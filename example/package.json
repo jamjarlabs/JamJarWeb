@@ -1,0 +1,21 @@
+{
+  "name": "jamjar-example",
+  "version": "0.1.0",
+  "description": "Example jamjar game",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "webpack-dev-server --mode=development",
+    "build": "webpack --mode=development"
+  },
+  "dependencies": {
+    "jamjar": "../"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.4",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  }
+}
