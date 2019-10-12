@@ -5,11 +5,15 @@
   "main": "lib/game.js",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint src --ext .ts,.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jthomperoo",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
     "ts-loader": "^6.2.0",
     "typescript": "^3.6.4"
   }

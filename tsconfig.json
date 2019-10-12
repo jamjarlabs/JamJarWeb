@@ -3,6 +3,9 @@
     "declaration": true,
     "outDir": "lib",
     "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
     "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
@@ -65,6 +68,7 @@
   },
   "exclude": [
     "node_modules",
-    "example"
+    "example",
+    "lib"
   ]
 }

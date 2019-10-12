@@ -14,10 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Message from "./message";
-
-interface Subscriber {
-    HandleMessage(message: Message) : void;
+interface IMessage {
+    type: string;
 }
 
-export default Subscriber;
+export default IMessage;

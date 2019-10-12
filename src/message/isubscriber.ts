@@ -16,8 +16,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-class Message<T> implements IMessage {
-    constructor(public type: string, public payload?: T) {}
+interface ISubscriber {
+    HandleMessage(message: IMessage): void;
 }
 
-export default Message;
+export default ISubscriber;
