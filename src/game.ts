@@ -14,12 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Subscriber from "./message/subscriber";
 import MessageBus from "./message/message_bus";
 import Message from "./message/message";
 import System from "./system/system";
 
-abstract class Game implements Subscriber{
+abstract class Game {
 
     private static readonly TIME_STEP = 1000 / 100;
 
@@ -30,28 +29,23 @@ abstract class Game implements Subscriber{
     private accumulator: number;
     private currentTime: number;
 
-
-    constructor({name = "game"} : {name?: string}) {
+    constructor({name = "game"}: {name?: string}) {
         this.name = name;
         this.messageBus = new MessageBus();
         this.accumulator = 0;
 		this.currentTime = 0;
     }
-
-    HandleMessage(message: Message) {
-        return;
-    }
     
-    Start() {
+    Start(): void  {
         this.messageBus.Dispatch();
         this.accumulator = 0;
 		this.currentTime = Date.now();
         this.loop();
     }
 
-    loop() {
+    loop(): void  {
 		const newTime = Date.now();
-		let frameTime = newTime - this.currentTime;
+		const frameTime = newTime - this.currentTime;
 		this.currentTime = newTime;
 
 		this.accumulator += frameTime;
@@ -60,7 +54,7 @@ abstract class Game implements Subscriber{
 			this.messageBus.Dispatch();
 			this.accumulator -= Game.TIME_STEP;
 		}
-		let alpha = this.accumulator / Game.TIME_STEP;
+		// const alpha = this.accumulator / Game.TIME_STEP;
 		// render
 		this.messageBus.Dispatch();
 		requestAnimationFrame(() => { this.loop(); });

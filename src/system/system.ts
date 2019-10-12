@@ -15,10 +15,11 @@ limitations under the License.
 */
 
 import MessageBus from "../message/message_bus";
-import Subscriber from "../message/subscriber";
 import Message from "../message/message";
+import IMessage from "../message/imessage";
+import ISubscriber from "../message/isubscriber";
 
-abstract class System implements Subscriber{
+abstract class System implements ISubscriber {
 
     public static readonly MESSAGE_UPDATE = "update"
     public static readonly MESSAGE_START = "start"
@@ -28,17 +29,19 @@ abstract class System implements Subscriber{
 		this.messageBus.Subscribe(this, System.MESSAGE_UPDATE);
     }
 
-    start() {}
+    abstract start(): void
 
-    update(dt: number) {}
+    abstract update(dt: number): void
 
-    HandleMessage(message: Message) {
+    HandleMessage(message: IMessage): void {
         switch(message.type) {
             case System.MESSAGE_START:
                 this.start();
                 break;
             case System.MESSAGE_UPDATE:
-                this.update(message.payload);
+                // Will always be non null
+                /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+                this.update((message as Message<number>).payload!);
                 break;
         }
     }

@@ -24,7 +24,7 @@ class Transform extends Component {
     public angle: number;
 
     constructor({ position = new Vector2D(0, 0), scale = new Vector2D(1, 1), angle = 0 }:
-        { position?: Vector2D, scale?: Vector2D, angle?: number }) {
+        { position?: Vector2D; scale?: Vector2D; angle?: number }) {
         super(Transform.KEY);
         this.position = position;
         this.scale = scale;

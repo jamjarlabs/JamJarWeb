@@ -14,24 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Subscriber from "./subscriber";
-import Message from "./message";
+import ISubscriber from "./isubscriber";
+import IMessage from "./imessage";
 
 class MessageBus {
-    private subscribers: Record<string, Subscriber[]>;
-    private messageQueue: Message[];
+    private subscribers: Record<string, ISubscriber[]>;
+    private messageQueue: IMessage[];
 
     constructor() {
         this.subscribers = {};
         this.messageQueue = [];
     }
 
-    Dispatch() {
+    Dispatch(): void {
         const queueLength = this.messageQueue.length;
         for (let i = 0; i < queueLength; i++) {
-            let message = this.messageQueue.shift()!; // Can't be null, supress null check
-            let messageSubs = this.subscribers[message.type];
-            if(!messageSubs) {
+            // Will always be non null
+            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+            const message = this.messageQueue.shift()!;
+            const messageSubs = this.subscribers[message.type];
+            if (!messageSubs) {
                 continue;
             }
             for (let j = 0; j < messageSubs.length; j++) {
@@ -40,11 +42,11 @@ class MessageBus {
         }
     }
 
-    Publish(message: Message) {
+    Publish(message: IMessage): void {
         this.messageQueue.push(message);
     }
 
-    Subscribe(subscriber: Subscriber, type: string) {
+    Subscribe(subscriber: ISubscriber, type: string): void {
         let typeSubs = this.subscribers[type];
         if (!typeSubs) {
             typeSubs = [];
