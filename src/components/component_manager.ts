@@ -14,10 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IMessage from "./imessage";
+import Component from "./component";
+import Entity from "../entity/entity";
 
-class Message<T> implements IMessage {
-    constructor(public type: string, public payload?: T) {}
+class ComponentManager {
+    private components: Record<number, Component>
+
+    constructor() {
+        this.components = [];
+    }
+
+    public Get(entity: Entity): Component {
+        return this.components[entity.id];
+    }
+
+    public Add(entity: Entity, component: Component): void {
+        this.components[entity.id] = component;
+    }
+
+    public Remove(entity: Entity): void {
+        delete this.components[entity.id];
+    }
 }
 
-export default Message;
+export default ComponentManager;

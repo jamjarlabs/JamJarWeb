@@ -15,6 +15,8 @@ limitations under the License.
 */
 
 abstract class Component {
+    public static readonly MESSAGE_ADD = "component_add";
+    public static readonly MESSAGE_REMOVE = "component_remove";
     constructor(public key: string) {}
 }
 

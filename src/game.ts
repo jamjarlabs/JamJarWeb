@@ -17,6 +17,7 @@ limitations under the License.
 import MessageBus from "./message/message_bus";
 import Message from "./message/message";
 import System from "./system/system";
+import EntityManager from "./entity/entity_manager";
 
 abstract class Game {
 
@@ -33,17 +34,19 @@ abstract class Game {
         this.name = name;
         this.messageBus = new MessageBus();
         this.accumulator = 0;
-		this.currentTime = 0;
+        this.currentTime = 0;
+        new EntityManager(this.messageBus);
     }
     
-    Start(): void  {
+    public Start(): void  {
         this.messageBus.Dispatch();
         this.accumulator = 0;
 		this.currentTime = Date.now();
         this.loop();
+        this.messageBus.Publish(new Message(System.MESSAGE_START));
     }
 
-    loop(): void  {
+    private loop(): void  {
 		const newTime = Date.now();
 		const frameTime = newTime - this.currentTime;
 		this.currentTime = newTime;

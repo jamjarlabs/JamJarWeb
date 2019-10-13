@@ -1,5 +1,3 @@
-import IMessage from "./imessage";
-
 /*
 Copyright 2019 JamJar Authors
 
@@ -15,6 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+import IMessage from "./imessage";
 
 interface ISubscriber {
     HandleMessage(message: IMessage): void;
