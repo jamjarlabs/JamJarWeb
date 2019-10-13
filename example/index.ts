@@ -16,10 +16,33 @@ limitations under the License.
 
 import Game from "jamjar/lib/game"
 import System from "jamjar/lib/system/system";
+import Entity from "jamjar/lib/entity/entity";
+import Transform from "jamjar/lib/components/transform";
+import MessageBus from "jamjar/lib/message/message_bus";
+import Component from "jamjar/lib/components/component";
 
 class TestSystem extends System {
+
+    constructor(messageBus: MessageBus) {
+        super(messageBus, (entity: Entity, components: Component[]) => {
+            for (const component of components) {
+                if (component.key == Transform.KEY) {
+                    return true;
+                }
+            }
+            return false;
+        })
+    }
+
     update(dt: number) {
-        console.log("UPDATE");
+        for (const entity of this.entities) {
+            const transform = entity.Get(Transform.KEY)! as Transform;
+        }
+    }
+
+    start(): void {
+        let entity = new Entity(this.messageBus);
+        entity.Add(new Transform({}));
     }
 }
 

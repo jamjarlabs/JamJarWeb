@@ -18,31 +18,73 @@ import MessageBus from "../message/message_bus";
 import Message from "../message/message";
 import IMessage from "../message/imessage";
 import ISubscriber from "../message/isubscriber";
+import Entity from "../entity/entity";
+import Component from "../components/component";
+import SystemEntity from "./system_entity";
 
 abstract class System implements ISubscriber {
 
     public static readonly MESSAGE_UPDATE = "update"
     public static readonly MESSAGE_START = "start"
+    public static readonly MESSAGE_REGISTER = "register";
 
-    constructor(public messageBus: MessageBus) {
-        this.messageBus.Subscribe(this, System.MESSAGE_START);
-		this.messageBus.Subscribe(this, System.MESSAGE_UPDATE);
+    protected entities: SystemEntity[];
+
+    constructor(public messageBus: MessageBus, private evaluator?: (entity: Entity, components: Component[]) => boolean) {
+        this.entities = [];
+        this.messageBus.Subscribe(this, [System.MESSAGE_START, System.MESSAGE_UPDATE, System.MESSAGE_REGISTER]);
     }
 
     abstract start(): void
 
     abstract update(dt: number): void
 
-    HandleMessage(message: IMessage): void {
+    public HandleMessage(message: IMessage): void {
         switch(message.type) {
-            case System.MESSAGE_START:
+            case System.MESSAGE_START:{
                 this.start();
                 break;
-            case System.MESSAGE_UPDATE:
+            }
+            case System.MESSAGE_UPDATE: {
                 // Will always be non null
                 /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
                 this.update((message as Message<number>).payload!);
                 break;
+            }
+            case System.MESSAGE_REGISTER: {
+                const registerMessage = message as Message<[Entity, Component[]]>;
+                if (!registerMessage.payload) {
+                    return;
+                }
+                this.register(registerMessage.payload[0], registerMessage.payload[1])
+                break;
+            }
+        }
+    }
+
+    private register(entity: Entity, components: Component[]): void {
+        if (!this.evaluator) {
+            return;
+        }   
+
+        this.remove(entity)
+
+        // Evaluation check
+        if (!this.evaluator(entity, components)) {
+            return;
+        }
+
+        // Add component to system
+        this.entities.push(new SystemEntity(entity, components));
+    }
+
+    private remove(entity: Entity): void {
+        for (let i = 0; i < this.entities.length; i++) {
+            const systemEntity = this.entities[i];
+            if (systemEntity.entity == entity) {
+                this.entities.splice(i, 1);
+                return;
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ class MessageBus {
         this.messageQueue = [];
     }
 
-    Dispatch(): void {
+    public Dispatch(): void {
         const queueLength = this.messageQueue.length;
         for (let i = 0; i < queueLength; i++) {
             // Will always be non null
@@ -42,17 +42,23 @@ class MessageBus {
         }
     }
 
-    Publish(message: IMessage): void {
+    public Publish(message: IMessage): void {
         this.messageQueue.push(message);
     }
 
-    Subscribe(subscriber: ISubscriber, type: string): void {
-        let typeSubs = this.subscribers[type];
+    public Subscribe(subscriber: ISubscriber, types: string | string[]): void {
+        if (types instanceof Array) {
+            for(const type of types) {
+                this.Subscribe(subscriber, type);
+            }
+            return;
+        }
+        let typeSubs = this.subscribers[types];
         if (!typeSubs) {
             typeSubs = [];
         }
         typeSubs.push(subscriber);
-        this.subscribers[type] = typeSubs;
+        this.subscribers[types] = typeSubs;
     }
 }
 
