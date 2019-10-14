@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ISubscriber from "./isubscriber";
+import Subscriber from "./subscriber";
 import IMessage from "./imessage";
 
 class MessageBus {
-    private subscribers: Record<string, ISubscriber[]>;
+    private subscribers: Record<string, Subscriber[]>;
     private messageQueue: IMessage[];
 
     constructor() {
@@ -37,7 +37,7 @@ class MessageBus {
                 continue;
             }
             for (let j = 0; j < messageSubs.length; j++) {
-                messageSubs[j].HandleMessage(message);
+                messageSubs[j].OnMessage(message);
             }
         }
     }
@@ -46,7 +46,7 @@ class MessageBus {
         this.messageQueue.push(message);
     }
 
-    public Subscribe(subscriber: ISubscriber, types: string | string[]): void {
+    public Subscribe(subscriber: Subscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for(const type of types) {
                 this.Subscribe(subscriber, type);
@@ -59,6 +59,37 @@ class MessageBus {
         }
         typeSubs.push(subscriber);
         this.subscribers[types] = typeSubs;
+    }
+
+    public UnsubscribeAll(subscriber: Subscriber): void {
+        for (const key in this.subscribers) {
+            const subscribers = this.subscribers[key];
+            for (let i = 0; i < subscribers.length; i++) {
+                const typeSub = subscribers[i];
+                if (subscriber.subscriberID == typeSub.subscriberID) {
+                    subscribers.splice(i, 1);
+                }
+            }
+        }
+    }
+
+    public Unsubscribe(subscriber: Subscriber, types: string | string[]): void {
+        if (types instanceof Array) {
+            for(const type of types) {
+                this.Unsubscribe(subscriber, type);
+            }
+            return;
+        }
+        let typeSubs = this.subscribers[types];
+        if (!typeSubs) {
+            typeSubs = [];
+        }
+        for (let i = 0; i < typeSubs.length; i++) {
+            const typeSub = typeSubs[i];
+            if (subscriber.subscriberID == typeSub.subscriberID) {
+                typeSubs.splice(i, 1);
+            }
+        }
     }
 }
 

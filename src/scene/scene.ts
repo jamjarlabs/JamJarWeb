@@ -14,47 +14,63 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ISubscriber from "../message/isubscriber";
+import Subscriber from "../message/subscriber";
 import MessageBus from "../message/message_bus";
 import IMessage from "../message/imessage";
 import Message from "../message/message";
-import ISystemManager from "../system/isystem_manager";
-import System from "../system/system";
+import Entity from "../entity/entity";
 
-abstract class Scene implements ISubscriber, ISystemManager {
+abstract class Scene extends Subscriber {
 
-    public static readonly MESSAGE_START = "scene_start";
     public static readonly MESSAGE_DESTROY = "scene_destroy";
+    private static readonly MESSAGE_ON_START = "scene_on_start";
 
     private static ID = 0;
 
     public id: number;
 
-    public systems: System[];
+    private entities: Entity[];
 
-    constructor(public messageBus: MessageBus) {
+    constructor(protected messageBus: MessageBus) {
+        super();
         this.id = Scene.ID++;
-        this.systems = [];
+        this.entities = [];
+        this.messageBus.Subscribe(this, [
+            Scene.MESSAGE_ON_START
+        ]);
     }
 
-    protected abstract onDestroy(): void;
+    protected abstract OnStart(): void;
 
-    protected abstract onStart(): void;
-
-    public AddSystem(system: System): void {
-        this.systems.push(system);
+    public OnMessage(message: IMessage): void {
+        switch(message.type) {
+            case Scene.MESSAGE_ON_START: {
+                const sceneStartMessage = message as Message<Scene>;
+                if (!sceneStartMessage.payload) {
+                    return;
+                }
+                if (this.id == sceneStartMessage.payload.id) {
+                    this.OnStart();
+                }
+                break;
+            }
+        }
     }
 
-    public abstract HandleMessage(message: IMessage): void;
+    public AddEntity(entity: Entity): void {
+        this.entities.push(entity);
+    }
 
     public Destroy(): void {
-        this.onDestroy();
         this.messageBus.Publish(new Message<Scene>(Scene.MESSAGE_DESTROY, this));
+        for (const entity of this.entities) {
+            entity.Destroy();
+        }
+        this.entities = [];
     }
 
     public Start(): void {
-        this.onStart();
-        this.messageBus.Publish(new Message<Scene>(Scene.MESSAGE_START, this));
+        this.OnStart();
     }
 }
 

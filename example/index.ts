@@ -20,48 +20,39 @@ import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/component/transform";
 import MessageBus from "jamjar/lib/message/message_bus";
 import Component from "jamjar/lib/component/component";
-import Scene from "../lib/scene/scene";
-import IMessage from "../lib/message/imessage";
+import Scene from "jamjar/lib/scene/scene";
 
 class TestSystem extends System {
 
-    constructor(messageBus: MessageBus) {
-        super(messageBus, (entity: Entity, components: Component[]) => {
-            for (const component of components) {
-                if (component.key == Transform.KEY) {
-                    return true;
-                }
+    private static readonly EVALUATOR = (entity: Entity, components: Component[]) => {
+        for (const component of components) {
+            if (component.key == Transform.KEY) {
+                return true;
             }
-            return false;
-        })
-    }
+        }
+        return false;
+    };
 
-    update(dt: number): void {
-        for (const entity of this.entities) {
-            console.log(entity);
-            const transform = entity.Get(Transform.KEY)! as Transform;
-            entity.Destroy();
+    constructor(messageBus: MessageBus, scene: Scene) {
+        super(messageBus, { evaluator: TestSystem.EVALUATOR, scene: scene });
+        for(let i = 0; i < 1000; i++) {
+            let entity = new Entity(this.messageBus);
+            entity.Add(new Transform());
+            if (this.scene) {
+                this.scene.AddEntity(entity);
+            }
         }
     }
 
-    start(): void {
-        let entity = new Entity(this.messageBus);
-        entity.Add(new Transform({}));
+    Update(dt: number): void {
     }
+
 }
 
 class TestScene extends Scene {
-    constructor(messageBus: MessageBus) {
-        super(messageBus);
+    OnStart(): void {
+        new TestSystem(this.messageBus, this);
     }
-
-    onStart(): void {
-        this.AddSystem(new TestSystem(this.messageBus));
-    }
-
-    onDestroy(): void {}
-
-    HandleMessage(message: IMessage): void {}
 }
 
 class TestGame extends Game {
@@ -69,7 +60,7 @@ class TestGame extends Game {
         super({name: "test-game"});
     }
 
-    onStart(): void {
+    OnStart(): void {
         new TestScene(this.messageBus).Start();
     }
 }
