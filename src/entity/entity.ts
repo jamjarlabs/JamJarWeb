@@ -36,6 +36,10 @@ class Entity {
     Remove(key: string): void {
         this.messageBus.Publish(new Message<[Entity, string]>(Component.MESSAGE_REMOVE, [this, key]));
     }
+
+    Destroy(): void {
+        this.messageBus.Publish(new Message<Entity>(Entity.MESSAGE_DESTROY, this));
+    }
 }
 
 export default Entity;

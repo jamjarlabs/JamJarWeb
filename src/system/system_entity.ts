@@ -40,6 +40,10 @@ class SystemEntity {
     public Remove(key: string): void {
         this.entity.Remove(key);
     }
+
+    public Destroy(): void {
+        this.entity.Destroy();
+    }
 }
 
 export default SystemEntity;

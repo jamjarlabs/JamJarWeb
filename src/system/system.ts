@@ -24,15 +24,21 @@ import SystemEntity from "./system_entity";
 
 abstract class System implements ISubscriber {
 
-    public static readonly MESSAGE_UPDATE = "update"
-    public static readonly MESSAGE_START = "start"
-    public static readonly MESSAGE_REGISTER = "register";
+    public static readonly MESSAGE_UPDATE = "system_update"
+    public static readonly MESSAGE_START = "system_start"
+    public static readonly MESSAGE_REGISTER = "system_register";
+    public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
     protected entities: SystemEntity[];
 
     constructor(public messageBus: MessageBus, private evaluator?: (entity: Entity, components: Component[]) => boolean) {
         this.entities = [];
-        this.messageBus.Subscribe(this, [System.MESSAGE_START, System.MESSAGE_UPDATE, System.MESSAGE_REGISTER]);
+        this.messageBus.Subscribe(this, [
+            System.MESSAGE_START, 
+            System.MESSAGE_UPDATE, 
+            System.MESSAGE_REGISTER, 
+            System.MESSAGE_DEREGISTER
+        ]);
     }
 
     abstract start(): void
@@ -59,7 +65,19 @@ abstract class System implements ISubscriber {
                 this.register(registerMessage.payload[0], registerMessage.payload[1])
                 break;
             }
+            case System.MESSAGE_DEREGISTER: {
+                const deregisterMessage = message as Message<Entity>;
+                if (!deregisterMessage.payload) {
+                    return;
+                }
+                this.deregister(deregisterMessage.payload);
+                break;
+            }
         }
+    }
+
+    private deregister(entity: Entity): void {
+        this.remove(entity)
     }
 
     private register(entity: Entity, components: Component[]): void {

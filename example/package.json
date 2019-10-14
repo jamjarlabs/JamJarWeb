@@ -9,9 +9,7 @@
     "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=development"
   },
-  "dependencies": {
-    "jamjar": "../"
-  },
+  "dependencies": {},
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.4",
     "webpack": "^4.41.1",
