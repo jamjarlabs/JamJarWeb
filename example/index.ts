@@ -18,9 +18,11 @@ import Game from "jamjar/lib/game"
 import System from "jamjar/lib/system/system";
 import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/transform/transform";
+import Motion from "jamjar/lib/motion/motion";
 import MessageBus from "jamjar/lib/message/message_bus";
 import Component from "jamjar/lib/component/component";
 import Scene from "jamjar/lib/scene/scene";
+import Vector2D from "../lib/geometry/vector_2d";
 
 class TestSystem extends System {
     private static readonly EVALUATOR = (entity: Entity, components: Component[]) => {
@@ -34,14 +36,12 @@ class TestSystem extends System {
 
     constructor(messageBus: MessageBus, scene: Scene) {
         super(messageBus, { evaluator: TestSystem.EVALUATOR, scene: scene });
-        for(let i = 0; i < 1000; i++) {
-            let entity = new Entity(this.messageBus, this.scene);
-            entity.Add(new Transform());
-        }
+        let entity = new Entity(this.messageBus, this.scene);
+        entity.Add(new Transform());
+        entity.Add(new Motion(new Vector2D(1,0)));
     }
 
-    Update(dt: number): void {
-    }
+    Update(dt: number): void {}
 }
 
 class TestScene extends Scene {

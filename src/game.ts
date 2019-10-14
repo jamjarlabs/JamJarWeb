@@ -18,6 +18,7 @@ import MessageBus from "./message/message_bus";
 import Message from "./message/message";
 import System from "./system/system";
 import EntityManager from "./entity/entity_manager";
+import MotionSystem from "./motion/motion_system";
 
 abstract class Game {
 
@@ -38,12 +39,17 @@ abstract class Game {
         new EntityManager(this.messageBus);
     }
 
+    private coreSystems() {
+        new MotionSystem(this.messageBus);
+    }
+
     protected OnStart(): void {
         return;
     }
     
     public Start(): void  {
         this.OnStart();
+        this.coreSystems()
         this.messageBus.Dispatch();
         this.accumulator = 0;
 		this.currentTime = Date.now();
