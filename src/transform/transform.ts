@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "./component";
-import Vector2D from "../vector_2d";
+import Component from "../component/component";
+import Vector2D from "../geometry/vector_2d";
 
 class Transform extends Component {
     static readonly KEY = "transform";

@@ -92,6 +92,10 @@ abstract class System extends Subscriber {
         }
     }
 
+    public Destroy(): void {
+        this.messageBus.UnsubscribeAll(this);
+    }
+
     private deregister(entity: Entity): void {
         this.remove(entity)
     }

@@ -25,9 +25,11 @@ class Entity {
     public static readonly KEY = "entity";
 
     public id: number;
+    public scene?: Scene;
 
     constructor(private messageBus: MessageBus, scene?: Scene) {
         this.id = Entity.ID++;
+        this.scene = scene;
         if (scene) {
             scene.AddEntity(this);
         }
