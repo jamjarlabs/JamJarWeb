@@ -17,49 +17,47 @@ limitations under the License.
 import MessageBus from "../message/message_bus";
 import Message from "../message/message";
 import IMessage from "../message/imessage";
-import ISubscriber from "../message/isubscriber";
+import Subscriber from "../message/subscriber";
 import Entity from "../entity/entity";
 import Component from "../component/component";
 import SystemEntity from "./system_entity";
 import Scene from "../scene/scene";
 
-abstract class System implements ISubscriber {
+abstract class System extends Subscriber {
 
     public static readonly MESSAGE_UPDATE = "system_update"
-    public static readonly MESSAGE_START = "system_start"
     public static readonly MESSAGE_REGISTER = "system_register";
     public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
     protected entities: SystemEntity[];
-    protected scene: Scene | null;
+    protected scene?: Scene;
 
-    constructor(public messageBus: MessageBus, private evaluator?: (entity: Entity, components: Component[]) => boolean) {
+    private evaluator?: (entity: Entity, components: Component[]) => boolean
+
+    constructor(protected messageBus: MessageBus, args: {
+        evaluator?: (entity: Entity, components: Component[]) => boolean;
+        scene?: Scene;
+    } = {}) {
+        super();
         this.entities = [];
-        this.scene = null;
+        this.evaluator = args.evaluator;
+        this.scene = args.scene;
         this.messageBus.Subscribe(this, [
-            System.MESSAGE_START, 
-            System.MESSAGE_UPDATE, 
-            System.MESSAGE_REGISTER, 
+            System.MESSAGE_UPDATE,
+            System.MESSAGE_REGISTER,
             System.MESSAGE_DEREGISTER,
-            Scene.MESSAGE_START,
             Scene.MESSAGE_DESTROY
         ]);
     }
 
-    abstract start(): void
+    protected abstract Update(dt: number): void;
 
-    abstract update(dt: number): void
-
-    public HandleMessage(message: IMessage): void {
-        switch(message.type) {
-            case System.MESSAGE_START:{
-                this.start();
-                break;
-            }
+    public OnMessage(message: IMessage): void {
+        switch (message.type) {
             case System.MESSAGE_UPDATE: {
                 // Will always be non null
                 /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-                this.update((message as Message<number>).payload!);
+                this.Update((message as Message<number>).payload!);
                 break;
             }
             case System.MESSAGE_REGISTER: {
@@ -78,14 +76,6 @@ abstract class System implements ISubscriber {
                 this.deregister(deregisterMessage.payload);
                 break;
             }
-            case Scene.MESSAGE_START: {
-                const sceneStartMessage = message as Message<Scene>;
-                if (!sceneStartMessage.payload) {
-                    return;
-                }
-                this.scene = sceneStartMessage.payload;
-                break;
-            }
             case Scene.MESSAGE_DESTROY: {
                 const sceneDestroyMessage = message as Message<Scene>;
                 if (!sceneDestroyMessage.payload) {
@@ -94,8 +84,8 @@ abstract class System implements ISubscriber {
                 if (!this.scene) {
                     return;
                 }
-                if(sceneDestroyMessage.payload.id == this.scene.id) {
-                    this.scene = null;
+                if (sceneDestroyMessage.payload.id == this.scene.id) {
+                    this.messageBus.UnsubscribeAll(this);
                 }
                 break;
             }
@@ -109,7 +99,7 @@ abstract class System implements ISubscriber {
     private register(entity: Entity, components: Component[]): void {
         if (!this.evaluator) {
             return;
-        }   
+        }
 
         this.remove(entity)
 

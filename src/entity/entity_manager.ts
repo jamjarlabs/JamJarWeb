@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ISubscriber from "../message/isubscriber";
+import Subscriber from "../message/subscriber";
 import ComponentManager from "../component/component_manager";
 import Entity from "./entity";
 import Component from "../component/component";
@@ -23,11 +23,12 @@ import MessageBus from "../message/message_bus";
 import System from "../system/system";
 import IMessage from "../message/imessage";
 
-class EntityManager implements ISubscriber {
+class EntityManager extends Subscriber {
     private componentManagers: ComponentManager[];
     private messageBus: MessageBus
 
     constructor(messageBus: MessageBus) {
+        super();
         this.messageBus = messageBus;
         this.componentManagers = [];
         this.messageBus.Subscribe(this, [
@@ -37,7 +38,7 @@ class EntityManager implements ISubscriber {
         ]);
     }
 
-    public HandleMessage(message: IMessage): void {
+    public OnMessage(message: IMessage): void {
 		switch(message.type) {
             case Entity.MESSAGE_DESTROY: {
                 const destroyMessage = message as Message<Entity>;

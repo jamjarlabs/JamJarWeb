@@ -14,11 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "./system";
+import IMessage from "./imessage";
 
-interface ISystemManager {
-    systems: System[];
-    AddSystem(system: System): void;
+abstract class Subscriber {
+    private static SUBSCRIBER_ID = 0;
+    public subscriberID: number;
+    constructor() {
+        this.subscriberID = Subscriber.SUBSCRIBER_ID++;
+    }
+    abstract OnMessage(message: IMessage): void;
 }
 
-export default ISystemManager;
+export default Subscriber;

@@ -17,6 +17,7 @@ limitations under the License.
 import MessageBus from "../message/message_bus";
 import Component from "../component/component";
 import Message from "../message/message";
+import Scene from "../scene/scene";
 
 class Entity {
     private static ID = 0;
@@ -25,8 +26,11 @@ class Entity {
 
     public id: number;
 
-    constructor(private messageBus: MessageBus) {
+    constructor(private messageBus: MessageBus, scene?: Scene) {
         this.id = Entity.ID++;
+        if (scene) {
+            scene.AddEntity(this);
+        }
     }
 
     Add(component: Component): void {
