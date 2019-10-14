@@ -17,13 +17,12 @@ limitations under the License.
 import Game from "jamjar/lib/game"
 import System from "jamjar/lib/system/system";
 import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/component/transform";
+import Transform from "jamjar/lib/transform/transform";
 import MessageBus from "jamjar/lib/message/message_bus";
 import Component from "jamjar/lib/component/component";
 import Scene from "jamjar/lib/scene/scene";
 
 class TestSystem extends System {
-
     private static readonly EVALUATOR = (entity: Entity, components: Component[]) => {
         for (const component of components) {
             if (component.key == Transform.KEY) {
@@ -36,17 +35,13 @@ class TestSystem extends System {
     constructor(messageBus: MessageBus, scene: Scene) {
         super(messageBus, { evaluator: TestSystem.EVALUATOR, scene: scene });
         for(let i = 0; i < 1000; i++) {
-            let entity = new Entity(this.messageBus);
+            let entity = new Entity(this.messageBus, this.scene);
             entity.Add(new Transform());
-            if (this.scene) {
-                this.scene.AddEntity(entity);
-            }
         }
     }
 
     Update(dt: number): void {
     }
-
 }
 
 class TestScene extends Scene {
@@ -57,7 +52,7 @@ class TestScene extends Scene {
 
 class TestGame extends Game {
     constructor() {
-        super({name: "test-game"});
+        super("test-game");
     }
 
     OnStart(): void {

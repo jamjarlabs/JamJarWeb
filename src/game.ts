@@ -30,7 +30,7 @@ abstract class Game {
     private accumulator: number;
     private currentTime: number;
 
-    constructor({name = "game"}: {name?: string}) {
+    constructor(name = "game") {
         this.name = name;
         this.messageBus = new MessageBus();
         this.accumulator = 0;
