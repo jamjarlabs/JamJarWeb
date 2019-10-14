@@ -17,9 +17,11 @@ limitations under the License.
 import Game from "jamjar/lib/game"
 import System from "jamjar/lib/system/system";
 import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/components/transform";
+import Transform from "jamjar/lib/component/transform";
 import MessageBus from "jamjar/lib/message/message_bus";
-import Component from "jamjar/lib/components/component";
+import Component from "jamjar/lib/component/component";
+import Scene from "../lib/scene/scene";
+import IMessage from "../lib/message/imessage";
 
 class TestSystem extends System {
 
@@ -36,6 +38,7 @@ class TestSystem extends System {
 
     update(dt: number): void {
         for (const entity of this.entities) {
+            console.log(entity);
             const transform = entity.Get(Transform.KEY)! as Transform;
             entity.Destroy();
         }
@@ -47,10 +50,27 @@ class TestSystem extends System {
     }
 }
 
+class TestScene extends Scene {
+    constructor(messageBus: MessageBus) {
+        super(messageBus);
+    }
+
+    onStart(): void {
+        this.AddSystem(new TestSystem(this.messageBus));
+    }
+
+    onDestroy(): void {}
+
+    HandleMessage(message: IMessage): void {}
+}
+
 class TestGame extends Game {
     constructor() {
         super({name: "test-game"});
-        new TestSystem(this.messageBus);
+    }
+
+    onStart(): void {
+        new TestScene(this.messageBus).Start();
     }
 }
 

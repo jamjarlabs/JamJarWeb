@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import Entity from "../entity/entity";
-import Component from "../components/component";
+import Component from "../component/component";
 
 class SystemEntity {
     public entity: Entity;
