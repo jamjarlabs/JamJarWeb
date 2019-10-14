@@ -19,8 +19,9 @@ import Message from "../message/message";
 import IMessage from "../message/imessage";
 import ISubscriber from "../message/isubscriber";
 import Entity from "../entity/entity";
-import Component from "../components/component";
+import Component from "../component/component";
 import SystemEntity from "./system_entity";
+import Scene from "../scene/scene";
 
 abstract class System implements ISubscriber {
 
@@ -30,14 +31,18 @@ abstract class System implements ISubscriber {
     public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
     protected entities: SystemEntity[];
+    protected scene: Scene | null;
 
     constructor(public messageBus: MessageBus, private evaluator?: (entity: Entity, components: Component[]) => boolean) {
         this.entities = [];
+        this.scene = null;
         this.messageBus.Subscribe(this, [
             System.MESSAGE_START, 
             System.MESSAGE_UPDATE, 
             System.MESSAGE_REGISTER, 
-            System.MESSAGE_DEREGISTER
+            System.MESSAGE_DEREGISTER,
+            Scene.MESSAGE_START,
+            Scene.MESSAGE_DESTROY
         ]);
     }
 
@@ -73,6 +78,27 @@ abstract class System implements ISubscriber {
                 this.deregister(deregisterMessage.payload);
                 break;
             }
+            case Scene.MESSAGE_START: {
+                const sceneStartMessage = message as Message<Scene>;
+                if (!sceneStartMessage.payload) {
+                    return;
+                }
+                this.scene = sceneStartMessage.payload;
+                break;
+            }
+            case Scene.MESSAGE_DESTROY: {
+                const sceneDestroyMessage = message as Message<Scene>;
+                if (!sceneDestroyMessage.payload) {
+                    return;
+                }
+                if (!this.scene) {
+                    return;
+                }
+                if(sceneDestroyMessage.payload.id == this.scene.id) {
+                    this.scene = null;
+                }
+                break;
+            }
         }
     }
 
@@ -99,7 +125,7 @@ abstract class System implements ISubscriber {
     private remove(entity: Entity): void {
         for (let i = 0; i < this.entities.length; i++) {
             const systemEntity = this.entities[i];
-            if (systemEntity.entity == entity) {
+            if (systemEntity.entity.id == entity.id) {
                 this.entities.splice(i, 1);
                 return;
             }

@@ -15,9 +15,9 @@ limitations under the License.
 */
 
 import ISubscriber from "../message/isubscriber";
-import ComponentManager from "../components/component_manager";
+import ComponentManager from "../component/component_manager";
 import Entity from "./entity";
-import Component from "../components/component";
+import Component from "../component/component";
 import Message from "../message/message";
 import MessageBus from "../message/message_bus";
 import System from "../system/system";

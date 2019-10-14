@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import MessageBus from "../message/message_bus";
-import Component from "../components/component";
+import Component from "../component/component";
 import Message from "../message/message";
 
 class Entity {
