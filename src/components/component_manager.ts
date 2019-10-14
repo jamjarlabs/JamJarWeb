@@ -20,7 +20,7 @@ import Entity from "../entity/entity";
 class ComponentManager {
     private components: Record<number, Component>
 
-    constructor() {
+    constructor(public key: string) {
         this.components = [];
     }
 

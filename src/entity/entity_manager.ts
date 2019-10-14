@@ -24,20 +24,27 @@ import System from "../system/system";
 import IMessage from "../message/imessage";
 
 class EntityManager implements ISubscriber {
-    private componentManagers: Record<string, ComponentManager>;
-    private componentManagersArr: ComponentManager[];
+    private componentManagers: ComponentManager[];
     private messageBus: MessageBus
 
     constructor(messageBus: MessageBus) {
         this.messageBus = messageBus;
-        this.componentManagers = {};
-        this.componentManagersArr = [];
-        this.messageBus.Subscribe(this, [Component.MESSAGE_ADD, Component.MESSAGE_REMOVE, Entity.MESSAGE_DESTROY])
+        this.componentManagers = [];
+        this.messageBus.Subscribe(this, [
+            Component.MESSAGE_ADD, 
+            Component.MESSAGE_REMOVE, 
+            Entity.MESSAGE_DESTROY
+        ]);
     }
 
     public HandleMessage(message: IMessage): void {
 		switch(message.type) {
             case Entity.MESSAGE_DESTROY: {
+                const destroyMessage = message as Message<Entity>;
+                if (!destroyMessage.payload) {
+                    return;
+                }
+                this.destroyEntity(destroyMessage.payload);
                 break;
             }
             case Component.MESSAGE_ADD: {
@@ -64,13 +71,20 @@ class EntityManager implements ISubscriber {
     }
 
     private registerEntity(entity: Entity): void {
-        const components = this.GetComponents(entity);
+        const components = this.getComponents(entity);
 		this.messageBus.Publish(new Message<[Entity, Component[]]>(System.MESSAGE_REGISTER, [entity, components]));
+    }
+
+    private destroyEntity(entity: Entity): void {
+        for (let i = 0; i < this.componentManagers.length; i++) {
+            this.componentManagers[i].Remove(entity);
+        }
+        this.messageBus.Publish(new Message<Entity>(System.MESSAGE_DEREGISTER, entity));
     }
     
     private removeComponent(entity: Entity, key: string): void {
-        let componentManager = this.componentManagers[key];
-        if(!componentManager) {
+        const componentManager = this.getComponentManager(key);
+        if (!componentManager) {
             return;
         }
         componentManager.Remove(entity);
@@ -78,20 +92,28 @@ class EntityManager implements ISubscriber {
     }
 
     private addComponent(entity: Entity, component: Component): void {
-        let componentManager = this.componentManagers[component.key];
-		if(!componentManager) {
-			componentManager = new ComponentManager();
-			this.componentManagersArr.push(componentManager);
-			this.componentManagers[component.key] = componentManager;
+        let componentManager = this.getComponentManager(component.key);
+		if (!componentManager) {
+			componentManager = new ComponentManager(component.key);
+			this.componentManagers.push(componentManager);
 		}
         componentManager.Add(entity, component);
         this.registerEntity(entity);
     }
 
-    public GetComponents(entity: Entity): Component[] {
+    private getComponentManager(key: string): ComponentManager | null {
+        for (let i = 0; i < this.componentManagers.length; i++) {
+            if (this.componentManagers[i].key == key) {
+                return this.componentManagers[i];
+            }
+        }
+        return null;
+    }
+
+    private getComponents(entity: Entity): Component[] {
         const components: Component[] = [];
-        for (let i = 0; i < this.componentManagersArr.length; i++) {
-            const component = this.componentManagersArr[i].Get(entity);
+        for (let i = 0; i < this.componentManagers.length; i++) {
+            const component = this.componentManagers[i].Get(entity);
             if (component) {
                 components.push(component);
             }

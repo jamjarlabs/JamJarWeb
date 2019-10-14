@@ -34,9 +34,10 @@ class TestSystem extends System {
         })
     }
 
-    update(dt: number) {
+    update(dt: number): void {
         for (const entity of this.entities) {
             const transform = entity.Get(Transform.KEY)! as Transform;
+            entity.Destroy();
         }
     }
 
