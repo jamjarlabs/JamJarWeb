@@ -15,19 +15,28 @@ limitations under the License.
 */
 
 import Component from "../component/component";
-import Vector2D from "../geometry/vector_2d";
+import Vector from "../geometry/vector";
+import Matrix from "../geometry/matrix";
 
 class Transform extends Component {
-    static readonly KEY = "transform";
-    public position: Vector2D;
-    public scale: Vector2D;
+    public static readonly KEY = "transform";
+    public position: Vector;
+    public scale: Vector;
     public angle: number;
 
-    constructor(position = new Vector2D(0,0), scale = new Vector2D(1,1), angle = 0) {
+    constructor(position = new Vector(0,0), scale = new Vector(1,1), angle = 0) {
         super(Transform.KEY);
         this.position = position;
         this.scale = scale;
         this.angle = angle;
+    }
+
+    public Matrix(): Matrix {
+        const matrix = new Matrix();
+        matrix.Scale(this.scale);
+        matrix.Rotate(this.angle);
+        matrix.Translate(this.position);
+        return matrix;
     }
 }
 

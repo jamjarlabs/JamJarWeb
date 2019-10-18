@@ -39,7 +39,7 @@ abstract class Game {
         new EntityManager(this.messageBus);
     }
 
-    private coreSystems() {
+    private coreSystems(): void {
         new MotionSystem(this.messageBus);
     }
 

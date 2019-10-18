@@ -18,36 +18,32 @@ import Game from "jamjar/lib/game"
 import System from "jamjar/lib/system/system";
 import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/transform/transform";
-import Motion from "jamjar/lib/motion/motion";
+import Vector from "jamjar/lib/geometry/vector";
+import CollisionSystem from "jamjar/lib/collision/collision_system";
+import IMessage from "jamjar/lib/message/imessage";
+import Collision from "jamjar/lib/collision/collision";
+import Message from "jamjar/lib/message/message";
+import Collider from "jamjar/lib/collision/collider";
+import Polygon from "jamjar/lib/geometry/polygon";
 import MessageBus from "jamjar/lib/message/message_bus";
 import Component from "jamjar/lib/component/component";
-import Scene from "jamjar/lib/scene/scene";
-import Vector2D from "../lib/geometry/vector_2d";
+import Motion from "jamjar/lib/motion/motion";
+import gjk from "jamjar/lib/algorithms/gjk";
 
-class TestSystem extends System {
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]) => {
-        for (const component of components) {
-            if (component.key == Transform.KEY) {
-                return true;
-            }
+class CollisionListenerSystem extends System {
+    constructor(messageBus: MessageBus) {
+        super(messageBus);
+        this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
+    }
+
+    OnMessage(message: IMessage): void {
+        super.OnMessage(message);
+        if (message.type == CollisionSystem.MESSAGE_COLLISION_DETECTED) {
+            console.log(message as Message<Collision>);
         }
-        return false;
-    };
-
-    constructor(messageBus: MessageBus, scene: Scene) {
-        super(messageBus, { evaluator: TestSystem.EVALUATOR, scene: scene });
-        let entity = new Entity(this.messageBus, this.scene);
-        entity.Add(new Transform());
-        entity.Add(new Motion(new Vector2D(1,0)));
     }
 
     Update(dt: number): void {}
-}
-
-class TestScene extends Scene {
-    OnStart(): void {
-        new TestSystem(this.messageBus, this);
-    }
 }
 
 class TestGame extends Game {
@@ -56,7 +52,17 @@ class TestGame extends Game {
     }
 
     OnStart(): void {
-        new TestScene(this.messageBus).Start();
+        new CollisionSystem(this.messageBus)
+        new CollisionListenerSystem(this.messageBus);
+
+        let a = new Entity(this.messageBus);
+        a.Add(new Transform(new Vector(0,0), new Vector(1,1)));
+        a.Add(new Collider(Polygon.Rectangle(1,1)));
+
+        let b = new Entity(this.messageBus);
+        b.Add(new Transform(new Vector(0,5)));
+        b.Add(new Collider(Polygon.Rectangle(1,1)));
+        b.Add(new Motion(new Vector(0, -1)));
     }
 }
 

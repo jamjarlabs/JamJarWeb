@@ -14,27 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-class Vector2D {
-    public x: number;
-    public y: number;
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    }
+import Component from "../component/component";
+import IShape from "../geometry/ishape";
 
-    Add(other: Vector2D): Vector2D {
-        return new Vector2D(
-            this.x + other.x,
-            this.y + other.y
-        );
-    }
+class Collider extends Component {
+    public static readonly KEY = "collider";
+    public shape: IShape;
 
-    Scale(scalar: number): Vector2D {
-        return new Vector2D(
-            this.x * scalar,
-            this.y * scalar
-        );
+    constructor(shape: IShape) {
+        super(Collider.KEY);
+        this.shape = shape;
     }
 }
 
-export default Vector2D;
+export default Collider;
