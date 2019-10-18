@@ -15,16 +15,16 @@ limitations under the License.
 */
 
 import Component from "../component/component";
-import Vector2D from "../geometry/vector_2d";
+import Vector from "../geometry/vector";
 
 class Motion extends Component {
     static readonly KEY = "motion";
-    public velocity: Vector2D;
-    public acceleration: Vector2D;
+    public velocity: Vector;
+    public acceleration: Vector;
     public angularVelocity: number;
     public angularAcceleration: number;
 
-    constructor(velocity = new Vector2D(0,0), acceleration = new Vector2D(0,0), angularVelocity = 0, angularAcceleration = 0) {
+    constructor(velocity = new Vector(0,0), acceleration = new Vector(0,0), angularVelocity = 0, angularAcceleration = 0) {
         super(Motion.KEY);
         this.velocity = velocity;
         this.acceleration = acceleration;

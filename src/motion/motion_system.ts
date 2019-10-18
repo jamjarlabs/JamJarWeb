@@ -23,7 +23,7 @@ import MessageBus from "../message/message_bus";
 import Scene from "../scene/scene";
 
 class MotionSystem extends System {
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]) => {
+    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
         return [Transform.KEY, Motion.KEY].every((type) => components.some(
             component => component.key == type
         ));
@@ -33,7 +33,7 @@ class MotionSystem extends System {
         super(messageBus, { evaluator: MotionSystem.EVALUATOR, scene: scene });
     }
 
-    Update(dt: number): void {
+    protected Update(dt: number): void {
         for(const entity of this.entities) {
             const transform = entity.Get(Transform.KEY) as Transform;
             const motion = entity.Get(Motion.KEY) as Motion;
