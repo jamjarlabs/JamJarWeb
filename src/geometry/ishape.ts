@@ -19,7 +19,7 @@ import Transform from "../transform/transform";
 
 interface IShape {
     Transform(transform: Transform): IShape;
-    FarthestPointInDirection(direction: Vector): Vector | undefined;
+    FarthestPointInDirection(direction: Vector): Vector;
 }
 
 export default IShape;

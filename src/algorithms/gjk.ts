@@ -90,7 +90,6 @@ class GJKSimplex {
                 acPerp = acPerp.Invert();
             }
 
-
             // If the origin lies outside of the simplex. remove the
             // point and determine a new direction in the direction
             // of the perpendicular; aiming to try to encapsulate
@@ -127,15 +126,9 @@ class GJKSimplex {
  * @param direction The direction to calculate the support point in
  * @returns {Vector|undefined} The support point; returns undefined if invalid shapes provided
  */
-function support(a: IShape, b: IShape, direction: Vector): Vector | undefined {
+function support(a: IShape, b: IShape, direction: Vector): Vector {
     const aFar = a.FarthestPointInDirection(direction);
-    if (!aFar) {
-        return;
-    }
     const bFar = b.FarthestPointInDirection(direction.Invert());
-    if (!bFar) {
-        return;
-    }
     return aFar.Sub(bFar);
 }
 
@@ -165,22 +158,17 @@ function Calculate(a: SystemEntity, b: SystemEntity): Collision | undefined {
 
     // Get the first support point and add it to the simplex
     const initSupportPoint = support(aShape, bShape, direction);
-    if (!initSupportPoint) {
-        return;
-    }
     simplex.Add(initSupportPoint);
 
-    // Flip the direction for the next support point
-    direction = direction.Invert();
+    // First support point was calculated from the origin, so the next search direction
+    // should be its inverse to get a point on the opposite side of the Minkowski Difference
+    direction = initSupportPoint.Invert();
 
     // Keep iterating until the direction is undefined, this will occur when
     // 'CalculateDirection' doesn't return a direction, indicating that an 
     // intersection has been detected
     while(direction) {
-        // Will always be non null as there will always be points in the simplex 
-        // at this position
-        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-        const supportPoint = support(aShape, bShape, direction!)!;
+        const supportPoint = support(aShape, bShape, direction);
 
         // If the support point did not reach as far as the origin,
         // the simplex must not contain the origin and therefore there is no
