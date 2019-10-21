@@ -25,9 +25,10 @@ class Polygon implements IShape {
         this.points = points;
     }
 
-    public FarthestPointInDirection(direction: Vector): Vector | undefined {
+    public FarthestPointInDirection(direction: Vector): Vector {
         let farthestDistance = -Infinity;
-        let farthestPoint: Vector | undefined;
+        // If there are no points, just return point 0,0
+        let farthestPoint: Vector = new Vector(0,0);
         for (const point of this.points) {
             const distanceInDirection = point.Dot(direction);
             if (distanceInDirection > farthestDistance) {

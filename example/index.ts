@@ -26,9 +26,7 @@ import Message from "jamjar/lib/message/message";
 import Collider from "jamjar/lib/collision/collider";
 import Polygon from "jamjar/lib/geometry/polygon";
 import MessageBus from "jamjar/lib/message/message_bus";
-import Component from "jamjar/lib/component/component";
-import Motion from "jamjar/lib/motion/motion";
-import gjk from "jamjar/lib/algorithms/gjk";
+import Ellipse from "jamjar/lib/geometry/ellipse";
 
 class CollisionListenerSystem extends System {
     constructor(messageBus: MessageBus) {
@@ -56,13 +54,12 @@ class TestGame extends Game {
         new CollisionListenerSystem(this.messageBus);
 
         let a = new Entity(this.messageBus);
-        a.Add(new Transform(new Vector(0,0), new Vector(1,1)));
+        a.Add(new Transform(new Vector(0,0)));
         a.Add(new Collider(Polygon.Rectangle(1,1)));
 
         let b = new Entity(this.messageBus);
-        b.Add(new Transform(new Vector(0,5)));
-        b.Add(new Collider(Polygon.Rectangle(1,1)));
-        b.Add(new Motion(new Vector(0, -1)));
+        b.Add(new Transform(new Vector(1.1,1.1)));
+        b.Add(new Collider(new Ellipse(new Vector(0.5, 2))));
     }
 }
 

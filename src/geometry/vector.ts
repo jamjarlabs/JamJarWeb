@@ -31,6 +31,13 @@ class Vector {
         );
     }
 
+    public Multiply(vector: Vector): Vector {
+        return new Vector(
+            this.x * vector.x,
+            this.y * vector.y
+        )
+    }
+
     public Add(vector: Vector): Vector {
         return new Vector(
             this.x + vector.x,
@@ -55,6 +62,15 @@ class Vector {
     public Dot(vector: Vector): number {
         return this.x * vector.x + this.y * vector.y;
     }
+
+    public Rotate(center: Vector, angle: number): Vector {
+		let x = this.x - center.x;
+		let y = this.y - center.y;
+		return new Vector(
+			(x * Math.cos(angle) - y * Math.sin(angle)) + center.x,
+			(y * Math.sin(angle) + y * Math.cos(angle)) + center.y
+		);
+	}
 
     public Invert(): Vector {
         return new Vector(
