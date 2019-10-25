@@ -15,22 +15,25 @@ limitations under the License.
 */
 
 import Component from "../component/component";
-import Vector from "../geometry/vector";
+import Color from "../rendering/color";
+import Polygon from "../geometry/polygon";
 
-class Motion extends Component {
-    public static readonly KEY = "motion";
-    public velocity: Vector;
-    public acceleration: Vector;
-    public angularVelocity: number;
-    public angularAcceleration: number;
+class Sprite extends Component {
+    public static readonly KEY = "sprite";
+    public bounds: Polygon;
+    public color: Color;
 
-    constructor(velocity = new Vector(0,0), acceleration = new Vector(0,0), angularVelocity = 0, angularAcceleration = 0) {
-        super(Motion.KEY);
-        this.velocity = velocity;
-        this.acceleration = acceleration;
-        this.angularVelocity = angularVelocity;
-        this.angularAcceleration = angularAcceleration;
+    constructor(color: Color, bounds: Polygon = Polygon.Rectangle(1,1)) {
+        super(Sprite.KEY);
+        this.color = color;
+        this.bounds = bounds;
+    } 
+
+    public Update(dt: number): void {}
+
+    public Render(): void {
+
     }
 }
 
-export default Motion;
+export default Sprite;

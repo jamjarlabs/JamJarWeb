@@ -19,6 +19,9 @@ import Message from "./message/message";
 import System from "./system/system";
 import EntityManager from "./entity/entity_manager";
 import MotionSystem from "./motion/motion_system";
+import SpriteSystem from "./sprite/sprite_system";
+import CameraSystem from "./camera/camera_system";
+import InterpolationSystem from "./interpolation/interpolation_system";
 
 abstract class Game {
 
@@ -28,19 +31,28 @@ abstract class Game {
 
     protected messageBus: MessageBus;
 
+    private gl: WebGL2RenderingContext;
     private accumulator: number;
     private currentTime: number;
 
-    constructor(name = "game") {
+    constructor(canvas: HTMLCanvasElement, name = "game") {
         this.name = name;
         this.messageBus = new MessageBus();
         this.accumulator = 0;
         this.currentTime = 0;
+        const glContext = canvas.getContext("webgl2");
+        if (!glContext) {
+            throw("WebGL2 not supported by this browser");
+        }
+        this.gl = glContext;
         new EntityManager(this.messageBus);
     }
 
     private coreSystems(): void {
+        new InterpolationSystem(this.messageBus);
         new MotionSystem(this.messageBus);
+        new SpriteSystem(this.messageBus, this.gl);
+        new CameraSystem(this.messageBus, this.gl);
     }
 
     protected OnStart(): void {
@@ -67,8 +79,11 @@ abstract class Game {
 			this.messageBus.Dispatch();
 			this.accumulator -= Game.TIME_STEP;
 		}
-		// const alpha = this.accumulator / Game.TIME_STEP;
-		// render
+		const alpha = this.accumulator / Game.TIME_STEP;
+        // render
+        this.messageBus.Publish(new Message(CameraSystem.MESSAGE_PREPARE_CAMERAS));
+        this.messageBus.Publish(new Message(SpriteSystem.MESSAGE_RENDER_SPRITES, alpha));
+        this.messageBus.Publish(new Message(InterpolationSystem.MESSAGE_INTERPOLATE_TRANSFORMS));
 		this.messageBus.Dispatch();
 		requestAnimationFrame(() => { this.loop(); });
     }

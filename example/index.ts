@@ -27,6 +27,10 @@ import Collider from "jamjar/lib/collision/collider";
 import Polygon from "jamjar/lib/geometry/polygon";
 import MessageBus from "jamjar/lib/message/message_bus";
 import Ellipse from "jamjar/lib/geometry/ellipse";
+import Camera from "jamjar/lib/camera/camera";
+import Sprite from "jamjar/lib/sprite/sprite";
+import Motion from "jamjar/lib/motion/motion";
+import Color from "jamjar/lib/rendering/color";
 
 class CollisionListenerSystem extends System {
     constructor(messageBus: MessageBus) {
@@ -40,26 +44,31 @@ class CollisionListenerSystem extends System {
             console.log(message as Message<Collision>);
         }
     }
-
-    Update(dt: number): void {}
 }
 
 class TestGame extends Game {
     constructor() {
-        super("test-game");
+        super(document.getElementById("game-canvas") as HTMLCanvasElement, "test-game");
     }
 
     OnStart(): void {
         new CollisionSystem(this.messageBus)
         new CollisionListenerSystem(this.messageBus);
 
+        const camera = new Entity(this.messageBus);
+        camera.Add(new Transform(new Vector(0,0)));
+        camera.Add(new Camera(new Color(0,0,0,1), undefined, undefined, new Vector(160,90)));
+
         let a = new Entity(this.messageBus);
-        a.Add(new Transform(new Vector(0,0)));
+        a.Add(new Transform(new Vector(0,0), new Vector(20,10)));
+        a.Add(new Sprite(new Color(1,0,0,1)));
         a.Add(new Collider(Polygon.Rectangle(1,1)));
 
         let b = new Entity(this.messageBus);
-        b.Add(new Transform(new Vector(1.1,1.1)));
-        b.Add(new Collider(new Ellipse(new Vector(0.5, 2))));
+        b.Add(new Transform(new Vector(4,0), new Vector(5,5)));
+        b.Add(new Sprite(new Color(0,1,0,1)));
+        b.Add(new Collider(Polygon.Rectangle(1,1)));
+        b.Add(new Motion(new Vector(0,0)))
     }
 }
 

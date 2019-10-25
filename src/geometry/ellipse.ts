@@ -30,11 +30,11 @@ class Ellipse implements IShape {
     }
 
     Transform(transform: Transform): IShape {
-        const matrix = transform.Matrix();
+        const matrix = transform.Matrix3D();
         return new Ellipse(
             this.dimensions.Multiply(transform.scale),
             this.orientation + transform.angle,
-            this.center.Apply(matrix)
+            this.center.Apply3D(matrix)
         );
     }
 
