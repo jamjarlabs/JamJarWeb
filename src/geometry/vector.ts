@@ -72,8 +72,8 @@ class Vector {
     }
 
     public Rotate(center: Vector, angle: number): Vector {
-		let x = this.x - center.x;
-		let y = this.y - center.y;
+		const x = this.x - center.x;
+		const y = this.y - center.y;
 		return new Vector(
 			(x * Math.cos(angle) - y * Math.sin(angle)) + center.x,
 			(y * Math.sin(angle) + y * Math.cos(angle)) + center.y

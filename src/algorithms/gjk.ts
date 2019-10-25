@@ -173,7 +173,7 @@ function Calculate(a: SystemEntity, b: SystemEntity): Collision | undefined {
         // If the support point did not reach as far as the origin,
         // the simplex must not contain the origin and therefore there is no
         // intersection
-        if (supportPoint.Dot(direction!) <= 0) {
+        if (supportPoint.Dot(direction) <= 0) {
             // No intersection
             return;
         }

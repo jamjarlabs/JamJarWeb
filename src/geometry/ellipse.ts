@@ -23,7 +23,7 @@ class Ellipse implements IShape {
     public dimensions: Vector;
     public orientation: number;
 
-    constructor(dimensions: Vector, orientation: number = 0, center: Vector = new Vector(0,0)) {
+    constructor(dimensions: Vector, orientation = 0, center: Vector = new Vector(0,0)) {
         this.center = center;
         this.dimensions = dimensions;
         this.orientation = orientation;
@@ -47,7 +47,7 @@ class Ellipse implements IShape {
         );
     }
 
-    public static Circle(radius: number, center: Vector = new Vector(0,0)) {
+    public static Circle(radius: number, center: Vector = new Vector(0,0)): Ellipse {
         return new Ellipse(new Vector(radius, radius), 0, center);
     }
 

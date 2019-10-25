@@ -28,12 +28,6 @@ class Sprite extends Component {
         this.color = color;
         this.bounds = bounds;
     } 
-
-    public Update(dt: number): void {}
-
-    public Render(): void {
-
-    }
 }
 
 export default Sprite;
