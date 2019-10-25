@@ -103,6 +103,16 @@ abstract class System extends Subscriber {
         this.messageBus.UnsubscribeAll(this);
     }
 
+    protected GetSystemEntity(entity: Entity): SystemEntity | undefined {
+        for (let i = 0; i < this.entities.length; i++) {
+            const systemEntity = this.entities[i];
+            if (systemEntity.entity.id == entity.id) {
+                return this.entities[i];
+            }
+        }
+        return;
+    }
+
     private deregister(entity: Entity): void {
         this.remove(entity)
     }
