@@ -54,7 +54,7 @@ abstract class System extends Subscriber {
      * General update method, default empty. Override with custom logic.
      * @param dt DeltaTime
      */
-    /* eslint-disable-next-line no-empty-function */
+    /* eslint-disable-next-line no-empty-function, @typescript-eslint/no-unused-vars */
     protected Update(dt: number): void {
         return;
     }

@@ -88,7 +88,10 @@ class SpriteSystem extends System {
     }
 
     createShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader {
-		const shader = gl.createShader(type)!;
+        const shader = gl.createShader(type);
+        if (!shader) {
+            throw ("Error creating shader");
+        }
 		gl.shaderSource(shader, source);
 		gl.compileShader(shader);
 		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
@@ -100,7 +103,10 @@ class SpriteSystem extends System {
 	}
 
 	createProgram(gl: WebGL2RenderingContext, vertex: WebGLShader, fragment: WebGLShader): WebGLProgram {
-        const program = gl.createProgram()!;
+        const program = gl.createProgram();
+        if (!program) {
+            throw("Error creating program");
+        }
 		gl.attachShader(program, vertex);
 		gl.attachShader(program, fragment);
 		gl.linkProgram(program);
@@ -135,9 +141,9 @@ class SpriteSystem extends System {
             gl.useProgram(program);
 
 			// Supply camera matrices to GPU
-            let viewLocation = gl.getUniformLocation(program, "uViewMatrix");
-            let modelLocation = gl.getUniformLocation(program, "uModelMatrix");
-            let projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
+            const viewLocation = gl.getUniformLocation(program, "uViewMatrix");
+            const modelLocation = gl.getUniformLocation(program, "uModelMatrix");
+            const projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
 
 
 			gl.uniformMatrix4fv(
@@ -151,16 +157,16 @@ class SpriteSystem extends System {
                 projectionMatrix.GetFloat32Array());
 
 			// Get color uniform location for GPU
-            let colorLocation = gl.getUniformLocation(program, "uColor");
+            const colorLocation = gl.getUniformLocation(program, "uColor");
             
             for (const entity of sprites) {
                 const sprite = entity.Get(Sprite.KEY) as Sprite;
                 const transform = entity.Get(Transform.KEY) as Transform;
 
-                let vao = gl.createVertexArray();
+                const vao = gl.createVertexArray();
 
-                let position = gl.getAttribLocation(program, "aVertexPosition");
-                let positionBuffer = gl.createBuffer();
+                const position = gl.getAttribLocation(program, "aVertexPosition");
+                const positionBuffer = gl.createBuffer();
         
                 // bind vao
                 gl.bindVertexArray(vao);

@@ -21,7 +21,7 @@ class Color {
     public blue: number;
     public alpha: number;
 
-    constructor(red: number, green: number, blue: number, alpha: number = 1) {
+    constructor(red: number, green: number, blue: number, alpha = 1) {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
@@ -37,7 +37,7 @@ class Color {
 		];
 	}
     
-    Mix(color: Color) {
+    Mix(color: Color): Color {
 		return new Color(
 			(color.red + this.red) / 2,
 			(color.green + this.green) / 2,
