@@ -86,6 +86,13 @@ class Vector {
             -this.y
         );
     }
+
+    public Copy(): Vector {
+        return new Vector(
+            this.x,
+            this.y
+        );
+    }
 }
 
 export default Vector;

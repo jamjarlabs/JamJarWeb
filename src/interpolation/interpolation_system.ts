@@ -50,7 +50,7 @@ class InterpolationSystem extends System {
     private interpolateTransforms(entities: SystemEntity[]) {
         for (const entity of entities) {
             const transform = entity.Get(Transform.KEY) as Transform;
-            transform.previous = transform.position;
+            transform.previous = transform.position.Copy();
         }
     }
 }

@@ -54,7 +54,11 @@ class CollisionSystem extends System {
             for (let j = 0; j < entities.length; j++) {
                 const b = entities[j];
                 if (a.entity.id != b.entity.id) {
-                    possibleCollisions.push([a,b]);
+                    if (!possibleCollisions.some((collision) => {
+                        return collision[0].entity.id == b.entity.id && collision[1].entity.id == a.entity.id
+                    })) {
+                        possibleCollisions.push([a,b]);
+                    }
                 }
             }
         }

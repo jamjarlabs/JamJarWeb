@@ -31,17 +31,44 @@ import Camera from "jamjar/lib/camera/camera";
 import Sprite from "jamjar/lib/sprite/sprite";
 import Motion from "jamjar/lib/motion/motion";
 import Color from "jamjar/lib/rendering/color";
+import Component from "../lib/component/component";
 
-class CollisionListenerSystem extends System {
+class BounceSystem extends System {
+
+    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
+        return [Transform.KEY, Collider.KEY, Motion.KEY].every((type) => components.some(
+            component => component.key == type
+        ));
+    };
+
     constructor(messageBus: MessageBus) {
-        super(messageBus);
+        super(messageBus, { evaluator: BounceSystem.EVALUATOR });
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
     }
 
     OnMessage(message: IMessage): void {
         super.OnMessage(message);
         if (message.type == CollisionSystem.MESSAGE_COLLISION_DETECTED) {
-            console.log(message as Message<Collision>);
+            const collisionMessage = message as Message<Collision>;
+            if (collisionMessage.payload == undefined) {
+                return;
+            }
+            const a = this.GetSystemEntity(collisionMessage.payload.a);
+            const b = this.GetSystemEntity(collisionMessage.payload.b);
+
+            if (a) {
+                const transform = a.Get(Transform.KEY) as Transform;
+                const motion = a.Get(Motion.KEY) as Motion;
+                motion.velocity = motion.velocity.Invert();
+                transform.position = transform.position.Add(motion.velocity.Scale(0.1));
+            }
+
+            if (b) {
+                const transform = b.Get(Transform.KEY) as Transform;
+                const motion = b.Get(Motion.KEY) as Motion;
+                motion.velocity = motion.velocity.Invert();
+                transform.position = transform.position.Add(motion.velocity.Scale(0.1));
+            }
         }
     }
 }
@@ -53,22 +80,29 @@ class TestGame extends Game {
 
     OnStart(): void {
         new CollisionSystem(this.messageBus)
-        new CollisionListenerSystem(this.messageBus);
+        new BounceSystem(this.messageBus);
 
         const camera = new Entity(this.messageBus);
         camera.Add(new Transform(new Vector(0,0)));
         camera.Add(new Camera(new Color(0,0,0,1), undefined, undefined, new Vector(160,90)));
 
         let a = new Entity(this.messageBus);
-        a.Add(new Transform(new Vector(0,0), new Vector(20,10)));
+        a.Add(new Transform(new Vector(-75,0), new Vector(5,50)));
         a.Add(new Sprite(new Color(1,0,0,1)));
         a.Add(new Collider(Polygon.Rectangle(1,1)));
+        a.Add(new Motion());
 
         let b = new Entity(this.messageBus);
-        b.Add(new Transform(new Vector(4,0), new Vector(5,5)));
+        b.Add(new Transform(new Vector(0,0), new Vector(5,5), 45 * Math.PI / 180));
         b.Add(new Sprite(new Color(0,1,0,1)));
         b.Add(new Collider(Polygon.Rectangle(1,1)));
-        b.Add(new Motion(new Vector(0,0)))
+        b.Add(new Motion(new Vector(-40,0)))
+
+        let c = new Entity(this.messageBus);
+        c.Add(new Transform(new Vector(75,0), new Vector(5,50)));
+        c.Add(new Sprite(new Color(0,0,1,1)));
+        c.Add(new Collider(Polygon.Rectangle(1,1)));
+        c.Add(new Motion());
     }
 }
 
