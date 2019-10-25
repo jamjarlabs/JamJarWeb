@@ -16,26 +16,48 @@ limitations under the License.
 
 import Component from "../component/component";
 import Vector from "../geometry/vector";
-import Matrix from "../geometry/matrix";
+import Matrix3D from "../geometry/matrix_3d";
+import Matrix4D from "../geometry/matrix_4d";
 
 class Transform extends Component {
     public static readonly KEY = "transform";
+    public previous: Vector;
     public position: Vector;
     public scale: Vector;
     public angle: number;
 
     constructor(position = new Vector(0,0), scale = new Vector(1,1), angle = 0) {
         super(Transform.KEY);
+        this.previous = position;
         this.position = position;
         this.scale = scale;
         this.angle = angle;
     }
 
-    public Matrix(): Matrix {
-        const matrix = new Matrix();
-        matrix.Scale(this.scale);
+    public Matrix3D(): Matrix3D {
+        const matrix = new Matrix3D();
         matrix.Rotate(this.angle);
+        matrix.Scale(this.scale);
         matrix.Translate(this.position);
+        return matrix;
+    }
+
+    public Matrix4D(): Matrix4D {
+        const matrix = new Matrix4D();
+        matrix.Rotate(this.angle);
+        matrix.Scale(this.scale);
+        matrix.Translate(this.position);
+        return matrix;
+    }
+
+    public InterpolatedMatrix4D(alpha: number): Matrix4D {
+        const matrix = new Matrix4D();
+        matrix.Rotate(this.angle);
+        matrix.Scale(this.scale);
+        matrix.Translate(new Vector(
+			this.previous.x * alpha + this.position.x * (1 - alpha),
+			this.previous.y * alpha + this.position.y * (1 - alpha)
+		));
         return matrix;
     }
 }

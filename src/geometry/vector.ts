@@ -13,7 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import Matrix from "./matrix";
+import Matrix3D from "./matrix_3d";
+import Matrix4D from "./matrix_4d";
 
 
 class Vector {
@@ -24,10 +25,17 @@ class Vector {
         this.y = y;
     }
 
-    public Apply(matrix: Matrix): Vector {
+    public Apply3D(matrix: Matrix3D): Vector {
         return new Vector(
             matrix.values[0][0] * this.x + matrix.values[1][0] * this.y + matrix.values[2][0],
             matrix.values[0][1] * this.x + matrix.values[1][1] * this.y + matrix.values[2][1]
+        );
+    }
+
+    public Apply4D(matrix: Matrix4D): Vector {
+        return new Vector(
+            matrix.values[0][0] * this.x + matrix.values[1][0] * this.y + matrix.values[3][0],
+            matrix.values[0][1] * this.x + matrix.values[1][1] * this.y + matrix.values[3][1]
         );
     }
 

@@ -50,7 +50,14 @@ abstract class System extends Subscriber {
         ]);
     }
 
-    protected abstract Update(dt: number): void;
+    /**
+     * General update method, default empty. Override with custom logic.
+     * @param dt DeltaTime
+     */
+    /* eslint-disable-next-line no-empty-function */
+    protected Update(dt: number): void {
+        return;
+    }
 
     public OnMessage(message: IMessage): void {
         switch (message.type) {

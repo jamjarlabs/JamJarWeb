@@ -40,12 +40,25 @@ class Polygon implements IShape {
     }
 
     public Transform(transform: Transform): Polygon {
-        const matrix = transform.Matrix();
+        const matrix = transform.Matrix3D();
         const transformedPoints = [];
         for (const point of this.points) {
-            transformedPoints.push(point.Apply(matrix));
+            transformedPoints.push(point.Apply3D(matrix));
         }
         return new Polygon(transformedPoints);
+    }
+
+    public GetArray(): number[] {
+        const arr = [];
+        for(const point of this.points) {
+            arr.push(point.x);
+            arr.push(point.y);
+        }
+        return arr;
+    }
+
+    public GetFloat32Array(): Float32Array {
+        return new Float32Array(this.GetArray());
     }
 
     public static Rectangle(width: number, height: number): Polygon {

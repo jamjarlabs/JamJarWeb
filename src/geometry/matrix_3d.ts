@@ -16,23 +16,23 @@ limitations under the License.
 
 import Vector from "./vector";
 
-type MatrixValues = [
+type Matrix3DValues = [
     [number, number, number],
     [number, number, number],
     [number, number, number]
 ]
 
-class Matrix {
+class Matrix3D {
 
-    public static readonly Identity: Matrix = new Matrix([
+    public static readonly Identity: Matrix3D = new Matrix3D([
         [1,0,0],
         [0,1,0],
         [0,0,1],
     ]);
 
-    public values: MatrixValues
+    public values: Matrix3DValues
 
-    constructor(values?: MatrixValues) {
+    constructor(values?: Matrix3DValues) {
         if (values) {
             this.values = values;
         }
@@ -55,8 +55,8 @@ class Matrix {
         this.values[0][0] = scale.x * this.values[0][0];
         this.values[0][1] = scale.x * this.values[0][1];
         this.values[0][2] = scale.x * this.values[0][2];
-        this.values[1][0] = scale.x * this.values[1][0];
-        this.values[1][1] = scale.x * this.values[1][1];
+        this.values[1][0] = scale.y * this.values[1][0];
+        this.values[1][1] = scale.y * this.values[1][1];
         this.values[1][2] = scale.y * this.values[1][2];
     }
 
@@ -79,6 +79,20 @@ class Matrix {
     public RotateDeg(angle: number): void {
         this.Rotate(angle * (Math.PI/180));
     }
+
+    public GetFloat32Array(): Float32Array {
+        return (new Float32Array([
+            this.values[0][0],
+            this.values[0][1],
+            this.values[0][2],
+            this.values[1][0],
+            this.values[1][1],
+            this.values[1][2],
+            this.values[2][0],
+            this.values[2][1],
+            this.values[2][2],
+        ]));
+    }
 }
 
-export default Matrix;
+export default Matrix3D;
