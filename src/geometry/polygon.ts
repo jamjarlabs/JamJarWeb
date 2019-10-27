@@ -18,6 +18,10 @@ import Vector from "./vector";
 import IShape from "./ishape";
 import Transform from "../transform/transform";
 
+/**
+ * Polygon is the representation of a 2D Polygon shape. 
+ * Can be used in collision detection and rendering.
+ */
 class Polygon implements IShape {
     public points: Vector[];
 
@@ -48,6 +52,10 @@ class Polygon implements IShape {
         return new Polygon(transformedPoints);
     }
 
+    /**
+     * GetArray returns the points of this polygon in an array form, of `[x1,y1,x2,y2...xn,yn]`.
+     * @returns {number[]} The array of points in the polygon
+     */
     public GetArray(): number[] {
         const arr = [];
         for(const point of this.points) {
@@ -57,10 +65,19 @@ class Polygon implements IShape {
         return arr;
     }
 
+    /**
+     * GetFloat32Array converts the polygon to a WebGL/glMatrix compatible Float32Array
+     * @returns {Float32Array} The array representation of the polygon
+     */
     public GetFloat32Array(): Float32Array {
         return new Float32Array(this.GetArray());
     }
 
+    /**
+     * Rectangle returns a new polygon in a rectangle shape.
+     * @param {number} width Width of the rectangle
+     * @param {number} height Height of the rectangle
+     */
     public static Rectangle(width: number, height: number): Polygon {
 		const halfWidth = width/2;
 		const halfHeight = height/2;

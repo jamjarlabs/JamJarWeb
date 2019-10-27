@@ -18,6 +18,9 @@ import IShape from "./ishape";
 import Vector from "./vector";
 import Transform from "../transform/transform";
 
+/**
+ * Ellipse is the representation of a 2D Ellipse shape. Can be used for collision detection.
+ */
 class Ellipse implements IShape {
     public center: Vector;
     public dimensions: Vector;
@@ -47,6 +50,11 @@ class Ellipse implements IShape {
         );
     }
 
+    /**
+     * Circle returns a new Ellipse in the shape of a circle.
+     * @param {number} radius Radius of the circle
+     * @param {Vector} center Centre of the circle
+     */
     public static Circle(radius: number, center: Vector = new Vector(0,0)): Ellipse {
         return new Ellipse(new Vector(radius, radius), 0, center);
     }

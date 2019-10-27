@@ -17,6 +17,10 @@ limitations under the License.
 import Component from "../component/component";
 import Vector from "../geometry/vector";
 
+/**
+ * Motion is a component that represents an entity with motion values.
+ * Holds info such as velocity, acceleration, angular velocity and angular acceleration.
+ */
 class Motion extends Component {
     public static readonly KEY = "motion";
     public velocity: Vector;

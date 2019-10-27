@@ -16,6 +16,10 @@ limitations under the License.
 
 import Entity from "../entity/entity";
 
+/**
+ * Collision represents a collision between two entities, and all information
+ * about the collision.
+ */
 class Collision {
     public a: Entity;
     public b: Entity;

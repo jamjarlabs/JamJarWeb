@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * IMessage is the interface for passing messages between systems/engine parts.
+ * Each message is guaranteed to have a message type, used for filtering/determining
+ * meaning for each message.
+ */
 interface IMessage {
     type: string;
 }

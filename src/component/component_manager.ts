@@ -17,6 +17,11 @@ limitations under the License.
 import Component from "./component";
 import Entity from "../entity/entity";
 
+/**
+ * ComponentManager holds a map/record of components of the same type, mapped
+ * to the ID of the entity the component belongs to.
+ * Used in conjunction with the EntityManager for managing Entities/Components.
+ */
 class ComponentManager {
     private components: Record<number, Component>
 
@@ -24,14 +29,31 @@ class ComponentManager {
         this.components = [];
     }
 
-    public Get(entity: Entity): Component {
+    /**
+     * Get returns a component associated with an entity if it
+     * exists, otherwise returns undefined.
+     * @param {Entity} entity Entity to get the component of
+     * @returns {Component|undefined} Component retrieved, if doesn't exist, undefined
+     */
+    public Get(entity: Entity): Component | undefined {
         return this.components[entity.id];
     }
 
+    /**
+     * Add adds a component to the ComponentManager, mapped to
+     * the entity that the component belongs to.
+     * @param {Entity} entity Entity of the component to add
+     * @param {Component} component Component to add
+     */
     public Add(entity: Entity, component: Component): void {
         this.components[entity.id] = component;
     }
 
+    /**
+     * Remove removes a component from the ComponentManager if it
+     * exists.
+     * @param {Entity} entity Entity of the component to remove
+     */
     public Remove(entity: Entity): void {
         delete this.components[entity.id];
     }

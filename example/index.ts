@@ -84,7 +84,7 @@ class TestGame extends Game {
 
         const camera = new Entity(this.messageBus);
         camera.Add(new Transform(new Vector(0,0)));
-        camera.Add(new Camera(new Color(0,0,0,1), undefined, undefined, new Vector(160,90)));
+        camera.Add(new Camera(new Color(0,0,0,1)));
 
         let a = new Entity(this.messageBus);
         a.Add(new Transform(new Vector(-75,0), new Vector(5,50)));

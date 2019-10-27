@@ -17,6 +17,10 @@ limitations under the License.
 import Component from "../component/component";
 import IShape from "../geometry/ishape";
 
+/**
+ * Collider is a component that defines a shape for detecting collisions
+ * with other Colliders.
+ */
 class Collider extends Component {
     public static readonly KEY = "collider";
     public shape: IShape;

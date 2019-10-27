@@ -17,6 +17,17 @@ limitations under the License.
 import Subscriber from "./subscriber";
 import IMessage from "./imessage";
 
+/**
+ * MessageBus is the core link between each part of the Engine, it handles processing
+ * messages and deciding which subscribers should recieve each message.
+ * An object can subscribe to a certain message, the message bus will keep track of
+ * subscribers for a message type.
+ * Messages can be sent to the message bus, which will be queued up.
+ * A dispatch can be triggered on the message bus, which will cause the message bus
+ * to send all the messages and to the subscribers that have subscribed to the message
+ * type.
+ * The dispatch should probably be left to the core game loop for triggering.
+ */
 class MessageBus {
     private subscribers: Record<string, Subscriber[]>;
     private messageQueue: IMessage[];
@@ -26,6 +37,10 @@ class MessageBus {
         this.messageQueue = [];
     }
 
+    /**
+     * Processes the message bus queue and forwards the messages to the subscribers.
+     * who have subscribed to each message type.
+     */
     public Dispatch(): void {
         const queueLength = this.messageQueue.length;
         for (let i = 0; i < queueLength; i++) {
@@ -42,10 +57,19 @@ class MessageBus {
         }
     }
 
+    /**
+     * Publish adds a message to the message bus queue to be dispatched.
+     * @param {IMessage} message The message to send
+     */
     public Publish(message: IMessage): void {
         this.messageQueue.push(message);
     }
 
+    /**
+     * Subscribe subscibes a subscriber to a particular message type or types.
+     * @param {Subscriber} subscriber The subscriber to the message type(s) 
+     * @param {string|string[]} types The message type(s) to subscribe to
+     */
     public Subscribe(subscriber: Subscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for(const type of types) {
@@ -61,6 +85,10 @@ class MessageBus {
         this.subscribers[types] = typeSubs;
     }
 
+    /**
+     * UnsubscribeAll unsubscribes a Subscriber from all messages.
+     * @param {Subscriber} subscriber The subscriber to unsubscribe
+     */
     public UnsubscribeAll(subscriber: Subscriber): void {
         for (const key in this.subscribers) {
             const subscribers = this.subscribers[key];
@@ -73,6 +101,11 @@ class MessageBus {
         }
     }
 
+    /**
+     * Unsubscribe unsubscribes a subscriber from a specific message type or types.
+     * @param {Subscriber} subscriber The subscriber to unsubscribe
+     * @param {string|strings} types The message type(s) to unsubscribe from
+     */
     public Unsubscribe(subscriber: Subscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for(const type of types) {

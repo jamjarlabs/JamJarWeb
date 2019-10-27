@@ -22,7 +22,12 @@ import Entity from "../entity/entity";
 import MessageBus from "../message/message_bus";
 import Scene from "../scene/scene";
 
+/**
+ * MotionSystem handles basic physics calculations for entities with a motion component.
+ * This system handles velocity, acceleration, angular velocity and angular acceleration.
+ */
 class MotionSystem extends System {
+    // Only entities with transform and motion components.
     private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
         return [Transform.KEY, Motion.KEY].every((type) => components.some(
             component => component.key == type

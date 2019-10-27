@@ -17,8 +17,23 @@ limitations under the License.
 import Vector from "./vector";
 import Transform from "../transform/transform";
 
+/**
+ * IShape is the interface for a shape, defining all methods that need implemented in order
+ * for the shape to be used with collision detection.
+ */
 interface IShape {
+    /**
+     * Transform takes a transform and applies it to shape.
+     * @param {Transform} transform The transform to apply to the shape
+     * @returns {IShape} The transformed shape
+     */
     Transform(transform: Transform): IShape;
+    /**
+     * FarthestPointInDirection returns the point that is farthest in the direction provided.
+     * Used in the GJK algorithm for collision detection.
+     * @param {Vector} direction The direction to get the point in
+     * @returns {Vector} The farthest point in the direction provided
+     */
     FarthestPointInDirection(direction: Vector): Vector;
 }
 
