@@ -1,6 +1,5 @@
 {
   "name": "jamjar",
-  "version": "0.1.0",
   "description": "WebGL based browser game engine",
   "main": "lib/game.js",
   "scripts": {
@@ -17,5 +16,5 @@
     "eslint": "^6.5.1",
     "ts-loader": "^6.2.0",
     "typescript": "^3.6.4"
-  }
+  },
 }

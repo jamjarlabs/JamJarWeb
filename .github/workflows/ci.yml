@@ -10,6 +10,20 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn build
+      - name: Install, lint and build
+        run: |
+          yarn install
+          yarn lint
+          yarn build
+        env:
+          CI: true
+      - name: Tag new version
+        if: github.event_name == 'release' && github.repository == 'jthomperoo/jamjar'
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | grep -P '([^\/]+$)' -o) 
+          yarn version --no-git-tag-version --new-version ${VERSION}
+      - name: Publish to NPM
+        if: github.event_name == 'release' && github.repository == 'jthomperoo/jamjar'
+        uses: luvies/action-yarn-publish@v0.1.1
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
