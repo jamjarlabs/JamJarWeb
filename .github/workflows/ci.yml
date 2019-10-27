@@ -21,13 +21,10 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Tag new version
+      - name: Publish to NPM
         if: github.event_name == 'release' && github.repository == 'jthomperoo/jamjar'
         run: |
           VERSION=$(echo "${{ github.ref }}" | grep -P '([^\/]+$)' -o) 
           yarn version --no-git-tag-version --new-version ${VERSION}
-      - name: Publish to NPM
-        if: github.event_name == 'release' && github.repository == 'jthomperoo/jamjar'
-        uses: luvies/action-yarn-publish@v0.1.1
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.YARN_TOKEN }}" >> ~/.npmrc
+          yarn publish --not-interactive --no-git-tag-version
