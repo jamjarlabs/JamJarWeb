@@ -19,6 +19,11 @@ import Vector from "../geometry/vector";
 import Matrix3D from "../geometry/matrix_3d";
 import Matrix4D from "../geometry/matrix_4d";
 
+/**
+ * Transform is a component for storing positional information.
+ * The transform holds position, scale and angle values.
+ * Frequently used in rendering, collisions and physics.
+ */
 class Transform extends Component {
     public static readonly KEY = "transform";
     public previous: Vector;
@@ -34,6 +39,10 @@ class Transform extends Component {
         this.angle = angle;
     }
 
+    /**
+     * Matrix3D returns a 3x3 matrix representation of the transform.
+     * @returns {Matrix3D} Matrix of transforms
+     */
     public Matrix3D(): Matrix3D {
         const matrix = new Matrix3D();
         matrix.Translate(this.position);
@@ -42,6 +51,10 @@ class Transform extends Component {
         return matrix;
     }
 
+    /**
+     * Matrix4D returns a 4x4 matrix representation of the transform.
+     * @returns {Matrix4D} Matrix of transforms
+     */
     public Matrix4D(): Matrix4D {
         const matrix = new Matrix4D();
         matrix.Translate(this.position);
@@ -50,6 +63,16 @@ class Transform extends Component {
         return matrix;
     }
 
+    /**
+     * InterpolatedMatrix4D returns a 4x4 matrix representation of the transform that has
+     * applied its interpolation calculation between the previous frame's position and the
+     * current transform position.
+     * The interpolation is based on the alpha value provided, which is time since last
+     * game tick.
+     * Used in rendering and ensuring smooth motion between frames.
+     * @param alpha time since last game tick
+     * @returns {Matrix4D} Matrix of the interpolated transform.
+     */
     public InterpolatedMatrix4D(alpha: number): Matrix4D {
         const matrix = new Matrix4D();
         matrix.Translate(new Vector(

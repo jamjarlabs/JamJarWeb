@@ -20,6 +20,10 @@ import IMessage from "../message/imessage";
 import Message from "../message/message";
 import Entity from "../entity/entity";
 
+/**
+ * Scene is a way to categorise entities, components and systems together, allowing them to be loaded/deleted
+ * together.
+ */
 abstract class Scene extends Subscriber {
 
     public static readonly MESSAGE_DESTROY = "scene_destroy";
@@ -40,6 +44,9 @@ abstract class Scene extends Subscriber {
         ]);
     }
 
+    /**
+     * OnStart is triggered on scene start.
+     */
     protected abstract OnStart(): void;
 
     public OnMessage(message: IMessage): void {
@@ -61,6 +68,9 @@ abstract class Scene extends Subscriber {
         this.entities.push(entity);
     }
 
+    /**
+     * Destroy destroys the scene, alongside all linked entities, components and systems.
+     */
     public Destroy(): void {
         this.messageBus.Publish(new Message<Scene>(Scene.MESSAGE_DESTROY, this));
         for (const entity of this.entities) {
@@ -69,6 +79,9 @@ abstract class Scene extends Subscriber {
         this.entities = [];
     }
 
+    /**
+     * Start starts this scene
+     */
     public Start(): void {
         this.OnStart();
     }

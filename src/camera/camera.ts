@@ -19,6 +19,11 @@ import Vector from "../geometry/vector";
 import Color from "../rendering/color";
 import Matrix4D from "../geometry/matrix_4d";
 
+/**
+ * Camera is a component that represents a game camera.
+ * Holds camera information such as viewport info, aspect info and the background color.
+ * In-game camera position should be managed in the transform.
+ */
 class Camera extends Component {
     public static readonly KEY = "camera";
     public backgroundColor: Color;
@@ -37,12 +42,11 @@ class Camera extends Component {
         this.virtualScale = virtualScale;
     }
 
-    GetViewMatrix(position: Vector): Matrix4D {
-        const viewMatrix = new Matrix4D();
-        viewMatrix.Translate(new Vector(-position.x, position.y));
-        return viewMatrix;
-    }
-
+    /**
+     * GetProjectionMatrix builds and returns an orthographic projection for use
+     * in rendering, based on the virtual scale defined in the camera.
+     * @returns {Matrix4D} The projection matrix
+     */
     GetProjectionMatrix(): Matrix4D {
         const halfWidth = this.virtualScale.x / 2;
         const halfHeight = this.virtualScale.y / 2;

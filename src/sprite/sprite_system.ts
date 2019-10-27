@@ -25,6 +25,8 @@ import IMessage from "../message/imessage";
 import SystemEntity from "../system/system_entity";
 import Camera from "../camera/camera";
 import Message from "../message/message";
+import Vector from "../geometry/vector";
+import Matrix4D from "../geometry/matrix_4d";
 
 class SpriteSystem extends System {
 
@@ -135,7 +137,9 @@ class SpriteSystem extends System {
             const camera = cameraEntity.Get(Camera.KEY) as Camera;
             const transform = cameraEntity.Get(Transform.KEY) as Transform;
 
-            const viewMatrix = camera.GetViewMatrix(transform.position);
+            const viewMatrix = new Matrix4D();
+            viewMatrix.Translate(new Vector(-transform.position.x, transform.position.y));
+
             const projectionMatrix = camera.GetProjectionMatrix();
 
             gl.useProgram(program);

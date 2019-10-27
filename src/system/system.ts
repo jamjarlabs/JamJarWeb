@@ -23,6 +23,10 @@ import Component from "../component/component";
 import SystemEntity from "./system_entity";
 import Scene from "../scene/scene";
 
+/**
+ * System is one of the key elements of the Entity-Component-System architecture.
+ * A system is for implementing logic, manipulating entities and their components.
+ */
 abstract class System extends Subscriber {
 
     public static readonly MESSAGE_UPDATE = "system_update"
@@ -32,6 +36,8 @@ abstract class System extends Subscriber {
     protected entities: SystemEntity[];
     protected scene?: Scene;
 
+    // The evaluator is used to evaluate if an entity with its components should be
+    // tracked by the system
     private evaluator?: (entity: Entity, components: Component[]) => boolean
 
     constructor(protected messageBus: MessageBus, args: {
@@ -80,7 +86,7 @@ abstract class System extends Subscriber {
                 if (!deregisterMessage.payload) {
                     return;
                 }
-                this.deregister(deregisterMessage.payload);
+                this.remove(deregisterMessage.payload);
                 break;
             }
             case Scene.MESSAGE_DESTROY: {
@@ -99,10 +105,23 @@ abstract class System extends Subscriber {
         }
     }
 
+    /**
+     * Destroy destroys the System and unsubscribes it from all messages.
+     * The System should be garbage collected after this, unless a direct
+     * reference to it exists somewhere. Therefore direct references to
+     * systems are discouraged; communication should all be through the
+     * message bus.
+     */
     public Destroy(): void {
         this.messageBus.UnsubscribeAll(this);
     }
 
+    /**
+     * Helper function to retrieve the SystemEntity equivalent of an
+     * Entity if it exists in this system, otherwise returns undefined.
+     * @param {Entity} entity The entity to get the SystemEntity of
+     * @returns {SystemEntity|undefined} The system entity if it exists, otherwise undefined
+     */
     protected GetSystemEntity(entity: Entity): SystemEntity | undefined {
         for (let i = 0; i < this.entities.length; i++) {
             const systemEntity = this.entities[i];
@@ -113,10 +132,14 @@ abstract class System extends Subscriber {
         return;
     }
 
-    private deregister(entity: Entity): void {
-        this.remove(entity)
-    }
-
+    /**
+     * register is used when a new entity is created with components, or an existing
+     * entity's components are changed; register calls the evaluator to check if the
+     * system should track this entity. If the evaluator returns true, the entity
+     * is added to the System's internal entity array.
+     * @param {Entity} entity The entity to register
+     * @param {Component[]} components The components of the registering entity.
+     */
     private register(entity: Entity, components: Component[]): void {
         if (!this.evaluator) {
             return;
@@ -133,6 +156,10 @@ abstract class System extends Subscriber {
         this.entities.push(new SystemEntity(entity, components));
     }
 
+    /**
+     * remove removes an entity from being tracked by the system
+     * @param {Entity} entity The entity to remove
+     */
     private remove(entity: Entity): void {
         for (let i = 0; i < this.entities.length; i++) {
             const systemEntity = this.entities[i];

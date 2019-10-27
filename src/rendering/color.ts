@@ -14,7 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
+/**
+ * Color represents an RGBA color.
+ * Values from 0 to 1.
+ */
 class Color {
     public red: number;
     public green: number;
@@ -28,6 +31,10 @@ class Color {
 		this.alpha = alpha;
 	}
 	
+	/**
+	 * Returns the color in the form of a tuple `[red, green, blue, alpha]`.
+	 * @returns {[number, number, number, number]} The tuple representation of the color
+	 */
 	GetTuple(): [number, number, number, number] {
 		return [
 			this.red,
@@ -36,7 +43,12 @@ class Color {
 			this.alpha
 		];
 	}
-    
+	
+	/**
+	 * Mixes two colors together.
+	 * @param {Color} color The color to mix with this one
+	 * @returns {Color} The mixed color
+	 */
     Mix(color: Color): Color {
 		return new Color(
 			(color.red + this.red) / 2,

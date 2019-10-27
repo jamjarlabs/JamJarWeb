@@ -23,6 +23,12 @@ import SpriteSystem from "./sprite/sprite_system";
 import CameraSystem from "./camera/camera_system";
 import InterpolationSystem from "./interpolation/interpolation_system";
 
+/**
+ * Game is the core engine class, tying together all of the parts of the engine.
+ * The game is where the game is initialised; scenes, entities, components and systems.
+ * The game contains the game loop, which handles triggering updates in systems and
+ * setting up rendering.
+ */
 abstract class Game {
 
     private static readonly TIME_STEP = 1000 / 100;
@@ -55,10 +61,16 @@ abstract class Game {
         new CameraSystem(this.messageBus, this.gl);
     }
 
+    /**
+     * OnStart is triggered when the game is started.
+     */
     protected OnStart(): void {
         return;
     }
     
+    /**
+     * Start kicks off the game, setting up systems and starting the game loop.
+     */
     public Start(): void  {
         this.OnStart();
         this.coreSystems()
@@ -68,6 +80,14 @@ abstract class Game {
         this.loop();
     }
 
+    /**
+     * loop is the core game loop, it handles repeatedly calling itself to manage updates and rendering.
+     * Updates should be fixed and occur consistently, therefore there is an accumulator to make sure
+     * that enough updates happen to keep up with the time step.
+     * Rendering can occur as fast as possible, rendering systems will have to account for interpolation,
+     * which uses the alpha value that is calculated.
+     * See: https://gameprogrammingpatterns.com/game-loop.html
+     */
     private loop(): void  {
 		const newTime = Date.now();
 		const frameTime = newTime - this.currentTime;

@@ -17,6 +17,13 @@ limitations under the License.
 import Entity from "../entity/entity";
 import Component from "../component/component";
 
+/**
+ * SystemEntity is a wrapper around an entity and its components,
+ * used in systems to provide an easier way to group an entity and its
+ * components.
+ * Includes a number of helper functions for retrieving/adding/removing components,
+ * and destroying the entity.
+ */
 class SystemEntity {
     public entity: Entity;
     public components: Record<string, Component>;
@@ -29,18 +36,35 @@ class SystemEntity {
         }
     }
 
+    /**
+     * Get returns any Component with the key provided if it exists;
+     * otherwise it returns undefined.
+     * @param {string} key The key identifier of the component 
+     * @returns {Component|undefined} The component if it exists, otherwise undefined
+     */
     public Get(key: string): Component | undefined {
         return this.components[key];
     }
 
+    /**
+     * Add adds a component to an entity.
+     * @param {Component} component The component to add
+     */
     public Add(component: Component): void {
         this.entity.Add(component);
     }
 
+    /**
+     * Remove removes a component from an entity.
+     * @param {string} key The key of the component to remove
+     */
     public Remove(key: string): void {
         this.entity.Remove(key);
     }
 
+    /**
+     * Destroy destroys the entity and all of its components.
+     */
     public Destroy(): void {
         this.entity.Destroy();
     }

@@ -16,12 +16,21 @@ limitations under the License.
 
 import IMessage from "./imessage";
 
+/**
+ * Subscriber represents something that can subscribe to and recieve messages
+ * from the message bus
+ */
 abstract class Subscriber {
     private static SUBSCRIBER_ID = 0;
     public subscriberID: number;
     constructor() {
         this.subscriberID = Subscriber.SUBSCRIBER_ID++;
     }
+    /**
+     * OnMessage handles a subscriber recieving a message.
+     * Called by the message bus for appropriate messages.
+     * @param {IMessage} message The message that has been sent to the subscriber
+     */
     abstract OnMessage(message: IMessage): void;
 }
 

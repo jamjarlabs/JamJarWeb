@@ -23,9 +23,15 @@ import Scene from "../scene/scene";
 import SystemEntity from "../system/system_entity";
 import IMessage from "../message/imessage";
 
+/**
+ * InterpolationSystem is responsible for updating each entities transform value after a render, so
+ * its previous value is always 1 frame before.
+ * This is part of the rendering process.
+ */
 class InterpolationSystem extends System {
     public static readonly MESSAGE_INTERPOLATE_TRANSFORMS = "interpolate_system_interpolate_transforms";
 
+    // All entities with a transform
     private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
         return components.some(
             component => component.key == Transform.KEY
@@ -47,6 +53,12 @@ class InterpolationSystem extends System {
         }
     }
 
+    /**
+     * interpolateTransforms updates the `previous` member to be the current position of the transform.
+     * This is used in rendering, allowing render systems to use the previous and current position to
+     * interpolate its position when drawing.
+     * @param {SystemEntity[]} entities The entities to update the interpolation positions of 
+     */
     private interpolateTransforms(entities: SystemEntity[]): void {
         for (const entity of entities) {
             const transform = entity.Get(Transform.KEY) as Transform;

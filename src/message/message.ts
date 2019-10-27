@@ -16,6 +16,10 @@ limitations under the License.
 
 import IMessage from "./imessage";
 
+/**
+ * Message is a message that can be sent along the event bus to subscribers.
+ * Message has a generic type payload for passing more data than just the message type.
+ */
 class Message<T> implements IMessage {
     constructor(public type: string, public payload?: T) {}
 }

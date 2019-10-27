@@ -14,6 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * Component is one of the key elements of the Entity-Component-System architecture.
+ * A component is there to store data, logic shouldn't exist within
+ * a component, apart from helper functions for retrieving
+ * component data.
+ * Each entity can only have 1 component of each type.
+ */
 abstract class Component {
     public static readonly MESSAGE_ADD = "component_add";
     public static readonly MESSAGE_REMOVE = "component_remove";
