@@ -6,7 +6,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "eslint src --ext .ts,.tsx",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "docs": "mkdocs serve"
   },
   "author": "jthomperoo",
   "license": "Apache-2.0",
