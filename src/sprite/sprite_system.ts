@@ -15,7 +15,6 @@ limitations under the License.
 */
 
 import System from "../system/system";
-import MessageBus from "../message/message_bus";
 import Entity from "../entity/entity";
 import Component from "../component/component";
 import Transform from "../transform/transform";
@@ -27,6 +26,7 @@ import Camera from "../camera/camera";
 import Message from "../message/message";
 import Vector from "../geometry/vector";
 import Matrix4D from "../geometry/matrix_4d";
+import IMessageBus from "../message/imessage_bus";
 
 class SpriteSystem extends System {
 
@@ -66,7 +66,7 @@ class SpriteSystem extends System {
     private gl: WebGL2RenderingContext;
     private program: WebGLProgram | null;
 
-    constructor(messageBus: MessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
+    constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
         super(messageBus, { evaluator: SpriteSystem.EVALUATOR, scene: scene });
         this.gl = gl;
         this.messageBus.Subscribe(this, SpriteSystem.MESSAGE_RENDER_SPRITES);

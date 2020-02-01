@@ -18,13 +18,13 @@ import System from "../system/system";
 import Transform from "../transform/transform";
 import Component from "../component/component";
 import Entity from "../entity/entity";
-import MessageBus from "../message/message_bus";
 import Scene from "../scene/scene";
 import Collider from "./collider";
 import SystemEntity from "../system/system_entity";
 import Collision from "./collision";
 import Message from "../message/message";
 import gjk from "../algorithms/gjk";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * CollisionSystem watches for collisions between entities with Colliders and Transforms.
@@ -44,7 +44,7 @@ class CollisionSystem extends System {
         ));
     };
 
-    constructor(messageBus: MessageBus, scene?: Scene) {
+    constructor(messageBus: IMessageBus, scene?: Scene) {
         super(messageBus, { evaluator: CollisionSystem.EVALUATOR, scene: scene });
     }
 

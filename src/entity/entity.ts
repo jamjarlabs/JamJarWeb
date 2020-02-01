@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import MessageBus from "../message/message_bus";
 import Component from "../component/component";
 import Message from "../message/message";
 import Scene from "../scene/scene";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * Entity is one of the key elements of the Entity-Component-System architecture.
@@ -34,7 +34,7 @@ class Entity {
     public id: number;
     public scene?: Scene;
 
-    constructor(private messageBus: MessageBus, scene?: Scene) {
+    constructor(private messageBus: IMessageBus, scene?: Scene) {
         this.id = Entity.ID++;
         this.scene = scene;
         if (scene) {

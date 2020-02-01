@@ -14,10 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Install, lint and build
+      - name: Install, lint, test and build
         run: |
           yarn install
           yarn lint
+          yarn test
           yarn build
         env:
           CI: true

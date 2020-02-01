@@ -19,8 +19,8 @@ import Transform from "../transform/transform";
 import Motion from "./motion";
 import Component from "../component/component";
 import Entity from "../entity/entity";
-import MessageBus from "../message/message_bus";
 import Scene from "../scene/scene";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * MotionSystem handles basic physics calculations for entities with a motion component.
@@ -34,7 +34,7 @@ class MotionSystem extends System {
         ));
     };
 
-    constructor(messageBus: MessageBus, scene?: Scene) {
+    constructor(messageBus: IMessageBus, scene?: Scene) {
         super(messageBus, { evaluator: MotionSystem.EVALUATOR, scene: scene });
     }
 
