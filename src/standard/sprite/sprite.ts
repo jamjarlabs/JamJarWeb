@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2019 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,13 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IGame from "../igame";
-import Fake from "./fake";
+import Component from "../../component/component";
+import Color from "../../rendering/color";
+import Polygon from "../../geometry/polygon";
 
-class FakeGame extends Fake implements IGame {
-    public Start(): void {
-        return;
-    }
+class Sprite extends Component {
+    public static readonly KEY = "sprite";
+    public bounds: Polygon;
+    public color: Color;
+
+    constructor(color: Color, bounds: Polygon = Polygon.Rectangle(1,1)) {
+        super(Sprite.KEY);
+        this.color = color;
+        this.bounds = bounds;
+    } 
 }
 
-export default FakeGame;
+export default Sprite;

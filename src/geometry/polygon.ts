@@ -16,7 +16,7 @@ limitations under the License.
 
 import Vector from "./vector";
 import IShape from "./ishape";
-import Transform from "../transform/transform";
+import Transform from "../standard/transform/transform";
 
 /**
  * Polygon is the representation of a 2D Polygon shape. 

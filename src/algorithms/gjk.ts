@@ -17,9 +17,9 @@ limitations under the License.
 import SystemEntity from "../system/system_entity";
 import IShape from "../geometry/ishape";
 import Vector from "../geometry/vector";
-import Collision from "../collision/collision";
-import Transform from "../transform/transform";
-import Collider from "../collision/collider";
+import Collision from "../standard/collision/collision";
+import Transform from "../standard/transform/transform";
+import Collider from "../standard/collision/collider";
 
 /**
  * GJKSimplex is a simplex that contains a maximum of three points, used to build up

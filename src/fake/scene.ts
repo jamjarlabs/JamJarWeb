@@ -14,13 +14,31 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IGame from "../igame";
 import Fake from "./fake";
+import IScene from "../scene/iscene";
+import IMessage from "../message/imessage";
+import IEntity from "../entity/ientity";
+import Reactor from "./reactor";
 
-class FakeGame extends Fake implements IGame {
+class FakeScene extends Fake implements IScene {
+
+    public id: number;
+    constructor(id: number, reactors: Reactor[] = []) {
+        super(reactors);
+        this.id = id;
+    }
+    public OnMessage(message: IMessage): void {
+        return;
+    }
+    public AddEntity(entity: IEntity): void {
+        return;
+    }
+    public Destroy(): void {
+        return;
+    }
     public Start(): void {
         return;
     }
 }
 
-export default FakeGame;
+export default FakeScene;

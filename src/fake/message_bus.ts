@@ -17,44 +17,27 @@ limitations under the License.
 import IMessageBus from "../message/imessage_bus";
 import Subscriber from "../message/subscriber";
 import IMessage from "../message/imessage";
+import Fake from "./fake";
 
-class FakeMessageBus implements IMessageBus {
-    private dispatchReactor: () => void;
-    private publishReactor: (message: IMessage) => void;
-    private subscribeReactor: (subscriber: Subscriber, types: string | string[]) => void;
-    private unsubscribeAllReactor: (subscriber: Subscriber) => void;
-    private unsubscribeReactor: (subscriber: Subscriber, types: string | string[]) => void;
-
-    constructor(dispatchReactor: () => void = (): void => {return;}, 
-    publishReactor: (message: IMessage) => void = (): void => {return;}, 
-    subscribeReactor: (subscriber: Subscriber, types: string | string[]) => void = (): void => {return;},
-    unsubscribeAllReactor: (subscriber: Subscriber) => void = (): void => {return;},
-    unsubscribeReactor: (subscriber: Subscriber, types: string | string[]) => void = (): void => {return;}) {
-        this.dispatchReactor = dispatchReactor;
-        this.publishReactor = publishReactor;
-        this.subscribeReactor = subscribeReactor;
-        this.unsubscribeAllReactor = unsubscribeAllReactor;
-        this.unsubscribeReactor = unsubscribeReactor;
-    }
-
+class FakeMessageBus extends Fake implements IMessageBus {
     public Dispatch(): void {
-        return this.dispatchReactor();
+        return;
     }
 
     public Publish(message: IMessage): void {
-        return this.publishReactor(message);
+        return;
     }
 
     public Subscribe(subscriber: Subscriber, types: string | string[]): void{
-        return this.subscribeReactor(subscriber, types);
+        return;
     }
 
     public UnsubscribeAll(subscriber: Subscriber): void {
-        return this.unsubscribeAllReactor(subscriber);
+        return;
     }
 
     public Unsubscribe(subscriber: Subscriber, types: string | string[]): void {
-        return this.unsubscribeReactor(subscriber, types);
+        return;
     }
 
 }

@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../component/component";
-import Vector from "../geometry/vector";
-import Matrix3D from "../geometry/matrix_3d";
-import Matrix4D from "../geometry/matrix_4d";
+import Component from "../../component/component";
+import Vector from "../../geometry/vector";
+import Matrix3D from "../../geometry/matrix_3d";
+import Matrix4D from "../../geometry/matrix_4d";
 
 /**
  * Transform is a component for storing positional information.

@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,21 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../component/component";
-import IShape from "../geometry/ishape";
+import IMessage from "../message/imessage";
+import IEntity from "../entity/ientity";
 
-/**
- * Collider is a component that defines a shape for detecting collisions
- * with other Colliders.
- */
-class Collider extends Component {
-    public static readonly KEY = "collider";
-    public shape: IShape;
-
-    constructor(shape: IShape) {
-        super(Collider.KEY);
-        this.shape = shape;
-    }
+interface IScene {
+    id: number;
+    OnMessage: (message: IMessage) => void;
+    AddEntity: (entity: IEntity) => void;
+    Destroy: () => void;
+    Start: () => void;
 }
 
-export default Collider;
+export default IScene;

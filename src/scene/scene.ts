@@ -17,28 +17,29 @@ limitations under the License.
 import Subscriber from "../message/subscriber";
 import IMessage from "../message/imessage";
 import Message from "../message/message";
-import Entity from "../entity/entity";
 import IMessageBus from "../message/imessage_bus";
+import IScene from "./iscene";
+import IEntity from "../entity/ientity";
 
 /**
  * Scene is a way to categorise entities, components and systems together, allowing them to be loaded/deleted
  * together.
  */
-abstract class Scene extends Subscriber {
+abstract class Scene extends Subscriber implements IScene {
 
     public static readonly MESSAGE_DESTROY = "scene_destroy";
-    private static readonly MESSAGE_ON_START = "scene_on_start";
+    public static readonly MESSAGE_ON_START = "scene_on_start";
 
     private static ID = 0;
 
     public id: number;
 
-    private entities: Entity[];
+    private entities: IEntity[];
 
-    constructor(protected messageBus: IMessageBus) {
+    constructor(protected messageBus: IMessageBus, entities: IEntity[] = []) {
         super();
         this.id = Scene.ID++;
-        this.entities = [];
+        this.entities = entities;
         this.messageBus.Subscribe(this, [
             Scene.MESSAGE_ON_START
         ]);
@@ -47,7 +48,9 @@ abstract class Scene extends Subscriber {
     /**
      * OnStart is triggered on scene start.
      */
-    protected abstract OnStart(): void;
+    protected OnStart(): void {
+        return;
+    }
 
     public OnMessage(message: IMessage): void {
         switch(message.type) {
@@ -64,7 +67,7 @@ abstract class Scene extends Subscriber {
         }
     }
 
-    public AddEntity(entity: Entity): void {
+    public AddEntity(entity: IEntity): void {
         this.entities.push(entity);
     }
 
@@ -83,7 +86,7 @@ abstract class Scene extends Subscriber {
      * Start starts this scene
      */
     public Start(): void {
-        this.OnStart();
+        this.messageBus.Publish(new Message<Scene>(Scene.MESSAGE_ON_START, this));
     }
 }
 

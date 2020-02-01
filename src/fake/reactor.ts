@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,20 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../component/component";
-import Color from "../rendering/color";
-import Polygon from "../geometry/polygon";
+/* eslint @typescript-eslint/no-explicit-any: 0 */
+// Requires any type as used in reflection to stub methods
 
-class Sprite extends Component {
-    public static readonly KEY = "sprite";
-    public bounds: Polygon;
-    public color: Color;
+class Reactor {
+    public name: string
+    public logic: (...args: any[]) => any
 
-    constructor(color: Color, bounds: Polygon = Polygon.Rectangle(1,1)) {
-        super(Sprite.KEY);
-        this.color = color;
-        this.bounds = bounds;
-    } 
+    constructor(name: string, logic: (...args: any[]) => any) {
+        this.name = name;
+        this.logic = logic;
+    }
 }
 
-export default Sprite;
+export default Reactor;

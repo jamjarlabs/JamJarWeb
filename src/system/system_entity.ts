@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Entity from "../entity/entity";
 import Component from "../component/component";
+import IEntity from "../entity/ientity";
 
 /**
  * SystemEntity is a wrapper around an entity and its components,
@@ -25,10 +25,10 @@ import Component from "../component/component";
  * and destroying the entity.
  */
 class SystemEntity {
-    public entity: Entity;
-    public components: Record<string, Component>;
+    public entity: IEntity;
+    private components: Record<string, Component>;
 
-    constructor(entity: Entity, components: Component[]) {
+    constructor(entity: IEntity, components: Component[]) {
         this.entity = entity;
         this.components = {};
         for (const component of components) {
@@ -51,6 +51,7 @@ class SystemEntity {
      * @param {Component} component The component to add
      */
     public Add(component: Component): void {
+        this.components[component.key] = component;
         this.entity.Add(component);
     }
 
@@ -59,6 +60,7 @@ class SystemEntity {
      * @param {string} key The key of the component to remove
      */
     public Remove(key: string): void {
+        delete this.components[key];
         this.entity.Remove(key);
     }
 

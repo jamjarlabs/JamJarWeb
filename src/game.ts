@@ -16,9 +16,9 @@ limitations under the License.
 
 import Message from "./message/message";
 import System from "./system/system";
-import SpriteSystem from "./sprite/sprite_system";
-import CameraSystem from "./camera/camera_system";
-import InterpolationSystem from "./interpolation/interpolation_system";
+import SpriteSystem from "./standard/sprite/sprite_system";
+import CameraSystem from "./standard/camera/camera_system";
+import InterpolationSystem from "./standard/interpolation/interpolation_system";
 import IGame from "./igame";
 import IMessageBus from "./message/imessage_bus";
 

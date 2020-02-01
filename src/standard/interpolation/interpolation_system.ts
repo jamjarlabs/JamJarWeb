@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../system/system";
-import Entity from "../entity/entity";
-import Component from "../component/component";
+import System from "../../system/system";
+import Component from "../../component/component";
 import Transform from "../transform/transform";
-import Scene from "../scene/scene";
-import SystemEntity from "../system/system_entity";
-import IMessage from "../message/imessage";
-import IMessageBus from "../message/imessage_bus";
+import Scene from "../../scene/scene";
+import SystemEntity from "../../system/system_entity";
+import IMessage from "../../message/imessage";
+import IMessageBus from "../../message/imessage_bus";
+import IEntity from "../../entity/ientity";
 
 /**
  * InterpolationSystem is responsible for updating each entities transform value after a render, so
@@ -32,7 +32,7 @@ class InterpolationSystem extends System {
     public static readonly MESSAGE_INTERPOLATE_TRANSFORMS = "interpolate_system_interpolate_transforms";
 
     // All entities with a transform
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return components.some(
             component => component.key == Transform.KEY
         );
