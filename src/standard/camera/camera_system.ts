@@ -14,15 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../system/system";
-import Scene from "../scene/scene";
-import IMessage from "../message/imessage";
+import System from "../../system/system";
+import Scene from "../../scene/scene";
+import IMessage from "../../message/imessage";
 import Camera from "./camera";
-import Entity from "../entity/entity";
-import Component from "../component/component";
-import SystemEntity from "../system/system_entity";
-import Vector from "../geometry/vector";
-import IMessageBus from "../message/imessage_bus";
+import Component from "../../component/component";
+import SystemEntity from "../../system/system_entity";
+import Vector from "../../geometry/vector";
+import IMessageBus from "../../message/imessage_bus";
+import IEntity from "../../entity/ientity";
 
 /**
  * CameraSystem handles setting up the canvas/preparing WebGL for drawing to cameras.
@@ -33,7 +33,7 @@ class CameraSystem extends System {
     public static readonly MESSAGE_PREPARE_CAMERAS = "canvas_system_prepare_cameras"
 
     // Only entities with a camera
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return components.some(
             component => component.key == Camera.KEY
         );

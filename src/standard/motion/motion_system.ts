@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../system/system";
+import System from "../../system/system";
 import Transform from "../transform/transform";
 import Motion from "./motion";
-import Component from "../component/component";
-import Entity from "../entity/entity";
-import Scene from "../scene/scene";
-import IMessageBus from "../message/imessage_bus";
+import Component from "../../component/component";
+import Scene from "../../scene/scene";
+import IMessageBus from "../../message/imessage_bus";
+import IEntity from "../../entity/ientity";
 
 /**
  * MotionSystem handles basic physics calculations for entities with a motion component.
@@ -28,7 +28,7 @@ import IMessageBus from "../message/imessage_bus";
  */
 class MotionSystem extends System {
     // Only entities with transform and motion components.
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Motion.KEY].every((type) => components.some(
             component => component.key == type
         ));

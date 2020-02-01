@@ -14,13 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IGame from "../igame";
-import Fake from "./fake";
+import Component from "../component/component";
+import Scene from "../scene/scene";
 
-class FakeGame extends Fake implements IGame {
-    public Start(): void {
-        return;
-    }
+interface IEntity {
+    id: number;
+    scene?: Scene;
+    Add: (component: Component) => void;
+    Remove: (key: string) => void;
+    Destroy: () => void;
 }
 
-export default FakeGame;
+export default IEntity;

@@ -14,13 +14,33 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IGame from "../igame";
+import IEntity from "../entity/ientity";
 import Fake from "./fake";
+import Scene from "../scene/scene";
+import Reactor from "./reactor";
+import Component from "../component/component";
 
-class FakeGame extends Fake implements IGame {
-    public Start(): void {
+class FakeEntity extends Fake implements IEntity {
+    public id: number;
+    public scene?: Scene;
+
+    constructor(id: number, scene?: Scene, reactors: Reactor[] = []) {
+        super(reactors);
+        this.id = id;
+        this.scene = scene;
+    }
+
+    Add(component: Component): void {
+        return;
+    }
+    
+    Remove(key: string): void {
+        return;
+    }
+
+    Destroy(): void {
         return;
     }
 }
 
-export default FakeGame;
+export default FakeEntity

@@ -17,11 +17,12 @@ limitations under the License.
 import Message from "../message/message";
 import IMessage from "../message/imessage";
 import Subscriber from "../message/subscriber";
-import Entity from "../entity/entity";
 import Component from "../component/component";
 import SystemEntity from "./system_entity";
-import Scene from "../scene/scene";
 import IMessageBus from "../message/imessage_bus";
+import IEntity from "../entity/ientity";
+import IScene from "../scene/iscene";
+import Scene from "../scene/scene";
 
 /**
  * System is one of the key elements of the Entity-Component-System architecture.
@@ -34,18 +35,18 @@ abstract class System extends Subscriber {
     public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
     protected entities: SystemEntity[];
-    protected scene?: Scene;
+    protected scene?: IScene;
 
     // The evaluator is used to evaluate if an entity with its components should be
     // tracked by the system
-    private evaluator?: (entity: Entity, components: Component[]) => boolean
+    private evaluator?: (entity: IEntity, components: Component[]) => boolean
 
     constructor(protected messageBus: IMessageBus, args: {
-        evaluator?: (entity: Entity, components: Component[]) => boolean;
-        scene?: Scene;
-    } = {}) {
+        evaluator?: (entity: IEntity, components: Component[]) => boolean;
+        scene?: IScene;
+    } = {}, entities: SystemEntity[] = []) {
         super();
-        this.entities = [];
+        this.entities = entities;
         this.evaluator = args.evaluator;
         this.scene = args.scene;
         this.messageBus.Subscribe(this, [
@@ -60,7 +61,6 @@ abstract class System extends Subscriber {
      * General update method, default empty. Override with custom logic.
      * @param dt DeltaTime
      */
-    /* eslint-disable-next-line no-empty-function, @typescript-eslint/no-unused-vars */
     protected Update(dt: number): void {
         return;
     }
@@ -74,7 +74,7 @@ abstract class System extends Subscriber {
                 break;
             }
             case System.MESSAGE_REGISTER: {
-                const registerMessage = message as Message<[Entity, Component[]]>;
+                const registerMessage = message as Message<[IEntity, Component[]]>;
                 if (!registerMessage.payload) {
                     return;
                 }
@@ -82,7 +82,7 @@ abstract class System extends Subscriber {
                 break;
             }
             case System.MESSAGE_DEREGISTER: {
-                const deregisterMessage = message as Message<Entity>;
+                const deregisterMessage = message as Message<IEntity>;
                 if (!deregisterMessage.payload) {
                     return;
                 }
@@ -90,7 +90,7 @@ abstract class System extends Subscriber {
                 break;
             }
             case Scene.MESSAGE_DESTROY: {
-                const sceneDestroyMessage = message as Message<Scene>;
+                const sceneDestroyMessage = message as Message<IScene>;
                 if (!sceneDestroyMessage.payload) {
                     return;
                 }
@@ -98,7 +98,7 @@ abstract class System extends Subscriber {
                     return;
                 }
                 if (sceneDestroyMessage.payload.id == this.scene.id) {
-                    this.messageBus.UnsubscribeAll(this);
+                    this.Destroy();
                 }
                 break;
             }
@@ -119,10 +119,10 @@ abstract class System extends Subscriber {
     /**
      * Helper function to retrieve the SystemEntity equivalent of an
      * Entity if it exists in this system, otherwise returns undefined.
-     * @param {Entity} entity The entity to get the SystemEntity of
+     * @param {IEntity} entity The entity to get the SystemEntity of
      * @returns {SystemEntity|undefined} The system entity if it exists, otherwise undefined
      */
-    protected GetSystemEntity(entity: Entity): SystemEntity | undefined {
+    protected GetSystemEntity(entity: IEntity): SystemEntity | undefined {
         for (let i = 0; i < this.entities.length; i++) {
             const systemEntity = this.entities[i];
             if (systemEntity.entity.id == entity.id) {
@@ -137,10 +137,10 @@ abstract class System extends Subscriber {
      * entity's components are changed; register calls the evaluator to check if the
      * system should track this entity. If the evaluator returns true, the entity
      * is added to the System's internal entity array.
-     * @param {Entity} entity The entity to register
+     * @param {IEntity} entity The entity to register
      * @param {Component[]} components The components of the registering entity.
      */
-    private register(entity: Entity, components: Component[]): void {
+    private register(entity: IEntity, components: Component[]): void {
         if (!this.evaluator) {
             return;
         }
@@ -158,9 +158,9 @@ abstract class System extends Subscriber {
 
     /**
      * remove removes an entity from being tracked by the system
-     * @param {Entity} entity The entity to remove
+     * @param {IEntity} entity The entity to remove
      */
-    private remove(entity: Entity): void {
+    private remove(entity: IEntity): void {
         for (let i = 0; i < this.entities.length; i++) {
             const systemEntity = this.entities[i];
             if (systemEntity.entity.id == entity.id) {

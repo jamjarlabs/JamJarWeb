@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../component/component";
-import Vector from "../geometry/vector";
+import Component from "../../component/component";
+import Vector from "../../geometry/vector";
 
 /**
  * Motion is a component that represents an entity with motion values.

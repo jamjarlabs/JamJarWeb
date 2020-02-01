@@ -18,6 +18,7 @@ import Component from "../component/component";
 import Message from "../message/message";
 import Scene from "../scene/scene";
 import IMessageBus from "../message/imessage_bus";
+import IEntity from "./ientity";
 
 /**
  * Entity is one of the key elements of the Entity-Component-System architecture.
@@ -26,7 +27,7 @@ import IMessageBus from "../message/imessage_bus";
  * The entity is basically just an ID, alongside some helper functions for
  * adding/removing components and destroying itself.
  */
-class Entity {
+class Entity implements IEntity{
     private static ID = 0;
     public static readonly MESSAGE_DESTROY = "entity_destroy";
     public static readonly KEY = "entity";

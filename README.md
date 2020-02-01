@@ -1,3 +1,7 @@
+[![Build](https://github.com/jthomperoo/jamjar/workflows/JamJar/badge.svg)](https://github.com/jthomperoo/JamJar/actions)
+[![codecov](https://codecov.io/gh/jthomperoo/jamjar/branch/master/graph/badge.svg)](https://codecov.io/gh/jthomperoo/jamjar)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+
 # JamJar 2D Typescript Game Engine
 
 JamJar is a 2D typescript game engine, designed to simplify building browser WebGL based games.  

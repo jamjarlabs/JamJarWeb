@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import Vector from "./vector";
-import Transform from "../transform/transform";
+import Transform from "../standard/transform/transform";
 
 /**
  * IShape is the interface for a shape, defining all methods that need implemented in order

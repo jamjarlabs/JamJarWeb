@@ -14,17 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../system/system";
+import System from "../../system/system";
 import Transform from "../transform/transform";
-import Component from "../component/component";
-import Entity from "../entity/entity";
-import Scene from "../scene/scene";
+import Component from "../../component/component";
+import Scene from "../../scene/scene";
 import Collider from "./collider";
-import SystemEntity from "../system/system_entity";
+import SystemEntity from "../../system/system_entity";
 import Collision from "./collision";
-import Message from "../message/message";
-import gjk from "../algorithms/gjk";
-import IMessageBus from "../message/imessage_bus";
+import Message from "../../message/message";
+import gjk from "../../algorithms/gjk";
+import IMessageBus from "../../message/imessage_bus";
+import IEntity from "../../entity/ientity";
 
 /**
  * CollisionSystem watches for collisions between entities with Colliders and Transforms.
@@ -38,7 +38,7 @@ class CollisionSystem extends System {
     public static readonly MESSAGE_COLLISION_DETECTED = "collision_detected";
 
     // Only entities with a transform and camera
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Collider.KEY].every((type) => components.some(
             component => component.key == type
         ));

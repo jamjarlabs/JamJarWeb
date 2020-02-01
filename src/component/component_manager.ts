@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import Component from "./component";
-import Entity from "../entity/entity";
+import IEntity from "../entity/ientity";
 
 /**
  * ComponentManager holds a map/record of components of the same type, mapped
@@ -32,29 +32,29 @@ class ComponentManager {
     /**
      * Get returns a component associated with an entity if it
      * exists, otherwise returns undefined.
-     * @param {Entity} entity Entity to get the component of
+     * @param {IEntity} entity Entity to get the component of
      * @returns {Component|undefined} Component retrieved, if doesn't exist, undefined
      */
-    public Get(entity: Entity): Component | undefined {
+    public Get(entity: IEntity): Component | undefined {
         return this.components[entity.id];
     }
 
     /**
      * Add adds a component to the ComponentManager, mapped to
      * the entity that the component belongs to.
-     * @param {Entity} entity Entity of the component to add
+     * @param {IEntity} entity Entity of the component to add
      * @param {Component} component Component to add
      */
-    public Add(entity: Entity, component: Component): void {
+    public Add(entity: IEntity, component: Component): void {
         this.components[entity.id] = component;
     }
 
     /**
      * Remove removes a component from the ComponentManager if it
      * exists.
-     * @param {Entity} entity Entity of the component to remove
+     * @param {IEntity} entity Entity of the component to remove
      */
-    public Remove(entity: Entity): void {
+    public Remove(entity: IEntity): void {
         delete this.components[entity.id];
     }
 }

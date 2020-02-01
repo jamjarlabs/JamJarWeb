@@ -14,19 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../system/system";
-import Entity from "../entity/entity";
-import Component from "../component/component";
+import System from "../../system/system";
+import Component from "../../component/component";
 import Transform from "../transform/transform";
 import Sprite from "./sprite";
-import Scene from "../scene/scene";
-import IMessage from "../message/imessage";
-import SystemEntity from "../system/system_entity";
+import Scene from "../../scene/scene";
+import IMessage from "../../message/imessage";
+import SystemEntity from "../../system/system_entity";
 import Camera from "../camera/camera";
-import Message from "../message/message";
-import Vector from "../geometry/vector";
-import Matrix4D from "../geometry/matrix_4d";
-import IMessageBus from "../message/imessage_bus";
+import Message from "../../message/message";
+import Vector from "../../geometry/vector";
+import Matrix4D from "../../geometry/matrix_4d";
+import IMessageBus from "../../message/imessage_bus";
+import IEntity from "../../entity/ientity";
 
 class SpriteSystem extends System {
 
@@ -55,7 +55,7 @@ class SpriteSystem extends System {
         }
     `;
 
-    private static readonly EVALUATOR = (entity: Entity, components: Component[]): boolean => {
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY].every((type) => components.some(
             component => component.key == type
         )) || [Transform.KEY, Camera.KEY].every((type) => components.some(

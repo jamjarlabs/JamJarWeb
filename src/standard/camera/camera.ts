@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../component/component";
-import Vector from "../geometry/vector";
-import Color from "../rendering/color";
-import Matrix4D from "../geometry/matrix_4d";
+import Component from "../../component/component";
+import Vector from "../../geometry/vector";
+import Color from "../../rendering/color";
+import Matrix4D from "../../geometry/matrix_4d";
 
 /**
  * Camera is a component that represents a game camera.
