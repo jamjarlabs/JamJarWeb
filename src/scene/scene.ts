@@ -15,10 +15,10 @@ limitations under the License.
 */
 
 import Subscriber from "../message/subscriber";
-import MessageBus from "../message/message_bus";
 import IMessage from "../message/imessage";
 import Message from "../message/message";
 import Entity from "../entity/entity";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * Scene is a way to categorise entities, components and systems together, allowing them to be loaded/deleted
@@ -35,7 +35,7 @@ abstract class Scene extends Subscriber {
 
     private entities: Entity[];
 
-    constructor(protected messageBus: MessageBus) {
+    constructor(protected messageBus: IMessageBus) {
         super();
         this.id = Scene.ID++;
         this.entities = [];

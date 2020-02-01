@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import MessageBus from "../message/message_bus";
 import Message from "../message/message";
 import IMessage from "../message/imessage";
 import Subscriber from "../message/subscriber";
@@ -22,6 +21,7 @@ import Entity from "../entity/entity";
 import Component from "../component/component";
 import SystemEntity from "./system_entity";
 import Scene from "../scene/scene";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * System is one of the key elements of the Entity-Component-System architecture.
@@ -40,7 +40,7 @@ abstract class System extends Subscriber {
     // tracked by the system
     private evaluator?: (entity: Entity, components: Component[]) => boolean
 
-    constructor(protected messageBus: MessageBus, args: {
+    constructor(protected messageBus: IMessageBus, args: {
         evaluator?: (entity: Entity, components: Component[]) => boolean;
         scene?: Scene;
     } = {}) {

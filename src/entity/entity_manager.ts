@@ -19,9 +19,9 @@ import ComponentManager from "../component/component_manager";
 import Entity from "./entity";
 import Component from "../component/component";
 import Message from "../message/message";
-import MessageBus from "../message/message_bus";
 import System from "../system/system";
 import IMessage from "../message/imessage";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * EntityManager keeps tracks of all entities and their components/changes in their components.
@@ -33,9 +33,9 @@ import IMessage from "../message/imessage";
  */
 class EntityManager extends Subscriber {
     private componentManagers: ComponentManager[];
-    private messageBus: MessageBus
+    private messageBus: IMessageBus
 
-    constructor(messageBus: MessageBus) {
+    constructor(messageBus: IMessageBus) {
         super();
         this.messageBus = messageBus;
         this.componentManagers = [];

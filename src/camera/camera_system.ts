@@ -15,7 +15,6 @@ limitations under the License.
 */
 
 import System from "../system/system";
-import MessageBus from "../message/message_bus";
 import Scene from "../scene/scene";
 import IMessage from "../message/imessage";
 import Camera from "./camera";
@@ -23,6 +22,7 @@ import Entity from "../entity/entity";
 import Component from "../component/component";
 import SystemEntity from "../system/system_entity";
 import Vector from "../geometry/vector";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * CameraSystem handles setting up the canvas/preparing WebGL for drawing to cameras.
@@ -41,7 +41,7 @@ class CameraSystem extends System {
 
     private gl: WebGL2RenderingContext;
 
-    constructor(messageBus: MessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
+    constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
         super(messageBus, { evaluator: CameraSystem.EVALUATOR, scene: scene });
         this.gl = gl;
         this.messageBus.Subscribe(this, CameraSystem.MESSAGE_PREPARE_CAMERAS);

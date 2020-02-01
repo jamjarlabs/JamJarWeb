@@ -18,10 +18,10 @@ import System from "../system/system";
 import Entity from "../entity/entity";
 import Component from "../component/component";
 import Transform from "../transform/transform";
-import MessageBus from "../message/message_bus";
 import Scene from "../scene/scene";
 import SystemEntity from "../system/system_entity";
 import IMessage from "../message/imessage";
+import IMessageBus from "../message/imessage_bus";
 
 /**
  * InterpolationSystem is responsible for updating each entities transform value after a render, so
@@ -38,7 +38,7 @@ class InterpolationSystem extends System {
         );
     };
 
-    constructor(messageBus: MessageBus, scene?: Scene) {
+    constructor(messageBus: IMessageBus, scene?: Scene) {
         super(messageBus, { evaluator: InterpolationSystem.EVALUATOR, scene: scene });
         this.messageBus.Subscribe(this, InterpolationSystem.MESSAGE_INTERPOLATE_TRANSFORMS);
     }

@@ -16,6 +16,7 @@ limitations under the License.
 
 import Subscriber from "./subscriber";
 import IMessage from "./imessage";
+import IMessageBus from "./imessage_bus";
 
 /**
  * MessageBus is the core link between each part of the Engine, it handles processing
@@ -28,7 +29,7 @@ import IMessage from "./imessage";
  * type.
  * The dispatch should probably be left to the core game loop for triggering.
  */
-class MessageBus {
+class MessageBus implements IMessageBus{
     private subscribers: Record<string, Subscriber[]>;
     private messageQueue: IMessage[];
 

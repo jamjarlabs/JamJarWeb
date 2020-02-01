@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import MessageBus from "./message/message_bus";
 import Message from "./message/message";
 import System from "./system/system";
-import EntityManager from "./entity/entity_manager";
-import MotionSystem from "./motion/motion_system";
 import SpriteSystem from "./sprite/sprite_system";
 import CameraSystem from "./camera/camera_system";
 import InterpolationSystem from "./interpolation/interpolation_system";
+import IGame from "./igame";
+import IMessageBus from "./message/imessage_bus";
+
 
 /**
  * Game is the core engine class, tying together all of the parts of the engine.
@@ -29,36 +29,25 @@ import InterpolationSystem from "./interpolation/interpolation_system";
  * The game contains the game loop, which handles triggering updates in systems and
  * setting up rendering.
  */
-abstract class Game {
+abstract class Game implements IGame {
 
     private static readonly TIME_STEP = 1000 / 100;
 
     public readonly name: string;
 
-    protected messageBus: MessageBus;
+    protected messageBus: IMessageBus;
 
-    private gl: WebGL2RenderingContext;
     private accumulator: number;
     private currentTime: number;
 
-    constructor(canvas: HTMLCanvasElement, name = "game") {
+    private frameRequestCallback: (callback: FrameRequestCallback) => number
+
+    constructor(messageBus: IMessageBus, name = "game", frameRequestCallback: (callback: FrameRequestCallback) => number = window.requestAnimationFrame.bind(window)) {
         this.name = name;
-        this.messageBus = new MessageBus();
+        this.messageBus = messageBus;
         this.accumulator = 0;
         this.currentTime = 0;
-        const glContext = canvas.getContext("webgl2");
-        if (!glContext) {
-            throw("WebGL2 not supported by this browser");
-        }
-        this.gl = glContext;
-        new EntityManager(this.messageBus);
-    }
-
-    private coreSystems(): void {
-        new InterpolationSystem(this.messageBus);
-        new MotionSystem(this.messageBus);
-        new SpriteSystem(this.messageBus, this.gl);
-        new CameraSystem(this.messageBus, this.gl);
+        this.frameRequestCallback = frameRequestCallback;
     }
 
     /**
@@ -73,7 +62,6 @@ abstract class Game {
      */
     public Start(): void  {
         this.OnStart();
-        this.coreSystems()
         this.messageBus.Dispatch();
         this.accumulator = 0;
 		this.currentTime = Date.now();
@@ -105,7 +93,7 @@ abstract class Game {
         this.messageBus.Publish(new Message(SpriteSystem.MESSAGE_RENDER_SPRITES, alpha));
         this.messageBus.Publish(new Message(InterpolationSystem.MESSAGE_INTERPOLATE_TRANSFORMS));
 		this.messageBus.Dispatch();
-		requestAnimationFrame(() => { this.loop(); });
+		this.frameRequestCallback(() => { this.loop(); });
     }
 }
 
