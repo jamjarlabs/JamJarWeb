@@ -29,10 +29,6 @@ class TestScene extends Scene {
         super(messageBus, entities);
         this.id = id;
     }
-    
-    OnStart(): void { 
-        return;
-    }
 }
 
 describe("Scene - OnMessage", () => {
