@@ -15,12 +15,13 @@ limitations under the License.
 */
 
 import IMessage from "./imessage";
+import ISubscriber from "./isubscriber";
 
 /**
  * Subscriber represents something that can subscribe to and recieve messages
  * from the message bus
  */
-abstract class Subscriber {
+abstract class Subscriber implements ISubscriber {
     private static SUBSCRIBER_ID = 0;
     public subscriberID: number;
     constructor() {

@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Subscriber from "./subscriber";
 import IMessage from "./imessage";
 import IMessageBus from "./imessage_bus";
+import ISubscriber from "./isubscriber";
 
 /**
  * MessageBus is the core link between each part of the Engine, it handles processing
@@ -30,12 +30,12 @@ import IMessageBus from "./imessage_bus";
  * The dispatch should probably be left to the core game loop for triggering.
  */
 class MessageBus implements IMessageBus{
-    private subscribers: Record<string, Subscriber[]>;
+    private subscribers: Record<string, ISubscriber[]>;
     private messageQueue: IMessage[];
 
-    constructor() {
-        this.subscribers = {};
-        this.messageQueue = [];
+    constructor(subscribers: Record<string, ISubscriber[]> = {}, messageQueue: IMessage[] = []) {
+        this.subscribers = subscribers;
+        this.messageQueue = messageQueue;
     }
 
     /**
@@ -68,10 +68,10 @@ class MessageBus implements IMessageBus{
 
     /**
      * Subscribe subscibes a subscriber to a particular message type or types.
-     * @param {Subscriber} subscriber The subscriber to the message type(s) 
+     * @param {ISubscriber} subscriber The subscriber to the message type(s) 
      * @param {string|string[]} types The message type(s) to subscribe to
      */
-    public Subscribe(subscriber: Subscriber, types: string | string[]): void {
+    public Subscribe(subscriber: ISubscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for(const type of types) {
                 this.Subscribe(subscriber, type);
@@ -88,9 +88,9 @@ class MessageBus implements IMessageBus{
 
     /**
      * UnsubscribeAll unsubscribes a Subscriber from all messages.
-     * @param {Subscriber} subscriber The subscriber to unsubscribe
+     * @param {ISubscriber} subscriber The subscriber to unsubscribe
      */
-    public UnsubscribeAll(subscriber: Subscriber): void {
+    public UnsubscribeAll(subscriber: ISubscriber): void {
         for (const key in this.subscribers) {
             const subscribers = this.subscribers[key];
             for (let i = 0; i < subscribers.length; i++) {
@@ -104,19 +104,19 @@ class MessageBus implements IMessageBus{
 
     /**
      * Unsubscribe unsubscribes a subscriber from a specific message type or types.
-     * @param {Subscriber} subscriber The subscriber to unsubscribe
+     * @param {ISubscriber} subscriber The subscriber to unsubscribe
      * @param {string|strings} types The message type(s) to unsubscribe from
      */
-    public Unsubscribe(subscriber: Subscriber, types: string | string[]): void {
+    public Unsubscribe(subscriber: ISubscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for(const type of types) {
                 this.Unsubscribe(subscriber, type);
             }
             return;
         }
-        let typeSubs = this.subscribers[types];
+        const typeSubs = this.subscribers[types];
         if (!typeSubs) {
-            typeSubs = [];
+            return;
         }
         for (let i = 0; i < typeSubs.length; i++) {
             const typeSub = typeSubs[i];
