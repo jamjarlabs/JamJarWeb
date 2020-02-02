@@ -1,4 +1,2 @@
 site_name: JamJar
 theme: readthedocs
-nav:
-- Home: 'index.md'
