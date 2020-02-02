@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,10 +23,12 @@ import IEntity from "../entity/ientity";
  * Used in conjunction with the EntityManager for managing Entities/Components.
  */
 class ComponentManager {
-    private components: Record<number, Component>
+    public key: string;
+    private components: Record<number, Component>;
 
-    constructor(public key: string) {
-        this.components = [];
+    constructor(key: string, components: Record<number, Component> = {}) {
+        this.key = key
+        this.components = components;
     }
 
     /**

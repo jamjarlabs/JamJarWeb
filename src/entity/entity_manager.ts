@@ -22,6 +22,7 @@ import Message from "../message/message";
 import System from "../system/system";
 import IMessage from "../message/imessage";
 import IMessageBus from "../message/imessage_bus";
+import IEntity from "./ientity";
 
 /**
  * EntityManager keeps tracks of all entities and their components/changes in their components.
@@ -35,10 +36,14 @@ class EntityManager extends Subscriber {
     private componentManagers: ComponentManager[];
     private messageBus: IMessageBus
 
-    constructor(messageBus: IMessageBus) {
-        super();
+    constructor(messageBus: IMessageBus, componentManagers: ComponentManager[] = [], subscriberID?: number) {
+        if (subscriberID !== undefined) {
+            super(subscriberID);
+        } else {
+            super();
+        }
         this.messageBus = messageBus;
-        this.componentManagers = [];
+        this.componentManagers = componentManagers;
         this.messageBus.Subscribe(this, [
             Component.MESSAGE_ADD, 
             Component.MESSAGE_REMOVE, 
@@ -49,7 +54,7 @@ class EntityManager extends Subscriber {
     public OnMessage(message: IMessage): void {
 		switch(message.type) {
             case Entity.MESSAGE_DESTROY: {
-                const destroyMessage = message as Message<Entity>;
+                const destroyMessage = message as Message<IEntity>;
                 if (!destroyMessage.payload) {
                     return;
                 }
@@ -57,7 +62,7 @@ class EntityManager extends Subscriber {
                 break;
             }
             case Component.MESSAGE_ADD: {
-                const componentMessage = message as Message<[Entity,Component]>;
+                const componentMessage = message as Message<[IEntity,Component]>;
                 if (!componentMessage.payload) {
                     return;
                 }
@@ -67,7 +72,7 @@ class EntityManager extends Subscriber {
                 break;
             }
             case Component.MESSAGE_REMOVE: {
-                const componentMessage = message as Message<[Entity,string]>;
+                const componentMessage = message as Message<[IEntity,string]>;
                 if (!componentMessage.payload) {
                     return;
                 }
@@ -82,30 +87,30 @@ class EntityManager extends Subscriber {
     /**
      * registerEntity publishes that a change has happened to an entity's components, alongside its new
      * component list.
-     * @param {Entity} entity The entity that has changed components
+     * @param {IEntity} entity The entity that has changed components
      */
-    private registerEntity(entity: Entity): void {
+    private registerEntity(entity: IEntity): void {
         const components = this.getComponents(entity);
-		this.messageBus.Publish(new Message<[Entity, Component[]]>(System.MESSAGE_REGISTER, [entity, components]));
+		this.messageBus.Publish(new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [entity, components]));
     }
 
     /**
      * destroyEntity publishes that an entity has been deleted and deregistered from the entity manager.
-     * @param {Entity} entity The entity that has been deleted
+     * @param {IEntity} entity The entity that has been deleted
      */
-    private destroyEntity(entity: Entity): void {
+    private destroyEntity(entity: IEntity): void {
         for (let i = 0; i < this.componentManagers.length; i++) {
             this.componentManagers[i].Remove(entity);
         }
-        this.messageBus.Publish(new Message<Entity>(System.MESSAGE_DEREGISTER, entity));
+        this.messageBus.Publish(new Message<IEntity>(System.MESSAGE_DEREGISTER, entity));
     }
     
     /**
      * removeComponent removes an entity's component by the component key provided.
-     * @param {Entity} entity Entity to remove the component from
+     * @param {IEntity} entity Entity to remove the component from
      * @param {string} key Key of the component to remove
      */
-    private removeComponent(entity: Entity, key: string): void {
+    private removeComponent(entity: IEntity, key: string): void {
         const componentManager = this.getComponentManager(key);
         if (!componentManager) {
             return;
@@ -116,10 +121,10 @@ class EntityManager extends Subscriber {
 
     /**
      * addComponent adds a component to the entity manager for an entity.
-     * @param {Entity} entity Entity of the component to add
+     * @param {IEntity} entity Entity of the component to add
      * @param {Component} component Component to add
      */
-    private addComponent(entity: Entity, component: Component): void {
+    private addComponent(entity: IEntity, component: Component): void {
         let componentManager = this.getComponentManager(component.key);
 		if (!componentManager) {
 			componentManager = new ComponentManager(component.key);
@@ -146,10 +151,10 @@ class EntityManager extends Subscriber {
 
     /**
      * getComponents gets all components belonging to an entity.
-     * @param {Entity} entity The entity to get the components of
+     * @param {IEntity} entity The entity to get the components of
      * @returns {Component[]} The list of components for the entity 
      */
-    private getComponents(entity: Entity): Component[] {
+    private getComponents(entity: IEntity): Component[] {
         const components: Component[] = [];
         for (let i = 0; i < this.componentManagers.length; i++) {
             const component = this.componentManagers[i].Get(entity);

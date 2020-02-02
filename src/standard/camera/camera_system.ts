@@ -23,14 +23,13 @@ import SystemEntity from "../../system/system_entity";
 import Vector from "../../geometry/vector";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
+import Game from "../../game";
 
 /**
  * CameraSystem handles setting up the canvas/preparing WebGL for drawing to cameras.
  * It is responsible for loading cameras; setting up viewports, background colors and draw options.
  */
 class CameraSystem extends System {
-
-    public static readonly MESSAGE_PREPARE_CAMERAS = "canvas_system_prepare_cameras"
 
     // Only entities with a camera
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -44,14 +43,14 @@ class CameraSystem extends System {
     constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
         super(messageBus, { evaluator: CameraSystem.EVALUATOR, scene: scene });
         this.gl = gl;
-        this.messageBus.Subscribe(this, CameraSystem.MESSAGE_PREPARE_CAMERAS);
+        this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
 
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case CameraSystem.MESSAGE_PREPARE_CAMERAS: {
+            case Game.MESSAGE_PRE_RENDER: {
                 this.prepareCameras(this.gl, this.entities);
                 break;
             }

@@ -27,10 +27,9 @@ import Vector from "../../geometry/vector";
 import Matrix4D from "../../geometry/matrix_4d";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
+import Game from "../../game";
 
 class SpriteSystem extends System {
-
-    public static readonly MESSAGE_RENDER_SPRITES = "sprite_system_render_sprites"
 
     private static readonly VERTEX_SHADER = `#version 300 es
         in vec2 aVertexPosition;
@@ -69,7 +68,7 @@ class SpriteSystem extends System {
     constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
         super(messageBus, { evaluator: SpriteSystem.EVALUATOR, scene: scene });
         this.gl = gl;
-        this.messageBus.Subscribe(this, SpriteSystem.MESSAGE_RENDER_SPRITES);
+        this.messageBus.Subscribe(this, Game.MESSAGE_RENDER);
         const vertexShader = this.createShader(gl, gl.VERTEX_SHADER, SpriteSystem.VERTEX_SHADER);
 		const fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, SpriteSystem.FRAGMENT_SHADER);
 		this.program = this.createProgram(gl, vertexShader, fragmentShader);
@@ -78,7 +77,7 @@ class SpriteSystem extends System {
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case SpriteSystem.MESSAGE_RENDER_SPRITES: {
+            case Game.MESSAGE_RENDER: {
                 const renderMessage = message as Message<number>;
                 if (renderMessage.payload == undefined) {
                     return;

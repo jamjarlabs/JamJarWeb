@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Vector from "./vector";
-import Transform from "../standard/transform/transform";
+import Vector from "../../geometry/vector";
+import Transform from "../transform/transform";
 
 /**
  * IShape is the interface for a shape, defining all methods that need implemented in order

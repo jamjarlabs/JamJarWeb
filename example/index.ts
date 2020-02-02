@@ -20,12 +20,57 @@ import Transform from "jamjar/lib/standard/transform/transform";
 import Vector from "jamjar/lib/geometry/vector";
 import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
 import CameraSystem from "jamjar/lib/standard/camera/camera_system";
+import MotionSystem from "jamjar/lib/standard/motion/motion_system";
+import InterpolationSystem from "jamjar/lib/standard/interpolation/interpolation_system";
 import EntityManager from "jamjar/lib/entity/entity_manager";
 import MessageBus from "jamjar/lib/message/message_bus";
 import Camera from "jamjar/lib/standard/camera/camera";
 import Sprite from "jamjar/lib/standard/sprite/sprite";
 import Color from "jamjar/lib/rendering/color";
-import IMessageBus from "../lib/message/imessage_bus";
+import IMessageBus from "jamjar/lib/message/imessage_bus";
+import Motion from "jamjar/lib/standard/motion/motion";
+import Scene from "jamjar/lib/scene/scene";
+import IMessage from "jamjar/lib/message/imessage";
+import Message from "jamjar/lib/message/message";
+
+class LoadingScene extends Scene {
+    constructor(messageBus: IMessageBus) {
+        super(messageBus);
+        this.messageBus.Subscribe(this, "FINISH_LOADING");
+    }
+    
+    OnStart(): void {
+        // display loading stuff
+        this.messageBus.Publish(new Message("FINISH_LOADING"))
+    }
+
+    OnMessage(message: IMessage) {
+        super.OnMessage(message);
+        switch (message.type) {
+            case "FINISH_LOADING": {
+                this.Destroy();
+                new SimpleScene(this.messageBus).Start();
+                break;
+            }
+        }
+    }
+}
+
+class SimpleScene extends Scene {
+    OnStart(): void {
+        new MotionSystem(this.messageBus, this);
+        new InterpolationSystem(this.messageBus, this);
+
+        const camera = new Entity(this.messageBus, this);
+        camera.Add(new Transform(new Vector(0,0)));
+        camera.Add(new Camera(new Color(0,0,0,1)));
+
+        let a = new Entity(this.messageBus, this);
+        a.Add(new Transform(new Vector(0,0), new Vector(20,20)));
+        a.Add(new Sprite(new Color(1,0.3,0.7,1)));
+        a.Add(new Motion(new Vector(0,0), new Vector(0,0), 2));
+    }
+}
 
 class ExampleGame extends Game {
     constructor(messageBus: IMessageBus) {
@@ -33,13 +78,7 @@ class ExampleGame extends Game {
     }
 
     OnStart(): void {
-        const camera = new Entity(this.messageBus);
-        camera.Add(new Transform(new Vector(0,0)));
-        camera.Add(new Camera(new Color(0,0,0,1)));
-
-        let a = new Entity(this.messageBus);
-        a.Add(new Transform(new Vector(0,0), new Vector(20,20)));
-        a.Add(new Sprite(new Color(1,0.3,0.7,1)));
+        new LoadingScene(this.messageBus).Start();
     }
 }
 

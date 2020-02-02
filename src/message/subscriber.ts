@@ -24,8 +24,8 @@ import ISubscriber from "./isubscriber";
 abstract class Subscriber implements ISubscriber {
     private static SUBSCRIBER_ID = 0;
     public subscriberID: number;
-    constructor() {
-        this.subscriberID = Subscriber.SUBSCRIBER_ID++;
+    constructor(subscriberID: number = Subscriber.SUBSCRIBER_ID++) {
+        this.subscriberID = subscriberID;
     }
     /**
      * OnMessage handles a subscriber recieving a message.

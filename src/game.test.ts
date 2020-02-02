@@ -15,54 +15,58 @@ limitations under the License.
 */
 
 import Game from "./game";
-import IMessageBus from "./message/imessage_bus";
 import FakeMessageBus from "./fake/message_bus";
 import Reactor from "./fake/reactor";
 
 class TestGame extends Game { }
 
 describe("Game - Start", () => {
-    type TestTuple = [string, Error | undefined, IMessageBus, string, (callback: FrameRequestCallback) => number];
+    type TestTuple = [string, Error | undefined, Game];
     test.each<TestTuple>([
         [
             "Fail to dispatch",
             Error("fail to dispatch"),
-            new FakeMessageBus([
-                new Reactor("Dispatch", () => { throw (Error("fail to dispatch")) })
-            ]),
-            "test",
-            (): number => { return 0; }
+            new TestGame(
+                new FakeMessageBus([
+                    new Reactor("Dispatch", () => { throw (Error("fail to dispatch")) })
+                ]),
+                "test",
+                (): number => { return 0; }
+            )
         ],
         [
             "Fail to publish",
             Error("fail to publish"),
-            new FakeMessageBus([
-                new Reactor("Publish", () => { throw (Error("fail to publish")) })
-            ]),
-            "test",
-            (): number => { return 0; }
+            new TestGame(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => { throw (Error("fail to publish")) })
+                ]),
+                "test",
+                (): number => { return 0; }
+            )
         ],
         [
             "Success, loop 1000 times",
             undefined,
-            new FakeMessageBus(),
-            "test",
-            ((): (callback: FrameRequestCallback) => number => {
-                let count = 0;
-                return (callback: FrameRequestCallback): number => {
-                    if (count < 999) {
-                        count++;
-                        callback(new Date().getTime());
-                        return 0;
-                    } else {
-                        return 0;
+            new TestGame(
+                new FakeMessageBus(),
+                "test",
+                ((): (callback: FrameRequestCallback) => number => {
+                    let count = 0;
+                    return (callback: FrameRequestCallback): number => {
+                        if (count < 999) {
+                            count++;
+                            callback(new Date().getTime());
+                            return 0;
+                        } else {
+                            return 0;
+                        }
                     }
-                }
-            })()
+                })()
+            )
         ]
-    ])("%p", (description: string, expected: Error | undefined, messageBus: IMessageBus, name: string, frameRequestCallback) => {
+    ])("%p", (description: string, expected: Error | undefined, game: Game) => {
         jest.useFakeTimers();
-        const game = new TestGame(messageBus, name, frameRequestCallback);
         if (expected instanceof Error) {
             expect(() => { game.Start() }).toThrow(expected);
         } else {
