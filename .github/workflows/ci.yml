@@ -17,6 +17,11 @@ jobs:
       - name: Install, lint, test and build
         run: |
           yarn install
+          
+          # Generate docs, if there is a difference from the version in the Git repo, fail
+          yarn generate-reference
+          git diff --exit-code
+
           yarn lint
           yarn test
           yarn build
