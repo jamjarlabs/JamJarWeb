@@ -16,6 +16,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [InterpolationSystem](interpolationsystem.md)
 
+  ↳ [KeyboardSystem](keyboardsystem.md)
+
   ↳ [MotionSystem](motionsystem.md)
 
   ↳ [SpriteSystem](spritesystem.md)

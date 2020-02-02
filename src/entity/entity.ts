@@ -16,7 +16,6 @@ limitations under the License.
 
 import Component from "../component/component";
 import Message from "../message/message";
-import Scene from "../scene/scene";
 import IMessageBus from "../message/imessage_bus";
 import IEntity from "./ientity";
 
@@ -33,14 +32,12 @@ class Entity implements IEntity{
     public static readonly KEY = "entity";
 
     public id: number;
-    public scene?: Scene;
 
     private messageBus: IMessageBus
 
-    constructor(messageBus: IMessageBus, scene?: Scene | undefined, id: number = Entity.ID++) {
+    constructor(messageBus: IMessageBus, id: number = Entity.ID++) {
         this.messageBus = messageBus;
         this.id = id;
-        this.scene = scene;
     }
 
     /**

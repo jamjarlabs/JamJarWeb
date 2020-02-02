@@ -31,7 +31,7 @@ describe("Entity - Add", () => {
         [
             "Fail to publish",
             new Error("fail to publish"),
-            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), undefined, 0),
+            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), 0),
             new FakeComponent("test")
         ],
         [
@@ -60,7 +60,7 @@ describe("Entity - Remove", () => {
         [
             "Fail to publish",
             new Error("fail to publish"),
-            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), undefined, 0),
+            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), 0),
             "test"
         ],
         [
@@ -88,7 +88,7 @@ describe("Entity - Destroy", () => {
         [
             "Fail to publish",
             new Error("fail to publish"),
-            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), undefined, 0)
+            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), 0)
         ],
         [
             "Success",
