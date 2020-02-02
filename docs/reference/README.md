@@ -3,63 +3,120 @@
 
 ## Index
 
-### External modules
+### Classes
 
-* ["component/component"](modules/_component_component_.md)
-* ["component/component_manager"](modules/_component_component_manager_.md)
-* ["component/component_manager.test"](modules/_component_component_manager_test_.md)
-* ["entity/entity"](modules/_entity_entity_.md)
-* ["entity/entity.test"](modules/_entity_entity_test_.md)
-* ["entity/entity_manager"](modules/_entity_entity_manager_.md)
-* ["entity/entity_manager.test"](modules/_entity_entity_manager_test_.md)
-* ["entity/ientity"](modules/_entity_ientity_.md)
-* ["fake/component"](modules/_fake_component_.md)
-* ["fake/entity"](modules/_fake_entity_.md)
-* ["fake/fake"](modules/_fake_fake_.md)
-* ["fake/game"](modules/_fake_game_.md)
-* ["fake/message_bus"](modules/_fake_message_bus_.md)
-* ["fake/reactor"](modules/_fake_reactor_.md)
-* ["fake/scene"](modules/_fake_scene_.md)
-* ["fake/subscriber"](modules/_fake_subscriber_.md)
-* ["game"](modules/_game_.md)
-* ["game.test"](modules/_game_test_.md)
-* ["geometry/matrix_3d"](modules/_geometry_matrix_3d_.md)
-* ["geometry/matrix_3d.test"](modules/_geometry_matrix_3d_test_.md)
-* ["geometry/matrix_4d"](modules/_geometry_matrix_4d_.md)
-* ["geometry/matrix_4d.test"](modules/_geometry_matrix_4d_test_.md)
-* ["geometry/vector"](modules/_geometry_vector_.md)
-* ["geometry/vector.test"](modules/_geometry_vector_test_.md)
-* ["igame"](modules/_igame_.md)
-* ["message/imessage"](modules/_message_imessage_.md)
-* ["message/imessage_bus"](modules/_message_imessage_bus_.md)
-* ["message/isubscriber"](modules/_message_isubscriber_.md)
-* ["message/message"](modules/_message_message_.md)
-* ["message/message_bus"](modules/_message_message_bus_.md)
-* ["message/message_bus.test"](modules/_message_message_bus_test_.md)
-* ["message/subscriber"](modules/_message_subscriber_.md)
-* ["rendering/color"](modules/_rendering_color_.md)
-* ["rendering/color.test"](modules/_rendering_color_test_.md)
-* ["scene/iscene"](modules/_scene_iscene_.md)
-* ["scene/scene"](modules/_scene_scene_.md)
-* ["scene/scene.test"](modules/_scene_scene_test_.md)
-* ["standard/camera/camera"](modules/_standard_camera_camera_.md)
-* ["standard/camera/camera_system"](modules/_standard_camera_camera_system_.md)
-* ["standard/collision/collider"](modules/_standard_collision_collider_.md)
-* ["standard/collision/collision"](modules/_standard_collision_collision_.md)
-* ["standard/collision/collision_system"](modules/_standard_collision_collision_system_.md)
-* ["standard/collision/gjk"](modules/_standard_collision_gjk_.md)
-* ["standard/interpolation/interpolation_system"](modules/_standard_interpolation_interpolation_system_.md)
-* ["standard/motion/motion"](modules/_standard_motion_motion_.md)
-* ["standard/motion/motion_system"](modules/_standard_motion_motion_system_.md)
-* ["standard/shape/ellipse"](modules/_standard_shape_ellipse_.md)
-* ["standard/shape/ishape"](modules/_standard_shape_ishape_.md)
-* ["standard/shape/polygon"](modules/_standard_shape_polygon_.md)
-* ["standard/shape/polygon.test"](modules/_standard_shape_polygon_test_.md)
-* ["standard/sprite/sprite"](modules/_standard_sprite_sprite_.md)
-* ["standard/sprite/sprite_system"](modules/_standard_sprite_sprite_system_.md)
-* ["standard/transform/transform"](modules/_standard_transform_transform_.md)
-* ["standard/transform/transform.test"](modules/_standard_transform_transform_test_.md)
-* ["system/system"](modules/_system_system_.md)
-* ["system/system.test"](modules/_system_system_test_.md)
-* ["system/system_entity"](modules/_system_system_entity_.md)
-* ["system/system_entity.test"](modules/_system_system_entity_test_.md)
+* [Camera](classes/camera.md)
+* [CameraSystem](classes/camerasystem.md)
+* [Collider](classes/collider.md)
+* [Collision](classes/collision.md)
+* [CollisionSystem](classes/collisionsystem.md)
+* [Color](classes/color.md)
+* [Component](classes/component.md)
+* [ComponentManager](classes/componentmanager.md)
+* [Ellipse](classes/ellipse.md)
+* [Entity](classes/entity.md)
+* [EntityManager](classes/entitymanager.md)
+* [Fake](classes/fake.md)
+* [FakeComponent](classes/fakecomponent.md)
+* [FakeEntity](classes/fakeentity.md)
+* [FakeGame](classes/fakegame.md)
+* [FakeMessageBus](classes/fakemessagebus.md)
+* [FakeScene](classes/fakescene.md)
+* [FakeSubscriber](classes/fakesubscriber.md)
+* [GJKSimplex](classes/gjksimplex.md)
+* [Game](classes/game.md)
+* [InterpolationSystem](classes/interpolationsystem.md)
+* [Matrix3D](classes/matrix3d.md)
+* [Matrix4D](classes/matrix4d.md)
+* [Message](classes/message.md)
+* [MessageBus](classes/messagebus.md)
+* [Motion](classes/motion.md)
+* [MotionSystem](classes/motionsystem.md)
+* [Polygon](classes/polygon.md)
+* [Reactor](classes/reactor.md)
+* [Scene](classes/scene.md)
+* [Sprite](classes/sprite.md)
+* [SpriteSystem](classes/spritesystem.md)
+* [Subscriber](classes/subscriber.md)
+* [System](classes/system.md)
+* [SystemEntity](classes/systementity.md)
+* [TestGame](classes/testgame.md)
+* [TestScene](classes/testscene.md)
+* [TestSystem](classes/testsystem.md)
+* [Transform](classes/transform.md)
+* [Vector](classes/vector.md)
+
+### Interfaces
+
+* [IEntity](interfaces/ientity.md)
+* [IGame](interfaces/igame.md)
+* [IMessage](interfaces/imessage.md)
+* [IMessageBus](interfaces/imessagebus.md)
+* [IScene](interfaces/iscene.md)
+* [IShape](interfaces/ishape.md)
+* [ISubscriber](interfaces/isubscriber.md)
+
+### Type aliases
+
+* [Matrix3DValues](README.md#matrix3dvalues)
+* [Matrix4DValues](README.md#matrix4dvalues)
+
+### Functions
+
+* [Calculate](README.md#calculate)
+* [support](README.md#support)
+
+## Type aliases
+
+###  Matrix3DValues
+
+Ƭ **Matrix3DValues**: *[[number, number, number], [number, number, number], [number, number, number]]*
+
+Matrix3DValues is shorthand for the 3x3 tuple of the matrix values
+
+___
+
+###  Matrix4DValues
+
+Ƭ **Matrix4DValues**: *[[number, number, number, number], [number, number, number, number], [number, number, number, number], [number, number, number, number]]*
+
+Matrix4DValues is shorthand for the 4x4 tuple of the matrix values
+
+## Functions
+
+###  Calculate
+
+▸ **Calculate**(`a`: [SystemEntity](classes/systementity.md), `b`: [SystemEntity](classes/systementity.md)): *[Collision](classes/collision.md) | undefined*
+
+Calculate determines if a collision/intersection exists between two entities
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`a` | [SystemEntity](classes/systementity.md) | First entity |
+`b` | [SystemEntity](classes/systementity.md) | Second entity |
+
+**Returns:** *[Collision](classes/collision.md) | undefined*
+
+A collision if it has been detected; if not undefined
+
+___
+
+###  support
+
+▸ **support**(`a`: [IShape](interfaces/ishape.md), `b`: [IShape](interfaces/ishape.md), `direction`: [Vector](classes/vector.md)): *[Vector](classes/vector.md)*
+
+support calculates a support point in a direction for two shapes
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`a` | [IShape](interfaces/ishape.md) | First shape |
+`b` | [IShape](interfaces/ishape.md) | Second shape |
+`direction` | [Vector](classes/vector.md) | The direction to calculate the support point in |
+
+**Returns:** *[Vector](classes/vector.md)*
+
+The support point; returns undefined if invalid shapes provided

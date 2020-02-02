@@ -7,7 +7,7 @@
     "watch": "tsc -w",
     "lint": "eslint src --ext .ts,.tsx",
     "test": "jest --coverage",
-    "generate-reference": "typedoc --out docs/reference/ --readme none --plugin typedoc-plugin-markdown --excludeExternals --hideBreadcrumbs --hideSources src/", 
+    "generate-reference": "typedoc --mode file --out docs/reference/ --readme none --plugin typedoc-plugin-markdown --excludeExternals --hideBreadcrumbs --hideSources src/", 
     "docs": "mkdocs serve"
   },
   "author": "jthomperoo",
