@@ -25,7 +25,6 @@ adding/removing components and destroying itself.
 
 * [id](entity.md#id)
 * [messageBus](entity.md#private-messagebus)
-* [scene](entity.md#optional-scene)
 * [ID](entity.md#static-private-id)
 * [KEY](entity.md#static-key)
 * [MESSAGE_DESTROY](entity.md#static-message_destroy)
@@ -40,14 +39,13 @@ adding/removing components and destroying itself.
 
 ###  constructor
 
-\+ **new Entity**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [Scene](scene.md) | undefined, `id`: number): *[Entity](entity.md)*
+\+ **new Entity**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `id`: number): *[Entity](entity.md)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`scene?` | [Scene](scene.md) &#124; undefined | - |
 `id` | number | Entity.ID++ |
 
 **Returns:** *[Entity](entity.md)*
@@ -65,14 +63,6 @@ ___
 ### `Private` messageBus
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-___
-
-### `Optional` scene
-
-• **scene**? : *[Scene](scene.md)*
-
-*Implementation of [IEntity](../interfaces/ientity.md).[scene](../interfaces/ientity.md#optional-scene)*
 
 ___
 
