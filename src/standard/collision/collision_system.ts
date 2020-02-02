@@ -22,7 +22,7 @@ import Collider from "./collider";
 import SystemEntity from "../../system/system_entity";
 import Collision from "./collision";
 import Message from "../../message/message";
-import gjk from "../../algorithms/gjk";
+import gjk from "./gjk";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 

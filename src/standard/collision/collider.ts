@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
-import IShape from "../../geometry/ishape";
+import IShape from "../shape/ishape";
 
 /**
  * Collider is a component that defines a shape for detecting collisions

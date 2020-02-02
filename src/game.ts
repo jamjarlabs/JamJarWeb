@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,20 +16,20 @@ limitations under the License.
 
 import Message from "./message/message";
 import System from "./system/system";
-import SpriteSystem from "./standard/sprite/sprite_system";
-import CameraSystem from "./standard/camera/camera_system";
-import InterpolationSystem from "./standard/interpolation/interpolation_system";
 import IGame from "./igame";
 import IMessageBus from "./message/imessage_bus";
 
 
 /**
- * Game is the core engine class, tying together all of the parts of the engine.
- * The game is where the game is initialised; scenes, entities, components and systems.
+ * Game is the core engine class.
  * The game contains the game loop, which handles triggering updates in systems and
  * setting up rendering.
  */
 abstract class Game implements IGame {
+
+    public static readonly MESSAGE_PRE_RENDER = "pre_render"
+    public static readonly MESSAGE_RENDER = "render"
+    public static readonly MESSAGE_POST_RENDER = "post_render"
 
     private static readonly TIME_STEP = 1000 / 100;
 
@@ -87,11 +87,15 @@ abstract class Game implements IGame {
 			this.messageBus.Dispatch();
 			this.accumulator -= Game.TIME_STEP;
 		}
-		const alpha = this.accumulator / Game.TIME_STEP;
+        const alpha = this.accumulator / Game.TIME_STEP;
+        // pre-render and dispatch, must be immediately dispatched to allow pre-render systems to
+        // send messages to the renderer before the actual render call.
+        this.messageBus.Publish(new Message(Game.MESSAGE_PRE_RENDER));
+        this.messageBus.Dispatch();
         // render
-        this.messageBus.Publish(new Message(CameraSystem.MESSAGE_PREPARE_CAMERAS));
-        this.messageBus.Publish(new Message(SpriteSystem.MESSAGE_RENDER_SPRITES, alpha));
-        this.messageBus.Publish(new Message(InterpolationSystem.MESSAGE_INTERPOLATE_TRANSFORMS));
+        this.messageBus.Publish(new Message(Game.MESSAGE_RENDER, alpha));
+        // post render
+        this.messageBus.Publish(new Message(Game.MESSAGE_POST_RENDER));
 		this.messageBus.Dispatch();
 		this.frameRequestCallback(() => { this.loop(); });
     }

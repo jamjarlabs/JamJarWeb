@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35,12 +35,12 @@ class Entity implements IEntity{
     public id: number;
     public scene?: Scene;
 
-    constructor(private messageBus: IMessageBus, scene?: Scene) {
-        this.id = Entity.ID++;
+    private messageBus: IMessageBus
+
+    constructor(messageBus: IMessageBus, scene?: Scene | undefined, id: number = Entity.ID++) {
+        this.messageBus = messageBus;
+        this.id = id;
         this.scene = scene;
-        if (scene) {
-            scene.AddEntity(this);
-        }
     }
 
     /**

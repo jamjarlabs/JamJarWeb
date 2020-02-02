@@ -16,7 +16,7 @@ limitations under the License.
 
 import Component from "../../component/component";
 import Color from "../../rendering/color";
-import Polygon from "../../geometry/polygon";
+import Polygon from "../shape/polygon";
 
 class Sprite extends Component {
     public static readonly KEY = "sprite";

@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 import IShape from "./ishape";
-import Vector from "./vector";
-import Transform from "../standard/transform/transform";
+import Vector from "../../geometry/vector";
+import Transform from "../transform/transform";
 
 /**
  * Ellipse is the representation of a 2D Ellipse shape. Can be used for collision detection.

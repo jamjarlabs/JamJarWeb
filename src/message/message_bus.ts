@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import ISubscriber from "./isubscriber";
  * type.
  * The dispatch should probably be left to the core game loop for triggering.
  */
-class MessageBus implements IMessageBus{
+class MessageBus implements IMessageBus {
     private subscribers: Record<string, ISubscriber[]>;
     private messageQueue: IMessage[];
 
@@ -73,7 +73,7 @@ class MessageBus implements IMessageBus{
      */
     public Subscribe(subscriber: ISubscriber, types: string | string[]): void {
         if (types instanceof Array) {
-            for(const type of types) {
+            for (const type of types) {
                 this.Subscribe(subscriber, type);
             }
             return;
@@ -109,7 +109,7 @@ class MessageBus implements IMessageBus{
      */
     public Unsubscribe(subscriber: ISubscriber, types: string | string[]): void {
         if (types instanceof Array) {
-            for(const type of types) {
+            for (const type of types) {
                 this.Unsubscribe(subscriber, type);
             }
             return;

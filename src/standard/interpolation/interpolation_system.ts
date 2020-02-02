@@ -22,6 +22,7 @@ import SystemEntity from "../../system/system_entity";
 import IMessage from "../../message/imessage";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
+import Game from "../../game";
 
 /**
  * InterpolationSystem is responsible for updating each entities transform value after a render, so
@@ -29,8 +30,6 @@ import IEntity from "../../entity/ientity";
  * This is part of the rendering process.
  */
 class InterpolationSystem extends System {
-    public static readonly MESSAGE_INTERPOLATE_TRANSFORMS = "interpolate_system_interpolate_transforms";
-
     // All entities with a transform
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return components.some(
@@ -40,13 +39,13 @@ class InterpolationSystem extends System {
 
     constructor(messageBus: IMessageBus, scene?: Scene) {
         super(messageBus, { evaluator: InterpolationSystem.EVALUATOR, scene: scene });
-        this.messageBus.Subscribe(this, InterpolationSystem.MESSAGE_INTERPOLATE_TRANSFORMS);
+        this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
     }
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case InterpolationSystem.MESSAGE_INTERPOLATE_TRANSFORMS: {
+            case Game.MESSAGE_POST_RENDER: {
                 this.interpolateTransforms(this.entities);
                 break;
             }

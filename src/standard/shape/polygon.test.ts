@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Vector from "./vector";
+import Vector from "../../geometry/vector";
 import Polygon from "./polygon";
-import Transform from "../standard/transform/transform";
+import Transform from "../transform/transform";
 
 describe("Polygon - FarthestPointInDirection", () => {
     type TestTuple = [string, Vector, Polygon, Vector];

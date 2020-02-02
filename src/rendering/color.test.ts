@@ -25,6 +25,11 @@ describe("Color - GetTuple", () => {
             new Color(1,0,1,0)
         ],
         [
+            "Get RGBA (1,0,1,1) (no alpha provided)",
+            [1,0,1,1],
+            new Color(1,0,1)
+        ],
+        [
             "Get RGBA (0.2,0.5,0.32,0.243)",
             [0.2,0.5,0.32,0.243],
             new Color(0.2,0.5,0.32,0.243)
