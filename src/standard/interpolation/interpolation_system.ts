@@ -17,12 +17,12 @@ limitations under the License.
 import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
-import Scene from "../../scene/scene";
 import SystemEntity from "../../system/system_entity";
 import IMessage from "../../message/imessage";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import Game from "../../game";
+import IScene from "../../scene/iscene";
 
 /**
  * InterpolationSystem is responsible for updating each entities transform value after a render, so
@@ -37,8 +37,10 @@ class InterpolationSystem extends System {
         );
     };
 
-    constructor(messageBus: IMessageBus, scene?: Scene) {
-        super(messageBus, { evaluator: InterpolationSystem.EVALUATOR, scene: scene });
+    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
+        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
+        { scene: undefined, entities: [], subscriberID: undefined }) {
+        super(messageBus, { evaluator: InterpolationSystem.EVALUATOR, scene, entities, subscriberID });
         this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
     }
 

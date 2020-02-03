@@ -1,14 +1,11 @@
 
-# Class: CameraSystem
-
-CameraSystem handles setting up the canvas/preparing WebGL for drawing to cameras.
-It is responsible for loading cameras; setting up viewports, background colors and draw options.
+# Class: WebGLSystem
 
 ## Hierarchy
 
   ↳ [System](system.md)
 
-  ↳ **CameraSystem**
+  ↳ **WebGLSystem**
 
 ## Implements
 
@@ -18,45 +15,59 @@ It is responsible for loading cameras; setting up viewports, background colors a
 
 ### Constructors
 
-* [constructor](camerasystem.md#constructor)
+* [constructor](webglsystem.md#constructor)
 
 ### Properties
 
-* [entities](camerasystem.md#protected-entities)
-* [gl](camerasystem.md#private-gl)
-* [messageBus](camerasystem.md#protected-messagebus)
-* [scene](camerasystem.md#protected-optional-scene)
-* [subscriberID](camerasystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](camerasystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](camerasystem.md#static-message_register)
-* [MESSAGE_UPDATE](camerasystem.md#static-message_update)
+* [entities](webglsystem.md#protected-entities)
+* [gl](webglsystem.md#private-gl)
+* [messageBus](webglsystem.md#protected-messagebus)
+* [program](webglsystem.md#private-program)
+* [renderables](webglsystem.md#private-renderables)
+* [scene](webglsystem.md#protected-optional-scene)
+* [subscriberID](webglsystem.md#subscriberid)
+* [FRAGMENT_SHADER](webglsystem.md#static-private-fragment_shader)
+* [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
+* [MESSAGE_LOAD_RENDERABLES](webglsystem.md#static-message_load_renderables)
+* [MESSAGE_REGISTER](webglsystem.md#static-message_register)
+* [MESSAGE_UPDATE](webglsystem.md#static-message_update)
+* [VERTEX_SHADER](webglsystem.md#static-private-vertex_shader)
 
 ### Methods
 
-* [Destroy](camerasystem.md#destroy)
-* [GetSystemEntity](camerasystem.md#protected-getsystementity)
-* [OnMessage](camerasystem.md#onmessage)
-* [Update](camerasystem.md#protected-update)
-* [prepareCameras](camerasystem.md#private-preparecameras)
-* [EVALUATOR](camerasystem.md#static-private-evaluator)
+* [Destroy](webglsystem.md#destroy)
+* [GetSystemEntity](webglsystem.md#protected-getsystementity)
+* [OnMessage](webglsystem.md#onmessage)
+* [Update](webglsystem.md#protected-update)
+* [createProgram](webglsystem.md#createprogram)
+* [createShader](webglsystem.md#createshader)
+* [render](webglsystem.md#private-render)
+* [EVALUATOR](webglsystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new CameraSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [Scene](scene.md)): *[CameraSystem](camerasystem.md)*
+\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `__namedParameters`: object): *[WebGLSystem](webglsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
+▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+
+▪ **gl**: *WebGL2RenderingContext*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, renderables: [] }
+
 Name | Type |
 ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`gl` | WebGL2RenderingContext |
-`scene?` | [Scene](scene.md) |
+`entities` | [SystemEntity](systementity.md)‹›[] |
+`renderables` | [Renderable](renderable.md)‹›[] |
+`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
+`subscriberID` | undefined &#124; number |
 
-**Returns:** *[CameraSystem](camerasystem.md)*
+**Returns:** *[WebGLSystem](webglsystem.md)*
 
 ## Properties
 
@@ -82,6 +93,18 @@ ___
 
 ___
 
+### `Private` program
+
+• **program**: *WebGLProgram | null*
+
+___
+
+### `Private` renderables
+
+• **renderables**: *[Renderable](renderable.md)[]*
+
+___
+
 ### `Protected` `Optional` scene
 
 • **scene**? : *[IScene](../interfaces/iscene.md)*
@@ -100,11 +123,43 @@ ___
 
 ___
 
+### `Static` `Private` FRAGMENT_SHADER
+
+▪ **FRAGMENT_SHADER**: *"#version 300 es
+        precision mediump float;
+
+        uniform vec4 uColor;
+
+        out vec4 outColor;
+
+        void main() {
+            outColor = uColor;
+        }
+    "* = `#version 300 es
+        precision mediump float;
+
+        uniform vec4 uColor;
+
+        out vec4 outColor;
+
+        void main() {
+            outColor = uColor;
+        }
+    `
+
+___
+
 ### `Static` MESSAGE_DEREGISTER
 
 ▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
 
 *Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+
+___
+
+### `Static` MESSAGE_LOAD_RENDERABLES
+
+▪ **MESSAGE_LOAD_RENDERABLES**: *"load_renderables"* = "load_renderables"
 
 ___
 
@@ -121,6 +176,32 @@ ___
 ▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
 
 *Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+
+___
+
+### `Static` `Private` VERTEX_SHADER
+
+▪ **VERTEX_SHADER**: *"#version 300 es
+        in vec2 aVertexPosition;
+
+        uniform mat4 uViewMatrix;
+        uniform mat4 uModelMatrix;
+        uniform mat4 uProjectionMatrix;
+
+        void main() {
+            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
+        }
+    "* = `#version 300 es
+        in vec2 aVertexPosition;
+
+        uniform mat4 uViewMatrix;
+        uniform mat4 uModelMatrix;
+        uniform mat4 uProjectionMatrix;
+
+        void main() {
+            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
+        }
+    `
 
 ## Methods
 
@@ -195,18 +276,45 @@ Name | Type | Description |
 
 ___
 
-### `Private` prepareCameras
+###  createProgram
 
-▸ **prepareCameras**(`gl`: WebGL2RenderingContext, `entities`: [SystemEntity](systementity.md)[]): *void*
-
-prepareCameras sets up viewports, background colors and draw options for cameras.
+▸ **createProgram**(`vertex`: WebGLShader, `fragment`: WebGLShader): *WebGLProgram*
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`gl` | WebGL2RenderingContext | WebGL context for interacting with WebGL |
-`entities` | [SystemEntity](systementity.md)[] | Array of camera entities  |
+Name | Type |
+------ | ------ |
+`vertex` | WebGLShader |
+`fragment` | WebGLShader |
+
+**Returns:** *WebGLProgram*
+
+___
+
+###  createShader
+
+▸ **createShader**(`type`: number, `source`: string): *WebGLShader*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`type` | number |
+`source` | string |
+
+**Returns:** *WebGLShader*
+
+___
+
+### `Private` render
+
+▸ **render**(`alpha`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`alpha` | number |
 
 **Returns:** *void*
 

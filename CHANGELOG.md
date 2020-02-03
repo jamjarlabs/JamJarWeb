@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `KeyboardSystem` to manage keyboard input.
+- Separate Rendering into stages, with `pre-render`, `render` and `post-render`. 
+- Sprites now processed in `pre-render`.
+- WebGL rendering system added.
 
 ## [0.1.0] - 2019-10-27
 ### Added

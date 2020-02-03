@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,9 +18,10 @@ import System from "../../system/system";
 import Transform from "../transform/transform";
 import Motion from "./motion";
 import Component from "../../component/component";
-import Scene from "../../scene/scene";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
+import IScene from "../../scene/iscene";
+import SystemEntity from "../../system/system_entity";
 
 /**
  * MotionSystem handles basic physics calculations for entities with a motion component.
@@ -34,8 +35,10 @@ class MotionSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, scene?: Scene) {
-        super(messageBus, { evaluator: MotionSystem.EVALUATOR, scene: scene });
+    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
+        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
+        { scene: undefined, entities: [], subscriberID: undefined }) {
+        super(messageBus, { evaluator: MotionSystem.EVALUATOR, scene, entities, subscriberID });
     }
 
     protected Update(dt: number): void {

@@ -45,16 +45,23 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 ###  constructor
 
-\+ **new KeyboardSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLDocument): *[KeyboardSystem](keyboardsystem.md)*
+\+ **new KeyboardSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLDocument, `__namedParameters`: object): *[KeyboardSystem](keyboardsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
+▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+
+▪ **inputElement**: *HTMLDocument*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+
 Name | Type |
 ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`inputElement` | HTMLDocument |
+`entities` | [SystemEntity](systementity.md)‹›[] |
+`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
+`subscriberID` | undefined &#124; number |
 
 **Returns:** *[KeyboardSystem](keyboardsystem.md)*
 

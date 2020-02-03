@@ -10,8 +10,6 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ **System**
 
-  ↳ [CameraSystem](camerasystem.md)
-
   ↳ [CollisionSystem](collisionsystem.md)
 
   ↳ [InterpolationSystem](interpolationsystem.md)
@@ -19,6 +17,8 @@ A system is for implementing logic, manipulating entities and their components.
   ↳ [KeyboardSystem](keyboardsystem.md)
 
   ↳ [MotionSystem](motionsystem.md)
+
+  ↳ [WebGLSystem](webglsystem.md)
 
   ↳ [SpriteSystem](spritesystem.md)
 
@@ -58,7 +58,7 @@ A system is for implementing logic, manipulating entities and their components.
 
 ###  constructor
 
-\+ **new System**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `args`: object, `entities`: [SystemEntity](systementity.md)[]): *[System](system.md)*
+\+ **new System**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[System](system.md)*
 
 *Overrides [Subscriber](subscriber.md).[constructor](subscriber.md#constructor)*
 
@@ -66,14 +66,14 @@ A system is for implementing logic, manipulating entities and their components.
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **args**: *object*= {}
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: [], subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`evaluator?` | undefined &#124; function |
-`scene?` | [IScene](../interfaces/iscene.md) |
-
-▪`Default value`  **entities**: *[SystemEntity](systementity.md)[]*= []
+`entities` | [SystemEntity](systementity.md)‹›[] |
+`evaluator` | undefined &#124; function |
+`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
+`subscriberID` | undefined &#124; number |
 
 **Returns:** *[System](system.md)*
 
@@ -87,7 +87,7 @@ ___
 
 ### `Private` `Optional` evaluator
 
-• **evaluator**? : *undefined | function*
+• **evaluator**? : *[Evaluator](../README.md#evaluator)*
 
 ___
 

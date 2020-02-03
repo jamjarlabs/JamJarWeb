@@ -6,7 +6,6 @@
 ### Classes
 
 * [Camera](classes/camera.md)
-* [CameraSystem](classes/camerasystem.md)
 * [Collider](classes/collider.md)
 * [Collision](classes/collision.md)
 * [CollisionSystem](classes/collisionsystem.md)
@@ -35,6 +34,7 @@
 * [MotionSystem](classes/motionsystem.md)
 * [Polygon](classes/polygon.md)
 * [Reactor](classes/reactor.md)
+* [Renderable](classes/renderable.md)
 * [Scene](classes/scene.md)
 * [Sprite](classes/sprite.md)
 * [SpriteSystem](classes/spritesystem.md)
@@ -46,6 +46,7 @@
 * [TestSystem](classes/testsystem.md)
 * [Transform](classes/transform.md)
 * [Vector](classes/vector.md)
+* [WebGLSystem](classes/webglsystem.md)
 
 ### Interfaces
 
@@ -59,6 +60,7 @@
 
 ### Type aliases
 
+* [Evaluator](README.md#evaluator)
 * [Matrix3DValues](README.md#matrix3dvalues)
 * [Matrix4DValues](README.md#matrix4dvalues)
 
@@ -68,6 +70,23 @@
 * [support](README.md#support)
 
 ## Type aliases
+
+###  Evaluator
+
+Ƭ **Evaluator**: *function*
+
+#### Type declaration:
+
+▸ (`entity`: [IEntity](interfaces/ientity.md), `components`: [Component](classes/component.md)[]): *boolean*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](interfaces/ientity.md) |
+`components` | [Component](classes/component.md)[] |
+
+___
 
 ###  Matrix3DValues
 

@@ -45,11 +45,7 @@ describe("System - GetSystemEntity", () => {
         [
             "No entities, return undefined",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                []
-            ),
+            new TestSystem(new FakeMessageBus()),
             new FakeEntity(0)
         ],
         [
@@ -57,12 +53,16 @@ describe("System - GetSystemEntity", () => {
             undefined,
             new TestSystem(
                 new FakeMessageBus(),
-                {},
-                [
-                    new SystemEntity(new FakeEntity(0), []),
-                    new SystemEntity(new FakeEntity(1), []),
-                    new SystemEntity(new FakeEntity(2), []),
-                ]
+                {
+                    scene: undefined,
+                    evaluator: undefined,
+                    subscriberID: undefined,
+                    entities: [
+                        new SystemEntity(new FakeEntity(0), []),
+                        new SystemEntity(new FakeEntity(1), []),
+                        new SystemEntity(new FakeEntity(2), []),
+                    ]
+                },
             ),
             new FakeEntity(3)
         ],
@@ -71,12 +71,16 @@ describe("System - GetSystemEntity", () => {
             new SystemEntity(new FakeEntity(0), []),
             new TestSystem(
                 new FakeMessageBus(),
-                {},
-                [
-                    new SystemEntity(new FakeEntity(0), []),
-                    new SystemEntity(new FakeEntity(1), []),
-                    new SystemEntity(new FakeEntity(2), []),
-                ]
+                {
+                    scene: undefined,
+                    evaluator: undefined,
+                    subscriberID: undefined,
+                    entities: [
+                        new SystemEntity(new FakeEntity(0), []),
+                        new SystemEntity(new FakeEntity(1), []),
+                        new SystemEntity(new FakeEntity(2), []),
+                    ]
+                },
             ),
             new FakeEntity(0)
         ],
@@ -100,199 +104,160 @@ describe("System - OnMessage", () => {
         [
             "Unused message type",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message("unused")
         ],
         [
             "Update",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message(System.MESSAGE_UPDATE)
         ],
         [
             "Register no payload",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message(System.MESSAGE_REGISTER)
         ],
         [
             "Register no payload",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message(System.MESSAGE_REGISTER)
         ],
         [
             "Register, no evaluator",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
             "Register, evaluator throws error",
             new Error("evaluator fail"),
-            new TestSystem(
-                new FakeMessageBus(),
-                { evaluator: (): boolean => { throw ("evaluator fail"); } },
-                [],
-            ),
+            new TestSystem(new FakeMessageBus(),
+                { scene: undefined, subscriberID: undefined, entities: [], evaluator: (): boolean => { throw ("evaluator fail"); } }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
             "Register, evaluator reject",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                { evaluator: (): boolean => { return false; } },
-                [],
-            ),
+            new TestSystem(new FakeMessageBus(), 
+                { scene: undefined, subscriberID: undefined, entities: [], evaluator: (): boolean => { return false; } }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
             "Register, evaluator accept",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                { evaluator: (): boolean => { return true; } },
-                [],
-            ),
+            new TestSystem(new FakeMessageBus(), 
+                { scene: undefined, subscriberID: undefined, entities: [], evaluator: (): boolean => { return true; } }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
             "Register, evaluator accept, entity already existed",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                { evaluator: (): boolean => { return true; } },
-                [
+            new TestSystem(new FakeMessageBus(), 
+            { 
+                scene: undefined, 
+                subscriberID: undefined, 
+                entities: [
                     new SystemEntity(new FakeEntity(0), []),
                     new SystemEntity(new FakeEntity(1), []),
                     new SystemEntity(new FakeEntity(2), []),
                     new SystemEntity(new FakeEntity(3), []),
                 ],
-            ),
+                evaluator: (): boolean => { return true; }
+            }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [new FakeComponent("test")]])
         ],
         [
             "Deregister, no payload",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message(System.MESSAGE_DEREGISTER)
         ],
         [
             "Deregister, entity not in system",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus(),),
             new Message<IEntity>(System.MESSAGE_DEREGISTER, new FakeEntity(3))
         ],
         [
             "Deregister, single entity remove",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [
+            new TestSystem(new FakeMessageBus(), 
+            { 
+                scene: undefined, 
+                subscriberID: undefined, 
+                entities: [
                     new SystemEntity(new FakeEntity(3), []),
                 ],
-            ),
+                evaluator: undefined
+            }),
             new Message<IEntity>(System.MESSAGE_DEREGISTER, new FakeEntity(3))
         ],
         [
             "Deregister, three entities, remove one",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [
+            new TestSystem(new FakeMessageBus(), 
+            { 
+                scene: undefined, 
+                subscriberID: undefined, 
+                entities: [
                     new SystemEntity(new FakeEntity(0), []),
                     new SystemEntity(new FakeEntity(1), []),
                     new SystemEntity(new FakeEntity(2), []),
                     new SystemEntity(new FakeEntity(3), []),
                 ],
-            ),
+                evaluator: undefined
+            }),
             new Message<IEntity>(System.MESSAGE_DEREGISTER, new FakeEntity(2))
         ],
         [
             "Destroy, no payload",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message(Scene.MESSAGE_DESTROY)
         ],
         [
             "Destroy, no scene",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {},
-                [],
-            ),
+            new TestSystem(new FakeMessageBus()),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
         ],
         [
             "Destroy, no matching scene",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {
-                    scene: new FakeScene(3)
-                },
-                [],
-            ),
+            new TestSystem(new FakeMessageBus(), 
+            { 
+                scene: new FakeScene(3), 
+                subscriberID: undefined, 
+                entities: [],
+                evaluator: undefined
+            }),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
         ],
         [
             "Destroy, unsubscribe all fail",
             new Error("fail to unsubscribe all"),
-            new TestSystem(
-                new FakeMessageBus([new Reactor("UnsubscribeAll", (): void => { throw ("fail to unsubscribe all"); })]),
-                {
-                    scene: new FakeScene(0)
-                },
-                [],
-            ),
+            new TestSystem(new FakeMessageBus([new Reactor("UnsubscribeAll", (): void => { throw ("fail to unsubscribe all"); })]),
+            { 
+                scene: new FakeScene(0), 
+                subscriberID: undefined, 
+                entities: [],
+                evaluator: undefined
+            }),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
         ],
         [
             "Destroy, success",
             undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {
-                    scene: new FakeScene(0)
-                },
-                [],
-            ),
+            new TestSystem(new FakeMessageBus(),
+            { 
+                scene: new FakeScene(0), 
+                subscriberID: undefined, 
+                entities: [],
+                evaluator: undefined
+            }),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
         ],
     ])("%p", (

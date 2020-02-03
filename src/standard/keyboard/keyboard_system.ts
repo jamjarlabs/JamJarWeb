@@ -17,6 +17,8 @@ limitations under the License.
 import System from "../../system/system";
 import Message from "../../message/message";
 import IMessageBus from "../../message/imessage_bus";
+import IScene from "../../scene/iscene";
+import SystemEntity from "../../system/system_entity";
 
 /**
  * KeyboardSystem handles Keyboard input events, converting them into JamJar ECS messages.
@@ -30,8 +32,11 @@ class KeyboardSystem extends System {
 
     private inputElement: HTMLDocument;
 
-    constructor(messageBus: IMessageBus, inputElement: HTMLDocument) {
-        super(messageBus);
+    constructor(messageBus: IMessageBus, inputElement: HTMLDocument,
+        { scene, entities, subscriberID }:
+            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
+            { scene: undefined, entities: [], subscriberID: undefined }) {
+        super(messageBus, { scene, evaluator: undefined, entities, subscriberID });
         this.inputElement = inputElement;
         this.inputElement.addEventListener("keydown", (event: KeyboardEvent): void => { this.keyDown(event); });
         this.inputElement.addEventListener("keyup", (event: KeyboardEvent): void => { this.keyUp(event); });
@@ -45,10 +50,10 @@ class KeyboardSystem extends System {
         this.messageBus.Publish(new Message<string>(KeyboardSystem.MESSAGE_KEY_DOWN, event.key));
     }
 
-        /**
-     * On key down publish keyup ECS message.
-     * @param {KeyboardEvent} event KeyboardEvent of the keydown
-     */
+    /**
+ * On key down publish keyup ECS message.
+ * @param {KeyboardEvent} event KeyboardEvent of the keydown
+ */
     private keyUp(event: KeyboardEvent): void {
         this.messageBus.Publish(new Message<string>(KeyboardSystem.MESSAGE_KEY_UP, event.key));
     }

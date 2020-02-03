@@ -39,7 +39,7 @@
 
 ###  constructor
 
-\+ **new TestSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `args`: object, `entities`: [SystemEntity](systementity.md)[]): *[TestSystem](testsystem.md)*
+\+ **new TestSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[TestSystem](testsystem.md)*
 
 *Inherited from [System](system.md).[constructor](system.md#constructor)*
 
@@ -49,14 +49,14 @@
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **args**: *object*= {}
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: [], subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`evaluator?` | undefined &#124; function |
-`scene?` | [IScene](../interfaces/iscene.md) |
-
-▪`Default value`  **entities**: *[SystemEntity](systementity.md)[]*= []
+`entities` | [SystemEntity](systementity.md)‹›[] |
+`evaluator` | undefined &#124; function |
+`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
+`subscriberID` | undefined &#124; number |
 
 **Returns:** *[TestSystem](testsystem.md)*
 

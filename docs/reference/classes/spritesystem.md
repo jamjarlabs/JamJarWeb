@@ -20,16 +20,12 @@
 ### Properties
 
 * [entities](spritesystem.md#protected-entities)
-* [gl](spritesystem.md#private-gl)
 * [messageBus](spritesystem.md#protected-messagebus)
-* [program](spritesystem.md#private-program)
 * [scene](spritesystem.md#protected-optional-scene)
 * [subscriberID](spritesystem.md#subscriberid)
-* [FRAGMENT_SHADER](spritesystem.md#static-private-fragment_shader)
 * [MESSAGE_DEREGISTER](spritesystem.md#static-message_deregister)
 * [MESSAGE_REGISTER](spritesystem.md#static-message_register)
 * [MESSAGE_UPDATE](spritesystem.md#static-message_update)
-* [VERTEX_SHADER](spritesystem.md#static-private-vertex_shader)
 
 ### Methods
 
@@ -37,26 +33,28 @@
 * [GetSystemEntity](spritesystem.md#protected-getsystementity)
 * [OnMessage](spritesystem.md#onmessage)
 * [Update](spritesystem.md#protected-update)
-* [createProgram](spritesystem.md#createprogram)
-* [createShader](spritesystem.md#createshader)
-* [renderSprites](spritesystem.md#private-rendersprites)
+* [prepareSprites](spritesystem.md#private-preparesprites)
 * [EVALUATOR](spritesystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new SpriteSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [Scene](scene.md)): *[SpriteSystem](spritesystem.md)*
+\+ **new SpriteSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[SpriteSystem](spritesystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
+▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+
 Name | Type |
 ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`gl` | WebGL2RenderingContext |
-`scene?` | [Scene](scene.md) |
+`entities` | [SystemEntity](systementity.md)‹›[] |
+`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
+`subscriberID` | undefined &#124; number |
 
 **Returns:** *[SpriteSystem](spritesystem.md)*
 
@@ -70,23 +68,11 @@ Name | Type |
 
 ___
 
-### `Private` gl
-
-• **gl**: *WebGL2RenderingContext*
-
-___
-
 ### `Protected` messageBus
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
-
-___
-
-### `Private` program
-
-• **program**: *WebGLProgram | null*
 
 ___
 
@@ -105,32 +91,6 @@ ___
 *Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
 
 *Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
-
-___
-
-### `Static` `Private` FRAGMENT_SHADER
-
-▪ **FRAGMENT_SHADER**: *"#version 300 es
-        precision mediump float;
-
-        uniform vec4 uColor;
-
-        out vec4 outColor;
-
-        void main() {
-            outColor = uColor;
-        }
-    "* = `#version 300 es
-        precision mediump float;
-
-        uniform vec4 uColor;
-
-        out vec4 outColor;
-
-        void main() {
-            outColor = uColor;
-        }
-    `
 
 ___
 
@@ -155,32 +115,6 @@ ___
 ▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
 
 *Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
-
-___
-
-### `Static` `Private` VERTEX_SHADER
-
-▪ **VERTEX_SHADER**: *"#version 300 es
-        in vec2 aVertexPosition;
-
-        uniform mat4 uViewMatrix;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uProjectionMatrix;
-
-        void main() {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
-        }
-    "* = `#version 300 es
-        in vec2 aVertexPosition;
-
-        uniform mat4 uViewMatrix;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uProjectionMatrix;
-
-        void main() {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
-        }
-    `
 
 ## Methods
 
@@ -255,48 +189,14 @@ Name | Type | Description |
 
 ___
 
-###  createProgram
+### `Private` prepareSprites
 
-▸ **createProgram**(`gl`: WebGL2RenderingContext, `vertex`: WebGLShader, `fragment`: WebGLShader): *WebGLProgram*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`gl` | WebGL2RenderingContext |
-`vertex` | WebGLShader |
-`fragment` | WebGLShader |
-
-**Returns:** *WebGLProgram*
-
-___
-
-###  createShader
-
-▸ **createShader**(`gl`: WebGL2RenderingContext, `type`: number, `source`: string): *WebGLShader*
+▸ **prepareSprites**(`alpha`: number): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`gl` | WebGL2RenderingContext |
-`type` | number |
-`source` | string |
-
-**Returns:** *WebGLShader*
-
-___
-
-### `Private` renderSprites
-
-▸ **renderSprites**(`gl`: WebGL2RenderingContext, `entities`: [SystemEntity](systementity.md)[], `alpha`: number): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`gl` | WebGL2RenderingContext |
-`entities` | [SystemEntity](systementity.md)[] |
 `alpha` | number |
 
 **Returns:** *void*
