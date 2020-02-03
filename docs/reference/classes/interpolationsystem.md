@@ -44,16 +44,21 @@ This is part of the rendering process.
 
 ###  constructor
 
-\+ **new InterpolationSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [Scene](scene.md)): *[InterpolationSystem](interpolationsystem.md)*
+\+ **new InterpolationSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[InterpolationSystem](interpolationsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
+▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+
 Name | Type |
 ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`scene?` | [Scene](scene.md) |
+`entities` | [SystemEntity](systementity.md)‹›[] |
+`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
+`subscriberID` | undefined &#124; number |
 
 **Returns:** *[InterpolationSystem](interpolationsystem.md)*
 

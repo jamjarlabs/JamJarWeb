@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ limitations under the License.
 import System from "../../system/system";
 import Transform from "../transform/transform";
 import Component from "../../component/component";
-import Scene from "../../scene/scene";
 import Collider from "./collider";
 import SystemEntity from "../../system/system_entity";
 import Collision from "./collision";
@@ -25,6 +24,7 @@ import Message from "../../message/message";
 import gjk from "./gjk";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
+import IScene from "../../scene/iscene";
 
 /**
  * CollisionSystem watches for collisions between entities with Colliders and Transforms.
@@ -44,8 +44,10 @@ class CollisionSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, scene?: Scene) {
-        super(messageBus, { evaluator: CollisionSystem.EVALUATOR, scene: scene });
+    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
+        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
+        { scene: undefined, entities: [], subscriberID: undefined }) {
+        super(messageBus, { evaluator: CollisionSystem.EVALUATOR, scene, entities, subscriberID });
     }
 
     Update(): void {

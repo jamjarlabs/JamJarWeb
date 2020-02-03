@@ -18,8 +18,8 @@ import Game from "jamjar/lib/game"
 import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/standard/transform/transform";
 import Vector from "jamjar/lib/geometry/vector";
+import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
 import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
-import CameraSystem from "jamjar/lib/standard/camera/camera_system";
 import MotionSystem from "jamjar/lib/standard/motion/motion_system";
 import KeyboardSystem from "jamjar/lib/standard/keyboard/keyboard_system";
 import InterpolationSystem from "jamjar/lib/standard/interpolation/interpolation_system";
@@ -37,13 +37,14 @@ import System from "../lib/system/system";
 import IEntity from "../lib/entity/ientity";
 import Component from "../lib/component/component";
 import IScene from "../lib/scene/iscene";
+import SystemEntity from "../lib/system/system_entity";
 
 class LoadingScene extends Scene {
     constructor(messageBus: IMessageBus) {
         super(messageBus);
         this.messageBus.Subscribe(this, "FINISH_LOADING");
     }
-    
+
     OnStart(): void {
         // display loading stuff
         this.messageBus.Publish(new Message("FINISH_LOADING"))
@@ -80,8 +81,10 @@ class MoveSystem extends System {
 
     private pressedKeys: Set<string>;
 
-    constructor(messageBus: IMessageBus, scene: IScene | undefined, pressedKeys: Set<string> = new Set()) {
-        super(messageBus, { evaluator: MoveSystem.EVALUATOR, scene: scene} );
+    constructor(messageBus: IMessageBus, { scene, entities, subscriberID, pressedKeys }:
+        { scene: IScene | undefined, entities: SystemEntity[], subscriberID: number | undefined, pressedKeys: Set<string> } =
+        { scene: undefined, entities: [], subscriberID: undefined, pressedKeys: new Set() }) {
+        super(messageBus, { evaluator: MoveSystem.EVALUATOR, scene, entities, subscriberID });
         this.pressedKeys = pressedKeys;
         messageBus.Subscribe(this, KeyboardSystem.MESSAGE_KEY_DOWN);
         messageBus.Subscribe(this, KeyboardSystem.MESSAGE_KEY_UP);
@@ -89,7 +92,7 @@ class MoveSystem extends System {
 
     public OnMessage(message: IMessage) {
         super.OnMessage(message);
-        switch(message.type) {
+        switch (message.type) {
             case KeyboardSystem.MESSAGE_KEY_DOWN: {
                 const upMessage = message as Message<string>;
                 if (upMessage.payload === undefined) {
@@ -110,10 +113,10 @@ class MoveSystem extends System {
     }
 
     protected Update(): void {
-        for(let i = 0; i < this.entities.length; i++) {
+        for (let i = 0; i < this.entities.length; i++) {
             const entity = this.entities[i];
             const motion = entity.Get(Motion.KEY) as Motion;
-            let targetVel = new Vector(0,0);
+            let targetVel = new Vector(0, 0);
             if (this.pressedKeys.has("w")) {
                 targetVel.y += MoveSystem.SPEED;
             }
@@ -133,19 +136,23 @@ class MoveSystem extends System {
 
 class SimpleScene extends Scene {
     OnStart(): void {
-        new MotionSystem(this.messageBus, this);
-        new InterpolationSystem(this.messageBus, this);
-        new MoveSystem(this.messageBus, this);
+        new SpriteSystem(messageBus, { scene: this, entities: [], subscriberID: undefined });
+        new MotionSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
+        new InterpolationSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
+        new MoveSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined, pressedKeys: new Set() });
 
         const camera = new Entity(this.messageBus);
-        camera.Add(new Transform(new Vector(0,0)));
-        camera.Add(new Camera(new Color(0,0,0,1)));
+        camera.Add(new Transform(new Vector(0, 0)));
+        camera.Add(new Camera(new Color(0, 0, 0, 1)));
+        camera.Add(new Motion(new Vector(0, 0), new Vector(0, 0), 0));
+        camera.Add(new Move());
 
-        let a = new Entity(this.messageBus);
-        a.Add(new Transform(new Vector(0,0), new Vector(20,20)));
-        a.Add(new Sprite(new Color(1,0.3,0.7,1)));
-        a.Add(new Motion(new Vector(0,0), new Vector(0,0), 0));
-        a.Add(new Move());
+        for (let i = 0; i < 100; i++) {
+            let a = new Entity(this.messageBus);
+            a.Add(new Transform(new Vector(Math.floor(Math.random() * (20 - -20 + 1) + -20), Math.floor(Math.random() * (20 - -20 + 1) + -20)), new Vector(5, 5)));
+            a.Add(new Sprite(new Color(Math.random(), Math.random(), Math.random(), 1)));
+            a.Add(new Motion(new Vector(0, 0), new Vector(0, 0), 0));
+        }
     }
 }
 
@@ -162,14 +169,13 @@ class ExampleGame extends Game {
 const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
 const gl = canvas.getContext("webgl2");
 if (!gl) {
-    throw("WebGL2 not supported in this browser")
+    throw ("WebGL2 not supported in this browser")
 }
 
 const messageBus = new MessageBus();
 
 new EntityManager(messageBus);
-new SpriteSystem(messageBus, gl);
-new CameraSystem(messageBus, gl);
+new WebGLSystem(messageBus, gl);
 new KeyboardSystem(messageBus, document);
 
 let exampleGame = new ExampleGame(messageBus);

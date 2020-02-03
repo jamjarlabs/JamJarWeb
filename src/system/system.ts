@@ -23,6 +23,7 @@ import IMessageBus from "../message/imessage_bus";
 import IEntity from "../entity/ientity";
 import IScene from "../scene/iscene";
 import Scene from "../scene/scene";
+import Evaluator from "./evaluator";
 
 /**
  * System is one of the key elements of the Entity-Component-System architecture.
@@ -39,16 +40,16 @@ abstract class System extends Subscriber {
 
     // The evaluator is used to evaluate if an entity with its components should be
     // tracked by the system
-    private evaluator?: (entity: IEntity, components: Component[]) => boolean
+    private evaluator?: Evaluator
 
-    constructor(protected messageBus: IMessageBus, args: {
-        evaluator?: (entity: IEntity, components: Component[]) => boolean;
-        scene?: IScene;
-    } = {}, entities: SystemEntity[] = []) {
-        super();
+    constructor(protected messageBus: IMessageBus,
+        { scene, evaluator, entities, subscriberID }:
+            { scene: IScene | undefined; evaluator: Evaluator | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
+            { scene: undefined, evaluator: undefined, entities: [], subscriberID: undefined }) {
+        super(subscriberID);
         this.entities = entities;
-        this.evaluator = args.evaluator;
-        this.scene = args.scene;
+        this.evaluator = evaluator;
+        this.scene = scene;
         this.messageBus.Subscribe(this, [
             System.MESSAGE_UPDATE,
             System.MESSAGE_REGISTER,

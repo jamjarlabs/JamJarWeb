@@ -90,12 +90,12 @@ abstract class Game implements IGame {
         const alpha = this.accumulator / Game.TIME_STEP;
         // pre-render and dispatch, must be immediately dispatched to allow pre-render systems to
         // send messages to the renderer before the actual render call.
-        this.messageBus.Publish(new Message(Game.MESSAGE_PRE_RENDER));
+        this.messageBus.Publish(new Message(Game.MESSAGE_PRE_RENDER, alpha));
         this.messageBus.Dispatch();
         // render
         this.messageBus.Publish(new Message(Game.MESSAGE_RENDER, alpha));
         // post render
-        this.messageBus.Publish(new Message(Game.MESSAGE_POST_RENDER));
+        this.messageBus.Publish(new Message(Game.MESSAGE_POST_RENDER, alpha));
 		this.messageBus.Dispatch();
 		this.frameRequestCallback(() => { this.loop(); });
     }

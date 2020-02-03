@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,182 +18,57 @@ import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
 import Sprite from "./sprite";
-import Scene from "../../scene/scene";
 import IMessage from "../../message/imessage";
-import SystemEntity from "../../system/system_entity";
-import Camera from "../camera/camera";
 import Message from "../../message/message";
-import Vector from "../../geometry/vector";
-import Matrix4D from "../../geometry/matrix_4d";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import Game from "../../game";
+import Renderable from "../../rendering/renderable";
+import WebGLSystem from "../webgl/webgl_system";
+import SystemEntity from "../../system/system_entity";
+import IScene from "../../scene/iscene";
 
 class SpriteSystem extends System {
-
-    private static readonly VERTEX_SHADER = `#version 300 es
-        in vec2 aVertexPosition;
-
-        uniform mat4 uViewMatrix;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uProjectionMatrix;
-
-        void main() {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
-        }
-    `;
-    private static readonly FRAGMENT_SHADER = `#version 300 es
-        precision mediump float;
-
-        uniform vec4 uColor;
-
-        out vec4 outColor;
-
-        void main() {
-            outColor = uColor;
-        }
-    `;
-
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY].every((type) => components.some(
-            component => component.key == type
-        )) || [Transform.KEY, Camera.KEY].every((type) => components.some(
             component => component.key == type
         ));
     };
 
-    private gl: WebGL2RenderingContext;
-    private program: WebGLProgram | null;
-
-    constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, scene?: Scene) {
-        super(messageBus, { evaluator: SpriteSystem.EVALUATOR, scene: scene });
-        this.gl = gl;
-        this.messageBus.Subscribe(this, Game.MESSAGE_RENDER);
-        const vertexShader = this.createShader(gl, gl.VERTEX_SHADER, SpriteSystem.VERTEX_SHADER);
-		const fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, SpriteSystem.FRAGMENT_SHADER);
-		this.program = this.createProgram(gl, vertexShader, fragmentShader);
+    constructor(messageBus: IMessageBus,
+        { scene, entities, subscriberID }:
+            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
+            { scene: undefined, entities: [], subscriberID: undefined }) {
+        super(messageBus, { evaluator: SpriteSystem.EVALUATOR, scene, entities, subscriberID });
+        this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case Game.MESSAGE_RENDER: {
+            case Game.MESSAGE_PRE_RENDER: {
                 const renderMessage = message as Message<number>;
                 if (renderMessage.payload == undefined) {
                     return;
                 }
-                this.renderSprites(this.gl, this.entities, renderMessage.payload);
+                this.prepareSprites(renderMessage.payload);
                 break;
             }
         }
     }
 
-    createShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader {
-        const shader = gl.createShader(type);
-        if (!shader) {
-            throw ("Error creating shader");
+    private prepareSprites(alpha: number): void {
+        const renderables: Renderable[] = [];
+        for (const entity of this.entities) {
+            const sprite = entity.Get(Sprite.KEY) as Sprite;
+            const transform = entity.Get(Transform.KEY) as Transform;
+            renderables.push(new Renderable(
+                sprite.bounds.GetFloat32Array(),
+                transform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
+                sprite.color)
+            );
         }
-		gl.shaderSource(shader, source);
-		gl.compileShader(shader);
-		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-			console.error(gl.getShaderInfoLog(shader));
-			gl.deleteShader(shader);
-			throw ("Error compiling shader");
-		}
-		return shader;
-	}
-
-	createProgram(gl: WebGL2RenderingContext, vertex: WebGLShader, fragment: WebGLShader): WebGLProgram {
-        const program = gl.createProgram();
-        if (!program) {
-            throw("Error creating program");
-        }
-		gl.attachShader(program, vertex);
-		gl.attachShader(program, fragment);
-		gl.linkProgram(program);
-		if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-			console.error(gl.getProgramInfoLog(program));
-			gl.deleteProgram(program);
-			throw ("Error linking program");
-		}
-		return program;
-	}
-
-    private renderSprites(gl: WebGL2RenderingContext, entities: SystemEntity[], alpha: number): void {
-		const sprites = entities.filter((entity) => {
-			return !entity.Get(Camera.KEY);
-		});
-		const cameras = entities.filter((entity) => {
-			return entity.Get(Camera.KEY);
-        });
-
-        const program = this.program;
-        if (!program) {
-            throw("Undefined program");
-        }
-        
-        for(const cameraEntity of cameras) {
-            const camera = cameraEntity.Get(Camera.KEY) as Camera;
-            const transform = cameraEntity.Get(Transform.KEY) as Transform;
-
-            const viewMatrix = new Matrix4D();
-            viewMatrix.Translate(new Vector(-transform.position.x, transform.position.y));
-
-            const projectionMatrix = camera.GetProjectionMatrix();
-
-            gl.useProgram(program);
-
-			// Supply camera matrices to GPU
-            const viewLocation = gl.getUniformLocation(program, "uViewMatrix");
-            const modelLocation = gl.getUniformLocation(program, "uModelMatrix");
-            const projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
-
-
-			gl.uniformMatrix4fv(
-				viewLocation,
-				false,
-                viewMatrix.GetFloat32Array());
-                
-            gl.uniformMatrix4fv(
-                projectionLocation,
-                false,
-                projectionMatrix.GetFloat32Array());
-
-			// Get color uniform location for GPU
-            const colorLocation = gl.getUniformLocation(program, "uColor");
-            
-            for (const entity of sprites) {
-                const sprite = entity.Get(Sprite.KEY) as Sprite;
-                const transform = entity.Get(Transform.KEY) as Transform;
-
-                const vao = gl.createVertexArray();
-
-                const position = gl.getAttribLocation(program, "aVertexPosition");
-                const positionBuffer = gl.createBuffer();
-        
-                // bind vao
-                gl.bindVertexArray(vao);
-                // Enable attribute
-                gl.enableVertexAttribArray(position);
-                // bind buffer
-                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-        
-                // send buffer data
-                gl.bufferData(gl.ARRAY_BUFFER, sprite.bounds.GetFloat32Array(), gl.DYNAMIC_DRAW);
-
-                const modelMatrix = transform.InterpolatedMatrix4D(alpha);
-
-                gl.uniformMatrix4fv(
-                    modelLocation,
-                    false,
-                    modelMatrix.GetFloat32Array()
-                );
-
-                gl.uniform4f(colorLocation, ...sprite.color.GetTuple());
-                gl.drawArrays(gl.TRIANGLE_FAN, 0, sprite.bounds.points.length);
-            }
-        }
+        this.messageBus.Publish(new Message<Renderable[]>(WebGLSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 

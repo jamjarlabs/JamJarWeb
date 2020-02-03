@@ -7,7 +7,6 @@
 
 ## Implemented by
 
-* [CameraSystem](../classes/camerasystem.md)
 * [CollisionSystem](../classes/collisionsystem.md)
 * [EntityManager](../classes/entitymanager.md)
 * [FakeSubscriber](../classes/fakesubscriber.md)
@@ -20,6 +19,7 @@
 * [System](../classes/system.md)
 * [TestScene](../classes/testscene.md)
 * [TestSystem](../classes/testsystem.md)
+* [WebGLSystem](../classes/webglsystem.md)
 
 ## Index
 
