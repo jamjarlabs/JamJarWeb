@@ -7,7 +7,6 @@
 
 ## Implemented by
 
-* [FakeGame](../classes/fakegame.md)
 * [Game](../classes/game.md)
 * [TestGame](../classes/testgame.md)
 

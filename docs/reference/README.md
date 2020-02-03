@@ -18,7 +18,6 @@
 * [Fake](classes/fake.md)
 * [FakeComponent](classes/fakecomponent.md)
 * [FakeEntity](classes/fakeentity.md)
-* [FakeGame](classes/fakegame.md)
 * [FakeMessageBus](classes/fakemessagebus.md)
 * [FakeScene](classes/fakescene.md)
 * [FakeSubscriber](classes/fakesubscriber.md)

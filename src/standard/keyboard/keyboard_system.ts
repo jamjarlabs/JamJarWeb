@@ -15,10 +15,10 @@ limitations under the License.
 */
 
 import System from "../../system/system";
-import Message from "../../message/message";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
+import Message from "../../message/message";
 
 /**
  * KeyboardSystem handles Keyboard input events, converting them into JamJar ECS messages.
@@ -32,30 +32,38 @@ class KeyboardSystem extends System {
 
     private inputElement: HTMLDocument;
 
+    private keyEvents: [string, string][];
+
     constructor(messageBus: IMessageBus, inputElement: HTMLDocument,
-        { scene, entities, subscriberID }:
-            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-            { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene, entities, subscriberID, keyEvents }:
+            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined; keyEvents: [string, string][] } =
+            { scene: undefined, entities: [], subscriberID: undefined, keyEvents: [] }) {
         super(messageBus, { scene, evaluator: undefined, entities, subscriberID });
         this.inputElement = inputElement;
-        this.inputElement.addEventListener("keydown", (event: KeyboardEvent): void => { this.keyDown(event); });
-        this.inputElement.addEventListener("keyup", (event: KeyboardEvent): void => { this.keyUp(event); });
+        this.keyEvents = keyEvents;
+        this.inputElement.addEventListener("keydown", (event: KeyboardEvent): void => { 
+            this.keyEvent(KeyboardSystem.MESSAGE_KEY_DOWN, event); 
+        });
+        this.inputElement.addEventListener("keyup", (event: KeyboardEvent): void => { 
+            this.keyEvent(KeyboardSystem.MESSAGE_KEY_UP, event); 
+        });
+    }
+
+    protected Update(): void {
+        for(let i = 0; i < this.keyEvents.length; i++) {
+            const keyEvent = this.keyEvents[i];
+            this.messageBus.Publish(new Message<string>(keyEvent[0], keyEvent[1]));
+        }
+        this.keyEvents = [];
     }
 
     /**
-     * On key down publish keydown ECS message.
-     * @param {KeyboardEvent} event KeyboardEvent of the keydown
+     * When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
+     * @param {string} type KeyboardEvent type
+     * @param {KeyboardEvent} event Keyboard Event
      */
-    private keyDown(event: KeyboardEvent): void {
-        this.messageBus.Publish(new Message<string>(KeyboardSystem.MESSAGE_KEY_DOWN, event.key));
-    }
-
-    /**
- * On key down publish keyup ECS message.
- * @param {KeyboardEvent} event KeyboardEvent of the keydown
- */
-    private keyUp(event: KeyboardEvent): void {
-        this.messageBus.Publish(new Message<string>(KeyboardSystem.MESSAGE_KEY_UP, event.key));
+    private keyEvent(type: string, event: KeyboardEvent): void {
+        this.keyEvents.push([type, event.key]);
     }
 }
 

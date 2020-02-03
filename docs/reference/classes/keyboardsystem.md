@@ -23,6 +23,7 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 * [entities](keyboardsystem.md#protected-entities)
 * [inputElement](keyboardsystem.md#private-inputelement)
+* [keyEvents](keyboardsystem.md#private-keyevents)
 * [messageBus](keyboardsystem.md#protected-messagebus)
 * [scene](keyboardsystem.md#protected-optional-scene)
 * [subscriberID](keyboardsystem.md#subscriberid)
@@ -38,8 +39,7 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 * [GetSystemEntity](keyboardsystem.md#protected-getsystementity)
 * [OnMessage](keyboardsystem.md#onmessage)
 * [Update](keyboardsystem.md#protected-update)
-* [keyDown](keyboardsystem.md#private-keydown)
-* [keyUp](keyboardsystem.md#private-keyup)
+* [keyEvent](keyboardsystem.md#private-keyevent)
 
 ## Constructors
 
@@ -55,11 +55,12 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 ▪ **inputElement**: *HTMLDocument*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, keyEvents: [] }
 
 Name | Type |
 ------ | ------ |
 `entities` | [SystemEntity](systementity.md)‹›[] |
+`keyEvents` | [string, string][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
@@ -78,6 +79,12 @@ ___
 ### `Private` inputElement
 
 • **inputElement**: *HTMLDocument*
+
+___
+
+### `Private` keyEvents
+
+• **keyEvents**: *[string, string][]*
 
 ___
 
@@ -200,48 +207,25 @@ ___
 
 ### `Protected` Update
 
-▸ **Update**(`dt`: number): *void*
+▸ **Update**(): *void*
 
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
-
-General update method, default empty. Override with custom logic.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+*Overrides [System](system.md).[Update](system.md#protected-update)*
 
 **Returns:** *void*
 
 ___
 
-### `Private` keyDown
+### `Private` keyEvent
 
-▸ **keyDown**(`event`: KeyboardEvent): *void*
+▸ **keyEvent**(`type`: string, `event`: KeyboardEvent): *void*
 
-On key down publish keydown ECS message.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`event` | KeyboardEvent | KeyboardEvent of the keydown  |
-
-**Returns:** *void*
-
-___
-
-### `Private` keyUp
-
-▸ **keyUp**(`event`: KeyboardEvent): *void*
-
-On key down publish keyup ECS message.
+When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`event` | KeyboardEvent | KeyboardEvent of the keydown  |
+`type` | string | KeyboardEvent type |
+`event` | KeyboardEvent | Keyboard Event  |
 
 **Returns:** *void*
