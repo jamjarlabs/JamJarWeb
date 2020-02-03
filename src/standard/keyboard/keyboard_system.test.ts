@@ -18,8 +18,10 @@ import IMessageBus from "../../message/imessage_bus";
 import KeyboardSystem from "./keyboard_system";
 import FakeMessageBus from "../../fake/message_bus";
 import { JSDOM } from "jsdom";
-
-// TODO: Add tests for publish failures, got into async hell when attempted previously
+import IMessage from "../../message/imessage";
+import Message from "../../message/message";
+import System from "../../system/system";
+import Reactor from "../../fake/reactor";
 
 describe("KeyboardSystem - key presses", () => {
     type TestTuple = [string, Error | undefined, IMessageBus, HTMLDocument, KeyboardEvent];
@@ -45,16 +47,81 @@ describe("KeyboardSystem - key presses", () => {
             })()
         ]
     ])("%p", (description: string, expected: Error | undefined, messageBus: IMessageBus, document: HTMLDocument, event: KeyboardEvent) => {
+        new KeyboardSystem(messageBus, document);
         if (expected instanceof Error) {
             expect(() => {
-                new KeyboardSystem(messageBus, document);
                 document.dispatchEvent(event);
             }).toThrow(expected);
         } else {
             expect(() => {
-                new KeyboardSystem(messageBus, document);
                 document.dispatchEvent(event);
             }).not.toThrow();
         }
+    });
+});
+
+describe("SpriteSystem - OnMessage -> Update", () => {
+    type TestTuple = [string, Error | undefined, KeyboardSystem, KeyboardSystem, IMessage];
+    test.each<TestTuple>([
+        [
+            "No queued key events",
+            undefined,
+            new KeyboardSystem(new FakeMessageBus(), new JSDOM().window.document,  {
+                scene: undefined,
+                entities: [],
+                keyEvents: [],
+                subscriberID: 0
+            }),
+            new KeyboardSystem(new FakeMessageBus(), new JSDOM().window.document, {
+                scene: undefined,
+                entities: [],
+                keyEvents: [],
+                subscriberID: 0
+            }),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+        [
+            "One queued event, fail to publish",
+            new Error("fail to publish"),
+            new KeyboardSystem(new FakeMessageBus(), new JSDOM().window.document,  {
+                scene: undefined,
+                entities: [],
+                keyEvents: [["test", "test"]],
+                subscriberID: 0
+            }),
+            new KeyboardSystem(new FakeMessageBus([ new Reactor("Publish", () => { throw("fail to publish"); })]), new JSDOM().window.document, {
+                scene: undefined,
+                entities: [],
+                keyEvents: [["test", "test"]],
+                subscriberID: 0
+            }),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+        [
+            "Three queued events, success, clear queue",
+            undefined,
+            new KeyboardSystem(new FakeMessageBus(), new JSDOM().window.document,  {
+                scene: undefined,
+                entities: [],
+                keyEvents: [],
+                subscriberID: 0
+            }),
+            new KeyboardSystem(new FakeMessageBus(), new JSDOM().window.document, {
+                scene: undefined,
+                entities: [],
+                keyEvents: [["test", "test1"], ["test", "test2"], ["test", "test3"]],
+                subscriberID: 0
+            }),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+    ])("%p", (description: string, expected: Error | undefined, expectedState: KeyboardSystem, keyboardSystem: KeyboardSystem, message: IMessage) => {
+        if (expected instanceof Error) {
+            expect(() => {
+                keyboardSystem.OnMessage(message);
+            }).toThrow(expected);
+        } else {
+            expect(keyboardSystem.OnMessage(message)).toEqual(expected);
+        }
+        expect(keyboardSystem).toEqual(expectedState);
     });
 });

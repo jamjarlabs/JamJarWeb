@@ -9,8 +9,6 @@
 
   ↳ [FakeMessageBus](fakemessagebus.md)
 
-  ↳ [FakeGame](fakegame.md)
-
   ↳ [FakeScene](fakescene.md)
 
   ↳ [FakeSubscriber](fakesubscriber.md)
