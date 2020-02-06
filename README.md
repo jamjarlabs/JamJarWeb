@@ -35,6 +35,8 @@ Dependencies to view docs locally:
 
 * [`mkdocs`](https://www.mkdocs.org/)
 
+Docs also require some plugins, use `pip install -r docs/requirements.txt` to get the required plugins.
+
 ## Set up
 
 1. Clone this project.

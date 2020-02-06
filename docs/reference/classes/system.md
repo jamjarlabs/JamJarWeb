@@ -18,6 +18,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [MotionSystem](motionsystem.md)
 
+  ↳ [PointerSystem](pointersystem.md)
+
   ↳ [WebGLSystem](webglsystem.md)
 
   ↳ [SpriteSystem](spritesystem.md)
@@ -49,6 +51,7 @@ A system is for implementing logic, manipulating entities and their components.
 
 * [Destroy](system.md#destroy)
 * [GetSystemEntity](system.md#protected-getsystementity)
+* [OnDestroy](system.md#protected-ondestroy)
 * [OnMessage](system.md#onmessage)
 * [Update](system.md#protected-update)
 * [register](system.md#private-register)
@@ -161,6 +164,17 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 

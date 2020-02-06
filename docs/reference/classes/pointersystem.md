@@ -1,14 +1,15 @@
 
-# Class: MotionSystem
+# Class: PointerSystem
 
-MotionSystem handles basic physics calculations for entities with a motion component.
-This system handles velocity, acceleration, angular velocity and angular acceleration.
+PointerSystem handles Pointer (mouse, touch etc.) input events, converting them into JamJar ECS messages.
 
 ## Hierarchy
 
   ↳ [System](system.md)
 
-  ↳ **MotionSystem**
+  ↳ **PointerSystem**
+
+  ↳ [TestPointerSystem](testpointersystem.md)
 
 ## Implements
 
@@ -18,32 +19,35 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ### Constructors
 
-* [constructor](motionsystem.md#constructor)
+* [constructor](pointersystem.md#constructor)
 
 ### Properties
 
-* [entities](motionsystem.md#protected-entities)
-* [messageBus](motionsystem.md#protected-messagebus)
-* [scene](motionsystem.md#protected-optional-scene)
-* [subscriberID](motionsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](motionsystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](motionsystem.md#static-message_register)
-* [MESSAGE_UPDATE](motionsystem.md#static-message_update)
+* [entities](pointersystem.md#protected-entities)
+* [inputElement](pointersystem.md#private-inputelement)
+* [messageBus](pointersystem.md#protected-messagebus)
+* [pointers](pointersystem.md#private-pointers)
+* [scene](pointersystem.md#protected-optional-scene)
+* [subscriberID](pointersystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](pointersystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](pointersystem.md#static-message_register)
+* [MESSAGE_UPDATE](pointersystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](motionsystem.md#destroy)
-* [GetSystemEntity](motionsystem.md#protected-getsystementity)
-* [OnDestroy](motionsystem.md#protected-ondestroy)
-* [OnMessage](motionsystem.md#onmessage)
-* [Update](motionsystem.md#protected-update)
-* [EVALUATOR](motionsystem.md#static-private-evaluator)
+* [Destroy](pointersystem.md#destroy)
+* [GetSystemEntity](pointersystem.md#protected-getsystementity)
+* [OnDestroy](pointersystem.md#protected-ondestroy)
+* [OnMessage](pointersystem.md#onmessage)
+* [Update](pointersystem.md#protected-update)
+* [pointerEvent](pointersystem.md#protected-pointerevent)
+* [EVALUATOR](pointersystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new MotionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[MotionSystem](motionsystem.md)*
+\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `__namedParameters`: object): *[PointerSystem](pointersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -51,15 +55,18 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪ **inputElement**: *HTMLElement*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, pointers: [] }
 
 Name | Type |
 ------ | ------ |
 `entities` | [SystemEntity](systementity.md)‹›[] |
+`pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
-**Returns:** *[MotionSystem](motionsystem.md)*
+**Returns:** *[PointerSystem](pointersystem.md)*
 
 ## Properties
 
@@ -71,11 +78,23 @@ Name | Type |
 
 ___
 
+### `Private` inputElement
+
+• **inputElement**: *HTMLElement*
+
+___
+
 ### `Protected` messageBus
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+
+___
+
+### `Private` pointers
+
+• **pointers**: *[string, [Pointer](pointer.md)][]*
 
 ___
 
@@ -191,15 +210,27 @@ ___
 
 ### `Protected` Update
 
-▸ **Update**(`dt`: number): *void*
+▸ **Update**(): *void*
 
 *Overrides [System](system.md).[Update](system.md#protected-update)*
 
+**Returns:** *void*
+
+___
+
+### `Protected` pointerEvent
+
+▸ **pointerEvent**(`event`: PointerEvent): *void*
+
+When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
+Adds in useful information, such as pointer position within camera bounds, pointer world position
+for each camera and if the pointer is within a camera's bounds.
+
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`dt` | number |
+Name | Type | Description |
+------ | ------ | ------ |
+`event` | PointerEvent | Pointer Event  |
 
 **Returns:** *void*
 

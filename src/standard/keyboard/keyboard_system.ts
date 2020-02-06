@@ -24,12 +24,6 @@ import Message from "../../message/message";
  * KeyboardSystem handles Keyboard input events, converting them into JamJar ECS messages.
  */
 class KeyboardSystem extends System {
-
-    // Message when a keyboard button is pressed down
-    public static readonly MESSAGE_KEY_DOWN: string = "keyboard_key_down";
-    // Message when a keyboard button is released
-    public static readonly MESSAGE_KEY_UP: string = "keyboard_key_up";
-
     private inputElement: HTMLDocument;
 
     private keyEvents: [string, string][];
@@ -41,12 +35,8 @@ class KeyboardSystem extends System {
         super(messageBus, { scene, evaluator: undefined, entities, subscriberID });
         this.inputElement = inputElement;
         this.keyEvents = keyEvents;
-        this.inputElement.addEventListener("keydown", (event: KeyboardEvent): void => { 
-            this.keyEvent(KeyboardSystem.MESSAGE_KEY_DOWN, event); 
-        });
-        this.inputElement.addEventListener("keyup", (event: KeyboardEvent): void => { 
-            this.keyEvent(KeyboardSystem.MESSAGE_KEY_UP, event); 
-        });
+        this.inputElement.addEventListener("keydown", this.keyEvent.bind(this));
+        this.inputElement.addEventListener("keyup", this.keyEvent.bind(this));
     }
 
     protected Update(): void {
@@ -57,13 +47,17 @@ class KeyboardSystem extends System {
         this.keyEvents = [];
     }
 
+    protected OnDestroy(): void {
+        this.inputElement.removeEventListener("keydown", this.keyEvent);
+        this.inputElement.removeEventListener("keyup", this.keyEvent);
+    }
+
     /**
      * When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
-     * @param {string} type KeyboardEvent type
      * @param {KeyboardEvent} event Keyboard Event
      */
-    private keyEvent(type: string, event: KeyboardEvent): void {
-        this.keyEvents.push([type, event.key]);
+    protected keyEvent(event: KeyboardEvent): void {
+        this.keyEvents.push([event.type, event.key]);
     }
 }
 

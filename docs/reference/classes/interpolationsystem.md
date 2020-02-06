@@ -35,6 +35,7 @@ This is part of the rendering process.
 
 * [Destroy](interpolationsystem.md#destroy)
 * [GetSystemEntity](interpolationsystem.md#protected-getsystementity)
+* [OnDestroy](interpolationsystem.md#protected-ondestroy)
 * [OnMessage](interpolationsystem.md#onmessage)
 * [Update](interpolationsystem.md#protected-update)
 * [interpolateTransforms](interpolationsystem.md#private-interpolatetransforms)
@@ -156,6 +157,19 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 

@@ -38,6 +38,7 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 * [Destroy](collisionsystem.md#destroy)
 * [GetSystemEntity](collisionsystem.md#protected-getsystementity)
+* [OnDestroy](collisionsystem.md#protected-ondestroy)
 * [OnMessage](collisionsystem.md#onmessage)
 * [Update](collisionsystem.md#update)
 * [broadPhase](collisionsystem.md#broadphase)
@@ -166,6 +167,19 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 

@@ -1,14 +1,14 @@
 
-# Class: MotionSystem
+# Class: TestPointerSystem
 
-MotionSystem handles basic physics calculations for entities with a motion component.
-This system handles velocity, acceleration, angular velocity and angular acceleration.
+TestKeyboardSystem is an extension of the PointerSystem that exposes the pointer event functions,
+allows testing them without having to use JS event listeners
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [PointerSystem](pointersystem.md)
 
-  ↳ **MotionSystem**
+  ↳ **TestPointerSystem**
 
 ## Implements
 
@@ -18,32 +18,35 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ### Constructors
 
-* [constructor](motionsystem.md#constructor)
+* [constructor](testpointersystem.md#constructor)
 
 ### Properties
 
-* [entities](motionsystem.md#protected-entities)
-* [messageBus](motionsystem.md#protected-messagebus)
-* [scene](motionsystem.md#protected-optional-scene)
-* [subscriberID](motionsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](motionsystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](motionsystem.md#static-message_register)
-* [MESSAGE_UPDATE](motionsystem.md#static-message_update)
+* [entities](testpointersystem.md#protected-entities)
+* [messageBus](testpointersystem.md#protected-messagebus)
+* [scene](testpointersystem.md#protected-optional-scene)
+* [subscriberID](testpointersystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](testpointersystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](testpointersystem.md#static-message_register)
+* [MESSAGE_UPDATE](testpointersystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](motionsystem.md#destroy)
-* [GetSystemEntity](motionsystem.md#protected-getsystementity)
-* [OnDestroy](motionsystem.md#protected-ondestroy)
-* [OnMessage](motionsystem.md#onmessage)
-* [Update](motionsystem.md#protected-update)
-* [EVALUATOR](motionsystem.md#static-private-evaluator)
+* [Destroy](testpointersystem.md#destroy)
+* [GetSystemEntity](testpointersystem.md#protected-getsystementity)
+* [OnDestroy](testpointersystem.md#protected-ondestroy)
+* [OnMessage](testpointersystem.md#onmessage)
+* [SimulatePointerEvent](testpointersystem.md#simulatepointerevent)
+* [Update](testpointersystem.md#protected-update)
+* [pointerEvent](testpointersystem.md#protected-pointerevent)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new MotionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[MotionSystem](motionsystem.md)*
+\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `__namedParameters`: object): *[TestPointerSystem](testpointersystem.md)*
+
+*Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -51,15 +54,18 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪ **inputElement**: *HTMLElement*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, pointers: [] }
 
 Name | Type |
 ------ | ------ |
 `entities` | [SystemEntity](systementity.md)‹›[] |
+`pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
-**Returns:** *[MotionSystem](motionsystem.md)*
+**Returns:** *[TestPointerSystem](testpointersystem.md)*
 
 ## Properties
 
@@ -189,31 +195,46 @@ Name | Type |
 
 ___
 
-### `Protected` Update
+###  SimulatePointerEvent
 
-▸ **Update**(`dt`: number): *void*
-
-*Overrides [System](system.md).[Update](system.md#protected-update)*
+▸ **SimulatePointerEvent**(`event`: PointerEvent): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`dt` | number |
+`event` | PointerEvent |
 
 **Returns:** *void*
 
 ___
 
-### `Static` `Private` EVALUATOR
+### `Protected` Update
 
-▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
+▸ **Update**(): *void*
+
+*Inherited from [PointerSystem](pointersystem.md).[Update](pointersystem.md#protected-update)*
+
+*Overrides [System](system.md).[Update](system.md#protected-update)*
+
+**Returns:** *void*
+
+___
+
+### `Protected` pointerEvent
+
+▸ **pointerEvent**(`event`: PointerEvent): *void*
+
+*Inherited from [PointerSystem](pointersystem.md).[pointerEvent](pointersystem.md#protected-pointerevent)*
+
+When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
+Adds in useful information, such as pointer position within camera bounds, pointer world position
+for each camera and if the pointer is within a camera's bounds.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+Name | Type | Description |
+------ | ------ | ------ |
+`event` | PointerEvent | Pointer Event  |
 
-**Returns:** *boolean*
+**Returns:** *void*

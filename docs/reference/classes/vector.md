@@ -26,7 +26,9 @@ Vector is the 2 dimensional representation of a vector, with two values (x,y).
 * [Copy](vector.md#copy)
 * [Dot](vector.md#dot)
 * [Invert](vector.md#invert)
+* [Magnitude](vector.md#magnitude)
 * [Multiply](vector.md#multiply)
+* [Normalize](vector.md#normalize)
 * [Rotate](vector.md#rotate)
 * [RotateDeg](vector.md#rotatedeg)
 * [Scale](vector.md#scale)
@@ -158,6 +160,18 @@ The result of the inverting
 
 ___
 
+###  Magnitude
+
+▸ **Magnitude**(): *number*
+
+Calculates magnitude of this vector.
+
+**Returns:** *number*
+
+The magnitude
+
+___
+
 ###  Multiply
 
 ▸ **Multiply**(`vector`: [Vector](vector.md)): *[Vector](vector.md)*
@@ -173,6 +187,18 @@ Name | Type | Description |
 **Returns:** *[Vector](vector.md)*
 
 The result of the multiplication
+
+___
+
+###  Normalize
+
+▸ **Normalize**(): *[Vector](vector.md)*
+
+Returns a normalized version of the vector.
+
+**Returns:** *[Vector](vector.md)*
+
+The normalized vector
 
 ___
 

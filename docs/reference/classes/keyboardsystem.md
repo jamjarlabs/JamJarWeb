@@ -9,6 +9,8 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
   ↳ **KeyboardSystem**
 
+  ↳ [TestKeyboardSystem](testkeyboardsystem.md)
+
 ## Implements
 
 * [ISubscriber](../interfaces/isubscriber.md)
@@ -28,8 +30,6 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 * [scene](keyboardsystem.md#protected-optional-scene)
 * [subscriberID](keyboardsystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](keyboardsystem.md#static-message_deregister)
-* [MESSAGE_KEY_DOWN](keyboardsystem.md#static-message_key_down)
-* [MESSAGE_KEY_UP](keyboardsystem.md#static-message_key_up)
 * [MESSAGE_REGISTER](keyboardsystem.md#static-message_register)
 * [MESSAGE_UPDATE](keyboardsystem.md#static-message_update)
 
@@ -37,9 +37,10 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 * [Destroy](keyboardsystem.md#destroy)
 * [GetSystemEntity](keyboardsystem.md#protected-getsystementity)
+* [OnDestroy](keyboardsystem.md#protected-ondestroy)
 * [OnMessage](keyboardsystem.md#onmessage)
 * [Update](keyboardsystem.md#protected-update)
-* [keyEvent](keyboardsystem.md#private-keyevent)
+* [keyEvent](keyboardsystem.md#protected-keyevent)
 
 ## Constructors
 
@@ -122,18 +123,6 @@ ___
 
 ___
 
-### `Static` MESSAGE_KEY_DOWN
-
-▪ **MESSAGE_KEY_DOWN**: *string* = "keyboard_key_down"
-
-___
-
-### `Static` MESSAGE_KEY_UP
-
-▪ **MESSAGE_KEY_UP**: *string* = "keyboard_key_up"
-
-___
-
 ### `Static` MESSAGE_REGISTER
 
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
@@ -187,6 +176,16 @@ The system entity if it exists, otherwise undefined
 
 ___
 
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Overrides [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+**Returns:** *void*
+
+___
+
 ###  OnMessage
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
@@ -215,9 +214,9 @@ ___
 
 ___
 
-### `Private` keyEvent
+### `Protected` keyEvent
 
-▸ **keyEvent**(`type`: string, `event`: KeyboardEvent): *void*
+▸ **keyEvent**(`event`: KeyboardEvent): *void*
 
 When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
 
@@ -225,7 +224,6 @@ When a Keyboard Event occurs; used to store keyboard events to be dispatched at 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`type` | string | KeyboardEvent type |
 `event` | KeyboardEvent | Keyboard Event  |
 
 **Returns:** *void*

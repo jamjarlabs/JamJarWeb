@@ -1,2 +1,6 @@
 site_name: JamJar
 theme: readthedocs
+plugins:
+  - awesome-pages:
+      collapse_single_pages: true
+  - search

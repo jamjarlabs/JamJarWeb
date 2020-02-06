@@ -9,5 +9,8 @@ module.exports = {
     ],
     collectCoverageFrom: [
         "**/src/**/*.ts"
+    ],
+    "setupFiles": [
+        "./mocks/browser.js"
     ]
 };

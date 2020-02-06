@@ -1,14 +1,14 @@
 
-# Class: MotionSystem
+# Class: TestKeyboardSystem
 
-MotionSystem handles basic physics calculations for entities with a motion component.
-This system handles velocity, acceleration, angular velocity and angular acceleration.
+TestKeyboardSystem is an extension of the KeyboardSystem that exposes the keypress functions,
+allows testing them without having to use JS event listeners
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [KeyboardSystem](keyboardsystem.md)
 
-  ↳ **MotionSystem**
+  ↳ **TestKeyboardSystem**
 
 ## Implements
 
@@ -18,32 +18,35 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ### Constructors
 
-* [constructor](motionsystem.md#constructor)
+* [constructor](testkeyboardsystem.md#constructor)
 
 ### Properties
 
-* [entities](motionsystem.md#protected-entities)
-* [messageBus](motionsystem.md#protected-messagebus)
-* [scene](motionsystem.md#protected-optional-scene)
-* [subscriberID](motionsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](motionsystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](motionsystem.md#static-message_register)
-* [MESSAGE_UPDATE](motionsystem.md#static-message_update)
+* [entities](testkeyboardsystem.md#protected-entities)
+* [messageBus](testkeyboardsystem.md#protected-messagebus)
+* [scene](testkeyboardsystem.md#protected-optional-scene)
+* [subscriberID](testkeyboardsystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](testkeyboardsystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](testkeyboardsystem.md#static-message_register)
+* [MESSAGE_UPDATE](testkeyboardsystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](motionsystem.md#destroy)
-* [GetSystemEntity](motionsystem.md#protected-getsystementity)
-* [OnDestroy](motionsystem.md#protected-ondestroy)
-* [OnMessage](motionsystem.md#onmessage)
-* [Update](motionsystem.md#protected-update)
-* [EVALUATOR](motionsystem.md#static-private-evaluator)
+* [Destroy](testkeyboardsystem.md#destroy)
+* [GetSystemEntity](testkeyboardsystem.md#protected-getsystementity)
+* [OnDestroy](testkeyboardsystem.md#protected-ondestroy)
+* [OnMessage](testkeyboardsystem.md#onmessage)
+* [SimulateKeyEvent](testkeyboardsystem.md#simulatekeyevent)
+* [Update](testkeyboardsystem.md#protected-update)
+* [keyEvent](testkeyboardsystem.md#protected-keyevent)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new MotionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[MotionSystem](motionsystem.md)*
+\+ **new TestKeyboardSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLDocument, `__namedParameters`: object): *[TestKeyboardSystem](testkeyboardsystem.md)*
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[constructor](keyboardsystem.md#constructor)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -51,15 +54,18 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪ **inputElement**: *HTMLDocument*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, keyEvents: [] }
 
 Name | Type |
 ------ | ------ |
 `entities` | [SystemEntity](systementity.md)‹›[] |
+`keyEvents` | [string, string][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
-**Returns:** *[MotionSystem](motionsystem.md)*
+**Returns:** *[TestKeyboardSystem](testkeyboardsystem.md)*
 
 ## Properties
 
@@ -162,10 +168,9 @@ ___
 
 ▸ **OnDestroy**(): *void*
 
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+*Inherited from [KeyboardSystem](keyboardsystem.md).[OnDestroy](keyboardsystem.md#protected-ondestroy)*
 
-Custom Destroy logic should go here to facilitate garbage collection, for example
-removing listeners.
+*Overrides [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
 
 **Returns:** *void*
 
@@ -189,31 +194,44 @@ Name | Type |
 
 ___
 
-### `Protected` Update
+###  SimulateKeyEvent
 
-▸ **Update**(`dt`: number): *void*
-
-*Overrides [System](system.md).[Update](system.md#protected-update)*
+▸ **SimulateKeyEvent**(`event`: KeyboardEvent): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`dt` | number |
+`event` | KeyboardEvent |
 
 **Returns:** *void*
 
 ___
 
-### `Static` `Private` EVALUATOR
+### `Protected` Update
 
-▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
+▸ **Update**(): *void*
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[Update](keyboardsystem.md#protected-update)*
+
+*Overrides [System](system.md).[Update](system.md#protected-update)*
+
+**Returns:** *void*
+
+___
+
+### `Protected` keyEvent
+
+▸ **keyEvent**(`event`: KeyboardEvent): *void*
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[keyEvent](keyboardsystem.md#protected-keyevent)*
+
+When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+Name | Type | Description |
+------ | ------ | ------ |
+`event` | KeyboardEvent | Keyboard Event  |
 
-**Returns:** *boolean*
+**Returns:** *void*
