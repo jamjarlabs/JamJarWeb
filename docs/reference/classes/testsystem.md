@@ -31,6 +31,7 @@
 
 * [Destroy](testsystem.md#destroy)
 * [GetSystemEntity](testsystem.md#protected-getsystementity)
+* [OnDestroy](testsystem.md#protected-ondestroy)
 * [OnMessage](testsystem.md#onmessage)
 * [TestGetSystemEntity](testsystem.md#testgetsystementity)
 * [Update](testsystem.md#protected-update)
@@ -154,6 +155,19 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 

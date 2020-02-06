@@ -107,6 +107,14 @@ abstract class System extends Subscriber {
     }
 
     /**
+     * Custom Destroy logic should go here to facilitate garbage collection, for example
+     * removing listeners.
+     */
+    protected OnDestroy(): void {
+        return;
+    }
+
+    /**
      * Destroy destroys the System and unsubscribes it from all messages.
      * The System should be garbage collected after this, unless a direct
      * reference to it exists somewhere. Therefore direct references to
@@ -114,6 +122,7 @@ abstract class System extends Subscriber {
      * message bus.
      */
     public Destroy(): void {
+        this.OnDestroy();
         this.messageBus.UnsubscribeAll(this);
     }
 

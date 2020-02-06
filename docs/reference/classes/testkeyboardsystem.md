@@ -1,15 +1,14 @@
 
-# Class: KeyboardSystem
+# Class: TestKeyboardSystem
 
-KeyboardSystem handles Keyboard input events, converting them into JamJar ECS messages.
+TestKeyboardSystem is an extension of the KeyboardSystem that exposes the keypress functions,
+allows testing them without having to use JS event listeners
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [KeyboardSystem](keyboardsystem.md)
 
-  ↳ **KeyboardSystem**
-
-  ↳ [TestKeyboardSystem](testkeyboardsystem.md)
+  ↳ **TestKeyboardSystem**
 
 ## Implements
 
@@ -19,36 +18,37 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 ### Constructors
 
-* [constructor](keyboardsystem.md#constructor)
+* [constructor](testkeyboardsystem.md#constructor)
 
 ### Properties
 
-* [entities](keyboardsystem.md#protected-entities)
-* [inputElement](keyboardsystem.md#private-inputelement)
-* [keyEvents](keyboardsystem.md#private-keyevents)
-* [messageBus](keyboardsystem.md#protected-messagebus)
-* [scene](keyboardsystem.md#protected-optional-scene)
-* [subscriberID](keyboardsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](keyboardsystem.md#static-message_deregister)
-* [MESSAGE_KEY_DOWN](keyboardsystem.md#static-message_key_down)
-* [MESSAGE_KEY_UP](keyboardsystem.md#static-message_key_up)
-* [MESSAGE_REGISTER](keyboardsystem.md#static-message_register)
-* [MESSAGE_UPDATE](keyboardsystem.md#static-message_update)
+* [entities](testkeyboardsystem.md#protected-entities)
+* [messageBus](testkeyboardsystem.md#protected-messagebus)
+* [scene](testkeyboardsystem.md#protected-optional-scene)
+* [subscriberID](testkeyboardsystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](testkeyboardsystem.md#static-message_deregister)
+* [MESSAGE_KEY_DOWN](testkeyboardsystem.md#static-message_key_down)
+* [MESSAGE_KEY_UP](testkeyboardsystem.md#static-message_key_up)
+* [MESSAGE_REGISTER](testkeyboardsystem.md#static-message_register)
+* [MESSAGE_UPDATE](testkeyboardsystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](keyboardsystem.md#destroy)
-* [GetSystemEntity](keyboardsystem.md#protected-getsystementity)
-* [OnDestroy](keyboardsystem.md#protected-ondestroy)
-* [OnMessage](keyboardsystem.md#onmessage)
-* [Update](keyboardsystem.md#protected-update)
-* [keyEvent](keyboardsystem.md#protected-keyevent)
+* [Destroy](testkeyboardsystem.md#destroy)
+* [GetSystemEntity](testkeyboardsystem.md#protected-getsystementity)
+* [OnDestroy](testkeyboardsystem.md#protected-ondestroy)
+* [OnMessage](testkeyboardsystem.md#onmessage)
+* [SimulateKeyEvent](testkeyboardsystem.md#simulatekeyevent)
+* [Update](testkeyboardsystem.md#protected-update)
+* [keyEvent](testkeyboardsystem.md#protected-keyevent)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new KeyboardSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLDocument, `__namedParameters`: object): *[KeyboardSystem](keyboardsystem.md)*
+\+ **new TestKeyboardSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLDocument, `__namedParameters`: object): *[TestKeyboardSystem](testkeyboardsystem.md)*
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[constructor](keyboardsystem.md#constructor)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -67,7 +67,7 @@ Name | Type |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
-**Returns:** *[KeyboardSystem](keyboardsystem.md)*
+**Returns:** *[TestKeyboardSystem](testkeyboardsystem.md)*
 
 ## Properties
 
@@ -76,18 +76,6 @@ Name | Type |
 • **entities**: *[SystemEntity](systementity.md)[]*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
-
-___
-
-### `Private` inputElement
-
-• **inputElement**: *HTMLDocument*
-
-___
-
-### `Private` keyEvents
-
-• **keyEvents**: *[string, string][]*
 
 ___
 
@@ -129,11 +117,15 @@ ___
 
 ▪ **MESSAGE_KEY_DOWN**: *string* = "keyboard_key_down"
 
+*Inherited from [KeyboardSystem](keyboardsystem.md).[MESSAGE_KEY_DOWN](keyboardsystem.md#static-message_key_down)*
+
 ___
 
 ### `Static` MESSAGE_KEY_UP
 
 ▪ **MESSAGE_KEY_UP**: *string* = "keyboard_key_up"
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[MESSAGE_KEY_UP](keyboardsystem.md#static-message_key_up)*
 
 ___
 
@@ -194,6 +186,8 @@ ___
 
 ▸ **OnDestroy**(): *void*
 
+*Inherited from [KeyboardSystem](keyboardsystem.md).[OnDestroy](keyboardsystem.md#protected-ondestroy)*
+
 *Overrides [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
 
 **Returns:** *void*
@@ -218,9 +212,25 @@ Name | Type |
 
 ___
 
+###  SimulateKeyEvent
+
+▸ **SimulateKeyEvent**(`event`: KeyboardEvent): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | KeyboardEvent |
+
+**Returns:** *void*
+
+___
+
 ### `Protected` Update
 
 ▸ **Update**(): *void*
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[Update](keyboardsystem.md#protected-update)*
 
 *Overrides [System](system.md).[Update](system.md#protected-update)*
 
@@ -231,6 +241,8 @@ ___
 ### `Protected` keyEvent
 
 ▸ **keyEvent**(`event`: KeyboardEvent): *void*
+
+*Inherited from [KeyboardSystem](keyboardsystem.md).[keyEvent](keyboardsystem.md#protected-keyevent)*
 
 When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
 

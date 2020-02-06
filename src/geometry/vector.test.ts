@@ -209,3 +209,49 @@ describe("Vector - Apply4D", () => {
         expect(vec.Apply4D(matrix)).toEqual(expected)
     });
 });
+
+describe("Vector - Magnitude", () => {
+    type TestTuple = [string, number, Vector];
+    test.each<TestTuple>([
+        [
+            "Magnitude of vector (4,2)",
+            4.47213595499958,
+            new Vector(4, 2)
+        ],
+        [
+            "Magnitude of vector (0.0001,0.002)",
+            0.0020024984394500784,
+            new Vector(0.0001,0.002)
+        ],
+    ])("%p", (description: string, expected: number, vector: Vector) => {
+        expect(vector.Magnitude()).toEqual(expected)
+    });
+});
+
+describe("Vector - Normalize", () => {
+    type TestTuple = [string, Vector, Vector];
+    test.each<TestTuple>([
+        [
+            "Normalize vector (5, 10)",
+            new Vector(0.4472135954999579, 0.8944271909999159),
+            new Vector(5, 10)
+        ],
+        [
+            "Normalize vector (0.1, 0.2)",
+            new Vector(0.44721359549995787, 0.8944271909999157),
+            new Vector(0.1, 0.2)
+        ],
+        [
+            "Normalize vector (0.0001,0.002)",
+            new Vector(0.04993761694389224, 0.9987523388778448),
+            new Vector(0.0001,0.002)
+        ],
+        [
+            "Normalize vector (0,0)",
+            new Vector(0, 0),
+            new Vector(0, 0)
+        ],
+    ])("%p", (description: string, expected: Vector, vector: Vector) => {
+        expect(vector.Normalize()).toEqual(expected)
+    });
+});

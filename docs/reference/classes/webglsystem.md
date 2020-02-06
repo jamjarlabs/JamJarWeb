@@ -37,6 +37,7 @@
 
 * [Destroy](webglsystem.md#destroy)
 * [GetSystemEntity](webglsystem.md#protected-getsystementity)
+* [OnDestroy](webglsystem.md#protected-ondestroy)
 * [OnMessage](webglsystem.md#onmessage)
 * [Update](webglsystem.md#protected-update)
 * [createProgram](webglsystem.md#createprogram)
@@ -239,6 +240,19 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 

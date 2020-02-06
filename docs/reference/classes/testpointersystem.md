@@ -1,15 +1,14 @@
 
-# Class: KeyboardSystem
+# Class: TestPointerSystem
 
-KeyboardSystem handles Keyboard input events, converting them into JamJar ECS messages.
+TestKeyboardSystem is an extension of the PointerSystem that exposes the pointer event functions,
+allows testing them without having to use JS event listeners
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [PointerSystem](pointersystem.md)
 
-  ↳ **KeyboardSystem**
-
-  ↳ [TestKeyboardSystem](testkeyboardsystem.md)
+  ↳ **TestPointerSystem**
 
 ## Implements
 
@@ -19,36 +18,38 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 ### Constructors
 
-* [constructor](keyboardsystem.md#constructor)
+* [constructor](testpointersystem.md#constructor)
 
 ### Properties
 
-* [entities](keyboardsystem.md#protected-entities)
-* [inputElement](keyboardsystem.md#private-inputelement)
-* [keyEvents](keyboardsystem.md#private-keyevents)
-* [messageBus](keyboardsystem.md#protected-messagebus)
-* [scene](keyboardsystem.md#protected-optional-scene)
-* [subscriberID](keyboardsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](keyboardsystem.md#static-message_deregister)
-* [MESSAGE_KEY_DOWN](keyboardsystem.md#static-message_key_down)
-* [MESSAGE_KEY_UP](keyboardsystem.md#static-message_key_up)
-* [MESSAGE_REGISTER](keyboardsystem.md#static-message_register)
-* [MESSAGE_UPDATE](keyboardsystem.md#static-message_update)
+* [entities](testpointersystem.md#protected-entities)
+* [messageBus](testpointersystem.md#protected-messagebus)
+* [scene](testpointersystem.md#protected-optional-scene)
+* [subscriberID](testpointersystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](testpointersystem.md#static-message_deregister)
+* [MESSAGE_DOWN](testpointersystem.md#static-message_down)
+* [MESSAGE_MOVE](testpointersystem.md#static-message_move)
+* [MESSAGE_REGISTER](testpointersystem.md#static-message_register)
+* [MESSAGE_UP](testpointersystem.md#static-message_up)
+* [MESSAGE_UPDATE](testpointersystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](keyboardsystem.md#destroy)
-* [GetSystemEntity](keyboardsystem.md#protected-getsystementity)
-* [OnDestroy](keyboardsystem.md#protected-ondestroy)
-* [OnMessage](keyboardsystem.md#onmessage)
-* [Update](keyboardsystem.md#protected-update)
-* [keyEvent](keyboardsystem.md#protected-keyevent)
+* [Destroy](testpointersystem.md#destroy)
+* [GetSystemEntity](testpointersystem.md#protected-getsystementity)
+* [OnDestroy](testpointersystem.md#protected-ondestroy)
+* [OnMessage](testpointersystem.md#onmessage)
+* [SimulatePointerEvent](testpointersystem.md#simulatepointerevent)
+* [Update](testpointersystem.md#protected-update)
+* [pointerEvent](testpointersystem.md#protected-pointerevent)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new KeyboardSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLDocument, `__namedParameters`: object): *[KeyboardSystem](keyboardsystem.md)*
+\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `__namedParameters`: object): *[TestPointerSystem](testpointersystem.md)*
+
+*Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -56,18 +57,18 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪ **inputElement**: *HTMLDocument*
+▪ **inputElement**: *HTMLElement*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, keyEvents: [] }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, pointers: [] }
 
 Name | Type |
 ------ | ------ |
 `entities` | [SystemEntity](systementity.md)‹›[] |
-`keyEvents` | [string, string][] |
+`pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
-**Returns:** *[KeyboardSystem](keyboardsystem.md)*
+**Returns:** *[TestPointerSystem](testpointersystem.md)*
 
 ## Properties
 
@@ -76,18 +77,6 @@ Name | Type |
 • **entities**: *[SystemEntity](systementity.md)[]*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
-
-___
-
-### `Private` inputElement
-
-• **inputElement**: *HTMLDocument*
-
-___
-
-### `Private` keyEvents
-
-• **keyEvents**: *[string, string][]*
 
 ___
 
@@ -125,15 +114,19 @@ ___
 
 ___
 
-### `Static` MESSAGE_KEY_DOWN
+### `Static` MESSAGE_DOWN
 
-▪ **MESSAGE_KEY_DOWN**: *string* = "keyboard_key_down"
+▪ **MESSAGE_DOWN**: *string* = "pointer_down"
+
+*Inherited from [PointerSystem](pointersystem.md).[MESSAGE_DOWN](pointersystem.md#static-message_down)*
 
 ___
 
-### `Static` MESSAGE_KEY_UP
+### `Static` MESSAGE_MOVE
 
-▪ **MESSAGE_KEY_UP**: *string* = "keyboard_key_up"
+▪ **MESSAGE_MOVE**: *string* = "pointer_move"
+
+*Inherited from [PointerSystem](pointersystem.md).[MESSAGE_MOVE](pointersystem.md#static-message_move)*
 
 ___
 
@@ -142,6 +135,14 @@ ___
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
 
 *Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+
+___
+
+### `Static` MESSAGE_UP
+
+▪ **MESSAGE_UP**: *string* = "pointer_up"
+
+*Inherited from [PointerSystem](pointersystem.md).[MESSAGE_UP](pointersystem.md#static-message_up)*
 
 ___
 
@@ -194,7 +195,10 @@ ___
 
 ▸ **OnDestroy**(): *void*
 
-*Overrides [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
 
 **Returns:** *void*
 
@@ -218,9 +222,25 @@ Name | Type |
 
 ___
 
+###  SimulatePointerEvent
+
+▸ **SimulatePointerEvent**(`event`: PointerEvent): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | PointerEvent |
+
+**Returns:** *void*
+
+___
+
 ### `Protected` Update
 
 ▸ **Update**(): *void*
+
+*Inherited from [PointerSystem](pointersystem.md).[Update](pointersystem.md#protected-update)*
 
 *Overrides [System](system.md).[Update](system.md#protected-update)*
 
@@ -228,16 +248,20 @@ ___
 
 ___
 
-### `Protected` keyEvent
+### `Protected` pointerEvent
 
-▸ **keyEvent**(`event`: KeyboardEvent): *void*
+▸ **pointerEvent**(`event`: PointerEvent): *void*
 
-When a Keyboard Event occurs; used to store keyboard events to be dispatched at the next update.
+*Inherited from [PointerSystem](pointersystem.md).[pointerEvent](pointersystem.md#protected-pointerevent)*
+
+When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
+Adds in useful information, such as pointer position within camera bounds, pointer world position
+for each camera and if the pointer is within a camera's bounds.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`event` | KeyboardEvent | Keyboard Event  |
+`event` | PointerEvent | Pointer Event  |
 
 **Returns:** *void*

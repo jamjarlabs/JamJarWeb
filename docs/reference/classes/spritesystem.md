@@ -31,6 +31,7 @@
 
 * [Destroy](spritesystem.md#destroy)
 * [GetSystemEntity](spritesystem.md#protected-getsystementity)
+* [OnDestroy](spritesystem.md#protected-ondestroy)
 * [OnMessage](spritesystem.md#onmessage)
 * [Update](spritesystem.md#protected-update)
 * [prepareSprites](spritesystem.md#private-preparesprites)
@@ -152,6 +153,19 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 

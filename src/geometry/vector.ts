@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -143,6 +143,26 @@ class Vector {
             -this.x,
             -this.y
         );
+    }
+
+    /**
+     * Calculates magnitude of this vector.
+     * @returns {number} The magnitude
+     */
+    public Magnitude(): number {
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+
+    /**
+     * Returns a normalized version of the vector.
+     * @returns {Vector} The normalized vector
+     */
+    public Normalize(): Vector {
+        let magnitude = this.Magnitude();
+		if (magnitude > 0) {
+			magnitude = 1 / magnitude;
+		}
+		return this.Scale(magnitude);
     }
 
     /**

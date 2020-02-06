@@ -34,6 +34,7 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 * [Destroy](motionsystem.md#destroy)
 * [GetSystemEntity](motionsystem.md#protected-getsystementity)
+* [OnDestroy](motionsystem.md#protected-ondestroy)
 * [OnMessage](motionsystem.md#onmessage)
 * [Update](motionsystem.md#protected-update)
 * [EVALUATOR](motionsystem.md#static-private-evaluator)
@@ -154,6 +155,19 @@ Name | Type | Description |
 **Returns:** *[SystemEntity](systementity.md) | undefined*
 
 The system entity if it exists, otherwise undefined
+
+___
+
+### `Protected` OnDestroy
+
+▸ **OnDestroy**(): *void*
+
+*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
+Custom Destroy logic should go here to facilitate garbage collection, for example
+removing listeners.
+
+**Returns:** *void*
 
 ___
 
