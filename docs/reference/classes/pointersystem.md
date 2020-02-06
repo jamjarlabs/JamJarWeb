@@ -30,10 +30,7 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 * [scene](pointersystem.md#protected-optional-scene)
 * [subscriberID](pointersystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](pointersystem.md#static-message_deregister)
-* [MESSAGE_DOWN](pointersystem.md#static-message_down)
-* [MESSAGE_MOVE](pointersystem.md#static-message_move)
 * [MESSAGE_REGISTER](pointersystem.md#static-message_register)
-* [MESSAGE_UP](pointersystem.md#static-message_up)
 * [MESSAGE_UPDATE](pointersystem.md#static-message_update)
 
 ### Methods
@@ -127,29 +124,11 @@ ___
 
 ___
 
-### `Static` MESSAGE_DOWN
-
-▪ **MESSAGE_DOWN**: *string* = "pointer_down"
-
-___
-
-### `Static` MESSAGE_MOVE
-
-▪ **MESSAGE_MOVE**: *string* = "pointer_move"
-
-___
-
 ### `Static` MESSAGE_REGISTER
 
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
 
 *Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
-
-___
-
-### `Static` MESSAGE_UP
-
-▪ **MESSAGE_UP**: *string* = "pointer_up"
 
 ___
 

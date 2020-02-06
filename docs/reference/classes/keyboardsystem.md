@@ -30,8 +30,6 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 * [scene](keyboardsystem.md#protected-optional-scene)
 * [subscriberID](keyboardsystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](keyboardsystem.md#static-message_deregister)
-* [MESSAGE_KEY_DOWN](keyboardsystem.md#static-message_key_down)
-* [MESSAGE_KEY_UP](keyboardsystem.md#static-message_key_up)
 * [MESSAGE_REGISTER](keyboardsystem.md#static-message_register)
 * [MESSAGE_UPDATE](keyboardsystem.md#static-message_update)
 
@@ -122,18 +120,6 @@ ___
 ▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
 
 *Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
-
-___
-
-### `Static` MESSAGE_KEY_DOWN
-
-▪ **MESSAGE_KEY_DOWN**: *string* = "keyboard_key_down"
-
-___
-
-### `Static` MESSAGE_KEY_UP
-
-▪ **MESSAGE_KEY_UP**: *string* = "keyboard_key_up"
 
 ___
 

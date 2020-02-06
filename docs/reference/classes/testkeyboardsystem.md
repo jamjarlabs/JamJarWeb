@@ -27,8 +27,6 @@ allows testing them without having to use JS event listeners
 * [scene](testkeyboardsystem.md#protected-optional-scene)
 * [subscriberID](testkeyboardsystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](testkeyboardsystem.md#static-message_deregister)
-* [MESSAGE_KEY_DOWN](testkeyboardsystem.md#static-message_key_down)
-* [MESSAGE_KEY_UP](testkeyboardsystem.md#static-message_key_up)
 * [MESSAGE_REGISTER](testkeyboardsystem.md#static-message_register)
 * [MESSAGE_UPDATE](testkeyboardsystem.md#static-message_update)
 
@@ -110,22 +108,6 @@ ___
 ▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
 
 *Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
-
-___
-
-### `Static` MESSAGE_KEY_DOWN
-
-▪ **MESSAGE_KEY_DOWN**: *string* = "keyboard_key_down"
-
-*Inherited from [KeyboardSystem](keyboardsystem.md).[MESSAGE_KEY_DOWN](keyboardsystem.md#static-message_key_down)*
-
-___
-
-### `Static` MESSAGE_KEY_UP
-
-▪ **MESSAGE_KEY_UP**: *string* = "keyboard_key_up"
-
-*Inherited from [KeyboardSystem](keyboardsystem.md).[MESSAGE_KEY_UP](keyboardsystem.md#static-message_key_up)*
 
 ___
 

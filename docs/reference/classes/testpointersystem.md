@@ -27,10 +27,7 @@ allows testing them without having to use JS event listeners
 * [scene](testpointersystem.md#protected-optional-scene)
 * [subscriberID](testpointersystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](testpointersystem.md#static-message_deregister)
-* [MESSAGE_DOWN](testpointersystem.md#static-message_down)
-* [MESSAGE_MOVE](testpointersystem.md#static-message_move)
 * [MESSAGE_REGISTER](testpointersystem.md#static-message_register)
-* [MESSAGE_UP](testpointersystem.md#static-message_up)
 * [MESSAGE_UPDATE](testpointersystem.md#static-message_update)
 
 ### Methods
@@ -114,35 +111,11 @@ ___
 
 ___
 
-### `Static` MESSAGE_DOWN
-
-▪ **MESSAGE_DOWN**: *string* = "pointer_down"
-
-*Inherited from [PointerSystem](pointersystem.md).[MESSAGE_DOWN](pointersystem.md#static-message_down)*
-
-___
-
-### `Static` MESSAGE_MOVE
-
-▪ **MESSAGE_MOVE**: *string* = "pointer_move"
-
-*Inherited from [PointerSystem](pointersystem.md).[MESSAGE_MOVE](pointersystem.md#static-message_move)*
-
-___
-
 ### `Static` MESSAGE_REGISTER
 
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
 
 *Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
-
-___
-
-### `Static` MESSAGE_UP
-
-▪ **MESSAGE_UP**: *string* = "pointer_up"
-
-*Inherited from [PointerSystem](pointersystem.md).[MESSAGE_UP](pointersystem.md#static-message_up)*
 
 ___
 
