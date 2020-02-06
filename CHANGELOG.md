@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `KeyboardSystem` to manage keyboard input.
+- `PointerSystem` to manage pointer input (mouse, touch).
 - Separate Rendering into stages, with `pre-render`, `render` and `post-render`. 
 - Sprites now processed in `pre-render`.
 - WebGL rendering system added.
