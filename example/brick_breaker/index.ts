@@ -93,7 +93,7 @@ class BallSystem extends System {
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
-        switch(message.type) {
+        switch (message.type) {
             case CollisionSystem.MESSAGE_COLLISION_DETECTED: {
                 const collisionMessage = message as Message<Collision>;
                 if (collisionMessage.payload === undefined) {
@@ -112,7 +112,7 @@ class BallSystem extends System {
 
                     if (collisionMessage.payload.a.id == entity.entity.id || collisionMessage.payload.b.id == entity.entity.id) {
                         bounce = true;
-                    } 
+                    }
 
                     if (!bounce) {
                         return;
@@ -155,24 +155,24 @@ class BallSystem extends System {
                 continue;
             }
 
-            if (transform.position.x > BallSystem.WIDTH/2) {
-                transform.position.x = BallSystem.WIDTH/2 - 0.01;
+            if (transform.position.x > BallSystem.WIDTH / 2) {
+                transform.position.x = BallSystem.WIDTH / 2 - 0.01;
                 motion.velocity = new Vector(-motion.velocity.x, motion.velocity.y);
             }
 
-            if (transform.position.x < -BallSystem.WIDTH/2) {
-                transform.position.x = -BallSystem.WIDTH/2 + 0.01;
+            if (transform.position.x < -BallSystem.WIDTH / 2) {
+                transform.position.x = -BallSystem.WIDTH / 2 + 0.01;
                 motion.velocity = new Vector(-motion.velocity.x, motion.velocity.y);
             }
 
-            if (transform.position.y > BallSystem.HEIGHT/2) {
-                transform.position.y = BallSystem.HEIGHT/2 - 0.01;
+            if (transform.position.y > BallSystem.HEIGHT / 2) {
+                transform.position.y = BallSystem.HEIGHT / 2 - 0.01;
                 motion.velocity = new Vector(motion.velocity.x, -motion.velocity.y);
             }
 
-            if (transform.position.y < -BallSystem.HEIGHT/2) {
+            if (transform.position.y < -BallSystem.HEIGHT / 2) {
                 ball.active = false;
-                motion.velocity = new Vector(0,0);
+                motion.velocity = new Vector(0, 0);
             }
         }
     }
@@ -260,21 +260,21 @@ class SimpleScene extends Scene {
 
         const camera = new Entity(this.messageBus);
         camera.Add(new Transform(new Vector(0, 0)));
-        camera.Add(new Camera(new Color(0, 0, 0, 1), new Vector(0,0), new Vector(1,1), new Vector(160, 90)));
+        camera.Add(new Camera(new Color(0, 0, 0, 1), new Vector(0, 0), new Vector(1, 1), new Vector(160, 90)));
         camera.Add(new Motion(new Vector(0, 0), new Vector(0, 0), 0));
 
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, -40), new Vector(30, 5)));
         player.Add(new Sprite(new Color(Math.random(), Math.random(), Math.random(), 1)));
         player.Add(new Motion(new Vector(0, 0), new Vector(0, 0), 0));
-        player.Add(new Collider(Polygon.Rectangle(1,1)))
+        player.Add(new Collider(Polygon.Rectangle(1, 1)))
         player.Add(new Player());
 
         const ball = new Entity(this.messageBus);
         ball.Add(new Transform(new Vector(0, -35), new Vector(4, 4)));
         ball.Add(new Sprite(new Color(Math.random(), Math.random(), Math.random(), 1)));
         ball.Add(new Motion(new Vector(0, 0), new Vector(0, 0), 0));
-        ball.Add(new Collider(Polygon.Rectangle(1,1)))
+        ball.Add(new Collider(Polygon.Rectangle(1, 1)))
         ball.Add(new Ball(false));
 
 
@@ -284,9 +284,9 @@ class SimpleScene extends Scene {
         for (let i = 0; i < brickColumns; i++) {
             for (let j = 0; j < brickRows; j++) {
                 const brick = new Entity(this.messageBus);
-                brick.Add(new Transform(new Vector((-brickColumns * 22)/2 + 22/2 + i*22, 40 - j*10), new Vector(20, 5)));
+                brick.Add(new Transform(new Vector((-brickColumns * 22) / 2 + 22 / 2 + i * 22, 40 - j * 10), new Vector(20, 5)));
                 brick.Add(new Sprite(new Color(Math.random(), Math.random(), Math.random(), 1)));
-                brick.Add(new Collider(Polygon.Rectangle(1,1)))
+                brick.Add(new Collider(Polygon.Rectangle(1, 1)))
                 brick.Add(new Brick());
             }
         }
