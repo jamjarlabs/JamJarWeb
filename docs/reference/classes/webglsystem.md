@@ -22,10 +22,12 @@
 * [entities](webglsystem.md#protected-entities)
 * [gl](webglsystem.md#private-gl)
 * [messageBus](webglsystem.md#protected-messagebus)
+* [placeholderTexture](webglsystem.md#private-placeholdertexture)
 * [program](webglsystem.md#private-program)
 * [renderables](webglsystem.md#private-renderables)
 * [scene](webglsystem.md#protected-optional-scene)
 * [subscriberID](webglsystem.md#subscriberid)
+* [textures](webglsystem.md#private-textures)
 * [FRAGMENT_SHADER](webglsystem.md#static-private-fragment_shader)
 * [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
 * [MESSAGE_LOAD_RENDERABLES](webglsystem.md#static-message_load_renderables)
@@ -40,8 +42,8 @@
 * [OnDestroy](webglsystem.md#protected-ondestroy)
 * [OnMessage](webglsystem.md#onmessage)
 * [Update](webglsystem.md#protected-update)
-* [createProgram](webglsystem.md#createprogram)
-* [createShader](webglsystem.md#createshader)
+* [createProgram](webglsystem.md#private-createprogram)
+* [createShader](webglsystem.md#private-createshader)
 * [render](webglsystem.md#private-render)
 * [EVALUATOR](webglsystem.md#static-private-evaluator)
 
@@ -94,6 +96,12 @@ ___
 
 ___
 
+### `Private` placeholderTexture
+
+• **placeholderTexture**: *WebGLTexture*
+
+___
+
 ### `Private` program
 
 • **program**: *WebGLProgram | null*
@@ -124,27 +132,55 @@ ___
 
 ___
 
+### `Private` textures
+
+• **textures**: *Record‹string, WebGLTexture›*
+
+___
+
 ### `Static` `Private` FRAGMENT_SHADER
 
 ▪ **FRAGMENT_SHADER**: *"#version 300 es
         precision mediump float;
 
+        uniform bool uTexturePresent;
         uniform vec4 uColor;
+        uniform sampler2D uTexture;
+
+        in vec2 vTextureCoordinate;
 
         out vec4 outColor;
 
         void main() {
-            outColor = uColor;
+            vec4 texturedColor;
+            if (uTexturePresent) {
+                texturedColor = texture(uTexture, vTextureCoordinate);
+            }
+            else {
+                texturedColor = uColor;
+            }
+            outColor = texturedColor;
         }
     "* = `#version 300 es
         precision mediump float;
 
+        uniform bool uTexturePresent;
         uniform vec4 uColor;
+        uniform sampler2D uTexture;
+
+        in vec2 vTextureCoordinate;
 
         out vec4 outColor;
 
         void main() {
-            outColor = uColor;
+            vec4 texturedColor;
+            if (uTexturePresent) {
+                texturedColor = texture(uTexture, vTextureCoordinate);
+            }
+            else {
+                texturedColor = uColor;
+            }
+            outColor = texturedColor;
         }
     `
 
@@ -184,23 +220,31 @@ ___
 
 ▪ **VERTEX_SHADER**: *"#version 300 es
         in vec2 aVertexPosition;
+        in vec2 aTexturePosition;
 
         uniform mat4 uViewMatrix;
         uniform mat4 uModelMatrix;
         uniform mat4 uProjectionMatrix;
 
+        out vec2 vTextureCoordinate;
+
         void main() {
             gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
+            vTextureCoordinate = aTexturePosition;
         }
     "* = `#version 300 es
         in vec2 aVertexPosition;
+        in vec2 aTexturePosition;
 
         uniform mat4 uViewMatrix;
         uniform mat4 uModelMatrix;
         uniform mat4 uProjectionMatrix;
 
+        out vec2 vTextureCoordinate;
+
         void main() {
             gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
+            vTextureCoordinate = aTexturePosition;
         }
     `
 
@@ -290,7 +334,7 @@ Name | Type | Description |
 
 ___
 
-###  createProgram
+### `Private` createProgram
 
 ▸ **createProgram**(`vertex`: WebGLShader, `fragment`: WebGLShader): *WebGLProgram*
 
@@ -305,7 +349,7 @@ Name | Type |
 
 ___
 
-###  createShader
+### `Private` createShader
 
 ▸ **createShader**(`type`: number, `source`: string): *WebGLShader*
 
