@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v0.2.0] - 2020-02-24
 ### Added
 - `KeyboardSystem` to manage keyboard input.
 - `PointerSystem` to manage pointer input (mouse, touch).
@@ -25,5 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Camera systems.
 - Basic physics for velocities/acceleration/rotation.
 
-[Unreleased]: https://github.com/jthomperoo/jamjar/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/jthomperoo/jamjar/compare/v0.2.0...HEAD
+[v0.2.0]: https://github.com/jthomperoo/jamjar/compare/0.1.0...v0.2.0
 [0.1.0]: https://github.com/jthomperoo/jamjar/releases/tag/0.1.0
