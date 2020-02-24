@@ -14,21 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Color from "./color";
-import Texture from "./texture";
+class ImageAsset {
+    public name: string;
+    public image: HTMLImageElement;
+    public success: boolean;
+    public error?: Error;
 
-class Renderable {
-    public verticies: Float32Array;
-    public modelMatrix: Float32Array;
-    public color: Color;
-    public texture?: Texture;
-
-    constructor(verticies: Float32Array, modelMatrix: Float32Array, color: Color, texture?: Texture) {
-        this.verticies = verticies;
-        this.modelMatrix = modelMatrix;
-        this.color = color;
-        this.texture = texture;
+    constructor(name: string, image: HTMLImageElement, success: boolean, error?: Error) {
+        this.name = name;
+        this.image = image;
+        this.success = success;
+        this.error = error;
     }
 }
 
-export default Renderable;
+export default ImageAsset;

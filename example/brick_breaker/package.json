@@ -1,7 +1,7 @@
 {
-  "name": "jamjar-example",
-  "version": "0.1.0",
-  "description": "Example jamjar game",
+  "name": "brick_breaker",
+  "version": "0.0.0",
+  "description": "Example jamjar game - break the breaks",
   "main": "index.js",
   "types": "index.d.ts",
   "license": "Apache-2.0",

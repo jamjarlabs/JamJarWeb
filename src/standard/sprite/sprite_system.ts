@@ -65,7 +65,8 @@ class SpriteSystem extends System {
             renderables.push(new Renderable(
                 sprite.bounds.GetFloat32Array(),
                 transform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
-                sprite.color)
+                sprite.color,
+                sprite.texture)
             );
         }
         this.messageBus.Publish(new Message<Renderable[]>(WebGLSystem.MESSAGE_LOAD_RENDERABLES, renderables));

@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Separate Rendering into stages, with `pre-render`, `render` and `post-render`. 
 - Sprites now processed in `pre-render`.
 - WebGL rendering system added.
+- `ImageSystem` to handle loading image assets.
+- Rendering system now supports rendering textures.
 
 ## [0.1.0] - 2019-10-27
 ### Added

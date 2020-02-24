@@ -1,6 +1,7 @@
 {
   "name": "jamjar",
   "description": "WebGL based browser game engine",
+  "version": "0.0.0",
   "main": "lib/game.js",
   "scripts": {
     "build": "tsc",

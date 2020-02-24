@@ -18,6 +18,7 @@
 * [bounds](sprite.md#bounds)
 * [color](sprite.md#color)
 * [key](sprite.md#key)
+* [texture](sprite.md#optional-texture)
 * [KEY](sprite.md#static-key)
 * [MESSAGE_ADD](sprite.md#static-message_add)
 * [MESSAGE_REMOVE](sprite.md#static-message_remove)
@@ -26,16 +27,20 @@
 
 ###  constructor
 
-\+ **new Sprite**(`color`: [Color](color.md), `bounds`: [Polygon](polygon.md)): *[Sprite](sprite.md)*
+\+ **new Sprite**(`color`: [Color](color.md), `__namedParameters`: object): *[Sprite](sprite.md)*
 
 *Overrides [Component](component.md).[constructor](component.md#constructor)*
 
 **Parameters:**
 
-Name | Type | Default |
------- | ------ | ------ |
-`color` | [Color](color.md) | - |
-`bounds` | [Polygon](polygon.md) | Polygon.Rectangle(1,1) |
+▪ **color**: *[Color](color.md)*
+
+▪`Default value`  **__namedParameters**: *object*= { bounds: Polygon.Rectangle(1, 1), texture: undefined }
+
+Name | Type |
+------ | ------ |
+`bounds` | [Polygon](polygon.md)‹› |
+`texture` | undefined &#124; [Texture](texture.md)‹› |
 
 **Returns:** *[Sprite](sprite.md)*
 
@@ -58,6 +63,12 @@ ___
 • **key**: *string*
 
 *Inherited from [Component](component.md).[key](component.md#key)*
+
+___
+
+### `Optional` texture
+
+• **texture**? : *[Texture](texture.md)*
 
 ___
 

@@ -14,21 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Color from "./color";
-import Texture from "./texture";
+class Texture {
+    public image: string;
+    public points: Float32Array;
 
-class Renderable {
-    public verticies: Float32Array;
-    public modelMatrix: Float32Array;
-    public color: Color;
-    public texture?: Texture;
-
-    constructor(verticies: Float32Array, modelMatrix: Float32Array, color: Color, texture?: Texture) {
-        this.verticies = verticies;
-        this.modelMatrix = modelMatrix;
-        this.color = color;
-        this.texture = texture;
+    constructor(image: string, points: Float32Array) {
+        this.image = image;
+        this.points = points;
     }
 }
 
-export default Renderable;
+export default Texture;

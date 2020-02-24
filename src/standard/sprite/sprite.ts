@@ -17,17 +17,22 @@ limitations under the License.
 import Component from "../../component/component";
 import Color from "../../rendering/color";
 import Polygon from "../shape/polygon";
+import Texture from "../../rendering/texture";
 
 class Sprite extends Component {
     public static readonly KEY = "sprite";
     public bounds: Polygon;
     public color: Color;
+    public texture?: Texture;
 
-    constructor(color: Color, bounds: Polygon = Polygon.Rectangle(1,1)) {
+    constructor(color: Color, { bounds, texture }:
+        { bounds: Polygon; texture: Texture | undefined } =
+        { bounds: Polygon.Rectangle(1, 1), texture: undefined }) {
         super(Sprite.KEY);
         this.color = color;
         this.bounds = bounds;
-    } 
+        this.texture = texture;
+    }
 }
 
 export default Sprite;
