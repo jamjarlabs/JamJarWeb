@@ -28,14 +28,14 @@ jobs:
         env:
           CI: true
       - uses: codecov/codecov-action@v1.0.3
-        if: github.repository == 'jthomperoo/jamjar'
+        if: github.repository == 'jamjarlabs/jamjar'
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           file: ./coverage/clover.xml
           flags: unittests
           name: jamjar-unittests
       - name: Publish to NPM
-        if: github.event_name == 'release' && github.repository == 'jthomperoo/jamjar'
+        if: github.event_name == 'release' && github.repository == 'jamjarlabs/jamjar'
         run: |
           VERSION=$(echo "${{ github.ref }}" | grep -P '([^\/]+$)' -o) 
           yarn version --no-git-tag-version --new-version ${VERSION}
