@@ -57,7 +57,8 @@ class KeyboardSystem extends System {
      * @param {KeyboardEvent} event Keyboard Event
      */
     protected keyEvent(event: KeyboardEvent): void {
-        this.keyEvents.push([event.type, event.key]);
+        console.log(event.code);
+        this.keyEvents.push([event.type, event.code]);
     }
 }
 
