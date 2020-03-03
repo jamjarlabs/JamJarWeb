@@ -109,7 +109,7 @@ describe("KeyboardSystem - key presses", () => {
                 ["keydown", "w"]
             ], entities: [] }),
             new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [], entities: [] }),
-            new window.KeyboardEvent("keydown", { "key": "w", bubbles: true })
+            new window.KeyboardEvent("keydown", { "code": "w", bubbles: true })
         ],
         [
             "Key up",
@@ -119,7 +119,7 @@ describe("KeyboardSystem - key presses", () => {
                 ], entities: []
             }),
             new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [], entities: [] }),
-            new window.KeyboardEvent("keyup", { "key": "w", bubbles: true })
+            new window.KeyboardEvent("keyup", { "code": "w", bubbles: true })
         ]
     ])("%p", (description: string, expectedState: KeyboardSystem, system: TestKeyboardSystem, event: KeyboardEvent) => {
         system.SimulateKeyEvent(event)
