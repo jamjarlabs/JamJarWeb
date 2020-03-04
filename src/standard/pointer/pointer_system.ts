@@ -44,8 +44,8 @@ class PointerSystem extends System {
 
     constructor(messageBus: IMessageBus, inputElement: HTMLElement,
         { scene, entities, subscriberID, pointers }:
-            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined; pointers: [string, Pointer][] } =
-            { scene: undefined, entities: [], subscriberID: undefined, pointers: [] }) {
+            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; pointers: [string, Pointer][] } =
+            { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [] }) {
         super(messageBus, { scene, evaluator: PointerSystem.EVALUATOR, entities, subscriberID });
         this.inputElement = inputElement;
         this.pointers = pointers;
@@ -81,9 +81,7 @@ class PointerSystem extends System {
         const pointerCameraInfos: PointerCameraInfo[] = [];
 
         // Calculate relevant information for each camerea
-        for (let i = 0; i < this.entities.length; i++) {
-            const entity = this.entities[i];
-
+        for (const entity of this.entities.values()) {
             const camera = entity.Get(Camera.KEY) as Camera;
             const transform = entity.Get(Transform.KEY) as Transform;
 

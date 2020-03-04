@@ -86,8 +86,8 @@ class WebGLSystem extends System {
     private textures: Record<string, WebGLTexture>;
 
     constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, { scene, entities, subscriberID, renderables }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined; renderables: Renderable[] } =
-        { scene: undefined, entities: [], subscriberID: undefined, renderables: [] }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; renderables: Renderable[] } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined, renderables: [] }) {
         super(messageBus, { evaluator: WebGLSystem.EVALUATOR, scene, entities, subscriberID });
         this.gl = gl;
         this.renderables = renderables;
@@ -198,7 +198,7 @@ class WebGLSystem extends System {
         const canvasWidth = gl.canvas.width;
         const canvasHeight = gl.canvas.height;
         
-        for(const cameraEntity of this.entities) {
+        for(const cameraEntity of this.entities.values()) {
             const camera = cameraEntity.Get(Camera.KEY) as Camera;
             const transform = cameraEntity.Get(Transform.KEY) as Transform;
 

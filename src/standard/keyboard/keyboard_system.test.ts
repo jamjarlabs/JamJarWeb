@@ -29,13 +29,13 @@ describe("KeyboardSystem - OnMessage", () => {
             undefined,
             new KeyboardSystem(new FakeMessageBus(), document, {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 keyEvents: [],
                 subscriberID: 0
             }),
             new KeyboardSystem(new FakeMessageBus(), document, {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 keyEvents: [],
                 subscriberID: 0
             }),
@@ -46,13 +46,13 @@ describe("KeyboardSystem - OnMessage", () => {
             new Error("fail to publish"),
             new KeyboardSystem(new FakeMessageBus(), document, {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 keyEvents: [["test", "test"]],
                 subscriberID: 0
             }),
             new KeyboardSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), window.document, {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 keyEvents: [["test", "test"]],
                 subscriberID: 0
             }),
@@ -63,13 +63,13 @@ describe("KeyboardSystem - OnMessage", () => {
             undefined,
             new KeyboardSystem(new FakeMessageBus(), document, {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 keyEvents: [],
                 subscriberID: 0
             }),
             new KeyboardSystem(new FakeMessageBus(), document, {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 keyEvents: [["test", "test1"], ["test", "test2"], ["test", "test3"]],
                 subscriberID: 0
             }),
@@ -107,8 +107,8 @@ describe("KeyboardSystem - key presses", () => {
             "Key down",
             new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [
                 ["keydown", "w"]
-            ], entities: [] }),
-            new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [], entities: [] }),
+            ], entities: new Map() }),
+            new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [], entities: new Map() }),
             new window.KeyboardEvent("keydown", { "code": "w", bubbles: true })
         ],
         [
@@ -116,9 +116,9 @@ describe("KeyboardSystem - key presses", () => {
             new KeyboardSystem(new FakeMessageBus(), document, {
                 scene: undefined, subscriberID: 0, keyEvents: [
                     ["keyup", "w"]
-                ], entities: []
+                ], entities: new Map()
             }),
-            new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [], entities: [] }),
+            new TestKeyboardSystem(new FakeMessageBus(), document, { scene: undefined, subscriberID: 0, keyEvents: [], entities: new Map() }),
             new window.KeyboardEvent("keyup", { "code": "w", bubbles: true })
         ]
     ])("%p", (description: string, expectedState: KeyboardSystem, system: TestKeyboardSystem, event: KeyboardEvent) => {

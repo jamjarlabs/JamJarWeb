@@ -34,7 +34,6 @@ This is part of the rendering process.
 ### Methods
 
 * [Destroy](interpolationsystem.md#destroy)
-* [GetSystemEntity](interpolationsystem.md#protected-getsystementity)
 * [OnDestroy](interpolationsystem.md#protected-ondestroy)
 * [OnMessage](interpolationsystem.md#onmessage)
 * [Update](interpolationsystem.md#protected-update)
@@ -53,11 +52,11 @@ This is part of the rendering process.
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
@@ -67,7 +66,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
@@ -139,27 +138,6 @@ message bus.
 
 ___
 
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-*Inherited from [System](system.md).[GetSystemEntity](system.md#protected-getsystementity)*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
-
-___
-
 ### `Protected` OnDestroy
 
 ▸ **OnDestroy**(): *void*
@@ -209,17 +187,11 @@ ___
 
 ### `Private` interpolateTransforms
 
-▸ **interpolateTransforms**(`entities`: [SystemEntity](systementity.md)[]): *void*
+▸ **interpolateTransforms**(): *void*
 
 interpolateTransforms updates the `previous` member to be the current position of the transform.
 This is used in rendering, allowing render systems to use the previous and current position to
 interpolate its position when drawing.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entities` | [SystemEntity](systementity.md)[] | The entities to update the interpolation positions of  |
 
 **Returns:** *void*
 

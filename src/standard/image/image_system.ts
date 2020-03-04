@@ -33,8 +33,8 @@ class ImageSystem extends System {
     private images: ImageAsset[];
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID, images, loadQueue }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined; loadQueue: ImageAsset[]; images: ImageAsset[] } =
-        { scene: undefined, entities: [], subscriberID: undefined, loadQueue: [], images: [] }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; loadQueue: ImageAsset[]; images: ImageAsset[] } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined, loadQueue: [], images: [] }) {
         super(messageBus, { scene, evaluator: undefined, entities, subscriberID })
         this.loadQueue = loadQueue;
         this.images = images;

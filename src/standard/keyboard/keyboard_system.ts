@@ -30,8 +30,8 @@ class KeyboardSystem extends System {
 
     constructor(messageBus: IMessageBus, inputElement: HTMLDocument,
         { scene, entities, subscriberID, keyEvents }:
-            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined; keyEvents: [string, string][] } =
-            { scene: undefined, entities: [], subscriberID: undefined, keyEvents: [] }) {
+            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; keyEvents: [string, string][] } =
+            { scene: undefined, entities: new Map(), subscriberID: undefined, keyEvents: [] }) {
         super(messageBus, { scene, evaluator: undefined, entities, subscriberID });
         this.inputElement = inputElement;
         this.keyEvents = keyEvents;
@@ -57,7 +57,6 @@ class KeyboardSystem extends System {
      * @param {KeyboardEvent} event Keyboard Event
      */
     protected keyEvent(event: KeyboardEvent): void {
-        console.log(event.code);
         this.keyEvents.push([event.type, event.code]);
     }
 }

@@ -39,13 +39,13 @@ describe("PointerSystem - OnMessage -> Update", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
@@ -56,7 +56,7 @@ describe("PointerSystem - OnMessage -> Update", () => {
             new Error("fail to publish"),
             new PointerSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [
                     ["test", new Pointer(new window.PointerEvent("pointermove"), new Vector(0, 0), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(3, 2), new Vector(2, 2), true)
@@ -66,7 +66,7 @@ describe("PointerSystem - OnMessage -> Update", () => {
             }),
             new PointerSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [
                     ["test", new Pointer(new window.PointerEvent("pointermove"), new Vector(0, 0), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(3, 2), new Vector(2, 2), true)
@@ -81,13 +81,13 @@ describe("PointerSystem - OnMessage -> Update", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [
                     ["test1", new Pointer(new window.PointerEvent("pointermove"), new Vector(0, 0), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(3, 2), new Vector(2, 2), true)
@@ -104,15 +104,15 @@ describe("PointerSystem - OnMessage -> Update", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [
-                    new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])
-                ],
+                entities: new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])]
+                ]),
                 pointers: [],
                 subscriberID: 0
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
@@ -123,22 +123,22 @@ describe("PointerSystem - OnMessage -> Update", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [
-                    new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()]),
-                    new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()]),
-                    new SystemEntity(new FakeEntity(2), [new Camera(), new Transform()]),
-                    new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])
-                ],
+                entities: new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])],
+                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
+                    [2, new SystemEntity(new FakeEntity(2), [new Camera(), new Transform()])],
+                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])]
+                ]),
                 pointers: [],
                 subscriberID: 0
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [
-                    new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()]),
-                    new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()]),
-                    new SystemEntity(new FakeEntity(2), [new Camera(), new Transform()])
-                ],
+                entities: new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])],
+                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
+                    [2, new SystemEntity(new FakeEntity(2), [new Camera(), new Transform()])]
+                ]),
                 pointers: [],
                 subscriberID: 0
             }),
@@ -149,13 +149,13 @@ describe("PointerSystem - OnMessage -> Update", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
@@ -166,13 +166,13 @@ describe("PointerSystem - OnMessage -> Update", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
-                entities: [],
+                entities: new Map(),
                 pointers: [],
                 subscriberID: 0
             }),
@@ -220,7 +220,7 @@ describe("PointerSystem - pointer input", () => {
                     pointers: [
                         ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.3, 0.8), [])]
                     ],
-                    entities: []
+                    entities: new Map()
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -233,7 +233,7 @@ describe("PointerSystem - pointer input", () => {
                     scene: undefined,
                     subscriberID: 0,
                     pointers: [],
-                    entities: []
+                    entities: new Map()
                 }),
             new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 })
         ],
@@ -255,16 +255,16 @@ describe("PointerSystem - pointer input", () => {
                             new PointerCameraInfo(new FakeEntity(1), new Vector(0.3,0.8), new Vector(30,80), false)
                         ])]
                     ],
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), [
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                        ]),
-                        new SystemEntity(new FakeEntity(1), [
+                        ])],
+                        [1, new SystemEntity(new FakeEntity(1), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
-                        ])
-                    ]
+                        ])]
+                    ])
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -277,16 +277,16 @@ describe("PointerSystem - pointer input", () => {
                     scene: undefined,
                     subscriberID: 0,
                     pointers: [],
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), [
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                        ]),
-                        new SystemEntity(new FakeEntity(1), [
+                        ])],
+                        [1, new SystemEntity(new FakeEntity(1), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
-                        ])
-                    ]
+                        ])]
+                    ])
                 }),
             new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 })
         ],
@@ -307,12 +307,12 @@ describe("PointerSystem - pointer input", () => {
                             new PointerCameraInfo(new FakeEntity(0), new Vector(0,0.2), new Vector(0,2), true),
                         ])]
                     ],
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), [
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
-                        ])
-                    ]
+                        ])]
+                    ])
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -325,12 +325,12 @@ describe("PointerSystem - pointer input", () => {
                     scene: undefined,
                     subscriberID: 0,
                     pointers: [],
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), [
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
-                        ])
-                    ]
+                        ])]
+                    ])
                 }),
             new window.PointerEvent("pointerup", { clientX: 0, clientY: 0 })
         ],
@@ -351,12 +351,12 @@ describe("PointerSystem - pointer input", () => {
                             new PointerCameraInfo(new FakeEntity(0), new Vector(0,0.2), new Vector(0,2), true),
                         ])]
                     ],
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), [
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
-                        ])
-                    ]
+                        ])]
+                    ])
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -369,12 +369,12 @@ describe("PointerSystem - pointer input", () => {
                     scene: undefined,
                     subscriberID: 0,
                     pointers: [],
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), [
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
-                        ])
-                    ]
+                        ])]
+                    ])
                 }),
             new window.PointerEvent("pointerdown", { clientX: 0, clientY: 0 })
         ],

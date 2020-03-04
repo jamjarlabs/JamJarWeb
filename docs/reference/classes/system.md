@@ -52,7 +52,6 @@ A system is for implementing logic, manipulating entities and their components.
 ### Methods
 
 * [Destroy](system.md#destroy)
-* [GetSystemEntity](system.md#protected-getsystementity)
 * [OnDestroy](system.md#protected-ondestroy)
 * [OnMessage](system.md#onmessage)
 * [Update](system.md#protected-update)
@@ -71,11 +70,11 @@ A system is for implementing logic, manipulating entities and their components.
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: [], subscriberID: undefined }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: new Map(), subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `evaluator` | undefined &#124; function |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
@@ -86,7 +85,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 ___
 
@@ -147,25 +146,6 @@ systems are discouraged; communication should all be through the
 message bus.
 
 **Returns:** *void*
-
-___
-
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
 
 ___
 

@@ -36,7 +36,6 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 ### Methods
 
 * [Destroy](keyboardsystem.md#destroy)
-* [GetSystemEntity](keyboardsystem.md#protected-getsystementity)
 * [OnDestroy](keyboardsystem.md#protected-ondestroy)
 * [OnMessage](keyboardsystem.md#onmessage)
 * [Update](keyboardsystem.md#protected-update)
@@ -56,11 +55,11 @@ KeyboardSystem handles Keyboard input events, converting them into JamJar ECS me
 
 ▪ **inputElement**: *HTMLDocument*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, keyEvents: [] }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, keyEvents: [] }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `keyEvents` | [string, string][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
@@ -71,7 +70,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
@@ -152,27 +151,6 @@ systems are discouraged; communication should all be through the
 message bus.
 
 **Returns:** *void*
-
-___
-
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-*Inherited from [System](system.md).[GetSystemEntity](system.md#protected-getsystementity)*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
 
 ___
 

@@ -33,7 +33,6 @@ allows testing them without having to use JS event listeners
 ### Methods
 
 * [Destroy](testpointersystem.md#destroy)
-* [GetSystemEntity](testpointersystem.md#protected-getsystementity)
 * [OnDestroy](testpointersystem.md#protected-ondestroy)
 * [OnMessage](testpointersystem.md#onmessage)
 * [SimulatePointerEvent](testpointersystem.md#simulatepointerevent)
@@ -56,11 +55,11 @@ allows testing them without having to use JS event listeners
 
 ▪ **inputElement**: *HTMLElement*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined, pointers: [] }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [] }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
@@ -71,7 +70,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
@@ -140,27 +139,6 @@ systems are discouraged; communication should all be through the
 message bus.
 
 **Returns:** *void*
-
-___
-
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-*Inherited from [System](system.md).[GetSystemEntity](system.md#protected-getsystementity)*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
 
 ___
 

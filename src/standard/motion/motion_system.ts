@@ -36,13 +36,13 @@ class MotionSystem extends System {
     };
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-        { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: MotionSystem.EVALUATOR, scene, entities, subscriberID });
     }
 
     protected Update(dt: number): void {
-        for(const entity of this.entities) {
+        for(const entity of this.entities.values()) {
             const transform = entity.Get(Transform.KEY) as Transform;
             const motion = entity.Get(Motion.KEY) as Motion;
 

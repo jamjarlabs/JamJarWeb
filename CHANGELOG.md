@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - `KeyboardSystem` messages emitted use JS `KeyboardEvent.code` (physical keyboard) rather than `KeyboardEvent.key` (input character).
+- `System` to store `SystemEntities` as a map rather than as an array, for easier random access.
 
 ## [v0.2.0] - 2020-02-24
 ### Added

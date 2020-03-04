@@ -28,70 +28,7 @@ import FakeScene from "../fake/scene";
 import IScene from "../scene/iscene";
 import Reactor from "../fake/reactor";
 
-class TestSystem extends System {
-    public TestGetSystemEntity(entity: IEntity): SystemEntity | undefined {
-        return this.GetSystemEntity(entity);
-    }
-}
-
-describe("System - GetSystemEntity", () => {
-    type TestTuple = [
-        string,
-        SystemEntity | undefined,
-        TestSystem,
-        IEntity,
-    ];
-    test.each<TestTuple>([
-        [
-            "No entities, return undefined",
-            undefined,
-            new TestSystem(new FakeMessageBus()),
-            new FakeEntity(0)
-        ],
-        [
-            "3 entities, not found, return undefined",
-            undefined,
-            new TestSystem(
-                new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    evaluator: undefined,
-                    subscriberID: undefined,
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), []),
-                        new SystemEntity(new FakeEntity(1), []),
-                        new SystemEntity(new FakeEntity(2), []),
-                    ]
-                },
-            ),
-            new FakeEntity(3)
-        ],
-        [
-            "3 entities, found",
-            new SystemEntity(new FakeEntity(0), []),
-            new TestSystem(
-                new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    evaluator: undefined,
-                    subscriberID: undefined,
-                    entities: [
-                        new SystemEntity(new FakeEntity(0), []),
-                        new SystemEntity(new FakeEntity(1), []),
-                        new SystemEntity(new FakeEntity(2), []),
-                    ]
-                },
-            ),
-            new FakeEntity(0)
-        ],
-    ])("%p", (
-        description: string,
-        expected: SystemEntity | undefined,
-        system: TestSystem,
-        entity: IEntity) => {
-        expect(system.TestGetSystemEntity(entity)).toEqual(expected)
-    });
-});
+class TestSystem extends System {}
 
 describe("System - OnMessage", () => {
     type TestTuple = [
@@ -135,21 +72,21 @@ describe("System - OnMessage", () => {
             "Register, evaluator throws error",
             new Error("evaluator fail"),
             new TestSystem(new FakeMessageBus(),
-                { scene: undefined, subscriberID: undefined, entities: [], evaluator: (): boolean => { throw ("evaluator fail"); } }),
+                { scene: undefined, subscriberID: undefined, entities: new Map(), evaluator: (): boolean => { throw ("evaluator fail"); } }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
             "Register, evaluator reject",
             undefined,
             new TestSystem(new FakeMessageBus(), 
-                { scene: undefined, subscriberID: undefined, entities: [], evaluator: (): boolean => { return false; } }),
+                { scene: undefined, subscriberID: undefined, entities: new Map(), evaluator: (): boolean => { return false; } }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
             "Register, evaluator accept",
             undefined,
             new TestSystem(new FakeMessageBus(), 
-                { scene: undefined, subscriberID: undefined, entities: [], evaluator: (): boolean => { return true; } }),
+                { scene: undefined, subscriberID: undefined, entities: new Map(), evaluator: (): boolean => { return true; } }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new FakeComponent("test")]])
         ],
         [
@@ -159,12 +96,12 @@ describe("System - OnMessage", () => {
             { 
                 scene: undefined, 
                 subscriberID: undefined, 
-                entities: [
-                    new SystemEntity(new FakeEntity(0), []),
-                    new SystemEntity(new FakeEntity(1), []),
-                    new SystemEntity(new FakeEntity(2), []),
-                    new SystemEntity(new FakeEntity(3), []),
-                ],
+                entities: new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [])],
+                    [1, new SystemEntity(new FakeEntity(1), [])],
+                    [2, new SystemEntity(new FakeEntity(2), [])],
+                    [3, new SystemEntity(new FakeEntity(3), [])],
+                ]),
                 evaluator: (): boolean => { return true; }
             }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [new FakeComponent("test")]])
@@ -188,9 +125,9 @@ describe("System - OnMessage", () => {
             { 
                 scene: undefined, 
                 subscriberID: undefined, 
-                entities: [
-                    new SystemEntity(new FakeEntity(3), []),
-                ],
+                entities: new Map([
+                    [3 ,new SystemEntity(new FakeEntity(3), [])],
+                ]),
                 evaluator: undefined
             }),
             new Message<IEntity>(System.MESSAGE_DEREGISTER, new FakeEntity(3))
@@ -202,12 +139,12 @@ describe("System - OnMessage", () => {
             { 
                 scene: undefined, 
                 subscriberID: undefined, 
-                entities: [
-                    new SystemEntity(new FakeEntity(0), []),
-                    new SystemEntity(new FakeEntity(1), []),
-                    new SystemEntity(new FakeEntity(2), []),
-                    new SystemEntity(new FakeEntity(3), []),
-                ],
+                entities: new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [])],
+                    [1, new SystemEntity(new FakeEntity(1), [])],
+                    [2, new SystemEntity(new FakeEntity(2), [])],
+                    [3, new SystemEntity(new FakeEntity(3), [])],
+                ]),
                 evaluator: undefined
             }),
             new Message<IEntity>(System.MESSAGE_DEREGISTER, new FakeEntity(2))
@@ -231,7 +168,7 @@ describe("System - OnMessage", () => {
             { 
                 scene: new FakeScene(3), 
                 subscriberID: undefined, 
-                entities: [],
+                entities: new Map(),
                 evaluator: undefined
             }),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
@@ -243,7 +180,7 @@ describe("System - OnMessage", () => {
             { 
                 scene: new FakeScene(0), 
                 subscriberID: undefined, 
-                entities: [],
+                entities: new Map(),
                 evaluator: undefined
             }),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
@@ -255,7 +192,7 @@ describe("System - OnMessage", () => {
             { 
                 scene: new FakeScene(0), 
                 subscriberID: undefined, 
-                entities: [],
+                entities: new Map(),
                 evaluator: undefined
             }),
             new Message<IScene>(Scene.MESSAGE_DESTROY, new FakeScene(0))
