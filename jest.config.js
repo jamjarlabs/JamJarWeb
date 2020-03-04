@@ -6,6 +6,7 @@ module.exports = {
     ],
     coveragePathIgnorePatterns: [
         "/node_modules/",
+        "/example/"
     ],
     collectCoverageFrom: [
         "**/src/**/*.ts"

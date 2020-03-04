@@ -21,6 +21,8 @@ import Vector from "jamjar/lib/geometry/vector";
 import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
 import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
 import MotionSystem from "jamjar/lib/standard/motion/motion_system";
+import FullscreenSystem from "jamjar/lib/standard/fullscreen/fullscreen_system";
+import KeyboardSystem from "jamjar/lib/standard/keyboard/keyboard_system";
 import Collider from "jamjar/lib/standard/collision/collider";
 import CollisionSystem from "jamjar/lib/standard/collision/collision_system";
 import PointerSystem from "jamjar/lib/standard/pointer/pointer_system";
@@ -68,6 +70,14 @@ class Asteroid extends Component {
 
     constructor() {
         super(Asteroid.KEY);
+    }
+}
+
+class Crosshair extends Component {
+    public static readonly KEY = "crosshair";
+
+    constructor() {
+        super(Crosshair.KEY);
     }
 }
 
@@ -230,6 +240,49 @@ class BulletSystem extends System {
 
 }
 
+class CrosshairSystem extends System {
+    // Only entities with transform and crosshair components.
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
+        return [Crosshair.KEY, Transform.KEY].every((type) => components.some(
+            component => component.key == type
+        ));
+    };
+
+    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
+        super(messageBus, { evaluator: CrosshairSystem.EVALUATOR, scene, entities, subscriberID });
+        this.messageBus.Subscribe(this, ["pointermove", "keydown"])
+    }
+    public OnMessage(message: IMessage): void {
+        super.OnMessage(message);
+        switch (message.type) {
+            case "pointermove": {
+                const pointerMessage = message as Message<Pointer>;
+                if (pointerMessage.payload === undefined) {
+                    return;
+                }
+                for (const crosshair of this.entities.values()) {
+                    const transform = crosshair.Get(Transform.KEY) as Transform;
+                    transform.position = pointerMessage.payload.cameraInfos[0].worldPosition;
+                }
+                break;
+            }
+            case "keydown": {
+                const keyMessage = message as Message<string>;
+                if (keyMessage.payload === undefined) {
+                    return;
+                }
+                if (keyMessage.payload == "KeyF") {
+                    this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN));
+                }
+                break;
+            }
+        }
+    }
+
+}
+
 class ControllerSystem extends System {
     // Only entities with transform and player components.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -244,7 +297,7 @@ class ControllerSystem extends System {
         { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined, targetedPosition: Vector } =
         { scene: undefined, entities: new Map(), subscriberID: undefined, targetedPosition: new Vector(0, 0) }) {
         super(messageBus, { evaluator: ControllerSystem.EVALUATOR, scene, entities, subscriberID });
-        this.messageBus.Subscribe(this, ["pointermove", "pointerdown"])
+        this.messageBus.Subscribe(this, ["pointermove", "pointerdown"]);
         this.targetedPosition = targetedPosition;
     }
 
@@ -301,7 +354,7 @@ class ControllerSystem extends System {
 
 class MainScene extends Scene {
     OnStart(): void {
-        new SpriteSystem(messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new SpriteSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
         new MotionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
         new InterpolationSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
         new CollisionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
@@ -309,8 +362,10 @@ class MainScene extends Scene {
         new ControllerSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, targetedPosition: new Vector(0, 0) })
         new BulletSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined })
         new AsteroidSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL })
+        new CrosshairSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
 
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]))
+        this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]))
 
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
@@ -322,6 +377,15 @@ class MainScene extends Scene {
         player.Add(new Camera());
         player.Add(new Player());
         this.AddEntity(player);
+
+        const crosshair = new Entity(this.messageBus);
+        crosshair.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
+        crosshair.Add(new Sprite(new Color(1, 1, 1, 1), {
+            bounds: Polygon.Rectangle(1, 1),
+            texture: new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+        }));
+        crosshair.Add(new Crosshair());
+        this.AddEntity(crosshair);
     }
 }
 
@@ -350,6 +414,8 @@ const messageBus = new MessageBus();
 new EntityManager(messageBus);
 new WebGLSystem(messageBus, gl);
 new PointerSystem(messageBus, canvas);
+new KeyboardSystem(messageBus, document);
+new FullscreenSystem(messageBus, canvas, document);
 
 const shooter = new Shooter(messageBus);
 

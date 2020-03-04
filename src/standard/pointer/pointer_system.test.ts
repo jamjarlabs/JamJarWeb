@@ -30,29 +30,34 @@ import Camera from "../camera/camera";
 import Transform from "../transform/transform";
 import SystemEntity from "../../system/system_entity";
 import Color from "../../rendering/color";
+import FullscreenSystem from "../fullscreen/fullscreen_system";
 
-describe("PointerSystem - OnMessage -> Update", () => {
+describe("PointerSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, PointerSystem, PointerSystem, IMessage];
     test.each<TestTuple>([
         [
-            "No queued pointer events",
+            "Update - No queued pointer events",
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<number>(System.MESSAGE_UPDATE, 1.0)
         ],
         [
-            "One queued event, fail to publish",
+            "Update - One queued event, fail to publish",
             new Error("fail to publish"),
             new PointerSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), window.document.createElement("canvas"), {
                 scene: undefined,
@@ -62,7 +67,9 @@ describe("PointerSystem - OnMessage -> Update", () => {
                         new PointerCameraInfo(new FakeEntity(0), new Vector(3, 2), new Vector(2, 2), true)
                     ])]
                 ],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), window.document.createElement("canvas"), {
                 scene: undefined,
@@ -72,18 +79,22 @@ describe("PointerSystem - OnMessage -> Update", () => {
                         new PointerCameraInfo(new FakeEntity(0), new Vector(3, 2), new Vector(2, 2), true)
                     ])]
                 ],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<number>(System.MESSAGE_UPDATE, 1.0)
         ],
         [
-            "Three queued events, success, clear queue",
+            "Update - Three queued events, success, clear queue",
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
@@ -95,12 +106,14 @@ describe("PointerSystem - OnMessage -> Update", () => {
                     ["test2", new Pointer(new window.PointerEvent("pointerdown"), new Vector(5, 4), [])],
                     ["test3", new Pointer(new window.PointerEvent("pointerup"), new Vector(3, 2), [])]
                 ],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<number>(System.MESSAGE_UPDATE, 1.0)
         ],
         [
-            "Correctly register new entity, none existing",
+            "Register - Correctly register new entity, none existing",
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
@@ -108,18 +121,22 @@ describe("PointerSystem - OnMessage -> Update", () => {
                     [0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])]
                 ]),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera(), new Transform()]])
         ],
         [
-            "Correctly register new entity, three existing",
+            "Register - Correctly register new entity, three existing",
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
@@ -130,7 +147,9 @@ describe("PointerSystem - OnMessage -> Update", () => {
                     [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])]
                 ]),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
@@ -140,43 +159,95 @@ describe("PointerSystem - OnMessage -> Update", () => {
                     [2, new SystemEntity(new FakeEntity(2), [new Camera(), new Transform()])]
                 ]),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [new Camera(), new Transform()]])
         ],
         [
-            "Correctly reject new entity, missing transform",
+            "Register - Correctly reject new entity, missing transform",
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]])
         ],
         [
-            "Correctly reject new entity, missing camera",
+            "Register - Correctly reject new entity, missing camera",
             undefined,
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
                 scene: undefined,
                 entities: new Map(),
                 pointers: [],
-                subscriberID: 0
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
             }),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
+        ],
+        [
+            "Enter Fullscreen - Mark as fullscreen",
+            undefined,
+            new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
+                scene: undefined,
+                entities: new Map(),
+                pointers: [],
+                subscriberID: 0,
+                isFullscreen: true,
+                lockedPointerPosition: undefined
+            }),
+            new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
+                scene: undefined,
+                entities: new Map(),
+                pointers: [],
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
+            }),
+            new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, [new FakeEntity(0), [new Transform()]])
+        ],
+        [
+            "Exit Fullscreen - Mark as not fullscreen and clear locked pointer position",
+            undefined,
+            new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
+                scene: undefined,
+                entities: new Map(),
+                pointers: [],
+                subscriberID: 0,
+                isFullscreen: false,
+                lockedPointerPosition: undefined
+            }),
+            new PointerSystem(new FakeMessageBus(), window.document.createElement("canvas"), {
+                scene: undefined,
+                entities: new Map(),
+                pointers: [],
+                subscriberID: 0,
+                isFullscreen: true,
+                lockedPointerPosition: new Vector(3,2)
+            }),
+            new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN, [new FakeEntity(0), [new Transform()]])
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: PointerSystem, message: IMessage) => {
         if (expected instanceof Error) {
@@ -206,7 +277,7 @@ describe("PointerSystem - pointer input", () => {
     type TestTuple = [string, PointerSystem, TestPointerSystem, PointerEvent];
     test.each<TestTuple>([
         [
-            "Pointer move, no cameras",
+            "Pointer move, not fullscreen, no cameras",
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
                 element.getBoundingClientRect = (): DOMRect => {
@@ -217,10 +288,12 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [
                         ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.3, 0.8), [])]
                     ],
-                    entities: new Map()
+                    entities: new Map(),
+                    lockedPointerPosition: undefined
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -232,13 +305,15 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [],
-                    entities: new Map()
+                    entities: new Map(),
+                    lockedPointerPosition: undefined
                 }),
             new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 })
         ],
         [
-            "Pointer move, two cameras",
+            "Pointer move, not fullscreen, two cameras",
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
                 element.getBoundingClientRect = (): DOMRect => {
@@ -249,10 +324,11 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [
                         ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.3, 0.8), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.3,0.8), new Vector(3,8), false),
-                            new PointerCameraInfo(new FakeEntity(1), new Vector(0.3,0.8), new Vector(30,80), false)
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.3, 0.8), new Vector(3, 8), false),
+                            new PointerCameraInfo(new FakeEntity(1), new Vector(0.3, 0.8), new Vector(30, 80), false)
                         ])]
                     ],
                     entities: new Map([
@@ -264,7 +340,8 @@ describe("PointerSystem - pointer input", () => {
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
                         ])]
-                    ])
+                    ]),
+                    lockedPointerPosition: undefined
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -276,6 +353,7 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [],
                     entities: new Map([
                         [0, new SystemEntity(new FakeEntity(0), [
@@ -286,9 +364,106 @@ describe("PointerSystem - pointer input", () => {
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
                         ])]
-                    ])
+                    ]),
+                    lockedPointerPosition: undefined
                 }),
             new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 })
+        ],
+        [
+            "Pointer move, fullscreen, no locked pointer position set, one camera",
+            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
+                const element = window.document.createElement("canvas")
+                element.getBoundingClientRect = (): DOMRect => {
+                    return new window.DOMRect(0, 0, 10, 10);
+                }
+                return element;
+            })(),
+                {
+                    scene: undefined,
+                    subscriberID: 0,
+                    isFullscreen: true,
+                    pointers: [
+                        ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.3, 0.8), [
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.3, 0.8), new Vector(3, 8), false),
+                        ])]
+                    ],
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
+                        ])]
+                    ]),
+                    lockedPointerPosition: new Vector(3,2)
+                }),
+            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
+                const element = window.document.createElement("canvas")
+                element.getBoundingClientRect = (): DOMRect => {
+                    return new window.DOMRect(0, 0, 10, 10);
+                }
+                return element;
+            })(),
+                {
+                    scene: undefined,
+                    subscriberID: 0,
+                    isFullscreen: true,
+                    pointers: [],
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
+                        ])]
+                    ]),
+                    lockedPointerPosition: undefined
+                }),
+            new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 })
+        ],
+        [
+            "Pointer move, fullscreen, locked pointer position set, one camera",
+            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
+                const element = window.document.createElement("canvas")
+                element.getBoundingClientRect = (): DOMRect => {
+                    return new window.DOMRect(0, 0, 10, 10);
+                }
+                return element;
+            })(),
+                {
+                    scene: undefined,
+                    subscriberID: 0,
+                    isFullscreen: true,
+                    pointers: [
+                        ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2, movementX: 10, movementY: 3 }), new Vector(1.2, 0.5), [
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(1.2, 0.5), new Vector(12, 5), false),
+                        ])]
+                    ],
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
+                        ])]
+                    ]),
+                    lockedPointerPosition: new Vector(12,5)
+                }),
+            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
+                const element = window.document.createElement("canvas")
+                element.getBoundingClientRect = (): DOMRect => {
+                    return new window.DOMRect(0, 0, 10, 10);
+                }
+                return element;
+            })(),
+                {
+                    scene: undefined,
+                    subscriberID: 0,
+                    isFullscreen: true,
+                    pointers: [],
+                    entities: new Map([
+                        [0, new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
+                        ])]
+                    ]),
+                    lockedPointerPosition: new Vector(2,2)
+                }),
+            new window.PointerEvent("pointermove", { clientX: 3, clientY: 2, movementX: 10, movementY: 3 })
         ],
         [
             "Pointer up, one camera",
@@ -302,9 +477,10 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [
                         ["pointerup", new Pointer(new window.PointerEvent("pointerup", { clientX: 0, clientY: 0 }), new Vector(0, 1), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0,0.2), new Vector(0,2), true),
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.2), new Vector(0, 2), true),
                         ])]
                     ],
                     entities: new Map([
@@ -312,7 +488,8 @@ describe("PointerSystem - pointer input", () => {
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
                         ])]
-                    ])
+                    ]),
+                    lockedPointerPosition: undefined
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -324,13 +501,15 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [],
                     entities: new Map([
                         [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
                         ])]
-                    ])
+                    ]),
+                    lockedPointerPosition: undefined
                 }),
             new window.PointerEvent("pointerup", { clientX: 0, clientY: 0 })
         ],
@@ -346,9 +525,10 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [
                         ["pointerdown", new Pointer(new window.PointerEvent("pointerdown", { clientX: 0, clientY: 0 }), new Vector(0, 1), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0,0.2), new Vector(0,2), true),
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.2), new Vector(0, 2), true),
                         ])]
                     ],
                     entities: new Map([
@@ -356,7 +536,8 @@ describe("PointerSystem - pointer input", () => {
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
                         ])]
-                    ])
+                    ]),
+                    lockedPointerPosition: undefined
                 }),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
                 const element = window.document.createElement("canvas")
@@ -368,13 +549,15 @@ describe("PointerSystem - pointer input", () => {
                 {
                     scene: undefined,
                     subscriberID: 0,
+                    isFullscreen: false,
                     pointers: [],
                     entities: new Map([
                         [0, new SystemEntity(new FakeEntity(0), [
                             new Transform(),
                             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(5, 5), new Vector(10, 10))
                         ])]
-                    ])
+                    ]),
+                    lockedPointerPosition: undefined
                 }),
             new window.PointerEvent("pointerdown", { clientX: 0, clientY: 0 })
         ],
