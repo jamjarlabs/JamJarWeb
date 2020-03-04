@@ -54,7 +54,7 @@ class FullscreenSystem extends System {
      * into the JamJar ECS messaging system.
      * @param event The fullscreenchange event
      */
-    protected onFullscreenChange(event: Event) {
+    protected onFullscreenChange(event: Event): void {
         if (this.document.fullscreenElement == null) {
             this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN));
         } else {

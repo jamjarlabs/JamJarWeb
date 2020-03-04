@@ -53,7 +53,7 @@ class PointerSystem extends System {
                 subscriberID: number | undefined; 
                 pointers: [string, Pointer][]; 
                 isFullscreen: boolean;
-                lockedPointerPosition: Vector | undefined
+                lockedPointerPosition: Vector | undefined;
             } =
             { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }) {
         super(messageBus, { scene, evaluator: PointerSystem.EVALUATOR, entities, subscriberID });

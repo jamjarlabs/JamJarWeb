@@ -29,7 +29,7 @@ describe("FullscreenSystem - OnMessage", () => {
             new Error("fail to request fullscreen"),
             new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
                 const canvas = window.document.createElement("canvas");
-                canvas.requestFullscreen = (options?: FullscreenOptions) => {
+                canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => {
                     throw("fail to request fullscreen");
                 }
                 return canvas;
@@ -40,7 +40,7 @@ describe("FullscreenSystem - OnMessage", () => {
             }),
             new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
                 const canvas = window.document.createElement("canvas");
-                canvas.requestFullscreen = (options?: FullscreenOptions) => {
+                canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => {
                     throw("fail to request fullscreen");
                 }
                 return canvas;
@@ -56,8 +56,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new Error("fail to request pointerlock"),
             new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
                 const canvas = window.document.createElement("canvas");
-                canvas.requestFullscreen = (options?: FullscreenOptions) => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = () => { 
+                canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
+                canvas.requestPointerLock = (): void => { 
                     throw("fail to request pointerlock");
                 };
                 return canvas;
@@ -68,8 +68,8 @@ describe("FullscreenSystem - OnMessage", () => {
             }),
             new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
                 const canvas = window.document.createElement("canvas");
-                canvas.requestFullscreen = (options?: FullscreenOptions) => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = () => { 
+                canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
+                canvas.requestPointerLock = (): void => { 
                     throw("fail to request pointerlock");
                 };
                 return canvas;
@@ -85,8 +85,8 @@ describe("FullscreenSystem - OnMessage", () => {
             undefined,
             new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
                 const canvas = window.document.createElement("canvas");
-                canvas.requestFullscreen = (options?: FullscreenOptions) => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = () => {};
+                canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
+                canvas.requestPointerLock = (): void => {return;};
                 return canvas;
             })(), window.document, {
                 entities: new Map(),
@@ -95,8 +95,8 @@ describe("FullscreenSystem - OnMessage", () => {
             }),
             new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
                 const canvas = window.document.createElement("canvas");
-                canvas.requestFullscreen = (options?: FullscreenOptions) => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = () => {};
+                canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
+                canvas.requestPointerLock = (): void => {return;};
                 return canvas;
             })(), window.document, {
                 entities: new Map(),
@@ -111,7 +111,7 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(),  window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = () => { throw("fail to exit fullscreen") };
+                doc.exitFullscreen = (): Promise<void> => { throw("fail to exit fullscreen") };
                 return doc
             })(), {
                 entities: new Map(),
@@ -121,7 +121,7 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = () => { throw("fail to exit fullscreen") };
+                doc.exitFullscreen = (): Promise<void> => { throw("fail to exit fullscreen") };
                 return doc
             })(), {
                 entities: new Map(),
@@ -136,8 +136,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(),  window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = () => {  return new Promise((resolve, reject) => resolve()); };
-                doc.exitPointerLock = () => { throw("fail to exit pointerlock") };
+                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void => resolve()); };
+                doc.exitPointerLock = (): Promise<void>  => { throw("fail to exit pointerlock") };
                 return doc
             })(), {
                 entities: new Map(),
@@ -147,8 +147,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = () => {  return new Promise((resolve, reject) => resolve()); };
-                doc.exitPointerLock = () => { throw("fail to exit pointerlock") };
+                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void  => resolve()); };
+                doc.exitPointerLock = (): Promise<void>  => { throw("fail to exit pointerlock") };
                 return doc
             })(), {
                 entities: new Map(),
@@ -163,8 +163,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(),  window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = () => {  return new Promise((resolve, reject) => resolve()); };
-                doc.exitPointerLock = () => { };
+                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void  => resolve()); };
+                doc.exitPointerLock = (): void  => { return; };
                 return doc
             })(), {
                 entities: new Map(),
@@ -174,8 +174,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = () => {  return new Promise((resolve, reject) => resolve()); };
-                doc.exitPointerLock = () => { };
+                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void  => resolve()); };
+                doc.exitPointerLock = (): void  => { return; };
                 return doc
             })(), {
                 entities: new Map(),
