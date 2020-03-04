@@ -55,11 +55,13 @@ allows testing them without having to use JS event listeners
 
 ▪ **inputElement**: *HTMLElement*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [] }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }
 
 Name | Type |
 ------ | ------ |
 `entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
+`isFullscreen` | boolean |
+`lockedPointerPosition` | undefined &#124; [Vector](vector.md)‹› |
 `pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
@@ -159,9 +161,9 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Inherited from [System](system.md).[OnMessage](system.md#onmessage)*
+*Inherited from [PointerSystem](pointersystem.md).[OnMessage](pointersystem.md#onmessage)*
 
-*Overrides [Subscriber](subscriber.md).[OnMessage](subscriber.md#abstract-onmessage)*
+*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
 

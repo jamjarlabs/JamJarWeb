@@ -26,6 +26,8 @@ import Component from "../../component/component";
 import Vector from "../../geometry/vector";
 import PointerCameraInfo from "./pointer_camera_info";
 import Transform from "../transform/transform";
+import FullscreenSystem from "../fullscreen/fullscreen_system";
+import IMessage from "../../message/imessage";
 
 /**
  * PointerSystem handles Pointer (mouse, touch etc.) input events, converting them into JamJar ECS messages.
@@ -39,16 +41,27 @@ class PointerSystem extends System {
     };
 
     private inputElement: HTMLElement;
-
+    private isFullscreen: boolean;
     private pointers: [string, Pointer][];
+    private lockedPointerPosition: Vector | undefined;
 
     constructor(messageBus: IMessageBus, inputElement: HTMLElement,
-        { scene, entities, subscriberID, pointers }:
-            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; pointers: [string, Pointer][] } =
-            { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [] }) {
+        { scene, entities, subscriberID, pointers, isFullscreen, lockedPointerPosition }:
+            { 
+                scene: IScene | undefined; 
+                entities: Map<number, SystemEntity>; 
+                subscriberID: number | undefined; 
+                pointers: [string, Pointer][]; 
+                isFullscreen: boolean;
+                lockedPointerPosition: Vector | undefined;
+            } =
+            { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }) {
         super(messageBus, { scene, evaluator: PointerSystem.EVALUATOR, entities, subscriberID });
+        this.messageBus.Subscribe(this, [FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, FullscreenSystem.MESSAGE_EXIT_FULLSCREEN]);
         this.inputElement = inputElement;
         this.pointers = pointers;
+        this.isFullscreen = isFullscreen;
+        this.lockedPointerPosition = lockedPointerPosition;
         // Set up listeners
         this.inputElement.addEventListener("pointermove", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("pointerdown", this.pointerEvent.bind(this));
@@ -64,6 +77,21 @@ class PointerSystem extends System {
         this.pointers = [];
     }
 
+    public OnMessage(message: IMessage): void {
+        super.OnMessage(message);
+        switch (message.type) {
+            case FullscreenSystem.MESSAGE_ENTER_FULLSCREEN: {
+                this.isFullscreen = true;
+                break;
+            }
+            case FullscreenSystem.MESSAGE_EXIT_FULLSCREEN: {
+                this.isFullscreen = false;
+                this.lockedPointerPosition = undefined;
+                break;
+            }
+        }
+    }
+
     /**
      * When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
      * Adds in useful information, such as pointer position within camera bounds, pointer world position
@@ -73,9 +101,26 @@ class PointerSystem extends System {
     protected pointerEvent(event: PointerEvent): void {
         // Get HTML element dimensions, calculate relative position within element
         const rect = this.inputElement.getBoundingClientRect();
+        let pointerX = event.clientX;
+        let pointerY = event.clientY;
+
+        if (this.isFullscreen) {
+            // If fullscreen, position calculated differently, using movementX and movementY
+            // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API
+            // movementX and movementY are the change in pointer position from the last event
+            // lockedPointerPosition is undefined when not fullscreen, when fullscreen it is used to
+            // keep track of the last pointer position
+            if (this.lockedPointerPosition !== undefined) {
+                this.lockedPointerPosition = this.lockedPointerPosition.Add(new Vector(event.movementX, event.movementY));
+                pointerX = this.lockedPointerPosition.x;
+                pointerY = this.lockedPointerPosition.y;
+            } else {
+                this.lockedPointerPosition = new Vector(event.clientX, event.clientY);
+            }
+        }
         const elementPosition = new Vector(
-            ((event.clientX - rect.left) - (rect.width / 2)) / rect.width,
-            -((event.clientY - rect.top) - (rect.height / 2)) / rect.height
+            ((pointerX - rect.left) - (rect.width / 2)) / rect.width,
+            -((pointerY - rect.top) - (rect.height / 2)) / rect.height
         );
 
         const pointerCameraInfos: PointerCameraInfo[] = [];
