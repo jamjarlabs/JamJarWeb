@@ -25,6 +25,8 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
 * [entities](pointersystem.md#protected-entities)
 * [inputElement](pointersystem.md#private-inputelement)
+* [isFullscreen](pointersystem.md#private-isfullscreen)
+* [lockedPointerPosition](pointersystem.md#private-lockedpointerposition)
 * [messageBus](pointersystem.md#protected-messagebus)
 * [pointers](pointersystem.md#private-pointers)
 * [scene](pointersystem.md#protected-optional-scene)
@@ -56,11 +58,13 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
 ▪ **inputElement**: *HTMLElement*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [] }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }
 
 Name | Type |
 ------ | ------ |
 `entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
+`isFullscreen` | boolean |
+`lockedPointerPosition` | undefined &#124; [Vector](vector.md)‹› |
 `pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
@@ -80,6 +84,18 @@ ___
 ### `Private` inputElement
 
 • **inputElement**: *HTMLElement*
+
+___
+
+### `Private` isFullscreen
+
+• **isFullscreen**: *boolean*
+
+___
+
+### `Private` lockedPointerPosition
+
+• **lockedPointerPosition**: *[Vector](vector.md) | undefined*
 
 ___
 
@@ -172,9 +188,7 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Inherited from [System](system.md).[OnMessage](system.md#onmessage)*
-
-*Overrides [Subscriber](subscriber.md).[OnMessage](subscriber.md#abstract-onmessage)*
+*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
 

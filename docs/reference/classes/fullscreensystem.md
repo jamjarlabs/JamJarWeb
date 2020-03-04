@@ -1,14 +1,13 @@
 
-# Class: TestPointerSystem
-
-TestKeyboardSystem is an extension of the PointerSystem that exposes the pointer event functions,
-allows testing them without having to use JS event listeners
+# Class: FullscreenSystem
 
 ## Hierarchy
 
-  ↳ [PointerSystem](pointersystem.md)
+  ↳ [System](system.md)
 
-  ↳ **TestPointerSystem**
+  ↳ **FullscreenSystem**
+
+  ↳ [TestFullscreenSystem](testfullscreensystem.md)
 
 ## Implements
 
@@ -18,34 +17,37 @@ allows testing them without having to use JS event listeners
 
 ### Constructors
 
-* [constructor](testpointersystem.md#constructor)
+* [constructor](fullscreensystem.md#constructor)
 
 ### Properties
 
-* [entities](testpointersystem.md#protected-entities)
-* [messageBus](testpointersystem.md#protected-messagebus)
-* [scene](testpointersystem.md#protected-optional-scene)
-* [subscriberID](testpointersystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](testpointersystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](testpointersystem.md#static-message_register)
-* [MESSAGE_UPDATE](testpointersystem.md#static-message_update)
+* [canvas](fullscreensystem.md#private-canvas)
+* [document](fullscreensystem.md#private-document)
+* [entities](fullscreensystem.md#protected-entities)
+* [messageBus](fullscreensystem.md#protected-messagebus)
+* [scene](fullscreensystem.md#protected-optional-scene)
+* [subscriberID](fullscreensystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](fullscreensystem.md#static-message_deregister)
+* [MESSAGE_ENTER_FULLSCREEN](fullscreensystem.md#static-message_enter_fullscreen)
+* [MESSAGE_EXIT_FULLSCREEN](fullscreensystem.md#static-message_exit_fullscreen)
+* [MESSAGE_REGISTER](fullscreensystem.md#static-message_register)
+* [MESSAGE_REQUEST_ENTER_FULLSCREEN](fullscreensystem.md#static-message_request_enter_fullscreen)
+* [MESSAGE_REQUEST_EXIT_FULLSCREEN](fullscreensystem.md#static-message_request_exit_fullscreen)
+* [MESSAGE_UPDATE](fullscreensystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](testpointersystem.md#destroy)
-* [OnDestroy](testpointersystem.md#protected-ondestroy)
-* [OnMessage](testpointersystem.md#onmessage)
-* [SimulatePointerEvent](testpointersystem.md#simulatepointerevent)
-* [Update](testpointersystem.md#protected-update)
-* [pointerEvent](testpointersystem.md#protected-pointerevent)
+* [Destroy](fullscreensystem.md#destroy)
+* [OnDestroy](fullscreensystem.md#protected-ondestroy)
+* [OnMessage](fullscreensystem.md#onmessage)
+* [Update](fullscreensystem.md#protected-update)
+* [onFullscreenChange](fullscreensystem.md#protected-onfullscreenchange)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `__namedParameters`: object): *[TestPointerSystem](testpointersystem.md)*
-
-*Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
+\+ **new FullscreenSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `document`: HTMLDocument, `__namedParameters`: object): *[FullscreenSystem](fullscreensystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -53,22 +55,33 @@ allows testing them without having to use JS event listeners
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪ **inputElement**: *HTMLElement*
+▪ **canvas**: *HTMLCanvasElement*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }
+▪ **document**: *HTMLDocument*
+
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
 `entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`isFullscreen` | boolean |
-`lockedPointerPosition` | undefined &#124; [Vector](vector.md)‹› |
-`pointers` | [string, [Pointer](pointer.md)‹›][] |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
-**Returns:** *[TestPointerSystem](testpointersystem.md)*
+**Returns:** *[FullscreenSystem](fullscreensystem.md)*
 
 ## Properties
+
+### `Private` canvas
+
+• **canvas**: *HTMLCanvasElement*
+
+___
+
+### `Private` document
+
+• **document**: *HTMLDocument*
+
+___
 
 ### `Protected` entities
 
@@ -112,11 +125,35 @@ ___
 
 ___
 
+### `Static` MESSAGE_ENTER_FULLSCREEN
+
+▪ **MESSAGE_ENTER_FULLSCREEN**: *"message_enter_fullscreen"* = "message_enter_fullscreen"
+
+___
+
+### `Static` MESSAGE_EXIT_FULLSCREEN
+
+▪ **MESSAGE_EXIT_FULLSCREEN**: *"message_exit_fullscreen"* = "message_exit_fullscreen"
+
+___
+
 ### `Static` MESSAGE_REGISTER
 
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
 
 *Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+
+___
+
+### `Static` MESSAGE_REQUEST_ENTER_FULLSCREEN
+
+▪ **MESSAGE_REQUEST_ENTER_FULLSCREEN**: *"message_request_enter_fullscreen"* = "message_request_enter_fullscreen"
+
+___
+
+### `Static` MESSAGE_REQUEST_EXIT_FULLSCREEN
+
+▪ **MESSAGE_REQUEST_EXIT_FULLSCREEN**: *"message_request_exit_fullscreen"* = "message_request_exit_fullscreen"
 
 ___
 
@@ -161,8 +198,6 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Inherited from [PointerSystem](pointersystem.md).[OnMessage](pointersystem.md#onmessage)*
-
 *Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
@@ -175,46 +210,32 @@ Name | Type |
 
 ___
 
-###  SimulatePointerEvent
-
-▸ **SimulatePointerEvent**(`event`: PointerEvent): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`event` | PointerEvent |
-
-**Returns:** *void*
-
-___
-
 ### `Protected` Update
 
-▸ **Update**(): *void*
+▸ **Update**(`dt`: number): *void*
 
-*Inherited from [PointerSystem](pointersystem.md).[Update](pointersystem.md#protected-update)*
+*Inherited from [System](system.md).[Update](system.md#protected-update)*
 
-*Overrides [System](system.md).[Update](system.md#protected-update)*
-
-**Returns:** *void*
-
-___
-
-### `Protected` pointerEvent
-
-▸ **pointerEvent**(`event`: PointerEvent): *void*
-
-*Inherited from [PointerSystem](pointersystem.md).[pointerEvent](pointersystem.md#protected-pointerevent)*
-
-When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
-Adds in useful information, such as pointer position within camera bounds, pointer world position
-for each camera and if the pointer is within a camera's bounds.
+General update method, default empty. Override with custom logic.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`event` | PointerEvent | Pointer Event  |
+`dt` | number | DeltaTime  |
+
+**Returns:** *void*
+
+___
+
+### `Protected` onFullscreenChange
+
+▸ **onFullscreenChange**(`event`: Event): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | Event |
 
 **Returns:** *void*
