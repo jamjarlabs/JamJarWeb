@@ -33,7 +33,6 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 ### Methods
 
 * [Destroy](motionsystem.md#destroy)
-* [GetSystemEntity](motionsystem.md#protected-getsystementity)
 * [OnDestroy](motionsystem.md#protected-ondestroy)
 * [OnMessage](motionsystem.md#onmessage)
 * [Update](motionsystem.md#protected-update)
@@ -51,11 +50,11 @@ This system handles velocity, acceleration, angular velocity and angular acceler
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
@@ -65,7 +64,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
@@ -134,27 +133,6 @@ systems are discouraged; communication should all be through the
 message bus.
 
 **Returns:** *void*
-
-___
-
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-*Inherited from [System](system.md).[GetSystemEntity](system.md#protected-getsystementity)*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
 
 ___
 

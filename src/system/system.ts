@@ -35,7 +35,7 @@ abstract class System extends Subscriber {
     public static readonly MESSAGE_REGISTER = "system_register";
     public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
-    protected entities: SystemEntity[];
+    protected entities: Map<number, SystemEntity>;
     protected scene?: IScene;
 
     // The evaluator is used to evaluate if an entity with its components should be
@@ -44,8 +44,8 @@ abstract class System extends Subscriber {
 
     constructor(protected messageBus: IMessageBus,
         { scene, evaluator, entities, subscriberID }:
-            { scene: IScene | undefined; evaluator: Evaluator | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-            { scene: undefined, evaluator: undefined, entities: [], subscriberID: undefined }) {
+            { scene: IScene | undefined; evaluator: Evaluator | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+            { scene: undefined, evaluator: undefined, entities: new Map(), subscriberID: undefined }) {
         super(subscriberID);
         this.entities = entities;
         this.evaluator = evaluator;
@@ -127,22 +127,6 @@ abstract class System extends Subscriber {
     }
 
     /**
-     * Helper function to retrieve the SystemEntity equivalent of an
-     * Entity if it exists in this system, otherwise returns undefined.
-     * @param {IEntity} entity The entity to get the SystemEntity of
-     * @returns {SystemEntity|undefined} The system entity if it exists, otherwise undefined
-     */
-    protected GetSystemEntity(entity: IEntity): SystemEntity | undefined {
-        for (let i = 0; i < this.entities.length; i++) {
-            const systemEntity = this.entities[i];
-            if (systemEntity.entity.id == entity.id) {
-                return this.entities[i];
-            }
-        }
-        return;
-    }
-
-    /**
      * register is used when a new entity is created with components, or an existing
      * entity's components are changed; register calls the evaluator to check if the
      * system should track this entity. If the evaluator returns true, the entity
@@ -163,7 +147,7 @@ abstract class System extends Subscriber {
         }
 
         // Add component to system
-        this.entities.push(new SystemEntity(entity, components));
+        this.entities.set(entity.id, new SystemEntity(entity, components));
     }
 
     /**
@@ -171,13 +155,7 @@ abstract class System extends Subscriber {
      * @param {IEntity} entity The entity to remove
      */
     private remove(entity: IEntity): void {
-        for (let i = 0; i < this.entities.length; i++) {
-            const systemEntity = this.entities[i];
-            if (systemEntity.entity.id == entity.id) {
-                this.entities.splice(i, 1);
-                return;
-            }
-        }
+        this.entities.delete(entity.id);
     }
 }
 

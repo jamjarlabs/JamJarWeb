@@ -85,8 +85,8 @@ class BallSystem extends System {
     };
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined, entities: SystemEntity[], subscriberID: number | undefined } =
-        { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene: IScene | undefined, entities: Map<number, SystemEntity>, subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: BallSystem.EVALUATOR, scene, entities, subscriberID });
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
     }
@@ -99,11 +99,11 @@ class BallSystem extends System {
                 if (collisionMessage.payload === undefined) {
                     return;
                 }
-                const balls = this.entities.filter((entity) => {
+                const balls = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Ball.KEY);
                 });
 
-                const bricks = this.entities.filter((entity) => {
+                const bricks = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Brick.KEY);
                 });
                 for (let i = 0; i < balls.length; i++) {
@@ -134,13 +134,13 @@ class BallSystem extends System {
     }
 
     protected Update(): void {
-        const player = this.entities.filter((entity) => {
+        const player = [...this.entities.values()].filter((entity) => {
             return entity.Get(Player.KEY);
         })[0];
 
         const playerTransform = player.Get(Transform.KEY) as Transform;
 
-        const balls = this.entities.filter((entity) => {
+        const balls = [...this.entities.values()].filter((entity) => {
             return entity.Get(Ball.KEY);
         });
 
@@ -191,8 +191,8 @@ class PlayerSystem extends System {
     };
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined, entities: SystemEntity[], subscriberID: number | undefined } =
-        { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene: IScene | undefined, entities: Map<number, SystemEntity>, subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: PlayerSystem.EVALUATOR, scene, entities, subscriberID });
         messageBus.Subscribe(this, "pointermove");
         messageBus.Subscribe(this, "pointerdown");
@@ -210,7 +210,7 @@ class PlayerSystem extends System {
                 if (pointer.cameraInfos.length <= 0) {
                     return;
                 }
-                const players = this.entities.filter((entity) => {
+                const players = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Player.KEY);
                 });
                 for (let i = 0; i < players.length; i++) {
@@ -218,7 +218,7 @@ class PlayerSystem extends System {
                     const transform = entity.Get(Transform.KEY) as Transform;
                     transform.position.x = pointer.cameraInfos[0].worldPosition.x;
                 }
-                const balls = this.entities.filter((entity) => {
+                const balls = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Ball.KEY);
                 })
                 for (let i = 0; i < balls.length; i++) {
@@ -232,7 +232,7 @@ class PlayerSystem extends System {
                 break;
             }
             case "pointerdown": {
-                const balls = this.entities.filter((entity) => {
+                const balls = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Ball.KEY);
                 })
                 for (let i = 0; i < balls.length; i++) {
@@ -251,12 +251,12 @@ class PlayerSystem extends System {
 
 class SimpleScene extends Scene {
     OnStart(): void {
-        new SpriteSystem(messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new MotionSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new InterpolationSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new PlayerSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new BallSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new CollisionSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
+        new SpriteSystem(messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new MotionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new InterpolationSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new PlayerSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new BallSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new CollisionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
 
         const camera = new Entity(this.messageBus);
         camera.Add(new Transform(new Vector(0, 0)));

@@ -37,8 +37,8 @@ class SpriteSystem extends System {
 
     constructor(messageBus: IMessageBus,
         { scene, entities, subscriberID }:
-            { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-            { scene: undefined, entities: [], subscriberID: undefined }) {
+            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+            { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: SpriteSystem.EVALUATOR, scene, entities, subscriberID });
         this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
@@ -59,7 +59,7 @@ class SpriteSystem extends System {
 
     private prepareSprites(alpha: number): void {
         const renderables: Renderable[] = [];
-        for (const entity of this.entities) {
+        for (const entity of this.entities.values()) {
             const sprite = entity.Get(Sprite.KEY) as Sprite;
             const transform = entity.Get(Transform.KEY) as Transform;
             renderables.push(new Renderable(

@@ -30,10 +30,8 @@
 ### Methods
 
 * [Destroy](testsystem.md#destroy)
-* [GetSystemEntity](testsystem.md#protected-getsystementity)
 * [OnDestroy](testsystem.md#protected-ondestroy)
 * [OnMessage](testsystem.md#onmessage)
-* [TestGetSystemEntity](testsystem.md#testgetsystementity)
 * [Update](testsystem.md#protected-update)
 
 ## Constructors
@@ -50,11 +48,11 @@
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: [], subscriberID: undefined }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: new Map(), subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `evaluator` | undefined &#124; function |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
@@ -65,7 +63,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
@@ -137,27 +135,6 @@ message bus.
 
 ___
 
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-*Inherited from [System](system.md).[GetSystemEntity](system.md#protected-getsystementity)*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
-
-___
-
 ### `Protected` OnDestroy
 
 ▸ **OnDestroy**(): *void*
@@ -186,20 +163,6 @@ Name | Type |
 `message` | [IMessage](../interfaces/imessage.md) |
 
 **Returns:** *void*
-
-___
-
-###  TestGetSystemEntity
-
-▸ **TestGetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
 
 ___
 

@@ -38,8 +38,8 @@ class InterpolationSystem extends System {
     };
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-        { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: InterpolationSystem.EVALUATOR, scene, entities, subscriberID });
         this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
     }
@@ -48,7 +48,7 @@ class InterpolationSystem extends System {
         super.OnMessage(message);
         switch (message.type) {
             case Game.MESSAGE_POST_RENDER: {
-                this.interpolateTransforms(this.entities);
+                this.interpolateTransforms();
                 break;
             }
         }
@@ -60,8 +60,8 @@ class InterpolationSystem extends System {
      * interpolate its position when drawing.
      * @param {SystemEntity[]} entities The entities to update the interpolation positions of 
      */
-    private interpolateTransforms(entities: SystemEntity[]): void {
-        for (const entity of entities) {
+    private interpolateTransforms(): void {
+        for (const entity of this.entities.values()) {
             const transform = entity.Get(Transform.KEY) as Transform;
             transform.previous = transform.position.Copy();
         }

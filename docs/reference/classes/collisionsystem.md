@@ -37,7 +37,6 @@ Once it has determined all collisions, it broadcasts them as messages.
 ### Methods
 
 * [Destroy](collisionsystem.md#destroy)
-* [GetSystemEntity](collisionsystem.md#protected-getsystementity)
 * [OnDestroy](collisionsystem.md#protected-ondestroy)
 * [OnMessage](collisionsystem.md#onmessage)
 * [Update](collisionsystem.md#update)
@@ -57,11 +56,11 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 ▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: [], subscriberID: undefined }
+▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined }
 
 Name | Type |
 ------ | ------ |
-`entities` | [SystemEntity](systementity.md)‹›[] |
+`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
 `scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
 `subscriberID` | undefined &#124; number |
 
@@ -71,7 +70,7 @@ Name | Type |
 
 ### `Protected` entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
+• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
@@ -149,27 +148,6 @@ message bus.
 
 ___
 
-### `Protected` GetSystemEntity
-
-▸ **GetSystemEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *[SystemEntity](systementity.md) | undefined*
-
-*Inherited from [System](system.md).[GetSystemEntity](system.md#protected-getsystementity)*
-
-Helper function to retrieve the SystemEntity equivalent of an
-Entity if it exists in this system, otherwise returns undefined.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to get the SystemEntity of |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-The system entity if it exists, otherwise undefined
-
-___
-
 ### `Protected` OnDestroy
 
 ▸ **OnDestroy**(): *void*
@@ -213,16 +191,10 @@ ___
 
 ###  broadPhase
 
-▸ **broadPhase**(`entities`: [SystemEntity](systementity.md)[]): *[[SystemEntity](systementity.md), [SystemEntity](systementity.md)][]*
+▸ **broadPhase**(): *[[SystemEntity](systementity.md), [SystemEntity](systementity.md)][]*
 
 broadPhase uses a broad phase collision detection algorithm, gathering pairs of possible
 entities that are colliding.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`entities` | [SystemEntity](systementity.md)[] | Array of entities to check for possible collisions. |
 
 **Returns:** *[[SystemEntity](systementity.md), [SystemEntity](systementity.md)][]*
 

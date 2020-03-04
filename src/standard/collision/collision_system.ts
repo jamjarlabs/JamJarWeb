@@ -45,14 +45,14 @@ class CollisionSystem extends System {
     };
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-        { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: CollisionSystem.EVALUATOR, scene, entities, subscriberID });
     }
 
     Update(): void {
         // Get collisions
-        const collisions = this.narrowPhase(this.broadPhase(this.entities));
+        const collisions = this.narrowPhase(this.broadPhase());
         // Publish collisions
         for (const collision of collisions) {
             this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_DETECTED, collision));
@@ -65,12 +65,10 @@ class CollisionSystem extends System {
      * @param {SystemEntity[]} entities Array of entities to check for possible collisions.
      * @returns {[SystemEntity, SystemEntity][]} A list of pairs of entities that could be colliding.
      */
-    broadPhase(entities: SystemEntity[]): [SystemEntity, SystemEntity][] {
+    broadPhase(): [SystemEntity, SystemEntity][] {
         const possibleCollisions: [SystemEntity, SystemEntity][] = []
-        for (let i = 0; i < entities.length; i++) {
-            const a = entities[i];
-            for (let j = 0; j < entities.length; j++) {
-                const b = entities[j];
+        for (const a of this.entities.values()) {
+            for (const b of this.entities.values()) {
                 if (a.entity.id != b.entity.id) {
                     if (!possibleCollisions.some((collision) => {
                         return collision[0].entity.id == b.entity.id && collision[1].entity.id == a.entity.id

@@ -91,8 +91,8 @@ class AsteroidSystem extends System {
     private destroyed: IEntity[];
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID, lastSpawnTime, spawnInterval }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined, lastSpawnTime: number; spawnInterval: number } =
-        { scene: undefined, entities: [], subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined, lastSpawnTime: number; spawnInterval: number } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL }) {
         super(messageBus, { evaluator: AsteroidSystem.EVALUATOR, scene, entities, subscriberID });
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
         this.lastSpawnTime = lastSpawnTime;
@@ -119,7 +119,7 @@ class AsteroidSystem extends System {
             this.createAsteroid(startPosition, size, Asteroid.MAX_SPEED);
         }
 
-        const asteroids = this.entities.filter((entity) => {
+        const asteroids = [...this.entities.values()].filter((entity) => {
             return entity.Get(Asteroid.KEY);
         });
 
@@ -143,15 +143,13 @@ class AsteroidSystem extends System {
                 if (collisionMessage.payload === undefined) {
                     return;
                 }
-                const asteroids = this.entities.filter((entity) => {
+                const asteroids = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Asteroid.KEY);
                 });
-                const bullets = this.entities.filter((entity) => {
+                const bullets = [...this.entities.values()].filter((entity) => {
                     return entity.Get(Bullet.KEY);
                 });
-                for (let i = 0; i < bullets.length; i++) {
-                    const bullet = bullets[i];
-
+                for (const bullet of bullets) {
                     let destroyEntity: IEntity | undefined = undefined;
 
                     if (bullet.entity.id == collisionMessage.payload.a.id) {
@@ -163,8 +161,7 @@ class AsteroidSystem extends System {
                     if (destroyEntity === undefined || this.destroyed.includes(destroyEntity)) {
                         continue;
                     }
-                    for (let j = 0; j < asteroids.length; j++) {
-                        const entity = asteroids[i];
+                    for (const entity of asteroids) {
                         if (entity === undefined || entity.entity.id != destroyEntity.id ) {
                             continue;
                         }
@@ -215,14 +212,13 @@ class BulletSystem extends System {
     };
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined } =
-        { scene: undefined, entities: [], subscriberID: undefined }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
         super(messageBus, { evaluator: BulletSystem.EVALUATOR, scene, entities, subscriberID });
     }
 
     protected Update(dt: number): void {
-        for (let i = 0; i < this.entities.length; i++) {
-            const bullet = this.entities[i];
+        for (const bullet of this.entities.values()) {
             const transform = bullet.Get(Transform.KEY) as Transform;
             // Delete bullets beyond the game screen
             if (transform.position.x > 85 || transform.position.x < -85 ||
@@ -245,8 +241,8 @@ class ControllerSystem extends System {
     private targetedPosition: Vector;
 
     constructor(messageBus: IMessageBus, { scene, entities, subscriberID, targetedPosition }:
-        { scene: IScene | undefined; entities: SystemEntity[]; subscriberID: number | undefined, targetedPosition: Vector } =
-        { scene: undefined, entities: [], subscriberID: undefined, targetedPosition: new Vector(0, 0) }) {
+        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined, targetedPosition: Vector } =
+        { scene: undefined, entities: new Map(), subscriberID: undefined, targetedPosition: new Vector(0, 0) }) {
         super(messageBus, { evaluator: ControllerSystem.EVALUATOR, scene, entities, subscriberID });
         this.messageBus.Subscribe(this, ["pointermove", "pointerdown"])
         this.targetedPosition = targetedPosition;
@@ -264,24 +260,21 @@ class ControllerSystem extends System {
                 break;
             }
             case "pointerdown": {
-                if (this.entities.length <= 0) {
-                    return;
-                }
-
-                const player = this.entities[0];
-                const transform = player.Get(Transform.KEY) as Transform;
-                const orientation = this.getOrientationToTarget(transform.position);
-                const bullet = new Entity(this.messageBus);
-                const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
-
-                bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.2, 3), orientation));
-                bullet.Add(new Sprite(new Color(1, 0, 0, 1)));
-                bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
-                bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
-                bullet.Add(new Bullet());
-
-                if (this.scene !== undefined) {
-                    this.scene.AddEntity(bullet);
+                for (const player of this.entities.values()) {
+                    const transform = player.Get(Transform.KEY) as Transform;
+                    const orientation = this.getOrientationToTarget(transform.position);
+                    const bullet = new Entity(this.messageBus);
+                    const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
+    
+                    bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.2, 3), orientation));
+                    bullet.Add(new Sprite(new Color(1, 0, 0, 1)));
+                    bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
+                    bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
+                    bullet.Add(new Bullet());
+    
+                    if (this.scene !== undefined) {
+                        this.scene.AddEntity(bullet);
+                    }
                 }
                 break;
             }
@@ -289,12 +282,10 @@ class ControllerSystem extends System {
     }
 
     protected Update(dt: number): void {
-        if (this.entities.length <= 0) {
-            return;
+        for (const player of this.entities.values()) {
+            const transform = player.Get(Transform.KEY) as Transform;
+            transform.angle = this.getOrientationToTarget(transform.position);
         }
-        const player = this.entities[0];
-        const transform = player.Get(Transform.KEY) as Transform;
-        transform.angle = this.getOrientationToTarget(transform.position);
     }
 
     private getOrientationToTarget(startPos: Vector): number {
@@ -310,14 +301,14 @@ class ControllerSystem extends System {
 
 class MainScene extends Scene {
     OnStart(): void {
-        new SpriteSystem(messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new MotionSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new InterpolationSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new CollisionSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined });
-        new ImageSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined, loadQueue: [], images: [] })
-        new ControllerSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined, targetedPosition: new Vector(0, 0) })
-        new BulletSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined })
-        new AsteroidSystem(this.messageBus, { scene: this, entities: [], subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL })
+        new SpriteSystem(messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new MotionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new InterpolationSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new CollisionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new ImageSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, loadQueue: [], images: [] })
+        new ControllerSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, targetedPosition: new Vector(0, 0) })
+        new BulletSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined })
+        new AsteroidSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL })
 
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]))
 
