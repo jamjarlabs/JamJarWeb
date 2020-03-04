@@ -21,6 +21,10 @@ import IMessage from "../../message/imessage";
 import IScene from "../../scene/iscene";
 import Message from "../../message/message";
 
+/**
+ * FullscreenSystem handles JS fullscreen change events, and provides a method for requesting 
+ * entering/existing fullscreen/pointer lock.
+ */
 class FullscreenSystem extends System {
 
     public static readonly MESSAGE_REQUEST_ENTER_FULLSCREEN = "message_request_enter_fullscreen";
@@ -45,6 +49,11 @@ class FullscreenSystem extends System {
         this.document.addEventListener("fullscreenchange", this.onFullscreenChange.bind(this));
     }
 
+    /**
+     * When a fullsceenchange event occurs this method is called, handles forwarding the fullscreen events
+     * into the JamJar ECS messaging system.
+     * @param event The fullscreenchange event
+     */
     protected onFullscreenChange(event: Event) {
         if (this.document.fullscreenElement == null) {
             this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN));

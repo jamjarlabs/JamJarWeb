@@ -1,6 +1,9 @@
 
 # Class: FullscreenSystem
 
+FullscreenSystem handles JS fullscreen change events, and provides a method for requesting
+entering/existing fullscreen/pointer lock.
+
 ## Hierarchy
 
   ↳ [System](system.md)
@@ -232,10 +235,13 @@ ___
 
 ▸ **onFullscreenChange**(`event`: Event): *void*
 
+When a fullsceenchange event occurs this method is called, handles forwarding the fullscreen events
+into the JamJar ECS messaging system.
+
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`event` | Event |
+Name | Type | Description |
+------ | ------ | ------ |
+`event` | Event | The fullscreenchange event  |
 
 **Returns:** *void*

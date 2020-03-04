@@ -248,10 +248,13 @@ ___
 
 *Inherited from [FullscreenSystem](fullscreensystem.md).[onFullscreenChange](fullscreensystem.md#protected-onfullscreenchange)*
 
+When a fullsceenchange event occurs this method is called, handles forwarding the fullscreen events
+into the JamJar ECS messaging system.
+
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`event` | Event |
+Name | Type | Description |
+------ | ------ | ------ |
+`event` | Event | The fullscreenchange event  |
 
 **Returns:** *void*
