@@ -100,6 +100,44 @@ describe("Polygon - Transform", () => {
     });
 });
 
+describe("Polygon - PointInside", () => {
+    type TestTuple = [string, boolean, Polygon, Vector];
+    test.each<TestTuple>([
+        [
+            "No points",
+            false,
+            new Polygon([]),
+            new Vector(0,0)
+        ],
+        [
+            "Rectangle around origin, point within",
+            true,
+            Polygon.Rectangle(2,2),
+            new Vector(0,0)
+        ],
+        [
+            "Rectangle around origin, point outside",
+            false,
+            Polygon.Rectangle(2,2),
+            new Vector(5,3)
+        ],
+        [
+            "Rectangle around arbitrary point, point within",
+            true,
+            Polygon.Rectangle(2,2).Transform(new Transform(new Vector(5,3))),
+            new Vector(5,4)
+        ],
+        [
+            "Rectangle around arbitrary point, point outside",
+            false,
+            Polygon.Rectangle(2,2).Transform(new Transform(new Vector(5,3))),
+            new Vector(2,1)
+        ],
+    ])("%p", (description: string, expected: boolean, polygon: Polygon, point: Vector) => {
+        expect(polygon.PointInside(point)).toEqual(expected)
+    });
+});
+
 describe("Polygon - GetArray", () => {
     type TestTuple = [string, number[], Polygon];
     test.each<TestTuple>([

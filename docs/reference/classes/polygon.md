@@ -27,6 +27,7 @@ Can be used in collision detection and rendering.
 * [FarthestPointInDirection](polygon.md#farthestpointindirection)
 * [GetArray](polygon.md#getarray)
 * [GetFloat32Array](polygon.md#getfloat32array)
+* [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
 * [Rectangle](polygon.md#static-rectangle)
 
@@ -89,6 +90,22 @@ GetFloat32Array converts the polygon to a WebGL/glMatrix compatible Float32Array
 **Returns:** *Float32Array*
 
 The array representation of the polygon
+
+___
+
+###  PointInside
+
+▸ **PointInside**(`point`: [Vector](vector.md)): *boolean*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`point` | [Vector](vector.md) |
+
+**Returns:** *boolean*
 
 ___
 

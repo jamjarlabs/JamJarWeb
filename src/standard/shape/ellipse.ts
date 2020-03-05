@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,13 +26,13 @@ class Ellipse implements IShape {
     public dimensions: Vector;
     public orientation: number;
 
-    constructor(dimensions: Vector, orientation = 0, center: Vector = new Vector(0,0)) {
+    constructor(dimensions: Vector, orientation = 0, center: Vector = new Vector(0, 0)) {
         this.center = center;
         this.dimensions = dimensions;
         this.orientation = orientation;
     }
 
-    Transform(transform: Transform): IShape {
+    public Transform(transform: Transform): IShape {
         const matrix = transform.Matrix3D();
         return new Ellipse(
             this.dimensions.Multiply(transform.scale),
@@ -41,9 +41,14 @@ class Ellipse implements IShape {
         );
     }
 
+    public PointInside(point: Vector): boolean {
+        return Math.pow(point.x - this.center.x, 2) / Math.pow(this.dimensions.x, 2) +
+            Math.pow(point.y - this.center.y, 2) / Math.pow(this.dimensions.y, 2) <= 1;
+    }
+
     public FarthestPointInDirection(direction: Vector): Vector {
         const angle = Math.atan2(direction.y, direction.x);
-        const angledDimensions = this.dimensions.Rotate(new Vector(0,0), this.orientation);
+        const angledDimensions = this.dimensions.Rotate(new Vector(0, 0), this.orientation);
         return new Vector(
             this.center.x + (angledDimensions.x * Math.cos(angle)),
             this.center.y + (angledDimensions.y * Math.sin(angle))
@@ -55,7 +60,7 @@ class Ellipse implements IShape {
      * @param {number} radius Radius of the circle
      * @param {Vector} center Centre of the circle
      */
-    public static Circle(radius: number, center: Vector = new Vector(0,0)): Ellipse {
+    public static Circle(radius: number, center: Vector = new Vector(0, 0)): Ellipse {
         return new Ellipse(new Vector(radius, radius), 0, center);
     }
 

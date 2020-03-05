@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -43,6 +43,7 @@ class Polygon implements IShape {
         return farthestPoint;
     }
 
+
     public Transform(transform: Transform): Polygon {
         const matrix = transform.Matrix3D();
         const transformedPoints = [];
@@ -50,6 +51,27 @@ class Polygon implements IShape {
             transformedPoints.push(point.Apply3D(matrix));
         }
         return new Polygon(transformedPoints);
+    }
+
+    public PointInside(point: Vector): boolean {
+        /**
+         * Raycasting algorithm
+         * https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
+         */
+        let j = this.points.length - 1;
+        let inPolygon = false;
+        for (let i = 0; i < this.points.length; i++) {
+            const cornerA = this.points[i];
+            const cornerB = this.points[j];
+            if (cornerA.y < point.y && cornerB.y >= point.y ||
+                cornerB.y < point.y && cornerA.y >= point.y) {
+                if (cornerA.x + (point.y - cornerA.y)/(cornerB.y-cornerA.y)*(cornerB.x-cornerA.x) < point.x) {
+                    inPolygon = true;
+                }
+            }
+            j=i;
+        }
+        return inPolygon;
     }
 
     /**
