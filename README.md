@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/jthomperoo/jamjar/workflows/JamJar/badge.svg)](https://github.com/jthomperoo/JamJar/actions)
-[![CodeCov Report](https://codecov.io/gh/jthomperoo/jamjar/branch/master/graph/badge.svg)](https://codecov.io/gh/jthomperoo/jamjar)
+[![Build Status](https://github.com/jamjarlabs/jamjar/workflows/JamJar/badge.svg)](https://github.com/jamjarlabs/JamJar/actions)
+[![CodeCov Report](https://codecov.io/gh/jamjarlabs/jamjar/branch/master/graph/badge.svg)](https://codecov.io/gh/jamjarlabs/jamjar)
 [![License - Apache 2.0](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/jamjar/badge/?version=latest)](https://jamjar.readthedocs.io/en/latest)
 [![NPM Package](https://img.shields.io/npm/v/jamjar)](https://www.npmjs.com/package/jamjar)
