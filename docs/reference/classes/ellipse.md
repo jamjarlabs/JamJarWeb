@@ -26,6 +26,7 @@ Ellipse is the representation of a 2D Ellipse shape. Can be used for collision d
 ### Methods
 
 * [FarthestPointInDirection](ellipse.md#farthestpointindirection)
+* [PointInside](ellipse.md#pointinside)
 * [Transform](ellipse.md#transform)
 * [Circle](ellipse.md#static-circle)
 
@@ -41,7 +42,7 @@ Name | Type | Default |
 ------ | ------ | ------ |
 `dimensions` | [Vector](vector.md) | - |
 `orientation` | number | 0 |
-`center` | [Vector](vector.md) | new Vector(0,0) |
+`center` | [Vector](vector.md) | new Vector(0, 0) |
 
 **Returns:** *[Ellipse](ellipse.md)*
 
@@ -81,6 +82,22 @@ Name | Type |
 
 ___
 
+###  PointInside
+
+▸ **PointInside**(`point`: [Vector](vector.md)): *boolean*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`point` | [Vector](vector.md) |
+
+**Returns:** *boolean*
+
+___
+
 ###  Transform
 
 ▸ **Transform**(`transform`: [Transform](transform.md)): *[IShape](../interfaces/ishape.md)*
@@ -108,6 +125,6 @@ Circle returns a new Ellipse in the shape of a circle.
 Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `radius` | number | - | Radius of the circle |
-`center` | [Vector](vector.md) | new Vector(0,0) | Centre of the circle  |
+`center` | [Vector](vector.md) | new Vector(0, 0) | Centre of the circle  |
 
 **Returns:** *[Ellipse](ellipse.md)*

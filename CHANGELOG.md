@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added `FullscreenSystem` to handle fullscreen events and pointer lock.
 - `PointerSystem` supports pointer lock through the `FullscreenSystem`.
+- `PointInside` function for shapes (`Polygon` and `Ellipse`), determines if a point is inside the polygon.
 ### Changed
 - `KeyboardSystem` messages emitted use JS `KeyboardEvent.code` (physical keyboard) rather than `KeyboardEvent.key` (input character).
 - `System` to store `SystemEntities` as a map rather than as an array, for easier random access.
