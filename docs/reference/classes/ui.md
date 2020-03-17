@@ -1,6 +1,12 @@
 
 # Class: UI
 
+UI is a component for marking an entity as part of the UI,
+this changes how it is rendered, and how any transform
+attached to it is interpreted. When attached will cause
+the entity and the sprite it has to be rendered relative
+to the camera, rather than in world space.
+
 ## Hierarchy
 
 * [Component](component.md)
