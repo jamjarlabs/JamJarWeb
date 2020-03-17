@@ -13,6 +13,7 @@
 
 ### Properties
 
+* [camera](renderable.md#optional-camera)
 * [color](renderable.md#color)
 * [modelMatrix](renderable.md#modelmatrix)
 * [texture](renderable.md#optional-texture)
@@ -22,7 +23,7 @@
 
 ###  constructor
 
-\+ **new Renderable**(`verticies`: Float32Array, `modelMatrix`: Float32Array, `color`: [Color](color.md), `texture?`: [Texture](texture.md)): *[Renderable](renderable.md)*
+\+ **new Renderable**(`verticies`: Float32Array, `modelMatrix`: Float32Array, `color`: [Color](color.md), `camera?`: [IEntity](../interfaces/ientity.md), `texture?`: [Texture](texture.md)): *[Renderable](renderable.md)*
 
 **Parameters:**
 
@@ -31,11 +32,18 @@ Name | Type |
 `verticies` | Float32Array |
 `modelMatrix` | Float32Array |
 `color` | [Color](color.md) |
+`camera?` | [IEntity](../interfaces/ientity.md) |
 `texture?` | [Texture](texture.md) |
 
 **Returns:** *[Renderable](renderable.md)*
 
 ## Properties
+
+### `Optional` camera
+
+• **camera**? : *[IEntity](../interfaces/ientity.md)*
+
+___
 
 ###  color
 

@@ -285,6 +285,9 @@ class WebGLSystem extends System {
             const colorLocation = gl.getUniformLocation(program, "uColor");
             
             for (const renderable of this.renderables) {
+                if (renderable.camera !== undefined && renderable.camera.id == cameraEntity.entity.id) {
+                    continue;
+                }
                 const vao = gl.createVertexArray();
                 const positionLocation = gl.getAttribLocation(program, "aVertexPosition");
                 const texturePositionLocation = gl.getAttribLocation(program, "aTexturePosition");
@@ -302,7 +305,7 @@ class WebGLSystem extends System {
                     }
                 }
 
-                gl.uniform1i(texturePresentLocation, Number(texturePresent))
+                gl.uniform1i(texturePresentLocation, Number(texturePresent));
 				gl.activeTexture(gl.TEXTURE0);
                 gl.bindTexture(gl.TEXTURE_2D, texture);
 				gl.uniform1i(textureLocation, 0);
