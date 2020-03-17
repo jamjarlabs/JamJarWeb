@@ -28,6 +28,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [SpriteSystem](spritesystem.md)
 
+  ↳ [UISystem](uisystem.md)
+
   ↳ [TestSystem](testsystem.md)
 
 ## Implements

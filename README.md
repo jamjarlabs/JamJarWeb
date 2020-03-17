@@ -13,12 +13,9 @@ JamJar provides the following:
 * Entity-Component-System architecture.
 * Composition based entities and components.
 * Regular game loop.
-* Sprites and rendering.
-* Collision detection.
-* Scene management.
-* Camera systems.
-* Basic physics for velocities/acceleration/rotation.
-* In development - Rigidbody system
+* Set of standard systems to use
+  * UI System - system for building user interfaces (HUDs etc.)
+  * Pointer System - system for interpreting browser pointer input (mouse, touch etc.)
 
 ## More information
 
@@ -47,6 +44,8 @@ Docs also require some plugins, use `pip install -r docs/requirements.txt` to ge
 Commands available:
 
 * `yarn lint` - Lints the code, if this doesn't pass the CI will fail.
+* `yarn test` - Runs unit tests against the code, if this doesn't pass the CI will fail.
 * `yarn build` - Builds the `/lib` folder, `/lib` is the JS distributable code built from the TypeScript.
 * `yarn watch` - Builds the project, but rebuilds on changes.
 * `yarn docs` - Serve documentation locally.
+* `yarn generate-reference` - Generate the markdown reference.

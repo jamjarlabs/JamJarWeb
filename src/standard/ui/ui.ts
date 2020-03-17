@@ -14,24 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Color from "./color";
-import Texture from "./texture";
-import IEntity from "../entity/ientity";
+import Component from "../../component/component";
+import IEntity from "../../entity/ientity";
 
-class Renderable {
-    public verticies: Float32Array;
-    public modelMatrix: Float32Array;
-    public color: Color;
-    public camera?: IEntity;
-    public texture?: Texture;
+/**
+ * UI is a component for marking an entity as part of the UI,
+ * this changes how it is rendered, and how any transform 
+ * attached to it is interpreted. When attached will cause
+ * the entity and the sprite it has to be rendered relative
+ * to the camera, rather than in world space.
+ */
+class UI extends Component {
+    public static readonly KEY = "ui";
+    public camera: IEntity;
 
-    constructor(verticies: Float32Array, modelMatrix: Float32Array, color: Color, camera?: IEntity, texture?: Texture) {
-        this.verticies = verticies;
-        this.modelMatrix = modelMatrix;
-        this.color = color;
-        this.texture = texture;
+    constructor(camera: IEntity) {
+        super(UI.KEY);
         this.camera = camera;
     }
 }
 
-export default Renderable;
+export default UI;

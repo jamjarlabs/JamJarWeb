@@ -23,6 +23,8 @@ Each entity can only have 1 component of each type.
 
   ↳ [Sprite](sprite.md)
 
+  ↳ [UI](ui.md)
+
 ## Index
 
 ### Constructors

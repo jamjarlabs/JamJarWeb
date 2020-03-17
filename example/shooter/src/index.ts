@@ -20,6 +20,7 @@ import Transform from "jamjar/lib/standard/transform/transform";
 import Vector from "jamjar/lib/geometry/vector";
 import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
 import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
+import UISystem from "jamjar/lib/standard/ui/ui_system";
 import MotionSystem from "jamjar/lib/standard/motion/motion_system";
 import FullscreenSystem from "jamjar/lib/standard/fullscreen/fullscreen_system";
 import KeyboardSystem from "jamjar/lib/standard/keyboard/keyboard_system";
@@ -47,6 +48,7 @@ import IScene from "jamjar/lib/scene/iscene";
 import IMessage from "jamjar/lib/message/imessage";
 import Pointer from "jamjar/lib/standard/pointer/pointer";
 import Collision from "jamjar/lib/standard/collision/collision";
+import UI from "jamjar/lib/standard/ui/ui";
 
 class Player extends Component {
     public static readonly KEY = "player";
@@ -243,7 +245,7 @@ class BulletSystem extends System {
 class CrosshairSystem extends System {
     // Only entities with transform and crosshair components.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Crosshair.KEY, Transform.KEY].every((type) => components.some(
+        return [Crosshair.KEY, Transform.KEY, UI.KEY].every((type) => components.some(
             component => component.key == type
         ));
     };
@@ -264,7 +266,13 @@ class CrosshairSystem extends System {
                 }
                 for (const crosshair of this.entities.values()) {
                     const transform = crosshair.Get(Transform.KEY) as Transform;
-                    transform.position = pointerMessage.payload.cameraInfos[0].worldPosition;
+                    const ui = crosshair.Get(UI.KEY) as UI;
+                    for (const cameraInfo of pointerMessage.payload.cameraInfos) {
+                        if (cameraInfo.camera.id != ui.camera.id) {
+                            continue;
+                        }  
+                        transform.position = pointerMessage.payload.cameraInfos[0].cameraPosition; 
+                    }
                 }
                 break;
             }
@@ -355,6 +363,7 @@ class ControllerSystem extends System {
 class MainScene extends Scene {
     OnStart(): void {
         new SpriteSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new UISystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
         new MotionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
         new InterpolationSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
         new CollisionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
@@ -366,6 +375,7 @@ class MainScene extends Scene {
 
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]))
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]))
+        this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["ui_banner", "assets/ui_banner.png"]))
 
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
@@ -379,13 +389,26 @@ class MainScene extends Scene {
         this.AddEntity(player);
 
         const crosshair = new Entity(this.messageBus);
-        crosshair.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
+        crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Sprite(new Color(1, 1, 1, 1), {
             bounds: Polygon.Rectangle(1, 1),
             texture: new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
         }));
+        crosshair.Add(new UI(player));
         crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
+
+        const width = 0.32;
+        const height = 0.04;
+
+        const banner = new Entity(this.messageBus);
+        banner.Add(new Transform(new Vector(0.5-width/2,0.5-height/2), new Vector(width,height)))
+        banner.Add(new Sprite(new Color(1, 1, 1, 1), {
+            bounds: Polygon.Rectangle(1, 1),
+            texture: new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
+        }));
+        banner.Add(new UI(player));
+        this.AddEntity(banner);
     }
 }
 
