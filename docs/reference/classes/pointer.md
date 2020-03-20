@@ -42,14 +42,20 @@ Name | Type |
 
 • **cameraInfos**: *[PointerCameraInfo](pointercamerainfo.md)[]*
 
+Relevant camera information around the pointer event.
+
 ___
 
 ###  elementPosition
 
 • **elementPosition**: *[Vector](vector.md)*
 
+Position within the game HTML element, from bottom left (-1, -1) to top right (1, 1).
+
 ___
 
 ###  event
 
 • **event**: *PointerEvent*
+
+Standard PointerEvent dispatched from JS.

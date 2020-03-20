@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - New `UISystem` for creating HUDs and UIs, position and scale relative to camera view rather than world space.
+### Changed
+- Changed coordinate systems from `(-0.5, -0.5) -> (0.5, 0.5)` to `(-1, -1) -> (1, 1)` to be more intuitive.
+  - `Camera` field `viewportPosition` changed.
+  - `PointerCameraInfo` field `cameraPosition` changed.
+  - `Pointer` field `elementPosition` changed.
+  - For `UI` enabled entities, the `Transform` field `position` changed.
 
 ## [v0.3.0] - 2020-03-05
 ### Added

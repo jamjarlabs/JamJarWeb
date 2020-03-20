@@ -174,7 +174,7 @@ class AsteroidSystem extends System {
                         continue;
                     }
                     for (const entity of asteroids) {
-                        if (entity === undefined || entity.entity.id != destroyEntity.id ) {
+                        if (entity === undefined || entity.entity.id != destroyEntity.id) {
                             continue;
                         }
                         entity.Destroy();
@@ -270,8 +270,8 @@ class CrosshairSystem extends System {
                     for (const cameraInfo of pointerMessage.payload.cameraInfos) {
                         if (cameraInfo.camera.id != ui.camera.id) {
                             continue;
-                        }  
-                        transform.position = pointerMessage.payload.cameraInfos[0].cameraPosition; 
+                        }
+                        transform.position = cameraInfo.cameraPosition;
                     }
                 }
                 break;
@@ -326,13 +326,13 @@ class ControllerSystem extends System {
                     const orientation = this.getOrientationToTarget(transform.position);
                     const bullet = new Entity(this.messageBus);
                     const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
-    
+
                     bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.2, 3), orientation));
                     bullet.Add(new Sprite(new Color(1, 0, 0, 1)));
                     bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
                     bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
                     bullet.Add(new Bullet());
-    
+
                     if (this.scene !== undefined) {
                         this.scene.AddEntity(bullet);
                     }
@@ -377,6 +377,11 @@ class MainScene extends Scene {
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]))
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["ui_banner", "assets/ui_banner.png"]))
 
+        const virtualSize = new Vector(160, 90);
+        const viewportPosition = new Vector(0, 0);
+        const viewportScale = new Vector(1, 1);
+        const backgroundColor = new Color(0, 0, 0, 1);
+
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
         player.Add(new Sprite(new Color(1, 1, 1, 1), {
@@ -384,7 +389,7 @@ class MainScene extends Scene {
             texture: new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
         }));
         player.Add(new Collider(Polygon.Rectangle(1, 1)))
-        player.Add(new Camera());
+        player.Add(new Camera(backgroundColor, viewportPosition, viewportScale, virtualSize));
         player.Add(new Player());
         this.AddEntity(player);
 
@@ -398,11 +403,11 @@ class MainScene extends Scene {
         crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
 
-        const width = 0.32;
-        const height = 0.04;
+        const width = 0.2;
+        const height = width * (virtualSize.y / virtualSize.x);
 
         const banner = new Entity(this.messageBus);
-        banner.Add(new Transform(new Vector(0.5-width/2,0.5-height/2), new Vector(width,height)))
+        banner.Add(new Transform(new Vector(1 - width, 1 - height), new Vector(width, height)))
         banner.Add(new Sprite(new Color(1, 1, 1, 1), {
             bounds: Polygon.Rectangle(1, 1),
             texture: new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())

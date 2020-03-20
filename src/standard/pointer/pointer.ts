@@ -22,11 +22,17 @@ import PointerCameraInfo from "./pointer_camera_info";
  * the element the game is running in.
  */
 class Pointer {
-    // Standard PointerEvent dispatched from JS.
+    /**
+     * Standard PointerEvent dispatched from JS.
+     */
     public event: PointerEvent;
-    // Position within the game HTML element, from bottom left (-0.5, -0.5) to top right (0.5, 0.5).
+    /**
+     * Position within the game HTML element, from bottom left (-1, -1) to top right (1, 1).
+     */
     public elementPosition: Vector;
-    // Relevant camera information around the pointer event.
+    /**
+     * Relevant camera information around the pointer event.
+     */
     public cameraInfos: PointerCameraInfo[];
 
     constructor(event: PointerEvent, elementPosition: Vector, cameraInfos: PointerCameraInfo[]) {

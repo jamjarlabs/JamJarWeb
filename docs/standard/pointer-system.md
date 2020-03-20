@@ -53,8 +53,7 @@ public OnMessage(message: IMessage): void {
 
 ### Pointer Messages
 
-Pointer messages contain a [`Pointer`](../../reference/classes/pointer) as a payload - this contains all the information about a pointer event. It contains a JavaScript [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent), the position of the pointer event relative to the game canvas as `elementPosition` and a list of [`PointerCameraInfo`](../../reference/classes/pointercamerainfo) containing pointer information relevant to each camera.  
-
+Pointer messages contain a [`Pointer`](../../reference/classes/pointer) as a payload - this contains all the information about a pointer event. It contains a JavaScript [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent), the position of the pointer event relative to the game canvas as [`elementPosition`](../../reference/classes/pointer#elementposition) and a list of [`PointerCameraInfo`](../../reference/classes/pointercamerainfo) containing pointer information relevant to each camera.  
 The [`PointerCameraInfo`](../../reference/classes/pointercamerainfo) contains information such as the position of the pointer in the world according to the camera, the position of the pointer relative to the camera's viewport, and if the pointer is within a cameras bounds.  
 
 To retrieve this example, see the `OnMessage` implementation below:
@@ -79,3 +78,4 @@ public OnMessage(message: IMessage): void {
     }
 }
 ```
+

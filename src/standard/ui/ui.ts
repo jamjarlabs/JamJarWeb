@@ -26,6 +26,9 @@ import IEntity from "../../entity/ientity";
  */
 class UI extends Component {
     public static readonly KEY = "ui";
+    /**
+     * Entity of the camera to render this UI element on.
+     */
     public camera: IEntity;
 
     constructor(camera: IEntity) {

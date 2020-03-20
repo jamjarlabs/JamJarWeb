@@ -14,8 +14,16 @@ JamJar provides the following:
 * Composition based entities and components.
 * Regular game loop.
 * Set of standard systems to use
-  * UI System - system for building user interfaces (HUDs etc.)
-  * Pointer System - system for interpreting browser pointer input (mouse, touch etc.)
+  * UI System - user interfaces (HUDs etc.).
+  * WebGL System - rendering using WebGL onto a HTML5 canvas.
+  * Collision System - collisions between colliders.
+  * Fullscreen System - fullscreen events and pointer lock.
+  * Interpolation System - smoothing movements between frames.
+  * Keyboard System - keyboard input.
+  * Pointer System - browser pointer input (mouse, touch etc.)
+  * Image System - loading image assets.
+  * Sprite System - processing sprites and images before rendering.
+  * Motion System - simple motion; velocity, acceleration, angular velocity etc.
 
 ## More information
 
