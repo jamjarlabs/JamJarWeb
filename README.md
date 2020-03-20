@@ -12,6 +12,7 @@ The engine is built for the source to be looked at and understood, to help in un
 JamJar provides the following:
 * Entity-Component-System architecture.
 * Composition based entities and components.
+* Messaging.
 * Regular game loop.
 * Set of standard systems to use
   * UI System - user interfaces (HUDs etc.).
@@ -56,4 +57,4 @@ Commands available:
 * `yarn build` - Builds the `/lib` folder, `/lib` is the JS distributable code built from the TypeScript.
 * `yarn watch` - Builds the project, but rebuilds on changes.
 * `yarn docs` - Serve documentation locally.
-* `yarn generate-reference` - Generate the markdown reference.
+* `yarn generate-reference` - Generate the markdown reference, the CI will generate this and if there is a diff it will fail.
