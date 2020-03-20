@@ -49,6 +49,8 @@ Name | Type |
 
 • **camera**: *[IEntity](../interfaces/ientity.md)*
 
+Entity of the camera to render this UI element on.
+
 ___
 
 ###  key

@@ -16,7 +16,7 @@ The UI system will only work in conjunction with some kind of rendering system, 
 
 ## Creating a UI element
 
-A UI element can be created by adding a `UI` component to an entity, alongside required [`Transform`](../../reference/classes/transform) and [`Sprite`](../../reference/classes/sprite) components.
+A UI element can be created by adding a [`UI`](../../reference/classes/ui) component to an entity, alongside required [`Transform`](../../reference/classes/transform) and [`Sprite`](../../reference/classes/sprite) components.
 
 ```typescript
 const gameCamera = new Entity(messageBus);
@@ -38,16 +38,16 @@ This example shows creating a camera, and then a UI element that will display in
 
 ![UI coordinate system](../assets/ui_dimensions.svg)
 
-The UI uses a coordinate system relative to the camera it is assigned to. All of the UI layout is through the `Transform` component, which is interpreted differently for UI elements.  
+The UI uses a coordinate system relative to the camera it is assigned to. All of the UI layout is through the [`Transform`](../../reference/classes/transform) component, which is interpreted differently for UI elements.  
 
 ### Position
-The coordinates go from `(-0.5,0.5)` (bottom left) to `(0.5,0.5)` (top right). This results in the center of the camera being marked by position `(0,0)`. To put a UI element a quarter along the screen, as shown here:
+The coordinates go from `(-1,-1)` (bottom left) to `(1,1)` (top right). This results in the center of the camera being marked by position `(0,0)`. To put a UI element a quarter along the screen, as shown here:
 
 ![Example position a quarter of the width to the right](../assets/ui_example_position.svg)
 
-This UI element would be at position `(0.25,0)`.
+This UI element would be at position `(0.5,0)`.
 ```typescript
-new Transform(new Vector(0.25, 0));
+new Transform(new Vector(0.5, 0));
 ```
 
 ### Scale
@@ -56,7 +56,7 @@ The scale of UI elements is relative to the camera's viewport - meaning that a s
 
 ### Rotation
 
-The rotation works exactly the same way as a normal world object, through the `Transform` component. The orientation is determined in radians.
+The rotation works exactly the same way as a normal world object, through the [`Transform`](../../reference/classes/transform) component. The orientation is determined in radians.
 
 ## UI cameras
 

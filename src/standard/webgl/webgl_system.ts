@@ -213,8 +213,8 @@ class WebGLSystem extends System {
             // combined with the real width and height to make sure it is in the center
             // of the viewport.
             const realPosition = new Vector(
-                (canvasWidth / 2 + camera.viewportPosition.x * canvasWidth) - realWidth / 2,
-                (canvasHeight / 2 + camera.viewportPosition.y * canvasHeight) - realHeight / 2
+                (canvasWidth / 2 + (camera.viewportPosition.x / 2) * canvasWidth) - realWidth / 2,
+                (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
             );
 
             // Define the viewport position of the camera
@@ -285,7 +285,7 @@ class WebGLSystem extends System {
             const colorLocation = gl.getUniformLocation(program, "uColor");
             
             for (const renderable of this.renderables) {
-                if (renderable.camera !== undefined && renderable.camera.id == cameraEntity.entity.id) {
+                if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
                     continue;
                 }
                 const vao = gl.createVertexArray();

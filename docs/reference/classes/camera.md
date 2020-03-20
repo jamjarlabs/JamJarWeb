@@ -57,6 +57,8 @@ Name | Type | Default |
 
 • **backgroundColor**: *[Color](color.md)*
 
+Background colour for the camera when rendering.
+
 ___
 
 ###  key
@@ -71,17 +73,28 @@ ___
 
 • **viewportPosition**: *[Vector](vector.md)*
 
+Position of the camera's viewport on the screen, with from
+bottom left (-1, -1) to top right (1, 1) with (0, 0) as the center.
+
 ___
 
 ###  viewportScale
 
 • **viewportScale**: *[Vector](vector.md)*
 
+Scale of the camera's viewport, relative to the canvas/rendering surface.
+A viewport scale of (1, 1) would take up the entire canvas, while a scale
+of (0.5, 0.5) would only take up half of the screen (width and height).
+
 ___
 
 ###  virtualScale
 
 • **virtualScale**: *[Vector](vector.md)*
+
+The scale of the camera in terms of world space.
+A virtual scale of (160, 90) would render 160 world space units wide and
+90 world space units tall, centered on the camera's transform position.
 
 ___
 

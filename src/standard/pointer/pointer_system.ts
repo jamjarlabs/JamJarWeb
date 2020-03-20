@@ -119,8 +119,8 @@ class PointerSystem extends System {
             }
         }
         const elementPosition = new Vector(
-            ((pointerX - rect.left) - (rect.width / 2)) / rect.width,
-            -((pointerY - rect.top) - (rect.height / 2)) / rect.height
+            ((pointerX - rect.left) - (rect.width / 2)) / (rect.width / 2),
+            -((pointerY - rect.top) - (rect.height / 2)) / (rect.height / 2)
         );
 
         const pointerCameraInfos: PointerCameraInfo[] = [];
@@ -131,7 +131,7 @@ class PointerSystem extends System {
             const transform = entity.Get(Transform.KEY) as Transform;
 
             const viewportScale = camera.viewportScale;
-            const viewportPosition = camera.viewportPosition;
+            const viewportPosition = camera.viewportPosition.Scale(0.5);
             const virtualScale = camera.virtualScale;
 
             const viewportHalfWidth = viewportScale.x / 2;

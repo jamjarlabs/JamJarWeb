@@ -43,11 +43,15 @@ Name | Type |
 
 • **camera**: *[IEntity](../interfaces/ientity.md)*
 
+Entity of the camera.
+
 ___
 
 ###  cameraPosition
 
 • **cameraPosition**: *[Vector](vector.md)*
+
+Position of the pointer relative to the camera's viewport, from bottom left (-1, -1) to top right (1, 1).
 
 ___
 
@@ -55,8 +59,12 @@ ___
 
 • **withinBounds**: *boolean*
 
+If the pointer is within the camera viewport.
+
 ___
 
 ###  worldPosition
 
 • **worldPosition**: *[Vector](vector.md)*
+
+Position in the world of the pointer using this camera.

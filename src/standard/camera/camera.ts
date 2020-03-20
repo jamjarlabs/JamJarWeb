@@ -26,9 +26,26 @@ import Matrix4D from "../../geometry/matrix_4d";
  */
 class Camera extends Component {
     public static readonly KEY = "camera";
+    /**
+     * Background colour for the camera when rendering.
+     */
     public backgroundColor: Color;
+    /**
+     * Position of the camera's viewport on the screen, with from 
+     * bottom left (-1, -1) to top right (1, 1) with (0, 0) as the center.
+     */
     public viewportPosition: Vector;
+    /**
+     * Scale of the camera's viewport, relative to the canvas/rendering surface.
+     * A viewport scale of (1, 1) would take up the entire canvas, while a scale 
+     * of (0.5, 0.5) would only take up half of the screen (width and height).
+     */
     public viewportScale: Vector;
+    /**
+     * The scale of the camera in terms of world space.
+     * A virtual scale of (160, 90) would render 160 world space units wide and
+     * 90 world space units tall, centered on the camera's transform position.
+     */
     public virtualScale: Vector;
 
     constructor(backgroundColor: Color = new Color(0,0,0,1), 

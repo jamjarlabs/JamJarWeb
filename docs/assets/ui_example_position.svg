@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="87.652496"
+     inkscape:cx="221.32345"
      inkscape:cy="103.40811"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -95,7 +95,7 @@
          id="tspan838"
          x="103.43465"
          y="68.082306"
-         style="stroke-width:0.26458332">(0,0.5)</tspan></text>
+         style="stroke-width:0.26458332">(0,1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -106,7 +106,7 @@
          id="tspan838-5"
          x="137.93449"
          y="93.196342"
-         style="stroke-width:0.26458332">(0.5,0)</tspan></text>
+         style="stroke-width:0.26458332">(1,0)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -117,7 +117,7 @@
          id="tspan838-4"
          x="103.05584"
          y="124.06597"
-         style="stroke-width:0.26458332">(0,-0.5)</tspan></text>
+         style="stroke-width:0.26458332">(0,-1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -128,7 +128,7 @@
          id="tspan838-7"
          x="53.076431"
          y="93.19635"
-         style="stroke-width:0.26458332">(-0.5,0)</tspan></text>
+         style="stroke-width:0.26458332">(-1,0)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -157,6 +157,6 @@
          id="tspan838-5-0"
          x="118.3627"
          y="96.161644"
-         style="fill:#ffffff;stroke-width:0.26458332">(0.25,0)</tspan></text>
+         style="fill:#ffffff;stroke-width:0.26458332">(0.5,0)</tspan></text>
   </g>
 </svg>

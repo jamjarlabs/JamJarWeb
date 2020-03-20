@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128.69603mm"
+   height="79.639587mm"
+   viewBox="0 0 128.69603 79.639587"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="camera_viewports.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="294.89374"
+     inkscape:cy="195.61278"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-33.885565,-104.8558)">
+    <rect
+       style="fill:#00ffff;fill-opacity:1;stroke:#e6e6e6;stroke-width:0.26458332"
+       id="rect815"
+       width="128.43144"
+       height="79.375"
+       x="34.017857"
+       y="104.98809" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot827"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion829"><rect
+           id="rect831"
+           width="116.16754"
+           height="112.63201"
+           x="115.66247"
+           y="144.93146" /></flowRegion><flowPara
+         id="flowPara833"></flowPara></flowRoot>    <rect
+       style="fill:#800080;fill-opacity:1;stroke:#e6e6e6;stroke-width:0.23801665"
+       id="rect858"
+       width="64.109985"
+       height="79.273323"
+       x="34.004574"
+       y="104.97481" />
+    <rect
+       style="fill:#008000;fill-opacity:1;stroke:#e6e6e6;stroke-width:0.1682896"
+       id="rect858-3"
+       width="64.17971"
+       height="39.587212"
+       x="98.114563"
+       y="144.66093" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="37.744465"
+       y="137.2451"
+       id="text823-6"><tspan
+         sodipodi:role="line"
+         id="tspan821-7"
+         x="37.744465"
+         y="137.2451"
+         style="stroke-width:0.26458332">Camera A</tspan><tspan
+         sodipodi:role="line"
+         x="37.744465"
+         y="142.53677"
+         style="stroke-width:0.26458332"
+         id="tspan856-5">viewportScale = (0.5, 1)</tspan><tspan
+         sodipodi:role="line"
+         x="37.744465"
+         y="147.82843"
+         style="stroke-width:0.26458332"
+         id="tspan854-3">viewportPosition = (-0.5,0)</tspan><tspan
+         sodipodi:role="line"
+         x="37.744465"
+         y="153.1201"
+         style="stroke-width:0.26458332"
+         id="tspan825-5" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="100.02865"
+       y="158.86139"
+       id="text823"><tspan
+         sodipodi:role="line"
+         id="tspan821"
+         x="100.02865"
+         y="158.86139"
+         style="stroke-width:0.26458332">Camera B</tspan><tspan
+         sodipodi:role="line"
+         x="100.02865"
+         y="164.15306"
+         style="stroke-width:0.26458332"
+         id="tspan856">viewportScale = (0.5, 0.5)</tspan><tspan
+         sodipodi:role="line"
+         x="100.02865"
+         y="169.44472"
+         style="stroke-width:0.26458332"
+         id="tspan854">viewportPosition = (0.5,-0.5)</tspan><tspan
+         sodipodi:role="line"
+         x="100.02865"
+         y="174.73639"
+         style="stroke-width:0.26458332"
+         id="tspan825" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="99.789848"
+       y="121.74809"
+       id="text823-62"><tspan
+         sodipodi:role="line"
+         id="tspan821-9"
+         x="99.789848"
+         y="121.74809"
+         style="stroke-width:0.26458332">Camera C</tspan><tspan
+         sodipodi:role="line"
+         x="99.789848"
+         y="127.03976"
+         style="stroke-width:0.26458332"
+         id="tspan856-1">viewportScale = (0.5, 0.5)</tspan><tspan
+         sodipodi:role="line"
+         x="99.789848"
+         y="132.33142"
+         style="stroke-width:0.26458332"
+         id="tspan854-2">viewportPosition = (0.5,0.5)</tspan><tspan
+         sodipodi:role="line"
+         x="99.789848"
+         y="137.62309"
+         style="stroke-width:0.26458332"
+         id="tspan825-7" /></text>
+  </g>
+</svg>

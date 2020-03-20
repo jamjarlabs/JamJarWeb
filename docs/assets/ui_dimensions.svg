@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="187.82274"
+     inkscape:cx="78.726266"
      inkscape:cy="103.33359"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -35,10 +35,10 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1440"
-     inkscape:window-height="864"
-     inkscape:window-x="1920"
-     inkscape:window-y="180"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -95,7 +95,7 @@
          id="tspan838"
          x="103.43465"
          y="68.082306"
-         style="stroke-width:0.26458332">(0,0.5)</tspan></text>
+         style="stroke-width:0.26458332">(0,1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -106,7 +106,7 @@
          id="tspan838-5"
          x="137.93449"
          y="93.196342"
-         style="stroke-width:0.26458332">(0.5,0)</tspan></text>
+         style="stroke-width:0.26458332">(1,0)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -117,7 +117,7 @@
          id="tspan838-4"
          x="103.05584"
          y="124.06597"
-         style="stroke-width:0.26458332">(0,-0.5)</tspan></text>
+         style="stroke-width:0.26458332">(0,-1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -128,7 +128,7 @@
          id="tspan838-7"
          x="53.076431"
          y="93.19635"
-         style="stroke-width:0.26458332">(-0.5,0)</tspan></text>
+         style="stroke-width:0.26458332">(-1,0)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"

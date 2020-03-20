@@ -92,17 +92,19 @@ class UISystem extends System {
                 // If the components are not found, must not be a valid camera, skip this entity
                 continue;
             }
+            
+            const relativeTransform = new Transform(
+                // camera position + UI element position * camera virtual scale
+                cameraTransform.position.Add(transform.position.Multiply(camera.virtualScale.Scale(0.5))),
+                // element scale * camera virtual scale
+                transform.scale.Multiply(camera.virtualScale),
+                transform.angle
+            );
 
             // Create the renderable for use by rendering systems
             renderables.push(new Renderable(
                 sprite.bounds.GetFloat32Array(),
-                new Transform(
-                    // camera position + UI element position * camera virtual scale
-                    cameraTransform.position.Add(transform.position.Multiply(camera.virtualScale)),
-                    // element scale * camera virtual scale
-                    transform.scale.Multiply(camera.virtualScale),
-                    transform.angle
-                ).InterpolatedMatrix4D(alpha).GetFloat32Array(),
+                relativeTransform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
                 sprite.color,
                 ui.camera,
                 sprite.texture

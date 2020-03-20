@@ -21,13 +21,21 @@ import Vector from "../../geometry/vector";
  * PointerCameraInfo pointer information relevant to a camera.
  */
 class PointerCameraInfo {
-    // Entity of the camera.
+    /**
+     * Entity of the camera.
+     */
     public camera: IEntity;
-    // Position of the pointer relative to the camera's viewport, from bottom left (-0.5, -0.5) to top right (0.5, 0.5).
+    /**
+     * Position of the pointer relative to the camera's viewport, from bottom left (-1, -1) to top right (1, 1).
+     */
     public cameraPosition: Vector;
-    // Position in the world of the pointer using this camera.
+    /**
+     * Position in the world of the pointer using this camera.
+     */
     public worldPosition: Vector;
-    // If the pointer is within the camera viewport.
+    /**
+     * If the pointer is within the camera viewport.
+     */
     public withinBounds: boolean;
 
     constructor(camera: IEntity, cameraPosition: Vector, worldPosition: Vector, withinBounds: boolean) {
