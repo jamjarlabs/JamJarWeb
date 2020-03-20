@@ -1,6 +1,12 @@
 
 # Class: ImageAsset
 
+ImageAsset represents a graphical image asset that has been loaded/
+attempted to be loaded.
+Stores meta info around the image, such as a name, the success
+of the image being loaded, and any errors from loading it.
+Also stores the image itself.
+
 ## Hierarchy
 
 * **ImageAsset**
@@ -41,11 +47,16 @@ Name | Type |
 
 • **error**? : *Error*
 
+An optional field, contains any error from loading the image, if there is
+none it will be undefined.
+
 ___
 
 ###  image
 
 • **image**: *HTMLImageElement*
+
+The actual image.
 
 ___
 
@@ -53,8 +64,14 @@ ___
 
 • **name**: *string*
 
+Name of the image asset, how it is referred to throughout the system,
+should be unique.
+
 ___
 
 ###  success
 
 • **success**: *boolean*
+
+A boolean indicating the success of loading the image, true = successful
+load, false = failed loading.

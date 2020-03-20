@@ -322,6 +322,7 @@ class ControllerSystem extends System {
             }
             case "pointerdown": {
                 for (const player of this.entities.values()) {
+                    console.log(this.targetedPosition);
                     const transform = player.Get(Transform.KEY) as Transform;
                     const orientation = this.getOrientationToTarget(transform.position);
                     const bullet = new Entity(this.messageBus);
@@ -382,14 +383,18 @@ class MainScene extends Scene {
         const viewportScale = new Vector(1, 1);
         const backgroundColor = new Color(0, 0, 0, 1);
 
+        const camera = new Entity(this.messageBus);
+        camera.Add(new Transform(new Vector(0, 0)));
+        camera.Add(new Camera(backgroundColor, viewportPosition, viewportScale, virtualSize));
+        this.AddEntity(camera);
+
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
         player.Add(new Sprite(new Color(1, 1, 1, 1), {
             bounds: Polygon.Rectangle(1, 1),
             texture: new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
         }));
-        player.Add(new Collider(Polygon.Rectangle(1, 1)))
-        player.Add(new Camera(backgroundColor, viewportPosition, viewportScale, virtualSize));
+        player.Add(new Collider(Polygon.Rectangle(1, 1)));
         player.Add(new Player());
         this.AddEntity(player);
 
@@ -399,7 +404,7 @@ class MainScene extends Scene {
             bounds: Polygon.Rectangle(1, 1),
             texture: new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
         }));
-        crosshair.Add(new UI(player));
+        crosshair.Add(new UI(camera));
         crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
 

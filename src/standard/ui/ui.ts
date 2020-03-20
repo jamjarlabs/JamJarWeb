@@ -25,6 +25,9 @@ import IEntity from "../../entity/ientity";
  * to the camera, rather than in world space.
  */
 class UI extends Component {
+    /**
+     * Key of the UI component.
+     */
     public static readonly KEY = "ui";
     /**
      * Entity of the camera to render this UI element on.

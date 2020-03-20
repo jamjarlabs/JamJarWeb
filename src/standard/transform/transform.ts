@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,10 +25,25 @@ import Matrix4D from "../../geometry/matrix_4d";
  * Frequently used in rendering, collisions and physics.
  */
 class Transform extends Component {
+    /**
+     * Key of the transform component.
+     */
     public static readonly KEY = "transform";
+    /**
+     * Previous position of the transform, used in interpolation.
+     */
     public previous: Vector;
+    /**
+     * Current transform position.
+     */
     public position: Vector;
+    /**
+     * Current transform scale.
+     */
     public scale: Vector;
+    /**
+     * Current transform angle in radians.
+     */
     public angle: number;
 
     constructor(position = new Vector(0,0), scale = new Vector(1,1), angle = 0) {

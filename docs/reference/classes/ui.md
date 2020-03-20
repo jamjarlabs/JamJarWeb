@@ -65,6 +65,8 @@ ___
 
 ▪ **KEY**: *"ui"* = "ui"
 
+Key of the UI component.
+
 ___
 
 ### `Static` MESSAGE_ADD

@@ -152,8 +152,8 @@ class PointerSystem extends System {
 
             // Position in the world according to the camera
             const worldPosition = new Vector(
-                cameraWorldPosition.x + virtualScale.x * cameraPosition.x,
-                cameraWorldPosition.y + virtualScale.y * cameraPosition.y
+                cameraWorldPosition.x + virtualScale.x * (cameraPosition.x / 2),
+                cameraWorldPosition.y + virtualScale.y * (cameraPosition.y / 2)
             );
 
             pointerCameraInfos.push(new PointerCameraInfo(

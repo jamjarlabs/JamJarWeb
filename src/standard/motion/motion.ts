@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,10 +22,25 @@ import Vector from "../../geometry/vector";
  * Holds info such as velocity, acceleration, angular velocity and angular acceleration.
  */
 class Motion extends Component {
+    /**
+     * Key of the motion component.
+     */
     public static readonly KEY = "motion";
+    /**
+     * Velocity of the entity.
+     */
     public velocity: Vector;
+    /**
+     * Acceleration of the entity.
+     */
     public acceleration: Vector;
+    /**
+     * Angular velocity of the entity around the Z axis, scalar value.
+     */
     public angularVelocity: number;
+    /**
+     * Angular acceleration of the entity around the Z axis, scalar value.
+     */
     public angularAcceleration: number;
 
     constructor(velocity = new Vector(0,0), acceleration = new Vector(0,0), angularVelocity = 0, angularAcceleration = 0) {
