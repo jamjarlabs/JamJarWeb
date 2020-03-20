@@ -58,6 +58,8 @@ Name | Type | Default |
 
 • **angle**: *number*
 
+Current transform angle in radians.
+
 ___
 
 ###  key
@@ -72,11 +74,15 @@ ___
 
 • **position**: *[Vector](vector.md)*
 
+Current transform position.
+
 ___
 
 ###  previous
 
 • **previous**: *[Vector](vector.md)*
+
+Previous position of the transform, used in interpolation.
 
 ___
 
@@ -84,11 +90,15 @@ ___
 
 • **scale**: *[Vector](vector.md)*
 
+Current transform scale.
+
 ___
 
 ### `Static` KEY
 
 ▪ **KEY**: *"transform"* = "transform"
+
+Key of the transform component.
 
 ___
 

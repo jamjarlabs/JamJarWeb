@@ -52,17 +52,23 @@ Name | Type | Default |
 
 • **acceleration**: *[Vector](vector.md)*
 
+Acceleration of the entity.
+
 ___
 
 ###  angularAcceleration
 
 • **angularAcceleration**: *number*
 
+Angular acceleration of the entity around the Z axis, scalar value.
+
 ___
 
 ###  angularVelocity
 
 • **angularVelocity**: *number*
+
+Angular velocity of the entity around the Z axis, scalar value.
 
 ___
 
@@ -78,11 +84,15 @@ ___
 
 • **velocity**: *[Vector](vector.md)*
 
+Velocity of the entity.
+
 ___
 
 ### `Static` KEY
 
 ▪ **KEY**: *"motion"* = "motion"
+
+Key of the motion component.
 
 ___
 

@@ -327,8 +327,8 @@ describe("PointerSystem - pointer input", () => {
                     isFullscreen: false,
                     pointers: [
                         ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.6, 1.6), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(6, 16), false),
-                            new PointerCameraInfo(new FakeEntity(1), new Vector(0.6, 1.6), new Vector(60, 160), false)
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(3, 8), false),
+                            new PointerCameraInfo(new FakeEntity(1), new Vector(0.6, 1.6), new Vector(30, 80), false)
                         ])]
                     ],
                     entities: new Map([
@@ -384,7 +384,7 @@ describe("PointerSystem - pointer input", () => {
                     isFullscreen: true,
                     pointers: [
                         ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.6, 1.6), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(6, 16), false),
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(3, 8), false),
                         ])]
                     ],
                     entities: new Map([
@@ -432,7 +432,7 @@ describe("PointerSystem - pointer input", () => {
                     isFullscreen: true,
                     pointers: [
                         ["pointermove", new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2, movementX: 10, movementY: 3 }), new Vector(2.4, 1), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(2.4, 1), new Vector(24, 10), false),
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(2.4, 1), new Vector(12, 5), false),
                         ])]
                     ],
                     entities: new Map([
@@ -480,7 +480,7 @@ describe("PointerSystem - pointer input", () => {
                     isFullscreen: false,
                     pointers: [
                         ["pointerup", new Pointer(new window.PointerEvent("pointerup", { clientX: 0, clientY: 0 }), new Vector(0, 2), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.4), new Vector(0, 4), true),
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.4), new Vector(0, 2), true),
                         ])]
                     ],
                     entities: new Map([
@@ -528,7 +528,7 @@ describe("PointerSystem - pointer input", () => {
                     isFullscreen: false,
                     pointers: [
                         ["pointerdown", new Pointer(new window.PointerEvent("pointerdown", { clientX: 0, clientY: 0 }), new Vector(0, 2), [
-                            new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.4), new Vector(0, 4), true),
+                            new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.4), new Vector(0, 2), true),
                         ])]
                     ],
                     entities: new Map([
