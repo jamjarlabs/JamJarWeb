@@ -208,10 +208,7 @@ class AsteroidSystem extends System {
             scale,
             Math.random() * (0 - Math.PI * 2) + Math.PI * 2));
 
-        asteroid.Add(new Sprite(new Color(1, 1, 1, 1), {
-            bounds: shape,
-            texture: undefined
-        }));
+        asteroid.Add(new Sprite(new Color(1, 1, 1, 1), 0, shape, undefined));
 
         asteroid.Add(new Collider(shape));
         asteroid.Add(new Motion(towardsVector.Scale(Math.random() * randomBetweenInts(Asteroid.MIN_SPEED, maxSpeed))));
@@ -341,7 +338,7 @@ class ControllerSystem extends System {
                     const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
 
                     bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.2, 3), orientation));
-                    bullet.Add(new Sprite(new Color(1, 0, 0, 1)));
+                    bullet.Add(new Sprite(new Color(1, 0, 0, 1), 0));
                     bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
                     bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
                     bullet.Add(new Bullet());
@@ -402,20 +399,22 @@ class MainScene extends Scene {
 
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
-        player.Add(new Sprite(new Color(1, 1, 1, 1), {
-            bounds: Polygon.Rectangle(1, 1),
-            texture: new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
-        }));
+        player.Add(new Sprite(new Color(1, 1, 1, 1), 
+            0, 
+            Polygon.Rectangle(1, 1),
+            new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array()))
+        );
         player.Add(new Collider(Polygon.Rectangle(1, 1)));
         player.Add(new Player());
         this.AddEntity(player);
 
         const crosshair = new Entity(this.messageBus);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
-        crosshair.Add(new Sprite(new Color(1, 1, 1, 1), {
-            bounds: Polygon.Rectangle(1, 1),
-            texture: new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
-        }));
+        crosshair.Add(new Sprite(new Color(1, 1, 1, 1), 
+            1,
+            Polygon.Rectangle(1, 1),
+            new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+        ));
         crosshair.Add(new UI(camera));
         crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
@@ -425,10 +424,11 @@ class MainScene extends Scene {
 
         const banner = new Entity(this.messageBus);
         banner.Add(new Transform(new Vector(1 - width, 1 - height), new Vector(width, height)))
-        banner.Add(new Sprite(new Color(1, 1, 1, 1), {
-            bounds: Polygon.Rectangle(1, 1),
-            texture: new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
-        }));
+        banner.Add(new Sprite(new Color(1, 1, 1, 1), 
+            0,
+            Polygon.Rectangle(1, 1),
+            new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
+        ));
         banner.Add(new UI(camera));
         this.AddEntity(banner);
     }

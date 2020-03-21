@@ -73,6 +73,7 @@ class SpriteSystem extends System {
             const sprite = entity.Get(Sprite.KEY) as Sprite;
             const transform = entity.Get(Transform.KEY) as Transform;
             renderables.push(new Renderable(
+                sprite.zOrder,
                 sprite.bounds.GetFloat32Array(),
                 transform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
                 sprite.color,

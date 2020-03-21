@@ -18,17 +18,19 @@
 * [modelMatrix](renderable.md#modelmatrix)
 * [texture](renderable.md#optional-texture)
 * [verticies](renderable.md#verticies)
+* [zOrder](renderable.md#zorder)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Renderable**(`verticies`: Float32Array, `modelMatrix`: Float32Array, `color`: [Color](color.md), `camera?`: [IEntity](../interfaces/ientity.md), `texture?`: [Texture](texture.md)): *[Renderable](renderable.md)*
+\+ **new Renderable**(`zOrder`: number, `verticies`: Float32Array, `modelMatrix`: Float32Array, `color`: [Color](color.md), `camera?`: [IEntity](../interfaces/ientity.md), `texture?`: [Texture](texture.md)): *[Renderable](renderable.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
+`zOrder` | number |
 `verticies` | Float32Array |
 `modelMatrix` | Float32Array |
 `color` | [Color](color.md) |
@@ -66,3 +68,9 @@ ___
 ###  verticies
 
 • **verticies**: *Float32Array*
+
+___
+
+###  zOrder
+
+• **zOrder**: *number*

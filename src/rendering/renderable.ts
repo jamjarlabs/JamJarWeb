@@ -19,13 +19,15 @@ import Texture from "./texture";
 import IEntity from "../entity/ientity";
 
 class Renderable {
+    public zOrder: number;
     public verticies: Float32Array;
     public modelMatrix: Float32Array;
     public color: Color;
     public camera?: IEntity;
     public texture?: Texture;
 
-    constructor(verticies: Float32Array, modelMatrix: Float32Array, color: Color, camera?: IEntity, texture?: Texture) {
+    constructor(zOrder: number, verticies: Float32Array, modelMatrix: Float32Array, color: Color, camera?: IEntity, texture?: Texture) {
+        this.zOrder = zOrder;
         this.verticies = verticies;
         this.modelMatrix = modelMatrix;
         this.color = color;

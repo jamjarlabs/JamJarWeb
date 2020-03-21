@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `zOrder` field to sprites, to determine which sprites should be rendered infront of which.
 ### Changed
 - `System` and descendants of `System` now use optional parameters rather than an object containing multiple parameters.
 - `Pointer` events are now published immediately and do not wait for the next update.

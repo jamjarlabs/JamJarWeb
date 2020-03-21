@@ -291,8 +291,11 @@ class WebGLSystem extends System {
 
 			// Get color uniform location for GPU
             const colorLocation = gl.getUniformLocation(program, "uColor");
+
+            // Sort renderables by z order
+            const sortedRenderables = this.renderables.sort((a: Renderable, b: Renderable) => a.zOrder - b.zOrder)
             
-            for (const renderable of this.renderables) {
+            for (const renderable of sortedRenderables) {
                 if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
                     continue;
                 }
