@@ -2,12 +2,22 @@
 <html>
     <head>
         <title>Shooter</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
     </head>
     <body>
-        <h1>
-            Shooter
-        </h1>
-        <canvas id="game-canvas" width="1600" height="900" style="width:960px;height:540px;cursor: none;"></canvas>
+        <canvas id="game-canvas" width="1600" height="900" style="width:1366px;height:768px;cursor:none;"></canvas>
         <script src="./main.js" type="module"></script>
     </body>
 </html>

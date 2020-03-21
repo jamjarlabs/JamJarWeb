@@ -1,10 +1,10 @@
 # UI System
 
-The UI System allows rendering UI elements in camera space, rather than world space. This can be used for making menus, HUDs, notifications etc.
+The [`UISystem`](../../reference/classes/uisystem) allows rendering UI elements in camera space, rather than world space. This can be used for making menus, HUDs, notifications etc.
 
-## Seting up the UI system
+## Setting up the UI System
 
-To set up a UI system, you simply need to provide a message bus.
+To set up a [`UISystem`](../../reference/classes/uisystem), you simply need to provide a message bus.
 
 ```typescript
 new PointerSystem(messageBus);
@@ -12,7 +12,7 @@ new PointerSystem(messageBus);
 
 ## Peer dependencies
 
-The UI system will only work in conjunction with some kind of rendering system, such as the [`WebGLSystem`](../../reference/classes/webglsystem) to actually render the UI elements; the UI system is a pre-rendering system.
+The [`UISystem`](../../reference/classes/uisystem) will only work in conjunction with some kind of rendering system, such as the [`WebGLSystem`](../../reference/classes/webglsystem) to actually render the UI elements; the [`UISystem`](../../reference/classes/uisystem) is a pre-rendering system.
 
 ## Creating a UI element
 

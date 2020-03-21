@@ -105,6 +105,7 @@ class UISystem extends System {
 
             // Create the renderable for use by rendering systems
             renderables.push(new Renderable(
+                sprite.zOrder,
                 sprite.bounds.GetFloat32Array(),
                 relativeTransform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
                 sprite.color,
