@@ -102,10 +102,14 @@ class AsteroidSystem extends System {
     private spawnInterval: number;
     private destroyed: IEntity[];
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID, lastSpawnTime, spawnInterval }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined, lastSpawnTime: number; spawnInterval: number } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL }) {
-        super(messageBus, { evaluator: AsteroidSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        lastSpawnTime: number = 0,
+        spawnInterval: number = AsteroidSystem.BASE_SPAWN_INTERVAL,
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number,
+        ) {
+        super(messageBus, scene, AsteroidSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
         this.lastSpawnTime = lastSpawnTime;
         this.spawnInterval = spawnInterval;
@@ -223,10 +227,11 @@ class BulletSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: BulletSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, BulletSystem.EVALUATOR, entities, subscriberID);
     }
 
     protected Update(dt: number): void {
@@ -250,10 +255,11 @@ class CrosshairSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: CrosshairSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, CrosshairSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointermove", "keydown"])
     }
     public OnMessage(message: IMessage): void {
@@ -301,10 +307,12 @@ class ControllerSystem extends System {
 
     private targetedPosition: Vector;
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID, targetedPosition }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined, targetedPosition: Vector } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined, targetedPosition: new Vector(0, 0) }) {
-        super(messageBus, { evaluator: ControllerSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number,
+        targetedPosition: Vector = new Vector(0,0)) {
+        super(messageBus, scene, ControllerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointermove", "pointerdown"]);
         this.targetedPosition = targetedPosition;
     }
@@ -363,16 +371,16 @@ class ControllerSystem extends System {
 
 class MainScene extends Scene {
     OnStart(): void {
-        new SpriteSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new UISystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new MotionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new InterpolationSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new CollisionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new ImageSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, loadQueue: [], images: [] })
-        new ControllerSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, targetedPosition: new Vector(0, 0) })
-        new BulletSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined })
-        new AsteroidSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined, lastSpawnTime: 0, spawnInterval: AsteroidSystem.BASE_SPAWN_INTERVAL })
-        new CrosshairSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new SpriteSystem(this.messageBus, this);
+        new UISystem(this.messageBus, this);
+        new MotionSystem(this.messageBus, this);
+        new InterpolationSystem(this.messageBus, this);
+        new CollisionSystem(this.messageBus, this);
+        new ImageSystem(this.messageBus, this);
+        new ControllerSystem(this.messageBus, this);
+        new BulletSystem(this.messageBus, this);
+        new AsteroidSystem(this.messageBus, this);
+        new CrosshairSystem(this.messageBus, this);
 
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]))
         this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]))
@@ -408,8 +416,8 @@ class MainScene extends Scene {
         crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
 
-        const width = 0.2;
-        const height = width * (virtualSize.y / virtualSize.x);
+        const height = 0.05;
+        const width = height * 4 * (virtualSize.x / virtualSize.y);
 
         const banner = new Entity(this.messageBus);
         banner.Add(new Transform(new Vector(1 - width, 1 - height), new Vector(width, height)))
@@ -417,7 +425,7 @@ class MainScene extends Scene {
             bounds: Polygon.Rectangle(1, 1),
             texture: new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
         }));
-        banner.Add(new UI(player));
+        banner.Add(new UI(camera));
         this.AddEntity(banner);
     }
 }

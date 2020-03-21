@@ -44,10 +44,11 @@ class CollisionSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: CollisionSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
     }
 
     Update(): void {

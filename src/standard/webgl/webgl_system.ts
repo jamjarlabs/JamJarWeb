@@ -31,6 +31,11 @@ import SystemEntity from "../../system/system_entity";
 import ImageSystem from "../image/image_system";
 import ImageAsset from "../image/image_asset";
 
+/**
+ * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
+ * Takes in renderables created by pre rendering steps and
+ * renders them onto a canvas.
+ */
 class WebGLSystem extends System {
 
     public static readonly MESSAGE_LOAD_RENDERABLES = "load_renderables";
@@ -85,10 +90,13 @@ class WebGLSystem extends System {
     private placeholderTexture: WebGLTexture;
     private textures: Record<string, WebGLTexture>;
 
-    constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext, { scene, entities, subscriberID, renderables }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; renderables: Renderable[] } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined, renderables: [] }) {
-        super(messageBus, { evaluator: WebGLSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        gl: WebGL2RenderingContext, 
+        scene?: IScene, 
+        renderables: Renderable[] = [],
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, WebGLSystem.EVALUATOR, entities, subscriberID );
         this.gl = gl;
         this.renderables = renderables;
         this.messageBus.Subscribe(this, [Game.MESSAGE_RENDER, WebGLSystem.MESSAGE_LOAD_RENDERABLES, ImageSystem.MESSAGE_FINISH_LOAD]);

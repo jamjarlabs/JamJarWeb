@@ -33,30 +33,40 @@ import IMessage from "../../message/imessage";
  * PointerSystem handles Pointer (mouse, touch etc.) input events, converting them into JamJar ECS messages.
  */
 class PointerSystem extends System {
-    // Only entities with camera and transform components
+    /**
+     * Ensure has Camera and Transform
+     */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Camera.KEY, Transform.KEY].every((type) => components.some(
             component => component.key == type
         ));
     };
 
+    /**
+     * The HTML element to get pointer events on.
+     */
     private inputElement: HTMLElement;
+    /**
+     * If the game is in fullscreen mode or not.
+     * true = in fullscreen, false = not in fullscreen
+     */
     private isFullscreen: boolean;
     private pointers: [string, Pointer][];
+    /**
+     * Position of the pointer if it is locked, used with the PointerAPI to
+     * keep track of pointer position using movementX and movementY.
+     * If it is undefined there is no pointer lock.
+     */
     private lockedPointerPosition: Vector | undefined;
 
     constructor(messageBus: IMessageBus, inputElement: HTMLElement,
-        { scene, entities, subscriberID, pointers, isFullscreen, lockedPointerPosition }:
-            { 
-                scene: IScene | undefined; 
-                entities: Map<number, SystemEntity>; 
-                subscriberID: number | undefined; 
-                pointers: [string, Pointer][]; 
-                isFullscreen: boolean;
-                lockedPointerPosition: Vector | undefined;
-            } =
-            { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }) {
-        super(messageBus, { scene, evaluator: PointerSystem.EVALUATOR, entities, subscriberID });
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
+        subscriberID?: number,
+        pointers: [string, Pointer][] = [],
+        isFullscreen = false,
+        lockedPointerPosition?: Vector) {
+        super(messageBus, scene, PointerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, [FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, FullscreenSystem.MESSAGE_EXIT_FULLSCREEN]);
         this.inputElement = inputElement;
         this.pointers = pointers;

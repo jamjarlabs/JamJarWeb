@@ -66,22 +66,19 @@ A system is for implementing logic, manipulating entities and their components.
 
 ###  constructor
 
-\+ **new System**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[System](system.md)*
+\+ **new System**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `entities`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[System](system.md)*
 
 *Overrides [Subscriber](subscriber.md).[constructor](subscriber.md#constructor)*
 
 **Parameters:**
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, evaluator: undefined, entities: new Map(), subscriberID: undefined }
-
-Name | Type |
------- | ------ |
-`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`evaluator` | undefined &#124; function |
-`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
-`subscriberID` | undefined &#124; number |
+Name | Type | Default |
+------ | ------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`scene?` | [IScene](../interfaces/iscene.md) | - |
+`evaluator?` | [Evaluator](../README.md#evaluator) | - |
+`entities` | Map‹number, [SystemEntity](systementity.md)› | new Map() |
+`subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[System](system.md)*
 
@@ -91,11 +88,20 @@ Name | Type |
 
 • **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
+A map of entities, mapped by their entity ID.
+ID: Entity
+0: PlayerEntity
+1: ObstacleEntity
+etc.
+
 ___
 
 ### `Private` `Optional` evaluator
 
 • **evaluator**? : *[Evaluator](../README.md#evaluator)*
+
+The evaluator is used to evaluate if an entity with its components should be
+tracked by the system
 
 ___
 
@@ -103,11 +109,18 @@ ___
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
+Reference to the message bus, the fundamental piece of JamJar
+for communicating with other parts of the engine.
+
 ___
 
 ### `Protected` `Optional` scene
 
 • **scene**? : *[IScene](../interfaces/iscene.md)*
+
+Any scene this system is part of, will change the lifecycle of the
+system to be part of the scene's lifecycle - it will be destroyed
+when the scene is destroyed.
 
 ___
 

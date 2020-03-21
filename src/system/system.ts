@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35,18 +35,39 @@ abstract class System extends Subscriber {
     public static readonly MESSAGE_REGISTER = "system_register";
     public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
+    /**
+     * Reference to the message bus, the fundamental piece of JamJar
+     * for communicating with other parts of the engine.
+     */
+    protected messageBus: IMessageBus;
+    /**
+     * A map of entities, mapped by their entity ID.
+     * ID: Entity
+     * 0: PlayerEntity
+     * 1: ObstacleEntity
+     * etc.
+     */
     protected entities: Map<number, SystemEntity>;
+    /**
+     * Any scene this system is part of, will change the lifecycle of the
+     * system to be part of the scene's lifecycle - it will be destroyed
+     * when the scene is destroyed.
+     */
     protected scene?: IScene;
 
-    // The evaluator is used to evaluate if an entity with its components should be
-    // tracked by the system
+    /**
+     * The evaluator is used to evaluate if an entity with its components should be
+     * tracked by the system
+     */
     private evaluator?: Evaluator
 
-    constructor(protected messageBus: IMessageBus,
-        { scene, evaluator, entities, subscriberID }:
-            { scene: IScene | undefined; evaluator: Evaluator | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-            { scene: undefined, evaluator: undefined, entities: new Map(), subscriberID: undefined }) {
+    constructor(messageBus: IMessageBus, 
+            scene?: IScene, 
+            evaluator?: Evaluator, 
+            entities: Map<number, SystemEntity> = new Map(), 
+            subscriberID?: number) {
         super(subscriberID);
+        this.messageBus = messageBus;
         this.entities = entities;
         this.evaluator = evaluator;
         this.scene = scene;

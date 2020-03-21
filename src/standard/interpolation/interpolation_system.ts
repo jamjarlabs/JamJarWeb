@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -30,17 +30,20 @@ import IScene from "../../scene/iscene";
  * This is part of the rendering process.
  */
 class InterpolationSystem extends System {
-    // All entities with a transform
+    /**
+     * Ensure has Transform
+     */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return components.some(
             component => component.key == Transform.KEY
         );
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: InterpolationSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, InterpolationSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
     }
 

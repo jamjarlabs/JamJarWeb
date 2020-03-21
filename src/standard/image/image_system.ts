@@ -22,6 +22,10 @@ import IMessage from "../../message/imessage";
 import Message from "../../message/message";
 import ImageAsset from "./image_asset";
 
+/**
+ * ImageSystem handles loading image assets in and making them available
+ * to the engine for rendering.
+ */
 class ImageSystem extends System {
     public static readonly MESSAGE_REQUEST_FLUSH = "request_image_flush";
     public static readonly MESSAGE_REQUEST_LOAD = "request_image_load";
@@ -32,10 +36,13 @@ class ImageSystem extends System {
     private loadQueue: ImageAsset[];
     private images: ImageAsset[];
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID, images, loadQueue }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; loadQueue: ImageAsset[]; images: ImageAsset[] } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined, loadQueue: [], images: [] }) {
-        super(messageBus, { scene, evaluator: undefined, entities, subscriberID })
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number,
+        images: ImageAsset[] = [],
+        loadQueue: ImageAsset[] = []) {
+        super(messageBus, scene, undefined, entities, subscriberID)
         this.loadQueue = loadQueue;
         this.images = images;
         this.messageBus.Subscribe(this, ImageSystem.MESSAGE_REQUEST_LOAD);

@@ -36,10 +36,13 @@ class FullscreenSystem extends System {
     private canvas: HTMLCanvasElement;
     private document: HTMLDocument;
 
-    constructor(messageBus: IMessageBus, canvas: HTMLCanvasElement, document: HTMLDocument, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: undefined, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        canvas: HTMLCanvasElement, 
+        document: HTMLDocument, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, undefined, entities, subscriberID);
         this.messageBus.Subscribe(this, [
             FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN,
             FullscreenSystem.MESSAGE_REQUEST_EXIT_FULLSCREEN,

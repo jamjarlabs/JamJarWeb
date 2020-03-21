@@ -38,75 +38,51 @@ describe("UISystem - OnMessage", () => {
         [
             "Unknown mesage type",
             undefined,
-            new UISystem(new FakeMessageBus(), {
-                entities: new Map(),
-                subscriberID: 0,
-                scene: undefined,
-            }),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new UISystem(new FakeMessageBus()),
             new Message("unknown")
         ],
         [
             "Pre render no payload",
             undefined,
-            new UISystem(new FakeMessageBus(), {
-                entities: new Map(),
-                subscriberID: 0,
-                scene: undefined,
-            }),
-            new UISystem(new FakeMessageBus(), {
-                entities: new Map(),
-                subscriberID: 0,
-                scene: undefined,
-            }),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER)
-        ],  
+        ],
         [
             "Correctly register new entity (camera), none existing",
             undefined,
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                    ])
-                }),
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                ]),
+                0
+            ),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Camera()
             ]])
-        ],    
+        ],
         [
             "Correctly register new entity (ui element), none existing",
             undefined,
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(0)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                    ])
-                }),
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(0)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                ]),
+                0
+            ),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new UI(new FakeEntity(0)),
@@ -117,52 +93,50 @@ describe("UISystem - OnMessage", () => {
             "Correctly register new entity (ui element), three existing",
             undefined,
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                        [3, new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                ]),
+                0
+            ),
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0
+            ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [
                 new Transform(),
                 new UI(new FakeEntity(2)),
@@ -172,18 +146,8 @@ describe("UISystem - OnMessage", () => {
         [
             "Correctly reject new entity (ui element), missing transform",
             undefined,
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined }),
                 new UI(new FakeEntity(1))
@@ -192,18 +156,8 @@ describe("UISystem - OnMessage", () => {
         [
             "Correctly reject new entity (ui element), missing sprite",
             undefined,
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new UI(new FakeEntity(1)),
                 new Transform()
@@ -212,18 +166,8 @@ describe("UISystem - OnMessage", () => {
         [
             "Correctly reject new entity (ui element), missing ui",
             undefined,
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
-            new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
+            new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined }),
@@ -233,151 +177,145 @@ describe("UISystem - OnMessage", () => {
             "Pre render, render 2, skip 1 no camera",
             undefined,
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                        [3, new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(4)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(4)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                        [3, new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(4)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(4)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
             "Pre render, render 2, skip 1 invalid camera",
             undefined,
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                        [3, new SystemEntity(new FakeEntity(4), [
-                            new Transform(),
-                            new UI(new FakeEntity(1)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(4), [
+                        new Transform(),
+                        new UI(new FakeEntity(1)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new UISystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                        [3, new SystemEntity(new FakeEntity(4), [
-                            new Transform(),
-                            new UI(new FakeEntity(1)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(4), [
+                        new Transform(),
+                        new UI(new FakeEntity(1)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
             "Pre render, fail to publish",
             new Error("fail to publish"),
             new UISystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                ]),
+                0
+            ),
             new UISystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Camera()
-                        ])],
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                ]),
+                0
+            ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: UISystem, uiSystem: UISystem, message: IMessage) => {

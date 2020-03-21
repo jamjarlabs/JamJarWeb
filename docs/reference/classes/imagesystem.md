@@ -1,6 +1,9 @@
 
 # Class: ImageSystem
 
+ImageSystem handles loading image assets in and making them available
+to the engine for rendering.
+
 ## Hierarchy
 
   ↳ [System](system.md)
@@ -49,23 +52,20 @@
 
 ###  constructor
 
-\+ **new ImageSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[ImageSystem](imagesystem.md)*
+\+ **new ImageSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `images`: [ImageAsset](imageasset.md)[], `loadQueue`: [ImageAsset](imageasset.md)[]): *[ImageSystem](imagesystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, loadQueue: [], images: [] }
-
-Name | Type |
------- | ------ |
-`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`images` | [ImageAsset](imageasset.md)‹›[] |
-`loadQueue` | [ImageAsset](imageasset.md)‹›[] |
-`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
-`subscriberID` | undefined &#124; number |
+Name | Type | Default |
+------ | ------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`scene?` | [IScene](../interfaces/iscene.md) | - |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`subscriberID?` | undefined &#124; number | - |
+`images` | [ImageAsset](imageasset.md)[] | [] |
+`loadQueue` | [ImageAsset](imageasset.md)[] | [] |
 
 **Returns:** *[ImageSystem](imagesystem.md)*
 
@@ -76,6 +76,12 @@ Name | Type |
 • **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
+
+A map of entities, mapped by their entity ID.
+ID: Entity
+0: PlayerEntity
+1: ObstacleEntity
+etc.
 
 ___
 
@@ -97,6 +103,9 @@ ___
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
 
+Reference to the message bus, the fundamental piece of JamJar
+for communicating with other parts of the engine.
+
 ___
 
 ### `Protected` `Optional` scene
@@ -104,6 +113,10 @@ ___
 • **scene**? : *[IScene](../interfaces/iscene.md)*
 
 *Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+
+Any scene this system is part of, will change the lifecycle of the
+system to be part of the scene's lifecycle - it will be destroyed
+when the scene is destroyed.
 
 ___
 

@@ -48,26 +48,22 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
 ###  constructor
 
-\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `__namedParameters`: object): *[PointerSystem](pointersystem.md)*
+\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `pointers`: [string, [Pointer](pointer.md)][], `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[PointerSystem](pointersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-▪ **inputElement**: *HTMLElement*
-
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }
-
-Name | Type |
------- | ------ |
-`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`isFullscreen` | boolean |
-`lockedPointerPosition` | undefined &#124; [Vector](vector.md)‹› |
-`pointers` | [string, [Pointer](pointer.md)‹›][] |
-`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
-`subscriberID` | undefined &#124; number |
+Name | Type | Default |
+------ | ------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`inputElement` | HTMLElement | - |
+`scene?` | [IScene](../interfaces/iscene.md) | - |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`subscriberID?` | undefined &#124; number | - |
+`pointers` | [string, [Pointer](pointer.md)][] | [] |
+`isFullscreen` | boolean | false |
+`lockedPointerPosition?` | [Vector](vector.md) | - |
 
 **Returns:** *[PointerSystem](pointersystem.md)*
 
@@ -79,11 +75,19 @@ Name | Type |
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
+A map of entities, mapped by their entity ID.
+ID: Entity
+0: PlayerEntity
+1: ObstacleEntity
+etc.
+
 ___
 
 ### `Private` inputElement
 
 • **inputElement**: *HTMLElement*
+
+The HTML element to get pointer events on.
 
 ___
 
@@ -91,11 +95,18 @@ ___
 
 • **isFullscreen**: *boolean*
 
+If the game is in fullscreen mode or not.
+true = in fullscreen, false = not in fullscreen
+
 ___
 
 ### `Private` lockedPointerPosition
 
 • **lockedPointerPosition**: *[Vector](vector.md) | undefined*
+
+Position of the pointer if it is locked, used with the PointerAPI to
+keep track of pointer position using movementX and movementY.
+If it is undefined there is no pointer lock.
 
 ___
 
@@ -104,6 +115,9 @@ ___
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+
+Reference to the message bus, the fundamental piece of JamJar
+for communicating with other parts of the engine.
 
 ___
 
@@ -118,6 +132,10 @@ ___
 • **scene**? : *[IScene](../interfaces/iscene.md)*
 
 *Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+
+Any scene this system is part of, will change the lifecycle of the
+system to be part of the scene's lifecycle - it will be destroyed
+when the scene is destroyed.
 
 ___
 
@@ -231,6 +249,8 @@ ___
 ### `Static` `Private` EVALUATOR
 
 ▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
+
+Ensure has Camera and Transform
 
 **Parameters:**
 

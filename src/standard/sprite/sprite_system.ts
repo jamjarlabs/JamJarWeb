@@ -29,8 +29,14 @@ import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import UI from "../ui/ui";
 
+/**
+ * SpriteSystem handles converting sprites into renderable objects that are fed into 
+ * a rendering system. Does not handle sprites that are designated as part of the UI.
+ */
 class SpriteSystem extends System {
-    // Has transform and sprite, but not UI
+    /**
+     * Ensure has Transform and Sprite, but not UI
+     */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY].every((type) => components.some(
             component => component.key == type
@@ -40,10 +46,10 @@ class SpriteSystem extends System {
     };
 
     constructor(messageBus: IMessageBus,
-        { scene, entities, subscriberID }:
-            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-            { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: SpriteSystem.EVALUATOR, scene, entities, subscriberID });
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
+        subscriberID?: number) {
+        super(messageBus, scene, SpriteSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
 
