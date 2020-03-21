@@ -325,12 +325,16 @@ class ControllerSystem extends System {
                 if (pointerMessage.payload === undefined) {
                     return;
                 }
-                this.targetedPosition = pointerMessage.payload.cameraInfos[0].worldPosition;
+                for (const cameraInfo of pointerMessage.payload.cameraInfos) {
+                    if (!cameraInfo.withinBounds) {
+                        continue;
+                    }
+                    this.targetedPosition = cameraInfo.worldPosition;
+                }
                 break;
             }
             case "pointerdown": {
                 for (const player of this.entities.values()) {
-                    console.log(this.targetedPosition);
                     const transform = player.Get(Transform.KEY) as Transform;
                     const orientation = this.getOrientationToTarget(transform.position);
                     const bullet = new Entity(this.messageBus);

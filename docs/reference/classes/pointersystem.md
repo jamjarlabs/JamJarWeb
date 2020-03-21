@@ -28,7 +28,6 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 * [isFullscreen](pointersystem.md#private-isfullscreen)
 * [lockedPointerPosition](pointersystem.md#private-lockedpointerposition)
 * [messageBus](pointersystem.md#protected-messagebus)
-* [pointers](pointersystem.md#private-pointers)
 * [scene](pointersystem.md#protected-optional-scene)
 * [subscriberID](pointersystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](pointersystem.md#static-message_deregister)
@@ -48,7 +47,7 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
 ###  constructor
 
-\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `pointers`: [string, [Pointer](pointer.md)][], `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[PointerSystem](pointersystem.md)*
+\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[PointerSystem](pointersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -61,7 +60,6 @@ Name | Type | Default |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
-`pointers` | [string, [Pointer](pointer.md)][] | [] |
 `isFullscreen` | boolean | false |
 `lockedPointerPosition?` | [Vector](vector.md) | - |
 
@@ -118,12 +116,6 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
-
-___
-
-### `Private` pointers
-
-• **pointers**: *[string, [Pointer](pointer.md)][]*
 
 ___
 
@@ -220,9 +212,17 @@ ___
 
 ### `Protected` Update
 
-▸ **Update**(): *void*
+▸ **Update**(`dt`: number): *void*
 
-*Overrides [System](system.md).[Update](system.md#protected-update)*
+*Inherited from [System](system.md).[Update](system.md#protected-update)*
+
+General update method, default empty. Override with custom logic.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`dt` | number | DeltaTime  |
 
 **Returns:** *void*
 

@@ -51,7 +51,6 @@ class PointerSystem extends System {
      * true = in fullscreen, false = not in fullscreen
      */
     private isFullscreen: boolean;
-    private pointers: [string, Pointer][];
     /**
      * Position of the pointer if it is locked, used with the PointerAPI to
      * keep track of pointer position using movementX and movementY.
@@ -63,28 +62,17 @@ class PointerSystem extends System {
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        pointers: [string, Pointer][] = [],
         isFullscreen = false,
         lockedPointerPosition?: Vector) {
         super(messageBus, scene, PointerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, [FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, FullscreenSystem.MESSAGE_EXIT_FULLSCREEN]);
         this.inputElement = inputElement;
-        this.pointers = pointers;
         this.isFullscreen = isFullscreen;
         this.lockedPointerPosition = lockedPointerPosition;
         // Set up listeners
         this.inputElement.addEventListener("pointermove", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("pointerdown", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("pointerup", this.pointerEvent.bind(this));
-    }
-
-    protected Update(): void {
-        // Publish all stored pointers, then clear pointer queue
-        for (let i = 0; i < this.pointers.length; i++) {
-            const pointer = this.pointers[i];
-            this.messageBus.Publish(new Message<Pointer>(pointer[0], pointer[1]));
-        }
-        this.pointers = [];
     }
 
     public OnMessage(message: IMessage): void {
@@ -144,15 +132,12 @@ class PointerSystem extends System {
             const viewportPosition = camera.viewportPosition.Scale(0.5);
             const virtualScale = camera.virtualScale;
 
-            const viewportHalfWidth = viewportScale.x / 2;
-            const viewportHalfHeight = viewportScale.y / 2;
-
             const cameraWorldPosition = transform.position;
 
-            const withinBounds = elementPosition.x < viewportPosition.x + viewportHalfWidth &&
-                elementPosition.x > viewportPosition.x - viewportHalfWidth &&
-                elementPosition.y < viewportPosition.y + viewportHalfHeight &&
-                elementPosition.y > viewportPosition.y - viewportHalfHeight;
+            const withinBounds = elementPosition.x < viewportPosition.x + viewportScale.x &&
+                elementPosition.x > viewportPosition.x - viewportScale.x &&
+                elementPosition.y < viewportPosition.y + viewportScale.y &&
+                elementPosition.y > viewportPosition.y - viewportScale.y;
 
             // Position relative to camera viewport
             const cameraPosition = new Vector(
@@ -173,9 +158,7 @@ class PointerSystem extends System {
                 withinBounds
             ));
         }
-
-        this.pointers.push([event.type, new Pointer(event, elementPosition, pointerCameraInfos)]);
-
+        this.messageBus.Publish(new Message<Pointer>(event.type, new Pointer(event, elementPosition, pointerCameraInfos)));
     }
 }
 
