@@ -27,161 +27,161 @@ describe("FullscreenSystem - OnMessage", () => {
         [
             "Request Enter Fullscreen - fail to request fullscreen",
             new Error("fail to request fullscreen"),
-            new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
+            new FullscreenSystem(new FakeMessageBus(), ((): HTMLCanvasElement => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => {
-                    throw("fail to request fullscreen");
+                    throw ("fail to request fullscreen");
                 }
                 return canvas;
-            })(), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
-            new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
+            })(), window.document,
+                undefined,
+                undefined,
+                0
+            ),
+            new FullscreenSystem(new FakeMessageBus(), ((): HTMLCanvasElement => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => {
-                    throw("fail to request fullscreen");
+                    throw ("fail to request fullscreen");
                 }
                 return canvas;
-            })(), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            })(), window.document,
+                undefined,
+                undefined,
+                0
+            ),
             new Message(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN)
         ],
         [
             "Request Enter Fullscreen - fail to request pointer lock",
             new Error("fail to request pointerlock"),
-            new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
+            new FullscreenSystem(new FakeMessageBus(), ((): HTMLCanvasElement => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = (): void => { 
-                    throw("fail to request pointerlock");
+                canvas.requestPointerLock = (): void => {
+                    throw ("fail to request pointerlock");
                 };
                 return canvas;
-            })(), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
-            new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
+            })(), window.document,
+                undefined,
+                undefined,
+                0
+            ),
+            new FullscreenSystem(new FakeMessageBus(), ((): HTMLCanvasElement => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = (): void => { 
-                    throw("fail to request pointerlock");
+                canvas.requestPointerLock = (): void => {
+                    throw ("fail to request pointerlock");
                 };
                 return canvas;
-            })(), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            })(), window.document,
+                undefined,
+                undefined,
+                0
+            ),
             new Message(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN)
         ],
         [
             "Request Enter Fullscreen - success",
             undefined,
-            new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
+            new FullscreenSystem(new FakeMessageBus(), ((): HTMLCanvasElement => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = (): void => {return;};
+                canvas.requestPointerLock = (): void => { return; };
                 return canvas;
-            })(), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
-            new FullscreenSystem(new FakeMessageBus(),  ((): HTMLCanvasElement => { 
+            })(), window.document,
+                undefined,
+                undefined,
+                0
+            ),
+            new FullscreenSystem(new FakeMessageBus(), ((): HTMLCanvasElement => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => { return new Promise((resolve, reject) => resolve()); };
-                canvas.requestPointerLock = (): void => {return;};
+                canvas.requestPointerLock = (): void => { return; };
                 return canvas;
-            })(), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            })(), window.document,
+                undefined,
+                undefined,
+                0
+            ),
             new Message(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN)
         ],
         [
             "Request Exit Fullscreen - fail to exit fullscreen",
             new Error("fail to exit fullscreen"),
-            new FullscreenSystem(new FakeMessageBus(),  window.document.createElement("canvas"), ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void> => { throw("fail to exit fullscreen") };
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void> => { throw("fail to exit fullscreen") };
+                doc.exitFullscreen = (): Promise<void> => { throw ("fail to exit fullscreen") };
                 return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            })(),
+                undefined,
+                undefined,
+                0
+            ),
+            new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
+                const dom = new JSDOM();
+                const doc = dom.window.document;
+                doc.exitFullscreen = (): Promise<void> => { throw ("fail to exit fullscreen") };
+                return doc
+            })(),
+                undefined,
+                undefined,
+                0
+            ),
             new Message(FullscreenSystem.MESSAGE_REQUEST_EXIT_FULLSCREEN)
         ],
         [
             "Request Exit Fullscreen - fail to exit pointer lock",
             new Error("fail to exit pointerlock"),
-            new FullscreenSystem(new FakeMessageBus(),  window.document.createElement("canvas"), ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void => resolve()); };
-                doc.exitPointerLock = (): Promise<void>  => { throw("fail to exit pointerlock") };
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void  => resolve()); };
-                doc.exitPointerLock = (): Promise<void>  => { throw("fail to exit pointerlock") };
+                doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
+                doc.exitPointerLock = (): Promise<void> => { throw ("fail to exit pointerlock") };
                 return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            })(),
+                undefined,
+                undefined,
+                0
+            ),
+            new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
+                const dom = new JSDOM();
+                const doc = dom.window.document;
+                doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
+                doc.exitPointerLock = (): Promise<void> => { throw ("fail to exit pointerlock") };
+                return doc
+            })(),
+                undefined,
+                undefined,
+                0
+            ),
             new Message(FullscreenSystem.MESSAGE_REQUEST_EXIT_FULLSCREEN)
         ],
         [
             "Request Exit Fullscreen - success",
             undefined,
-            new FullscreenSystem(new FakeMessageBus(),  window.document.createElement("canvas"), ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void  => resolve()); };
-                doc.exitPointerLock = (): void  => { return; };
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void>  => {  return new Promise((resolve, reject): void  => resolve()); };
-                doc.exitPointerLock = (): void  => { return; };
+                doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
+                doc.exitPointerLock = (): void => { return; };
                 return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            })(),
+                undefined,
+                undefined,
+                0
+            ),
+            new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
+                const dom = new JSDOM();
+                const doc = dom.window.document;
+                doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
+                doc.exitPointerLock = (): void => { return; };
+                return doc
+            })(),
+                undefined,
+                undefined,
+                0
+            ),
             new Message(FullscreenSystem.MESSAGE_REQUEST_EXIT_FULLSCREEN)
         ]
     ])("%p", (description: string, expected: Error | undefined, expectedState: FullscreenSystem, system: FullscreenSystem, message: IMessage) => {
@@ -218,37 +218,37 @@ describe("FullscreenSystem - toggle fullscreen", () => {
             new Error("fail to publish"),
             new FullscreenSystem(new FakeMessageBus([
                 new Reactor("Publish", () => { throw ("fail to publish"); })
-            ]), 
-            window.document.createElement("canvas"), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            ]),
+                window.document.createElement("canvas"), window.document,
+                undefined,
+                undefined,
+                0
+            ),
             new TestFullscreenSystem(new FakeMessageBus([
                 new Reactor("Publish", () => { throw ("fail to publish"); })
-            ]), 
-            window.document.createElement("canvas"), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            ]),
+                window.document.createElement("canvas"), window.document,
+                undefined,
+                undefined,
+                0
+            ),
             new window.Event("test")
         ],
         [
             "Fullscreen exit, success",
             undefined,
-            new FullscreenSystem(new FakeMessageBus(), 
-            window.document.createElement("canvas"), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
-            new TestFullscreenSystem(new FakeMessageBus(), 
-            window.document.createElement("canvas"), window.document, {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            new FullscreenSystem(new FakeMessageBus(),
+                window.document.createElement("canvas"), window.document,
+                undefined,
+                undefined,
+                0
+            ),
+            new TestFullscreenSystem(new FakeMessageBus(),
+                window.document.createElement("canvas"), window.document,
+                undefined,
+                undefined,
+                0
+            ),
             new window.Event("test")
         ],
         [
@@ -256,73 +256,73 @@ describe("FullscreenSystem - toggle fullscreen", () => {
             new Error("fail to publish"),
             new FullscreenSystem(new FakeMessageBus([
                 new Reactor("Publish", () => { throw ("fail to publish"); })
-            ]), 
-            window.document.createElement("canvas"), 
-            ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                Object.defineProperty(doc, "fullscreenElement", {
-                    writable: true,
-                    value: doc.createElement("canvas")
-                })
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            ]),
+                window.document.createElement("canvas"),
+                ((): HTMLDocument => {
+                    const dom = new JSDOM();
+                    const doc = dom.window.document;
+                    Object.defineProperty(doc, "fullscreenElement", {
+                        writable: true,
+                        value: doc.createElement("canvas")
+                    })
+                    return doc
+                })(),
+                undefined,
+                undefined,
+                0
+            ),
             new TestFullscreenSystem(new FakeMessageBus([
                 new Reactor("Publish", () => { throw ("fail to publish"); })
-            ]), 
-            window.document.createElement("canvas"), 
-            ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                Object.defineProperty(doc, "fullscreenElement", {
-                    writable: true,
-                    value: doc.createElement("canvas")
-                })
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            ]),
+                window.document.createElement("canvas"),
+                ((): HTMLDocument => {
+                    const dom = new JSDOM();
+                    const doc = dom.window.document;
+                    Object.defineProperty(doc, "fullscreenElement", {
+                        writable: true,
+                        value: doc.createElement("canvas")
+                    })
+                    return doc
+                })(),
+                undefined,
+                undefined,
+                0
+            ),
             new window.Event("test")
         ],
         [
             "Fullscreen enter, success",
             undefined,
-            new FullscreenSystem(new FakeMessageBus(), 
-            window.document.createElement("canvas"), 
-            ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                Object.defineProperty(doc, "fullscreenElement", {
-                    writable: true,
-                    value: doc.createElement("canvas")
-                })
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
-            new TestFullscreenSystem(new FakeMessageBus(), 
-            window.document.createElement("canvas"), 
-            ((): HTMLDocument => {
-                const dom = new JSDOM();
-                const doc = dom.window.document;
-                Object.defineProperty(doc, "fullscreenElement", {
-                    writable: true,
-                    value: doc.createElement("canvas")
-                })
-                return doc
-            })(), {
-                entities: new Map(),
-                scene: undefined,
-                subscriberID: 0
-            }),
+            new FullscreenSystem(new FakeMessageBus(),
+                window.document.createElement("canvas"),
+                ((): HTMLDocument => {
+                    const dom = new JSDOM();
+                    const doc = dom.window.document;
+                    Object.defineProperty(doc, "fullscreenElement", {
+                        writable: true,
+                        value: doc.createElement("canvas")
+                    })
+                    return doc
+                })(),
+                undefined,
+                undefined,
+                0
+            ),
+            new TestFullscreenSystem(new FakeMessageBus(),
+                window.document.createElement("canvas"),
+                ((): HTMLDocument => {
+                    const dom = new JSDOM();
+                    const doc = dom.window.document;
+                    Object.defineProperty(doc, "fullscreenElement", {
+                        writable: true,
+                        value: doc.createElement("canvas")
+                    })
+                    return doc
+                })(),
+                undefined,
+                undefined,
+                0
+            ),
             new window.Event("test")
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: FullscreenSystem, system: TestFullscreenSystem, event: Event) => {

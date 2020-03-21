@@ -43,7 +43,7 @@ allows testing them without having to use JS event listeners
 
 ###  constructor
 
-\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `__namedParameters`: object): *[TestPointerSystem](testpointersystem.md)*
+\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `pointers`: [string, [Pointer](pointer.md)][], `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[TestPointerSystem](testpointersystem.md)*
 
 *Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
 
@@ -51,20 +51,16 @@ allows testing them without having to use JS event listeners
 
 **Parameters:**
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-▪ **inputElement**: *HTMLElement*
-
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined, pointers: [], isFullscreen: false, lockedPointerPosition: undefined }
-
-Name | Type |
------- | ------ |
-`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`isFullscreen` | boolean |
-`lockedPointerPosition` | undefined &#124; [Vector](vector.md)‹› |
-`pointers` | [string, [Pointer](pointer.md)‹›][] |
-`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
-`subscriberID` | undefined &#124; number |
+Name | Type | Default |
+------ | ------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`inputElement` | HTMLElement | - |
+`scene?` | [IScene](../interfaces/iscene.md) | - |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`subscriberID?` | undefined &#124; number | - |
+`pointers` | [string, [Pointer](pointer.md)][] | [] |
+`isFullscreen` | boolean | false |
+`lockedPointerPosition?` | [Vector](vector.md) | - |
 
 **Returns:** *[TestPointerSystem](testpointersystem.md)*
 
@@ -76,6 +72,12 @@ Name | Type |
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
+A map of entities, mapped by their entity ID.
+ID: Entity
+0: PlayerEntity
+1: ObstacleEntity
+etc.
+
 ___
 
 ### `Protected` messageBus
@@ -84,6 +86,9 @@ ___
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
 
+Reference to the message bus, the fundamental piece of JamJar
+for communicating with other parts of the engine.
+
 ___
 
 ### `Protected` `Optional` scene
@@ -91,6 +96,10 @@ ___
 • **scene**? : *[IScene](../interfaces/iscene.md)*
 
 *Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+
+Any scene this system is part of, will change the lifecycle of the
+system to be part of the scene's lifecycle - it will be destroyed
+when the scene is destroyed.
 
 ___
 

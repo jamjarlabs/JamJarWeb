@@ -84,10 +84,11 @@ class BallSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined, entities: Map<number, SystemEntity>, subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: BallSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, BallSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
     }
 
@@ -190,10 +191,11 @@ class PlayerSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined, entities: Map<number, SystemEntity>, subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: PlayerSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
         messageBus.Subscribe(this, "pointermove");
         messageBus.Subscribe(this, "pointerdown");
     }
@@ -251,12 +253,12 @@ class PlayerSystem extends System {
 
 class SimpleScene extends Scene {
     OnStart(): void {
-        new SpriteSystem(messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new MotionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new InterpolationSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new PlayerSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new BallSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
-        new CollisionSystem(this.messageBus, { scene: this, entities: new Map(), subscriberID: undefined });
+        new SpriteSystem(messageBus, this);
+        new MotionSystem(this.messageBus, this);
+        new InterpolationSystem(this.messageBus, this);
+        new PlayerSystem(this.messageBus, this);
+        new BallSystem(this.messageBus, this);
+        new CollisionSystem(this.messageBus, this);
 
         const camera = new Entity(this.messageBus);
         camera.Add(new Transform(new Vector(0, 0)));

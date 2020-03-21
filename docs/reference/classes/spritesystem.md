@@ -1,6 +1,9 @@
 
 # Class: SpriteSystem
 
+SpriteSystem handles converting sprites into renderable objects that are fed into
+a rendering system. Does not handle sprites that are designated as part of the UI.
+
 ## Hierarchy
 
   ↳ [System](system.md)
@@ -40,21 +43,18 @@
 
 ###  constructor
 
-\+ **new SpriteSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `__namedParameters`: object): *[SpriteSystem](spritesystem.md)*
+\+ **new SpriteSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[SpriteSystem](spritesystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined }
-
 Name | Type |
 ------ | ------ |
-`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
-`subscriberID` | undefined &#124; number |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
+`scene?` | [IScene](../interfaces/iscene.md) |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› |
+`subscriberID?` | undefined &#124; number |
 
 **Returns:** *[SpriteSystem](spritesystem.md)*
 
@@ -66,6 +66,12 @@ Name | Type |
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
+A map of entities, mapped by their entity ID.
+ID: Entity
+0: PlayerEntity
+1: ObstacleEntity
+etc.
+
 ___
 
 ### `Protected` messageBus
@@ -74,6 +80,9 @@ ___
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
 
+Reference to the message bus, the fundamental piece of JamJar
+for communicating with other parts of the engine.
+
 ___
 
 ### `Protected` `Optional` scene
@@ -81,6 +90,10 @@ ___
 • **scene**? : *[IScene](../interfaces/iscene.md)*
 
 *Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+
+Any scene this system is part of, will change the lifecycle of the
+system to be part of the scene's lifecycle - it will be destroyed
+when the scene is destroyed.
 
 ___
 
@@ -198,6 +211,8 @@ ___
 ### `Static` `Private` EVALUATOR
 
 ▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
+
+Ensure has Transform and Sprite, but not UI
 
 **Parameters:**
 

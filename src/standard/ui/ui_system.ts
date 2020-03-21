@@ -35,7 +35,9 @@ import Camera from "../camera/camera";
  * relative to a camera, rather than as part of the world coordinates.
  */
 class UISystem extends System {
-    // Has transform, sprite and UI, or transform and camera
+    /**
+     * Ensure has Transform, Sprite and UI, or Transform and Camera.
+     */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY, UI.KEY].every((type) => components.some(
             component => component.key == type
@@ -45,10 +47,10 @@ class UISystem extends System {
     };
 
     constructor(messageBus: IMessageBus,
-        { scene, entities, subscriberID }:
-            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-            { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: UISystem.EVALUATOR, scene, entities, subscriberID });
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
+        subscriberID?: number) {
+        super(messageBus, scene, UISystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
 
@@ -92,7 +94,7 @@ class UISystem extends System {
                 // If the components are not found, must not be a valid camera, skip this entity
                 continue;
             }
-            
+
             const relativeTransform = new Transform(
                 // camera position + UI element position * camera virtual scale
                 cameraTransform.position.Add(transform.position.Multiply(camera.virtualScale.Scale(0.5))),

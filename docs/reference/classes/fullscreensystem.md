@@ -50,25 +50,20 @@ entering/existing fullscreen/pointer lock.
 
 ###  constructor
 
-\+ **new FullscreenSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `document`: HTMLDocument, `__namedParameters`: object): *[FullscreenSystem](fullscreensystem.md)*
+\+ **new FullscreenSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `document`: HTMLDocument, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[FullscreenSystem](fullscreensystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-▪ **canvas**: *HTMLCanvasElement*
-
-▪ **document**: *HTMLDocument*
-
-▪`Default value`  **__namedParameters**: *object*= { scene: undefined, entities: new Map(), subscriberID: undefined }
-
 Name | Type |
 ------ | ------ |
-`entities` | Map‹number, [SystemEntity](systementity.md)‹›› |
-`scene` | undefined &#124; [IScene](../interfaces/iscene.md) |
-`subscriberID` | undefined &#124; number |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
+`canvas` | HTMLCanvasElement |
+`document` | HTMLDocument |
+`scene?` | [IScene](../interfaces/iscene.md) |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› |
+`subscriberID?` | undefined &#124; number |
 
 **Returns:** *[FullscreenSystem](fullscreensystem.md)*
 
@@ -92,6 +87,12 @@ ___
 
 *Inherited from [System](system.md).[entities](system.md#protected-entities)*
 
+A map of entities, mapped by their entity ID.
+ID: Entity
+0: PlayerEntity
+1: ObstacleEntity
+etc.
+
 ___
 
 ### `Protected` messageBus
@@ -100,6 +101,9 @@ ___
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
 
+Reference to the message bus, the fundamental piece of JamJar
+for communicating with other parts of the engine.
+
 ___
 
 ### `Protected` `Optional` scene
@@ -107,6 +111,10 @@ ___
 • **scene**? : *[IScene](../interfaces/iscene.md)*
 
 *Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+
+Any scene this system is part of, will change the lifecycle of the
+system to be part of the scene's lifecycle - it will be destroyed
+when the scene is destroyed.
 
 ___
 

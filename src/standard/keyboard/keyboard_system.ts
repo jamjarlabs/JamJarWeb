@@ -28,11 +28,13 @@ class KeyboardSystem extends System {
 
     private keyEvents: [string, string][];
 
-    constructor(messageBus: IMessageBus, inputElement: HTMLDocument,
-        { scene, entities, subscriberID, keyEvents }:
-            { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined; keyEvents: [string, string][] } =
-            { scene: undefined, entities: new Map(), subscriberID: undefined, keyEvents: [] }) {
-        super(messageBus, { scene, evaluator: undefined, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        inputElement: HTMLDocument,
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number,
+        keyEvents: [string, string][] = []) {
+        super(messageBus, scene, undefined, entities, subscriberID);
         this.inputElement = inputElement;
         this.keyEvents = keyEvents;
         this.inputElement.addEventListener("keydown", this.keyEvent.bind(this));

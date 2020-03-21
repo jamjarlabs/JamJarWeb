@@ -36,119 +36,97 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Unknown mesage type",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), {
-                entities: new Map(),
-                subscriberID: 0,
-                scene: undefined,
-            }),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus()),
             new Message("unknown")
         ],
         [
             "Pre render no payload",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), {
-                entities: new Map(),
-                subscriberID: 0,
-                scene: undefined,
-            }),
-            new SpriteSystem(new FakeMessageBus(), {
-                entities: new Map(),
-                subscriberID: 0,
-                scene: undefined,
-            }),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER)
         ],
         [
             "Pre render fail to publish",
             new Error("fail to publish"),
             new SpriteSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new SpriteSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
             "Pre render render 3 sprites",
             undefined,
             new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
             "Correctly register new entity, none existing",
             undefined,
             new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                    ])
-                }),
-            new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                ]),
+                0
+            ),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
@@ -158,47 +136,45 @@ describe("SpriteSystem - OnMessage", () => {
             "Correctly register new entity, three existing",
             undefined,
             new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [3, new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                ]),
+                0
+            ),
             new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map([
-                        [0, new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [1, new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])],
-                        [2, new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
-                        ])]
-                    ])
-                }),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Color(0, 1, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Color(0, 0, 1), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
+                    ])]
+                ]),
+                0
+            ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [
                 new Transform(),
                 new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
@@ -207,18 +183,8 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject new entity, missing transform",
             undefined,
-            new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
-            new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Sprite(new Color(1, 0, 0), { bounds: Polygon.Rectangle(2, 2), texture: undefined })
             ]])
@@ -226,18 +192,8 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject new entity, missing sprite",
             undefined,
-            new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
-            new SpriteSystem(new FakeMessageBus(),
-                {
-                    scene: undefined,
-                    subscriberID: 0,
-                    entities: new Map()
-                }),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: SpriteSystem, spriteSystem: SpriteSystem, message: IMessage) => {

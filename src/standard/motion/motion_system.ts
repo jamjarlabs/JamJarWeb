@@ -28,17 +28,20 @@ import SystemEntity from "../../system/system_entity";
  * This system handles velocity, acceleration, angular velocity and angular acceleration.
  */
 class MotionSystem extends System {
-    // Only entities with transform and motion components.
+    /**
+     * Ensure has Transform and Motion.
+     */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Motion.KEY].every((type) => components.some(
             component => component.key == type
         ));
     };
 
-    constructor(messageBus: IMessageBus, { scene, entities, subscriberID }:
-        { scene: IScene | undefined; entities: Map<number, SystemEntity>; subscriberID: number | undefined } =
-        { scene: undefined, entities: new Map(), subscriberID: undefined }) {
-        super(messageBus, { evaluator: MotionSystem.EVALUATOR, scene, entities, subscriberID });
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, MotionSystem.EVALUATOR, entities, subscriberID);
     }
 
     protected Update(dt: number): void {
