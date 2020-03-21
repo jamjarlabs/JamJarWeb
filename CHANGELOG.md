@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - `System` and descendants of `System` now use optional parameters rather than an object containing multiple parameters.
+- `Pointer` events are now published immediately and do not wait for the next update.
+### Fixed
+- `PointerCameraInfo.withinBounds` now correctly calculated.
 
 ## [v0.4.1] - 2020-03-20
 ### Fixed

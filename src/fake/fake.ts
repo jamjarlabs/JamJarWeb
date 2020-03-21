@@ -25,7 +25,7 @@ abstract class Fake {
                 for (let i = 0; i < reactors.length; i++) {
                     const reactor = reactors[i];
                     if (reactor.name == prop.toString()) {
-                        return reactor.logic(Array.from(args))
+                        return reactor.logic;
                     }
                 }
                 return Reflect.get(target, prop, receiver)

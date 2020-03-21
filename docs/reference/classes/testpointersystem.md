@@ -43,7 +43,7 @@ allows testing them without having to use JS event listeners
 
 ###  constructor
 
-\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `pointers`: [string, [Pointer](pointer.md)][], `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[TestPointerSystem](testpointersystem.md)*
+\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[TestPointerSystem](testpointersystem.md)*
 
 *Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
 
@@ -58,7 +58,6 @@ Name | Type | Default |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
-`pointers` | [string, [Pointer](pointer.md)][] | [] |
 `isFullscreen` | boolean | false |
 `lockedPointerPosition?` | [Vector](vector.md) | - |
 
@@ -200,11 +199,17 @@ ___
 
 ### `Protected` Update
 
-▸ **Update**(): *void*
+▸ **Update**(`dt`: number): *void*
 
-*Inherited from [PointerSystem](pointersystem.md).[Update](pointersystem.md#protected-update)*
+*Inherited from [System](system.md).[Update](system.md#protected-update)*
 
-*Overrides [System](system.md).[Update](system.md#protected-update)*
+General update method, default empty. Override with custom logic.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`dt` | number | DeltaTime  |
 
 **Returns:** *void*
 
