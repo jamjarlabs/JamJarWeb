@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Shooter</title>
-        <style>
-            html, body {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-            }
 
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        </style>
-    </head>
-    <body>
-        <canvas id="game-canvas" width="1600" height="900" style="width:1366px;height:768px;cursor:none;"></canvas>
-        <script src="./main.js" type="module"></script>
-    </body>
+<head>
+    <title>Shooter</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="HandheldFriendly" content="true" />
+<title>Shooter</title>
+</head>
+
+<body>
+    <canvas id="game-canvas" width="1600" height="900" style="width:90%;cursor:none;touch-action:none;"></canvas>
+    <script src="./main.js" type="module"></script>
+</body>
+
 </html>

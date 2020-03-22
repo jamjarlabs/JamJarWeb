@@ -257,12 +257,13 @@ class CrosshairSystem extends System {
         entities?: Map<number, SystemEntity>, 
         subscriberID?: number) {
         super(messageBus, scene, CrosshairSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, ["pointermove", "keydown"])
+        this.messageBus.Subscribe(this, ["pointermove", "pointerdown", "keydown"])
     }
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case "pointermove": {
+            case "pointermove":
+            case "pointerdown": {
                 const pointerMessage = message as Message<Pointer>;
                 if (pointerMessage.payload === undefined) {
                     return;
@@ -332,6 +333,17 @@ class ControllerSystem extends System {
             }
             case "pointerdown": {
                 for (const player of this.entities.values()) {
+                    const pointerMessage = message as Message<Pointer>;
+                    if (pointerMessage.payload === undefined) {
+                        return;
+                    }
+                    for (const cameraInfo of pointerMessage.payload.cameraInfos) {
+                        if (!cameraInfo.withinBounds) {
+                            continue;
+                        }
+                        this.targetedPosition = cameraInfo.worldPosition;
+                    }
+                    
                     const transform = player.Get(Transform.KEY) as Transform;
                     const orientation = this.getOrientationToTarget(transform.position);
                     const bullet = new Entity(this.messageBus);
