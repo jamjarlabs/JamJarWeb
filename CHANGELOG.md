@@ -6,6 +6,9 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Group by texture for WebGL rendering to reduce texture switching and improve
+  performance.
 ### Fixed
 - `Polygon.PointInside` does not mistakenly predict point to the right of the 
   polygon are inside.
