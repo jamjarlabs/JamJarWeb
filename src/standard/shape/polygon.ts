@@ -57,16 +57,19 @@ class Polygon implements IShape {
         /**
          * Raycasting algorithm
          * https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
+         * Based on description here:
+         * http://alienryderflex.com/polygon/
          */
         let j = this.points.length - 1;
         let inPolygon = false;
         for (let i = 0; i < this.points.length; i++) {
             const cornerA = this.points[i];
             const cornerB = this.points[j];
-            if (cornerA.y < point.y && cornerB.y >= point.y ||
-                cornerB.y < point.y && cornerA.y >= point.y) {
+            if ((cornerA.y < point.y && cornerB.y >= point.y ||
+                cornerB.y < point.y && cornerA.y >= point.y) &&
+                (cornerA.x <= point.x || cornerB.x <= point.x)) {
                 if (cornerA.x + (point.y - cornerA.y)/(cornerB.y-cornerA.y)*(cornerB.x-cornerA.x) < point.x) {
-                    inPolygon = true;
+                    inPolygon = !inPolygon;
                 }
             }
             j=i;
