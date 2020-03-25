@@ -44,7 +44,7 @@ describe("Entity - Add", () => {
         if (expected instanceof Error) {
             expect(() => { entity.Add(component); }).toThrow(expected);
         } else {
-            expect(entity.Add(component)).toEqual(expected)
+            expect(entity.Add(component)).toEqual(expected);
         }
     });
 });
@@ -73,7 +73,7 @@ describe("Entity - Remove", () => {
         if (expected instanceof Error) {
             expect(() => { entity.Remove(key); }).toThrow(expected);
         } else {
-            expect(entity.Remove(key)).toEqual(expected)
+            expect(entity.Remove(key)).toEqual(expected);
         }
     });
 });
@@ -99,7 +99,7 @@ describe("Entity - Destroy", () => {
         if (expected instanceof Error) {
             expect(() => { entity.Destroy(); }).toThrow(expected);
         } else {
-            expect(entity.Destroy()).toEqual(expected)
+            expect(entity.Destroy()).toEqual(expected);
         }
     });
 });

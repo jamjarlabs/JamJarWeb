@@ -27,7 +27,7 @@ class ComponentManager {
     private components: Record<number, Component>;
 
     constructor(key: string, components: Record<number, Component> = {}) {
-        this.key = key
+        this.key = key;
         this.components = components;
     }
 

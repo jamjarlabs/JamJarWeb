@@ -100,7 +100,7 @@ abstract class System extends Subscriber {
                 if (!registerMessage.payload) {
                     return;
                 }
-                this.register(registerMessage.payload[0], registerMessage.payload[1])
+                this.register(registerMessage.payload[0], registerMessage.payload[1]);
                 break;
             }
             case System.MESSAGE_DEREGISTER: {
@@ -160,7 +160,7 @@ abstract class System extends Subscriber {
             return;
         }
 
-        this.remove(entity)
+        this.remove(entity);
 
         // Evaluation check
         if (!this.evaluator(entity, components)) {

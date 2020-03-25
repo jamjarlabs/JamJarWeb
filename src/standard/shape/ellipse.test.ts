@@ -80,7 +80,7 @@ describe("Ellipse - Transform", () => {
             new Transform(new Vector(-3, 10), new Vector(2, 3), Math.PI / 4)
         ],
     ])("%p", (description: string, expected: Ellipse, ellipse: Ellipse, transform: Transform) => {
-        expect(ellipse.Transform(transform)).toEqual(expected)
+        expect(ellipse.Transform(transform)).toEqual(expected);
     });
 });
 
@@ -112,7 +112,7 @@ describe("Ellipse - PointInside", () => {
             new Vector(3,5)
         ],
     ])("%p", (description: string, expected: boolean, ellipse: Ellipse, point: Vector) => {
-        expect(ellipse.PointInside(point)).toEqual(expected)
+        expect(ellipse.PointInside(point)).toEqual(expected);
     });
 });
 
@@ -126,6 +126,6 @@ describe("Polygon - Circle", () => {
             Ellipse.Circle(2, new Vector(0, 0))
         ],
     ])("%p", (description: string, expected: Ellipse, ellipse: Ellipse) => {
-        expect(ellipse).toEqual(expected)
+        expect(ellipse).toEqual(expected);
     });
 });

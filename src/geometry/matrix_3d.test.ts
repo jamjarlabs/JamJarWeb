@@ -55,7 +55,7 @@ describe("Matrix3D - Translate", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, translation: Vector) => {
         matrix.Translate(translation);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -97,7 +97,7 @@ describe("Matrix3D - Scale", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, scale: Vector) => {
         matrix.Scale(scale);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -139,7 +139,7 @@ describe("Matrix3D - Rotate", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, rotation: number) => {
         matrix.Rotate(rotation);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -181,7 +181,7 @@ describe("Matrix3D - RotateDeg", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, rotation: number) => {
         matrix.RotateDeg(rotation);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -202,7 +202,7 @@ describe("Matrix3D - GetFloat32Array", () => {
             ]),
         ],
     ])("%p", (description: string, expected: Float32Array, matrix: Matrix3D) => {
-        expect(matrix.GetFloat32Array()).toEqual(expected)
+        expect(matrix.GetFloat32Array()).toEqual(expected);
     });
 });
 
@@ -222,6 +222,6 @@ describe("Matrix3D - Identity", () => {
             ]),
         ],
     ])("%p", (description: string, expected: Matrix3D) => {
-        expect(Matrix3D.Identity()).toEqual(expected)
+        expect(Matrix3D.Identity()).toEqual(expected);
     });
 });

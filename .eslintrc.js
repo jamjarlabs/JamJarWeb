@@ -16,6 +16,7 @@ module.exports = {
     },
     rules: {
         "no-undef": "off",
+        "semi": 2,
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/interface-name-prefix": [
             "error",

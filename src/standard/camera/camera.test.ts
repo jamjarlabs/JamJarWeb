@@ -43,6 +43,6 @@ describe("Camera - GetProjectionMatrix", () => {
             new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(1, 1))
         ],
     ])("%p", (description: string, expected: Matrix4D, camera: Camera) => {
-        expect(camera.GetProjectionMatrix()).toEqual(expected)
+        expect(camera.GetProjectionMatrix()).toEqual(expected);
     });
 });

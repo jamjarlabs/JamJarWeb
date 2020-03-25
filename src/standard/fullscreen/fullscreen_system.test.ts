@@ -31,7 +31,7 @@ describe("FullscreenSystem - OnMessage", () => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => {
                     throw ("fail to request fullscreen");
-                }
+                };
                 return canvas;
             })(), window.document,
                 undefined,
@@ -42,7 +42,7 @@ describe("FullscreenSystem - OnMessage", () => {
                 const canvas = window.document.createElement("canvas");
                 canvas.requestFullscreen = (options?: FullscreenOptions): Promise<void> => {
                     throw ("fail to request fullscreen");
-                }
+                };
                 return canvas;
             })(), window.document,
                 undefined,
@@ -111,8 +111,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void> => { throw ("fail to exit fullscreen") };
-                return doc
+                doc.exitFullscreen = (): Promise<void> => { throw ("fail to exit fullscreen"); };
+                return doc;
             })(),
                 undefined,
                 undefined,
@@ -121,8 +121,8 @@ describe("FullscreenSystem - OnMessage", () => {
             new FullscreenSystem(new FakeMessageBus(), window.document.createElement("canvas"), ((): HTMLDocument => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
-                doc.exitFullscreen = (): Promise<void> => { throw ("fail to exit fullscreen") };
-                return doc
+                doc.exitFullscreen = (): Promise<void> => { throw ("fail to exit fullscreen"); };
+                return doc;
             })(),
                 undefined,
                 undefined,
@@ -137,8 +137,8 @@ describe("FullscreenSystem - OnMessage", () => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
                 doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
-                doc.exitPointerLock = (): Promise<void> => { throw ("fail to exit pointerlock") };
-                return doc
+                doc.exitPointerLock = (): Promise<void> => { throw ("fail to exit pointerlock"); };
+                return doc;
             })(),
                 undefined,
                 undefined,
@@ -148,8 +148,8 @@ describe("FullscreenSystem - OnMessage", () => {
                 const dom = new JSDOM();
                 const doc = dom.window.document;
                 doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
-                doc.exitPointerLock = (): Promise<void> => { throw ("fail to exit pointerlock") };
-                return doc
+                doc.exitPointerLock = (): Promise<void> => { throw ("fail to exit pointerlock"); };
+                return doc;
             })(),
                 undefined,
                 undefined,
@@ -165,7 +165,7 @@ describe("FullscreenSystem - OnMessage", () => {
                 const doc = dom.window.document;
                 doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
                 doc.exitPointerLock = (): void => { return; };
-                return doc
+                return doc;
             })(),
                 undefined,
                 undefined,
@@ -176,7 +176,7 @@ describe("FullscreenSystem - OnMessage", () => {
                 const doc = dom.window.document;
                 doc.exitFullscreen = (): Promise<void> => { return new Promise((resolve, reject): void => resolve()); };
                 doc.exitPointerLock = (): void => { return; };
-                return doc
+                return doc;
             })(),
                 undefined,
                 undefined,
@@ -264,8 +264,8 @@ describe("FullscreenSystem - toggle fullscreen", () => {
                     Object.defineProperty(doc, "fullscreenElement", {
                         writable: true,
                         value: doc.createElement("canvas")
-                    })
-                    return doc
+                    });
+                    return doc;
                 })(),
                 undefined,
                 undefined,
@@ -281,8 +281,8 @@ describe("FullscreenSystem - toggle fullscreen", () => {
                     Object.defineProperty(doc, "fullscreenElement", {
                         writable: true,
                         value: doc.createElement("canvas")
-                    })
-                    return doc
+                    });
+                    return doc;
                 })(),
                 undefined,
                 undefined,
@@ -301,8 +301,8 @@ describe("FullscreenSystem - toggle fullscreen", () => {
                     Object.defineProperty(doc, "fullscreenElement", {
                         writable: true,
                         value: doc.createElement("canvas")
-                    })
-                    return doc
+                    });
+                    return doc;
                 })(),
                 undefined,
                 undefined,
@@ -316,8 +316,8 @@ describe("FullscreenSystem - toggle fullscreen", () => {
                     Object.defineProperty(doc, "fullscreenElement", {
                         writable: true,
                         value: doc.createElement("canvas")
-                    })
-                    return doc
+                    });
+                    return doc;
                 })(),
                 undefined,
                 undefined,

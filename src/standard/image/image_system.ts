@@ -42,7 +42,7 @@ class ImageSystem extends System {
         subscriberID?: number,
         images: ImageAsset[] = [],
         loadQueue: ImageAsset[] = []) {
-        super(messageBus, scene, undefined, entities, subscriberID)
+        super(messageBus, scene, undefined, entities, subscriberID);
         this.loadQueue = loadQueue;
         this.images = images;
         this.messageBus.Subscribe(this, ImageSystem.MESSAGE_REQUEST_LOAD);
@@ -76,8 +76,8 @@ class ImageSystem extends System {
 
     protected Update(): void {
         for (let i = 0; i < this.loadQueue.length; i++) {
-            const imageAsset = this.loadQueue[i]
-            this.images.push(imageAsset)
+            const imageAsset = this.loadQueue[i];
+            this.images.push(imageAsset);
             this.messageBus.Publish(new Message<ImageAsset>(ImageSystem.MESSAGE_FINISH_LOAD, imageAsset));
         }
         this.loadQueue = [];

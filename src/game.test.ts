@@ -28,7 +28,7 @@ describe("Game - Start", () => {
             Error("fail to dispatch"),
             new TestGame(
                 new FakeMessageBus([
-                    new Reactor("Dispatch", () => { throw (Error("fail to dispatch")) })
+                    new Reactor("Dispatch", () => { throw (Error("fail to dispatch")); })
                 ]),
                 "test",
                 (): number => { return 0; }
@@ -39,7 +39,7 @@ describe("Game - Start", () => {
             Error("fail to publish"),
             new TestGame(
                 new FakeMessageBus([
-                    new Reactor("Publish", () => { throw (Error("fail to publish")) })
+                    new Reactor("Publish", () => { throw (Error("fail to publish")); })
                 ]),
                 "test",
                 (): number => { return 0; }
@@ -61,16 +61,16 @@ describe("Game - Start", () => {
                         } else {
                             return 0;
                         }
-                    }
+                    };
                 })()
             )
         ]
     ])("%p", (description: string, expected: Error | undefined, game: Game) => {
         jest.useFakeTimers();
         if (expected instanceof Error) {
-            expect(() => { game.Start() }).toThrow(expected);
+            expect(() => { game.Start(); }).toThrow(expected);
         } else {
-            expect(game.Start()).toEqual(expected)
+            expect(game.Start()).toEqual(expected);
         }
         jest.runAllTimers();
     });

@@ -63,9 +63,9 @@ describe("MessageBus - Dispatch", () => {
         ]
     ])("%p", (description: string, expected: Error | undefined, messageBus: MessageBus) => {
         if (expected instanceof Error) {
-            expect(() => { messageBus.Dispatch() }).toThrow(expected);
+            expect(() => { messageBus.Dispatch(); }).toThrow(expected);
         } else {
-            expect(messageBus.Dispatch()).toEqual(expected)
+            expect(messageBus.Dispatch()).toEqual(expected);
         }
     });
 });
@@ -81,9 +81,9 @@ describe("MessageBus - Publish", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, messageBus: MessageBus, message: IMessage) => {
         if (expected instanceof Error) {
-            expect(() => { messageBus.Publish(message) }).toThrow(expected);
+            expect(() => { messageBus.Publish(message); }).toThrow(expected);
         } else {
-            expect(messageBus.Publish(message)).toEqual(expected)
+            expect(messageBus.Publish(message)).toEqual(expected);
         }
     });
 });
@@ -125,9 +125,9 @@ describe("MessageBus - Subscribe", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, messageBus: MessageBus, subscriber: ISubscriber, types: string | string[]) => {
         if (expected instanceof Error) {
-            expect(() => { messageBus.Subscribe(subscriber, types) }).toThrow(expected);
+            expect(() => { messageBus.Subscribe(subscriber, types); }).toThrow(expected);
         } else {
-            expect(messageBus.Subscribe(subscriber, types)).toEqual(expected)
+            expect(messageBus.Subscribe(subscriber, types)).toEqual(expected);
         }
     });
 });
@@ -183,9 +183,9 @@ describe("MessageBus - UnsubscribeAll", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, messageBus: MessageBus, subscriber: ISubscriber) => {
         if (expected instanceof Error) {
-            expect(() => { messageBus.UnsubscribeAll(subscriber) }).toThrow(expected);
+            expect(() => { messageBus.UnsubscribeAll(subscriber); }).toThrow(expected);
         } else {
-            expect(messageBus.UnsubscribeAll(subscriber)).toEqual(expected)
+            expect(messageBus.UnsubscribeAll(subscriber)).toEqual(expected);
         }
     });
 });
@@ -227,9 +227,9 @@ describe("MessageBus - Unsubscribe", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, messageBus: MessageBus, subscriber: ISubscriber, types: string | string[]) => {
         if (expected instanceof Error) {
-            expect(() => { messageBus.Unsubscribe(subscriber, types) }).toThrow(expected);
+            expect(() => { messageBus.Unsubscribe(subscriber, types); }).toThrow(expected);
         } else {
-            expect(messageBus.Unsubscribe(subscriber, types)).toEqual(expected)
+            expect(messageBus.Unsubscribe(subscriber, types)).toEqual(expected);
         }
     });
 });

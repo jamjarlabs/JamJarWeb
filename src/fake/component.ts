@@ -18,4 +18,4 @@ import Component from "../component/component";
 
 class FakeComponent extends Component {}
 
-export default FakeComponent
+export default FakeComponent;

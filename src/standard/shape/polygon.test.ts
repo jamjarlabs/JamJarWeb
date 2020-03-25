@@ -58,7 +58,7 @@ describe("Polygon - FarthestPointInDirection", () => {
             new Vector(-1, 0)
         ],
     ])("%p", (description: string, expected: Vector, polygon: Polygon, direction: Vector) => {
-        expect(polygon.FarthestPointInDirection(direction)).toEqual(expected)
+        expect(polygon.FarthestPointInDirection(direction)).toEqual(expected);
     });
 });
 
@@ -96,7 +96,7 @@ describe("Polygon - Transform", () => {
             )
         ],
     ])("%p", (description: string, expected: Polygon, polygon: Polygon, transform: Transform) => {
-        expect(polygon.Transform(transform)).toEqual(expected)
+        expect(polygon.Transform(transform)).toEqual(expected);
     });
 });
 
@@ -158,7 +158,7 @@ describe("Polygon - PointInside", () => {
             new Vector(2,1)
         ],
     ])("%p", (description: string, expected: boolean, polygon: Polygon, point: Vector) => {
-        expect(polygon.PointInside(point)).toEqual(expected)
+        expect(polygon.PointInside(point)).toEqual(expected);
     });
 });
 
@@ -180,7 +180,7 @@ describe("Polygon - GetArray", () => {
             ]),
         ],
     ])("%p", (description: string, expected: number[], polygon: Polygon) => {
-        expect(polygon.GetArray()).toEqual(expected)
+        expect(polygon.GetArray()).toEqual(expected);
     });
 });
 
@@ -202,7 +202,7 @@ describe("Polygon - GetFloat32Array", () => {
             ]),
         ],
     ])("%p", (description: string, expected: Float32Array, polygon: Polygon) => {
-        expect(polygon.GetFloat32Array()).toEqual(expected)
+        expect(polygon.GetFloat32Array()).toEqual(expected);
     });
 });
 
@@ -243,6 +243,6 @@ describe("Polygon - Rectangle", () => {
             2
         ],
     ])("%p", (description: string, expected: Polygon, width: number, height: number) => {
-        expect(Polygon.Rectangle(width, height)).toEqual(expected)
+        expect(Polygon.Rectangle(width, height)).toEqual(expected);
     });
 });
