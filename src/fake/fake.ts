@@ -28,7 +28,7 @@ abstract class Fake {
                         return reactor.logic;
                     }
                 }
-                return Reflect.get(target, prop, receiver)
+                return Reflect.get(target, prop, receiver);
             }
         });
     }

@@ -171,9 +171,9 @@ describe("System - OnMessage", () => {
         system: System,
         message: IMessage) => {
         if (expected instanceof Error) {
-            expect(() => { system.OnMessage(message) }).toThrow(expected);
+            expect(() => { system.OnMessage(message); }).toThrow(expected);
         } else {
-            expect(system.OnMessage(message)).toEqual(expected)
+            expect(system.OnMessage(message)).toEqual(expected);
         }
     });
 });

@@ -46,8 +46,8 @@ describe("SystemEntity - Get", () => {
             "test1"
         ],
     ])("%p", (description: string, expected: Component | undefined, entity: IEntity, components: Component[], key: string) => {
-        const systemEntity = new SystemEntity(entity, components)
-        expect(systemEntity.Get(key)).toEqual(expected)
+        const systemEntity = new SystemEntity(entity, components);
+        expect(systemEntity.Get(key)).toEqual(expected);
     });
 });
 
@@ -58,7 +58,7 @@ describe("SystemEntity - Add", () => {
             "Fail to add component",
             new Error("fail to add component"),
             new FakeEntity(0, undefined, [new Reactor("Add", (args) => {
-                throw ("fail to add component")
+                throw ("fail to add component");
             })]),
             [],
             new FakeComponent("test")
@@ -71,13 +71,13 @@ describe("SystemEntity - Add", () => {
             new FakeComponent("test")
         ],
     ])("%p", (description: string, expected: Error | undefined, entity: IEntity, components: Component[], component: Component) => {
-        const systemEntity = new SystemEntity(entity, components)
+        const systemEntity = new SystemEntity(entity, components);
         if (expected instanceof Error) {
             expect(() => {
-                systemEntity.Add(component)
+                systemEntity.Add(component);
             }).toThrow(expected);
         } else {
-            expect(systemEntity.Add(component)).toEqual(expected)
+            expect(systemEntity.Add(component)).toEqual(expected);
         }
     });
 });
@@ -89,7 +89,7 @@ describe("SystemEntity - Remove", () => {
             "Fail to remove component",
             new Error("fail to remove component"),
             new FakeEntity(0, undefined, [new Reactor("Remove", (args) => {
-                throw ("fail to remove component")
+                throw ("fail to remove component");
             })]),
             [],
             "test"
@@ -102,13 +102,13 @@ describe("SystemEntity - Remove", () => {
             "test"
         ],
     ])("%p", (description: string, expected: Error | undefined, entity: IEntity, components: Component[], key: string) => {
-        const systemEntity = new SystemEntity(entity, components)
+        const systemEntity = new SystemEntity(entity, components);
         if (expected instanceof Error) {
             expect(() => {
-                systemEntity.Remove(key)
+                systemEntity.Remove(key);
             }).toThrow(expected);
         } else {
-            expect(systemEntity.Remove(key)).toEqual(expected)
+            expect(systemEntity.Remove(key)).toEqual(expected);
         }
     });
 });
@@ -120,7 +120,7 @@ describe("SystemEntity - Destroy", () => {
             "Fail to destroy entity",
             new Error("fail to destroy entity"),
             new FakeEntity(0, undefined, [new Reactor("Destroy", (args) => {
-                throw ("fail to destroy entity")
+                throw ("fail to destroy entity");
             })]),
             []
         ],
@@ -131,13 +131,13 @@ describe("SystemEntity - Destroy", () => {
             [new FakeComponent("test1"), new FakeComponent("test2"), new FakeComponent("test3")]
         ],
     ])("%p", (description: string, expected: Error | undefined, entity: IEntity, components: Component[]) => {
-        const systemEntity = new SystemEntity(entity, components)
+        const systemEntity = new SystemEntity(entity, components);
         if (expected instanceof Error) {
             expect(() => {
-                systemEntity.Destroy()
+                systemEntity.Destroy();
             }).toThrow(expected);
         } else {
-            expect(systemEntity.Destroy()).toEqual(expected)
+            expect(systemEntity.Destroy()).toEqual(expected);
         }
     });
 });

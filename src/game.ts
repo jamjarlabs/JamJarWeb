@@ -83,7 +83,7 @@ abstract class Game implements IGame {
 
 		this.accumulator += frameTime;
 		while (this.accumulator >= Game.TIME_STEP) {
-			this.messageBus.Publish(new Message(System.MESSAGE_UPDATE, Game.TIME_STEP / 1000))
+			this.messageBus.Publish(new Message(System.MESSAGE_UPDATE, Game.TIME_STEP / 1000));
 			this.messageBus.Dispatch();
 			this.accumulator -= Game.TIME_STEP;
 		}

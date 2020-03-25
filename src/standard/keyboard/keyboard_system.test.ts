@@ -114,7 +114,7 @@ describe("KeyboardSystem - key presses", () => {
             new window.KeyboardEvent("keyup", { "code": "w", bubbles: true })
         ]
     ])("%p", (description: string, expectedState: KeyboardSystem, system: TestKeyboardSystem, event: KeyboardEvent) => {
-        system.SimulateKeyEvent(event)
+        system.SimulateKeyEvent(event);
         expect(system).toEqual(expectedState);
     });
 });

@@ -55,7 +55,7 @@ describe("ComponentManager - Get", () => {
             new FakeEntity(0)
         ],
     ])("%p", (description: string, expected: Component | undefined, componentManager: ComponentManager, entity: IEntity) => {
-        expect(componentManager.Get(entity)).toEqual(expected)
+        expect(componentManager.Get(entity)).toEqual(expected);
     });
 });
 
@@ -111,7 +111,7 @@ describe("ComponentManager - Add", () => {
         ],
     ])("%p", (description: string, expectedState: ComponentManager, componentManager: ComponentManager, entity: IEntity, component: Component) => {
         componentManager.Add(entity, component);
-        expect(componentManager).toEqual(expectedState)
+        expect(componentManager).toEqual(expectedState);
     });
 });
 
@@ -162,6 +162,6 @@ describe("ComponentManager - Remove", () => {
         ],
     ])("%p", (description: string, expectedState: ComponentManager, componentManager: ComponentManager, entity: IEntity) => {
         componentManager.Remove(entity);
-        expect(componentManager).toEqual(expectedState)
+        expect(componentManager).toEqual(expectedState);
     });
 });

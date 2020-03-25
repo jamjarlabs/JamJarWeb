@@ -59,7 +59,7 @@ describe("Matrix4D - Translate", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, translation: Vector) => {
         matrix.Translate(translation);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -105,7 +105,7 @@ describe("Matrix4D - Scale", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, scale: Vector) => {
         matrix.Scale(scale);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -151,7 +151,7 @@ describe("Matrix4D - Rotate", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, rotation: number) => {
         matrix.Rotate(rotation);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -197,7 +197,7 @@ describe("Matrix4D - RotateDeg", () => {
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, rotation: number) => {
         matrix.RotateDeg(rotation);
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -273,9 +273,9 @@ describe("Matrix4D - Ortho", () => {
         if (expected instanceof Error) {
             expect(() => { matrix.Ortho(left, right, bottom, top, near, far); }).toThrow(expected);
         } else {
-            expect(matrix.Ortho(left, right, bottom, top, near, far)).toEqual(expected)
+            expect(matrix.Ortho(left, right, bottom, top, near, far)).toEqual(expected);
         }
-        expect(matrix).toEqual(expectedState)
+        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -297,7 +297,7 @@ describe("Matrix4D - GetFloat32Array", () => {
             ]),
         ],
     ])("%p", (description: string, expected: Float32Array, matrix: Matrix4D) => {
-        expect(matrix.GetFloat32Array()).toEqual(expected)
+        expect(matrix.GetFloat32Array()).toEqual(expected);
     });
 });
 
@@ -318,6 +318,6 @@ describe("Matrix4D - Identity", () => {
             ]),
         ],
     ])("%p", (description: string, expected: Matrix4D) => {
-        expect(Matrix4D.Identity()).toEqual(expected)
+        expect(Matrix4D.Identity()).toEqual(expected);
     });
 });

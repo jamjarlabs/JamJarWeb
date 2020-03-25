@@ -43,4 +43,4 @@ class FakeEntity extends Fake implements IEntity {
     }
 }
 
-export default FakeEntity
+export default FakeEntity;

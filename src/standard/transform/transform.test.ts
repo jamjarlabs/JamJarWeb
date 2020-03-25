@@ -46,7 +46,7 @@ describe("Transform - Matrix3D", () => {
             ]
         ])("%p", (description: string, expected: Matrix3D, position: Vector, scale: Vector, angle: number) => {
             const transform = new Transform(position, scale, angle);
-            expect(transform.Matrix3D()).toEqual(expected)
+            expect(transform.Matrix3D()).toEqual(expected);
         });
 });
 
@@ -79,7 +79,7 @@ describe("Transform - Matrix4D", () => {
             ]
         ])("%p", (description: string, expected: Matrix4D, position: Vector, scale: Vector, angle: number) => {
             const transform = new Transform(position, scale, angle);
-            expect(transform.Matrix4D()).toEqual(expected)
+            expect(transform.Matrix4D()).toEqual(expected);
         });
 });
 
@@ -117,6 +117,6 @@ describe("Transform - InterpolatedMatrix4D", () => {
         ])("%p", (description: string, expected: Matrix4D, position: Vector, scale: Vector, angle: number, previous: Vector, alpha: number) => {
             const transform = new Transform(position, scale, angle);
             transform.previous = previous;
-            expect(transform.InterpolatedMatrix4D(alpha)).toEqual(expected)
+            expect(transform.InterpolatedMatrix4D(alpha)).toEqual(expected);
         });
 });

@@ -60,9 +60,9 @@ describe("Scene - OnMessage", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, scene: IScene, message: IMessage) => {
         if (expected instanceof Error) {
-            expect(() => { scene.OnMessage(message) }).toThrow(expected);
+            expect(() => { scene.OnMessage(message); }).toThrow(expected);
         } else {
-            expect(scene.OnMessage(message)).toEqual(expected)
+            expect(scene.OnMessage(message)).toEqual(expected);
         }
     });
 });
@@ -84,9 +84,9 @@ describe("Scene - AddEntity", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, scene: IScene, entity: IEntity) => {
         if (expected instanceof Error) {
-            expect(() => { scene.AddEntity(entity) }).toThrow(expected);
+            expect(() => { scene.AddEntity(entity); }).toThrow(expected);
         } else {
-            expect(scene.AddEntity(entity)).toEqual(expected)
+            expect(scene.AddEntity(entity)).toEqual(expected);
         }
     });
 });
@@ -121,9 +121,9 @@ describe("Scene - Destroy", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, scene: IScene) => {
         if (expected instanceof Error) {
-            expect(() => { scene.Destroy() }).toThrow(expected);
+            expect(() => { scene.Destroy(); }).toThrow(expected);
         } else {
-            expect(scene.Destroy()).toEqual(expected)
+            expect(scene.Destroy()).toEqual(expected);
         }
     });
 });
@@ -145,9 +145,9 @@ describe("Scene - Start", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, scene: IScene) => {
         if (expected instanceof Error) {
-            expect(() => { scene.Start() }).toThrow(expected);
+            expect(() => { scene.Start(); }).toThrow(expected);
         } else {
-            expect(scene.Start()).toEqual(expected)
+            expect(scene.Start()).toEqual(expected);
         }
     });
 });

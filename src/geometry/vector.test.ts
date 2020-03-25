@@ -30,7 +30,7 @@ describe("Vector - Multiply", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, other: Vector) => {
         const vec = new Vector(x, y);
-        expect(vec.Multiply(other)).toEqual(expected)
+        expect(vec.Multiply(other)).toEqual(expected);
     });
 });
 
@@ -46,7 +46,7 @@ describe("Vector - Add", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, other: Vector) => {
         const vec = new Vector(x, y);
-        expect(vec.Add(other)).toEqual(expected)
+        expect(vec.Add(other)).toEqual(expected);
     });
 });
 
@@ -62,7 +62,7 @@ describe("Vector - Sub", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, other: Vector) => {
         const vec = new Vector(x, y);
-        expect(vec.Sub(other)).toEqual(expected)
+        expect(vec.Sub(other)).toEqual(expected);
     });
 });
 
@@ -79,7 +79,7 @@ describe("Vector - Scale", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, scalar: number) => {
         const vec = new Vector(x, y);
-        expect(vec.Scale(scalar)).toEqual(expected)
+        expect(vec.Scale(scalar)).toEqual(expected);
     });
 });
 
@@ -96,7 +96,7 @@ describe("Vector - Dot", () => {
         ],
     ])("%p", (description: string, expected: number, x: number, y: number, other: Vector) => {
         const vec = new Vector(x, y);
-        expect(vec.Dot(other)).toEqual(expected)
+        expect(vec.Dot(other)).toEqual(expected);
     });
 });
 
@@ -114,7 +114,7 @@ describe("Vector - Rotate", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, center: Vector, angle: number) => {
         const vec = new Vector(x, y);
-        expect(vec.Rotate(center, angle)).toEqual(expected)
+        expect(vec.Rotate(center, angle)).toEqual(expected);
     });
 });
 
@@ -131,7 +131,7 @@ describe("Vector - RotateDeg", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, center: Vector, angle: number) => {
         const vec = new Vector(x, y);
-        expect(vec.RotateDeg(center, angle)).toEqual(expected)
+        expect(vec.RotateDeg(center, angle)).toEqual(expected);
     });
 });
 
@@ -146,7 +146,7 @@ describe("Vector - Invert", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number) => {
         const vec = new Vector(x, y);
-        expect(vec.Invert()).toEqual(expected)
+        expect(vec.Invert()).toEqual(expected);
     });
 });
 
@@ -161,7 +161,7 @@ describe("Vector - Copy", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number) => {
         const vec = new Vector(x, y);
-        expect(vec.Copy()).toEqual(expected)
+        expect(vec.Copy()).toEqual(expected);
     });
 });
 
@@ -183,7 +183,7 @@ describe("Vector - Apply3D", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, matrix: Matrix3D) => {
         const vec = new Vector(x, y);
-        expect(vec.Apply3D(matrix)).toEqual(expected)
+        expect(vec.Apply3D(matrix)).toEqual(expected);
     });
 });
 
@@ -206,7 +206,7 @@ describe("Vector - Apply4D", () => {
         ],
     ])("%p", (description: string, expected: Vector, x: number, y: number, matrix: Matrix4D) => {
         const vec = new Vector(x, y);
-        expect(vec.Apply4D(matrix)).toEqual(expected)
+        expect(vec.Apply4D(matrix)).toEqual(expected);
     });
 });
 
@@ -224,7 +224,7 @@ describe("Vector - Magnitude", () => {
             new Vector(0.0001,0.002)
         ],
     ])("%p", (description: string, expected: number, vector: Vector) => {
-        expect(vector.Magnitude()).toEqual(expected)
+        expect(vector.Magnitude()).toEqual(expected);
     });
 });
 
@@ -252,6 +252,6 @@ describe("Vector - Normalize", () => {
             new Vector(0, 0)
         ],
     ])("%p", (description: string, expected: Vector, vector: Vector) => {
-        expect(vector.Normalize()).toEqual(expected)
+        expect(vector.Normalize()).toEqual(expected);
     });
 });

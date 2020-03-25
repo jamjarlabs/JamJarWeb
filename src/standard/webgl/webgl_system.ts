@@ -293,7 +293,7 @@ class WebGLSystem extends System {
             const colorLocation = gl.getUniformLocation(program, "uColor");
 
             // Sort renderables by z order
-            const sortedRenderables = this.renderables.sort((a: Renderable, b: Renderable) => a.zOrder - b.zOrder)
+            const sortedRenderables = this.renderables.sort((a: Renderable, b: Renderable) => a.zOrder - b.zOrder);
             
             for (const renderable of sortedRenderables) {
                 if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {

@@ -166,10 +166,10 @@ describe("EntityManager - OnMessage", () => {
         if (expected instanceof Error) {
             expect(() => { entityManager.OnMessage(message); }).toThrow(expected);
         } else {
-            expect(entityManager.OnMessage(message)).toEqual(expected)
+            expect(entityManager.OnMessage(message)).toEqual(expected);
         }
         if (expectedState instanceof EntityManager) {
-            expect(entityManager).toEqual(expectedState)
+            expect(entityManager).toEqual(expectedState);
         }
     });
 });

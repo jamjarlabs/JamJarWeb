@@ -157,10 +157,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer move, not fullscreen, no camera, publish fail",
             new Error("publish fail"),
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -168,12 +168,12 @@ describe("PointerSystem - pointer input", () => {
                 0
             ),
             new TestPointerSystem(new FakeMessageBus([new Reactor("Publish", (message: Message<Pointer>) => {
-                throw("publish fail")
+                throw("publish fail");
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -186,10 +186,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer move, not fullscreen, no cameras",
             undefined,
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -200,12 +200,12 @@ describe("PointerSystem - pointer input", () => {
                 expect(message).toEqual(new Message<Pointer>(
                     "pointermove",
                     new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.6, 1.6), [])
-                ))
+                ));
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -218,10 +218,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer move, not fullscreen, two cameras",
             undefined,
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -244,12 +244,12 @@ describe("PointerSystem - pointer input", () => {
                         new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(3, 8), false),
                         new PointerCameraInfo(new FakeEntity(1), new Vector(0.6, 1.6), new Vector(30, 80), false)
                     ])
-                ))
+                ));
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -271,10 +271,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer move, fullscreen, no locked pointer position set, one camera",
             undefined,
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -294,12 +294,12 @@ describe("PointerSystem - pointer input", () => {
                     new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.6, 1.6), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(3, 8), false),
                     ])
-                ))
+                ));
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -319,10 +319,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer move, fullscreen, locked pointer position set, one camera",
             undefined,
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -342,12 +342,12 @@ describe("PointerSystem - pointer input", () => {
                     new Pointer(new window.PointerEvent("pointermove", { clientX: 3, clientY: 2, movementX: 10, movementY: 3 }), new Vector(2.4, 1), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(2.4, 1), new Vector(12, 5), false),
                     ])
-                ))
+                ));
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -367,10 +367,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer up, one camera",
             undefined,
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -388,12 +388,12 @@ describe("PointerSystem - pointer input", () => {
                     new Pointer(new window.PointerEvent("pointerup", { clientX: 0, clientY: 0 }), new Vector(0, 2), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.4), new Vector(0, 2), true),
                     ])
-                ))
+                ));
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -412,10 +412,10 @@ describe("PointerSystem - pointer input", () => {
             "Pointer down, one camera",
             undefined,
             new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -433,12 +433,12 @@ describe("PointerSystem - pointer input", () => {
                     new Pointer(new window.PointerEvent("pointerdown", { clientX: 0, clientY: 0 }), new Vector(0, 2), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(0, 0.4), new Vector(0, 2), true),
                     ])
-                ))
+                ));
             })]), ((): HTMLElement => {
-                const element = window.document.createElement("canvas")
+                const element = window.document.createElement("canvas");
                 element.getBoundingClientRect = (): DOMRect => {
                     return new window.DOMRect(0, 0, 10, 10);
-                }
+                };
                 return element;
             })(),
                 undefined,
@@ -454,9 +454,9 @@ describe("PointerSystem - pointer input", () => {
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: TestPointerSystem, event: PointerEvent) => {
         if (expected instanceof Error) {
-            expect(() => { system.SimulatePointerEvent(event) }).toThrow(expected);
+            expect(() => { system.SimulatePointerEvent(event); }).toThrow(expected);
         } else {
-            system.SimulatePointerEvent(event)
+            system.SimulatePointerEvent(event);
         }
         expect(system).toEqual(expectedState);
     });

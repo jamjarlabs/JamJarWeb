@@ -35,7 +35,7 @@ describe("Color - GetTuple", () => {
             new Color(0.2,0.5,0.32,0.243)
         ],
     ])("%p", (description: string, expected: [number, number, number, number], color: Color) => {
-        expect(color.GetTuple()).toEqual(expected)
+        expect(color.GetTuple()).toEqual(expected);
     });
 });
 
@@ -55,6 +55,6 @@ describe("Color - Mix", () => {
             new Color(0,1,0,0)
         ],
     ])("%p", (description: string, expected: Color, color: Color, other: Color) => {
-        expect(color.Mix(other)).toEqual(expected)
+        expect(color.Mix(other)).toEqual(expected);
     });
 });

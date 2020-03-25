@@ -67,12 +67,12 @@ class CollisionSystem extends System {
      * @returns {[SystemEntity, SystemEntity][]} A list of pairs of entities that could be colliding.
      */
     broadPhase(): [SystemEntity, SystemEntity][] {
-        const possibleCollisions: [SystemEntity, SystemEntity][] = []
+        const possibleCollisions: [SystemEntity, SystemEntity][] = [];
         for (const a of this.entities.values()) {
             for (const b of this.entities.values()) {
                 if (a.entity.id != b.entity.id) {
                     if (!possibleCollisions.some((collision) => {
-                        return collision[0].entity.id == b.entity.id && collision[1].entity.id == a.entity.id
+                        return collision[0].entity.id == b.entity.id && collision[1].entity.id == a.entity.id;
                     })) {
                         possibleCollisions.push([a,b]);
                     }
