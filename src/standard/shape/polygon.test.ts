@@ -110,6 +110,30 @@ describe("Polygon - PointInside", () => {
             new Vector(0,0)
         ],
         [
+            "Rectangle around origin, point above",
+            false,
+            Polygon.Rectangle(2,2),
+            new Vector(0,3)
+        ],
+        [
+            "Rectangle around origin, point below",
+            false,
+            Polygon.Rectangle(2,2),
+            new Vector(0,-3)
+        ],
+        [
+            "Rectangle around origin, point left",
+            false,
+            Polygon.Rectangle(2,2),
+            new Vector(-3,0)
+        ],
+        [
+            "Rectangle around origin, point right",
+            false,
+            Polygon.Rectangle(2,2),
+            new Vector(3,0)
+        ],
+        [
             "Rectangle around origin, point within",
             true,
             Polygon.Rectangle(2,2),
