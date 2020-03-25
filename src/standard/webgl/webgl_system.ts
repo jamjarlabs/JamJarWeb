@@ -291,63 +291,95 @@ class WebGLSystem extends System {
 
 			// Get color uniform location for GPU
             const colorLocation = gl.getUniformLocation(program, "uColor");
-
-            // Sort renderables by z order
-            const sortedRenderables = this.renderables.sort((a: Renderable, b: Renderable) => a.zOrder - b.zOrder);
             
-            for (const renderable of sortedRenderables) {
-                if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
-                    continue;
+            // Group by z order
+            const zOrderGroups: Renderable[][] = [];
+            for (const renderable of this.renderables) {
+                if (zOrderGroups[renderable.zOrder] === undefined) {
+                    zOrderGroups[renderable.zOrder] = [renderable];
+                } else {
+                    zOrderGroups[renderable.zOrder].push(renderable);
                 }
-                const vao = gl.createVertexArray();
-                const positionLocation = gl.getAttribLocation(program, "aVertexPosition");
-                const texturePositionLocation = gl.getAttribLocation(program, "aTexturePosition");
-                const positionBuffer = gl.createBuffer();
-                const textureBuffer = gl.createBuffer();
-                let texturePresent = false;
-                let texturePoints = renderable.verticies;
-                let texture = this.placeholderTexture;
-                if (renderable.texture !== undefined) {
-                    texturePresent = true;
-                    texturePoints = renderable.texture.points;
-                    texture = this.textures[renderable.texture.image];
-                    if (texture === undefined) {
-                        texture = this.placeholderTexture;
+            }
+            for (const zOrderGroup of zOrderGroups) {
+
+                // Group by texture
+                const textureGroups: Map<string, Renderable[]> = new Map();
+                for (const renderable of zOrderGroup) {
+                    let textureName = "none";
+                    if (renderable.texture !== undefined) {
+                        textureName = `texture_${renderable.texture.image}`;
+                    }
+                    const textureRenderables = textureGroups.get(textureName);
+                    if (textureRenderables === undefined) {
+                        textureGroups.set(textureName, [renderable]);
+                    } else {
+                        textureRenderables.push(renderable);
+                        textureGroups.set(textureName, textureRenderables);
                     }
                 }
 
-                gl.uniform1i(texturePresentLocation, Number(texturePresent));
-				gl.activeTexture(gl.TEXTURE0);
-                gl.bindTexture(gl.TEXTURE_2D, texture);
-				gl.uniform1i(textureLocation, 0);
+                for (const textureGroup of textureGroups.values()) {
+                    const canary = textureGroup[0];
+                    let texturePresent = false;
+                    let texture = this.placeholderTexture;
+                    if (canary.texture !== undefined) {
+                        texturePresent = true;
+                        texture = this.textures[canary.texture.image];
+                        if (texture === undefined) {
+                            texture = this.placeholderTexture;
+                        }
+                    }
+                            
+                    gl.uniform1i(texturePresentLocation, Number(texturePresent));
+                    gl.activeTexture(gl.TEXTURE0);
+                    gl.bindTexture(gl.TEXTURE_2D, texture);
+                    gl.uniform1i(textureLocation, 0);
+
+                    for (const renderable of textureGroup) {
+                        if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
+                            continue;
+                        }
+                        const vao = gl.createVertexArray();
+                        const positionLocation = gl.getAttribLocation(program, "aVertexPosition");
+                        const texturePositionLocation = gl.getAttribLocation(program, "aTexturePosition");
+                        const positionBuffer = gl.createBuffer();
+                        const textureBuffer = gl.createBuffer();
+
+                        let texturePoints = renderable.verticies;
+                        if (renderable.texture !== undefined) {
+                            texturePoints = renderable.texture.points;
+                        }
+                
+                        // bind vao
+                        gl.bindVertexArray(vao);
+                        // Enable attribute
+                        gl.enableVertexAttribArray(positionLocation);
+                        // bind buffer
+                        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+                
+                        // send buffer data
+                        gl.bufferData(gl.ARRAY_BUFFER, renderable.verticies, gl.DYNAMIC_DRAW);
         
-                // bind vao
-                gl.bindVertexArray(vao);
-                // Enable attribute
-                gl.enableVertexAttribArray(positionLocation);
-                // bind buffer
-                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+                        gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
         
-                // send buffer data
-                gl.bufferData(gl.ARRAY_BUFFER, renderable.verticies, gl.DYNAMIC_DRAW);
-
-                gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
-
-                gl.bufferData(gl.ARRAY_BUFFER, texturePoints, gl.DYNAMIC_DRAW);
-
-                gl.enableVertexAttribArray(texturePositionLocation);
-
-                gl.vertexAttribPointer(texturePositionLocation, 2, gl.FLOAT, false, 0, 0);
-
-                gl.uniformMatrix4fv(
-                    modelLocation,
-                    false,
-                    renderable.modelMatrix
-                );
-
-                gl.uniform4f(colorLocation, ...renderable.color.GetTuple());
-                gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.verticies.length / 2);
+                        gl.bufferData(gl.ARRAY_BUFFER, texturePoints, gl.DYNAMIC_DRAW);
+        
+                        gl.enableVertexAttribArray(texturePositionLocation);
+        
+                        gl.vertexAttribPointer(texturePositionLocation, 2, gl.FLOAT, false, 0, 0);
+        
+                        gl.uniformMatrix4fv(
+                            modelLocation,
+                            false,
+                            renderable.modelMatrix
+                        );
+        
+                        gl.uniform4f(colorLocation, ...renderable.color.GetTuple());
+                        gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.verticies.length / 2);
+                    }
+                }
             }
         }
         this.renderables = [];
