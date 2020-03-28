@@ -1,14 +1,14 @@
 
-# Class: ImageSystem
+# Class: HTTPImageSystem
 
-ImageSystem handles loading image assets in and making them available
+HTTPImageSystem handles loading image assets in and making them available
 to the engine for rendering.
 
 ## Hierarchy
 
   ↳ [System](system.md)
 
-  ↳ **ImageSystem**
+  ↳ **HTTPImageSystem**
 
 ## Implements
 
@@ -18,41 +18,38 @@ to the engine for rendering.
 
 ### Constructors
 
-* [constructor](imagesystem.md#constructor)
+* [constructor](httpimagesystem.md#constructor)
 
 ### Properties
 
-* [entities](imagesystem.md#protected-entities)
-* [images](imagesystem.md#private-images)
-* [loadQueue](imagesystem.md#private-loadqueue)
-* [messageBus](imagesystem.md#protected-messagebus)
-* [scene](imagesystem.md#protected-optional-scene)
-* [subscriberID](imagesystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](imagesystem.md#static-message_deregister)
-* [MESSAGE_FINISH_LOAD](imagesystem.md#static-message_finish_load)
-* [MESSAGE_REGISTER](imagesystem.md#static-message_register)
-* [MESSAGE_REQUEST_CLEAR](imagesystem.md#static-message_request_clear)
-* [MESSAGE_REQUEST_FLUSH](imagesystem.md#static-message_request_flush)
-* [MESSAGE_REQUEST_LOAD](imagesystem.md#static-message_request_load)
-* [MESSAGE_UPDATE](imagesystem.md#static-message_update)
+* [entities](httpimagesystem.md#protected-entities)
+* [images](httpimagesystem.md#private-images)
+* [messageBus](httpimagesystem.md#protected-messagebus)
+* [scene](httpimagesystem.md#protected-optional-scene)
+* [subscriberID](httpimagesystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](httpimagesystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](httpimagesystem.md#static-message_register)
+* [MESSAGE_REQUEST_CLEAR](httpimagesystem.md#static-message_request_clear)
+* [MESSAGE_REQUEST_FLUSH](httpimagesystem.md#static-message_request_flush)
+* [MESSAGE_UPDATE](httpimagesystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](imagesystem.md#destroy)
-* [OnDestroy](imagesystem.md#protected-ondestroy)
-* [OnMessage](imagesystem.md#onmessage)
-* [Update](imagesystem.md#protected-update)
-* [clear](imagesystem.md#private-clear)
-* [flush](imagesystem.md#private-flush)
-* [load](imagesystem.md#private-load)
-* [onError](imagesystem.md#protected-onerror)
-* [onLoad](imagesystem.md#protected-onload)
+* [Destroy](httpimagesystem.md#destroy)
+* [OnDestroy](httpimagesystem.md#protected-ondestroy)
+* [OnMessage](httpimagesystem.md#onmessage)
+* [Update](httpimagesystem.md#protected-update)
+* [clear](httpimagesystem.md#private-clear)
+* [flush](httpimagesystem.md#private-flush)
+* [load](httpimagesystem.md#private-load)
+* [onError](httpimagesystem.md#protected-onerror)
+* [onLoad](httpimagesystem.md#protected-onload)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new ImageSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `images`: [ImageAsset](imageasset.md)[], `loadQueue`: [ImageAsset](imageasset.md)[]): *[ImageSystem](imagesystem.md)*
+\+ **new HTTPImageSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `images`: [ImageAsset](imageasset.md)[]): *[HTTPImageSystem](httpimagesystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -65,9 +62,8 @@ Name | Type | Default |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 `images` | [ImageAsset](imageasset.md)[] | [] |
-`loadQueue` | [ImageAsset](imageasset.md)[] | [] |
 
-**Returns:** *[ImageSystem](imagesystem.md)*
+**Returns:** *[HTTPImageSystem](httpimagesystem.md)*
 
 ## Properties
 
@@ -88,12 +84,6 @@ ___
 ### `Private` images
 
 • **images**: *[ImageAsset](imageasset.md)[]*
-
-___
-
-### `Private` loadQueue
-
-• **loadQueue**: *[ImageAsset](imageasset.md)[]*
 
 ___
 
@@ -138,12 +128,6 @@ ___
 
 ___
 
-### `Static` MESSAGE_FINISH_LOAD
-
-▪ **MESSAGE_FINISH_LOAD**: *"request_finish_load_image"* = "request_finish_load_image"
-
-___
-
 ### `Static` MESSAGE_REGISTER
 
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
@@ -161,12 +145,6 @@ ___
 ### `Static` MESSAGE_REQUEST_FLUSH
 
 ▪ **MESSAGE_REQUEST_FLUSH**: *"request_image_flush"* = "request_image_flush"
-
-___
-
-### `Static` MESSAGE_REQUEST_LOAD
-
-▪ **MESSAGE_REQUEST_LOAD**: *"request_image_load"* = "request_image_load"
 
 ___
 
@@ -225,9 +203,17 @@ ___
 
 ### `Protected` Update
 
-▸ **Update**(): *void*
+▸ **Update**(`dt`: number): *void*
 
-*Overrides [System](system.md).[Update](system.md#protected-update)*
+*Inherited from [System](system.md).[Update](system.md#protected-update)*
+
+General update method, default empty. Override with custom logic.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`dt` | number | DeltaTime  |
 
 **Returns:** *void*
 

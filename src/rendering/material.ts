@@ -14,15 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-class Texture {
-        
-    public image: string;
-    public points?: Float32Array;
+import Texture from "./texture";
+import ShaderAsset from "./shader_asset";
 
-    constructor(image: string, points?: Float32Array) {
-        this.image = image;
-        this.points = points;
+class Material {
+    public shaders: string[];
+    public texture: Texture;
+
+    constructor(texture: Texture,
+        shaders: string[] = [ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME]) {
+        this.shaders = shaders;
+        this.texture = texture;
     }
 }
 
-export default Texture;
+export default Material;

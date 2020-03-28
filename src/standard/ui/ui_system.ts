@@ -108,9 +108,8 @@ class UISystem extends System {
                 sprite.zOrder,
                 sprite.bounds.GetFloat32Array(),
                 relativeTransform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
-                sprite.color,
+                sprite.material,
                 ui.camera,
-                sprite.texture
             ));
         }
         this.messageBus.Publish(new Message<Renderable[]>(WebGLSystem.MESSAGE_LOAD_RENDERABLES, renderables));

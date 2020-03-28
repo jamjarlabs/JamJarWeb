@@ -14,15 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-class Texture {
-        
-    public image: string;
-    public points?: Float32Array;
-
-    constructor(image: string, points?: Float32Array) {
-        this.image = image;
-        this.points = points;
-    }
+/**
+ * IShader is the interface representing a general shader. 
+ * This is designed to allow the possiblity of switching out the
+ * render technology, e.g. GLSL, HLSL etc.
+ */
+interface IShader {
+    /**
+     * Source code of the shader, can be in any language.
+     */
+    source: string;
+    /**
+     * Type of the shader, for example fragment or vertex shader.
+     */
+    type: string;
 }
 
-export default Texture;
+export default IShader;

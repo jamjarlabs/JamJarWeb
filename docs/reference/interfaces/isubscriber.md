@@ -11,7 +11,7 @@
 * [EntityManager](../classes/entitymanager.md)
 * [FakeSubscriber](../classes/fakesubscriber.md)
 * [FullscreenSystem](../classes/fullscreensystem.md)
-* [ImageSystem](../classes/imagesystem.md)
+* [HTTPImageSystem](../classes/httpimagesystem.md)
 * [InterpolationSystem](../classes/interpolationsystem.md)
 * [KeyboardSystem](../classes/keyboardsystem.md)
 * [MotionSystem](../classes/motionsystem.md)

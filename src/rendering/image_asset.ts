@@ -22,6 +22,10 @@ limitations under the License.
  * Also stores the image itself.
  */
 class ImageAsset {
+
+    public static readonly MESSAGE_REQUEST_LOAD = "request_image_load";
+    public static readonly MESSAGE_FINISH_LOAD = "finish_image_load";
+
     /**
      * Name of the image asset, how it is referred to throughout the system, 
      * should be unique.

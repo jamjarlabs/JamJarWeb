@@ -14,7 +14,7 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [FullscreenSystem](fullscreensystem.md)
 
-  ↳ [ImageSystem](imagesystem.md)
+  ↳ [HTTPImageSystem](httpimagesystem.md)
 
   ↳ [InterpolationSystem](interpolationsystem.md)
 

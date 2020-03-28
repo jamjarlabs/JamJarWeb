@@ -14,15 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-class Texture {
-        
-    public image: string;
-    public points?: Float32Array;
+import IShader from "./ishader";
 
-    constructor(image: string, points?: Float32Array) {
-        this.image = image;
-        this.points = points;
+class ShaderAsset {
+    public static readonly MESSAGE_REQUEST_LOAD = "request_shader_load";
+    public static readonly MESSAGE_FINISH_LOAD = "finish_shader_load";
+
+    public static readonly DEFAULT_VERTEX_SHADER_NAME = "default_vertex";
+    public static readonly DEFAULT_FRAGMENT_SHADER_NAME = "default_fragment";
+
+    public name: string;
+    public shader: IShader;
+    
+    constructor(name: string, shader: IShader) {
+        this.name = name;
+        this.shader = shader;
     }
 }
 
-export default Texture;
+export default ShaderAsset;

@@ -20,7 +20,6 @@ import IMessage from "../../message/imessage";
 import Camera from "../camera/camera";
 import Message from "../../message/message";
 import Vector from "../../geometry/vector";
-import Matrix4D from "../../geometry/matrix_4d";
 import IMessageBus from "../../message/imessage_bus";
 import Game from "../../game";
 import IEntity from "../../entity/ientity";
@@ -28,8 +27,13 @@ import Component from "../../component/component";
 import Renderable from "../../rendering/renderable";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
-import ImageSystem from "../image/image_system";
-import ImageAsset from "../image/image_asset";
+import ImageAsset from "../../rendering/image_asset";
+import ShaderAsset from "../../rendering/shader_asset";
+import Shader from "../glsl/glsl_shader";
+import GLSLShader from "../glsl/glsl_shader";
+import GLSLContext from "../glsl/glsl_context";
+import DefaultVertexShader from "./default_vertex_shader";
+import DefaultFragmentShader from "./default_fragment_shader";
 
 /**
  * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
@@ -40,44 +44,6 @@ class WebGLSystem extends System {
 
     public static readonly MESSAGE_LOAD_RENDERABLES = "load_renderables";
 
-    private static readonly VERTEX_SHADER = `#version 300 es
-        in vec2 aVertexPosition;
-        in vec2 aTexturePosition;
-
-        uniform mat4 uViewMatrix;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uProjectionMatrix;
-
-        out vec2 vTextureCoordinate;
-
-        void main() {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
-            vTextureCoordinate = aTexturePosition;
-        }
-    `;
-    private static readonly FRAGMENT_SHADER = `#version 300 es
-        precision mediump float;
-
-        uniform bool uTexturePresent;
-        uniform vec4 uColor;
-        uniform sampler2D uTexture;
-
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
-
-        void main() {
-            vec4 texturedColor;
-            if (uTexturePresent) {
-                texturedColor = texture(uTexture, vTextureCoordinate);
-            }
-            else {
-                texturedColor = uColor;
-            }
-            outColor = texturedColor;
-        }
-    `;
-
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Camera.KEY].every((type) => components.some(
             component => component.key == type
@@ -85,32 +51,44 @@ class WebGLSystem extends System {
     };
 
     private gl: WebGL2RenderingContext;
-    private program: WebGLProgram | null;
     private renderables: Renderable[];
-    private placeholderTexture: WebGLTexture;
-    private textures: Record<string, WebGLTexture>;
+    private textures: Map<string, WebGLTexture>;
+    private shaders: Map<string, [WebGLShader, GLSLShader]>;
+    private programs: Map<string, WebGLProgram>;
 
-    constructor(messageBus: IMessageBus, 
-        gl: WebGL2RenderingContext, 
-        scene?: IScene, 
+    constructor(messageBus: IMessageBus,
+        gl: WebGL2RenderingContext,
+        scene?: IScene,
         renderables: Renderable[] = [],
-        entities?: Map<number, SystemEntity>, 
+        defaultShaderAssets: ShaderAsset[] = [
+            new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()) 
+        ],
+        shaders: Map<string, [WebGLShader, Shader]> = new Map(),
+        textures: Map<string, WebGLTexture> = new Map(),
+        programs: Map<string, WebGLProgram> = new Map(),
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
-        super(messageBus, scene, WebGLSystem.EVALUATOR, entities, subscriberID );
+        super(messageBus, scene, WebGLSystem.EVALUATOR, entities, subscriberID);
+
         this.gl = gl;
         this.renderables = renderables;
-        this.messageBus.Subscribe(this, [Game.MESSAGE_RENDER, WebGLSystem.MESSAGE_LOAD_RENDERABLES, ImageSystem.MESSAGE_FINISH_LOAD]);
-        const vertexShader = this.createShader(gl.VERTEX_SHADER, WebGLSystem.VERTEX_SHADER);
-		const fragmentShader = this.createShader(gl.FRAGMENT_SHADER, WebGLSystem.FRAGMENT_SHADER);
-        this.program = this.createProgram(vertexShader, fragmentShader);
-        const placeholderTexture = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, placeholderTexture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,255,255]));
-        if (placeholderTexture === null) {
-            throw("Failed to create placeholder texture");
+        this.textures = textures;
+        this.shaders = shaders;
+        this.programs = programs;
+
+        // Subscribe to messages
+        this.messageBus.Subscribe(this, [
+            Game.MESSAGE_RENDER, 
+            WebGLSystem.MESSAGE_LOAD_RENDERABLES, 
+            ImageAsset.MESSAGE_FINISH_LOAD,
+            ShaderAsset.MESSAGE_REQUEST_LOAD
+        ]);
+
+        // Load default shaders
+        for (const asset of defaultShaderAssets) {
+            this.loadShader(asset);
         }
-        this.placeholderTexture = placeholderTexture;
-        this.textures = {};
     }
 
     public OnMessage(message: IMessage): void {
@@ -132,81 +110,94 @@ class WebGLSystem extends System {
                 this.renderables.push(...renderMessage.payload);
                 break;
             }
-            case ImageSystem.MESSAGE_FINISH_LOAD: {
+            case ImageAsset.MESSAGE_FINISH_LOAD: {
                 const loadMessage = message as Message<ImageAsset>;
-                if (loadMessage.payload == undefined) {
+                const asset = loadMessage.payload;
+                if (asset === undefined) {
                     return;
                 }
-                if (!loadMessage.payload.success) {
+                this.loadTexture(asset);
+                break;
+            }
+            case ShaderAsset.MESSAGE_REQUEST_LOAD: {
+                const loadMessage = message as Message<ShaderAsset>;
+                const asset = loadMessage.payload;
+                if (asset === undefined) {
                     return;
                 }
-                const gl = this.gl;
-                const level = 0;
-                const internalFormat = gl.RGBA;
-                const srcFormat = gl.RGBA;
-                const srcType = gl.UNSIGNED_BYTE;
-                const glTexture = gl.createTexture();
-        
-                gl.bindTexture(gl.TEXTURE_2D, glTexture);
-                gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, loadMessage.payload.image);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-                gl.generateMipmap(gl.TEXTURE_2D);
-                if (glTexture === null) {
-                    throw("Failed to create texture");
-                }
-                this.textures[loadMessage.payload.name] = glTexture;
+                this.loadShader(asset);
+                break;
             }
         }
     }
 
-    private createShader(type: number, source: string): WebGLShader {
-        const gl = this.gl;
-        const shader = gl.createShader(type);
-        if (!shader) {
-            throw ("Error creating shader");
+    private loadShader(asset: ShaderAsset): void {
+        if (!(asset.shader instanceof GLSLShader)) {
+            return;
         }
-		gl.shaderSource(shader, source);
-		gl.compileShader(shader);
-		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-			console.error(gl.getShaderInfoLog(shader));
-			gl.deleteShader(shader);
-			throw ("Error compiling shader");
-		}
-		return shader;
-	}
 
-	private createProgram(vertex: WebGLShader, fragment: WebGLShader): WebGLProgram {
         const gl = this.gl;
-        const program = gl.createProgram();
-        if (!program) {
-            throw("Error creating program");
+        let type: number;
+        switch (asset.shader.type) {
+            case GLSLShader.VERTEX_TYPE: {
+                type = gl.VERTEX_SHADER;
+                break;
+            }
+            case GLSLShader.FRAGMENT_TYPE: {
+                type = gl.FRAGMENT_SHADER;
+                break;
+            }
+            default: {
+                return;
+            }
         }
-		gl.attachShader(program, vertex);
-		gl.attachShader(program, fragment);
-		gl.linkProgram(program);
-		if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-			console.error(gl.getProgramInfoLog(program));
-			gl.deleteProgram(program);
-			throw ("Error linking program");
-		}
-		return program;
-	}
+
+        const shader = gl.createShader(type);
+        if (shader === null) {
+            throw (`Error creating shader ${asset.name}`);
+        }
+        gl.shaderSource(shader, asset.shader.source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            console.error(gl.getShaderInfoLog(shader));
+            gl.deleteShader(shader);
+            throw (`Error compiling shader ${asset.name}`);
+        }
+        this.shaders.set(asset.name, [shader, asset.shader]);
+        this.messageBus.Publish(new Message(ShaderAsset.MESSAGE_FINISH_LOAD));
+    }
+
+    private loadTexture(asset: ImageAsset): void {
+        if (!asset.success) {
+            return;
+        }
+        const gl = this.gl;
+        const level = 0;
+        const internalFormat = gl.RGBA;
+        const srcFormat = gl.RGBA;
+        const srcType = gl.UNSIGNED_BYTE;
+        const glTexture = gl.createTexture();
+
+        gl.bindTexture(gl.TEXTURE_2D, glTexture);
+        gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.generateMipmap(gl.TEXTURE_2D);
+        if (glTexture === null) {
+            throw ("Failed to create texture");
+        }
+        this.textures.set(asset.name, glTexture);
+    }
 
     private render(alpha: number): void {
         const gl = this.gl;
 
-        const program = this.program;
-        if (!program) {
-            throw("Undefined program");
-        }
-
         const canvasWidth = gl.canvas.width;
         const canvasHeight = gl.canvas.height;
-        
-        for(const cameraEntity of this.entities.values()) {
+
+        for (const cameraEntity of this.entities.values()) {
             const camera = cameraEntity.Get(Camera.KEY) as Camera;
             const transform = cameraEntity.Get(Transform.KEY) as Transform;
 
@@ -227,71 +218,43 @@ class WebGLSystem extends System {
 
             // Define the viewport position of the camera
             gl.viewport(
-				realPosition.x,
-				realPosition.y,
-				realWidth,
-				realHeight
-			);
+                realPosition.x,
+                realPosition.y,
+                realWidth,
+                realHeight
+            );
 
             // Define scissor around camera viewport, ensures that nothing is rendered outside
             // of the viewport defined for this camera
-			gl.scissor(
-				realPosition.x,
-				realPosition.y,
-				realWidth,
-				realHeight
+            gl.scissor(
+                realPosition.x,
+                realPosition.y,
+                realWidth,
+                realHeight
             );
-            
+
             gl.enable(gl.SCISSOR_TEST);
-    
+
             // Clear the screen
             gl.clearDepth(1.0);
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-            
+
             // Set the background color
             gl.clearColor(
-                camera.backgroundColor.red, 
-                camera.backgroundColor.green, 
-                camera.backgroundColor.blue, 
+                camera.backgroundColor.red,
+                camera.backgroundColor.green,
+                camera.backgroundColor.blue,
                 camera.backgroundColor.alpha
             );
-    
+
             // Enable depth testing (objects can appear behind/infront of eachother)
             gl.enable(gl.DEPTH_TEST);
             gl.depthFunc(gl.LEQUAL);
-    
+
             // Enable alpha blending
             gl.enable(gl.BLEND);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-            const viewMatrix = new Matrix4D();
-            viewMatrix.Translate(transform.position.Invert());
-
-            const projectionMatrix = camera.GetProjectionMatrix();
-
-            gl.useProgram(program);
-
-			// Supply camera matrices to GPU
-            const viewLocation = gl.getUniformLocation(program, "uViewMatrix");
-            const modelLocation = gl.getUniformLocation(program, "uModelMatrix");
-            const projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
-            const texturePresentLocation = gl.getUniformLocation(program, "uTexturePresent");
-            const textureLocation = gl.getUniformLocation(program, "uTexture");
-
-
-			gl.uniformMatrix4fv(
-				viewLocation,
-				false,
-                viewMatrix.GetFloat32Array());
-                
-            gl.uniformMatrix4fv(
-                projectionLocation,
-                false,
-                projectionMatrix.GetFloat32Array());
-
-			// Get color uniform location for GPU
-            const colorLocation = gl.getUniformLocation(program, "uColor");
-            
             // Group by z order
             const zOrderGroups: Renderable[][] = [];
             for (const renderable of this.renderables) {
@@ -302,84 +265,118 @@ class WebGLSystem extends System {
                 }
             }
             for (const zOrderGroup of zOrderGroups) {
-
-                // Group by texture
-                const textureGroups: Map<string, Renderable[]> = new Map();
+                // Group by program
+                const programGroups: Map<string, Renderable[]> = new Map();
                 for (const renderable of zOrderGroup) {
-                    let textureName = "none";
-                    if (renderable.texture !== undefined) {
-                        textureName = `texture_${renderable.texture.image}`;
+                    let key = "";
+                    for (const shaderName of renderable.material.shaders) {
+                        key = `${key}_${shaderName}`;
                     }
-                    const textureRenderables = textureGroups.get(textureName);
-                    if (textureRenderables === undefined) {
-                        textureGroups.set(textureName, [renderable]);
+                    const programRenderables = programGroups.get(key);
+                    if (programRenderables === undefined) {
+                        programGroups.set(key, [renderable]);
                     } else {
-                        textureRenderables.push(renderable);
-                        textureGroups.set(textureName, textureRenderables);
+                        programRenderables.push(renderable);
+                        programGroups.set(key, programRenderables);
                     }
                 }
 
-                for (const textureGroup of textureGroups.values()) {
-                    const canary = textureGroup[0];
-                    let texturePresent = false;
-                    let texture = this.placeholderTexture;
-                    if (canary.texture !== undefined) {
-                        texturePresent = true;
-                        texture = this.textures[canary.texture.image];
-                        if (texture === undefined) {
-                            texture = this.placeholderTexture;
+                for (const programGroup of programGroups.values()) {
+                    const programCanary = programGroup[0];
+                    const shaders = [];
+                    let programKey = "";
+                    let loaded = true;
+
+                    for (const shaderName of programCanary.material.shaders) {
+                        const shader = this.shaders.get(shaderName);
+                        if (shader === undefined) {
+                            // Shader not loaded
+                            loaded = false;
+                            break;
+                        }
+                        shaders.push(shader);
+                        programKey = `${programKey}_${shaderName}`;
+                    }
+
+                    if (!loaded) {
+                        // Shader not loaded skip renderables for
+                        // this program
+                        continue;
+                    }
+
+                    // Set program variables
+                    let program = this.programs.get(programKey);
+                    // Program not created yet
+                    if (program === undefined) {
+                        const loadProgram = gl.createProgram();
+                        if (loadProgram === null) {
+                            throw (`Error creating program '${programKey}'`);
+                        }
+                        for (const shader of shaders) {
+                            gl.attachShader(loadProgram, shader[0]);
+                        }
+                        gl.linkProgram(loadProgram);
+                        if (!gl.getProgramParameter(loadProgram, gl.LINK_STATUS)) {
+                            console.error(gl.getProgramInfoLog(loadProgram));
+                            gl.deleteProgram(loadProgram);
+                            throw (`Error linking program '${programKey}'`);
+                        }
+                        this.programs.set(programKey, loadProgram);
+                        program = loadProgram;
+                    }
+
+                    gl.useProgram(program);
+                    // Per shader
+                    const glslContext = new GLSLContext(gl, program, camera, transform);
+                    for (const shader of shaders) {
+                        if (shader[1].perShader !== undefined) {
+                            shader[1].perShader(glslContext);
                         }
                     }
-                            
-                    gl.uniform1i(texturePresentLocation, Number(texturePresent));
-                    gl.activeTexture(gl.TEXTURE0);
-                    gl.bindTexture(gl.TEXTURE_2D, texture);
-                    gl.uniform1i(textureLocation, 0);
 
-                    for (const renderable of textureGroup) {
-                        if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
+                    // Group by texture
+                    const textureGroups: Map<string, Renderable[]> = new Map();
+                    for (const renderable of programGroup) {
+                        const textureName = `texture_${renderable.material.texture.image}`;
+                        const textureRenderables = textureGroups.get(textureName);
+                        if (textureRenderables === undefined) {
+                            textureGroups.set(textureName, [renderable]);
+                        } else {
+                            textureRenderables.push(renderable);
+                            textureGroups.set(textureName, textureRenderables);
+                        }
+                    }
+
+                    for (const textureGroup of textureGroups.values()) {
+                        const textureCanary = textureGroup[0];
+                        const texture = this.textures.get(textureCanary.material.texture.image);
+                        if (texture === undefined) {
+                            // Texture not loaded, skip rendering for this texture
                             continue;
                         }
-                        const vao = gl.createVertexArray();
-                        const positionLocation = gl.getAttribLocation(program, "aVertexPosition");
-                        const texturePositionLocation = gl.getAttribLocation(program, "aTexturePosition");
-                        const positionBuffer = gl.createBuffer();
-                        const textureBuffer = gl.createBuffer();
 
-                        let texturePoints = renderable.verticies;
-                        if (renderable.texture !== undefined) {
-                            texturePoints = renderable.texture.points;
+                        for (const shader of shaders) {
+                            if (shader[1].perTexture !== undefined) {
+                                shader[1].perTexture(glslContext, texture);
+                            }
                         }
-                
-                        // bind vao
-                        gl.bindVertexArray(vao);
-                        // Enable attribute
-                        gl.enableVertexAttribArray(positionLocation);
-                        // bind buffer
-                        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-                
-                        // send buffer data
-                        gl.bufferData(gl.ARRAY_BUFFER, renderable.verticies, gl.DYNAMIC_DRAW);
-        
-                        gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
-        
-                        gl.bufferData(gl.ARRAY_BUFFER, texturePoints, gl.DYNAMIC_DRAW);
-        
-                        gl.enableVertexAttribArray(texturePositionLocation);
-        
-                        gl.vertexAttribPointer(texturePositionLocation, 2, gl.FLOAT, false, 0, 0);
-        
-                        gl.uniformMatrix4fv(
-                            modelLocation,
-                            false,
-                            renderable.modelMatrix
-                        );
-        
-                        gl.uniform4f(colorLocation, ...renderable.color.GetTuple());
-                        gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.verticies.length / 2);
+
+                        for (const renderable of textureGroup) {
+                            if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
+                                continue;
+                            }
+
+                            for (const shader of shaders) {
+                                if (shader[1].perRenderable !== undefined) {
+                                    shader[1].perRenderable(glslContext, texture, renderable);
+                                }
+                            }
+
+                            gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.verticies.length / 2);
+                        }
                     }
                 }
+
             }
         }
         this.renderables = [];

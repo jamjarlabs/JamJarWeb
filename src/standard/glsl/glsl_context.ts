@@ -14,23 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IEntity from "../entity/ientity";
-import Material from "./material";
+import Camera from "../camera/camera";
+import Transform from "../transform/transform";
 
-class Renderable {
-    public zOrder: number;
-    public verticies: Float32Array;
-    public modelMatrix: Float32Array;
-    public material: Material;
-    public camera?: IEntity;
+class GLSLContext {
+    public gl: WebGL2RenderingContext;
+    public program: WebGLProgram;
+    public camera: Camera;
+    public transform: Transform;
 
-    constructor(zOrder: number, verticies: Float32Array, modelMatrix: Float32Array, material: Material, camera?: IEntity) {
-        this.zOrder = zOrder;
-        this.verticies = verticies;
-        this.modelMatrix = modelMatrix;
-        this.material = material;
+    constructor(gl: WebGL2RenderingContext, program: WebGLProgram, camera: Camera, transform: Transform) {
+        this.gl = gl;
+        this.program = program;
         this.camera = camera;
+        this.transform = transform;
     }
 }
 
-export default Renderable;
+export default GLSLContext;

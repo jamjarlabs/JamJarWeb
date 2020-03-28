@@ -26,18 +26,16 @@ renders them onto a canvas.
 * [entities](webglsystem.md#protected-entities)
 * [gl](webglsystem.md#private-gl)
 * [messageBus](webglsystem.md#protected-messagebus)
-* [placeholderTexture](webglsystem.md#private-placeholdertexture)
-* [program](webglsystem.md#private-program)
+* [programs](webglsystem.md#private-programs)
 * [renderables](webglsystem.md#private-renderables)
 * [scene](webglsystem.md#protected-optional-scene)
+* [shaders](webglsystem.md#private-shaders)
 * [subscriberID](webglsystem.md#subscriberid)
 * [textures](webglsystem.md#private-textures)
-* [FRAGMENT_SHADER](webglsystem.md#static-private-fragment_shader)
 * [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
 * [MESSAGE_LOAD_RENDERABLES](webglsystem.md#static-message_load_renderables)
 * [MESSAGE_REGISTER](webglsystem.md#static-message_register)
 * [MESSAGE_UPDATE](webglsystem.md#static-message_update)
-* [VERTEX_SHADER](webglsystem.md#static-private-vertex_shader)
 
 ### Methods
 
@@ -45,8 +43,8 @@ renders them onto a canvas.
 * [OnDestroy](webglsystem.md#protected-ondestroy)
 * [OnMessage](webglsystem.md#onmessage)
 * [Update](webglsystem.md#protected-update)
-* [createProgram](webglsystem.md#private-createprogram)
-* [createShader](webglsystem.md#private-createshader)
+* [loadShader](webglsystem.md#private-loadshader)
+* [loadTexture](webglsystem.md#private-loadtexture)
 * [render](webglsystem.md#private-render)
 * [EVALUATOR](webglsystem.md#static-private-evaluator)
 
@@ -54,7 +52,7 @@ renders them onto a canvas.
 
 ###  constructor
 
-\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [Renderable](renderable.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
+\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [Renderable](renderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, Shader]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -66,6 +64,13 @@ Name | Type | Default |
 `gl` | WebGL2RenderingContext | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `renderables` | [Renderable](renderable.md)[] | [] |
+`defaultShaderAssets` | [ShaderAsset](shaderasset.md)[] | [
+            new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()) 
+        ] |
+`shaders` | Map‹string, [WebGLShader, Shader]› | new Map() |
+`textures` | Map‹string, WebGLTexture› | new Map() |
+`programs` | Map‹string, WebGLProgram› | new Map() |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
@@ -104,15 +109,9 @@ for communicating with other parts of the engine.
 
 ___
 
-### `Private` placeholderTexture
+### `Private` programs
 
-• **placeholderTexture**: *WebGLTexture*
-
-___
-
-### `Private` program
-
-• **program**: *WebGLProgram | null*
+• **programs**: *Map‹string, WebGLProgram›*
 
 ___
 
@@ -134,6 +133,12 @@ when the scene is destroyed.
 
 ___
 
+### `Private` shaders
+
+• **shaders**: *Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›*
+
+___
+
 ###  subscriberID
 
 • **subscriberID**: *number*
@@ -146,55 +151,7 @@ ___
 
 ### `Private` textures
 
-• **textures**: *Record‹string, WebGLTexture›*
-
-___
-
-### `Static` `Private` FRAGMENT_SHADER
-
-▪ **FRAGMENT_SHADER**: *"#version 300 es
-        precision mediump float;
-
-        uniform bool uTexturePresent;
-        uniform vec4 uColor;
-        uniform sampler2D uTexture;
-
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
-
-        void main() {
-            vec4 texturedColor;
-            if (uTexturePresent) {
-                texturedColor = texture(uTexture, vTextureCoordinate);
-            }
-            else {
-                texturedColor = uColor;
-            }
-            outColor = texturedColor;
-        }
-    "* = `#version 300 es
-        precision mediump float;
-
-        uniform bool uTexturePresent;
-        uniform vec4 uColor;
-        uniform sampler2D uTexture;
-
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
-
-        void main() {
-            vec4 texturedColor;
-            if (uTexturePresent) {
-                texturedColor = texture(uTexture, vTextureCoordinate);
-            }
-            else {
-                texturedColor = uColor;
-            }
-            outColor = texturedColor;
-        }
-    `
+• **textures**: *Map‹string, WebGLTexture›*
 
 ___
 
@@ -225,40 +182,6 @@ ___
 ▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
 
 *Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
-
-___
-
-### `Static` `Private` VERTEX_SHADER
-
-▪ **VERTEX_SHADER**: *"#version 300 es
-        in vec2 aVertexPosition;
-        in vec2 aTexturePosition;
-
-        uniform mat4 uViewMatrix;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uProjectionMatrix;
-
-        out vec2 vTextureCoordinate;
-
-        void main() {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
-            vTextureCoordinate = aTexturePosition;
-        }
-    "* = `#version 300 es
-        in vec2 aVertexPosition;
-        in vec2 aTexturePosition;
-
-        uniform mat4 uViewMatrix;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uProjectionMatrix;
-
-        out vec2 vTextureCoordinate;
-
-        void main() {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
-            vTextureCoordinate = aTexturePosition;
-        }
-    `
 
 ## Methods
 
@@ -325,33 +248,31 @@ Name | Type | Description |
 
 ___
 
-### `Private` createProgram
+### `Private` loadShader
 
-▸ **createProgram**(`vertex`: WebGLShader, `fragment`: WebGLShader): *WebGLProgram*
+▸ **loadShader**(`asset`: [ShaderAsset](shaderasset.md)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`vertex` | WebGLShader |
-`fragment` | WebGLShader |
+`asset` | [ShaderAsset](shaderasset.md) |
 
-**Returns:** *WebGLProgram*
+**Returns:** *void*
 
 ___
 
-### `Private` createShader
+### `Private` loadTexture
 
-▸ **createShader**(`type`: number, `source`: string): *WebGLShader*
+▸ **loadTexture**(`asset`: [ImageAsset](imageasset.md)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`type` | number |
-`source` | string |
+`asset` | [ImageAsset](imageasset.md) |
 
-**Returns:** *WebGLShader*
+**Returns:** *void*
 
 ___
 

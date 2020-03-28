@@ -27,7 +27,7 @@ import KeyboardSystem from "jamjar/lib/standard/keyboard/keyboard_system";
 import Collider from "jamjar/lib/standard/collision/collider";
 import CollisionSystem from "jamjar/lib/standard/collision/collision_system";
 import PointerSystem from "jamjar/lib/standard/pointer/pointer_system";
-import ImageSystem from "jamjar/lib/standard/image/image_system";
+import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
 import InterpolationSystem from "jamjar/lib/standard/interpolation/interpolation_system";
 import EntityManager from "jamjar/lib/entity/entity_manager";
 import MessageBus from "jamjar/lib/message/message_bus";
@@ -49,6 +49,10 @@ import IMessage from "jamjar/lib/message/imessage";
 import Pointer from "jamjar/lib/standard/pointer/pointer";
 import Collision from "jamjar/lib/standard/collision/collision";
 import UI from "jamjar/lib/standard/ui/ui";
+import Material from "jamjar/lib/rendering/material";
+import ImageAsset from "jamjar/lib/rendering/image_asset";
+import ShaderAsset from "jamjar/lib/rendering/shader_asset";
+import GLSLShader from "../../../lib/standard/glsl/glsl_shader";
 
 class Player extends Component {
     public static readonly KEY = "player";
@@ -208,7 +212,7 @@ class AsteroidSystem extends System {
             scale,
             Math.random() * (0 - Math.PI * 2) + Math.PI * 2));
 
-        asteroid.Add(new Sprite(new Color(1, 1, 1, 1), 0, shape, undefined));
+        asteroid.Add(new Sprite(new Material(new Texture("asteroid", shape.GetFloat32Array())), 0, shape));
 
         asteroid.Add(new Collider(shape));
         asteroid.Add(new Motion(towardsVector.Scale(Math.random() * randomBetweenInts(Asteroid.MIN_SPEED, maxSpeed))));
@@ -350,7 +354,12 @@ class ControllerSystem extends System {
                     const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
 
                     bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.2, 3), orientation));
-                    bullet.Add(new Sprite(new Color(1, 0, 0, 1), 0));
+                    bullet.Add(new Sprite(new Material(
+                        new Texture(
+                            "bullet", 
+                            new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array()
+                        ),
+                        [ "bullet_frag_shader", ShaderAsset.DEFAULT_VERTEX_SHADER_NAME]), 0));
                     bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
                     bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
                     bullet.Add(new Bullet());
@@ -389,15 +398,35 @@ class MainScene extends Scene {
         new MotionSystem(this.messageBus, this);
         new InterpolationSystem(this.messageBus, this);
         new CollisionSystem(this.messageBus, this);
-        new ImageSystem(this.messageBus, this);
+        new HTTPImageSystem(this.messageBus, this);
         new ControllerSystem(this.messageBus, this);
         new BulletSystem(this.messageBus, this);
         new AsteroidSystem(this.messageBus, this);
         new CrosshairSystem(this.messageBus, this);
 
-        this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]))
-        this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]))
-        this.messageBus.Publish(new Message<[string, string]>(ImageSystem.MESSAGE_REQUEST_LOAD, ["ui_banner", "assets/ui_banner.png"]))
+        this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
+            "bullet_frag_shader",
+            new GLSLShader(
+                GLSLShader.FRAGMENT_TYPE,
+                `#version 300 es
+                precision mediump float;
+                
+                in vec2 vTextureCoordinate;
+        
+                out vec4 outColor;
+        
+                void main() {
+                    outColor = vec4(0,1,0,1);
+                }
+                `
+            )
+        )))
+
+        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["bullet", "assets/bullet.png"]));
+        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["asteroid", "assets/asteroid.png"]));
+        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]));
+        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]));
+        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["ui_banner", "assets/ui_banner.png"]));
 
         const virtualSize = new Vector(160, 90);
         const viewportPosition = new Vector(0, 0);
@@ -411,21 +440,25 @@ class MainScene extends Scene {
 
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
-        player.Add(new Sprite(new Color(1, 1, 1, 1), 
+        player.Add(new Sprite(
+            new Material(
+                new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+            ), 
             0, 
-            Polygon.Rectangle(1, 1),
-            new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array()))
-        );
+            Polygon.Rectangle(1, 1)
+        ));
         player.Add(new Collider(Polygon.Rectangle(1, 1)));
         player.Add(new Player());
         this.AddEntity(player);
 
         const crosshair = new Entity(this.messageBus);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
-        crosshair.Add(new Sprite(new Color(1, 1, 1, 1), 
+        crosshair.Add(new Sprite(
+            new Material(
+                new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+            ),
             1,
-            Polygon.Rectangle(1, 1),
-            new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+            Polygon.Rectangle(1, 1)
         ));
         crosshair.Add(new UI(camera));
         crosshair.Add(new Crosshair());
@@ -436,10 +469,12 @@ class MainScene extends Scene {
 
         const banner = new Entity(this.messageBus);
         banner.Add(new Transform(new Vector(1 - width, 1 - height), new Vector(width, height)))
-        banner.Add(new Sprite(new Color(1, 1, 1, 1), 
+        banner.Add(new Sprite(
+            new Material(
+                new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
+            ),
             0,
-            Polygon.Rectangle(1, 1),
-            new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
+            Polygon.Rectangle(1, 1)
         ));
         banner.Add(new UI(camera));
         this.AddEntity(banner);

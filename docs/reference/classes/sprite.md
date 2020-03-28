@@ -22,9 +22,8 @@ Can contain texture information such as bounds and a texture.
 ### Properties
 
 * [bounds](sprite.md#bounds)
-* [color](sprite.md#color)
 * [key](sprite.md#key)
-* [texture](sprite.md#optional-texture)
+* [material](sprite.md#material)
 * [zOrder](sprite.md#zorder)
 * [KEY](sprite.md#static-key)
 * [MESSAGE_ADD](sprite.md#static-message_add)
@@ -34,7 +33,7 @@ Can contain texture information such as bounds and a texture.
 
 ###  constructor
 
-\+ **new Sprite**(`color`: [Color](color.md), `zOrder`: number, `bounds`: [Polygon](polygon.md), `texture?`: [Texture](texture.md)): *[Sprite](sprite.md)*
+\+ **new Sprite**(`material`: [Material](material.md), `zOrder`: number, `bounds`: [Polygon](polygon.md)): *[Sprite](sprite.md)*
 
 *Overrides [Component](component.md).[constructor](component.md#constructor)*
 
@@ -42,10 +41,9 @@ Can contain texture information such as bounds and a texture.
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`color` | [Color](color.md) | - |
+`material` | [Material](material.md) | - |
 `zOrder` | number | - |
 `bounds` | [Polygon](polygon.md) | Polygon.Rectangle(1, 1) |
-`texture?` | [Texture](texture.md) | - |
 
 **Returns:** *[Sprite](sprite.md)*
 
@@ -59,14 +57,6 @@ The shape of the sprite to draw, represented by a Polygon.
 
 ___
 
-###  color
-
-• **color**: *[Color](color.md)*
-
-The colour of the sprite to use if there is no texture present.
-
-___
-
 ###  key
 
 • **key**: *string*
@@ -75,11 +65,9 @@ ___
 
 ___
 
-### `Optional` texture
+###  material
 
-• **texture**? : *[Texture](texture.md)*
-
-Optional texture (image) to use for the sprite.
+• **material**: *[Material](material.md)*
 
 ___
 

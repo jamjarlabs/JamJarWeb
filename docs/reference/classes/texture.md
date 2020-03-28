@@ -14,20 +14,20 @@
 ### Properties
 
 * [image](texture.md#image)
-* [points](texture.md#points)
+* [points](texture.md#optional-points)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Texture**(`image`: string, `points`: Float32Array): *[Texture](texture.md)*
+\+ **new Texture**(`image`: string, `points?`: Float32Array): *[Texture](texture.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `image` | string |
-`points` | Float32Array |
+`points?` | Float32Array |
 
 **Returns:** *[Texture](texture.md)*
 
@@ -39,6 +39,6 @@ Name | Type |
 
 ___
 
-###  points
+### `Optional` points
 
-• **points**: *Float32Array*
+• **points**? : *Float32Array*
