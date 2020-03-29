@@ -59,7 +59,7 @@ abstract class Scene extends Subscriber implements IScene {
                 if (!sceneStartMessage.payload) {
                     return;
                 }
-                if (this.id == sceneStartMessage.payload.id) {
+                if (this.id === sceneStartMessage.payload.id) {
                     this.OnStart();
                 }
                 break;

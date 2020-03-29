@@ -39,9 +39,9 @@ class SpriteSystem extends System {
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         )) && ![UI.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         ));
     };
 
@@ -58,7 +58,7 @@ class SpriteSystem extends System {
         switch (message.type) {
             case Game.MESSAGE_PRE_RENDER: {
                 const renderMessage = message as Message<number>;
-                if (renderMessage.payload == undefined) {
+                if (renderMessage.payload === undefined) {
                     return;
                 }
                 this.prepareSprites(renderMessage.payload);

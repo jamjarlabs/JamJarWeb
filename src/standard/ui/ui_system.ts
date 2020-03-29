@@ -40,9 +40,9 @@ class UISystem extends System {
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY, UI.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         )) || [Transform.KEY, Camera.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         ));
     };
 
@@ -59,7 +59,7 @@ class UISystem extends System {
         switch (message.type) {
             case Game.MESSAGE_PRE_RENDER: {
                 const renderMessage = message as Message<number>;
-                if (renderMessage.payload == undefined) {
+                if (renderMessage.payload === undefined) {
                     return;
                 }
                 this.prepareUI(renderMessage.payload);

@@ -53,7 +53,7 @@ class GJKSimplex {
         // towards the origin
         const ao = a.Invert();
         // If the simplex is a triangle
-        if (this.points.length == 3) {
+        if (this.points.length === 3) {
             // B is the penultimate in the simplex
             // C is the oldest point in the simplex
             const b = this.points[1];

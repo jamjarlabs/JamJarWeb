@@ -142,7 +142,7 @@ class EntityManager extends Subscriber {
      */
     private getComponentManager(key: string): ComponentManager | undefined {
         for (let i = 0; i < this.componentManagers.length; i++) {
-            if (this.componentManagers[i].key == key) {
+            if (this.componentManagers[i].key === key) {
                 return this.componentManagers[i];
             }
         }

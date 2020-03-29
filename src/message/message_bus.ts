@@ -95,7 +95,7 @@ class MessageBus implements IMessageBus {
             const subscribers = this.subscribers[key];
             for (let i = 0; i < subscribers.length; i++) {
                 const typeSub = subscribers[i];
-                if (subscriber.subscriberID == typeSub.subscriberID) {
+                if (subscriber.subscriberID === typeSub.subscriberID) {
                     subscribers.splice(i, 1);
                 }
             }
@@ -120,7 +120,7 @@ class MessageBus implements IMessageBus {
         }
         for (let i = 0; i < typeSubs.length; i++) {
             const typeSub = typeSubs[i];
-            if (subscriber.subscriberID == typeSub.subscriberID) {
+            if (subscriber.subscriberID === typeSub.subscriberID) {
                 typeSubs.splice(i, 1);
             }
         }

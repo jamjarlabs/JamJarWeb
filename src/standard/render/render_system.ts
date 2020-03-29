@@ -54,7 +54,7 @@ abstract class RenderSystem extends System {
         switch (message.type) {
             case RenderSystem.MESSAGE_LOAD_RENDERABLES: {
                 const renderMessage = message as Message<Renderable[]>;
-                if (renderMessage.payload == undefined) {
+                if (renderMessage.payload === undefined) {
                     return;
                 }
                 this.renderables.push(...renderMessage.payload);

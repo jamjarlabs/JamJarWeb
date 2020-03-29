@@ -33,7 +33,7 @@ class MotionSystem extends System {
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Motion.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         ));
     };
 
