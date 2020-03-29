@@ -14,16 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/**
- * JSDOM for mocking DOM interactions, such as event listeners.
- */
-
-const jsdom = require("jsdom")
-const { JSDOM } = jsdom;
-const dom = new JSDOM()
-global.document = dom.window.document
-global.window = dom.window
-
 // Workaround for https://github.com/kulshekhar/ts-jest/issues/1035 https://github.com/jsdom/jsdom/issues/2527
 // Taken from: https://github.com/kulshekhar/ts-jest/issues/1035#issuecomment-486442977
 global.window.PointerEvent = function (type, eventInitDict) { 
@@ -33,3 +23,17 @@ global.window.BeforeUnloadEvent = function () { };
 global.window.DOMRect = function (x, y, width, height) {
     return { x, y, width, height, left: x - width / 2, right: x + width / 2, top: y + height / 2, bottom: y - height / 2 }
 };
+global.window.WebGL2RenderingContext = function () {
+    return {};
+};
+global.window.WebGLTexture = function () {
+    return {};
+};
+global.window.WebGLShader = function () {
+    return {};
+};
+// Workaround for JSON marshalling maps, used in testing
+// From https://stackoverflow.com/a/43705077/6052295
+Map.prototype.toJSON = function () {
+    return [...this]
+}

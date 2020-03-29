@@ -1,6 +1,9 @@
 
 # Class: Renderable
 
+Renderable represents something that can be rendered.
+Contains information for rendering.
+
 ## Hierarchy
 
 * **Renderable**
@@ -14,9 +17,8 @@
 ### Properties
 
 * [camera](renderable.md#optional-camera)
-* [color](renderable.md#color)
+* [material](renderable.md#material)
 * [modelMatrix](renderable.md#modelmatrix)
-* [texture](renderable.md#optional-texture)
 * [verticies](renderable.md#verticies)
 * [zOrder](renderable.md#zorder)
 
@@ -24,7 +26,7 @@
 
 ###  constructor
 
-\+ **new Renderable**(`zOrder`: number, `verticies`: Float32Array, `modelMatrix`: Float32Array, `color`: [Color](color.md), `camera?`: [IEntity](../interfaces/ientity.md), `texture?`: [Texture](texture.md)): *[Renderable](renderable.md)*
+\+ **new Renderable**(`zOrder`: number, `verticies`: Float32Array, `modelMatrix`: Float32Array, `material`: [Material](material.md), `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)*
 
 **Parameters:**
 
@@ -33,9 +35,8 @@ Name | Type |
 `zOrder` | number |
 `verticies` | Float32Array |
 `modelMatrix` | Float32Array |
-`color` | [Color](color.md) |
+`material` | [Material](material.md) |
 `camera?` | [IEntity](../interfaces/ientity.md) |
-`texture?` | [Texture](texture.md) |
 
 **Returns:** *[Renderable](renderable.md)*
 
@@ -45,11 +46,17 @@ Name | Type |
 
 • **camera**? : *[IEntity](../interfaces/ientity.md)*
 
+Any camera to associate with the renderable, will only render on
+the camera supplied.
+
 ___
 
-###  color
+###  material
 
-• **color**: *[Color](color.md)*
+• **material**: *[Material](material.md)*
+
+The material of the object to render, containing render information
+about texture and shaders.
 
 ___
 
@@ -57,11 +64,8 @@ ___
 
 • **modelMatrix**: *Float32Array*
 
-___
-
-### `Optional` texture
-
-• **texture**? : *[Texture](texture.md)*
+The model matrix (position, scale, rotation) of the object to render,
+represented as Float32Array for performance.
 
 ___
 
@@ -69,8 +73,15 @@ ___
 
 • **verticies**: *Float32Array*
 
+The vertices of the object to render,
+represented as Float32Array for performance.
+
 ___
 
 ###  zOrder
 
 • **zOrder**: *number*
+
+The Z-Order of the object, the order at which the object will appear
+infront or behind other objects. A higher Z-Order means in front, a
+lower Z-Order means behind.

@@ -3,6 +3,5 @@ theme: readthedocs
 markdown_extensions:
   - mdx_truly_sane_lists
 plugins:
-  - awesome-pages:
-      collapse_single_pages: true
+  - awesome-pages
   - search

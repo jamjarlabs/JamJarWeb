@@ -14,11 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * Texture is the mapping from an image that has been loaded, deciding
+ * how the texture should be drawn and represented.
+ */
 class Texture {
+    /**
+     * Name of the image the texture refers to.
+     */
     public image: string;
-    public points: Float32Array;
+    /**
+     * Mapping in points on the image, represented as Float32Array for performance.
+     */
+    public points?: Float32Array;
 
-    constructor(image: string, points: Float32Array) {
+    constructor(image: string, points?: Float32Array) {
         this.image = image;
         this.points = points;
     }

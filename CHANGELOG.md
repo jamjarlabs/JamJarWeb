@@ -6,7 +6,13 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `Material` represents shaders and a texture to apply. Can be applied to
+  entities, allowing custom shaders.
+- Can now load custom shaders using a `ShaderAsset`.
 ### Changed
+- All sprites require a `Texture` now, no longer optional.
+- `ImageSystem` renamed to `HTTPImageSystem`.
 - Group by texture for WebGL rendering to reduce texture switching and improve
   performance.
 ### Fixed

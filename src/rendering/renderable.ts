@@ -14,24 +14,46 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Color from "./color";
-import Texture from "./texture";
 import IEntity from "../entity/ientity";
+import Material from "./material";
 
+/**
+ * Renderable represents something that can be rendered.
+ * Contains information for rendering.
+ */
 class Renderable {
+    /**
+     * The Z-Order of the object, the order at which the object will appear
+     * infront or behind other objects. A higher Z-Order means in front, a
+     * lower Z-Order means behind.
+     */
     public zOrder: number;
+    /**
+     * The vertices of the object to render,
+     * represented as Float32Array for performance.
+     */
     public verticies: Float32Array;
+    /**
+     * The model matrix (position, scale, rotation) of the object to render,
+     * represented as Float32Array for performance.
+     */
     public modelMatrix: Float32Array;
-    public color: Color;
+    /**
+     * The material of the object to render, containing render information
+     * about texture and shaders.
+     */
+    public material: Material;
+    /**
+     * Any camera to associate with the renderable, will only render on
+     * the camera supplied.
+     */
     public camera?: IEntity;
-    public texture?: Texture;
 
-    constructor(zOrder: number, verticies: Float32Array, modelMatrix: Float32Array, color: Color, camera?: IEntity, texture?: Texture) {
+    constructor(zOrder: number, verticies: Float32Array, modelMatrix: Float32Array, material: Material, camera?: IEntity) {
         this.zOrder = zOrder;
         this.verticies = verticies;
         this.modelMatrix = modelMatrix;
-        this.color = color;
-        this.texture = texture;
+        this.material = material;
         this.camera = camera;
     }
 }

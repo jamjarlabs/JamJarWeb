@@ -20,40 +20,34 @@ import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
 import IMessage from "../../message/imessage";
 import Message from "../../message/message";
-import ImageAsset from "./image_asset";
+import ImageAsset from "../../rendering/image_asset";
 
 /**
- * ImageSystem handles loading image assets in and making them available
+ * HTTPImageSystem handles loading image assets in and making them available
  * to the engine for rendering.
  */
-class ImageSystem extends System {
+class HTTPImageSystem extends System {
     public static readonly MESSAGE_REQUEST_FLUSH = "request_image_flush";
-    public static readonly MESSAGE_REQUEST_LOAD = "request_image_load";
     public static readonly MESSAGE_REQUEST_CLEAR = "request_image_clear";
 
-    public static readonly MESSAGE_FINISH_LOAD = "request_finish_load_image";
-
-    private loadQueue: ImageAsset[];
     private images: ImageAsset[];
 
     constructor(messageBus: IMessageBus, 
         scene?: IScene, 
         entities?: Map<number, SystemEntity>, 
         subscriberID?: number,
-        images: ImageAsset[] = [],
-        loadQueue: ImageAsset[] = []) {
+        images: ImageAsset[] = []) {
         super(messageBus, scene, undefined, entities, subscriberID);
-        this.loadQueue = loadQueue;
         this.images = images;
-        this.messageBus.Subscribe(this, ImageSystem.MESSAGE_REQUEST_LOAD);
-        this.messageBus.Subscribe(this, ImageSystem.MESSAGE_REQUEST_FLUSH);
-        this.messageBus.Subscribe(this, ImageSystem.MESSAGE_REQUEST_CLEAR);
+        this.messageBus.Subscribe(this, ImageAsset.MESSAGE_REQUEST_LOAD);
+        this.messageBus.Subscribe(this, HTTPImageSystem.MESSAGE_REQUEST_FLUSH);
+        this.messageBus.Subscribe(this, HTTPImageSystem.MESSAGE_REQUEST_CLEAR);
     }
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case ImageSystem.MESSAGE_REQUEST_LOAD: {
+            case ImageAsset.MESSAGE_REQUEST_LOAD: {
                 const loadMessage = message as Message<[string, string]>;
                 if (loadMessage.payload === undefined) {
                     return;
@@ -63,35 +57,26 @@ class ImageSystem extends System {
                 this.load(name, src);
                 break;
             }
-            case ImageSystem.MESSAGE_REQUEST_FLUSH: {
+            case HTTPImageSystem.MESSAGE_REQUEST_FLUSH: {
                 this.flush();
                 break;
             }
-            case ImageSystem.MESSAGE_REQUEST_CLEAR: {
+            case HTTPImageSystem.MESSAGE_REQUEST_CLEAR: {
                 this.clear();
                 break;
             }
         }
     }
 
-    protected Update(): void {
-        for (let i = 0; i < this.loadQueue.length; i++) {
-            const imageAsset = this.loadQueue[i];
-            this.images.push(imageAsset);
-            this.messageBus.Publish(new Message<ImageAsset>(ImageSystem.MESSAGE_FINISH_LOAD, imageAsset));
-        }
-        this.loadQueue = [];
-    }
-
     protected onLoad(event: Event | undefined, image: HTMLImageElement, name: string): void {
         const asset = new ImageAsset(name, image, true);
-        this.messageBus.Publish(new Message<ImageAsset>(ImageSystem.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
     }
 
     protected onError(event: Event | undefined, image: HTMLImageElement, name: string): void {
         const asset = new ImageAsset(name, image, false, new Error(`Failed to load image ${name} from source ${image.src}`));
-        this.messageBus.Publish(new Message<ImageAsset>(ImageSystem.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
     }
 
@@ -104,7 +89,7 @@ class ImageSystem extends System {
 
     private flush(): void {
         for (let i = 0; i < this.images.length; i++) {
-            this.messageBus.Publish(new Message<ImageAsset>(ImageSystem.MESSAGE_FINISH_LOAD, this.images[i]));
+            this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, this.images[i]));
         }
     }
 
@@ -114,4 +99,4 @@ class ImageSystem extends System {
 
 }
 
-export default ImageSystem;
+export default HTTPImageSystem;

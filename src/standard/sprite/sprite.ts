@@ -15,9 +15,8 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
-import Color from "../../rendering/color";
 import Polygon from "../shape/polygon";
-import Texture from "../../rendering/texture";
+import Material from "../../rendering/material";
 
 /**
  * Sprite is a component for storing information around a sprite
@@ -41,24 +40,16 @@ class Sprite extends Component {
      * The shape of the sprite to draw, represented by a Polygon.
      */
     public bounds: Polygon;
-    /**
-     * The colour of the sprite to use if there is no texture present.
-     */
-    public color: Color;
-    /**
-     * Optional texture (image) to use for the sprite.
-     */
-    public texture?: Texture;
 
-    constructor(color: Color,
+    public material: Material;
+
+    constructor(material: Material,
         zOrder: number,
-        bounds: Polygon = Polygon.Rectangle(1, 1),
-        texture?: Texture) {
+        bounds: Polygon = Polygon.Rectangle(1, 1)) {
         super(Sprite.KEY);
-        this.color = color;
+        this.material = material;
         this.zOrder = zOrder;
         this.bounds = bounds;
-        this.texture = texture;
     }
 }
 

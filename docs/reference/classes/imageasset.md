@@ -23,6 +23,8 @@ Also stores the image itself.
 * [image](imageasset.md#image)
 * [name](imageasset.md#name)
 * [success](imageasset.md#success)
+* [MESSAGE_FINISH_LOAD](imageasset.md#static-message_finish_load)
+* [MESSAGE_REQUEST_LOAD](imageasset.md#static-message_request_load)
 
 ## Constructors
 
@@ -75,3 +77,19 @@ ___
 
 A boolean indicating the success of loading the image, true = successful
 load, false = failed loading.
+
+___
+
+### `Static` MESSAGE_FINISH_LOAD
+
+▪ **MESSAGE_FINISH_LOAD**: *"finish_image_load"* = "finish_image_load"
+
+Message when an image asset is finished loading.
+
+___
+
+### `Static` MESSAGE_REQUEST_LOAD
+
+▪ **MESSAGE_REQUEST_LOAD**: *"request_image_load"* = "request_image_load"
+
+Message to request an image asset to be loaded.

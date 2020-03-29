@@ -36,7 +36,7 @@ describe("KeyboardSystem - OnMessage", () => {
             new Error("fail to publish"),
             new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0, [["test", "test"]]),
             new KeyboardSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), 
-                window.document, 
+                document, 
                 undefined, 
                 undefined, 
                 0, 

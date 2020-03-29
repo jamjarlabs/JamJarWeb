@@ -24,10 +24,10 @@ import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import Game from "../../game";
 import Renderable from "../../rendering/renderable";
-import WebGLSystem from "../webgl/webgl_system";
 import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import UI from "../ui/ui";
+import RenderSystem from "../render/render_system";
 
 /**
  * SpriteSystem handles converting sprites into renderable objects that are fed into 
@@ -76,12 +76,11 @@ class SpriteSystem extends System {
                 sprite.zOrder,
                 sprite.bounds.GetFloat32Array(),
                 transform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
-                sprite.color,
+                sprite.material,
                 undefined,
-                sprite.texture
             ));
         }
-        this.messageBus.Publish(new Message<Renderable[]>(WebGLSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        this.messageBus.Publish(new Message<Renderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 
