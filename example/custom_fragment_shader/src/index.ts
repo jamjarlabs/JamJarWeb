@@ -19,6 +19,7 @@ import IMessageBus from "jamjar/lib/message/imessage_bus";
 import EntityManager from "jamjar/lib/entity/entity_manager";
 import MessageBus from "jamjar/lib/message/message_bus";
 import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
+import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
 import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
 import ShaderAsset from "jamjar/lib/rendering/shader_asset";
 import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
@@ -28,6 +29,10 @@ import Sprite from "jamjar/lib/standard/sprite/sprite";
 import Polygon from "jamjar/lib/standard/shape/polygon";
 import ImageAsset from "jamjar/lib/rendering/image_asset";
 import Camera from "jamjar/lib/standard/camera/camera";
+import Material from "jamjar/lib/rendering/material";
+import Message from "jamjar/lib/message/message";
+import Texture from "jamjar/lib/rendering/texture";
+import Vector from "jamjar/lib/geometry/vector";
 
 // Game definition
 class ShaderGame extends Game {
@@ -66,7 +71,7 @@ class ShaderGame extends Game {
 
         // Create example entity
         const example = new Entity(this.messageBus);
-        example.Add(new Transform());
+        example.Add(new Transform(new Vector(0,0), new Vector(10,10)));
 
         // Create sprite using a material with the previously loaded texture,
         // alongside using our custom fragment shader with the default
@@ -98,6 +103,9 @@ new WebGLSystem(messageBus, gl);
 
 // Create SpriteSystem
 new SpriteSystem(messageBus);
+
+// Create Image loading system
+new HTTPImageSystem(messageBus);
 
 // Create and start game
 new ShaderGame(messageBus).Start();

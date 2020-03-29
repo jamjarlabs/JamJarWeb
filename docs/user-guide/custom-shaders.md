@@ -17,15 +17,9 @@ Outlined below are the steps for creating a simple custom shader using GLSL ES
 3.0. We will be making a really simple fragment shader that will render
 everything as green rather than using a texture.
 
-- Make sure you have a rendering system initialized, alongside a Sprite
-  pre-rendering system:
+- Make sure you have a rendering system initialized, a Sprite
+  pre-rendering system, and an image loading system:
 ```typescript
-import Game from "jamjar/lib/game"
-import IMessageBus from "jamjar/lib/message/imessage_bus";
-import EntityManager from "jamjar/lib/entity/entity_manager";
-import MessageBus from "jamjar/lib/message/message_bus";
-import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
-import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
 
 // Game definition
 class ShaderGame extends Game {
@@ -56,6 +50,9 @@ new WebGLSystem(messageBus, gl);
 // Create SpriteSystem
 new SpriteSystem(messageBus);
 
+// Create Image loading system
+new HTTPImageSystem(messageBus);
+
 // Create and start game
 new ShaderGame(messageBus).Start();
 ```
@@ -64,8 +61,6 @@ new ShaderGame(messageBus).Start();
 
 ```typescript
 ...
-import ShaderAsset from "jamjar/lib/rendering/shader_asset";
-import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
 
 // Game definition
 class ShaderGame extends Game {
@@ -103,12 +98,6 @@ class ShaderGame extends Game {
 
 ```typescript
 ...
-import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/standard/transform/transform";
-import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Polygon from "jamjar/lib/standard/shape/polygon";
-import ImageAsset from "jamjar/lib/rendering/image_asset";
-import Camera from "jamjar/lib/standard/camera/camera";
 
 // Game definition
 class ShaderGame extends Game {
@@ -160,7 +149,6 @@ class ShaderGame extends Game {
         ));
     }
 }
-
 ...
 ```
 
