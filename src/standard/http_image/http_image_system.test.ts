@@ -59,7 +59,7 @@ describe("HTTPImageSystem - OnMessage", () => {
             ),
             new HTTPImageSystem(
                 new FakeMessageBus([
-                    new Reactor("Publish", () => { throw ("publish fail") })
+                    new Reactor("Publish", () => { throw ("publish fail"); })
                 ]),
                 undefined,
                 undefined,

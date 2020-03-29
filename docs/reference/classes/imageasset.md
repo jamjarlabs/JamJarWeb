@@ -84,8 +84,12 @@ ___
 
 ▪ **MESSAGE_FINISH_LOAD**: *"finish_image_load"* = "finish_image_load"
 
+Message when an image asset is finished loading.
+
 ___
 
 ### `Static` MESSAGE_REQUEST_LOAD
 
 ▪ **MESSAGE_REQUEST_LOAD**: *"request_image_load"* = "request_image_load"
+
+Message to request an image asset to be loaded.

@@ -16,6 +16,7 @@ limitations under the License.
 
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
+import ShaderAsset from "../../rendering/shader_asset";
 
 class DefaultFragmentShader extends GLSLShader {
     private static readonly SOURCE = `#version 300 es
@@ -44,7 +45,7 @@ class DefaultFragmentShader extends GLSLShader {
     
     constructor() {
         super(
-            GLSLShader.FRAGMENT_TYPE, 
+            ShaderAsset.FRAGMENT_TYPE, 
             DefaultFragmentShader.SOURCE, 
             undefined,
             DefaultFragmentShader.PER_TEXTURE,

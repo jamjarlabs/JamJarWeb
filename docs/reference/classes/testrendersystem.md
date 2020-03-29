@@ -1,15 +1,14 @@
 
-# Class: WebGLSystem
+# Class: TestRenderSystem
 
-WebGLSystem handles rendering to an HTML5 canvas using WebGL.
-Takes in renderables created by pre rendering steps and
-renders them onto a canvas.
+TextRenderSystem is the implementation of the abstract RenderSystem, used
+only for testing
 
 ## Hierarchy
 
   ↳ [RenderSystem](rendersystem.md)
 
-  ↳ **WebGLSystem**
+  ↳ **TestRenderSystem**
 
 ## Implements
 
@@ -19,62 +18,49 @@ renders them onto a canvas.
 
 ### Constructors
 
-* [constructor](webglsystem.md#constructor)
+* [constructor](testrendersystem.md#constructor)
 
 ### Properties
 
-* [entities](webglsystem.md#protected-entities)
-* [gl](webglsystem.md#private-gl)
-* [messageBus](webglsystem.md#protected-messagebus)
-* [programs](webglsystem.md#private-programs)
-* [renderables](webglsystem.md#protected-renderables)
-* [scene](webglsystem.md#protected-optional-scene)
-* [shaders](webglsystem.md#private-shaders)
-* [subscriberID](webglsystem.md#subscriberid)
-* [textures](webglsystem.md#private-textures)
-* [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
-* [MESSAGE_LOAD_RENDERABLES](webglsystem.md#static-message_load_renderables)
-* [MESSAGE_REGISTER](webglsystem.md#static-message_register)
-* [MESSAGE_UPDATE](webglsystem.md#static-message_update)
+* [entities](testrendersystem.md#protected-entities)
+* [messageBus](testrendersystem.md#protected-messagebus)
+* [renderables](testrendersystem.md#protected-renderables)
+* [scene](testrendersystem.md#protected-optional-scene)
+* [subscriberID](testrendersystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](testrendersystem.md#static-message_deregister)
+* [MESSAGE_LOAD_RENDERABLES](testrendersystem.md#static-message_load_renderables)
+* [MESSAGE_REGISTER](testrendersystem.md#static-message_register)
+* [MESSAGE_UPDATE](testrendersystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](webglsystem.md#destroy)
-* [OnDestroy](webglsystem.md#protected-ondestroy)
-* [OnMessage](webglsystem.md#onmessage)
-* [Update](webglsystem.md#protected-update)
-* [loadShader](webglsystem.md#private-loadshader)
-* [loadTexture](webglsystem.md#private-loadtexture)
-* [render](webglsystem.md#private-render)
-* [EVALUATOR](webglsystem.md#static-private-evaluator)
+* [Destroy](testrendersystem.md#destroy)
+* [OnDestroy](testrendersystem.md#protected-ondestroy)
+* [OnMessage](testrendersystem.md#onmessage)
+* [Update](testrendersystem.md#protected-update)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [Renderable](renderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, Shader]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
+\+ **new TestRenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: [Renderable](renderable.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[TestRenderSystem](testrendersystem.md)*
 
-*Overrides [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
+*Inherited from [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
+
+*Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`gl` | WebGL2RenderingContext | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
+`evaluator?` | [Evaluator](../README.md#evaluator) | - |
 `renderables` | [Renderable](renderable.md)[] | [] |
-`defaultShaderAssets` | [ShaderAsset](shaderasset.md)[] | [
-            new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()) 
-        ] |
-`shaders` | Map‹string, [WebGLShader, Shader]› | new Map() |
-`textures` | Map‹string, WebGLTexture› | new Map() |
-`programs` | Map‹string, WebGLProgram› | new Map() |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
-**Returns:** *[WebGLSystem](webglsystem.md)*
+**Returns:** *[TestRenderSystem](testrendersystem.md)*
 
 ## Properties
 
@@ -92,12 +78,6 @@ etc.
 
 ___
 
-### `Private` gl
-
-• **gl**: *WebGL2RenderingContext*
-
-___
-
 ### `Protected` messageBus
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
@@ -106,12 +86,6 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
-
-___
-
-### `Private` programs
-
-• **programs**: *Map‹string, WebGLProgram›*
 
 ___
 
@@ -137,12 +111,6 @@ when the scene is destroyed.
 
 ___
 
-### `Private` shaders
-
-• **shaders**: *Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›*
-
-___
-
 ###  subscriberID
 
 • **subscriberID**: *number*
@@ -150,12 +118,6 @@ ___
 *Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
 
 *Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
-
-___
-
-### `Private` textures
-
-• **textures**: *Map‹string, WebGLTexture›*
 
 ___
 
@@ -226,7 +188,9 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Overrides [RenderSystem](rendersystem.md).[OnMessage](rendersystem.md#onmessage)*
+*Inherited from [RenderSystem](rendersystem.md).[OnMessage](rendersystem.md#onmessage)*
+
+*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
 
@@ -253,60 +217,3 @@ Name | Type | Description |
 `dt` | number | DeltaTime  |
 
 **Returns:** *void*
-
-___
-
-### `Private` loadShader
-
-▸ **loadShader**(`asset`: [ShaderAsset](shaderasset.md)): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`asset` | [ShaderAsset](shaderasset.md) |
-
-**Returns:** *void*
-
-___
-
-### `Private` loadTexture
-
-▸ **loadTexture**(`asset`: [ImageAsset](imageasset.md)): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`asset` | [ImageAsset](imageasset.md) |
-
-**Returns:** *void*
-
-___
-
-### `Private` render
-
-▸ **render**(`alpha`: number): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`alpha` | number |
-
-**Returns:** *void*
-
-___
-
-### `Static` `Private` EVALUATOR
-
-▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
-
-**Returns:** *boolean*

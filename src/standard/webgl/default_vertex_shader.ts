@@ -18,6 +18,7 @@ import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import Matrix4D from "../../geometry/matrix_4d";
 import Renderable from "../../rendering/renderable";
+import ShaderAsset from "../../rendering/shader_asset";
 
 class DefaultVertexShader extends GLSLShader {
     private static readonly SOURCE = `#version 300 es
@@ -110,7 +111,7 @@ class DefaultVertexShader extends GLSLShader {
 
     constructor() {
         super(
-            GLSLShader.VERTEX_TYPE, 
+            ShaderAsset.VERTEX_TYPE, 
             DefaultVertexShader.SOURCE, 
             DefaultVertexShader.PER_SHADER,
             undefined,

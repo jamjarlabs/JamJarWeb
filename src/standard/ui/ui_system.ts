@@ -23,12 +23,12 @@ import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import Game from "../../game";
 import Renderable from "../../rendering/renderable";
-import WebGLSystem from "../webgl/webgl_system";
 import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import UI from "../ui/ui";
 import Sprite from "../sprite/sprite";
 import Camera from "../camera/camera";
+import RenderSystem from "../render/render_system";
 
 /**
  * UISystem handles sprites that are designated as part of the UI, handling their coordinates and scale
@@ -112,7 +112,7 @@ class UISystem extends System {
                 ui.camera,
             ));
         }
-        this.messageBus.Publish(new Message<Renderable[]>(WebGLSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        this.messageBus.Publish(new Message<Renderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 

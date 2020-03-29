@@ -18,15 +18,41 @@ import Renderable from "../../rendering/renderable";
 import IShader from "../../rendering/ishader";
 import GLSLContext from "./glsl_context";
 
+/**
+ * A GLSLShader is a shader used with WebGL, holds GLSL source code, shader
+ * type and hooks for injecting shader variables such as uniforms, attributes
+ * etc.
+ */
 class GLSLShader implements IShader {
-
-    public static readonly VERTEX_TYPE = "vertex";
-    public static readonly FRAGMENT_TYPE = "fragment";
-
+    /**
+     * GLSL source code.
+     */
     public source: string;
+    /**
+     * Shader type, vertex or fragment.
+     */
     public type: string;
+    /**
+     * Hook for injecting variables for the GLSL shader at the
+     * per shader stage of the rendering process, runs once
+     * per program (grouping of shaders) used, should inject
+     * variables for shader specific, but not texture or renderable
+     * specific variables.
+     */
     public perShader?: (context: GLSLContext) => void;
+    /**
+     * Hook for injecting variables for the GLSL shader at the
+     * per texture stage of the rendering process, runs once
+     * per texture used, should inject variables for texture specific, 
+     * but not renderable specific variables.
+     */
     public perTexture?: (context: GLSLContext, texture: WebGLTexture) => void;
+    /**
+     * Hook for injecting variables for the GLSL shader at the
+     * per renderable stage of the rendering process, runs once
+     * per renderable used, should inject variables for renderable
+     * specific variables.
+     */
     public perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: Renderable) => void;
     
     constructor(type: string, 

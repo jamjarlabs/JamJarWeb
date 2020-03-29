@@ -1,6 +1,9 @@
 
 # Class: GLSLContext
 
+GLSLContext contains all common information for a GLSLShader to use when supplying
+variables to the GPU, such as uniforms, and attributes.
+
 ## Hierarchy
 
 * **GLSLContext**
@@ -41,11 +44,15 @@ Name | Type |
 
 • **camera**: *[Camera](camera.md)*
 
+The camera component of the camera entity being rendered to.
+
 ___
 
 ###  gl
 
 • **gl**: *WebGL2RenderingContext*
+
+WebGL rendering context.
 
 ___
 
@@ -53,8 +60,12 @@ ___
 
 • **program**: *WebGLProgram*
 
+WebGL program being used that this shader is part of.
+
 ___
 
 ###  transform
 
 • **transform**: *[Transform](transform.md)*
+
+The transform component of the camera entity being rendered to.

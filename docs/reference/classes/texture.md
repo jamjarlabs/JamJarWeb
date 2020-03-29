@@ -1,6 +1,9 @@
 
 # Class: Texture
 
+Texture is the mapping from an image that has been loaded, deciding
+how the texture should be drawn and represented.
+
 ## Hierarchy
 
 * **Texture**
@@ -37,8 +40,12 @@ Name | Type |
 
 • **image**: *string*
 
+Name of the image the texture refers to.
+
 ___
 
 ### `Optional` points
 
 • **points**? : *Float32Array*
+
+Mapping in points on the image, represented as Float32Array for performance.

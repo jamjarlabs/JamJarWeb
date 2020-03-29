@@ -24,9 +24,7 @@
 * [perTexture](defaultfragmentshader.md#optional-pertexture)
 * [source](defaultfragmentshader.md#source)
 * [type](defaultfragmentshader.md#type)
-* [FRAGMENT_TYPE](defaultfragmentshader.md#static-fragment_type)
 * [SOURCE](defaultfragmentshader.md#static-private-source)
-* [VERTEX_TYPE](defaultfragmentshader.md#static-vertex_type)
 
 ### Methods
 
@@ -50,6 +48,11 @@
 
 *Inherited from [GLSLShader](glslshader.md).[perRenderable](glslshader.md#optional-perrenderable)*
 
+Hook for injecting variables for the GLSL shader at the
+per renderable stage of the rendering process, runs once
+per renderable used, should inject variables for renderable
+specific variables.
+
 ___
 
 ### `Optional` perShader
@@ -58,6 +61,12 @@ ___
 
 *Inherited from [GLSLShader](glslshader.md).[perShader](glslshader.md#optional-pershader)*
 
+Hook for injecting variables for the GLSL shader at the
+per shader stage of the rendering process, runs once
+per program (grouping of shaders) used, should inject
+variables for shader specific, but not texture or renderable
+specific variables.
+
 ___
 
 ### `Optional` perTexture
@@ -65,6 +74,11 @@ ___
 • **perTexture**? : *undefined | function*
 
 *Inherited from [GLSLShader](glslshader.md).[perTexture](glslshader.md#optional-pertexture)*
+
+Hook for injecting variables for the GLSL shader at the
+per texture stage of the rendering process, runs once
+per texture used, should inject variables for texture specific,
+but not renderable specific variables.
 
 ___
 
@@ -76,6 +90,8 @@ ___
 
 *Inherited from [GLSLShader](glslshader.md).[source](glslshader.md#source)*
 
+GLSL source code.
+
 ___
 
 ###  type
@@ -86,13 +102,7 @@ ___
 
 *Inherited from [GLSLShader](glslshader.md).[type](glslshader.md#type)*
 
-___
-
-### `Static` FRAGMENT_TYPE
-
-▪ **FRAGMENT_TYPE**: *"fragment"* = "fragment"
-
-*Inherited from [GLSLShader](glslshader.md).[FRAGMENT_TYPE](glslshader.md#static-fragment_type)*
+Shader type, vertex or fragment.
 
 ___
 
@@ -123,14 +133,6 @@ ___
             outColor = texture(uTexture, vTextureCoordinate);
         }
     `
-
-___
-
-### `Static` VERTEX_TYPE
-
-▪ **VERTEX_TYPE**: *"vertex"* = "vertex"
-
-*Inherited from [GLSLShader](glslshader.md).[VERTEX_TYPE](glslshader.md#static-vertex_type)*
 
 ## Methods
 

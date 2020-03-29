@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Transform from "../transform/transform";
 import IMessage from "../../message/imessage";
 import Camera from "../camera/camera";
@@ -34,15 +33,14 @@ import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import DefaultVertexShader from "./default_vertex_shader";
 import DefaultFragmentShader from "./default_fragment_shader";
+import RenderSystem from "../render/render_system";
 
 /**
  * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
  * Takes in renderables created by pre rendering steps and
  * renders them onto a canvas.
  */
-class WebGLSystem extends System {
-
-    public static readonly MESSAGE_LOAD_RENDERABLES = "load_renderables";
+class WebGLSystem extends RenderSystem {
 
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Camera.KEY].every((type) => components.some(
@@ -51,7 +49,6 @@ class WebGLSystem extends System {
     };
 
     private gl: WebGL2RenderingContext;
-    private renderables: Renderable[];
     private textures: Map<string, WebGLTexture>;
     private shaders: Map<string, [WebGLShader, GLSLShader]>;
     private programs: Map<string, WebGLProgram>;
@@ -69,10 +66,9 @@ class WebGLSystem extends System {
         programs: Map<string, WebGLProgram> = new Map(),
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
-        super(messageBus, scene, WebGLSystem.EVALUATOR, entities, subscriberID);
+        super(messageBus, scene, WebGLSystem.EVALUATOR, renderables, entities, subscriberID);
 
         this.gl = gl;
-        this.renderables = renderables;
         this.textures = textures;
         this.shaders = shaders;
         this.programs = programs;
@@ -80,14 +76,17 @@ class WebGLSystem extends System {
         // Subscribe to messages
         this.messageBus.Subscribe(this, [
             Game.MESSAGE_RENDER, 
-            WebGLSystem.MESSAGE_LOAD_RENDERABLES, 
+            RenderSystem.MESSAGE_LOAD_RENDERABLES, 
             ImageAsset.MESSAGE_FINISH_LOAD,
             ShaderAsset.MESSAGE_REQUEST_LOAD
         ]);
 
         // Load default shaders
         for (const asset of defaultShaderAssets) {
-            this.loadShader(asset);
+            this.messageBus.Publish(new Message<ShaderAsset>(
+                ShaderAsset.MESSAGE_REQUEST_LOAD, 
+                asset
+            ));
         }
     }
 
@@ -100,14 +99,6 @@ class WebGLSystem extends System {
                     return;
                 }
                 this.render(renderMessage.payload);
-                break;
-            }
-            case WebGLSystem.MESSAGE_LOAD_RENDERABLES: {
-                const renderMessage = message as Message<Renderable[]>;
-                if (renderMessage.payload == undefined) {
-                    return;
-                }
-                this.renderables.push(...renderMessage.payload);
                 break;
             }
             case ImageAsset.MESSAGE_FINISH_LOAD: {
@@ -139,11 +130,11 @@ class WebGLSystem extends System {
         const gl = this.gl;
         let type: number;
         switch (asset.shader.type) {
-            case GLSLShader.VERTEX_TYPE: {
+            case ShaderAsset.VERTEX_TYPE: {
                 type = gl.VERTEX_SHADER;
                 break;
             }
-            case GLSLShader.FRAGMENT_TYPE: {
+            case ShaderAsset.FRAGMENT_TYPE: {
                 type = gl.FRAGMENT_SHADER;
                 break;
             }
@@ -154,14 +145,14 @@ class WebGLSystem extends System {
 
         const shader = gl.createShader(type);
         if (shader === null) {
-            throw (`Error creating shader ${asset.name}`);
+            throw (`Error creating shader for asset '${asset.name}'`);
         }
         gl.shaderSource(shader, asset.shader.source);
         gl.compileShader(shader);
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.error(gl.getShaderInfoLog(shader));
+            const err = gl.getShaderInfoLog(shader);
             gl.deleteShader(shader);
-            throw (`Error compiling shader ${asset.name}`);
+            throw (`Error compiling shader for asset '${asset.name}', error: ${err}`);
         }
         this.shaders.set(asset.name, [shader, asset.shader]);
         this.messageBus.Publish(new Message(ShaderAsset.MESSAGE_FINISH_LOAD));
@@ -186,7 +177,7 @@ class WebGLSystem extends System {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.generateMipmap(gl.TEXTURE_2D);
         if (glTexture === null) {
-            throw ("Failed to create texture");
+            throw (`Failed to create texture for image asset '${asset.name}'`);
         }
         this.textures.set(asset.name, glTexture);
     }

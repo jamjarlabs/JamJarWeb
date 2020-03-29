@@ -24,7 +24,7 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [PointerSystem](pointersystem.md)
 
-  ↳ [WebGLSystem](webglsystem.md)
+  ↳ [RenderSystem](rendersystem.md)
 
   ↳ [SpriteSystem](spritesystem.md)
 

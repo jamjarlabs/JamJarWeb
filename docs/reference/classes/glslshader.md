@@ -1,13 +1,17 @@
 
 # Class: GLSLShader
 
+A GLSLShader is a shader used with WebGL, holds GLSL source code, shader
+type and hooks for injecting shader variables such as uniforms, attributes
+etc.
+
 ## Hierarchy
 
 * **GLSLShader**
 
-  ↳ [DefaultVertexShader](defaultvertexshader.md)
-
   ↳ [DefaultFragmentShader](defaultfragmentshader.md)
+
+  ↳ [DefaultVertexShader](defaultvertexshader.md)
 
 ## Implements
 
@@ -26,8 +30,6 @@
 * [perTexture](glslshader.md#optional-pertexture)
 * [source](glslshader.md#source)
 * [type](glslshader.md#type)
-* [FRAGMENT_TYPE](glslshader.md#static-fragment_type)
-* [VERTEX_TYPE](glslshader.md#static-vertex_type)
 
 ## Constructors
 
@@ -53,17 +55,33 @@ Name | Type |
 
 • **perRenderable**? : *undefined | function*
 
+Hook for injecting variables for the GLSL shader at the
+per renderable stage of the rendering process, runs once
+per renderable used, should inject variables for renderable
+specific variables.
+
 ___
 
 ### `Optional` perShader
 
 • **perShader**? : *undefined | function*
 
+Hook for injecting variables for the GLSL shader at the
+per shader stage of the rendering process, runs once
+per program (grouping of shaders) used, should inject
+variables for shader specific, but not texture or renderable
+specific variables.
+
 ___
 
 ### `Optional` perTexture
 
 • **perTexture**? : *undefined | function*
+
+Hook for injecting variables for the GLSL shader at the
+per texture stage of the rendering process, runs once
+per texture used, should inject variables for texture specific,
+but not renderable specific variables.
 
 ___
 
@@ -73,6 +91,8 @@ ___
 
 *Implementation of [IShader](../interfaces/ishader.md).[source](../interfaces/ishader.md#source)*
 
+GLSL source code.
+
 ___
 
 ###  type
@@ -81,14 +101,4 @@ ___
 
 *Implementation of [IShader](../interfaces/ishader.md).[type](../interfaces/ishader.md#type)*
 
-___
-
-### `Static` FRAGMENT_TYPE
-
-▪ **FRAGMENT_TYPE**: *"fragment"* = "fragment"
-
-___
-
-### `Static` VERTEX_TYPE
-
-▪ **VERTEX_TYPE**: *"vertex"* = "vertex"
+Shader type, vertex or fragment.

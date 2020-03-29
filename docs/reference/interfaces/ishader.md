@@ -14,6 +14,7 @@ render technology, e.g. GLSL, HLSL etc.
 * [DefaultFragmentShader](../classes/defaultfragmentshader.md)
 * [DefaultVertexShader](../classes/defaultvertexshader.md)
 * [GLSLShader](../classes/glslshader.md)
+* [TestShader](../classes/testshader.md)
 
 ## Index
 

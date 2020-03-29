@@ -17,12 +17,24 @@ limitations under the License.
 import Texture from "./texture";
 import ShaderAsset from "./shader_asset";
 
+/**
+ * Material represents the combination of a texture and a list of shaders to apply
+ * to a render object, for example to be used as part of a sprite.
+ */
 class Material {
+    /**
+     * List of shaders to apply.
+     */
     public shaders: string[];
+    /**
+     * The texture to apply
+     */
     public texture: Texture;
 
-    constructor(texture: Texture,
-        shaders: string[] = [ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME]) {
+    constructor(texture: Texture, shaders: string[] = [
+        ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, 
+        ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME
+    ]) {
         this.shaders = shaders;
         this.texture = texture;
     }

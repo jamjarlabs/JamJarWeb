@@ -16,14 +16,49 @@ limitations under the License.
 
 import IShader from "./ishader";
 
+/**
+ * ShaderAsset is used to load in new shaders, takes a generic shader
+ * and a shader name.
+ * Render Systems listen out for shader loading requests and will
+ * load the requested shaders if valid.
+ */
 class ShaderAsset {
+    /**
+     * Message to request loading a shader.
+     */
     public static readonly MESSAGE_REQUEST_LOAD = "request_shader_load";
+    /**
+     * Message for finishing loading a shader.
+     */
     public static readonly MESSAGE_FINISH_LOAD = "finish_shader_load";
 
+    /**
+     * Default vertex shader name, render systems will generally load this
+     * by default, and it will therefore be always available.
+     */
     public static readonly DEFAULT_VERTEX_SHADER_NAME = "default_vertex";
+    /**
+     * Default fragment shader name, render systems will generally load this
+     * by default, and it will therefore be always available.
+     */
     public static readonly DEFAULT_FRAGMENT_SHADER_NAME = "default_fragment";
 
+    /**
+     * Vertex shader type.
+     */
+    public static readonly VERTEX_TYPE = "vertex";
+    /**
+     * Fragment shader type.
+     */
+    public static readonly FRAGMENT_TYPE = "fragment";
+
+    /**
+     * Name of the shader.
+     */
     public name: string;
+    /**
+     * Generic shader.
+     */
     public shader: IShader;
     
     constructor(name: string, shader: IShader) {

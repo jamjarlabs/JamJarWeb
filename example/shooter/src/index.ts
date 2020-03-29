@@ -407,7 +407,7 @@ class MainScene extends Scene {
         this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "bullet_frag_shader",
             new GLSLShader(
-                GLSLShader.FRAGMENT_TYPE,
+                ShaderAsset.FRAGMENT_TYPE,
                 `#version 300 es
                 precision mediump float;
                 

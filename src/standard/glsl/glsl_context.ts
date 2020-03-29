@@ -17,10 +17,26 @@ limitations under the License.
 import Camera from "../camera/camera";
 import Transform from "../transform/transform";
 
+/**
+ * GLSLContext contains all common information for a GLSLShader to use when supplying
+ * variables to the GPU, such as uniforms, and attributes.
+ */
 class GLSLContext {
+    /**
+     * WebGL rendering context.
+     */
     public gl: WebGL2RenderingContext;
+    /**
+     * WebGL program being used that this shader is part of.
+     */
     public program: WebGLProgram;
+    /**
+     * The camera component of the camera entity being rendered to.
+     */
     public camera: Camera;
+    /**
+     * The transform component of the camera entity being rendered to.
+     */
     public transform: Transform;
 
     constructor(gl: WebGL2RenderingContext, program: WebGLProgram, camera: Camera, transform: Transform) {
