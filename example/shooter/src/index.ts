@@ -52,7 +52,7 @@ import UI from "jamjar/lib/standard/ui/ui";
 import Material from "jamjar/lib/rendering/material";
 import ImageAsset from "jamjar/lib/rendering/image_asset";
 import ShaderAsset from "jamjar/lib/rendering/shader_asset";
-import GLSLShader from "../../../lib/standard/glsl/glsl_shader";
+import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
 
 class Player extends Component {
     public static readonly KEY = "player";
