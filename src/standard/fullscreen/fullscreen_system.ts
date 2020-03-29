@@ -58,7 +58,7 @@ class FullscreenSystem extends System {
      * @param event The fullscreenchange event
      */
     protected onFullscreenChange(event: Event): void {
-        if (this.document.fullscreenElement == null) {
+        if (this.document.fullscreenElement === null) {
             this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN));
         } else {
             this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_ENTER_FULLSCREEN));

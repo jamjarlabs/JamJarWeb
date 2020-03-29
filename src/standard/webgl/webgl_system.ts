@@ -44,7 +44,7 @@ class WebGLSystem extends RenderSystem {
 
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Camera.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         ));
     };
 
@@ -95,7 +95,7 @@ class WebGLSystem extends RenderSystem {
         switch (message.type) {
             case Game.MESSAGE_RENDER: {
                 const renderMessage = message as Message<number>;
-                if (renderMessage.payload == undefined) {
+                if (renderMessage.payload === undefined) {
                     return;
                 }
                 this.render(renderMessage.payload);

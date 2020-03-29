@@ -40,7 +40,7 @@ class CollisionSystem extends System {
     // Only entities with a transform and camera
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Collider.KEY].every((type) => components.some(
-            component => component.key == type
+            component => component.key === type
         ));
     };
 
@@ -70,9 +70,9 @@ class CollisionSystem extends System {
         const possibleCollisions: [SystemEntity, SystemEntity][] = [];
         for (const a of this.entities.values()) {
             for (const b of this.entities.values()) {
-                if (a.entity.id != b.entity.id) {
+                if (a.entity.id !== b.entity.id) {
                     if (!possibleCollisions.some((collision) => {
-                        return collision[0].entity.id == b.entity.id && collision[1].entity.id == a.entity.id;
+                        return collision[0].entity.id === b.entity.id && collision[1].entity.id === a.entity.id;
                     })) {
                         possibleCollisions.push([a,b]);
                     }

@@ -119,7 +119,7 @@ class Matrix4D {
      * @param {number} far Far bound
      */
     public Ortho(left: number, right: number, bottom: number, top: number, near: number, far: number): void {
-        if (left == right || bottom == top || near == far) {
+        if (left === right || bottom === top || near === far) {
             throw("Invalid parameters for Orthograhic projection, will result in division by zero.");
         }
 

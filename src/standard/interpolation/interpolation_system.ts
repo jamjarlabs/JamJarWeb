@@ -35,7 +35,7 @@ class InterpolationSystem extends System {
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return components.some(
-            component => component.key == Transform.KEY
+            component => component.key === Transform.KEY
         );
     };
 

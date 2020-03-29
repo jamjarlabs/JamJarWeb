@@ -119,7 +119,7 @@ abstract class System extends Subscriber {
                 if (!this.scene) {
                     return;
                 }
-                if (sceneDestroyMessage.payload.id == this.scene.id) {
+                if (sceneDestroyMessage.payload.id === this.scene.id) {
                     this.Destroy();
                 }
                 break;
