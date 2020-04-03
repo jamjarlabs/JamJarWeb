@@ -27,6 +27,7 @@
 * [TestRenderSystem](../classes/testrendersystem.md)
 * [TestScene](../classes/testscene.md)
 * [TestSystem](../classes/testsystem.md)
+* [TextSystem](../classes/textsystem.md)
 * [UISystem](../classes/uisystem.md)
 * [WebGLSystem](../classes/webglsystem.md)
 

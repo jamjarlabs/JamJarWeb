@@ -48,7 +48,7 @@ Contains the message constant for loading renderables.
 
 ###  constructor
 
-\+ **new RenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: [Renderable](renderable.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[RenderSystem](rendersystem.md)*
+\+ **new RenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[RenderSystem](rendersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -59,7 +59,7 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `evaluator?` | [Evaluator](../README.md#evaluator) | - |
-`renderables` | [Renderable](renderable.md)[] | [] |
+`renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
@@ -94,7 +94,7 @@ ___
 
 ### `Protected` renderables
 
-• **renderables**: *[Renderable](renderable.md)[]*
+• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
 
 A list of things to be rendered.
 

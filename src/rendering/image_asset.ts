@@ -40,7 +40,7 @@ class ImageAsset {
     /**
      * The actual image.
      */
-    public image: HTMLImageElement;
+    public image: HTMLImageElement | ImageData;
     /**
      * A boolean indicating the success of loading the image, true = successful
      * load, false = failed loading.
@@ -52,7 +52,7 @@ class ImageAsset {
      */
     public error?: Error;
 
-    constructor(name: string, image: HTMLImageElement, success: boolean, error?: Error) {
+    constructor(name: string, image: HTMLImageElement | ImageData, success: boolean, error?: Error) {
         this.name = name;
         this.image = image;
         this.success = success;

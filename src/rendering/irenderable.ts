@@ -16,53 +16,38 @@ limitations under the License.
 
 import IEntity from "../entity/ientity";
 import Material from "./material";
-import IRenderable from "./irenderable";
 
 /**
  * Renderable represents something that can be rendered.
  * Contains information for rendering.
  */
-class Renderable<T> implements IRenderable {
+interface IRenderable {
     /**
      * The Z-Order of the object, the order at which the object will appear
      * infront or behind other objects. A higher Z-Order means in front, a
      * lower Z-Order means behind.
      */
-    public zOrder: number;
+    zOrder: number;
     /**
      * The vertices of the object to render,
      * represented as Float32Array for performance.
      */
-    public verticies: Float32Array;
+    verticies: Float32Array;
     /**
      * The model matrix (position, scale, rotation) of the object to render,
      * represented as Float32Array for performance.
      */
-    public modelMatrix: Float32Array;
+    modelMatrix: Float32Array;
     /**
      * The material of the object to render, containing render information
      * about texture and shaders.
      */
-    public material: Material;
-
-    /**
-     * An optional payload of additional data.
-     */
-    public payload?: T;
+    material: Material;
     /**
      * Any camera to associate with the renderable, will only render on
      * the camera supplied.
      */
-    public camera?: IEntity;
-
-    constructor(zOrder: number, verticies: Float32Array, modelMatrix: Float32Array, material: Material, payload?: T, camera?: IEntity) {
-        this.zOrder = zOrder;
-        this.verticies = verticies;
-        this.modelMatrix = modelMatrix;
-        this.material = material;
-        this.payload = payload;
-        this.camera = camera;
-    }
+    camera?: IEntity;
 }
 
-export default Renderable;
+export default IRenderable;

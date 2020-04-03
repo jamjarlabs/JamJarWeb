@@ -1,14 +1,11 @@
 
-# Class: TestRenderSystem
-
-TextRenderSystem is the implementation of the abstract RenderSystem, used
-only for testing
+# Class: TextSystem
 
 ## Hierarchy
 
-  ↳ [RenderSystem](rendersystem.md)
+  ↳ [System](system.md)
 
-  ↳ **TestRenderSystem**
+  ↳ **TextSystem**
 
 ## Implements
 
@@ -18,34 +15,36 @@ only for testing
 
 ### Constructors
 
-* [constructor](testrendersystem.md#constructor)
+* [constructor](textsystem.md#constructor)
 
 ### Properties
 
-* [entities](testrendersystem.md#protected-entities)
-* [messageBus](testrendersystem.md#protected-messagebus)
-* [renderables](testrendersystem.md#protected-renderables)
-* [scene](testrendersystem.md#protected-optional-scene)
-* [subscriberID](testrendersystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](testrendersystem.md#static-message_deregister)
-* [MESSAGE_LOAD_RENDERABLES](testrendersystem.md#static-message_load_renderables)
-* [MESSAGE_REGISTER](testrendersystem.md#static-message_register)
-* [MESSAGE_UPDATE](testrendersystem.md#static-message_update)
+* [entities](textsystem.md#protected-entities)
+* [mappings](textsystem.md#private-mappings)
+* [messageBus](textsystem.md#protected-messagebus)
+* [scene](textsystem.md#protected-optional-scene)
+* [subscriberID](textsystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](textsystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](textsystem.md#static-message_register)
+* [MESSAGE_REQUEST_CLEAR](textsystem.md#static-message_request_clear)
+* [MESSAGE_REQUEST_FLUSH](textsystem.md#static-message_request_flush)
+* [MESSAGE_UPDATE](textsystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](testrendersystem.md#destroy)
-* [OnDestroy](testrendersystem.md#protected-ondestroy)
-* [OnMessage](testrendersystem.md#onmessage)
-* [Update](testrendersystem.md#protected-update)
+* [Destroy](textsystem.md#destroy)
+* [OnDestroy](textsystem.md#protected-ondestroy)
+* [OnMessage](textsystem.md#onmessage)
+* [Update](textsystem.md#protected-update)
+* [loadFont](textsystem.md#private-loadfont)
+* [prepareText](textsystem.md#private-preparetext)
+* [EVALUATOR](textsystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new TestRenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[TestRenderSystem](testrendersystem.md)*
-
-*Inherited from [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
+\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -55,12 +54,11 @@ Name | Type | Default |
 ------ | ------ | ------ |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
-`evaluator?` | [Evaluator](../README.md#evaluator) | - |
-`renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`mappings` | Map‹string, [FontMapping](fontmapping.md)› | new Map() |
 `subscriberID?` | undefined &#124; number | - |
 
-**Returns:** *[TestRenderSystem](testrendersystem.md)*
+**Returns:** *[TextSystem](textsystem.md)*
 
 ## Properties
 
@@ -78,6 +76,12 @@ etc.
 
 ___
 
+### `Private` mappings
+
+• **mappings**: *Map‹string, [FontMapping](fontmapping.md)›*
+
+___
+
 ### `Protected` messageBus
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
@@ -86,16 +90,6 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
-
-___
-
-### `Protected` renderables
-
-• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
-
-*Inherited from [RenderSystem](rendersystem.md).[renderables](rendersystem.md#protected-renderables)*
-
-A list of things to be rendered.
 
 ___
 
@@ -129,21 +123,23 @@ ___
 
 ___
 
-### `Static` MESSAGE_LOAD_RENDERABLES
-
-▪ **MESSAGE_LOAD_RENDERABLES**: *"load_renderables"* = "load_renderables"
-
-*Inherited from [RenderSystem](rendersystem.md).[MESSAGE_LOAD_RENDERABLES](rendersystem.md#static-message_load_renderables)*
-
-Message used to add new renderables into the render system's render list.
-
-___
-
 ### `Static` MESSAGE_REGISTER
 
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
 
 *Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+
+___
+
+### `Static` MESSAGE_REQUEST_CLEAR
+
+▪ **MESSAGE_REQUEST_CLEAR**: *"request_font_clear"* = "request_font_clear"
+
+___
+
+### `Static` MESSAGE_REQUEST_FLUSH
+
+▪ **MESSAGE_REQUEST_FLUSH**: *"request_font_flush"* = "request_font_flush"
 
 ___
 
@@ -188,8 +184,6 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Inherited from [RenderSystem](rendersystem.md).[OnMessage](rendersystem.md#onmessage)*
-
 *Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
@@ -217,3 +211,46 @@ Name | Type | Description |
 `dt` | number | DeltaTime  |
 
 **Returns:** *void*
+
+___
+
+### `Private` loadFont
+
+▸ **loadFont**(`asset`: [FontAsset](fontasset.md)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`asset` | [FontAsset](fontasset.md) |
+
+**Returns:** *void*
+
+___
+
+### `Private` prepareText
+
+▸ **prepareText**(`alpha`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`alpha` | number |
+
+**Returns:** *void*
+
+___
+
+### `Static` `Private` EVALUATOR
+
+▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *boolean*

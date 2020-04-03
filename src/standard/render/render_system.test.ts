@@ -21,6 +21,7 @@ import Message from "../../message/message";
 import Renderable from "../../rendering/renderable";
 import Material from "../../rendering/material";
 import Texture from "../../rendering/texture";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * TextRenderSystem is the implementation of the abstract RenderSystem, used
@@ -102,7 +103,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<Renderable[]>(
+            new Message<IRenderable[]>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
                 [
                     new Renderable(0, new Float32Array(), new Float32Array(), new Material(new Texture("test4"))),
@@ -133,7 +134,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<Renderable[]>(
+            new Message<IRenderable[]>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
                 [
                     new Renderable(0, new Float32Array(), new Float32Array(), new Material(new Texture("test1"))),
@@ -163,7 +164,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<Renderable[]>(
+            new Message<IRenderable[]>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
                 [
                     new Renderable(0, new Float32Array(), new Float32Array(), new Material(new Texture("test1"))),

@@ -44,6 +44,13 @@ class ShaderAsset {
     public static readonly DEFAULT_FRAGMENT_SHADER_NAME = "default_fragment";
 
     /**
+     * Default text fragment shader name, render systems will generally load this
+     * by default, and it will therefore be always available. Default fragment shader
+     * for text.
+     */
+    public static readonly DEFAULT_TEXT_FRAGMENT_SHADER_NAME = "default_text_fragment";
+
+    /**
      * Vertex shader type.
      */
     public static readonly VERTEX_TYPE = "vertex";

@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Renderable from "../../rendering/renderable";
 import IShader from "../../rendering/ishader";
 import GLSLContext from "./glsl_context";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * A GLSLShader is a shader used with WebGL, holds GLSL source code, shader
@@ -53,13 +53,13 @@ class GLSLShader implements IShader {
      * per renderable used, should inject variables for renderable
      * specific variables.
      */
-    public perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: Renderable) => void;
+    public perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable) => void;
     
     constructor(type: string, 
         source: string, 
         perShader?: (context: GLSLContext) => void, 
         perTexture?: (context: GLSLContext, texture: WebGLTexture) => void, 
-        perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: Renderable) => void) {
+        perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable) => void) {
         this.type = type;
         this.source = source;
         this.perShader = perShader;

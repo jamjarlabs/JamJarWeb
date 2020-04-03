@@ -26,5 +26,8 @@
     "typedoc": "^0.16.9",
     "typedoc-plugin-markdown": "^2.2.16",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "tiny-sdf": "^1.0.2"
   }
 }

@@ -16,12 +16,12 @@ limitations under the License.
 
 import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
-import Renderable from "../../rendering/renderable";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
 import Evaluator from "../../system/evaluator";
 import IMessage from "../../message/imessage";
 import Message from "../../message/message";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * RenderSystem is an abstract class representing a generic rendering system,
@@ -37,12 +37,12 @@ abstract class RenderSystem extends System {
     /**
      * A list of things to be rendered.
      */
-    protected renderables: Renderable[];
+    protected renderables: IRenderable[];
 
     constructor(messageBus: IMessageBus,
         scene?: IScene,
         evaluator?: Evaluator,
-        renderables: Renderable[] = [],
+        renderables: IRenderable[] = [],
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, evaluator, entities, subscriberID);
@@ -53,7 +53,7 @@ abstract class RenderSystem extends System {
         super.OnMessage(message);
         switch (message.type) {
             case RenderSystem.MESSAGE_LOAD_RENDERABLES: {
-                const renderMessage = message as Message<Renderable[]>;
+                const renderMessage = message as Message<IRenderable[]>;
                 if (renderMessage.payload === undefined) {
                     return;
                 }

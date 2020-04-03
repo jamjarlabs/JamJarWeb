@@ -17,9 +17,14 @@ limitations under the License.
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import Matrix4D from "../../geometry/matrix_4d";
-import Renderable from "../../rendering/renderable";
 import ShaderAsset from "../../rendering/shader_asset";
+import IRenderable from "../../rendering/irenderable";
 
+/**
+ * DefaultVertexShader is the shader loaded for handling the
+ * "default_vertex" shader choice, used as the default shader
+ * and expected to be loaded.
+ */
 class DefaultVertexShader extends GLSLShader {
     private static readonly SOURCE = `#version 300 es
         in vec2 aVertexPosition;
@@ -65,7 +70,7 @@ class DefaultVertexShader extends GLSLShader {
             projectionMatrix.GetFloat32Array());
     };
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, texture: WebGLTexture, renderable: Renderable): void => {
+    private static readonly PER_RENDERABLE = (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable): void => {
         const gl = context.gl;
         const program = context.program;
 

@@ -18,6 +18,11 @@ import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import ShaderAsset from "../../rendering/shader_asset";
 
+/**
+ * DefaultFragmentShader is the shader loaded for handling the
+ * "default_fragment" shader choice, used as the default shader
+ * and expected to be loaded.
+ */
 class DefaultFragmentShader extends GLSLShader {
     private static readonly SOURCE = `#version 300 es
         precision mediump float;

@@ -23,17 +23,17 @@ import IMessageBus from "../../message/imessage_bus";
 import Game from "../../game";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
-import Renderable from "../../rendering/renderable";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
 import ImageAsset from "../../rendering/image_asset";
 import ShaderAsset from "../../rendering/shader_asset";
-import Shader from "../glsl/glsl_shader";
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import DefaultVertexShader from "./default_vertex_shader";
 import DefaultFragmentShader from "./default_fragment_shader";
 import RenderSystem from "../render/render_system";
+import DefaultTextFragmentShader from "./default_text_fragment_shader";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
@@ -56,12 +56,13 @@ class WebGLSystem extends RenderSystem {
     constructor(messageBus: IMessageBus,
         gl: WebGL2RenderingContext,
         scene?: IScene,
-        renderables: Renderable[] = [],
+        renderables: IRenderable[] = [],
         defaultShaderAssets: ShaderAsset[] = [
             new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()) 
+            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader())
         ],
-        shaders: Map<string, [WebGLShader, Shader]> = new Map(),
+        shaders: Map<string, [WebGLShader, GLSLShader]> = new Map(),
         textures: Map<string, WebGLTexture> = new Map(),
         programs: Map<string, WebGLProgram> = new Map(),
         entities?: Map<number, SystemEntity>,
@@ -167,15 +168,24 @@ class WebGLSystem extends RenderSystem {
         const internalFormat = gl.RGBA;
         const srcFormat = gl.RGBA;
         const srcType = gl.UNSIGNED_BYTE;
+        const border = 0;
         const glTexture = gl.createTexture();
 
         gl.bindTexture(gl.TEXTURE_2D, glTexture);
-        gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-        gl.generateMipmap(gl.TEXTURE_2D);
+        if (asset.image instanceof(HTMLImageElement)) {
+            gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.generateMipmap(gl.TEXTURE_2D);
+        } else {
+            gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, asset.image.width, asset.image.height, border, srcFormat, srcType, asset.image);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        }
         if (glTexture === null) {
             throw (`Failed to create texture for image asset '${asset.name}'`);
         }
@@ -247,7 +257,7 @@ class WebGLSystem extends RenderSystem {
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
             // Group by z order
-            const zOrderGroups: Renderable[][] = [];
+            const zOrderGroups: IRenderable[][] = [];
             for (const renderable of this.renderables) {
                 if (zOrderGroups[renderable.zOrder] === undefined) {
                     zOrderGroups[renderable.zOrder] = [renderable];
@@ -257,7 +267,7 @@ class WebGLSystem extends RenderSystem {
             }
             for (const zOrderGroup of zOrderGroups) {
                 // Group by program
-                const programGroups: Map<string, Renderable[]> = new Map();
+                const programGroups: Map<string, IRenderable[]> = new Map();
                 for (const renderable of zOrderGroup) {
                     let key = "";
                     for (const shaderName of renderable.material.shaders) {
@@ -326,7 +336,7 @@ class WebGLSystem extends RenderSystem {
                     }
 
                     // Group by texture
-                    const textureGroups: Map<string, Renderable[]> = new Map();
+                    const textureGroups: Map<string, IRenderable[]> = new Map();
                     for (const renderable of programGroup) {
                         const textureName = `texture_${renderable.material.texture.image}`;
                         const textureRenderables = textureGroups.get(textureName);

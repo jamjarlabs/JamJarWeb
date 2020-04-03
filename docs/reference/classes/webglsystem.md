@@ -52,7 +52,7 @@ renders them onto a canvas.
 
 ###  constructor
 
-\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [Renderable](renderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, Shader]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
+\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
 
 *Overrides [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
 
@@ -63,12 +63,13 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `gl` | WebGL2RenderingContext | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
-`renderables` | [Renderable](renderable.md)[] | [] |
+`renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
 `defaultShaderAssets` | [ShaderAsset](shaderasset.md)[] | [
             new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()) 
+            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader())
         ] |
-`shaders` | Map‹string, [WebGLShader, Shader]› | new Map() |
+`shaders` | Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]› | new Map() |
 `textures` | Map‹string, WebGLTexture› | new Map() |
 `programs` | Map‹string, WebGLProgram› | new Map() |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
@@ -117,7 +118,7 @@ ___
 
 ### `Protected` renderables
 
-• **renderables**: *[Renderable](renderable.md)[]*
+• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
 
 *Inherited from [RenderSystem](rendersystem.md).[renderables](rendersystem.md#protected-renderables)*
 
