@@ -271,7 +271,9 @@ class TextSystem extends System {
                      * determines spacing between characters
                      */
                     charTransform = new Transform(
-                        transform.position.Add(new Vector((xAlign * transform.scale.x/2) + (xAlign * text.spacing * transform.scale.x/2), 0)),
+                        transform.position
+                            .Add(text.offset)
+                            .Add(new Vector((xAlign * transform.scale.x/2) + (xAlign * text.spacing * transform.scale.x/2), 0)),
                         transform.scale,
                         transform.angle
                     );
@@ -296,7 +298,8 @@ class TextSystem extends System {
                     // Convert the transform.position to be relative to the camera
                     const textPosition = cameraTransform.position
                         .Add(transform.position)
-                        .Multiply(camera.virtualScale.Scale(0.5));
+                        .Multiply(camera.virtualScale.Scale(0.5))
+                        .Add(text.offset.Multiply(camera.virtualScale.Scale(0.5)));
                     
                     // Convert the scale to be relative to the camera
                     const charScale = transform.scale.Multiply(camera.virtualScale);
