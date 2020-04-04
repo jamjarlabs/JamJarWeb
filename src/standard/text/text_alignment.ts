@@ -24,7 +24,7 @@ enum TextAlignment {
      */
     Left = 0,
     /**
-     * Center Algin text, center of text is set to the transform
+     * Center Align text, center of text is set to the transform
      * position.
      */
     Center = 1,

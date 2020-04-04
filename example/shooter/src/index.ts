@@ -531,6 +531,7 @@ class MainScene extends Scene {
         scoreCounter.Add(new Text(2, "Score:0", "test", TextAlignment.Center, 0.3, new Color(0,1,0)));
         scoreCounter.Add(new ScoreCounter());
         scoreCounter.Add(new UI(camera));
+        this.AddEntity(scoreCounter);
 
     }
 }

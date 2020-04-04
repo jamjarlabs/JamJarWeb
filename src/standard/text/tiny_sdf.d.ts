@@ -25,7 +25,7 @@ declare module "tiny-sdf" {
     /**
      * TinySDF is a library for generating SDF image data from a font and characters.
      */
-    export class TinySDF implements ISDFGenerator {
+    export default class TinySDF implements ISDFGenerator {
         constructor(fontSize?: number, buffer?: number, radius?: number, cutoff?: number, fontFamily?: string, fontWeight?: string)
         draw(char: string): ImageData
     }

@@ -26,7 +26,7 @@ import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import Text from "./text";
 import FontAsset from "../../rendering/font_asset";
-import { ISDFGenerator, SDFGeneratorFactory, TinySDF } from "tiny-sdf";
+import { ISDFGenerator, SDFGeneratorFactory } from "tiny-sdf";
 import ImageAsset from "../../rendering/image_asset";
 import Renderable from "../../rendering/renderable";
 import RenderSystem from "../render/render_system";
@@ -39,6 +39,7 @@ import TextAlignment from "./text_alignment";
 import TextRender from "./text_render";
 import Camera from "../camera/camera";
 import UI from "../ui/ui";
+import TinySDF from "tiny-sdf";
 
 /**
  * TextSystem is a pre-rendering system, taking in text components and
@@ -306,7 +307,7 @@ class TextSystem extends System {
                      * determines spacing between characters
                      */
                     charTransform = new Transform(
-                        textPosition.Add(new Vector((xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x/2), 1)),
+                        textPosition.Add(new Vector((xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x/2), 0)),
                         charScale,
                         transform.angle
                     );

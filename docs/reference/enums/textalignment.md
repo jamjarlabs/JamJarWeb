@@ -17,7 +17,7 @@ TextAlignment is the alignment options for text.
 
 • **Center**: = 1
 
-Center Algin text, center of text is set to the transform
+Center Align text, center of text is set to the transform
 position.
 
 ___
