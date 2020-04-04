@@ -56,7 +56,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -66,7 +66,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -81,15 +81,15 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -99,15 +99,15 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -122,7 +122,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                 ]),
                 0
@@ -130,7 +130,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
@@ -141,19 +141,19 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                 ]),
                 0
@@ -163,22 +163,22 @@ describe("SpriteSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
             ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [
                 new Transform(),
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
@@ -187,7 +187,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [

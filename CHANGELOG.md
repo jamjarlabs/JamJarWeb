@@ -7,6 +7,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### Added
+- `RectangleByPoints` function in `Polygon`, creates a new `Polygon` rectangle
+  between the two provided points.
 - Frustum culling, only rendering what is on screen to improve performance.
 - Text rendering with the `TextSystem`, `FontAsset` and `Text` Component.
   - Supports any font loaded through the browser.
@@ -21,6 +23,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   entities, allowing custom shaders.
 - Can now load custom shaders using a `ShaderAsset`.
 ### Changed
+- `Rectangle` function in `Polygon` renamed `RectangleByDimensions`.
+- `RectangleByDimensions` takes an optional origin point, default `0,0`.
 - All sprites require a `Texture` now, no longer optional.
 - `ImageSystem` renamed to `HTTPImageSystem`.
 - Group by texture for WebGL rendering to reduce texture switching and improve

@@ -112,49 +112,49 @@ describe("Polygon - PointInside", () => {
         [
             "Rectangle around origin, point above",
             false,
-            Polygon.Rectangle(2,2),
+            Polygon.RectangleByDimensions(2,2),
             new Vector(0,3)
         ],
         [
             "Rectangle around origin, point below",
             false,
-            Polygon.Rectangle(2,2),
+            Polygon.RectangleByDimensions(2,2),
             new Vector(0,-3)
         ],
         [
             "Rectangle around origin, point left",
             false,
-            Polygon.Rectangle(2,2),
+            Polygon.RectangleByDimensions(2,2),
             new Vector(-3,0)
         ],
         [
             "Rectangle around origin, point right",
             false,
-            Polygon.Rectangle(2,2),
+            Polygon.RectangleByDimensions(2,2),
             new Vector(3,0)
         ],
         [
             "Rectangle around origin, point within",
             true,
-            Polygon.Rectangle(2,2),
+            Polygon.RectangleByDimensions(2,2),
             new Vector(0,0)
         ],
         [
             "Rectangle around origin, point outside",
             false,
-            Polygon.Rectangle(2,2),
+            Polygon.RectangleByDimensions(2,2),
             new Vector(5,3)
         ],
         [
             "Rectangle around arbitrary point, point within",
             true,
-            Polygon.Rectangle(2,2).Transform(new Transform(new Vector(5,3))),
+            Polygon.RectangleByDimensions(2,2).Transform(new Transform(new Vector(5,3))),
             new Vector(5,4)
         ],
         [
             "Rectangle around arbitrary point, point outside",
             false,
-            Polygon.Rectangle(2,2).Transform(new Transform(new Vector(5,3))),
+            Polygon.RectangleByDimensions(2,2).Transform(new Transform(new Vector(5,3))),
             new Vector(2,1)
         ],
     ])("%p", (description: string, expected: boolean, polygon: Polygon, point: Vector) => {
@@ -206,16 +206,16 @@ describe("Polygon - GetFloat32Array", () => {
     });
 });
 
-describe("Polygon - Rectangle", () => {
+describe("Polygon - RectangleByDimensions", () => {
     type TestTuple = [string, Polygon, number, number];
     test.each<TestTuple>([
         [
             "0*0 rectangle",
             new Polygon([
-                new Vector(-0,0),
                 new Vector(0,0),
-                new Vector(0,-0),
-                new Vector(-0,-0),
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
             ]),
             0,
             0
@@ -243,6 +243,58 @@ describe("Polygon - Rectangle", () => {
             2
         ],
     ])("%p", (description: string, expected: Polygon, width: number, height: number) => {
-        expect(Polygon.Rectangle(width, height)).toEqual(expected);
+        expect(Polygon.RectangleByDimensions(width, height)).toEqual(expected);
+    });
+});
+
+describe("Polygon - RectangleByPoints", () => {
+    type TestTuple = [string, Polygon, Vector, Vector];
+    test.each<TestTuple>([
+        [
+            "0,0 to 1,1 rectangle",
+            new Polygon([
+                new Vector(0,0),
+                new Vector(1,0),
+                new Vector(1,1),
+                new Vector(0,1),
+            ]),
+            new Vector(0,0),
+            new Vector(1,1)
+        ],
+        [
+            "0,0 to 5,5 rectangle",
+            new Polygon([
+                new Vector(0,0),
+                new Vector(5,0),
+                new Vector(5,5),
+                new Vector(0,5),
+            ]),
+            new Vector(0,0),
+            new Vector(5,5)
+        ],
+        [
+            "2,3 to 10,9 rectangle",
+            new Polygon([
+                new Vector(2,3),
+                new Vector(10,3),
+                new Vector(10,9),
+                new Vector(2,9),
+            ]),
+            new Vector(2,3),
+            new Vector(10,9)
+        ],
+        [
+            "0,0 to 0,0 rectangle",
+            new Polygon([
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+            ]),
+            new Vector(0,0),
+            new Vector(0,0)
+        ],
+    ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector) => {
+        expect(Polygon.RectangleByPoints(bottomLeft, topRight)).toEqual(expected);
     });
 });

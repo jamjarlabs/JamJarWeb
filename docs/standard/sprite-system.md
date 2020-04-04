@@ -30,8 +30,8 @@ the [`Sprite`](../../reference/classes/sprite) component to an entity.
 const spriteEntity = new Entity(messageBus);
 spriteEntity.Add(new Transform(new Vector(0, 0), new Vector(5,5)));
 spriteEntity.Add(new Sprite(new Color(1, 1, 1, 1), {
-    bounds: Polygon.Rectangle(1, 1),
-    texture: new Texture("example_texture", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
+    bounds: Polygon.RectangleByDimensions(1, 1),
+    texture: new Texture("example_texture", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1)).GetFloat32Array())
 }));
 ```
 This example shows creating an [`Entity`](../../reference/classes/entity) which

@@ -78,7 +78,7 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(0)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                 ]),
                 0
@@ -87,7 +87,7 @@ describe("UISystem - OnMessage", () => {
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new UI(new FakeEntity(0)),
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
@@ -99,12 +99,12 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -113,7 +113,7 @@ describe("UISystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                 ]),
                 0
@@ -124,12 +124,12 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -141,7 +141,7 @@ describe("UISystem - OnMessage", () => {
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [
                 new Transform(),
                 new UI(new FakeEntity(2)),
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
@@ -150,7 +150,7 @@ describe("UISystem - OnMessage", () => {
             new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2)),
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2)),
                 new UI(new FakeEntity(1))
             ]])
         ],
@@ -171,7 +171,7 @@ describe("UISystem - OnMessage", () => {
             new UISystem(new FakeMessageBus(), undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
-                new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2)),
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2)),
             ]])
         ],
         [
@@ -183,12 +183,12 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -197,7 +197,7 @@ describe("UISystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(4)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -208,12 +208,12 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -222,7 +222,7 @@ describe("UISystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(4)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -238,12 +238,12 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -252,7 +252,7 @@ describe("UISystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
                         new UI(new FakeEntity(1)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -263,12 +263,12 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -277,7 +277,7 @@ describe("UISystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
                         new UI(new FakeEntity(1)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -293,7 +293,7 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -308,7 +308,7 @@ describe("UISystem - OnMessage", () => {
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Sprite(new Material(new Texture("test")), 0, Polygon.Rectangle(2, 2))
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),

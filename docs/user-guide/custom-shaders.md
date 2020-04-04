@@ -143,9 +143,9 @@ class ShaderGame extends Game {
         // vertex shader
         example.Add(new Sprite(
             new Material(
-                new Texture("example", Polygon.Rectangle(1,1).GetFloat32Array()),
+                new Texture("example", Polygon.RectangleByDimensions(1,1).GetFloat32Array()),
                 [ "example-shader", ShaderAsset.DEFAULT_VERTEX_SHADER_NAME ]
-            ), 0, Polygon.Rectangle(1,1)
+            ), 0, Polygon.RectangleByDimensions(1,1)
         ));
     }
 }
