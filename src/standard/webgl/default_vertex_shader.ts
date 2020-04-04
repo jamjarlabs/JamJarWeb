@@ -85,7 +85,7 @@ class DefaultVertexShader extends GLSLShader {
 
         let texturePoints = renderable.material.texture.points;
         if (texturePoints === undefined) {
-            texturePoints = renderable.verticies;
+            texturePoints = renderable.vertices.GetFloat32Array();
         }
 
         // bind vao
@@ -97,7 +97,7 @@ class DefaultVertexShader extends GLSLShader {
         gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
         // send buffer data
-        gl.bufferData(gl.ARRAY_BUFFER, renderable.verticies, gl.DYNAMIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, renderable.vertices.GetFloat32Array(), gl.DYNAMIC_DRAW);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
 
@@ -110,7 +110,7 @@ class DefaultVertexShader extends GLSLShader {
         gl.uniformMatrix4fv(
             modelLocation,
             false,
-            renderable.modelMatrix
+            renderable.modelMatrix.GetFloat32Array()
         );
     };
 

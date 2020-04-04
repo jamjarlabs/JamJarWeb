@@ -17,6 +17,8 @@ limitations under the License.
 import IEntity from "../entity/ientity";
 import Material from "./material";
 import IRenderable from "./irenderable";
+import Matrix4D from "../geometry/matrix_4d";
+import Polygon from "../standard/shape/polygon";
 
 /**
  * Renderable represents something that can be rendered.
@@ -30,15 +32,13 @@ class Renderable<T> implements IRenderable {
      */
     public zOrder: number;
     /**
-     * The vertices of the object to render,
-     * represented as Float32Array for performance.
+     * The vertices of the object to render.
      */
-    public verticies: Float32Array;
+    public vertices: Polygon;
     /**
-     * The model matrix (position, scale, rotation) of the object to render,
-     * represented as Float32Array for performance.
+     * The model matrix (position, scale, rotation) of the object to render.
      */
-    public modelMatrix: Float32Array;
+    public modelMatrix: Matrix4D;
     /**
      * The material of the object to render, containing render information
      * about texture and shaders.
@@ -55,9 +55,9 @@ class Renderable<T> implements IRenderable {
      */
     public camera?: IEntity;
 
-    constructor(zOrder: number, verticies: Float32Array, modelMatrix: Float32Array, material: Material, payload?: T, camera?: IEntity) {
+    constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, payload?: T, camera?: IEntity) {
         this.zOrder = zOrder;
-        this.verticies = verticies;
+        this.vertices = vertices;
         this.modelMatrix = modelMatrix;
         this.material = material;
         this.payload = payload;

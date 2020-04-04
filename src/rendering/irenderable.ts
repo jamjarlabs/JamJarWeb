@@ -16,6 +16,8 @@ limitations under the License.
 
 import IEntity from "../entity/ientity";
 import Material from "./material";
+import Matrix4D from "../geometry/matrix_4d";
+import Polygon from "../standard/shape/polygon";
 
 /**
  * Renderable represents something that can be rendered.
@@ -29,15 +31,13 @@ interface IRenderable {
      */
     zOrder: number;
     /**
-     * The vertices of the object to render,
-     * represented as Float32Array for performance.
+     * The vertices of the object to render.
      */
-    verticies: Float32Array;
+    vertices: Polygon;
     /**
-     * The model matrix (position, scale, rotation) of the object to render,
-     * represented as Float32Array for performance.
+     * The model matrix (position, scale, rotation) of the object to render.
      */
-    modelMatrix: Float32Array;
+    modelMatrix: Matrix4D;
     /**
      * The material of the object to render, containing render information
      * about texture and shaders.

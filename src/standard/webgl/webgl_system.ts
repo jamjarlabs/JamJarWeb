@@ -217,6 +217,11 @@ class WebGLSystem extends RenderSystem {
                 (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
             );
 
+            const cameraViewLeft = transform.position.x - camera.virtualScale.x/2;
+            const cameraViewRight = transform.position.x + camera.virtualScale.x/2;
+            const cameraViewTop = transform.position.y + camera.virtualScale.y/2;
+            const cameraViewBottom = transform.position.y - camera.virtualScale.y/2;
+
             // Define the viewport position of the camera
             gl.viewport(
                 realPosition.x,
@@ -367,13 +372,29 @@ class WebGLSystem extends RenderSystem {
                                 continue;
                             }
 
+                            let inView = false;
+                            let i = 0;
+                            while(!inView && i < renderable.vertices.points.length) {
+                                const vertex = renderable.vertices.points[i].Apply4D(renderable.modelMatrix);
+                                if (vertex.x < cameraViewRight && vertex.x > cameraViewLeft && 
+                                    vertex.y < cameraViewTop && vertex.y > cameraViewBottom) {
+                                    inView = true;
+                                }
+                                i++;
+                            }
+                            // Frustum culling
+                            if (!inView) {
+                                // Not in camera view, skip rendering
+                                continue;
+                            }
+
                             for (const shader of shaders) {
                                 if (shader[1].perRenderable !== undefined) {
                                     shader[1].perRenderable(glslContext, texture, renderable);
                                 }
                             }
 
-                            gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.verticies.length / 2);
+                            gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.vertices.GetFloat32Array().length / 2);
                         }
                     }
                 }
