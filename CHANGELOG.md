@@ -6,6 +6,8 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- `Text` position correctly calculated for `UI` entities.
 
 ## [v0.6.0] - 2020-04-04
 ### Added
