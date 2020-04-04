@@ -23,7 +23,6 @@ JamJar provides the following:
 * Regular game loop.
 * Custom shader support.
 * Set of standard systems to use
-  * UI System - user interfaces (HUDs etc.).
   * WebGL System - rendering using WebGL onto a HTML5 canvas.
   * Collision System - collisions between colliders.
   * Fullscreen System - fullscreen events and pointer lock.
@@ -33,7 +32,8 @@ JamJar provides the following:
   * HTTP Image System - loading image assets over HTTP.
   * Sprite System - processing sprites and images before rendering.
   * Motion System - simple motion; velocity, acceleration, angular velocity etc.
-  * Text System - text rendering.
+  * UI - user interfaces (HUDs etc.).
+  * Text System - processing text before rendering, handling fonts.
 
 ## More information
 
