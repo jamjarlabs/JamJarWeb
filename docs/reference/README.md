@@ -26,6 +26,7 @@
 * [FakeComponent](classes/fakecomponent.md)
 * [FakeEntity](classes/fakeentity.md)
 * [FakeMessageBus](classes/fakemessagebus.md)
+* [FakeSDFGenerator](classes/fakesdfgenerator.md)
 * [FakeScene](classes/fakescene.md)
 * [FakeSubscriber](classes/fakesubscriber.md)
 * [FontAsset](classes/fontasset.md)

@@ -35,7 +35,7 @@ describe("SpriteSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, SpriteSystem, SpriteSystem, IMessage];
     test.each<TestTuple>([
         [
-            "Unknown mesage type",
+            "Unknown message type",
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus()),

@@ -32,6 +32,11 @@ global.window.WebGLTexture = function () {
 global.window.WebGLShader = function () {
     return {};
 };
+global.window.ImageData = function(width, height) {
+    const data = new Uint8ClampedArray(width * height);
+    data.fill(0);
+    return { width, height, data };
+};
 // Workaround for JSON marshalling maps, used in testing
 // From https://stackoverflow.com/a/43705077/6052295
 Map.prototype.toJSON = function () {
