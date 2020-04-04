@@ -6,6 +6,8 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v0.6.1] - 2020-04-04
 ### Fixed
 - `Text` position correctly calculated for `UI` entities.
 
@@ -103,7 +105,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - Basic physics for velocities/acceleration/rotation.
 
 [Unreleased]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.6.0...HEAD
+https://github.com/jamjarlabs/jamjar/compare/v0.6.1...HEAD
+[v0.6.1]: 
+https://github.com/jamjarlabs/jamjar/compare/v0.6.0...v0.6.1 
 [v0.6.0]: 
 https://github.com/jamjarlabs/jamjar/compare/v0.5.0...v0.6.0 
 [v0.5.0]: 
