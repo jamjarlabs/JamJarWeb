@@ -297,9 +297,9 @@ class TextSystem extends System {
 
                     // Convert the transform.position to be relative to the camera
                     const textPosition = cameraTransform.position
-                        .Add(transform.position)
-                        .Multiply(camera.virtualScale.Scale(0.5))
+                        .Add(transform.position.Multiply(camera.virtualScale.Scale(0.5)))
                         .Add(text.offset.Multiply(camera.virtualScale.Scale(0.5)));
+                    
                     
                     // Convert the scale to be relative to the camera
                     const charScale = transform.scale.Multiply(camera.virtualScale);
