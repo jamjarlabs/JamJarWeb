@@ -22,6 +22,7 @@ rendering it such as font, alignment, color and shaders.
 * [color](text.md#color)
 * [font](text.md#font)
 * [key](text.md#key)
+* [offset](text.md#offset)
 * [shaders](text.md#shaders)
 * [spacing](text.md#spacing)
 * [value](text.md#value)
@@ -35,7 +36,7 @@ rendering it such as font, alignment, color and shaders.
 
 ###  constructor
 
-\+ **new Text**(`zOrder`: number, `value`: string, `font`: string, `align`: [TextAlignment](../enums/textalignment.md), `spacing`: number, `color`: [Color](color.md), `shaders`: string[]): *[Text](text.md)*
+\+ **new Text**(`zOrder`: number, `value`: string, `font`: string, `align`: [TextAlignment](../enums/textalignment.md), `spacing`: number, `offset`: [Vector](vector.md), `color`: [Color](color.md), `shaders`: string[]): *[Text](text.md)*
 
 *Overrides [Component](component.md).[constructor](component.md#constructor)*
 
@@ -48,11 +49,12 @@ Name | Type | Default |
 `font` | string | - |
 `align` | [TextAlignment](../enums/textalignment.md) | TextAlignment.Left |
 `spacing` | number | Text.DEFAULT_SPACING |
-`color` | [Color](color.md) | new Color(0,0,0,1) |
+`offset` | [Vector](vector.md) | new Vector(0,0) |
+`color` | [Color](color.md) | new Color(0, 0, 0, 1) |
 `shaders` | string[] | [
-        ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, 
-        ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
-    ] |
+            ShaderAsset.DEFAULT_VERTEX_SHADER_NAME,
+            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
+        ] |
 
 **Returns:** *[Text](text.md)*
 
@@ -87,6 +89,15 @@ ___
 • **key**: *string*
 
 *Inherited from [Component](component.md).[key](component.md#key)*
+
+___
+
+###  offset
+
+• **offset**: *[Vector](vector.md)*
+
+The offset from the text origin to place the text, allows adding text
+above or below an entity.
 
 ___
 

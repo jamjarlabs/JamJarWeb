@@ -18,6 +18,7 @@ import Component from "../../component/component";
 import ShaderAsset from "../../rendering/shader_asset";
 import TextAlignment from "./text_alignment";
 import Color from "../../rendering/color";
+import Vector from "../../geometry/vector";
 
 /**
  * Text is a component for specifying text to render, alongside options for
@@ -56,6 +57,11 @@ class Text extends Component {
      */
     public spacing: number;
     /**
+     * The offset from the text origin to place the text, allows adding text
+     * above or below an entity.
+     */
+    public offset: Vector;
+    /**
      * Text color.
      */
     public color: Color;
@@ -64,16 +70,25 @@ class Text extends Component {
      */
     public shaders: string[];
 
-    constructor(zOrder: number, value: string, font: string, align: TextAlignment = TextAlignment.Left, spacing: number = Text.DEFAULT_SPACING, color: Color = new Color(0,0,0,1), shaders: string[] = [
-        ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, 
-        ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
-    ]) {
+    constructor(
+        zOrder: number,
+        value: string,
+        font: string,
+        align: TextAlignment = TextAlignment.Left,
+        spacing: number = Text.DEFAULT_SPACING,
+        offset: Vector = new Vector(0,0),
+        color: Color = new Color(0, 0, 0, 1),
+        shaders: string[] = [
+            ShaderAsset.DEFAULT_VERTEX_SHADER_NAME,
+            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
+        ]) {
         super(Text.KEY);
         this.zOrder = zOrder;
         this.value = value;
         this.font = font;
         this.spacing = spacing;
         this.align = align;
+        this.offset = offset;
         this.color = color;
         this.shaders = shaders;
     }

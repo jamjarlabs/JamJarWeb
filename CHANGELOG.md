@@ -12,8 +12,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   - Supports any font loaded through the browser.
   - Specify font size, weight, family, and other tuning options through
     `FontAsset` for a font.
-  - Specify z order, alignment, spacing, color and shaders through `Text`
-    component for a specific piece of text. 
+  - Specify z order, alignment, spacing, color, offset and shaders through
+    `Text` component for a specific piece of text. 
   - New fragment shader for rendering text, `default_text_fragment`.
 - `Renderable` can now have additional information attached to them by
   pre-rendering systems, which can be accessed by shaders.
