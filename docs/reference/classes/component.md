@@ -25,6 +25,8 @@ Each entity can only have 1 component of each type.
 
   ↳ [UI](ui.md)
 
+  ↳ [Text](text.md)
+
 ## Index
 
 ### Constructors

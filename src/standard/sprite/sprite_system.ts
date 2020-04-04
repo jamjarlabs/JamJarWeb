@@ -28,6 +28,7 @@ import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import UI from "../ui/ui";
 import RenderSystem from "../render/render_system";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * SpriteSystem handles converting sprites into renderable objects that are fed into 
@@ -68,7 +69,7 @@ class SpriteSystem extends System {
     }
 
     private prepareSprites(alpha: number): void {
-        const renderables: Renderable[] = [];
+        const renderables: IRenderable[] = [];
         for (const entity of this.entities.values()) {
             const sprite = entity.Get(Sprite.KEY) as Sprite;
             const transform = entity.Get(Transform.KEY) as Transform;
@@ -80,7 +81,7 @@ class SpriteSystem extends System {
                 undefined,
             ));
         }
-        this.messageBus.Publish(new Message<Renderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        this.messageBus.Publish(new Message<IRenderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 

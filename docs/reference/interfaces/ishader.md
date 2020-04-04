@@ -12,6 +12,7 @@ render technology, e.g. GLSL, HLSL etc.
 ## Implemented by
 
 * [DefaultFragmentShader](../classes/defaultfragmentshader.md)
+* [DefaultTextFragmentShader](../classes/defaulttextfragmentshader.md)
 * [DefaultVertexShader](../classes/defaultvertexshader.md)
 * [GLSLShader](../classes/glslshader.md)
 * [TestShader](../classes/testshader.md)

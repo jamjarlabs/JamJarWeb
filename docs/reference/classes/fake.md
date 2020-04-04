@@ -13,6 +13,8 @@
 
   ↳ [FakeSubscriber](fakesubscriber.md)
 
+  ↳ [FakeSDFGenerator](fakesdfgenerator.md)
+
 ## Index
 
 ### Constructors

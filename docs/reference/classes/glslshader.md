@@ -11,6 +11,8 @@ etc.
 
   ↳ [DefaultFragmentShader](defaultfragmentshader.md)
 
+  ↳ [DefaultTextFragmentShader](defaulttextfragmentshader.md)
+
   ↳ [DefaultVertexShader](defaultvertexshader.md)
 
 ## Implements

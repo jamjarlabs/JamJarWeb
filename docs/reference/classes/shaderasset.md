@@ -21,6 +21,7 @@ load the requested shaders if valid.
 * [name](shaderasset.md#name)
 * [shader](shaderasset.md#shader)
 * [DEFAULT_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_fragment_shader_name)
+* [DEFAULT_TEXT_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_text_fragment_shader_name)
 * [DEFAULT_VERTEX_SHADER_NAME](shaderasset.md#static-default_vertex_shader_name)
 * [FRAGMENT_TYPE](shaderasset.md#static-fragment_type)
 * [MESSAGE_FINISH_LOAD](shaderasset.md#static-message_finish_load)
@@ -66,6 +67,16 @@ ___
 
 Default fragment shader name, render systems will generally load this
 by default, and it will therefore be always available.
+
+___
+
+### `Static` DEFAULT_TEXT_FRAGMENT_SHADER_NAME
+
+▪ **DEFAULT_TEXT_FRAGMENT_SHADER_NAME**: *"default_text_fragment"* = "default_text_fragment"
+
+Default text fragment shader name, render systems will generally load this
+by default, and it will therefore be always available. Default fragment shader
+for text.
 
 ___
 

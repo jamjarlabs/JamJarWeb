@@ -29,6 +29,7 @@ import UI from "../ui/ui";
 import Sprite from "../sprite/sprite";
 import Camera from "../camera/camera";
 import RenderSystem from "../render/render_system";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * UISystem handles sprites that are designated as part of the UI, handling their coordinates and scale
@@ -73,7 +74,7 @@ class UISystem extends System {
         const uiElements = [...this.entities.values()].filter((entity) => {
             return entity.Get(UI.KEY) && entity.Get(Sprite.KEY);
         });
-        const renderables: Renderable[] = [];
+        const renderables: IRenderable[] = [];
         for (const entity of uiElements) {
 
             const sprite = entity.Get(Sprite.KEY) as Sprite;
@@ -112,7 +113,7 @@ class UISystem extends System {
                 ui.camera,
             ));
         }
-        this.messageBus.Publish(new Message<Renderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        this.messageBus.Publish(new Message<IRenderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 

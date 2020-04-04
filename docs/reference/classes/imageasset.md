@@ -30,14 +30,14 @@ Also stores the image itself.
 
 ###  constructor
 
-\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement, `success`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
+\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement | ImageData, `success`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `name` | string |
-`image` | HTMLImageElement |
+`image` | HTMLImageElement &#124; ImageData |
 `success` | boolean |
 `error?` | Error |
 
@@ -56,7 +56,7 @@ ___
 
 ###  image
 
-• **image**: *HTMLImageElement*
+• **image**: *HTMLImageElement | ImageData*
 
 The actual image.
 

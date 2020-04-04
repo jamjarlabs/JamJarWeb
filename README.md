@@ -21,6 +21,7 @@ JamJar provides the following:
 * Composition based entities and components.
 * Messaging.
 * Regular game loop.
+* Custom shader support.
 * Set of standard systems to use
   * UI System - user interfaces (HUDs etc.).
   * WebGL System - rendering using WebGL onto a HTML5 canvas.
@@ -29,9 +30,10 @@ JamJar provides the following:
   * Interpolation System - smoothing movements between frames.
   * Keyboard System - keyboard input.
   * Pointer System - browser pointer input (mouse, touch etc.)
-  * Image System - loading image assets.
+  * HTTP Image System - loading image assets over HTTP.
   * Sprite System - processing sprites and images before rendering.
   * Motion System - simple motion; velocity, acceleration, angular velocity etc.
+  * Text System - text rendering.
 
 ## More information
 

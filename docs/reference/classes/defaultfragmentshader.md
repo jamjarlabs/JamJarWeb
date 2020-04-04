@@ -1,6 +1,10 @@
 
 # Class: DefaultFragmentShader
 
+DefaultFragmentShader is the shader loaded for handling the
+"default_fragment" shader choice, used as the default shader
+and expected to be loaded.
+
 ## Hierarchy
 
 * [GLSLShader](glslshader.md)

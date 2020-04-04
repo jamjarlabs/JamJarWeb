@@ -53,6 +53,10 @@ import Material from "jamjar/lib/rendering/material";
 import ImageAsset from "jamjar/lib/rendering/image_asset";
 import ShaderAsset from "jamjar/lib/rendering/shader_asset";
 import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
+import FontAsset from "jamjar/lib/rendering/font_asset";
+import TextSystem from "jamjar/lib/standard/text/text_system";
+import Text from "jamjar/lib/standard/text/text";
+import TextAlignment from "../../../lib/standard/text/text_alignment";
 
 class Player extends Component {
     public static readonly KEY = "player";
@@ -87,6 +91,51 @@ class Crosshair extends Component {
     }
 }
 
+class ScoreCounter extends Component {
+    public static readonly KEY = "score_counter";
+
+    public score: number;
+
+    constructor(score: number = 0) {
+        super(ScoreCounter.KEY);
+        this.score = score;
+    }
+}
+
+class ScoreSystem extends System {
+    public static readonly MESSAGE_SCORE_INCREMENT = "message_score_increment";
+    // Only entities with transform and bullet components.
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
+        return [ScoreCounter.KEY, Text.KEY].every((type) => components.some(
+            component => component.key == type
+        ));
+    };
+
+    constructor(messageBus: IMessageBus, 
+        scene?: IScene, 
+        entities?: Map<number, SystemEntity>, 
+        subscriberID?: number) {
+        super(messageBus, scene, ScoreSystem.EVALUATOR, entities, subscriberID);
+        this.messageBus.Subscribe(this, ScoreSystem.MESSAGE_SCORE_INCREMENT)
+    }
+
+    public OnMessage(message: IMessage): void {
+        super.OnMessage(message);
+        switch(message.type) {
+            case ScoreSystem.MESSAGE_SCORE_INCREMENT: {
+                for (const entity of this.entities.values()) {
+                    const counter = entity.Get(ScoreCounter.KEY) as ScoreCounter;
+                    const text = entity.Get(Text.KEY) as Text;
+                    counter.score = counter.score + 1;
+                    text.value = `Score:${counter.score}`;
+                }
+                break;
+            }
+        }
+    }
+
+}
+
 class AsteroidSystem extends System {
     // Only entities with transform and asteroid components.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -104,7 +153,7 @@ class AsteroidSystem extends System {
 
     private lastSpawnTime: number;
     private spawnInterval: number;
-    private destroyed: IEntity[];
+    private destroyed: number[];
 
     constructor(messageBus: IMessageBus, 
         scene?: IScene, 
@@ -152,7 +201,6 @@ class AsteroidSystem extends System {
                 entity.Destroy();
             }
         }
-        this.destroyed = [];
     }
 
     public OnMessage(message: IMessage): void {
@@ -178,7 +226,7 @@ class AsteroidSystem extends System {
                         destroyEntity = collisionMessage.payload.a;
                     }
 
-                    if (destroyEntity === undefined || this.destroyed.includes(destroyEntity)) {
+                    if (destroyEntity === undefined || this.destroyed.includes(destroyEntity.id)) {
                         continue;
                     }
                     for (const entity of asteroids) {
@@ -186,7 +234,8 @@ class AsteroidSystem extends System {
                             continue;
                         }
                         entity.Destroy();
-                        this.destroyed.push(entity.entity);
+                        this.messageBus.Publish(new Message(ScoreSystem.MESSAGE_SCORE_INCREMENT));
+                        this.destroyed.push(entity.entity.id);
                     }
                 }
                 break;
@@ -358,8 +407,7 @@ class ControllerSystem extends System {
                         new Texture(
                             "bullet", 
                             new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array()
-                        ),
-                        [ "bullet_frag_shader", ShaderAsset.DEFAULT_VERTEX_SHADER_NAME]), 0));
+                        )), 1));
                     bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
                     bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
                     bullet.Add(new Bullet());
@@ -403,6 +451,18 @@ class MainScene extends Scene {
         new BulletSystem(this.messageBus, this);
         new AsteroidSystem(this.messageBus, this);
         new CrosshairSystem(this.messageBus, this);
+        new TextSystem(this.messageBus, this);
+        new ScoreSystem(this.messageBus, this);
+
+        this.messageBus.Publish(new Message<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
+            "test",
+            "VT323",
+            "normal",
+            100,
+            0,
+            1,
+            1
+        )));
 
         this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "bullet_frag_shader",
@@ -420,7 +480,7 @@ class MainScene extends Scene {
                 }
                 `
             )
-        )))
+        )));
 
         this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["bullet", "assets/bullet.png"]));
         this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["asteroid", "assets/asteroid.png"]));
@@ -464,20 +524,15 @@ class MainScene extends Scene {
         crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
 
-        const height = 0.05;
-        const width = height * 4 * (virtualSize.x / virtualSize.y);
+        const scoreHeight = 0.08;
+        const scoreCharWidth = scoreHeight * (virtualSize.y / virtualSize.x);
+        const scoreCounter = new Entity(this.messageBus);
+        scoreCounter.Add(new Transform(new Vector(0, 0.8), new Vector(scoreCharWidth, scoreHeight)));
+        scoreCounter.Add(new Text(2, "Score:0", "test", TextAlignment.Center, 0.3, new Color(0,1,0)));
+        scoreCounter.Add(new ScoreCounter());
+        scoreCounter.Add(new UI(camera));
+        this.AddEntity(scoreCounter);
 
-        const banner = new Entity(this.messageBus);
-        banner.Add(new Transform(new Vector(1 - width, 1 - height), new Vector(width, height)))
-        banner.Add(new Sprite(
-            new Material(
-                new Texture("ui_banner", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
-            ),
-            0,
-            Polygon.Rectangle(1, 1)
-        ));
-        banner.Add(new UI(camera));
-        this.AddEntity(banner);
     }
 }
 

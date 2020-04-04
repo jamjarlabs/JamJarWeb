@@ -3,6 +3,10 @@
 
 ## Index
 
+### Enumerations
+
+* [TextAlignment](enums/textalignment.md)
+
 ### Classes
 
 * [Camera](classes/camera.md)
@@ -13,6 +17,7 @@
 * [Component](classes/component.md)
 * [ComponentManager](classes/componentmanager.md)
 * [DefaultFragmentShader](classes/defaultfragmentshader.md)
+* [DefaultTextFragmentShader](classes/defaulttextfragmentshader.md)
 * [DefaultVertexShader](classes/defaultvertexshader.md)
 * [Ellipse](classes/ellipse.md)
 * [Entity](classes/entity.md)
@@ -21,8 +26,11 @@
 * [FakeComponent](classes/fakecomponent.md)
 * [FakeEntity](classes/fakeentity.md)
 * [FakeMessageBus](classes/fakemessagebus.md)
+* [FakeSDFGenerator](classes/fakesdfgenerator.md)
 * [FakeScene](classes/fakescene.md)
 * [FakeSubscriber](classes/fakesubscriber.md)
+* [FontAsset](classes/fontasset.md)
+* [FontMapping](classes/fontmapping.md)
 * [FullscreenSystem](classes/fullscreensystem.md)
 * [GJKSimplex](classes/gjksimplex.md)
 * [GLSLContext](classes/glslcontext.md)
@@ -61,6 +69,9 @@
 * [TestScene](classes/testscene.md)
 * [TestShader](classes/testshader.md)
 * [TestSystem](classes/testsystem.md)
+* [Text](classes/text.md)
+* [TextRender](classes/textrender.md)
+* [TextSystem](classes/textsystem.md)
 * [Texture](classes/texture.md)
 * [Transform](classes/transform.md)
 * [UI](classes/ui.md)
@@ -74,6 +85,7 @@
 * [IGame](interfaces/igame.md)
 * [IMessage](interfaces/imessage.md)
 * [IMessageBus](interfaces/imessagebus.md)
+* [IRenderable](interfaces/irenderable.md)
 * [IScene](interfaces/iscene.md)
 * [IShader](interfaces/ishader.md)
 * [IShape](interfaces/ishape.md)
