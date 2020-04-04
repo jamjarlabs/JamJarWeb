@@ -7,6 +7,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### Added
+- Frustum culling, only rendering what is on screen to improve performance.
 - Text rendering with the `TextSystem`, `FontAsset` and `Text` Component.
   - Supports any font loaded through the browser.
   - Specify font size, weight, family, and other tuning options through

@@ -19,7 +19,7 @@ Contains information for rendering.
 * [camera](irenderable.md#optional-camera)
 * [material](irenderable.md#material)
 * [modelMatrix](irenderable.md#modelmatrix)
-* [verticies](irenderable.md#verticies)
+* [vertices](irenderable.md#vertices)
 * [zOrder](irenderable.md#zorder)
 
 ## Properties
@@ -44,19 +44,17 @@ ___
 
 ###  modelMatrix
 
-• **modelMatrix**: *Float32Array*
+• **modelMatrix**: *[Matrix4D](../classes/matrix4d.md)*
 
-The model matrix (position, scale, rotation) of the object to render,
-represented as Float32Array for performance.
+The model matrix (position, scale, rotation) of the object to render.
 
 ___
 
-###  verticies
+###  vertices
 
-• **verticies**: *Float32Array*
+• **vertices**: *[Polygon](../classes/polygon.md)*
 
-The vertices of the object to render,
-represented as Float32Array for performance.
+The vertices of the object to render.
 
 ___
 

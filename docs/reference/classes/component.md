@@ -13,9 +13,9 @@ Each entity can only have 1 component of each type.
 
   ↳ [FakeComponent](fakecomponent.md)
 
-  ↳ [Camera](camera.md)
-
   ↳ [Transform](transform.md)
+
+  ↳ [Camera](camera.md)
 
   ↳ [Collider](collider.md)
 

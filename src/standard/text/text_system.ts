@@ -326,8 +326,8 @@ class TextSystem extends System {
                 // information for shaders to use
                 renderables.push(new Renderable<TextRender>(
                     text.zOrder,
-                    Polygon.Rectangle(1,1).GetFloat32Array(),
-                    charTransform.InterpolatedMatrix4D(alpha).GetFloat32Array(),
+                    Polygon.Rectangle(1,1),
+                    charTransform.InterpolatedMatrix4D(alpha),
                     new Material(
                         new Texture(
                             `font_${text.font}`,

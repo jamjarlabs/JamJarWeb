@@ -28,22 +28,22 @@ Contains information for rendering.
 * [material](renderable.md#material)
 * [modelMatrix](renderable.md#modelmatrix)
 * [payload](renderable.md#optional-payload)
-* [verticies](renderable.md#verticies)
+* [vertices](renderable.md#vertices)
 * [zOrder](renderable.md#zorder)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Renderable**(`zOrder`: number, `verticies`: Float32Array, `modelMatrix`: Float32Array, `material`: [Material](material.md), `payload?`: T, `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)*
+\+ **new Renderable**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `payload?`: T, `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `zOrder` | number |
-`verticies` | Float32Array |
-`modelMatrix` | Float32Array |
+`vertices` | [Polygon](polygon.md) |
+`modelMatrix` | [Matrix4D](matrix4d.md) |
 `material` | [Material](material.md) |
 `payload?` | T |
 `camera?` | [IEntity](../interfaces/ientity.md) |
@@ -76,12 +76,11 @@ ___
 
 ###  modelMatrix
 
-• **modelMatrix**: *Float32Array*
+• **modelMatrix**: *[Matrix4D](matrix4d.md)*
 
 *Implementation of [IRenderable](../interfaces/irenderable.md).[modelMatrix](../interfaces/irenderable.md#modelmatrix)*
 
-The model matrix (position, scale, rotation) of the object to render,
-represented as Float32Array for performance.
+The model matrix (position, scale, rotation) of the object to render.
 
 ___
 
@@ -93,14 +92,13 @@ An optional payload of additional data.
 
 ___
 
-###  verticies
+###  vertices
 
-• **verticies**: *Float32Array*
+• **vertices**: *[Polygon](polygon.md)*
 
-*Implementation of [IRenderable](../interfaces/irenderable.md).[verticies](../interfaces/irenderable.md#verticies)*
+*Implementation of [IRenderable](../interfaces/irenderable.md).[vertices](../interfaces/irenderable.md#vertices)*
 
-The vertices of the object to render,
-represented as Float32Array for performance.
+The vertices of the object to render.
 
 ___
 
