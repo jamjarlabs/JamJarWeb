@@ -23,14 +23,45 @@ import TextAlignment from "./text_alignment";
  * the rendering process/shaders.
  */
 class TextRender {
+    /**
+     * CSS Font Family.
+     */
     public family: string;
+    /**
+     * CSS Font Weight.
+     */
     public weight: string;
+    /**
+     * Whitespace buffer around a glyph in the atlas in pixels.
+     */
     public buffer: number;
+    /**
+     * How many pixels around the glyph shape in the atlas
+     * to use for encoding distance.
+     */
     public radius: number;
+    /**
+     * How much of the radius (relative) is used for the 
+     * inside part the glyph.
+     */
     public cutoff: number;
+    /**
+     * CSS font size in pixels.
+     */
     public size: number;
+    /**
+     * Color of the text.
+     */
     public color: Color;
+    /**
+     * Order which the text should appear, if it should appear infront/behind other 
+     * objects, the higher the value the more precedence it is given and will
+     * appear in front of objects with a lower value.
+     */
     public zOrder: number;
+    /**
+     * Text Alignment.
+     */
     public align: TextAlignment;
 
     constructor(family: string,

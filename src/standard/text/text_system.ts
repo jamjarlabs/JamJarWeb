@@ -26,7 +26,7 @@ import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import Text from "./text";
 import FontAsset from "../../rendering/font_asset";
-import TinySDF from "tiny-sdf";
+import { ISDFGenerator, SDFGeneratorFactory, TinySDF } from "tiny-sdf";
 import ImageAsset from "../../rendering/image_asset";
 import Renderable from "../../rendering/renderable";
 import RenderSystem from "../render/render_system";
@@ -40,10 +40,13 @@ import TextRender from "./text_render";
 import Camera from "../camera/camera";
 import UI from "../ui/ui";
 
+/**
+ * TextSystem is a pre-rendering system, taking in text components and
+ * converting them into renderables for render systems to use.
+ * This system will also handle preparing fonts and generating font atlases to
+ * be loaded as textures by rendering systems.
+ */
 class TextSystem extends System {
-
-    public static readonly MESSAGE_REQUEST_FLUSH = "request_font_flush";
-    public static readonly MESSAGE_REQUEST_CLEAR = "request_font_clear";
 
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Text.KEY].every((type) => components.some(
@@ -53,20 +56,29 @@ class TextSystem extends System {
         ));
     };
 
+    private static readonly DEFAULT_SDF_GENERATOR_FACTORY = (
+        fontSize?: number, 
+        buffer?: number, 
+        radius?: number, 
+        cutoff?: number, 
+        fontFamily?: string, 
+        fontWeight?: string): ISDFGenerator => new TinySDF(fontSize, buffer, radius, cutoff, fontFamily, fontWeight);
+
     private mappings: Map<string, FontMapping>;
+    private sdfGeneratorFactory: SDFGeneratorFactory;
 
     constructor(messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         mappings: Map<string, FontMapping> = new Map(),
+        sdfGeneratorFactory: SDFGeneratorFactory = TextSystem.DEFAULT_SDF_GENERATOR_FACTORY,
         subscriberID?: number) {
         super(messageBus, scene, TextSystem.EVALUATOR, entities, subscriberID);
         this.mappings = mappings;
+        this.sdfGeneratorFactory = sdfGeneratorFactory;
         this.messageBus.Subscribe(this, [ 
             Game.MESSAGE_PRE_RENDER, 
             FontAsset.MESSAGE_REQUEST_LOAD,
-            TextSystem.MESSAGE_REQUEST_CLEAR,
-            TextSystem.MESSAGE_REQUEST_FLUSH
         ]);
     }
 
@@ -94,37 +106,83 @@ class TextSystem extends System {
 
     private loadFont(asset: FontAsset): void {
         // Set up SDF generator
-        const generator = new TinySDF(asset.size, asset.buffer, asset.radius, asset.cutoff, asset.family, asset.weight);
-        // Create new mapping
-        const mapping: Map<string, number> = new Map();
-        const size = asset.size + asset.buffer * 2;
+        const generator = this.sdfGeneratorFactory(asset.size, asset.buffer, asset.radius, asset.cutoff, asset.family, asset.weight);
+
+        // Calculate size of each character glyph in pixels
+        const glyphSize = asset.size + asset.buffer * 2;
+        // Calculate dimensions of glyph atlas, must be a square, meaning
+        // that this is the minimum x^2 that can fit in all of the glyphs
         const atlasSize = Math.ceil(Math.sqrt(asset.characters.length));
+
+        // Calculate image data for each character, and calculate
+        // mapping data for each character
         const characterImages: ImageData[] = [];
+        const mapping: Map<string, number> = new Map();
         for (let i = 0; i < asset.characters.length; i++) {
             const char = asset.characters[i];
             const charData = generator.draw(char);
             characterImages.push(charData);
             mapping.set(char, i);
         }
-        // Set up empty bitmap array
-        const bitmapData = new Uint8ClampedArray((size * size * 4) * (atlasSize * atlasSize));
-        // Each row of bitmap
-        for (let i = 0; i < size * atlasSize; i++) {
-            const rowIndex = Math.floor(i / size) * atlasSize;
+
+        // Set up empty bitmap array to use to store all of the combined
+        // characters in a glyph atlas, contains enough entries for each
+        // glyph's pixels, represented in RGBA (4 channels)
+        const glyphAtlas = new Uint8ClampedArray((glyphSize * glyphSize * 4) * (atlasSize * atlasSize));
+        
+        // Build up the glyph atlas, inserting each character's glyph
+        // data into the atlas
+        /**
+         * The atlas array operates left to right, then top to bottom, meaning that
+         * a row-by-row approach is required. For the first row, it first inserts
+         * the first row of the first image, then inserts the first row of the
+         * second image, then the first row of the third image. For the second
+         * row it will do the same with the second row of each image. 
+         * The algorithm needs to understand how many images will fit in each
+         * column, and also which images are in which row.
+         * If all the images are inserted, the rest of the entries should be
+         * blank (all 0).
+         * |------------------|
+         * | 1  1  2  2  3  3 |
+         * | 1  1  2  2  3  3 |
+         * | 4  4  5  5  >  - |
+         * | -  -  -  -  -  - |
+         * | -  -  -  -  -  - |
+         * | -  -  -  -  -  - |
+         * | -  -  -  -  -  - |
+         * |------------------|
+         */
+        // Iterate down every row in the glyph atlas
+        for (let i = 0; i < glyphSize * atlasSize; i++) {
+            // Get the index of the character for the first column
+            // of this row
+            const rowIndex = Math.floor(i / glyphSize) * atlasSize;
+            // Iterate across for the number of images that can fit in
+            // horizontally
             for (let j = 0; j < atlasSize; j++) {
-                const fillStart = (i * size * atlasSize * 4) + (j * size * 4);
-                const subStart = (i % size) * size * 4;
+                // Determine the index of the glyph atlas to insert
+                // data into
+                const fillStart = (i * glyphSize * atlasSize * 4) + (j * glyphSize * 4);
+                // If current position doesn't have any character to insert
                 if (rowIndex + j >= characterImages.length) {
-                    // empty
-                    let empty = new Uint8ClampedArray(size * 4);
+                    // Insert blank (all 0)
+                    let empty = new Uint8ClampedArray(glyphSize * 4);
                     empty = empty.fill(0);
-                    bitmapData.set(empty, fillStart)
+                    glyphAtlas.set(empty, fillStart);
                     continue;
                 }
-                const subData = characterImages[rowIndex + j].data.subarray(subStart, subStart + size * 4);
-                bitmapData.set(subData, fillStart);
+                // Determine the starting index in the image being inserted to
+                // sample from, this will be the index of the start of a row
+                const subStart = (i % glyphSize) * glyphSize * 4;
+                // Get the row being inserted from the character image
+                const subData = characterImages[rowIndex + j].data.subarray(subStart, subStart + glyphSize * 4);
+                // Insert into the glyph atlas
+                glyphAtlas.set(subData, fillStart);
             }
         }
+
+        // Save font mapping, allows for retrieval of font at render time,
+        // alongside information for retrieving character positioning/layout
         this.mappings.set(
             asset.name,
             new FontMapping(
@@ -133,94 +191,138 @@ class TextSystem extends System {
                 mapping
             )
         );
+
+        // Publish the newly generated bitmap image to load as a texture
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
             `font_${asset.name}`,
-            new ImageData(bitmapData, size * atlasSize, size * atlasSize),
+            new ImageData(glyphAtlas, glyphSize * atlasSize, glyphSize * atlasSize),
             true
         )));
     }
 
     private prepareText(alpha: number): void {
         const renderables: Renderable<TextRender>[] = [];
-        // Filter to only get text elements
+
+        // Get text entities
         const textEntities = [...this.entities.values()].filter((entity) => {
             return entity.Get(Text.KEY) && entity.Get(Transform.KEY);
         });
+
+        // Iterate over each entity that has text to be rendered
         for (const entity of textEntities) {
             const text = entity.Get(Text.KEY) as Text;
             const transform = entity.Get(Transform.KEY) as Transform;
 
+            // Get font mapping, if it doesn't exist, skip rendering
+            // this text
             const mapping = this.mappings.get(text.font);
             if (mapping === undefined) {
                 continue;
             }
 
+            // Get a UI element if it is attached to the entity
             const ui = entity.Get(UI.KEY) as UI | undefined;
 
+            // Iterate over each character to be rendered
             for (let i = 0; i < text.value.length; i++) {
                 const char = text.value[i];
+                
+                // Get the character's mapping value, if it doesn't
+                // exist skip rendering this character
                 const position = mapping.characters.get(char);
                 if(position === undefined) {
                     continue;
                 }
 
-                let xPos;
+                // Determine the x alignment of the text, based
+                // on the text alignment options provided
+                let xAlign;
                 switch(text.align) {
                     case TextAlignment.Left: {
-                        xPos = i + 0.5;
+                        // +0.5 to shift first character from being centered on
+                        // transform position to the right of it
+                        xAlign = i + 0.5;
                         break;
                     }
                     case TextAlignment.Center: {
-                        xPos = i - (text.value.length-1)/2;
+                        xAlign = i - (text.value.length-1)/2;
                         break;
                     }
                     case TextAlignment.Right: {
-                        xPos = i - (text.value.length-1) - 0.5;
+                        // Inverse of left align, with transform position set to
+                        // right of the last character
+                        xAlign = i - (text.value.length-1) - 0.5;
                         break;
                     }
                     default: {
-                        throw(`Invalid text alignment: ${text.align}`)
+                        throw(`Invalid text alignment: ${text.align}`);
                     }
                 }
 
+                // Transform for character
                 let charTransform: Transform;
                 if (ui === undefined) {
-                    // Not UI text
+                    // Not part of the UI
+                    /**
+                     * (xAlign * transform.scale.x/2) -> determines alignment
+                     * left, center, right
+                     * (xAlign * text.spacing * transform.scale.x/2) ->
+                     * determines spacing between characters
+                     */
                     charTransform = new Transform(
-                        transform.position.Add(new Vector(xPos * transform.scale.x/2 + xPos * text.spacing * transform.scale.x/2, 0)),
+                        transform.position.Add(new Vector((xAlign * transform.scale.x/2) + (xAlign * text.spacing * transform.scale.x/2), 0)),
                         transform.scale,
                         transform.angle
                     );
         
                 } else {
+                    // Part of the UI
+                    // Get the camera entity this is assigned to, if no camera
+                    // found, skip this entity 
                     const cameraEntity = this.entities.get(ui.camera.id);
                     if (cameraEntity === undefined) {
-                        // If no camera found, skip this entity
                         break;
                     }
-                    // Get components of the camera entity
+                    // Get components of the camera entity, if the components
+                    // are not found, must not be a valid camera, skip this
+                    // entity 
                     const camera = cameraEntity.Get(Camera.KEY) as Camera | undefined;
                     const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform | undefined;
                     if (camera === undefined || cameraTransform === undefined) {
-                        // If the components are not found, must not be a valid camera, skip this entity
                         break;
                     }
+
+                    // Convert the transform.position to be relative to the camera
                     const textPosition = cameraTransform.position
                         .Add(transform.position)
                         .Multiply(camera.virtualScale.Scale(0.5));
                     
+                    // Convert the scale to be relative to the camera
                     const charScale = transform.scale.Multiply(camera.virtualScale);
-                    // UI text
+                    /**
+                     * (xAlign * charScale.x / 2) -> determines alignment
+                     * left, center, right
+                     * (xAlign * text.spacing * charScale.x/2) ->
+                     * determines spacing between characters
+                     */
                     charTransform = new Transform(
-                        textPosition.Add(new Vector((xPos * (charScale.x / 2) + xPos * text.spacing * charScale.x / 2), 1)),
+                        textPosition.Add(new Vector((xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x/2), 1)),
                         charScale,
                         transform.angle
                     );
                 }
 
+                // Determine the position in the glyph to extract the text glyph
+                // from
                 const x = position % mapping.width;
                 const y = Math.floor(position / mapping.width);
+                // Determine how wide and tall each glyph is in the texture
+                // (which goes from 0 -> 1, so a glyph atlas with 10*10
+                // dimensions - 100 characters - would have a character size of
+                // 0.1)
                 const charSize = 1 / mapping.width;
+                // Create renderable for the character, include extra TextRender
+                // information for shaders to use
                 renderables.push(new Renderable<TextRender>(
                     text.zOrder,
                     Polygon.Rectangle(1,1).GetFloat32Array(),

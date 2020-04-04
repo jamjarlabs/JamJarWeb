@@ -1,6 +1,11 @@
 
 # Class: TextSystem
 
+TextSystem is a pre-rendering system, taking in text components and
+converting them into renderables for render systems to use.
+This system will also handle preparing fonts and generating font atlases to
+be loaded as textures by rendering systems.
+
 ## Hierarchy
 
   ↳ [System](system.md)
@@ -23,11 +28,10 @@
 * [mappings](textsystem.md#private-mappings)
 * [messageBus](textsystem.md#protected-messagebus)
 * [scene](textsystem.md#protected-optional-scene)
+* [sdfGeneratorFactory](textsystem.md#private-sdfgeneratorfactory)
 * [subscriberID](textsystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](textsystem.md#static-message_deregister)
 * [MESSAGE_REGISTER](textsystem.md#static-message_register)
-* [MESSAGE_REQUEST_CLEAR](textsystem.md#static-message_request_clear)
-* [MESSAGE_REQUEST_FLUSH](textsystem.md#static-message_request_flush)
 * [MESSAGE_UPDATE](textsystem.md#static-message_update)
 
 ### Methods
@@ -38,13 +42,14 @@
 * [Update](textsystem.md#protected-update)
 * [loadFont](textsystem.md#private-loadfont)
 * [prepareText](textsystem.md#private-preparetext)
+* [DEFAULT_SDF_GENERATOR_FACTORY](textsystem.md#static-private-default_sdf_generator_factory)
 * [EVALUATOR](textsystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
+\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `sdfGeneratorFactory`: SDFGeneratorFactory, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -56,6 +61,7 @@ Name | Type | Default |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `mappings` | Map‹string, [FontMapping](fontmapping.md)› | new Map() |
+`sdfGeneratorFactory` | SDFGeneratorFactory | TextSystem.DEFAULT_SDF_GENERATOR_FACTORY |
 `subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[TextSystem](textsystem.md)*
@@ -105,6 +111,12 @@ when the scene is destroyed.
 
 ___
 
+### `Private` sdfGeneratorFactory
+
+• **sdfGeneratorFactory**: *SDFGeneratorFactory*
+
+___
+
 ###  subscriberID
 
 • **subscriberID**: *number*
@@ -128,18 +140,6 @@ ___
 ▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
 
 *Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
-
-___
-
-### `Static` MESSAGE_REQUEST_CLEAR
-
-▪ **MESSAGE_REQUEST_CLEAR**: *"request_font_clear"* = "request_font_clear"
-
-___
-
-### `Static` MESSAGE_REQUEST_FLUSH
-
-▪ **MESSAGE_REQUEST_FLUSH**: *"request_font_flush"* = "request_font_flush"
 
 ___
 
@@ -239,6 +239,25 @@ Name | Type |
 `alpha` | number |
 
 **Returns:** *void*
+
+___
+
+### `Static` `Private` DEFAULT_SDF_GENERATOR_FACTORY
+
+▸ **DEFAULT_SDF_GENERATOR_FACTORY**(`fontSize?`: undefined | number, `buffer?`: undefined | number, `radius?`: undefined | number, `cutoff?`: undefined | number, `fontFamily?`: undefined | string, `fontWeight?`: undefined | string): *ISDFGenerator*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fontSize?` | undefined &#124; number |
+`buffer?` | undefined &#124; number |
+`radius?` | undefined &#124; number |
+`cutoff?` | undefined &#124; number |
+`fontFamily?` | undefined &#124; string |
+`fontWeight?` | undefined &#124; string |
+
+**Returns:** *ISDFGenerator*
 
 ___
 

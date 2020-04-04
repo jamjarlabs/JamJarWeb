@@ -55,11 +55,15 @@ Name | Type |
 
 • **align**: *[TextAlignment](../enums/textalignment.md)*
 
+Text Alignment.
+
 ___
 
 ###  buffer
 
 • **buffer**: *number*
+
+Whitespace buffer around a glyph in the atlas in pixels.
 
 ___
 
@@ -67,11 +71,16 @@ ___
 
 • **color**: *[Color](color.md)*
 
+Color of the text.
+
 ___
 
 ###  cutoff
 
 • **cutoff**: *number*
+
+How much of the radius (relative) is used for the
+inside part the glyph.
 
 ___
 
@@ -79,11 +88,16 @@ ___
 
 • **family**: *string*
 
+CSS Font Family.
+
 ___
 
 ###  radius
 
 • **radius**: *number*
+
+How many pixels around the glyph shape in the atlas
+to use for encoding distance.
 
 ___
 
@@ -91,14 +105,22 @@ ___
 
 • **size**: *number*
 
+CSS font size in pixels.
+
 ___
 
 ###  weight
 
 • **weight**: *string*
 
+CSS Font Weight.
+
 ___
 
 ###  zOrder
 
 • **zOrder**: *number*
+
+Order which the text should appear, if it should appear infront/behind other
+objects, the higher the value the more precedence it is given and will
+appear in front of objects with a lower value.
