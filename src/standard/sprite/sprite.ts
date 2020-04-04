@@ -45,7 +45,7 @@ class Sprite extends Component {
 
     constructor(material: Material,
         zOrder: number,
-        bounds: Polygon = Polygon.Rectangle(1, 1)) {
+        bounds: Polygon = Polygon.RectangleByDimensions(1, 1)) {
         super(Sprite.KEY);
         this.material = material;
         this.zOrder = zOrder;

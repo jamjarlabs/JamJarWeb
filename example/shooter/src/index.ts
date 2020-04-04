@@ -406,9 +406,9 @@ class ControllerSystem extends System {
                     bullet.Add(new Sprite(new Material(
                         new Texture(
                             "bullet", 
-                            new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array()
+                            Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1)).GetFloat32Array()
                         )), 1));
-                    bullet.Add(new Collider(Polygon.Rectangle(1, 1)))
+                    bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)))
                     bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
                     bullet.Add(new Bullet());
 
@@ -502,12 +502,12 @@ class MainScene extends Scene {
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
         player.Add(new Sprite(
             new Material(
-                new Texture("space_ship", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+                new Texture("space_ship", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1)).GetFloat32Array())
             ), 
             0, 
-            Polygon.Rectangle(1, 1)
+            Polygon.RectangleByDimensions(1, 1)
         ));
-        player.Add(new Collider(Polygon.Rectangle(1, 1)));
+        player.Add(new Collider(Polygon.RectangleByDimensions(1, 1)));
         player.Add(new Player());
         this.AddEntity(player);
 
@@ -515,10 +515,10 @@ class MainScene extends Scene {
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Sprite(
             new Material(
-                new Texture("crosshair", new Polygon([new Vector(1, 0), new Vector(0, 0), new Vector(0, 1), new Vector(1, 1)]).GetFloat32Array())
+                new Texture("crosshair", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1)).GetFloat32Array())
             ),
             1,
-            Polygon.Rectangle(1, 1)
+            Polygon.RectangleByDimensions(1, 1)
         ));
         crosshair.Add(new UI(camera));
         crosshair.Add(new Crosshair());

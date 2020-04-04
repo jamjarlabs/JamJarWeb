@@ -29,7 +29,8 @@ Can be used in collision detection and rendering.
 * [GetFloat32Array](polygon.md#getfloat32array)
 * [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
-* [Rectangle](polygon.md#static-rectangle)
+* [RectangleByDimensions](polygon.md#static-rectanglebydimensions)
+* [RectangleByPoints](polygon.md#static-rectanglebypoints)
 
 ## Constructors
 
@@ -125,17 +126,37 @@ Name | Type |
 
 ___
 
-### `Static` Rectangle
+### `Static` RectangleByDimensions
 
-▸ **Rectangle**(`width`: number, `height`: number): *[Polygon](polygon.md)*
+▸ **RectangleByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md)): *[Polygon](polygon.md)*
 
-Rectangle returns a new polygon in a rectangle shape.
+RectangleByDimensions returns a new polygon in a rectangle shape with the
+width and height provided, optionally around an origin point.
+
+**Parameters:**
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`width` | number | - | Width of the rectangle |
+`height` | number | - | Height of the rectangle |
+`origin` | [Vector](vector.md) | new Vector(0,0) | Center point of the rectangle  |
+
+**Returns:** *[Polygon](polygon.md)*
+
+___
+
+### `Static` RectangleByPoints
+
+▸ **RectangleByPoints**(`bottomLeft`: [Vector](vector.md), `topRight`: [Vector](vector.md)): *[Polygon](polygon.md)*
+
+RectangleByPoints returns a new polygon in a rectangle shape between the
+two provided points.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`width` | number | Width of the rectangle |
-`height` | number | Height of the rectangle  |
+`bottomLeft` | [Vector](vector.md) | Bottom left of the rectangle |
+`topRight` | [Vector](vector.md) | Top right of the rectangle  |
 
 **Returns:** *[Polygon](polygon.md)*

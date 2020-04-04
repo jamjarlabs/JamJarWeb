@@ -99,19 +99,36 @@ class Polygon implements IShape {
     }
 
     /**
-     * Rectangle returns a new polygon in a rectangle shape.
+     * RectangleByDimensions returns a new polygon in a rectangle shape with the
+     * width and height provided, optionally around an origin point.
      * @param {number} width Width of the rectangle
      * @param {number} height Height of the rectangle
+     * @param {origin} origin Center point of the rectangle
      */
-    public static Rectangle(width: number, height: number): Polygon {
+    public static RectangleByDimensions(width: number, height: number, origin: Vector = new Vector(0,0)): Polygon {
 		const halfWidth = width/2;
-		const halfHeight = height/2;
+        const halfHeight = height/2;
 		return new Polygon([
-			new Vector(-halfWidth, halfHeight),
-			new Vector(halfWidth, halfHeight),
-			new Vector(halfWidth, -halfHeight),
-			new Vector(-halfWidth, -halfHeight),
+			new Vector(origin.x - halfWidth, origin.y + halfHeight),
+			new Vector(origin.x + halfWidth, origin.y + halfHeight),
+			new Vector(origin.x + halfWidth, origin.y - halfHeight),
+			new Vector(origin.x - halfWidth, origin.y - halfHeight),
 		]);
+    }
+
+    /**
+     * RectangleByPoints returns a new polygon in a rectangle shape between the
+     * two provided points.
+     * @param {Vector} bottomLeft Bottom left of the rectangle
+     * @param {Vector} topRight Top right of the rectangle
+     */
+    public static RectangleByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
+        return new Polygon([
+            bottomLeft, 
+            bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            topRight, 
+            topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+        ]);
     }
 }
 

@@ -36,8 +36,8 @@ gameCamera.Add(new Camera());
 const uiElement = new Entity(messageBus);
 uiElement.Add(new Transform(new Vector(0, 0), new Vector(0.2,0.2)));
 uiElement.Add(new Sprite(new Color(1, 1, 1, 1), {
-    bounds: Polygon.Rectangle(1, 1),
-    texture: new Texture("example_texture", new Polygon([new Vector(0, 0), new Vector(1, 0), new Vector(1, 1), new Vector(0, 1)]).GetFloat32Array())
+    bounds: Polygon.RectangleByDimensions(1, 1),
+    texture: new Texture("example_texture", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1)).GetFloat32Array())
 }));
 uiElement.Add(new UI(gameCamera));
 ```

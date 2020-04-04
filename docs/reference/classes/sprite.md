@@ -43,7 +43,7 @@ Name | Type | Default |
 ------ | ------ | ------ |
 `material` | [Material](material.md) | - |
 `zOrder` | number | - |
-`bounds` | [Polygon](polygon.md) | Polygon.Rectangle(1, 1) |
+`bounds` | [Polygon](polygon.md) | Polygon.RectangleByDimensions(1, 1) |
 
 **Returns:** *[Sprite](sprite.md)*
 

@@ -84,11 +84,11 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test1"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test2"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test3"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test4"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test5")))
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test1"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test2"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test3"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test4"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test5")))
                 ],
                 undefined,
                 0
@@ -98,9 +98,9 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test1"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test2"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test3")))
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test1"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test2"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test3")))
                 ],
                 undefined,
                 0
@@ -108,8 +108,8 @@ describe("WebGLSystem - OnMessage", () => {
             new Message<IRenderable[]>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test4"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test5")))
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test4"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test5")))
                 ]
             )
         ],
@@ -121,9 +121,9 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test1"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test2"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test3"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test1"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test2"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test3"))),
                 ],
                 undefined,
                 0
@@ -139,9 +139,9 @@ describe("WebGLSystem - OnMessage", () => {
             new Message<IRenderable[]>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test1"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test2"))),
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test3"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test1"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test2"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test3"))),
                 ]
             )
         ],
@@ -153,7 +153,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test1"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test1"))),
                 ],
                 undefined,
                 0
@@ -169,7 +169,7 @@ describe("WebGLSystem - OnMessage", () => {
             new Message<IRenderable[]>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
                 [
-                    new Renderable(0, Polygon.Rectangle(1,1), new Matrix4D(), new Material(new Texture("test1"))),
+                    new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material(new Texture("test1"))),
                 ]
             )
         ],
