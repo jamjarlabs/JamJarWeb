@@ -23,6 +23,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   entities, allowing custom shaders.
 - Can now load custom shaders using a `ShaderAsset`.
 ### Changed
+- Merged `SpriteSystem` and `UISystem` into a single system - `SpriteSystem`.
 - `Rectangle` function in `Polygon` renamed `RectangleByDimensions`.
 - `RectangleByDimensions` takes an optional origin point, default `0,0`.
 - All sprites require a `Texture` now, no longer optional.

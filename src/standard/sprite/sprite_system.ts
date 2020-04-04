@@ -29,19 +29,21 @@ import IScene from "../../scene/iscene";
 import UI from "../ui/ui";
 import RenderSystem from "../render/render_system";
 import IRenderable from "../../rendering/irenderable";
+import Camera from "../camera/camera";
 
 /**
  * SpriteSystem handles converting sprites into renderable objects that are fed into 
- * a rendering system. Does not handle sprites that are designated as part of the UI.
+ * a rendering system.
  */
 class SpriteSystem extends System {
     /**
-     * Ensure has Transform and Sprite, but not UI
+     * Ensure is Sprite entity with Transform and Sprite, or Camera entity with
+     * Transform and Camera
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Sprite.KEY].every((type) => components.some(
             component => component.key === type
-        )) && ![UI.KEY].every((type) => components.some(
+        )) || [Transform.KEY, Camera.KEY].every((type) => components.some(
             component => component.key === type
         ));
     };
@@ -70,16 +72,58 @@ class SpriteSystem extends System {
 
     private prepareSprites(alpha: number): void {
         const renderables: IRenderable[] = [];
-        for (const entity of this.entities.values()) {
+        // Get sprite entities
+        const spriteEntities = [...this.entities.values()].filter((entity) => {
+            return entity.Get(Sprite.KEY);
+        });
+        for (const entity of spriteEntities) {
             const sprite = entity.Get(Sprite.KEY) as Sprite;
             const transform = entity.Get(Transform.KEY) as Transform;
-            renderables.push(new Renderable(
-                sprite.zOrder,
-                sprite.bounds,
-                transform.InterpolatedMatrix4D(alpha),
-                sprite.material,
-                undefined,
-            ));
+            const ui = entity.Get(UI.KEY) as UI | undefined;
+            
+            if (ui === undefined) {
+                // Not UI
+                renderables.push(new Renderable(
+                    sprite.zOrder,
+                    sprite.bounds,
+                    transform.InterpolatedMatrix4D(alpha),
+                    sprite.material,
+                    undefined,
+                ));
+            } else {
+                // UI 
+                // Get the camera the UI component is targeting
+                const cameraEntity = this.entities.get(ui.camera.id);
+                if (cameraEntity === undefined) {
+                    // If no camera found, skip this entity
+                    continue;
+                }
+
+                // Get components of the camera entity
+                const camera = cameraEntity.Get(Camera.KEY) as Camera | undefined;
+                const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform | undefined;
+                if (camera === undefined || cameraTransform === undefined) {
+                    // If the components are not found, must not be a valid camera, skip this entity
+                    continue;
+                }
+
+                const relativeTransform = new Transform(
+                    // camera position + UI element position * camera virtual scale
+                    cameraTransform.position.Add(transform.position.Multiply(camera.virtualScale.Scale(0.5))),
+                    // element scale * camera virtual scale
+                    transform.scale.Multiply(camera.virtualScale),
+                    transform.angle
+                );
+
+                // Create the renderable for use by rendering systems
+                renderables.push(new Renderable(
+                    sprite.zOrder,
+                    sprite.bounds,
+                    relativeTransform.InterpolatedMatrix4D(alpha),
+                    sprite.material,
+                    ui.camera,
+                ));
+            }
         }
         this.messageBus.Publish(new Message<IRenderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }

@@ -30,8 +30,6 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [TextSystem](textsystem.md)
 
-  ↳ [UISystem](uisystem.md)
-
   ↳ [TestSystem](testsystem.md)
 
 ## Implements

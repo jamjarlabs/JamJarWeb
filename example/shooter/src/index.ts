@@ -532,7 +532,6 @@ class MainScene extends Scene {
         scoreCounter.Add(new ScoreCounter());
         scoreCounter.Add(new UI(camera));
         this.AddEntity(scoreCounter);
-
     }
 }
 

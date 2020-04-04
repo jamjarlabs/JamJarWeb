@@ -75,7 +75,6 @@
 * [Texture](classes/texture.md)
 * [Transform](classes/transform.md)
 * [UI](classes/ui.md)
-* [UISystem](classes/uisystem.md)
 * [Vector](classes/vector.md)
 * [WebGLSystem](classes/webglsystem.md)
 

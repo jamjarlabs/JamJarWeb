@@ -30,6 +30,8 @@ import System from "../../system/system";
 import IEntity from "../../entity/ientity";
 import Material from "../../rendering/material";
 import Texture from "../../rendering/texture";
+import UI from "../ui/ui";
+import Camera from "../camera/camera";
 
 describe("SpriteSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, SpriteSystem, SpriteSystem, IMessage];
@@ -115,7 +117,117 @@ describe("SpriteSystem - OnMessage", () => {
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
-            "Correctly register new entity, none existing",
+            "Pre render, UI, render 2, skip 1 no camera",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(4)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new SpriteSystem(new FakeMessageBus(),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(4)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, UI, render 2, skip 1 invalid camera",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(4), [
+                        new Transform(),
+                        new UI(new FakeEntity(1)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new SpriteSystem(new FakeMessageBus(),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(4), [
+                        new Transform(),
+                        new UI(new FakeEntity(1)),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Correctly register non-ui sprite new entity, none existing",
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
@@ -134,7 +246,47 @@ describe("SpriteSystem - OnMessage", () => {
             ]])
         ],
         [
-            "Correctly register new entity, three existing",
+            "Correctly register ui sprite new entity, none existing",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2)),
+                        new UI(new FakeEntity(0))
+                    ])],
+                ]),
+                0
+            ),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
+                new Transform(),
+                new Sprite(new Material(new Texture("test")), 0, Polygon.RectangleByDimensions(2, 2)),
+                new UI(new FakeEntity(0))
+            ]])
+        ],
+        [
+            "Correctly register camera new entity, none existing",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(),
+                undefined,
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                ]),
+                0
+            ),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
+                new Transform(),
+                new Camera()
+            ]])
+        ],
+        [
+            "Correctly register new non-ui sprite entity, three existing",
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
@@ -182,7 +334,7 @@ describe("SpriteSystem - OnMessage", () => {
             ]])
         ],
         [
-            "Correctly reject new entity, missing transform",
+            "Correctly reject non-ui sprite new entity, missing transform",
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
@@ -191,7 +343,23 @@ describe("SpriteSystem - OnMessage", () => {
             ]])
         ],
         [
-            "Correctly reject new entity, missing sprite",
+            "Correctly reject non-ui sprite new entity, missing sprite",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
+        ],
+        [
+            "Correctly reject camera new entity, missing transform",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
+                new Camera()
+            ]])
+        ],
+        [
+            "Correctly reject camera new entity, missing camera",
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),

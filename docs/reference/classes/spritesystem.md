@@ -2,7 +2,7 @@
 # Class: SpriteSystem
 
 SpriteSystem handles converting sprites into renderable objects that are fed into
-a rendering system. Does not handle sprites that are designated as part of the UI.
+a rendering system.
 
 ## Hierarchy
 
@@ -212,7 +212,8 @@ ___
 
 ▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
 
-Ensure has Transform and Sprite, but not UI
+Ensure is Sprite entity with Transform and Sprite, or Camera entity with
+Transform and Camera
 
 **Parameters:**
 
