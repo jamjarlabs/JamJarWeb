@@ -126,6 +126,54 @@ describe("PointerSystem - OnMessage", () => {
             ),
             new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN, [new FakeEntity(0), [new Transform()]])
         ],
+        [
+            "Update, no wheel message",
+            undefined,
+            new PointerSystem(new FakeMessageBus([
+                new Reactor("Publish", () => { throw("unexpected wheel event publish"); })
+            ]), 
+                document.createElement("canvas"), 
+                undefined, 
+                undefined, 
+                0, 
+                undefined, 
+                undefined, 
+                undefined
+            ),
+             new PointerSystem(new FakeMessageBus(), 
+                document.createElement("canvas"), 
+                undefined, 
+                undefined, 
+                0, 
+                undefined, 
+                undefined, 
+                undefined
+            ),            
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+        [
+            "Update, wheel message",
+            undefined,
+            new PointerSystem(new FakeMessageBus(), 
+                document.createElement("canvas"), 
+                undefined, 
+                undefined, 
+                0, 
+                undefined, 
+                undefined, 
+                undefined
+            ),
+            new PointerSystem(new FakeMessageBus(), 
+                document.createElement("canvas"), 
+                undefined, 
+                undefined, 
+                0, 
+                undefined, 
+                undefined, 
+                new WheelEvent("test")
+            ),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: PointerSystem, message: IMessage) => {
         if (expected instanceof Error) {
             expect(() => {
@@ -141,7 +189,7 @@ describe("PointerSystem - OnMessage", () => {
 
 
 /**
- * TestKeyboardSystem is an extension of the PointerSystem that exposes the pointer event functions,
+ * TestPointerSystem is an extension of the PointerSystem that exposes the pointer event functions,
  * allows testing them without having to use JS event listeners
  */
 class TestPointerSystem extends PointerSystem {
@@ -457,6 +505,64 @@ describe("PointerSystem - pointer input", () => {
             expect(() => { system.SimulatePointerEvent(event); }).toThrow(expected);
         } else {
             system.SimulatePointerEvent(event);
+        }
+        expect(system).toEqual(expectedState);
+    });
+});
+
+/**
+ * TestWheelSystem is an extension of the PointerSystem that exposes the wheel event functions,
+ * allows testing them without having to use JS event listeners
+ */
+class TestWheelSystem extends PointerSystem {
+    public SimulateWheelEvent(event: WheelEvent): void {
+        this.wheelEvent(event);
+    }
+}
+
+describe("PointerSystem - pointer input", () => {
+    type TestTuple = [string, Error | undefined, PointerSystem, TestWheelSystem, WheelEvent];
+    test.each<TestTuple>([
+        [
+            "Wheel event triggered",
+            undefined,
+            new TestWheelSystem(new FakeMessageBus(), ((): HTMLElement => {
+                const element = document.createElement("canvas");
+                element.getBoundingClientRect = (): DOMRect => {
+                    return new DOMRect(0, 0, 10, 10);
+                };
+                return element;
+            })(),
+                undefined,
+                undefined,
+                0,
+                undefined,
+                undefined,
+                new WheelEvent("test"),
+            ),
+            new TestWheelSystem(new FakeMessageBus([new Reactor("Publish", (message: Message<Pointer>) => {
+                throw("publish fail");
+            })]), ((): HTMLElement => {
+                const element = document.createElement("canvas");
+                element.getBoundingClientRect = (): DOMRect => {
+                    return new DOMRect(0, 0, 10, 10);
+                };
+                return element;
+            })(),
+                undefined,
+                undefined,
+                0,
+                undefined,
+                undefined,
+                undefined,
+            ),
+            new WheelEvent("test")
+        ],
+    ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: TestWheelSystem, event: WheelEvent) => {
+        if (expected instanceof Error) {
+            expect(() => { system.SimulateWheelEvent(event); }).toThrow(expected);
+        } else {
+            system.SimulateWheelEvent(event);
         }
         expect(system).toEqual(expectedState);
     });

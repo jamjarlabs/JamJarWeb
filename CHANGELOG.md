@@ -12,6 +12,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - `Apply4D` added to `Polygon` to apply 4D matrices.
 - `Center` added to `Polygon` to get center of shape.
 - `Center` added to `IShape`.
+- Wheel support, can now listen for `wheel` events, which are published with
+  throttled `WheelEvent` messages.
 ### Changed
 - Collision algorithms now abstracted as `ICollisionAlgorithm`, can be swapped
   out in `CollisionSystem` and `FrustumCulling`.

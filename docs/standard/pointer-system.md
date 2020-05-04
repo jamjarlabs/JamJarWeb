@@ -7,11 +7,12 @@ world position and camera positions.
 
 ## Events
 
-The Pointer System listens for three events:
+The Pointer System listens for four events:
 
 * `pointermove` - When the pointer moves.
 * `pointerdown` - When a pointer presses down (mouse click down, touch down).
 * `pointerup` - When a pointer is released (mouse click up, release touch).
+* `wheel` - When a mouse wheel is moved.
 
 ## Using Pointer System Messages
 
@@ -93,3 +94,31 @@ public OnMessage(message: IMessage): void {
 }
 ```
 
+### Wheel Messages
+
+Wheel messages are treated differently than Pointer messages - there is no
+additional information calculated and included with the wheel data, instead the
+raw [`WheelEvent`](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent)
+is provided as a payload.
+
+To retrieve this example, see the `OnMessage` implementation below:
+```typescript
+public OnMessage(message: IMessage): void {
+    super.OnMessage(message);
+    switch (message.type) {
+        case "wheel": {
+            const wheelEvent = message as Message<WheelEvent>;
+            if (wheelEvent.payload === undefined) {
+                return;
+            }
+            if (wheelEvent.payload.deltaY > 0) {
+                console.log("DOWN");
+            }
+            if (wheelEvent.payload.deltaY < 0) {
+                console.log("UP");
+            }
+            break;
+        }
+    }
+}
+```
