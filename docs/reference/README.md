@@ -9,9 +9,11 @@
 
 ### Classes
 
+* [AlwaysCollideAlgorithm](classes/alwayscollidealgorithm.md)
 * [Camera](classes/camera.md)
 * [Collider](classes/collider.md)
 * [Collision](classes/collision.md)
+* [CollisionInfo](classes/collisioninfo.md)
 * [CollisionSystem](classes/collisionsystem.md)
 * [Color](classes/color.md)
 * [Component](classes/component.md)
@@ -29,10 +31,12 @@
 * [FakeSDFGenerator](classes/fakesdfgenerator.md)
 * [FakeScene](classes/fakescene.md)
 * [FakeSubscriber](classes/fakesubscriber.md)
+* [FakeWebGL2RenderingContext](classes/fakewebgl2renderingcontext.md)
 * [FontAsset](classes/fontasset.md)
 * [FontMapping](classes/fontmapping.md)
+* [FrustumCuller](classes/frustumculler.md)
 * [FullscreenSystem](classes/fullscreensystem.md)
-* [GJKSimplex](classes/gjksimplex.md)
+* [GJKAlgorithm](classes/gjkalgorithm.md)
 * [GLSLContext](classes/glslcontext.md)
 * [GLSLShader](classes/glslshader.md)
 * [Game](classes/game.md)
@@ -47,6 +51,7 @@
 * [MessageBus](classes/messagebus.md)
 * [Motion](classes/motion.md)
 * [MotionSystem](classes/motionsystem.md)
+* [NeverCollideAlgorithm](classes/nevercollidealgorithm.md)
 * [Pointer](classes/pointer.md)
 * [PointerCameraInfo](classes/pointercamerainfo.md)
 * [PointerSystem](classes/pointersystem.md)
@@ -61,6 +66,7 @@
 * [Subscriber](classes/subscriber.md)
 * [System](classes/system.md)
 * [SystemEntity](classes/systementity.md)
+* [TestCollisionAlgorithm](classes/testcollisionalgorithm.md)
 * [TestFullscreenSystem](classes/testfullscreensystem.md)
 * [TestGame](classes/testgame.md)
 * [TestKeyboardSystem](classes/testkeyboardsystem.md)
@@ -80,7 +86,9 @@
 
 ### Interfaces
 
+* [ICollisionAlgorithm](interfaces/icollisionalgorithm.md)
 * [IEntity](interfaces/ientity.md)
+* [IFrustumCuller](interfaces/ifrustumculler.md)
 * [IGame](interfaces/igame.md)
 * [IMessage](interfaces/imessage.md)
 * [IMessageBus](interfaces/imessagebus.md)
@@ -95,11 +103,6 @@
 * [Evaluator](README.md#evaluator)
 * [Matrix3DValues](README.md#matrix3dvalues)
 * [Matrix4DValues](README.md#matrix4dvalues)
-
-### Functions
-
-* [Calculate](README.md#calculate)
-* [support](README.md#support)
 
 ## Type aliases
 
@@ -133,42 +136,3 @@ ___
 Ƭ **Matrix4DValues**: *[[number, number, number, number], [number, number, number, number], [number, number, number, number], [number, number, number, number]]*
 
 Matrix4DValues is shorthand for the 4x4 tuple of the matrix values
-
-## Functions
-
-###  Calculate
-
-▸ **Calculate**(`a`: [SystemEntity](classes/systementity.md), `b`: [SystemEntity](classes/systementity.md)): *[Collision](classes/collision.md) | undefined*
-
-Calculate determines if a collision/intersection exists between two entities
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`a` | [SystemEntity](classes/systementity.md) | First entity |
-`b` | [SystemEntity](classes/systementity.md) | Second entity |
-
-**Returns:** *[Collision](classes/collision.md) | undefined*
-
-A collision if it has been detected; if not undefined
-
-___
-
-###  support
-
-▸ **support**(`a`: [IShape](interfaces/ishape.md), `b`: [IShape](interfaces/ishape.md), `direction`: [Vector](classes/vector.md)): *[Vector](classes/vector.md)*
-
-support calculates a support point in a direction for two shapes
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`a` | [IShape](interfaces/ishape.md) | First shape |
-`b` | [IShape](interfaces/ishape.md) | Second shape |
-`direction` | [Vector](classes/vector.md) | The direction to calculate the support point in |
-
-**Returns:** *[Vector](classes/vector.md)*
-
-The support point; returns undefined if invalid shapes provided

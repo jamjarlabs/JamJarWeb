@@ -17,11 +17,24 @@ for the shape to be used with collision detection.
 
 ### Methods
 
+* [Center](ishape.md#center)
 * [FarthestPointInDirection](ishape.md#farthestpointindirection)
 * [PointInside](ishape.md#pointinside)
 * [Transform](ishape.md#transform)
 
 ## Methods
+
+###  Center
+
+▸ **Center**(): *[Vector](../classes/vector.md)*
+
+Center calculates/retrieves the center of a shape.
+
+**Returns:** *[Vector](../classes/vector.md)*
+
+The center point of the shape
+
+___
 
 ###  FarthestPointInDirection
 

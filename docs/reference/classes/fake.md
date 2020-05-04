@@ -13,6 +13,8 @@
 
   ↳ [FakeSubscriber](fakesubscriber.md)
 
+  ↳ [FakeWebGL2RenderingContext](fakewebgl2renderingcontext.md)
+
   ↳ [FakeSDFGenerator](fakesdfgenerator.md)
 
 ## Index

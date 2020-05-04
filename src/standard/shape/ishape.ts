@@ -23,6 +23,11 @@ import Transform from "../transform/transform";
  */
 interface IShape {
     /**
+     * Center calculates/retrieves the center of a shape.
+     * @returns {Vector} The center point of the shape
+     */
+    Center(): Vector;
+    /**
      * Transform takes a transform and applies it to shape.
      * @param {Transform} transform The transform to apply to the shape
      * @returns {IShape} The transformed shape

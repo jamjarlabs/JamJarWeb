@@ -29,7 +29,43 @@ import ImageAsset from "../../rendering/image_asset";
 import ShaderAsset from "../../rendering/shader_asset";
 import IShader from "../../rendering/ishader";
 import GLSLShader from "../glsl/glsl_shader";
+import FakeWebGL2RenderingContext from "../../fake/webgl2_rendering_context";
+import Reactor from "../../fake/reactor";
+import Game from "../../game";
+import Renderable from "../../rendering/renderable";
+import Polygon from "../shape/polygon";
+import Matrix4D from "../../geometry/matrix_4d";
+import Material from "../../rendering/material";
+import Texture from "../../rendering/texture";
+import FrustumCuller from "../frustum_culler/frustum_culler";
+import NeverCollideAlgorithm from "../collision/algorithm/never_collide_algorithm";
+import AlwaysCollideAlgorithm from "../collision/algorithm/always_collide_algorithm";
+import ICollisionAlgorithm from "../collision/algorithm/icollision_algorithm";
+import Vector from "../../geometry/vector";
+import CollisionInfo from "../collision/collision_info";
+import IShape from "../shape/ishape";
 
+class TestCollisionAlgorithm implements ICollisionAlgorithm {
+    private centerPairs: [Vector, Vector][];
+    constructor(centerPairs: [Vector, Vector][]) {
+        this.centerPairs = centerPairs;
+    }
+
+    public CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined {
+        const aCenter = a.Center();
+        const bCenter = b.Center();
+        for (const pair of this.centerPairs) {
+            if (aCenter.x === pair[0].x && aCenter.y === pair[0].y && bCenter.x === pair[1].x && bCenter.y === pair[1].y ||
+                aCenter.x === pair[1].x && aCenter.y === pair[1].y && bCenter.x === pair[0].x && bCenter.y === pair[0].y) {
+                return new CollisionInfo(
+                    a,
+                    b
+                );
+            }
+        }
+        return;
+    }
+}
 
 class TestShader implements IShader {
     public source: string;
@@ -49,10 +85,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -64,10 +98,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -84,10 +116,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -99,10 +129,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -125,10 +153,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -140,10 +166,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -166,10 +190,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -187,10 +209,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -213,10 +233,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -228,10 +246,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -248,10 +264,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -263,10 +277,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -283,15 +295,8 @@ describe("WebGLSystem - OnMessage", () => {
             new Error("Failed to create texture for image asset 'test'"),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createTexture = function(): WebGLShader | null { return null; };
-                    context.bindTexture = function(): void {return;};
-                    context.texImage2D = function(): void {return;};
-                    context.texParameteri = function(): void {return;};
-                    context.generateMipmap = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -303,15 +308,49 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createTexture = function(): WebGLShader | null { return null; };
-                    context.bindTexture = function(): void {return;};
-                    context.texImage2D = function(): void {return;};
-                    context.texParameteri = function(): void {return;};
-                    context.generateMipmap = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), true))
+        ],
+        [
+            "Finish image asset load, success, new asset",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map([
+                    ["test", new WebGLTexture()]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -328,15 +367,11 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createTexture = function(): WebGLShader | null { return new WebGLTexture(); };
-                    context.bindTexture = function(): void {return;};
-                    context.texImage2D = function(): void {return;};
-                    context.texParameteri = function(): void {return;};
-                    context.generateMipmap = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
                 undefined,
                 undefined,
                 undefined,
@@ -346,23 +381,23 @@ describe("WebGLSystem - OnMessage", () => {
                 ]),
                 undefined,
                 undefined,
+                undefined,
                 0,
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createTexture = function(): WebGLShader | null { return new WebGLTexture(); };
-                    context.bindTexture = function(): void {return;};
-                    context.texImage2D = function(): void {return;};
-                    context.texParameteri = function(): void {return;};
-                    context.generateMipmap = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
                 undefined,
                 undefined,
                 undefined,
                 undefined,
+                new Map([
+                    ["test", new WebGLTexture()]
+                ]),
                 undefined,
                 undefined,
                 undefined,
@@ -371,19 +406,15 @@ describe("WebGLSystem - OnMessage", () => {
             new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), true))
         ],
         [
-            "Finish image asset load, success, replace existing",
+            "Finish image asset load, success, image data",
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createTexture = function(): WebGLShader | null { return new WebGLTexture(); };
-                    context.bindTexture = function(): void {return;};
-                    context.texImage2D = function(): void {return;};
-                    context.texParameteri = function(): void {return;};
-                    context.generateMipmap = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
                 undefined,
                 undefined,
                 undefined,
@@ -391,43 +422,37 @@ describe("WebGLSystem - OnMessage", () => {
                 new Map([
                     ["test", new WebGLTexture()]
                 ]),
+                undefined,
                 undefined,
                 undefined,
                 0,
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createTexture = function(): WebGLShader | null { return new WebGLTexture(); };
-                    context.bindTexture = function(): void {return;};
-                    context.texImage2D = function(): void {return;};
-                    context.texParameteri = function(): void {return;};
-                    context.generateMipmap = function(): void {return;};
-                    return context;
-                })(),
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                new Map([
-                    ["test", new WebGLTexture()]
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
                 ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
                 undefined,
                 undefined,
                 0,
             ),
-            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), true))
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new ImageData(5, 10), true))
         ],
         [
             "Finish shader load, no payload",
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -439,10 +464,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -459,10 +482,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -474,10 +495,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -494,10 +513,8 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -509,10 +526,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -529,11 +544,8 @@ describe("WebGLSystem - OnMessage", () => {
             new Error("Error creating shader for asset 'test'"),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return null; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -545,11 +557,8 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return null; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -566,16 +575,11 @@ describe("WebGLSystem - OnMessage", () => {
             new Error("Error compiling shader for asset 'test', error: test error"),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string | null { return null; };
-                    context.getShaderInfoLog = function(): string | null { return "test error"; };
-                    context.deleteShader = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderInfoLog", (): string => "test error"),
+                ]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -587,16 +591,11 @@ describe("WebGLSystem - OnMessage", () => {
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string | null { return null; };
-                    context.getShaderInfoLog = function(): string | null { return "test error"; };
-                    context.deleteShader = function(): void {return;};
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderInfoLog", (): string => "test error"),
+                ]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -613,14 +612,10 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string { return "test"; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderParameter", (): string => "test"),
+                ]),
                 undefined,
                 undefined,
                 undefined,
@@ -630,24 +625,22 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 0,
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string { return "test"; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderParameter", (): string => "test"),
+                ]),
                 undefined,
                 undefined,
                 undefined,
                 new Map([
                     ["test", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "test")]]
                 ]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -660,14 +653,10 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string { return "test"; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderParameter", (): string => "test"),
+                ]),
                 undefined,
                 undefined,
                 undefined,
@@ -677,18 +666,16 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 0,
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string { return "test"; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderParameter", (): string => "test"),
+                ]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -705,14 +692,10 @@ describe("WebGLSystem - OnMessage", () => {
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string { return "test"; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderParameter", (): string => "test"),
+                ]),
                 undefined,
                 undefined,
                 undefined,
@@ -722,18 +705,16 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 0,
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
-                ((): WebGL2RenderingContext => {
-                    const context = new WebGL2RenderingContext();
-                    context.createShader = function(): WebGLShader | null { return new WebGLShader(); };
-                    context.shaderSource = function(): void {return;};
-                    context.compileShader = function(): void {return;};
-                    context.getShaderParameter = function(): string { return "test"; };
-                    return context;
-                })(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createShader", (): WebGLTexture => new WebGLTexture()),
+                    new Reactor("getShaderParameter", (): string => "test"),
+                ]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -753,7 +734,918 @@ describe("WebGLSystem - OnMessage", () => {
         } else {
             expect(system.OnMessage(message)).toEqual(expected);
         }
-        // Workaround for comparing anonymous functions of mocked WebGL2RenderingContext
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
+        expect(system).toEqual(expectedState);
     });
 });
+
+describe("WebGLSystem - Render", () => {
+    let drawCount = 0;
+    type TestTuple = [string, Error | undefined, number, WebGLSystem, WebGLSystem, IMessage];
+    test.each<TestTuple>([
+        [
+            "Render, no alpha payload",
+            undefined,
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>(),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>(),
+                0,
+            ),
+            new Message(Game.MESSAGE_RENDER)
+        ],
+        [
+            "Render, no cameras",
+            undefined,
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>(),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>(),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, no renderables",
+            undefined,
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, no loaded shaders",
+            undefined,
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                ]),
+                undefined,
+                [],
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ))
+                    )
+                ],
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, fail to create program",
+            new Error("Error creating program '_test_vert_test_frag'"),
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram | null => null),
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram | null => null),
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, fail to link program",
+            new Error("Error linking program '_test_vert_test_frag', error: null"),
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): boolean => false)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): boolean => false)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, no loaded textures",
+            undefined,
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                undefined,
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, 1 renderables, cull",
+            undefined,
+            0,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new NeverCollideAlgorithm()),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new NeverCollideAlgorithm()),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, 1 renderables, don't cull",
+            undefined,
+            1,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { drawCount++; }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new NeverCollideAlgorithm()),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { drawCount++; }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new AlwaysCollideAlgorithm()),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, 5 renderables, 2 cameras, cull 2",
+            undefined,
+            6,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { drawCount++; }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new TestCollisionAlgorithm([
+                    [new Vector(1, 1), new Vector(0,0)],
+                    [new Vector(1, 1), new Vector(1,0)],
+                    [new Vector(1, 1), new Vector(2,0)],
+                    [new Vector(2, 2), new Vector(2,0)],
+                    [new Vector(2, 2), new Vector(3,0)],
+                    [new Vector(2, 2), new Vector(4,0)]
+                ])),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1,1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(2,2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { drawCount++; }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(0,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    ),
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(1,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    ),
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(2,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    ),
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(3,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    ),
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(4,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"])
+                    )
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new TestCollisionAlgorithm([
+                    [new Vector(1, 1), new Vector(0,0)],
+                    [new Vector(1, 1), new Vector(1,0)],
+                    [new Vector(1, 1), new Vector(2,0)],
+                    [new Vector(2, 2), new Vector(2,0)],
+                    [new Vector(2, 2), new Vector(3,0)],
+                    [new Vector(2, 2), new Vector(4,0)]
+                ])),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1,1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(2,2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+        [
+            "Render, 3 renderables, 2 cameras, render only to one camera",
+            undefined,
+            3,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { drawCount++; }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new TestCollisionAlgorithm([
+                    [new Vector(1, 1), new Vector(0,0)],
+                    [new Vector(1, 1), new Vector(1,0)],
+                    [new Vector(1, 1), new Vector(2,0)],
+                    [new Vector(2, 2), new Vector(0,0)],
+                    [new Vector(2, 2), new Vector(1,0)],
+                    [new Vector(2, 2), new Vector(2,0)]
+                ])),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1,1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(new Vector(2,2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])]
+                ]),
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("drawArrays", (): void => { drawCount++; }),
+                    new Reactor("canvas", (): HTMLCanvasElement => {
+                        const canvas = new HTMLCanvasElement();
+                        canvas.width = 10;
+                        canvas.height = 10;
+                        return canvas;
+                    }),
+                    new Reactor("createProgram", (): WebGLProgram => new WebGLProgram()),
+                    new Reactor("getProgramParameter", (): number => 1)
+                ]),
+                undefined,
+                [
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(0,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"]),
+                        undefined, 
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(1,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"]),
+                        undefined, 
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(0, 
+                        Polygon.RectangleByDimensions(1,1, new Vector(2,0)), 
+                        new Matrix4D(), 
+                        new Material(new Texture(
+                            "test",
+                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"]), 
+                        undefined, 
+                        new FakeEntity(0)
+                    ),
+                ],
+                undefined,
+                new Map<string, [WebGLShader, GLSLShader]>([
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                ]),
+                new Map<string, WebGLTexture>([
+                    ["test", new WebGLTexture()]
+                ]),
+                new Map<string, WebGLProgram>([
+                    ["_test_vert_test_frag", new WebGLProgram()]
+                ]),
+                new FrustumCuller(new TestCollisionAlgorithm([
+                    [new Vector(1, 1), new Vector(0,0)],
+                    [new Vector(1, 1), new Vector(1,0)],
+                    [new Vector(1, 1), new Vector(2,0)],
+                    [new Vector(2, 2), new Vector(0,0)],
+                    [new Vector(2, 2), new Vector(1,0)],
+                    [new Vector(2, 2), new Vector(2,0)]
+                ])),
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1,1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(new Vector(2,2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                    ])]
+                ]),
+                0,
+            ),
+            new Message<number>(Game.MESSAGE_RENDER, 1.0)
+        ],
+    ])("%p", (description: string, expected: Error | undefined, expectedDrawCount: number, expectedState: WebGLSystem, system: WebGLSystem, message: IMessage) => {
+        if (expected instanceof Error) {
+            expect(() => {
+                system.OnMessage(message);
+            }).toThrow(expected);
+        } else {
+            expect(system.OnMessage(message)).toEqual(expected);
+        }
+        // Workaround for comparing objects with anonymous functions
+        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
+        expect(drawCount).toEqual(expectedDrawCount);
+        drawCount = 0;
+    });
+});
+

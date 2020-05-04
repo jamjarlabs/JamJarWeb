@@ -6,6 +6,18 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Frustum Culling separated out, can choose a collision algorithm to use for
+  culling.
+- `Apply4D` added to `Polygon` to apply 4D matrices.
+- `Center` added to `Polygon` to get center of shape.
+- `Center` added to `IShape`.
+### Changed
+- Collision algorithms now abstracted as `ICollisionAlgorithm`, can be swapped
+  out in `CollisionSystem` and `FrustumCulling`.
+    - Collision algorithms take two shapes as input and output a `CollisionInfo`
+    object, or undefined if there is no collision.
+- GJK refactored to work as a `ICollisionAlgorithm`.
 
 ## [v0.6.1] - 2020-04-04
 ### Fixed

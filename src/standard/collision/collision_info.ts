@@ -14,23 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IEntity from "../../entity/ientity";
-import CollisionInfo from "./collision_info";
+import IShape from "../shape/ishape";
 
 /**
- * Collision represents a collision between two entities, and all information
- * about the collision.
+ * CollisionInfo contains specific collision information, calculated by a
+ * CollisionAlgorithm.
  */
-class Collision {
-    public a: IEntity;
-    public b: IEntity;
-    public info: CollisionInfo;
-
-    constructor(a: IEntity, b: IEntity, info: CollisionInfo) {
+class CollisionInfo {
+    public a: IShape;
+    public b: IShape;
+    constructor(a: IShape, b: IShape) {
         this.a = a;
         this.b = b;
-        this.info = info;
     }
 }
 
-export default Collision;
+export default CollisionInfo;

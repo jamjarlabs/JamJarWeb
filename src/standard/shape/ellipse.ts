@@ -32,6 +32,10 @@ class Ellipse implements IShape {
         this.orientation = orientation;
     }
 
+    public Center(): Vector {
+        return this.center;
+    }
+
     public Transform(transform: Transform): IShape {
         const matrix = transform.Matrix3D();
         return new Ellipse(

@@ -17,6 +17,7 @@ limitations under the License.
 import Vector from "../../geometry/vector";
 import Polygon from "./polygon";
 import Transform from "../transform/transform";
+import Matrix4D from "../../geometry/matrix_4d";
 
 describe("Polygon - FarthestPointInDirection", () => {
     type TestTuple = [string, Vector, Polygon, Vector];
@@ -203,6 +204,59 @@ describe("Polygon - GetFloat32Array", () => {
         ],
     ])("%p", (description: string, expected: Float32Array, polygon: Polygon) => {
         expect(polygon.GetFloat32Array()).toEqual(expected);
+    });
+});
+
+describe("Polygon - Center", () => {
+    type TestTuple = [string, Vector, Polygon];
+    test.each<TestTuple>([
+        [
+            "No points",
+            new Vector(NaN,NaN),
+            new Polygon([])
+        ],
+        [
+            "Square around origin",
+            new Vector(0,0),
+            Polygon.RectangleByDimensions(1, 1, new Vector(0,0))
+        ],
+        [
+            "Rectangle around origin",
+            new Vector(0,0),
+            Polygon.RectangleByDimensions(10, 1, new Vector(0,0))
+        ],
+        [
+            "Rectangle around point",
+            new Vector(10,5),
+            Polygon.RectangleByDimensions(10, 3, new Vector(10,5))
+        ],
+    ])("%p", (description: string, expected: Vector, polygon: Polygon) => {
+        expect(polygon.Center()).toEqual(expected);
+    });
+});
+
+describe("Polygon - Apply4D", () => {
+    type TestTuple = [string, Polygon, Polygon, Matrix4D];
+    test.each<TestTuple>([
+        [
+            "No points",
+            new Polygon([]),
+            new Polygon([]),
+            new Matrix4D()
+        ],
+        [
+            "Square, move up 3, scale 2",
+            Polygon.RectangleByDimensions(2, 2, new Vector(0,3)),
+            Polygon.RectangleByDimensions(1, 1, new Vector(0,0)),
+            ((): Matrix4D => {
+                const mat = new Matrix4D();
+                mat.Translate(new Vector(0,3));
+                mat.Scale(new Vector(2,2));
+                return mat;
+            })()
+        ],
+    ])("%p", (description: string, expected: Polygon, polygon: Polygon, matrix: Matrix4D) => {
+        expect(polygon.Apply4D(matrix)).toEqual(expected);
     });
 });
 

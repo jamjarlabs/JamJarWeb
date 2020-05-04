@@ -18,12 +18,13 @@ about the collision.
 
 * [a](collision.md#a)
 * [b](collision.md#b)
+* [info](collision.md#info)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Collision**(`a`: [IEntity](../interfaces/ientity.md), `b`: [IEntity](../interfaces/ientity.md)): *[Collision](collision.md)*
+\+ **new Collision**(`a`: [IEntity](../interfaces/ientity.md), `b`: [IEntity](../interfaces/ientity.md), `info`: [CollisionInfo](collisioninfo.md)): *[Collision](collision.md)*
 
 **Parameters:**
 
@@ -31,6 +32,7 @@ Name | Type |
 ------ | ------ |
 `a` | [IEntity](../interfaces/ientity.md) |
 `b` | [IEntity](../interfaces/ientity.md) |
+`info` | [CollisionInfo](collisioninfo.md) |
 
 **Returns:** *[Collision](collision.md)*
 
@@ -45,3 +47,9 @@ ___
 ###  b
 
 • **b**: *[IEntity](../interfaces/ientity.md)*
+
+___
+
+###  info
+
+• **info**: *[CollisionInfo](collisioninfo.md)*
