@@ -6,6 +6,8 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v0.7.0] - 2020-05-04
 ### Added
 - Frustum Culling separated out, can choose a collision algorithm to use for
   culling.
@@ -119,7 +121,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - Basic physics for velocities/acceleration/rotation.
 
 [Unreleased]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.6.1...HEAD
+https://github.com/jamjarlabs/jamjar/compare/v0.7.0...HEAD
+[v0.7.0]: 
+https://github.com/jamjarlabs/jamjar/compare/v0.6.1...v0.7.0 
 [v0.6.1]: 
 https://github.com/jamjarlabs/jamjar/compare/v0.6.0...v0.6.1 
 [v0.6.0]: 
