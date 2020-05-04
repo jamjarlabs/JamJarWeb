@@ -1,14 +1,14 @@
 
-# Class: TestPointerSystem
+# Class: TestWheelSystem
 
-TestPointerSystem is an extension of the PointerSystem that exposes the pointer event functions,
+TestWheelSystem is an extension of the PointerSystem that exposes the wheel event functions,
 allows testing them without having to use JS event listeners
 
 ## Hierarchy
 
   ↳ [PointerSystem](pointersystem.md)
 
-  ↳ **TestPointerSystem**
+  ↳ **TestWheelSystem**
 
 ## Implements
 
@@ -18,33 +18,33 @@ allows testing them without having to use JS event listeners
 
 ### Constructors
 
-* [constructor](testpointersystem.md#constructor)
+* [constructor](testwheelsystem.md#constructor)
 
 ### Properties
 
-* [entities](testpointersystem.md#protected-entities)
-* [messageBus](testpointersystem.md#protected-messagebus)
-* [scene](testpointersystem.md#protected-optional-scene)
-* [subscriberID](testpointersystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](testpointersystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](testpointersystem.md#static-message_register)
-* [MESSAGE_UPDATE](testpointersystem.md#static-message_update)
+* [entities](testwheelsystem.md#protected-entities)
+* [messageBus](testwheelsystem.md#protected-messagebus)
+* [scene](testwheelsystem.md#protected-optional-scene)
+* [subscriberID](testwheelsystem.md#subscriberid)
+* [MESSAGE_DEREGISTER](testwheelsystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](testwheelsystem.md#static-message_register)
+* [MESSAGE_UPDATE](testwheelsystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](testpointersystem.md#destroy)
-* [OnDestroy](testpointersystem.md#protected-ondestroy)
-* [OnMessage](testpointersystem.md#onmessage)
-* [SimulatePointerEvent](testpointersystem.md#simulatepointerevent)
-* [Update](testpointersystem.md#update)
-* [pointerEvent](testpointersystem.md#protected-pointerevent)
-* [wheelEvent](testpointersystem.md#protected-wheelevent)
+* [Destroy](testwheelsystem.md#destroy)
+* [OnDestroy](testwheelsystem.md#protected-ondestroy)
+* [OnMessage](testwheelsystem.md#onmessage)
+* [SimulateWheelEvent](testwheelsystem.md#simulatewheelevent)
+* [Update](testwheelsystem.md#update)
+* [pointerEvent](testwheelsystem.md#protected-pointerevent)
+* [wheelEvent](testwheelsystem.md#protected-wheelevent)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent): *[TestPointerSystem](testpointersystem.md)*
+\+ **new TestWheelSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent): *[TestWheelSystem](testwheelsystem.md)*
 
 *Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
 
@@ -63,7 +63,7 @@ Name | Type | Default |
 `lockedPointerPosition?` | [Vector](vector.md) | - |
 `lastWheelEvent?` | WheelEvent | - |
 
-**Returns:** *[TestPointerSystem](testpointersystem.md)*
+**Returns:** *[TestWheelSystem](testwheelsystem.md)*
 
 ## Properties
 
@@ -185,15 +185,15 @@ Name | Type |
 
 ___
 
-###  SimulatePointerEvent
+###  SimulateWheelEvent
 
-▸ **SimulatePointerEvent**(`event`: PointerEvent): *void*
+▸ **SimulateWheelEvent**(`event`: WheelEvent): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`event` | PointerEvent |
+`event` | WheelEvent |
 
 **Returns:** *void*
 

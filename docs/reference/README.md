@@ -75,6 +75,7 @@
 * [TestScene](classes/testscene.md)
 * [TestShader](classes/testshader.md)
 * [TestSystem](classes/testsystem.md)
+* [TestWheelSystem](classes/testwheelsystem.md)
 * [Text](classes/text.md)
 * [TextRender](classes/textrender.md)
 * [TextSystem](classes/textsystem.md)

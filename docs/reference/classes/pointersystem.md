@@ -11,6 +11,8 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
   ↳ [TestPointerSystem](testpointersystem.md)
 
+  ↳ [TestWheelSystem](testwheelsystem.md)
+
 ## Implements
 
 * [ISubscriber](../interfaces/isubscriber.md)
@@ -26,6 +28,7 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 * [entities](pointersystem.md#protected-entities)
 * [inputElement](pointersystem.md#private-inputelement)
 * [isFullscreen](pointersystem.md#private-isfullscreen)
+* [lastWheelEvent](pointersystem.md#private-lastwheelevent)
 * [lockedPointerPosition](pointersystem.md#private-lockedpointerposition)
 * [messageBus](pointersystem.md#protected-messagebus)
 * [scene](pointersystem.md#protected-optional-scene)
@@ -39,15 +42,16 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 * [Destroy](pointersystem.md#destroy)
 * [OnDestroy](pointersystem.md#protected-ondestroy)
 * [OnMessage](pointersystem.md#onmessage)
-* [Update](pointersystem.md#protected-update)
+* [Update](pointersystem.md#update)
 * [pointerEvent](pointersystem.md#protected-pointerevent)
+* [wheelEvent](pointersystem.md#protected-wheelevent)
 * [EVALUATOR](pointersystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md)): *[PointerSystem](pointersystem.md)*
+\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent): *[PointerSystem](pointersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -62,6 +66,7 @@ Name | Type | Default |
 `subscriberID?` | undefined &#124; number | - |
 `isFullscreen` | boolean | false |
 `lockedPointerPosition?` | [Vector](vector.md) | - |
+`lastWheelEvent?` | WheelEvent | - |
 
 **Returns:** *[PointerSystem](pointersystem.md)*
 
@@ -95,6 +100,15 @@ ___
 
 If the game is in fullscreen mode or not.
 true = in fullscreen, false = not in fullscreen
+
+___
+
+### `Private` lastWheelEvent
+
+• **lastWheelEvent**: *WheelEvent | undefined*
+
+Last wheel event captured, stored here to throttle a potentially
+frequently firing event
 
 ___
 
@@ -210,19 +224,11 @@ Name | Type |
 
 ___
 
-### `Protected` Update
+###  Update
 
-▸ **Update**(`dt`: number): *void*
+▸ **Update**(): *void*
 
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
-
-General update method, default empty. Override with custom logic.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+*Overrides [System](system.md).[Update](system.md#protected-update)*
 
 **Returns:** *void*
 
@@ -232,15 +238,35 @@ ___
 
 ▸ **pointerEvent**(`event`: PointerEvent): *void*
 
-When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
-Adds in useful information, such as pointer position within camera bounds, pointer world position
-for each camera and if the pointer is within a camera's bounds.
+When a Pointer Event occurs; dispatches the pointer event with extra info
+through the JamJar messaging system as a Pointer.
+Adds in useful information, such as pointer position within camera
+bounds, pointer world position for each camera and if the pointer is
+within a camera's bounds.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `event` | PointerEvent | Pointer Event  |
+
+**Returns:** *void*
+
+___
+
+### `Protected` wheelEvent
+
+▸ **wheelEvent**(`event`: WheelEvent): *void*
+
+When a Wheel Event occurs; used to store the last wheel event to be
+dispatched at the next update. This is to throttle this event which can
+be fired many times.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`event` | WheelEvent | Fired wheel event  |
 
 **Returns:** *void*
 

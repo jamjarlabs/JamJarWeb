@@ -57,22 +57,30 @@ class PointerSystem extends System {
      * If it is undefined there is no pointer lock.
      */
     private lockedPointerPosition: Vector | undefined;
+    /**
+     * Last wheel event captured, stored here to throttle a potentially
+     * frequently firing event
+     */
+    private lastWheelEvent: WheelEvent | undefined;
 
     constructor(messageBus: IMessageBus, inputElement: HTMLElement,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
         isFullscreen = false,
-        lockedPointerPosition?: Vector) {
+        lockedPointerPosition?: Vector,
+        lastWheelEvent?: WheelEvent) {
         super(messageBus, scene, PointerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, [FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, FullscreenSystem.MESSAGE_EXIT_FULLSCREEN]);
         this.inputElement = inputElement;
         this.isFullscreen = isFullscreen;
         this.lockedPointerPosition = lockedPointerPosition;
+        this.lastWheelEvent = lastWheelEvent;
         // Set up listeners
         this.inputElement.addEventListener("pointermove", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("pointerdown", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("pointerup", this.pointerEvent.bind(this));
+        this.inputElement.addEventListener("wheel", this.wheelEvent.bind(this));
     }
 
     public OnMessage(message: IMessage): void {
@@ -90,10 +98,30 @@ class PointerSystem extends System {
         }
     }
 
+    public Update(): void {
+        // If wheel event waiting, publish it - in a throttled way
+        if (this.lastWheelEvent !== undefined) {
+            this.messageBus.Publish(new Message<WheelEvent>("wheel", this.lastWheelEvent));
+            this.lastWheelEvent = undefined;
+        }
+    }
+
     /**
-     * When a Pointer Event occurs; used to store pointer events to be dispatched at the next update.
-     * Adds in useful information, such as pointer position within camera bounds, pointer world position
-     * for each camera and if the pointer is within a camera's bounds.
+     * When a Wheel Event occurs; used to store the last wheel event to be
+     * dispatched at the next update. This is to throttle this event which can
+     * be fired many times.
+     * @param {WheelEvent} event Fired wheel event 
+     */
+    protected wheelEvent(event: WheelEvent): void {
+        this.lastWheelEvent = event;
+    }
+
+    /**
+     * When a Pointer Event occurs; dispatches the pointer event with extra info
+     * through the JamJar messaging system as a Pointer.
+     * Adds in useful information, such as pointer position within camera
+     * bounds, pointer world position for each camera and if the pointer is
+     * within a camera's bounds.
      * @param {PointerEvent} event Pointer Event
      */
     protected pointerEvent(event: PointerEvent): void {
