@@ -34,6 +34,9 @@ import DefaultFragmentShader from "./default_fragment_shader";
 import RenderSystem from "../render/render_system";
 import DefaultTextFragmentShader from "./default_text_fragment_shader";
 import IRenderable from "../../rendering/irenderable";
+import IFrustumCuller from "../frustum_culler/ifrustum_culler";
+import FrustumCuller from "../frustum_culler/frustum_culler";
+import Polygon from "../shape/polygon";
 
 /**
  * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
@@ -52,6 +55,7 @@ class WebGLSystem extends RenderSystem {
     private textures: Map<string, WebGLTexture>;
     private shaders: Map<string, [WebGLShader, GLSLShader]>;
     private programs: Map<string, WebGLProgram>;
+    private frustumCuller: IFrustumCuller;
 
     constructor(messageBus: IMessageBus,
         gl: WebGL2RenderingContext,
@@ -65,6 +69,7 @@ class WebGLSystem extends RenderSystem {
         shaders: Map<string, [WebGLShader, GLSLShader]> = new Map(),
         textures: Map<string, WebGLTexture> = new Map(),
         programs: Map<string, WebGLProgram> = new Map(),
+        frustumCuller: IFrustumCuller = new FrustumCuller(),
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, WebGLSystem.EVALUATOR, renderables, entities, subscriberID);
@@ -73,6 +78,7 @@ class WebGLSystem extends RenderSystem {
         this.textures = textures;
         this.shaders = shaders;
         this.programs = programs;
+        this.frustumCuller = frustumCuller;
 
         // Subscribe to messages
         this.messageBus.Subscribe(this, [
@@ -217,10 +223,7 @@ class WebGLSystem extends RenderSystem {
                 (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
             );
 
-            const cameraViewLeft = transform.position.x - camera.virtualScale.x/2;
-            const cameraViewRight = transform.position.x + camera.virtualScale.x/2;
-            const cameraViewTop = transform.position.y + camera.virtualScale.y/2;
-            const cameraViewBottom = transform.position.y - camera.virtualScale.y/2;
+            const cameraViewShape = Polygon.RectangleByDimensions(camera.virtualScale.x, camera.virtualScale.y).Transform(transform);
 
             // Define the viewport position of the camera
             gl.viewport(
@@ -323,9 +326,9 @@ class WebGLSystem extends RenderSystem {
                         }
                         gl.linkProgram(loadProgram);
                         if (!gl.getProgramParameter(loadProgram, gl.LINK_STATUS)) {
-                            console.error(gl.getProgramInfoLog(loadProgram));
+                            const linkErr = gl.getProgramInfoLog(loadProgram);
                             gl.deleteProgram(loadProgram);
-                            throw (`Error linking program '${programKey}'`);
+                            throw (`Error linking program '${programKey}', error: ${linkErr}`);
                         }
                         this.programs.set(programKey, loadProgram);
                         program = loadProgram;
@@ -372,18 +375,8 @@ class WebGLSystem extends RenderSystem {
                                 continue;
                             }
 
-                            let inView = false;
-                            let i = 0;
-                            while(!inView && i < renderable.vertices.points.length) {
-                                const vertex = renderable.vertices.points[i].Apply4D(renderable.modelMatrix);
-                                if (vertex.x < cameraViewRight && vertex.x > cameraViewLeft && 
-                                    vertex.y < cameraViewTop && vertex.y > cameraViewBottom) {
-                                    inView = true;
-                                }
-                                i++;
-                            }
                             // Frustum culling
-                            if (!inView) {
+                            if (this.frustumCuller.Cull(cameraViewShape, renderable.vertices.Apply4D(renderable.modelMatrix))) {
                                 // Not in camera view, skip rendering
                                 continue;
                             }

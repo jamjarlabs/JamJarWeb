@@ -14,23 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IEntity from "../../entity/ientity";
-import CollisionInfo from "./collision_info";
+import ICollisionAlgorithm from "./icollision_algorithm";
+import CollisionInfo from "../collision_info";
+import IShape from "../../shape/ishape";
 
 /**
- * Collision represents a collision between two entities, and all information
- * about the collision.
+ * AlwaysCollideAlgorithm provides an algorithm that always detects a collision
+ * between two shapes, used in testing or as a placeholder algorithm
  */
-class Collision {
-    public a: IEntity;
-    public b: IEntity;
-    public info: CollisionInfo;
-
-    constructor(a: IEntity, b: IEntity, info: CollisionInfo) {
-        this.a = a;
-        this.b = b;
-        this.info = info;
+class AlwaysCollideAlgorithm implements ICollisionAlgorithm {
+    CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined {
+        return new CollisionInfo(a, b);
     }
 }
 
-export default Collision;
+export default AlwaysCollideAlgorithm;

@@ -21,10 +21,12 @@ import Collider from "./collider";
 import SystemEntity from "../../system/system_entity";
 import Collision from "./collision";
 import Message from "../../message/message";
-import gjk from "./gjk";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import IScene from "../../scene/iscene";
+import ICollisionAlgorithm from "./algorithm/icollision_algorithm";
+import GJKAlgorithm from "./algorithm/gjk_algorithm";
+import AlwaysCollideAlgorithm from "./algorithm/always_collide_algorithm";
 
 /**
  * CollisionSystem watches for collisions between entities with Colliders and Transforms.
@@ -44,60 +46,71 @@ class CollisionSystem extends System {
         ));
     };
 
+    private narrowAlgorithm: ICollisionAlgorithm;
+    private broadAlgorithm: ICollisionAlgorithm;
+
     constructor(messageBus: IMessageBus, 
         scene?: IScene, 
+        narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm(),
+        broadAlgorithm: ICollisionAlgorithm = new AlwaysCollideAlgorithm(),
         entities?: Map<number, SystemEntity>, 
         subscriberID?: number) {
         super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
+        this.narrowAlgorithm = narrowAlgorithm;
+        this.broadAlgorithm = broadAlgorithm;
     }
 
     Update(): void {
         // Get collisions
-        const collisions = this.narrowPhase(this.broadPhase());
+        const collisions: Collision[] = [];
+        for (const a of this.entities.values()) {
+
+            const aTransform = a.Get(Transform.KEY) as Transform;
+            const aCollider = a.Get(Collider.KEY) as Collider;
+            const aShape = aCollider.shape.Transform(aTransform);
+
+            for (const b of this.entities.values()) {
+                if (a.entity.id === b.entity.id) {
+                    // Don't check for collisions with same entity
+                    continue;
+                }
+
+                const alreadyChecked = collisions.some((collision) => {
+                    return collision.a.id === a.entity.id && collision.b.id === b.entity.id ||
+                        collision.a.id === b.entity.id && collision.b.id === a.entity.id;
+                });
+                if (alreadyChecked) {
+                    // Don't check the same collision twice
+                    continue;
+                }
+
+                const bTransform = b.Get(Transform.KEY) as Transform;
+                const bCollider = b.Get(Collider.KEY) as Collider;
+                const bShape = bCollider.shape.Transform(bTransform);
+                if (!this.broadAlgorithm.CalculateCollision(aShape, bShape)) {
+                    // Broad algorithm discount collision
+                    continue;
+                }
+
+                const collisionInfo = this.narrowAlgorithm.CalculateCollision(aShape, bShape);
+                if (collisionInfo === undefined) {
+                    // No collision
+                    continue;
+                }
+                
+                // Collision detected
+                collisions.push(new Collision(
+                    a.entity,
+                    b.entity,
+                    collisionInfo
+                ));
+            }
+        }
+
         // Publish collisions
         for (const collision of collisions) {
             this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_DETECTED, collision));
         }
-    }
-
-    /**
-     * broadPhase uses a broad phase collision detection algorithm, gathering pairs of possible
-     * entities that are colliding.
-     * @param {SystemEntity[]} entities Array of entities to check for possible collisions.
-     * @returns {[SystemEntity, SystemEntity][]} A list of pairs of entities that could be colliding.
-     */
-    broadPhase(): [SystemEntity, SystemEntity][] {
-        const possibleCollisions: [SystemEntity, SystemEntity][] = [];
-        for (const a of this.entities.values()) {
-            for (const b of this.entities.values()) {
-                if (a.entity.id !== b.entity.id) {
-                    if (!possibleCollisions.some((collision) => {
-                        return collision[0].entity.id === b.entity.id && collision[1].entity.id === a.entity.id;
-                    })) {
-                        possibleCollisions.push([a,b]);
-                    }
-                }
-            }
-        }
-        return possibleCollisions;
-    }
-
-    /**
-     * narrowPhase uses a narrow phase collision detection algorithm, taking a list of possible
-     * collisions and determining actual collisions; alongside relevant collision info.
-     * @param {[SystemEntity, SystemEntity][]} possibleCollisions Array of pairs of possible colliding entities.
-     * @return {Collision[]} Array of detected collisions.
-     */
-    narrowPhase(possibleCollisions: [SystemEntity, SystemEntity][]): Collision[] {
-        const collisions: Collision[] = [];
-        for (const possibleCollision of possibleCollisions) {
-            const collision = gjk.Calculate(possibleCollision[0], possibleCollision[1]);
-            if (!collision) {
-                continue;
-            }
-            collisions.push(collision);
-        }
-        return collisions;
     }
 }
 

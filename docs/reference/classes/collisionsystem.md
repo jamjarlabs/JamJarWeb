@@ -25,8 +25,10 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 ### Properties
 
+* [broadAlgorithm](collisionsystem.md#private-broadalgorithm)
 * [entities](collisionsystem.md#protected-entities)
 * [messageBus](collisionsystem.md#protected-messagebus)
+* [narrowAlgorithm](collisionsystem.md#private-narrowalgorithm)
 * [scene](collisionsystem.md#protected-optional-scene)
 * [subscriberID](collisionsystem.md#subscriberid)
 * [MESSAGE_COLLISION_DETECTED](collisionsystem.md#static-message_collision_detected)
@@ -40,30 +42,36 @@ Once it has determined all collisions, it broadcasts them as messages.
 * [OnDestroy](collisionsystem.md#protected-ondestroy)
 * [OnMessage](collisionsystem.md#onmessage)
 * [Update](collisionsystem.md#update)
-* [broadPhase](collisionsystem.md#broadphase)
-* [narrowPhase](collisionsystem.md#narrowphase)
 * [EVALUATOR](collisionsystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
+\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`scene?` | [IScene](../interfaces/iscene.md) |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› |
-`subscriberID?` | undefined &#124; number |
+Name | Type | Default |
+------ | ------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`scene?` | [IScene](../interfaces/iscene.md) | - |
+`narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new GJKAlgorithm() |
+`broadAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AlwaysCollideAlgorithm() |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[CollisionSystem](collisionsystem.md)*
 
 ## Properties
+
+### `Private` broadAlgorithm
+
+• **broadAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
+
+___
 
 ### `Protected` entities
 
@@ -87,6 +95,12 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
+
+___
+
+### `Private` narrowAlgorithm
+
+• **narrowAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
 
 ___
 
@@ -196,38 +210,6 @@ ___
 *Overrides [System](system.md).[Update](system.md#protected-update)*
 
 **Returns:** *void*
-
-___
-
-###  broadPhase
-
-▸ **broadPhase**(): *[[SystemEntity](systementity.md), [SystemEntity](systementity.md)][]*
-
-broadPhase uses a broad phase collision detection algorithm, gathering pairs of possible
-entities that are colliding.
-
-**Returns:** *[[SystemEntity](systementity.md), [SystemEntity](systementity.md)][]*
-
-A list of pairs of entities that could be colliding.
-
-___
-
-###  narrowPhase
-
-▸ **narrowPhase**(`possibleCollisions`: [[SystemEntity](systementity.md), [SystemEntity](systementity.md)][]): *[Collision](collision.md)[]*
-
-narrowPhase uses a narrow phase collision detection algorithm, taking a list of possible
-collisions and determining actual collisions; alongside relevant collision info.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`possibleCollisions` | [[SystemEntity](systementity.md), [SystemEntity](systementity.md)][] | Array of pairs of possible colliding entities. |
-
-**Returns:** *[Collision](collision.md)[]*
-
-Array of detected collisions.
 
 ___
 

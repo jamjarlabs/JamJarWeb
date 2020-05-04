@@ -24,6 +24,7 @@ renders them onto a canvas.
 ### Properties
 
 * [entities](webglsystem.md#protected-entities)
+* [frustumCuller](webglsystem.md#private-frustumculler)
 * [gl](webglsystem.md#private-gl)
 * [messageBus](webglsystem.md#protected-messagebus)
 * [programs](webglsystem.md#private-programs)
@@ -52,7 +53,7 @@ renders them onto a canvas.
 
 ###  constructor
 
-\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
+\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
 
 *Overrides [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
 
@@ -72,6 +73,7 @@ Name | Type | Default |
 `shaders` | Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]› | new Map() |
 `textures` | Map‹string, WebGLTexture› | new Map() |
 `programs` | Map‹string, WebGLProgram› | new Map() |
+`frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
@@ -90,6 +92,12 @@ ID: Entity
 0: PlayerEntity
 1: ObstacleEntity
 etc.
+
+___
+
+### `Private` frustumCuller
+
+• **frustumCuller**: *[IFrustumCuller](../interfaces/ifrustumculler.md)*
 
 ___
 

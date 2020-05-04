@@ -32,6 +32,9 @@ global.window.WebGLTexture = function () {
 global.window.WebGLShader = function () {
     return {};
 };
+global.window.WebGLProgram = function () {
+    return {};
+};
 global.window.ImageData = function(width, height) {
     const data = new Uint8ClampedArray(width * height);
     data.fill(0);

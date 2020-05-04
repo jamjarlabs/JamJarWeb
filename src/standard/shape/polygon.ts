@@ -17,6 +17,7 @@ limitations under the License.
 import Vector from "../../geometry/vector";
 import IShape from "./ishape";
 import Transform from "../transform/transform";
+import Matrix4D from "../../geometry/matrix_4d";
 
 /**
  * Polygon is the representation of a 2D Polygon shape. 
@@ -27,6 +28,14 @@ class Polygon implements IShape {
 
     constructor(points: Vector[]) {
         this.points = points;
+    }
+
+    public Apply4D(matrix: Matrix4D): Polygon {
+        const appliedPoints: Vector[] = [];
+        for (const point of this.points) {
+            appliedPoints.push(point.Apply4D(matrix));
+        }
+        return new Polygon(appliedPoints);
     }
 
     public FarthestPointInDirection(direction: Vector): Vector {
@@ -41,6 +50,19 @@ class Polygon implements IShape {
             }
         }
         return farthestPoint;
+    }
+
+    public Center(): Vector {
+        let xSum = 0;
+        let ySum = 0;
+        for (const point of this.points) {
+            xSum += point.x;
+            ySum += point.y;
+        }
+        return new Vector(
+            xSum / this.points.length, 
+            ySum / this.points.length
+        );
     }
 
 

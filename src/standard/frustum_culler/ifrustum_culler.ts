@@ -14,23 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IEntity from "../../entity/ientity";
-import CollisionInfo from "./collision_info";
+import IShape from "../shape/ishape";
 
 /**
- * Collision represents a collision between two entities, and all information
- * about the collision.
+ * IFrustumCuller represents a structure that can determine if shapes are
+ * outside of a frustum and if they should be culled.
  */
-class Collision {
-    public a: IEntity;
-    public b: IEntity;
-    public info: CollisionInfo;
-
-    constructor(a: IEntity, b: IEntity, info: CollisionInfo) {
-        this.a = a;
-        this.b = b;
-        this.info = info;
-    }
+interface IFrustumCuller {
+    Cull(frustumPlaneShape: IShape, shape: IShape): boolean;
 }
 
-export default Collision;
+export default IFrustumCuller;

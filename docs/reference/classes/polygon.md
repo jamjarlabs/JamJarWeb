@@ -24,6 +24,8 @@ Can be used in collision detection and rendering.
 
 ### Methods
 
+* [Apply4D](polygon.md#apply4d)
+* [Center](polygon.md#center)
 * [FarthestPointInDirection](polygon.md#farthestpointindirection)
 * [GetArray](polygon.md#getarray)
 * [GetFloat32Array](polygon.md#getfloat32array)
@@ -53,6 +55,30 @@ Name | Type |
 • **points**: *[Vector](vector.md)[]*
 
 ## Methods
+
+###  Apply4D
+
+▸ **Apply4D**(`matrix`: [Matrix4D](matrix4d.md)): *[Polygon](polygon.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`matrix` | [Matrix4D](matrix4d.md) |
+
+**Returns:** *[Polygon](polygon.md)*
+
+___
+
+###  Center
+
+▸ **Center**(): *[Vector](vector.md)*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Returns:** *[Vector](vector.md)*
+
+___
 
 ###  FarthestPointInDirection
 
