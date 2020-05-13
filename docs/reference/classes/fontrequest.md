@@ -1,6 +1,10 @@
 
 # Class: FontRequest
 
+FontRequest specifies all information required to prepare and render a font.
+Once a font request has been processed the font will be available to be drawn
+with if the processing is successful.
+
 ## Hierarchy
 
 * **FontRequest**
@@ -87,17 +91,24 @@ ___
 
 • **generateMipmaps**: *boolean*
 
+Texture option for generating mipmaps or not.
+True = generate mipmaps, false = don't generate mipmaps.
+
 ___
 
 ###  magFilter
 
 • **magFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
 
+Texture magnification filter.
+
 ___
 
 ###  minFilter
 
 • **minFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
+
+Texture minification filter.
 
 ___
 
@@ -138,11 +149,15 @@ ___
 
 • **xWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
 
+Texture wrapping along x axis.
+
 ___
 
 ###  yWrap
 
 • **yWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
+
+Texture wrapping along y axis.
 
 ___
 

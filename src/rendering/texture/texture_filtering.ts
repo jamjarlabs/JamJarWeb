@@ -14,9 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * TextureFiltering specifies texture filtering modes
+ */
 enum TextureFiltering {
+    /**
+     * Nearest neighbour filtering.
+     */
     NEAREST = 1,
+    /**
+     * Bilinear filtering.
+     */
     BILINEAR = 2,
+    /**
+     * Trilinear filtering.
+     */
     TRILINEAR = 3
 }
 

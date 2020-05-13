@@ -14,6 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * IFontOptions represents optional properties for a font being loaded, will be
+ * generally used with defaults that are overridden.
+ */
 interface IFontOptions {
     /**
      * Characters to pre-render for the font, should be

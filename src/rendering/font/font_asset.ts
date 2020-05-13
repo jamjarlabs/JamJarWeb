@@ -16,14 +16,22 @@ limitations under the License.
 
 import FontRequest from "./font_request";
 
+/**
+ * FontAsset represents a loaded and rendered font asset.
+ */
 class FontAsset {
     /**
      * Message when a font asset is finished loading.
      */
     public static readonly MESSAGE_FINISH_LOAD = "finish_font_load";
-
+    
+    /**
+     * Name of the asset
+     */
     public name: string;
-
+    /**
+     * Request that created the asset
+     */
     public request: FontRequest;
 
     constructor(name: string, request: FontRequest) {

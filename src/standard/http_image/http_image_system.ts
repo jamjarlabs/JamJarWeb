@@ -24,8 +24,8 @@ import ImageAsset from "../../rendering/image/image_asset";
 import ImageRequest from "../../rendering/image/image_request";
 
 /**
- * HTTPImageSystem handles loading image assets in and making them available
- * to the engine for rendering.
+ * HTTPImageSystem handles loading image assets over HTTP and making them
+ * available to the engine for rendering.
  */
 class HTTPImageSystem extends System {
     public static readonly MESSAGE_REQUEST_FLUSH = "request_image_flush";

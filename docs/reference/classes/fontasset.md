@@ -1,6 +1,8 @@
 
 # Class: FontAsset
 
+FontAsset represents a loaded and rendered font asset.
+
 ## Hierarchy
 
 * **FontAsset**
@@ -38,11 +40,15 @@ Name | Type |
 
 • **name**: *string*
 
+Name of the asset
+
 ___
 
 ###  request
 
 • **request**: *[FontRequest](fontrequest.md)*
+
+Request that created the asset
 
 ___
 

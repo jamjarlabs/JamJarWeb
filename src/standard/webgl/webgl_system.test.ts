@@ -302,7 +302,7 @@ describe("WebGLSystem - OnMessage", () => {
             ))
         ],
         [
-            "Finish image asset load, missing texture options",
+            "Finish image asset load, unsupported x wrap",
             undefined,
             new WebGLSystem(
                 new FakeMessageBus(),
@@ -333,11 +333,131 @@ describe("WebGLSystem - OnMessage", () => {
             new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
                 "test", 
                 new Image(), 
-                false,
-                TextureWrapping.CLAMP_TO_EDGE,
+                true,
+                5,
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false
+            ))
+        ],
+        [
+            "Finish image asset load, unsupported y wrap",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new Image(), 
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                100,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
+        ],
+        [
+            "Finish image asset load, unsupported mag filter",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new Image(), 
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                23,
+                TextureFiltering.NEAREST,
+                false
+            ))
+        ],
+        [
+            "Finish image asset load, unsupported min filter",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new Image(), 
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.NEAREST,
+                88,
                 false
             ))
         ],
@@ -429,6 +549,56 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
                 false
+            ))
+        ],
+        [
+            "Finish image asset load, success, new asset, generate mipmap",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map([
+                    ["test", new WebGLTexture()]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test",
+                new Image(),
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                true
             ))
         ],
         [
@@ -531,6 +701,56 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
                 false
+            ))
+        ],
+        [
+            "Finish image asset load, success, image data, generate mipmap",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                new Map([
+                    ["test", new WebGLTexture()]
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext([
+                    new Reactor("createTexture", (): WebGLTexture => {
+                        return new WebGLTexture();
+                    })
+                ]),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new ImageData(5, 10), 
+                true, 
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                true
             ))
         ],
         [

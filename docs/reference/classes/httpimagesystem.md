@@ -1,8 +1,8 @@
 
 # Class: HTTPImageSystem
 
-HTTPImageSystem handles loading image assets in and making them available
-to the engine for rendering.
+HTTPImageSystem handles loading image assets over HTTP and making them
+available to the engine for rendering.
 
 ## Hierarchy
 

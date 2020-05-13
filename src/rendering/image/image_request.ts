@@ -18,6 +18,12 @@ import ITextureOptions from "../texture/itexture_options";
 import TextureFiltering from "../texture/texture_filtering";
 import TextureWrapping from "../texture/texture_wrapping";
 
+/**
+ * ImageRequest specifies all information required to load and prepare an image.
+ * This includes the source of the image, if the image should be fetched from a
+ * source (e.g. from a URL), and options for how the texture the image is
+ * rendered to should be generated.
+ */
 class ImageRequest {
     /**
      * Message to request an image asset to be loaded.
@@ -33,11 +39,26 @@ class ImageRequest {
      * Source of the image, where the image exists (URL, filepath etc.).
      */
     public source: string;
-
+    /**
+     * Texture minification filter.
+     */
     public minFilter: TextureFiltering;
+    /**
+     * Texture magnification filter.
+     */
     public magFilter: TextureFiltering;
+    /**
+     * Texture wrapping along x axis.
+     */
     public xWrap: TextureWrapping;
+    /**
+     * Texture wrapping along y axis.
+     */
     public yWrap: TextureWrapping;
+    /**
+     * Texture option for generating mipmaps or not.
+     * True = generate mipmaps, false = don't generate mipmaps.
+     */
     public generateMipmaps: boolean;
 
     constructor(name: string, source: string, textureOptions: ITextureOptions = {}) {

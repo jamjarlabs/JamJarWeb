@@ -1,6 +1,8 @@
 
 # Enumeration: TextureWrapping
 
+TextureWrapping specifies modes for wrapping a texture.
+
 ## Index
 
 ### Enumeration members
@@ -15,14 +17,20 @@
 
 • **CLAMP_TO_EDGE**: = 3
 
+Clamps the coordinates between 0 and 1.
+
 ___
 
 ###  MIRRORED_REPEAT
 
 • **MIRRORED_REPEAT**: = 2
 
+Repeat the texture image, mirroring the image with each repeat.
+
 ___
 
 ###  REPEAT
 
 • **REPEAT**: = 1
+
+Repeat the textures image.

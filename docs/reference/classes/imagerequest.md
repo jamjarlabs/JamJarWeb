@@ -1,6 +1,11 @@
 
 # Class: ImageRequest
 
+ImageRequest specifies all information required to load and prepare an image.
+This includes the source of the image, if the image should be fetched from a
+source (e.g. from a URL), and options for how the texture the image is
+rendered to should be generated.
+
 ## Hierarchy
 
 * **ImageRequest**
@@ -44,17 +49,24 @@ Name | Type | Default |
 
 • **generateMipmaps**: *boolean*
 
+Texture option for generating mipmaps or not.
+True = generate mipmaps, false = don't generate mipmaps.
+
 ___
 
 ###  magFilter
 
 • **magFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
 
+Texture magnification filter.
+
 ___
 
 ###  minFilter
 
 • **minFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
+
+Texture minification filter.
 
 ___
 
@@ -79,11 +91,15 @@ ___
 
 • **xWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
 
+Texture wrapping along x axis.
+
 ___
 
 ###  yWrap
 
 • **yWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
+
+Texture wrapping along y axis.
 
 ___
 

@@ -1,6 +1,8 @@
 
 # Enumeration: TextureFiltering
 
+TextureFiltering specifies texture filtering modes
+
 ## Index
 
 ### Enumeration members
@@ -15,14 +17,20 @@
 
 • **BILINEAR**: = 2
 
+Bilinear filtering.
+
 ___
 
 ###  NEAREST
 
 • **NEAREST**: = 1
 
+Nearest neighbour filtering.
+
 ___
 
 ###  TRILINEAR
 
 • **TRILINEAR**: = 3
+
+Trilinear filtering.

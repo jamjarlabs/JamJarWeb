@@ -490,7 +490,11 @@ class MainScene extends Scene {
             )
         )));
 
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("bullet", "assets/bullet.png")));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("bullet", "assets/bullet.png",
+        {
+            minFilter: TextureFiltering.NEAREST,
+            magFilter: TextureFiltering.NEAREST
+        })));
         this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("asteroid", "assets/asteroid.png")));
         this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("space_ship", "assets/space_ship.png", 
         {

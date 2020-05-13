@@ -17,11 +17,30 @@ limitations under the License.
 import TextureWrapping from "./texture_wrapping";
 import TextureFiltering from "./texture_filtering";
 
+/**
+ * ITextureOptions represents optional properties for a texture being rendered,
+ * will generally be used with defaults that are overridden.
+ */
 interface ITextureOptions {
+    /**
+     * Wrapping along the x-axis
+     */
     xWrap?: TextureWrapping;
+    /**
+     * Wrapping along the y-axis
+     */
     yWrap?: TextureWrapping;
+    /**
+     * Magnification filter.
+     */
     magFilter?: TextureFiltering;
+    /**
+     * Minification filter.
+     */
     minFilter?: TextureFiltering;
+    /**
+     * Flag for generating mipmaps or not, true = generate, false = don't generate
+     */
     generateMipmaps?: boolean;
 }
 

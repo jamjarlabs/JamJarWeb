@@ -14,9 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/**
+ * TextureWrapping specifies modes for wrapping a texture.
+ */
 enum TextureWrapping {
+    /**
+     * Repeat the textures image.
+     */
     REPEAT = 1,
+    /**
+     * Repeat the texture image, mirroring the image with each repeat.
+     */
     MIRRORED_REPEAT = 2,
+    /**
+     * Clamps the coordinates between 0 and 1.
+     */
     CLAMP_TO_EDGE = 3
 }
 

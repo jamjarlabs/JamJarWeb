@@ -1,6 +1,9 @@
 
 # Interface: IFontOptions
 
+IFontOptions represents optional properties for a font being loaded, will be
+generally used with defaults that are overridden.
+
 ## Hierarchy
 
 * **IFontOptions**

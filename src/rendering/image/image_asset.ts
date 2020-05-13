@@ -49,11 +49,26 @@ class ImageAsset {
      * none it will be undefined.
      */
     public error?: Error;
-
-    public xWrap: TextureWrapping;
-    public yWrap: TextureWrapping;
-    public magFilter: TextureFiltering;
+    /**
+     * Texture minification filter.
+     */
     public minFilter: TextureFiltering;
+    /**
+     * Texture magnification filter.
+     */
+    public magFilter: TextureFiltering;
+    /**
+     * Texture wrapping along x axis.
+     */
+    public xWrap: TextureWrapping;
+    /**
+     * Texture wrapping along y axis.
+     */
+    public yWrap: TextureWrapping;
+    /**
+     * Texture option for generating mipmaps or not.
+     * True = generate mipmaps, false = don't generate mipmaps.
+     */
     public generateMipmaps: boolean;
 
     constructor(name: string, 

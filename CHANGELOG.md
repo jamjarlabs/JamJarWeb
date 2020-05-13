@@ -6,6 +6,23 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Ability to configure how textures are configured with `ITextureOptions`.
+  - Can specify x and y wrap.
+    - Repeat.
+    - Repeat mirror.
+    - Clamp to edge.
+  - Can specify magnification and minification filters.
+    - Nearest neighbour.
+    - Bilinear.
+    - Trilinear.
+  - Can specify generating mipmaps.
+### Changed
+- Images now loaded with a new `ImageRequest` rather than an `ImageAsset` -
+  `ImageAsset` used internally.
+  - Message for loading images moved from `ImageAsset` to `ImageRequest`.
+- Optional font options specified by a `IFontOptions` interface, allows
+  overriding default font options such as `characters`, `buffer`, `cutoff` etc.
 
 ## [v0.7.0] - 2020-05-04
 ### Added

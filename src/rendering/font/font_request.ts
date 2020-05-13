@@ -19,12 +19,17 @@ import TextureFiltering from "../texture/texture_filtering";
 import TextureWrapping from "../texture/texture_wrapping";
 import IFontOptions from "./ifont_options";
 
-
+/**
+ * FontRequest specifies all information required to prepare and render a font.
+ * Once a font request has been processed the font will be available to be drawn
+ * with if the processing is successful.
+ */
 class FontRequest {
     /**
      * Message to request a font asset to be loaded.
      */
     public static readonly MESSAGE_REQUEST_LOAD = "request_font_load";
+
     /**
      * Unique name to identify the font and settings combination.
      */
@@ -60,11 +65,26 @@ class FontRequest {
      * inside part the glyph.
      */
     public cutoff: number;
-    
+    /**
+     * Texture minification filter.
+     */
     public minFilter: TextureFiltering;
+    /**
+     * Texture magnification filter.
+     */
     public magFilter: TextureFiltering;
+    /**
+     * Texture wrapping along x axis.
+     */
     public xWrap: TextureWrapping;
+    /**
+     * Texture wrapping along y axis.
+     */
     public yWrap: TextureWrapping;
+    /**
+     * Texture option for generating mipmaps or not.
+     * True = generate mipmaps, false = don't generate mipmaps.
+     */
     public generateMipmaps: boolean;
 
     constructor(name: string,
