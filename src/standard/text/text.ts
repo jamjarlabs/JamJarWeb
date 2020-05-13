@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
-import ShaderAsset from "../../rendering/shader_asset";
+import ShaderAsset from "../../rendering/shader/shader_asset";
 import TextAlignment from "./text_alignment";
 import Color from "../../rendering/color";
 import Vector from "../../geometry/vector";

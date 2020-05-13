@@ -16,7 +16,7 @@ limitations under the License.
 
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
-import ShaderAsset from "../../rendering/shader_asset";
+import ShaderAsset from "../../rendering/shader/shader_asset";
 
 /**
  * DefaultFragmentShader is the shader loaded for handling the

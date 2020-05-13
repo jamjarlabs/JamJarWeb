@@ -20,17 +20,21 @@ Also stores the image itself.
 ### Properties
 
 * [error](imageasset.md#optional-error)
+* [generateMipmaps](imageasset.md#generatemipmaps)
 * [image](imageasset.md#image)
+* [magFilter](imageasset.md#magfilter)
+* [minFilter](imageasset.md#minfilter)
 * [name](imageasset.md#name)
 * [success](imageasset.md#success)
+* [xWrap](imageasset.md#xwrap)
+* [yWrap](imageasset.md#ywrap)
 * [MESSAGE_FINISH_LOAD](imageasset.md#static-message_finish_load)
-* [MESSAGE_REQUEST_LOAD](imageasset.md#static-message_request_load)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement | ImageData, `success`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
+\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement | ImageData, `success`: boolean, `xWrap`: [TextureWrapping](../enums/texturewrapping.md), `yWrap`: [TextureWrapping](../enums/texturewrapping.md), `magFilter`: [TextureFiltering](../enums/texturefiltering.md), `minFilter`: [TextureFiltering](../enums/texturefiltering.md), `generateMipmaps`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
 
 **Parameters:**
 
@@ -39,6 +43,11 @@ Name | Type |
 `name` | string |
 `image` | HTMLImageElement &#124; ImageData |
 `success` | boolean |
+`xWrap` | [TextureWrapping](../enums/texturewrapping.md) |
+`yWrap` | [TextureWrapping](../enums/texturewrapping.md) |
+`magFilter` | [TextureFiltering](../enums/texturefiltering.md) |
+`minFilter` | [TextureFiltering](../enums/texturefiltering.md) |
+`generateMipmaps` | boolean |
 `error?` | Error |
 
 **Returns:** *[ImageAsset](imageasset.md)*
@@ -54,11 +63,29 @@ none it will be undefined.
 
 ___
 
+###  generateMipmaps
+
+• **generateMipmaps**: *boolean*
+
+___
+
 ###  image
 
 • **image**: *HTMLImageElement | ImageData*
 
 The actual image.
+
+___
+
+###  magFilter
+
+• **magFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
+
+___
+
+###  minFilter
+
+• **minFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
 
 ___
 
@@ -80,16 +107,20 @@ load, false = failed loading.
 
 ___
 
+###  xWrap
+
+• **xWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
+
+___
+
+###  yWrap
+
+• **yWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
+
+___
+
 ### `Static` MESSAGE_FINISH_LOAD
 
 ▪ **MESSAGE_FINISH_LOAD**: *"finish_image_load"* = "finish_image_load"
 
 Message when an image asset is finished loading.
-
-___
-
-### `Static` MESSAGE_REQUEST_LOAD
-
-▪ **MESSAGE_REQUEST_LOAD**: *"request_image_load"* = "request_image_load"
-
-Message to request an image asset to be loaded.

@@ -25,9 +25,9 @@ import FakeEntity from "../../fake/entity";
 import Camera from "../camera/camera";
 import Transform from "../transform/transform";
 import SystemEntity from "../../system/system_entity";
-import ImageAsset from "../../rendering/image_asset";
-import ShaderAsset from "../../rendering/shader_asset";
-import IShader from "../../rendering/ishader";
+import ImageAsset from "../../rendering/image/image_asset";
+import ShaderAsset from "../../rendering/shader/shader_asset";
+import IShader from "../../rendering/shader/ishader";
 import GLSLShader from "../glsl/glsl_shader";
 import FakeWebGL2RenderingContext from "../../fake/webgl2_rendering_context";
 import Reactor from "../../fake/reactor";
@@ -36,7 +36,7 @@ import Renderable from "../../rendering/renderable";
 import Polygon from "../shape/polygon";
 import Matrix4D from "../../geometry/matrix_4d";
 import Material from "../../rendering/material";
-import Texture from "../../rendering/texture";
+import Texture from "../../rendering/texture/texture";
 import FrustumCuller from "../frustum_culler/frustum_culler";
 import NeverCollideAlgorithm from "../collision/algorithm/never_collide_algorithm";
 import AlwaysCollideAlgorithm from "../collision/algorithm/always_collide_algorithm";
@@ -44,6 +44,8 @@ import ICollisionAlgorithm from "../collision/algorithm/icollision_algorithm";
 import Vector from "../../geometry/vector";
 import CollisionInfo from "../collision/collision_info";
 import IShape from "../shape/ishape";
+import TextureFiltering from "../../rendering/texture/texture_filtering";
+import TextureWrapping from "../../rendering/texture/texture_wrapping";
 
 class TestCollisionAlgorithm implements ICollisionAlgorithm {
     private centerPairs: [Vector, Vector][];
@@ -288,7 +290,56 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0,
             ),
-            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), false))
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new Image(), 
+                false, 
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
+        ],
+        [
+            "Finish image asset load, missing texture options",
+            undefined,
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new WebGLSystem(
+                new FakeMessageBus(),
+                new FakeWebGL2RenderingContext(),
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0,
+            ),
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new Image(), 
+                false,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
         ],
         [
             "Finish image asset load, fail to create texture",
@@ -319,7 +370,16 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0,
             ),
-            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), true))
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test",
+                new Image(),
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
         ],
         [
             "Finish image asset load, success, new asset",
@@ -360,7 +420,16 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0,
             ),
-            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), true))
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test",
+                new Image(),
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
         ],
         [
             "Finish image asset load, success, replace existing",
@@ -403,7 +472,16 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0,
             ),
-            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new Image(), true))
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test",
+                new Image(),
+                true,
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
         ],
         [
             "Finish image asset load, success, image data",
@@ -444,7 +522,16 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0,
             ),
-            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset("test", new ImageData(5, 10), true))
+            new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
+                "test", 
+                new ImageData(5, 10), 
+                true, 
+                TextureWrapping.CLAMP_TO_EDGE,
+                TextureWrapping.MIRRORED_REPEAT,
+                TextureFiltering.TRILINEAR,
+                TextureFiltering.NEAREST,
+                false
+            ))
         ],
         [
             "Finish shader load, no payload",
@@ -781,7 +868,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -802,7 +889,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -829,7 +916,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -855,7 +942,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -887,7 +974,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -913,7 +1000,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -923,12 +1010,12 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ))
                     )
                 ],
@@ -954,7 +1041,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -965,19 +1052,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 undefined,
                 undefined,
@@ -993,7 +1080,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1004,19 +1091,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 undefined,
                 undefined,
@@ -1038,7 +1125,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1050,19 +1137,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 undefined,
                 undefined,
@@ -1078,7 +1165,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1090,19 +1177,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 undefined,
                 undefined,
@@ -1124,7 +1211,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1138,8 +1225,8 @@ describe("WebGLSystem - Render", () => {
                 [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 undefined,
                 new Map<string, WebGLProgram>([
@@ -1157,7 +1244,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1169,19 +1256,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 undefined,
                 undefined,
@@ -1203,7 +1290,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1217,8 +1304,8 @@ describe("WebGLSystem - Render", () => {
                 [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1238,7 +1325,7 @@ describe("WebGLSystem - Render", () => {
             new WebGLSystem(
                 new FakeMessageBus(),
                 new FakeWebGL2RenderingContext([
-                    new Reactor("drawArrays", (): void => { throw("expected no draw call"); }),
+                    new Reactor("drawArrays", (): void => { throw ("expected no draw call"); }),
                     new Reactor("canvas", (): HTMLCanvasElement => {
                         const canvas = new HTMLCanvasElement();
                         canvas.width = 10;
@@ -1250,19 +1337,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1302,8 +1389,8 @@ describe("WebGLSystem - Render", () => {
                 [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1335,19 +1422,19 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "",)]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "",)]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "")]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1387,8 +1474,8 @@ describe("WebGLSystem - Render", () => {
                 [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => { return; }, () => { return; }, () => { return; })]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => { return; }, () => { return; }, () => { return; })]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1397,21 +1484,21 @@ describe("WebGLSystem - Render", () => {
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
                 new FrustumCuller(new TestCollisionAlgorithm([
-                    [new Vector(1, 1), new Vector(0,0)],
-                    [new Vector(1, 1), new Vector(1,0)],
-                    [new Vector(1, 1), new Vector(2,0)],
-                    [new Vector(2, 2), new Vector(2,0)],
-                    [new Vector(2, 2), new Vector(3,0)],
-                    [new Vector(2, 2), new Vector(4,0)]
+                    [new Vector(1, 1), new Vector(0, 0)],
+                    [new Vector(1, 1), new Vector(1, 0)],
+                    [new Vector(1, 1), new Vector(2, 0)],
+                    [new Vector(2, 2), new Vector(2, 0)],
+                    [new Vector(2, 2), new Vector(3, 0)],
+                    [new Vector(2, 2), new Vector(4, 0)]
                 ])),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(new Vector(1,1)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])],
                     [1, new SystemEntity(new FakeEntity(0), [
-                        new Transform(new Vector(2,2)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(2, 2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])]
                 ]),
                 0,
@@ -1431,51 +1518,51 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(0,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     ),
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(1,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(1, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     ),
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(2,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(2, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     ),
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(3,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(3, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     ),
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(4,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(4, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"])
                     )
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => { return; }, () => { return; }, () => { return; })]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => { return; }, () => { return; }, () => { return; })]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1484,21 +1571,21 @@ describe("WebGLSystem - Render", () => {
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
                 new FrustumCuller(new TestCollisionAlgorithm([
-                    [new Vector(1, 1), new Vector(0,0)],
-                    [new Vector(1, 1), new Vector(1,0)],
-                    [new Vector(1, 1), new Vector(2,0)],
-                    [new Vector(2, 2), new Vector(2,0)],
-                    [new Vector(2, 2), new Vector(3,0)],
-                    [new Vector(2, 2), new Vector(4,0)]
+                    [new Vector(1, 1), new Vector(0, 0)],
+                    [new Vector(1, 1), new Vector(1, 0)],
+                    [new Vector(1, 1), new Vector(2, 0)],
+                    [new Vector(2, 2), new Vector(2, 0)],
+                    [new Vector(2, 2), new Vector(3, 0)],
+                    [new Vector(2, 2), new Vector(4, 0)]
                 ])),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(new Vector(1,1)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])],
                     [1, new SystemEntity(new FakeEntity(0), [
-                        new Transform(new Vector(2,2)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(2, 2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])]
                 ]),
                 0,
@@ -1526,8 +1613,8 @@ describe("WebGLSystem - Render", () => {
                 [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => { return; }, () => { return; }, () => { return; })]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => { return; }, () => { return; }, () => { return; })]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1536,21 +1623,21 @@ describe("WebGLSystem - Render", () => {
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
                 new FrustumCuller(new TestCollisionAlgorithm([
-                    [new Vector(1, 1), new Vector(0,0)],
-                    [new Vector(1, 1), new Vector(1,0)],
-                    [new Vector(1, 1), new Vector(2,0)],
-                    [new Vector(2, 2), new Vector(0,0)],
-                    [new Vector(2, 2), new Vector(1,0)],
-                    [new Vector(2, 2), new Vector(2,0)]
+                    [new Vector(1, 1), new Vector(0, 0)],
+                    [new Vector(1, 1), new Vector(1, 0)],
+                    [new Vector(1, 1), new Vector(2, 0)],
+                    [new Vector(2, 2), new Vector(0, 0)],
+                    [new Vector(2, 2), new Vector(1, 0)],
+                    [new Vector(2, 2), new Vector(2, 0)]
                 ])),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(new Vector(1,1)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
-                        new Transform(new Vector(2,2)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(2, 2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])]
                 ]),
                 0,
@@ -1570,41 +1657,41 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 [
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(0,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"]),
-                        undefined, 
+                        undefined,
                         new FakeEntity(0)
                     ),
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(1,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(1, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
                         ), ["test_vert", "test_frag"]),
-                        undefined, 
+                        undefined,
                         new FakeEntity(0)
                     ),
-                    new Renderable(0, 
-                        Polygon.RectangleByDimensions(1,1, new Vector(2,0)), 
-                        new Matrix4D(), 
+                    new Renderable(0,
+                        Polygon.RectangleByDimensions(1, 1, new Vector(2, 0)),
+                        new Matrix4D(),
                         new Material(new Texture(
                             "test",
-                            Polygon.RectangleByDimensions(1,1).GetFloat32Array()
-                        ), ["test_vert", "test_frag"]), 
-                        undefined, 
+                            Polygon.RectangleByDimensions(1, 1).GetFloat32Array()
+                        ), ["test_vert", "test_frag"]),
+                        undefined,
                         new FakeEntity(0)
                     ),
                 ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
-                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => {return;}, () => {return;}, () => {return;})]],
-                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => {return;}, () => {return;}, () => {return;})]]
+                    ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "", () => { return; }, () => { return; }, () => { return; })]],
+                    ["test_frag", [new WebGLShader(), new GLSLShader(ShaderAsset.FRAGMENT_TYPE, "", () => { return; }, () => { return; }, () => { return; })]]
                 ]),
                 new Map<string, WebGLTexture>([
                     ["test", new WebGLTexture()]
@@ -1613,21 +1700,21 @@ describe("WebGLSystem - Render", () => {
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
                 new FrustumCuller(new TestCollisionAlgorithm([
-                    [new Vector(1, 1), new Vector(0,0)],
-                    [new Vector(1, 1), new Vector(1,0)],
-                    [new Vector(1, 1), new Vector(2,0)],
-                    [new Vector(2, 2), new Vector(0,0)],
-                    [new Vector(2, 2), new Vector(1,0)],
-                    [new Vector(2, 2), new Vector(2,0)]
+                    [new Vector(1, 1), new Vector(0, 0)],
+                    [new Vector(1, 1), new Vector(1, 0)],
+                    [new Vector(1, 1), new Vector(2, 0)],
+                    [new Vector(2, 2), new Vector(0, 0)],
+                    [new Vector(2, 2), new Vector(1, 0)],
+                    [new Vector(2, 2), new Vector(2, 0)]
                 ])),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(new Vector(1,1)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
-                        new Transform(new Vector(2,2)),
-                        new Camera(undefined, undefined, undefined, new Vector(1,1))
+                        new Transform(new Vector(2, 2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1))
                     ])]
                 ]),
                 0,

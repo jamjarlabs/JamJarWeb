@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { ISDFGenerator, SDFGeneratorFactory } from "tiny-sdf";
+import TinySDF from "tiny-sdf";
 import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
@@ -25,21 +27,20 @@ import Game from "../../game";
 import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import Text from "./text";
-import FontAsset from "../../rendering/font_asset";
-import { ISDFGenerator, SDFGeneratorFactory } from "tiny-sdf";
-import ImageAsset from "../../rendering/image_asset";
+import ImageAsset from "../../rendering/image/image_asset";
 import Renderable from "../../rendering/renderable";
 import RenderSystem from "../render/render_system";
 import Polygon from "../shape/polygon";
 import Material from "../../rendering/material";
-import Texture from "../../rendering/texture";
+import Texture from "../../rendering/texture/texture";
 import FontMapping from "./font_mapping";
 import Vector from "../../geometry/vector";
 import TextAlignment from "./text_alignment";
 import TextRender from "./text_render";
 import Camera from "../camera/camera";
 import UI from "../ui/ui";
-import TinySDF from "tiny-sdf";
+import FontRequest from "../../rendering/font/font_request";
+import FontAsset from "../../rendering/font/font_asset";
 
 /**
  * TextSystem is a pre-rendering system, taking in text components and
@@ -79,7 +80,7 @@ class TextSystem extends System {
         this.sdfGeneratorFactory = sdfGeneratorFactory;
         this.messageBus.Subscribe(this, [ 
             Game.MESSAGE_PRE_RENDER, 
-            FontAsset.MESSAGE_REQUEST_LOAD,
+            FontRequest.MESSAGE_REQUEST_LOAD,
         ]);
     }
 
@@ -94,8 +95,8 @@ class TextSystem extends System {
                 this.prepareText(renderMessage.payload);
                 break;
             }
-            case FontAsset.MESSAGE_REQUEST_LOAD: {
-                const fontMessage = message as Message<FontAsset>;
+            case FontRequest.MESSAGE_REQUEST_LOAD: {
+                const fontMessage = message as Message<FontRequest>;
                 if (fontMessage.payload === undefined) {
                     return;
                 }
@@ -105,22 +106,22 @@ class TextSystem extends System {
         }
     }
 
-    private loadFont(asset: FontAsset): void {
+    private loadFont(request: FontRequest): void {
         // Set up SDF generator
-        const generator = this.sdfGeneratorFactory(asset.size, asset.buffer, asset.radius, asset.cutoff, asset.family, asset.weight);
+        const generator = this.sdfGeneratorFactory(request.size, request.buffer, request.radius, request.cutoff, request.family, request.weight);
 
         // Calculate size of each character glyph in pixels
-        const glyphSize = asset.size + asset.buffer * 2;
+        const glyphSize = request.size + request.buffer * 2;
         // Calculate dimensions of glyph atlas, must be a square, meaning
         // that this is the minimum x^2 that can fit in all of the glyphs
-        const atlasSize = Math.ceil(Math.sqrt(asset.characters.length));
+        const atlasSize = Math.ceil(Math.sqrt(request.characters.length));
 
         // Calculate image data for each character, and calculate
         // mapping data for each character
         const characterImages: ImageData[] = [];
         const mapping: Map<string, number> = new Map();
-        for (let i = 0; i < asset.characters.length; i++) {
-            const char = asset.characters[i];
+        for (let i = 0; i < request.characters.length; i++) {
+            const char = request.characters[i];
             const charData = generator.draw(char);
             characterImages.push(charData);
             mapping.set(char, i);
@@ -185,19 +186,27 @@ class TextSystem extends System {
         // Save font mapping, allows for retrieval of font at render time,
         // alongside information for retrieving character positioning/layout
         this.mappings.set(
-            asset.name,
+            request.name,
             new FontMapping(
                 atlasSize,
-                asset,
+                new FontAsset(
+                    request.name,
+                    request
+                ),
                 mapping
             )
         );
 
         // Publish the newly generated bitmap image to load as a texture
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
-            `font_${asset.name}`,
+            `font_${request.name}`,
             new ImageData(glyphAtlas, glyphSize * atlasSize, glyphSize * atlasSize),
-            true
+            true,
+            request.xWrap,
+            request.yWrap,
+            request.magFilter,
+            request.minFilter,
+            request.generateMipmaps
         )));
     }
 
@@ -342,12 +351,12 @@ class TextSystem extends System {
                         text.shaders
                     ),
                     new TextRender(
-                        mapping.asset.family,
-                        mapping.asset.weight,
-                        mapping.asset.buffer,
-                        mapping.asset.radius,
-                        mapping.asset.cutoff,
-                        mapping.asset.size,
+                        mapping.asset.request.family,
+                        mapping.asset.request.weight,
+                        mapping.asset.request.buffer,
+                        mapping.asset.request.radius,
+                        mapping.asset.request.cutoff,
+                        mapping.asset.request.size,
                         text.color,
                         text.zOrder,
                         text.align

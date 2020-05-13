@@ -237,14 +237,13 @@ ___
 
 ### `Private` load
 
-▸ **load**(`name`: string, `src`: string): *void*
+▸ **load**(`request`: [ImageRequest](imagerequest.md)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`name` | string |
-`src` | string |
+`request` | [ImageRequest](imagerequest.md) |
 
 **Returns:** *void*
 
@@ -252,7 +251,7 @@ ___
 
 ### `Protected` onError
 
-▸ **onError**(`event`: Event | undefined, `image`: HTMLImageElement, `name`: string): *void*
+▸ **onError**(`event`: Event | undefined, `image`: HTMLImageElement, `request`: [ImageRequest](imagerequest.md)): *void*
 
 **Parameters:**
 
@@ -260,7 +259,7 @@ Name | Type |
 ------ | ------ |
 `event` | Event &#124; undefined |
 `image` | HTMLImageElement |
-`name` | string |
+`request` | [ImageRequest](imagerequest.md) |
 
 **Returns:** *void*
 
@@ -268,7 +267,7 @@ ___
 
 ### `Protected` onLoad
 
-▸ **onLoad**(`event`: Event | undefined, `image`: HTMLImageElement, `name`: string): *void*
+▸ **onLoad**(`event`: Event | undefined, `image`: HTMLImageElement, `request`: [ImageRequest](imagerequest.md)): *void*
 
 **Parameters:**
 
@@ -276,6 +275,6 @@ Name | Type |
 ------ | ------ |
 `event` | Event &#124; undefined |
 `image` | HTMLImageElement |
-`name` | string |
+`request` | [ImageRequest](imagerequest.md) |
 
 **Returns:** *void*

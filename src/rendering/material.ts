@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Texture from "./texture";
-import ShaderAsset from "./shader_asset";
+import Texture from "./texture/texture";
+import ShaderAsset from "./shader/shader_asset";
 
 /**
  * Material represents the combination of a texture and a list of shaders to apply

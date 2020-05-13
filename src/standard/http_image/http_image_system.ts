@@ -20,7 +20,8 @@ import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
 import IMessage from "../../message/imessage";
 import Message from "../../message/message";
-import ImageAsset from "../../rendering/image_asset";
+import ImageAsset from "../../rendering/image/image_asset";
+import ImageRequest from "../../rendering/image/image_request";
 
 /**
  * HTTPImageSystem handles loading image assets in and making them available
@@ -39,22 +40,22 @@ class HTTPImageSystem extends System {
         images: ImageAsset[] = []) {
         super(messageBus, scene, undefined, entities, subscriberID);
         this.images = images;
-        this.messageBus.Subscribe(this, ImageAsset.MESSAGE_REQUEST_LOAD);
-        this.messageBus.Subscribe(this, HTTPImageSystem.MESSAGE_REQUEST_FLUSH);
-        this.messageBus.Subscribe(this, HTTPImageSystem.MESSAGE_REQUEST_CLEAR);
+        this.messageBus.Subscribe(this, [
+            ImageRequest.MESSAGE_REQUEST_LOAD,
+            HTTPImageSystem.MESSAGE_REQUEST_FLUSH,
+            HTTPImageSystem.MESSAGE_REQUEST_CLEAR
+        ]);
     }
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case ImageAsset.MESSAGE_REQUEST_LOAD: {
-                const loadMessage = message as Message<[string, string]>;
+            case ImageRequest.MESSAGE_REQUEST_LOAD: {
+                const loadMessage = message as Message<ImageRequest>;
                 if (loadMessage.payload === undefined) {
                     return;
                 }
-                const name = loadMessage.payload[0];
-                const src = loadMessage.payload[1];
-                this.load(name, src);
+                this.load(loadMessage.payload);
                 break;
             }
             case HTTPImageSystem.MESSAGE_REQUEST_FLUSH: {
@@ -68,23 +69,42 @@ class HTTPImageSystem extends System {
         }
     }
 
-    protected onLoad(event: Event | undefined, image: HTMLImageElement, name: string): void {
-        const asset = new ImageAsset(name, image, true);
+    protected onLoad(event: Event | undefined, image: HTMLImageElement, request: ImageRequest): void {
+        const asset = new ImageAsset(
+            request.name, 
+            image, 
+            true,
+            request.xWrap,
+            request.yWrap,
+            request.magFilter,
+            request.minFilter,
+            request.generateMipmaps
+        );
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
     }
 
-    protected onError(event: Event | undefined, image: HTMLImageElement, name: string): void {
-        const asset = new ImageAsset(name, image, false, new Error(`Failed to load image ${name} from source ${image.src}`));
+    protected onError(event: Event | undefined, image: HTMLImageElement, request: ImageRequest): void {
+        const asset = new ImageAsset(
+            request.name, 
+            image, 
+            false, 
+            request.xWrap,
+            request.yWrap,
+            request.magFilter,
+            request.minFilter,
+            request.generateMipmaps,
+            new Error(`Failed to load image ${request.name} from source ${request.source}`)
+        );
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
     }
 
-    private load(name: string, src: string): void {
+    private load(request: ImageRequest): void {
         const img = new Image();
-        img.addEventListener("error", this.onError.bind(this, event, img, name));
-        img.addEventListener("load", this.onLoad.bind(this, event, img, name));
-        img.src = src;
+        img.addEventListener("error", this.onError.bind(this, event, img, request));
+        img.addEventListener("load", this.onLoad.bind(this, event, img, request));
+        img.src = request.source;
     }
 
     private flush(): void {

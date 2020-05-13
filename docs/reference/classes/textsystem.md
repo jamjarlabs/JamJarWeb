@@ -216,13 +216,13 @@ ___
 
 ### `Private` loadFont
 
-▸ **loadFont**(`asset`: [FontAsset](fontasset.md)): *void*
+▸ **loadFont**(`request`: [FontRequest](fontrequest.md)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`asset` | [FontAsset](fontasset.md) |
+`request` | [FontRequest](fontrequest.md) |
 
 **Returns:** *void*
 

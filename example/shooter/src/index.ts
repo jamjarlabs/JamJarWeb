@@ -50,13 +50,15 @@ import Pointer from "jamjar/lib/standard/pointer/pointer";
 import Collision from "jamjar/lib/standard/collision/collision";
 import UI from "jamjar/lib/standard/ui/ui";
 import Material from "jamjar/lib/rendering/material";
-import ImageAsset from "jamjar/lib/rendering/image_asset";
 import ShaderAsset from "jamjar/lib/rendering/shader_asset";
 import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
 import FontAsset from "jamjar/lib/rendering/font_asset";
 import TextSystem from "jamjar/lib/standard/text/text_system";
 import Text from "jamjar/lib/standard/text/text";
 import TextAlignment from "../../../lib/standard/text/text_alignment";
+import TextureFiltering from "../../../lib/rendering/image/texture_filtering";
+import FontRequest from "../../../lib/rendering/font/font_request";
+import ImageRequest from "../../../lib/rendering/image/image_request";
 
 class Player extends Component {
     public static readonly KEY = "player";
@@ -454,14 +456,20 @@ class MainScene extends Scene {
         new TextSystem(this.messageBus, this);
         new ScoreSystem(this.messageBus, this);
 
-        this.messageBus.Publish(new Message<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
+        this.messageBus.Publish(new Message<FontRequest>(FontAsset.MESSAGE_REQUEST_LOAD, new FontRequest(
             "test",
             "VT323",
             "normal",
             100,
-            0,
-            1,
-            1
+            {
+                buffer: 0,
+                cutoff: 1,
+                radius: 1
+            },
+            {
+                magFilter: TextureFiltering.NEAREST,
+                minFilter: TextureFiltering.NEAREST,
+            }
         )));
 
         this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
@@ -482,11 +490,23 @@ class MainScene extends Scene {
             )
         )));
 
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["bullet", "assets/bullet.png"]));
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["asteroid", "assets/asteroid.png"]));
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["space_ship", "assets/space_ship.png"]));
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["crosshair", "assets/crosshair.png"]));
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["ui_banner", "assets/ui_banner.png"]));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("bullet", "assets/bullet.png")));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("asteroid", "assets/asteroid.png")));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("space_ship", "assets/space_ship.png", 
+        {
+            minFilter: TextureFiltering.NEAREST,
+            magFilter: TextureFiltering.NEAREST
+        })));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("crosshair", "assets/crosshair.png", 
+        {
+            minFilter: TextureFiltering.NEAREST,
+            magFilter: TextureFiltering.NEAREST
+        })));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest("ui_banner", "assets/ui_banner.png",
+        {
+            minFilter: TextureFiltering.NEAREST,
+            magFilter: TextureFiltering.NEAREST
+        })));
 
         const virtualSize = new Vector(160, 90);
         const viewportPosition = new Vector(0, 0);

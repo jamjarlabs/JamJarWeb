@@ -20,7 +20,7 @@ import FakeMessageBus from "../../fake/message_bus";
 import Message from "../../message/message";
 import Renderable from "../../rendering/renderable";
 import Material from "../../rendering/material";
-import Texture from "../../rendering/texture";
+import Texture from "../../rendering/texture/texture";
 import IRenderable from "../../rendering/irenderable";
 import Polygon from "../shape/polygon";
 import Matrix4D from "../../geometry/matrix_4d";
