@@ -14,18 +14,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import FontAsset from "../../rendering/font/font_asset";
+import FontRequest from "./font_request";
 
-class FontMapping {
-    public width: number;
-    public asset: FontAsset;
-    public characters: Map<string, number>
+/**
+ * FontAsset represents a loaded and rendered font asset.
+ */
+class FontAsset {
+    /**
+     * Message when a font asset is finished loading.
+     */
+    public static readonly MESSAGE_FINISH_LOAD = "finish_font_load";
+    
+    /**
+     * Name of the asset
+     */
+    public name: string;
+    /**
+     * Request that created the asset
+     */
+    public request: FontRequest;
 
-    constructor(width: number, asset: FontAsset, characters: Map<string, number>) {
-        this.width = width;
-        this.asset = asset;
-        this.characters = characters;
+    constructor(name: string, request: FontRequest) {
+        this.name = name;
+        this.request = request;
     }
 }
 
-export default FontMapping;
+export default FontAsset;

@@ -26,6 +26,13 @@ global.window.DOMRect = function (x, y, width, height) {
 global.window.WebGL2RenderingContext = function () {
     return {};
 };
+global.window.WebGL2RenderingContext.NEAREST = 0;
+global.window.WebGL2RenderingContext.LINEAR = 0;
+global.window.WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR = 0;
+global.window.WebGL2RenderingContext.REPEAT = 0;
+global.window.WebGL2RenderingContext.MIRRORED_REPEAT = 0;
+global.window.WebGL2RenderingContext.CLAMP_TO_EDGE = 0;
+
 global.window.WebGLTexture = function () {
     return {};
 };

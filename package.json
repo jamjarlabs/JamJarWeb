@@ -7,7 +7,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "eslint src --ext .ts,.tsx",
-    "test": "jest --coverage",
+    "test": "jest --coverage --silent",
     "generate-reference": "typedoc --mode file --out docs/reference/ --readme none --plugin typedoc-plugin-markdown --excludeExternals --hideBreadcrumbs --hideSources src/",
     "docs": "mkdocs serve"
   },

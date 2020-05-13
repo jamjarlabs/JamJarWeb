@@ -25,8 +25,8 @@ import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
-import ImageAsset from "../../rendering/image_asset";
-import ShaderAsset from "../../rendering/shader_asset";
+import ImageAsset from "../../rendering/image/image_asset";
+import ShaderAsset from "../../rendering/shader/shader_asset";
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import DefaultVertexShader from "./default_vertex_shader";
@@ -37,6 +37,8 @@ import IRenderable from "../../rendering/irenderable";
 import IFrustumCuller from "../frustum_culler/ifrustum_culler";
 import FrustumCuller from "../frustum_culler/frustum_culler";
 import Polygon from "../shape/polygon";
+import TextureFiltering from "../../rendering/texture/texture_filtering";
+import TextureWrapping from "../../rendering/texture/texture_wrapping";
 
 /**
  * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
@@ -50,6 +52,18 @@ class WebGLSystem extends RenderSystem {
             component => component.key === type
         ));
     };
+
+    private static readonly FILTER_MODES = new Map<TextureFiltering, number>(new Map([
+        [TextureFiltering.NEAREST, WebGL2RenderingContext.NEAREST],
+        [TextureFiltering.BILINEAR, WebGL2RenderingContext.LINEAR],
+        [TextureFiltering.TRILINEAR, WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR],
+    ]));
+
+    private static readonly WRAP_MODES = new Map<TextureWrapping, number>(new Map([
+        [TextureWrapping.REPEAT, WebGL2RenderingContext.REPEAT],
+        [TextureWrapping.MIRRORED_REPEAT, WebGL2RenderingContext.MIRRORED_REPEAT],
+        [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
+    ]));
 
     private gl: WebGL2RenderingContext;
     private textures: Map<string, WebGLTexture>;
@@ -169,6 +183,29 @@ class WebGLSystem extends RenderSystem {
         if (!asset.success) {
             return;
         }
+
+        // Find GL modes
+        const xWrap = WebGLSystem.WRAP_MODES.get(asset.xWrap);
+        if (xWrap === undefined) {
+            console.warn(`Unsupported x wrapping mode: ${asset.xWrap}`);
+            return;
+        }
+        const yWrap = WebGLSystem.WRAP_MODES.get(asset.yWrap);
+        if (yWrap === undefined) {
+            console.warn(`Unsupported y wrapping mode: ${asset.xWrap}`);
+            return;
+        }
+        const magFilter = WebGLSystem.FILTER_MODES.get(asset.magFilter);
+        if (magFilter === undefined) {
+            console.warn(`Unsupported mag filtering mode: ${asset.magFilter}`);
+            return;
+        }
+        const minFilter = WebGLSystem.FILTER_MODES.get(asset.minFilter);
+        if (minFilter === undefined) {
+            console.warn(`Unsupported min filtering mode: ${asset.minFilter}`);
+            return;
+        }
+
         const gl = this.gl;
         const level = 0;
         const internalFormat = gl.RGBA;
@@ -180,17 +217,22 @@ class WebGLSystem extends RenderSystem {
         gl.bindTexture(gl.TEXTURE_2D, glTexture);
         if (asset.image instanceof(HTMLImageElement)) {
             gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-            gl.generateMipmap(gl.TEXTURE_2D);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, xWrap);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, yWrap);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, minFilter);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, magFilter);
+            if (asset.generateMipmaps) {
+                gl.generateMipmap(gl.TEXTURE_2D);
+            }
         } else {
             gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, asset.image.width, asset.image.height, border, srcFormat, srcType, asset.image);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, xWrap);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, yWrap);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, minFilter);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, magFilter);
+            if (asset.generateMipmaps) {
+                gl.generateMipmap(gl.TEXTURE_2D);
+            }
         }
         if (glTexture === null) {
             throw (`Failed to create texture for image asset '${asset.name}'`);

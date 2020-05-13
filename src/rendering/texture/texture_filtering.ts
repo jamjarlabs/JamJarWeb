@@ -14,18 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import FontAsset from "../../rendering/font/font_asset";
-
-class FontMapping {
-    public width: number;
-    public asset: FontAsset;
-    public characters: Map<string, number>
-
-    constructor(width: number, asset: FontAsset, characters: Map<string, number>) {
-        this.width = width;
-        this.asset = asset;
-        this.characters = characters;
-    }
+/**
+ * TextureFiltering specifies texture filtering modes
+ */
+enum TextureFiltering {
+    /**
+     * Nearest neighbour filtering.
+     */
+    NEAREST = 1,
+    /**
+     * Bilinear filtering.
+     */
+    BILINEAR = 2,
+    /**
+     * Trilinear filtering.
+     */
+    TRILINEAR = 3
 }
 
-export default FontMapping;
+export default TextureFiltering;

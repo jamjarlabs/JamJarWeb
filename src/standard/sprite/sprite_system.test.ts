@@ -29,7 +29,7 @@ import Component from "../../component/component";
 import System from "../../system/system";
 import IEntity from "../../entity/ientity";
 import Material from "../../rendering/material";
-import Texture from "../../rendering/texture";
+import Texture from "../../rendering/texture/texture";
 import UI from "../ui/ui";
 import Camera from "../camera/camera";
 

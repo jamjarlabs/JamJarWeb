@@ -14,18 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import FontAsset from "../../rendering/font/font_asset";
-
-class FontMapping {
-    public width: number;
-    public asset: FontAsset;
-    public characters: Map<string, number>
-
-    constructor(width: number, asset: FontAsset, characters: Map<string, number>) {
-        this.width = width;
-        this.asset = asset;
-        this.characters = characters;
-    }
+/**
+ * TextureWrapping specifies modes for wrapping a texture.
+ */
+enum TextureWrapping {
+    /**
+     * Repeat the textures image.
+     */
+    REPEAT = 1,
+    /**
+     * Repeat the texture image, mirroring the image with each repeat.
+     */
+    MIRRORED_REPEAT = 2,
+    /**
+     * Clamps the coordinates between 0 and 1.
+     */
+    CLAMP_TO_EDGE = 3
 }
 
-export default FontMapping;
+export default TextureWrapping;

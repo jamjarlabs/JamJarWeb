@@ -16,7 +16,7 @@ limitations under the License.
 
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
-import ShaderAsset from "../../rendering/shader_asset";
+import ShaderAsset from "../../rendering/shader/shader_asset";
 import IRenderable from "../../rendering/irenderable";
 import Renderable from "../../rendering/renderable";
 import TextRender from "../text/text_render";

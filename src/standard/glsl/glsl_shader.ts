@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IShader from "../../rendering/ishader";
+import IShader from "../../rendering/shader/ishader";
 import GLSLContext from "./glsl_context";
 import IRenderable from "../../rendering/irenderable";
 

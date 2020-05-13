@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import TextureWrapping from "../texture/texture_wrapping";
+import TextureFiltering from "../texture/texture_filtering";
+
 /**
  * ImageAsset represents a graphical image asset that has been loaded/
  * attempted to be loaded.
@@ -22,11 +25,6 @@ limitations under the License.
  * Also stores the image itself.
  */
 class ImageAsset {
-
-    /**
-     * Message to request an image asset to be loaded.
-     */
-    public static readonly MESSAGE_REQUEST_LOAD = "request_image_load";
     /**
      * Message when an image asset is finished loading.
      */
@@ -51,12 +49,46 @@ class ImageAsset {
      * none it will be undefined.
      */
     public error?: Error;
+    /**
+     * Texture minification filter.
+     */
+    public minFilter: TextureFiltering;
+    /**
+     * Texture magnification filter.
+     */
+    public magFilter: TextureFiltering;
+    /**
+     * Texture wrapping along x axis.
+     */
+    public xWrap: TextureWrapping;
+    /**
+     * Texture wrapping along y axis.
+     */
+    public yWrap: TextureWrapping;
+    /**
+     * Texture option for generating mipmaps or not.
+     * True = generate mipmaps, false = don't generate mipmaps.
+     */
+    public generateMipmaps: boolean;
 
-    constructor(name: string, image: HTMLImageElement | ImageData, success: boolean, error?: Error) {
+    constructor(name: string, 
+        image: HTMLImageElement | ImageData, 
+        success: boolean, 
+        xWrap: TextureWrapping,
+        yWrap: TextureWrapping,
+        magFilter: TextureFiltering,
+        minFilter: TextureFiltering,
+        generateMipmaps: boolean, 
+        error?: Error) {
         this.name = name;
         this.image = image;
         this.success = success;
         this.error = error;
+        this.xWrap = xWrap;
+        this.yWrap = yWrap;
+        this.magFilter = magFilter;
+        this.minFilter = minFilter;
+        this.generateMipmaps = generateMipmaps;
     }
 }
 

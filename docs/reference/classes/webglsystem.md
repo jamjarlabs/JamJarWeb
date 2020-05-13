@@ -33,10 +33,12 @@ renders them onto a canvas.
 * [shaders](webglsystem.md#private-shaders)
 * [subscriberID](webglsystem.md#subscriberid)
 * [textures](webglsystem.md#private-textures)
+* [FILTER_MODES](webglsystem.md#static-private-filter_modes)
 * [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
 * [MESSAGE_LOAD_RENDERABLES](webglsystem.md#static-message_load_renderables)
 * [MESSAGE_REGISTER](webglsystem.md#static-message_register)
 * [MESSAGE_UPDATE](webglsystem.md#static-message_update)
+* [WRAP_MODES](webglsystem.md#static-private-wrap_modes)
 
 ### Methods
 
@@ -168,6 +170,16 @@ ___
 
 ___
 
+### `Static` `Private` FILTER_MODES
+
+▪ **FILTER_MODES**: *Map‹[TextureFiltering](../enums/texturefiltering.md), number›* = new Map<TextureFiltering, number>(new Map([
+        [TextureFiltering.NEAREST, WebGL2RenderingContext.NEAREST],
+        [TextureFiltering.BILINEAR, WebGL2RenderingContext.LINEAR],
+        [TextureFiltering.TRILINEAR, WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR],
+    ]))
+
+___
+
 ### `Static` MESSAGE_DEREGISTER
 
 ▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
@@ -199,6 +211,16 @@ ___
 ▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
 
 *Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+
+___
+
+### `Static` `Private` WRAP_MODES
+
+▪ **WRAP_MODES**: *Map‹[TextureWrapping](../enums/texturewrapping.md), number›* = new Map<TextureWrapping, number>(new Map([
+        [TextureWrapping.REPEAT, WebGL2RenderingContext.REPEAT],
+        [TextureWrapping.MIRRORED_REPEAT, WebGL2RenderingContext.MIRRORED_REPEAT],
+        [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
+    ]))
 
 ## Methods
 

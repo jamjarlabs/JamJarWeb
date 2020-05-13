@@ -6,6 +6,8 @@
 ### Enumerations
 
 * [TextAlignment](enums/textalignment.md)
+* [TextureFiltering](enums/texturefiltering.md)
+* [TextureWrapping](enums/texturewrapping.md)
 
 ### Classes
 
@@ -34,6 +36,7 @@
 * [FakeWebGL2RenderingContext](classes/fakewebgl2renderingcontext.md)
 * [FontAsset](classes/fontasset.md)
 * [FontMapping](classes/fontmapping.md)
+* [FontRequest](classes/fontrequest.md)
 * [FrustumCuller](classes/frustumculler.md)
 * [FullscreenSystem](classes/fullscreensystem.md)
 * [GJKAlgorithm](classes/gjkalgorithm.md)
@@ -42,6 +45,7 @@
 * [Game](classes/game.md)
 * [HTTPImageSystem](classes/httpimagesystem.md)
 * [ImageAsset](classes/imageasset.md)
+* [ImageRequest](classes/imagerequest.md)
 * [InterpolationSystem](classes/interpolationsystem.md)
 * [KeyboardSystem](classes/keyboardsystem.md)
 * [Material](classes/material.md)
@@ -89,6 +93,7 @@
 
 * [ICollisionAlgorithm](interfaces/icollisionalgorithm.md)
 * [IEntity](interfaces/ientity.md)
+* [IFontOptions](interfaces/ifontoptions.md)
 * [IFrustumCuller](interfaces/ifrustumculler.md)
 * [IGame](interfaces/igame.md)
 * [IMessage](interfaces/imessage.md)
@@ -98,6 +103,7 @@
 * [IShader](interfaces/ishader.md)
 * [IShape](interfaces/ishape.md)
 * [ISubscriber](interfaces/isubscriber.md)
+* [ITextureOptions](interfaces/itextureoptions.md)
 
 ### Type aliases
 

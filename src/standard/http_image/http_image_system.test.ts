@@ -19,7 +19,9 @@ import IMessage from "../../message/imessage";
 import FakeMessageBus from "../../fake/message_bus";
 import Message from "../../message/message";
 import Reactor from "../../fake/reactor";
-import ImageAsset from "../../rendering/image_asset";
+import ImageAsset from "../../rendering/image/image_asset";
+import TextureWrapping from "../../rendering/texture/texture_wrapping";
+import TextureFiltering from "../../rendering/texture/texture_filtering";
 
 describe("HTTPImageSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, HTTPImageSystem, HTTPImageSystem, IMessage];
@@ -52,9 +54,36 @@ describe("HTTPImageSystem - OnMessage", () => {
                 undefined,
                 0,
                 [
-                    new ImageAsset("test", new window.Image(), true),
-                    new ImageAsset("test1", new window.Image(), false),
-                    new ImageAsset("test2", new window.Image(), true)
+                    new ImageAsset(
+                        "test", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test1", 
+                        new window.Image(), 
+                        false, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test2", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    )
                 ]
             ),
             new HTTPImageSystem(
@@ -65,9 +94,36 @@ describe("HTTPImageSystem - OnMessage", () => {
                 undefined,
                 0,
                 [
-                    new ImageAsset("test", new window.Image(), true),
-                    new ImageAsset("test1", new window.Image(), false),
-                    new ImageAsset("test2", new window.Image(), true)
+                    new ImageAsset(
+                        "test", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test1", 
+                        new window.Image(), 
+                        false, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test2", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    )
                 ]
             ),
             new Message(HTTPImageSystem.MESSAGE_REQUEST_FLUSH)
@@ -81,9 +137,36 @@ describe("HTTPImageSystem - OnMessage", () => {
                 undefined,
                 0,
                 [
-                    new ImageAsset("test", new window.Image(), true),
-                    new ImageAsset("test1", new window.Image(), false),
-                    new ImageAsset("test2", new window.Image(), true)
+                    new ImageAsset(
+                        "test", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test1", 
+                        new window.Image(), 
+                        false, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test2", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    )
                 ]
             ),
             new HTTPImageSystem(
@@ -92,9 +175,36 @@ describe("HTTPImageSystem - OnMessage", () => {
                 undefined,
                 0,
                 [
-                    new ImageAsset("test", new window.Image(), true),
-                    new ImageAsset("test1", new window.Image(), false),
-                    new ImageAsset("test2", new window.Image(), true)
+                    new ImageAsset(
+                        "test", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test1", 
+                        new window.Image(), 
+                        false, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test2", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    )
                 ]
             ),
             new Message(HTTPImageSystem.MESSAGE_REQUEST_FLUSH)
@@ -115,9 +225,36 @@ describe("HTTPImageSystem - OnMessage", () => {
                 undefined,
                 0,
                 [
-                    new ImageAsset("test", new window.Image(), true),
-                    new ImageAsset("test1", new window.Image(), false),
-                    new ImageAsset("test2", new window.Image(), true)
+                    new ImageAsset(
+                        "test", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test1", 
+                        new window.Image(), 
+                        false, 
+                        TextureWrapping.CLAMP_TO_EDGE, 
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    ),
+                    new ImageAsset(
+                        "test2", 
+                        new window.Image(), 
+                        true, 
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT, 
+                        TextureFiltering.NEAREST, 
+                        TextureFiltering.BILINEAR, 
+                        false
+                    )
                 ]
             ),
             new Message(HTTPImageSystem.MESSAGE_REQUEST_CLEAR)

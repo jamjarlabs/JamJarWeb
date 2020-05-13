@@ -18,7 +18,7 @@ import IMessage from "../../message/imessage";
 import FakeMessageBus from "../../fake/message_bus";
 import Message from "../../message/message";
 import TextSystem from "./text_system";
-import FontAsset from "../../rendering/font_asset";
+import FontAsset from "../../rendering/font/font_asset";
 import Reactor from "../../fake/reactor";
 import { ISDFGenerator } from "tiny-sdf";
 import Fake from "../../fake/fake";
@@ -36,6 +36,7 @@ import Camera from "../camera/camera";
 import System from "../../system/system";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
+import FontRequest from "../../rendering/font/font_request";
 
 /**
  * FakeSDFGenerator is used to stub SDFGenerators.
@@ -61,19 +62,21 @@ describe("TextSystem - OnMessage", () => {
             undefined,
             new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<number>(FontAsset.MESSAGE_REQUEST_LOAD)
+            new Message<number>(FontRequest.MESSAGE_REQUEST_LOAD)
         ],
         [
             "Load font, SDF factory error",
             new Error("sdf factory error"),
             new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, () => { throw("sdf factory error");}, 0),
             new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, () => { throw("sdf factory error");}, 0),
-            new Message<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
-                "test",
-                "test",
-                "test",
-                15
-            ))
+            new Message<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, 
+                new FontRequest(
+                    "test",
+                    "test",
+                    "test",
+                    15
+                )
+            )
         ],
         [
             "Load font, 5 characters, 3*3 atlas, publish fail",
@@ -89,13 +92,15 @@ describe("TextSystem - OnMessage", () => {
                         3,
                         new FontAsset(
                             "test",
-                            "test",
-                            "test",
-                            15,
-                            1,
-                            1,
-                            1,
-                            "abcde"
+                            new FontRequest(
+                                "test",
+                                "test",
+                                "test",
+                                15,
+                                {
+                                    characters: "abcde"
+                                }
+                            )
                         ),
                         new Map<string, number>([
                             ["a", 0],
@@ -119,16 +124,17 @@ describe("TextSystem - OnMessage", () => {
                 () => new FakeSDFGenerator(), 
                 0
             ),
-            new Message<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
-                "test",
-                "test",
-                "test",
-                15,
-                1,
-                1,
-                1,
-                "abcde"
-            ))
+            new Message<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, 
+                new FontRequest(
+                    "test",
+                    "test",
+                    "test",
+                    15,
+                    {
+                        characters: "abcde"
+                    }
+                )
+            )
         ],
         [
             "Load font, 5 characters, 3*3 atlas, success",
@@ -142,13 +148,15 @@ describe("TextSystem - OnMessage", () => {
                         3,
                         new FontAsset(
                             "test",
-                            "test",
-                            "test",
-                            15,
-                            1,
-                            1,
-                            1,
-                            "abcde"
+                            new FontRequest(
+                                "test",
+                                "test",
+                                "test",
+                                15,
+                                {
+                                    characters: "abcde"
+                                }
+                            )
                         ),
                         new Map<string, number>([
                             ["a", 0],
@@ -170,16 +178,17 @@ describe("TextSystem - OnMessage", () => {
                 () => new FakeSDFGenerator(), 
                 0
             ),
-            new Message<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
-                "test",
-                "test",
-                "test",
-                15,
-                1,
-                1,
-                1,
-                "abcde"
-            ))
+            new Message<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, 
+                new FontRequest(
+                    "test",
+                    "test",
+                    "test",
+                    15,
+                    {
+                        characters: "abcde"
+                    }
+                )
+            )
         ],
         [
             "Pre render, no payload",
@@ -267,7 +276,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]),
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["p", 0]
                     ]))]
                 ]),
@@ -284,7 +293,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["p", 0]
                     ]))]
                 ]),
@@ -308,7 +317,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]),
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -331,7 +340,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -357,7 +366,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]),
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["c", 2],
                         ["d", 3],
                         ["e", 4],
@@ -380,7 +389,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["c", 2],
                         ["d", 3],
                         ["e", 4],
@@ -407,7 +416,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -434,7 +443,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -463,7 +472,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -490,7 +499,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -519,7 +528,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -546,7 +555,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -575,7 +584,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -602,7 +611,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -632,7 +641,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)),
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -660,7 +669,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -693,7 +702,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -724,7 +733,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -757,7 +766,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -788,7 +797,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -822,7 +831,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -854,7 +863,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -888,7 +897,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -920,7 +929,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
@@ -954,7 +963,7 @@ describe("TextSystem - OnMessage", () => {
                     [
                         "test", 
                         new FontMapping(10, 
-                        new FontAsset("test", "test", "normal", 3), 
+                        new FontAsset("test", new FontRequest("test", "test", "test", 3)), 
                         new Map([
                             ["a", 0],
                             ["b", 1],
@@ -986,7 +995,7 @@ describe("TextSystem - OnMessage", () => {
                     ])]
                 ]), 
                 new Map([
-                    ["test", new FontMapping(10, new FontAsset("test", "test", "normal", 3), new Map([
+                    ["test", new FontMapping(10, new FontAsset("test", new FontRequest("test", "test", "test", 3)), new Map([
                         ["a", 0],
                         ["b", 1],
                         ["c", 2],
