@@ -16,7 +16,7 @@ limitations under the License.
 
 import Component from "../../component/component";
 import Polygon from "../shape/polygon";
-import Material from "../../rendering/material";
+import Material from "../../rendering/material/material";
 
 /**
  * Sprite is a component for storing information around a sprite

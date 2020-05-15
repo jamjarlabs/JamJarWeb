@@ -17,12 +17,23 @@ Versioning](https://semver.org/spec/v2.0.0.html).
     - Bilinear.
     - Trilinear.
   - Can specify generating mipmaps.
+- Primitive rendering, can now render primitive shapes by adding a `Primitive`
+  component - can render lines, polygons, and points; allows specifying draw mode.
 ### Changed
 - Images now loaded with a new `ImageRequest` rather than an `ImageAsset` -
   `ImageAsset` used internally.
   - Message for loading images moved from `ImageAsset` to `ImageRequest`.
 - Optional font options specified by a `IFontOptions` interface, allows
   overriding default font options such as `characters`, `buffer`, `cutoff` etc.
+- `Material` options specified by new `IMaterialOptions`, a collection of
+  optional arguments that override material defaults.
+### Fixed
+- Z order bug where an error was thrown if there were gaps between z orders,
+  e.g. `0, 1, 3` would error because `2` was missing - caused due to internal
+  representation of z order with an array; changed to use a map.
+- Dispatches in the message bus could be skipped if a subscriber unsubscribed
+  from the message, causing the order to be confused and subscribers to be
+  skipped. Fixed by cloning the dispatch queue before dispatching.
 
 ## [v0.7.0] - 2020-05-04
 ### Added

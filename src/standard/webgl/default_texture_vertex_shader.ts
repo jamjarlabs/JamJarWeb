@@ -25,7 +25,7 @@ import IRenderable from "../../rendering/irenderable";
  * "default_vertex" shader choice, used as the default shader
  * and expected to be loaded.
  */
-class DefaultVertexShader extends GLSLShader {
+class DefaultTextureVertexShader extends GLSLShader {
     private static readonly SOURCE = `#version 300 es
         in vec2 aVertexPosition;
         in vec2 aTexturePosition;
@@ -70,7 +70,10 @@ class DefaultVertexShader extends GLSLShader {
             projectionMatrix.GetFloat32Array());
     };
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable): void => {
+    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
+        if (renderable.material.texture === undefined) {
+            throw(`Default texture vertex shader can only be used if a renderable has a texture to apply.`);
+        }
         const gl = context.gl;
         const program = context.program;
 
@@ -83,10 +86,7 @@ class DefaultVertexShader extends GLSLShader {
         const positionBuffer = gl.createBuffer();
         const textureBuffer = gl.createBuffer();
 
-        let texturePoints = renderable.material.texture.points;
-        if (texturePoints === undefined) {
-            texturePoints = renderable.vertices.GetFloat32Array();
-        }
+        let texturePoints = renderable.material.texture.points.GetFloat32Array();
 
         // bind vao
         gl.bindVertexArray(vao);
@@ -117,12 +117,12 @@ class DefaultVertexShader extends GLSLShader {
     constructor() {
         super(
             ShaderAsset.VERTEX_TYPE, 
-            DefaultVertexShader.SOURCE, 
-            DefaultVertexShader.PER_SHADER,
+            DefaultTextureVertexShader.SOURCE, 
+            DefaultTextureVertexShader.PER_SHADER,
             undefined,
-            DefaultVertexShader.PER_RENDERABLE
+            DefaultTextureVertexShader.PER_RENDERABLE
         );
     }
 }
 
-export default DefaultVertexShader;
+export default DefaultTextureVertexShader;

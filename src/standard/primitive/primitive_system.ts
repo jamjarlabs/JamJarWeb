@@ -17,7 +17,6 @@ limitations under the License.
 import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
-import Sprite from "./sprite";
 import IMessage from "../../message/imessage";
 import Message from "../../message/message";
 import IMessageBus from "../../message/imessage_bus";
@@ -30,19 +29,12 @@ import UI from "../ui/ui";
 import RenderSystem from "../render/render_system";
 import IRenderable from "../../rendering/irenderable";
 import Camera from "../camera/camera";
-import DrawMode from "../../rendering/draw_mode";
+import Primitive from "./primitive";
 
-/**
- * SpriteSystem handles converting sprites into renderable objects that are fed into 
- * a rendering system.
- */
-class SpriteSystem extends System {
-    /**
-     * Ensure is Sprite entity with Transform and Sprite, or Camera entity with
-     * Transform and Camera
-     */
+class PrimitiveSystem extends System {
+
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Sprite.KEY].every((type) => components.some(
+        return [Transform.KEY, Primitive.KEY].every((type) => components.some(
             component => component.key === type
         )) || [Transform.KEY, Camera.KEY].every((type) => components.some(
             component => component.key === type
@@ -53,7 +45,7 @@ class SpriteSystem extends System {
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
-        super(messageBus, scene, SpriteSystem.EVALUATOR, entities, subscriberID);
+        super(messageBus, scene, PrimitiveSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
 
@@ -75,21 +67,21 @@ class SpriteSystem extends System {
         const renderables: IRenderable[] = [];
         // Get sprite entities
         const spriteEntities = [...this.entities.values()].filter((entity) => {
-            return entity.Get(Sprite.KEY);
+            return entity.Get(Primitive.KEY);
         });
         for (const entity of spriteEntities) {
-            const sprite = entity.Get(Sprite.KEY) as Sprite;
+            const primitive = entity.Get(Primitive.KEY) as Primitive;
             const transform = entity.Get(Transform.KEY) as Transform;
             const ui = entity.Get(UI.KEY) as UI | undefined;
             
             if (ui === undefined) {
                 // Not UI
                 renderables.push(new Renderable(
-                    sprite.zOrder,
-                    sprite.bounds,
+                    primitive.zOrder,
+                    primitive.shape,
                     transform.InterpolatedMatrix4D(alpha),
-                    sprite.material,
-                    DrawMode.TRIANGLE_FAN,
+                    primitive.material,
+                    primitive.drawMode,
                     undefined,
                 ));
             } else {
@@ -119,11 +111,11 @@ class SpriteSystem extends System {
 
                 // Create the renderable for use by rendering systems
                 renderables.push(new Renderable(
-                    sprite.zOrder,
-                    sprite.bounds,
+                    primitive.zOrder,
+                    primitive.shape,
                     relativeTransform.InterpolatedMatrix4D(alpha),
-                    sprite.material,
-                    DrawMode.TRIANGLE_FAN,
+                    primitive.material,
+                    primitive.drawMode,
                     ui.camera,
                 ));
             }
@@ -132,4 +124,4 @@ class SpriteSystem extends System {
     }
 }
 
-export default SpriteSystem;
+export default PrimitiveSystem;

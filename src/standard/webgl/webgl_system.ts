@@ -29,8 +29,8 @@ import ImageAsset from "../../rendering/image/image_asset";
 import ShaderAsset from "../../rendering/shader/shader_asset";
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
-import DefaultVertexShader from "./default_vertex_shader";
-import DefaultFragmentShader from "./default_fragment_shader";
+import DefaultTextureVertexShader from "./default_texture_vertex_shader";
+import DefaultTextureFragmentShader from "./default_texture_fragment_shader";
 import RenderSystem from "../render/render_system";
 import DefaultTextFragmentShader from "./default_text_fragment_shader";
 import IRenderable from "../../rendering/irenderable";
@@ -39,6 +39,9 @@ import FrustumCuller from "../frustum_culler/frustum_culler";
 import Polygon from "../shape/polygon";
 import TextureFiltering from "../../rendering/texture/texture_filtering";
 import TextureWrapping from "../../rendering/texture/texture_wrapping";
+import DrawMode from "../../rendering/draw_mode";
+import DefaultPrimitiveFragmentShader from "./default_primitive_fragment_shader";
+import DefaultPrimitiveVertexShader from "./default_primitive_vertex_shader";
 
 /**
  * WebGLSystem handles rendering to an HTML5 canvas using WebGL.
@@ -65,6 +68,15 @@ class WebGLSystem extends RenderSystem {
         [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
     ]));
 
+    private static readonly DRAW_MODES = new Map<DrawMode, number>(new Map([
+        [DrawMode.POINTS, WebGL2RenderingContext.POINTS],
+        [DrawMode.LINES, WebGL2RenderingContext.LINES],
+        [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
+        [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
+        [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
+        [DrawMode.TRIANGLE_FAN, WebGL2RenderingContext.TRIANGLE_FAN],
+    ]));
+
     private gl: WebGL2RenderingContext;
     private textures: Map<string, WebGLTexture>;
     private shaders: Map<string, [WebGLShader, GLSLShader]>;
@@ -76,9 +88,11 @@ class WebGLSystem extends RenderSystem {
         scene?: IScene,
         renderables: IRenderable[] = [],
         defaultShaderAssets: ShaderAsset[] = [
-            new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader())
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME, new DefaultTextureFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME, new DefaultPrimitiveFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, new DefaultPrimitiveVertexShader())
         ],
         shaders: Map<string, [WebGLShader, GLSLShader]> = new Map(),
         textures: Map<string, WebGLTexture> = new Map(),
@@ -307,15 +321,16 @@ class WebGLSystem extends RenderSystem {
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
             // Group by z order
-            const zOrderGroups: IRenderable[][] = [];
+            const zOrderGroups: Map<number, IRenderable[]> = new Map();
             for (const renderable of this.renderables) {
-                if (zOrderGroups[renderable.zOrder] === undefined) {
-                    zOrderGroups[renderable.zOrder] = [renderable];
+                const zOrderGroup = zOrderGroups.get(renderable.zOrder);
+                if (zOrderGroup === undefined) {
+                    zOrderGroups.set(renderable.zOrder, [renderable]);
                 } else {
-                    zOrderGroups[renderable.zOrder].push(renderable);
+                    zOrderGroup.push(renderable);
                 }
             }
-            for (const zOrderGroup of zOrderGroups) {
+            for (const zOrderGroup of zOrderGroups.values()) {
                 // Group by program
                 const programGroups: Map<string, IRenderable[]> = new Map();
                 for (const renderable of zOrderGroup) {
@@ -388,7 +403,10 @@ class WebGLSystem extends RenderSystem {
                     // Group by texture
                     const textureGroups: Map<string, IRenderable[]> = new Map();
                     for (const renderable of programGroup) {
-                        const textureName = `texture_${renderable.material.texture.image}`;
+                        let textureName = `no_texture`;
+                        if (renderable.material.texture !== undefined) {
+                            textureName = `texture_${renderable.material.texture.image}`;
+                        }
                         const textureRenderables = textureGroups.get(textureName);
                         if (textureRenderables === undefined) {
                             textureGroups.set(textureName, [renderable]);
@@ -400,20 +418,29 @@ class WebGLSystem extends RenderSystem {
 
                     for (const textureGroup of textureGroups.values()) {
                         const textureCanary = textureGroup[0];
-                        const texture = this.textures.get(textureCanary.material.texture.image);
-                        if (texture === undefined) {
-                            // Texture not loaded, skip rendering for this texture
-                            continue;
-                        }
-
-                        for (const shader of shaders) {
-                            if (shader[1].perTexture !== undefined) {
-                                shader[1].perTexture(glslContext, texture);
+                        let texture: WebGLTexture | undefined = undefined;
+                        if (textureCanary.material.texture !== undefined) {
+                            texture = this.textures.get(textureCanary.material.texture.image);
+                            if (texture === undefined) {
+                                // Texture not loaded, skip rendering for this texture
+                                continue;
+                            }
+    
+                            for (const shader of shaders) {
+                                if (shader[1].perTexture !== undefined) {
+                                    shader[1].perTexture(glslContext, texture);
+                                }
                             }
                         }
 
                         for (const renderable of textureGroup) {
                             if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
+                                continue;
+                            }
+
+                            const drawMode = WebGLSystem.DRAW_MODES.get(renderable.drawMode);
+                            if (drawMode === undefined) {
+                                console.warn(`Unsupported draw mode ${renderable.drawMode}`);
                                 continue;
                             }
 
@@ -425,11 +452,10 @@ class WebGLSystem extends RenderSystem {
 
                             for (const shader of shaders) {
                                 if (shader[1].perRenderable !== undefined) {
-                                    shader[1].perRenderable(glslContext, texture, renderable);
+                                    shader[1].perRenderable(glslContext, renderable, texture);
                                 }
                             }
-
-                            gl.drawArrays(gl.TRIANGLE_FAN, 0, renderable.vertices.GetFloat32Array().length / 2);
+                            gl.drawArrays(drawMode, 0, renderable.vertices.GetFloat32Array().length / 2);
                         }
                     }
                 }

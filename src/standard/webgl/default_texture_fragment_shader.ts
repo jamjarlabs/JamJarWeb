@@ -17,17 +17,19 @@ limitations under the License.
 import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import ShaderAsset from "../../rendering/shader/shader_asset";
+import IRenderable from "../../rendering/irenderable";
 
 /**
  * DefaultFragmentShader is the shader loaded for handling the
  * "default_fragment" shader choice, used as the default shader
  * and expected to be loaded.
  */
-class DefaultFragmentShader extends GLSLShader {
+class DefaultTextureFragmentShader extends GLSLShader {
     private static readonly SOURCE = `#version 300 es
         precision mediump float;
 
         uniform sampler2D uTexture;
+        uniform vec4 uColor;
 
         in vec2 vTextureCoordinate;
 
@@ -35,6 +37,7 @@ class DefaultFragmentShader extends GLSLShader {
 
         void main() {
             outColor = texture(uTexture, vTextureCoordinate);
+            outColor.rgb = mix(outColor.rgb, vec3(1.0), uColor.a);
         }
     `;
 
@@ -47,16 +50,24 @@ class DefaultFragmentShader extends GLSLShader {
         gl.uniform1i(textureLocation, 0);
     };
 
+    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
+        const gl = context.gl;
+        const program = context.program;
+        // Add in color information
+        const colorLocation = gl.getUniformLocation(program, "uColor");
+        gl.uniform4f(colorLocation, ...renderable.material.color.GetTuple());
+    };
+
     
     constructor() {
         super(
             ShaderAsset.FRAGMENT_TYPE, 
-            DefaultFragmentShader.SOURCE, 
+            DefaultTextureFragmentShader.SOURCE, 
             undefined,
-            DefaultFragmentShader.PER_TEXTURE,
-            undefined
+            DefaultTextureFragmentShader.PER_TEXTURE,
+            DefaultTextureFragmentShader.PER_RENDERABLE,
         );
     }
 }
 
-export default DefaultFragmentShader;
+export default DefaultTextureFragmentShader;

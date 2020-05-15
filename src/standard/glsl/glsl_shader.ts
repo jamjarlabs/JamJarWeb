@@ -53,13 +53,13 @@ class GLSLShader implements IShader {
      * per renderable used, should inject variables for renderable
      * specific variables.
      */
-    public perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable) => void;
+    public perRenderable?: (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture, ) => void;
     
     constructor(type: string, 
         source: string, 
         perShader?: (context: GLSLContext) => void, 
         perTexture?: (context: GLSLContext, texture: WebGLTexture) => void, 
-        perRenderable?: (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable) => void) {
+        perRenderable?: (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture) => void) {
         this.type = type;
         this.source = source;
         this.perShader = perShader;

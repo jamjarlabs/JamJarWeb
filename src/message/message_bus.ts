@@ -52,8 +52,12 @@ class MessageBus implements IMessageBus {
             if (!messageSubs) {
                 continue;
             }
-            for (let j = 0; j < messageSubs.length; j++) {
-                messageSubs[j].OnMessage(message);
+            // Take a copy of the array, otherwise subscribers might unsubscribe
+            // as part of this message, mixing the dispatch order and causing
+            // other subscribers to not recieve a message
+            const clonedQueue = [...messageSubs];
+            for (let j = 0; j < clonedQueue.length; j++) {
+                clonedQueue[j].OnMessage(message);
             }
         }
     }

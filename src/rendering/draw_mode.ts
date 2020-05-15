@@ -14,26 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Polygon from "../../standard/shape/polygon";
-
-/**
- * Texture is the mapping from an image that has been loaded, deciding
- * how the texture should be drawn and represented.
- */
-class Texture {
-    /**
-     * Name of the image the texture refers to.
-     */
-    public image: string;
-    /**
-     * Mapping in points on the image.
-     */
-    public points: Polygon;
-
-    constructor(image: string, points: Polygon) {
-        this.image = image;
-        this.points = points;
-    }
+enum DrawMode {
+    POINTS = 0,
+    LINES = 1,
+    LINE_STRIP = 2,
+    TRIANGLES = 3,
+    TRIANGLE_STRIP = 4,
+    TRIANGLE_FAN = 5
 }
 
-export default Texture;
+export default DrawMode;

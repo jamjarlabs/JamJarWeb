@@ -15,10 +15,11 @@ limitations under the License.
 */
 
 import IEntity from "../entity/ientity";
-import Material from "./material";
+import Material from "./material/material";
 import IRenderable from "./irenderable";
 import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../standard/shape/polygon";
+import DrawMode from "./draw_mode";
 
 /**
  * Renderable represents something that can be rendered.
@@ -44,7 +45,10 @@ class Renderable<T> implements IRenderable {
      * about texture and shaders.
      */
     public material: Material;
-
+    /**
+     * The draw mode of the renderable, specifying how it will be rendered.
+     */
+    public drawMode: DrawMode;
     /**
      * An optional payload of additional data.
      */
@@ -55,11 +59,12 @@ class Renderable<T> implements IRenderable {
      */
     public camera?: IEntity;
 
-    constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, payload?: T, camera?: IEntity) {
+    constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode, payload?: T, camera?: IEntity) {
         this.zOrder = zOrder;
         this.vertices = vertices;
         this.modelMatrix = modelMatrix;
         this.material = material;
+        this.drawMode = drawMode;
         this.payload = payload;
         this.camera = camera;
     }
