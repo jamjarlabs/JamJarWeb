@@ -1,4 +1,4 @@
-# Text System
+# Text
 
 The [TextSystem] allows rendering text - taking in text components and producing
 a list [Renderable] objects for a [RenderSystem] to use.

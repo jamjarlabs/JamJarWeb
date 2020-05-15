@@ -86,7 +86,7 @@ class ShaderGame extends Game {
         this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "example-shader",
             shader
-        )))
+        )));
     }
 }
 
@@ -124,10 +124,13 @@ class ShaderGame extends Game {
         this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "example-shader",
             shader
-        )))
+        )));
 
         // Load texture, will be overridden by custom shader
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["example", "assets/example.png"]));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+            "example",
+            "assets/example.png"
+        )));
 
         // Create camera
         const cameraEntity = new Entity(this.messageBus);
@@ -136,16 +139,18 @@ class ShaderGame extends Game {
 
         // Create example entity
         const example = new Entity(this.messageBus);
-        example.Add(new Transform());
+        example.Add(new Transform(new Vector(0,0), new Vector(10,10)));
 
         // Create sprite using a material with the previously loaded texture,
         // alongside using our custom fragment shader with the default
         // vertex shader
         example.Add(new Sprite(
-            new Material(
-                new Texture("example", Polygon.RectangleByDimensions(1,1).GetFloat32Array()),
-                [ "example-shader", ShaderAsset.DEFAULT_VERTEX_SHADER_NAME ]
-            ), 0, Polygon.RectangleByDimensions(1,1)
+            new Material({
+                texture: new Texture("example", Polygon.RectangleByDimensions(1,1)),
+                shaders: [ "example-shader", ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME ]
+            }), 
+            0, 
+            Polygon.RectangleByDimensions(1,1)
         ));
     }
 }

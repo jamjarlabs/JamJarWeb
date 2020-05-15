@@ -1,4 +1,4 @@
-# Pointer System
+# Pointers
 
 The Pointer System sets up event listeners on an HTML element supplied to it
 (normally the canvas of the game) and converts any events it recieves into

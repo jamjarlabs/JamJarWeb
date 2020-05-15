@@ -21,9 +21,9 @@ Can contain texture information such as bounds and a texture.
 
 ### Properties
 
-* [bounds](sprite.md#bounds)
 * [key](sprite.md#key)
 * [material](sprite.md#material)
+* [shape](sprite.md#shape)
 * [zOrder](sprite.md#zorder)
 * [KEY](sprite.md#static-key)
 * [MESSAGE_ADD](sprite.md#static-message_add)
@@ -49,14 +49,6 @@ Name | Type | Default |
 
 ## Properties
 
-###  bounds
-
-• **bounds**: *[Polygon](polygon.md)*
-
-The shape of the sprite to draw, represented by a Polygon.
-
-___
-
 ###  key
 
 • **key**: *string*
@@ -68,6 +60,16 @@ ___
 ###  material
 
 • **material**: *[Material](material.md)*
+
+Material to apply when rendering the Sprite.
+
+___
+
+###  shape
+
+• **shape**: *[Polygon](polygon.md)*
+
+The shape of the sprite to draw, represented by a Polygon.
 
 ___
 

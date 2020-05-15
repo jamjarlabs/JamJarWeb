@@ -17,6 +17,7 @@ Contains information for rendering.
 ### Properties
 
 * [camera](irenderable.md#optional-camera)
+* [drawMode](irenderable.md#drawmode)
 * [material](irenderable.md#material)
 * [modelMatrix](irenderable.md#modelmatrix)
 * [vertices](irenderable.md#vertices)
@@ -30,6 +31,14 @@ Contains information for rendering.
 
 Any camera to associate with the renderable, will only render on
 the camera supplied.
+
+___
+
+###  drawMode
+
+• **drawMode**: *[DrawMode](../enums/drawmode.md)*
+
+The draw mode of the renderable, specifying how it will be rendered.
 
 ___
 

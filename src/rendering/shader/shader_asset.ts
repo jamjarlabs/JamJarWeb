@@ -36,13 +36,16 @@ class ShaderAsset {
      * Default vertex shader name, render systems will generally load this
      * by default, and it will therefore be always available.
      */
-    public static readonly DEFAULT_VERTEX_SHADER_NAME = "default_vertex";
+    public static readonly DEFAULT_TEXTURE_VERTEX_SHADER_NAME = "default_texture_vertex";
     /**
      * Default fragment shader name, render systems will generally load this
      * by default, and it will therefore be always available.
      */
-    public static readonly DEFAULT_FRAGMENT_SHADER_NAME = "default_fragment";
+    public static readonly DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME = "default_texture_fragment";
 
+    public static readonly DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME = "default_primitive_vertex";
+
+    public static readonly DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME = "default_primitive_fragment";
     /**
      * Default text fragment shader name, render systems will generally load this
      * by default, and it will therefore be always available. Default fragment shader

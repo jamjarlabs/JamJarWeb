@@ -148,15 +148,15 @@ ___
 
 ### `Static` `Private` PER_RENDERABLE
 
-▸ **PER_RENDERABLE**(`context`: [GLSLContext](glslcontext.md), `texture`: WebGLTexture, `renderable`: [IRenderable](../interfaces/irenderable.md)): *void*
+▸ **PER_RENDERABLE**(`context`: [GLSLContext](glslcontext.md), `renderable`: [IRenderable](../interfaces/irenderable.md), `texture?`: WebGLTexture): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `context` | [GLSLContext](glslcontext.md) |
-`texture` | WebGLTexture |
 `renderable` | [IRenderable](../interfaces/irenderable.md) |
+`texture?` | WebGLTexture |
 
 **Returns:** *void*
 

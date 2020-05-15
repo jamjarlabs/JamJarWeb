@@ -113,10 +113,10 @@ abstract class System extends Subscriber {
             }
             case Scene.MESSAGE_DESTROY: {
                 const sceneDestroyMessage = message as Message<IScene>;
-                if (!sceneDestroyMessage.payload) {
+                if (sceneDestroyMessage.payload === undefined) {
                     return;
                 }
-                if (!this.scene) {
+                if (this.scene === undefined) {
                     return;
                 }
                 if (sceneDestroyMessage.payload.id === this.scene.id) {

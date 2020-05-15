@@ -1,8 +1,8 @@
 
 # Class: Material
 
-Material represents the combination of a texture and a list of shaders to apply
-to a render object, for example to be used as part of a sprite.
+Material represents how something is displayed and rendered, specifying
+shaders, textures and colors.
 
 ## Hierarchy
 
@@ -16,28 +16,35 @@ to a render object, for example to be used as part of a sprite.
 
 ### Properties
 
+* [color](material.md#color)
 * [shaders](material.md#shaders)
-* [texture](material.md#texture)
+* [texture](material.md#optional-texture)
+* [NO_TEXTURE_COLOR](material.md#static-private-no_texture_color)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Material**(`texture`: [Texture](texture.md), `shaders`: string[]): *[Material](material.md)*
+\+ **new Material**(`options`: [IMaterialOptions](../interfaces/imaterialoptions.md)): *[Material](material.md)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`texture` | [Texture](texture.md) | - |
-`shaders` | string[] | [
-        ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, 
-        ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME
-    ] |
+`options` | [IMaterialOptions](../interfaces/imaterialoptions.md) | {} |
 
 **Returns:** *[Material](material.md)*
 
 ## Properties
+
+###  color
+
+• **color**: *[Color](color.md)*
+
+The color to apply, if there is a texture the texture output is mixed
+this color, if there is no texture the color is used directly.
+
+___
 
 ###  shaders
 
@@ -47,8 +54,14 @@ List of shaders to apply.
 
 ___
 
-###  texture
+### `Optional` texture
 
-• **texture**: *[Texture](texture.md)*
+• **texture**? : *[Texture](texture.md)*
 
-The texture to apply
+The texture to apply.
+
+___
+
+### `Static` `Private` NO_TEXTURE_COLOR
+
+▪ **NO_TEXTURE_COLOR**: *[Color](color.md)‹›* = new Color(0.54, 0, 0.54, 1)

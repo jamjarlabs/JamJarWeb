@@ -30,6 +30,7 @@ import UI from "../ui/ui";
 import RenderSystem from "../render/render_system";
 import IRenderable from "../../rendering/irenderable";
 import Camera from "../camera/camera";
+import DrawMode from "../../rendering/draw_mode";
 
 /**
  * SpriteSystem handles converting sprites into renderable objects that are fed into 
@@ -85,9 +86,10 @@ class SpriteSystem extends System {
                 // Not UI
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    sprite.bounds,
+                    sprite.shape,
                     transform.InterpolatedMatrix4D(alpha),
                     sprite.material,
+                    DrawMode.TRIANGLE_FAN,
                     undefined,
                 ));
             } else {
@@ -118,9 +120,10 @@ class SpriteSystem extends System {
                 // Create the renderable for use by rendering systems
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    sprite.bounds,
+                    sprite.shape,
                     relativeTransform.InterpolatedMatrix4D(alpha),
                     sprite.material,
+                    DrawMode.TRIANGLE_FAN,
                     ui.camera,
                 ));
             }

@@ -5,6 +5,7 @@
 
 ### Enumerations
 
+* [DrawMode](enums/drawmode.md)
 * [TextAlignment](enums/textalignment.md)
 * [TextureFiltering](enums/texturefiltering.md)
 * [TextureWrapping](enums/texturewrapping.md)
@@ -20,9 +21,11 @@
 * [Color](classes/color.md)
 * [Component](classes/component.md)
 * [ComponentManager](classes/componentmanager.md)
-* [DefaultFragmentShader](classes/defaultfragmentshader.md)
+* [DefaultPrimitiveFragmentShader](classes/defaultprimitivefragmentshader.md)
+* [DefaultPrimitiveVertexShader](classes/defaultprimitivevertexshader.md)
 * [DefaultTextFragmentShader](classes/defaulttextfragmentshader.md)
-* [DefaultVertexShader](classes/defaultvertexshader.md)
+* [DefaultTextureFragmentShader](classes/defaulttexturefragmentshader.md)
+* [DefaultTextureVertexShader](classes/defaulttexturevertexshader.md)
 * [Ellipse](classes/ellipse.md)
 * [Entity](classes/entity.md)
 * [EntityManager](classes/entitymanager.md)
@@ -60,6 +63,8 @@
 * [PointerCameraInfo](classes/pointercamerainfo.md)
 * [PointerSystem](classes/pointersystem.md)
 * [Polygon](classes/polygon.md)
+* [Primitive](classes/primitive.md)
+* [PrimitiveSystem](classes/primitivesystem.md)
 * [Reactor](classes/reactor.md)
 * [RenderSystem](classes/rendersystem.md)
 * [Renderable](classes/renderable.md)
@@ -96,6 +101,7 @@
 * [IFontOptions](interfaces/ifontoptions.md)
 * [IFrustumCuller](interfaces/ifrustumculler.md)
 * [IGame](interfaces/igame.md)
+* [IMaterialOptions](interfaces/imaterialoptions.md)
 * [IMessage](interfaces/imessage.md)
 * [IMessageBus](interfaces/imessagebus.md)
 * [IRenderable](interfaces/irenderable.md)

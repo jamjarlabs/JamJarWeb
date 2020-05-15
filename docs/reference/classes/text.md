@@ -52,7 +52,7 @@ Name | Type | Default |
 `offset` | [Vector](vector.md) | new Vector(0,0) |
 `color` | [Color](color.md) | new Color(0, 0, 0, 1) |
 `shaders` | string[] | [
-            ShaderAsset.DEFAULT_VERTEX_SHADER_NAME,
+            ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
             ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
         ] |
 

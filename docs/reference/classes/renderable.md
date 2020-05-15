@@ -25,6 +25,7 @@ Contains information for rendering.
 ### Properties
 
 * [camera](renderable.md#optional-camera)
+* [drawMode](renderable.md#drawmode)
 * [material](renderable.md#material)
 * [modelMatrix](renderable.md#modelmatrix)
 * [payload](renderable.md#optional-payload)
@@ -35,7 +36,7 @@ Contains information for rendering.
 
 ###  constructor
 
-\+ **new Renderable**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `payload?`: T, `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)*
+\+ **new Renderable**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `payload?`: T, `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)*
 
 **Parameters:**
 
@@ -45,6 +46,7 @@ Name | Type |
 `vertices` | [Polygon](polygon.md) |
 `modelMatrix` | [Matrix4D](matrix4d.md) |
 `material` | [Material](material.md) |
+`drawMode` | [DrawMode](../enums/drawmode.md) |
 `payload?` | T |
 `camera?` | [IEntity](../interfaces/ientity.md) |
 
@@ -60,6 +62,16 @@ Name | Type |
 
 Any camera to associate with the renderable, will only render on
 the camera supplied.
+
+___
+
+###  drawMode
+
+• **drawMode**: *[DrawMode](../enums/drawmode.md)*
+
+*Implementation of [IRenderable](../interfaces/irenderable.md).[drawMode](../interfaces/irenderable.md#drawmode)*
+
+The draw mode of the renderable, specifying how it will be rendered.
 
 ___
 

@@ -15,9 +15,10 @@ limitations under the License.
 */
 
 import IEntity from "../entity/ientity";
-import Material from "./material";
+import Material from "./material/material";
 import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../standard/shape/polygon";
+import DrawMode from "./draw_mode";
 
 /**
  * Renderable represents something that can be rendered.
@@ -43,6 +44,10 @@ interface IRenderable {
      * about texture and shaders.
      */
     material: Material;
+    /**
+     * The draw mode of the renderable, specifying how it will be rendered.
+     */
+    drawMode: DrawMode;
     /**
      * Any camera to associate with the renderable, will only render on
      * the camera supplied.

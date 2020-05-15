@@ -14,30 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Texture from "./texture/texture";
-import ShaderAsset from "./shader/shader_asset";
+import Texture from "../texture/texture";
+import Color from "../color";
 
 /**
- * Material represents the combination of a texture and a list of shaders to apply
- * to a render object, for example to be used as part of a sprite.
+ * IMaterialOptions represents optional properties for a material, will
+ * generally be used with defaults that are overridden.
  */
-class Material {
+interface IMaterialOptions {
     /**
      * List of shaders to apply.
      */
-    public shaders: string[];
+    shaders?: string[];
     /**
-     * The texture to apply
+     * The texture to apply.
      */
-    public texture: Texture;
-
-    constructor(texture: Texture, shaders: string[] = [
-        ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, 
-        ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME
-    ]) {
-        this.shaders = shaders;
-        this.texture = texture;
-    }
+    texture?: Texture;
+    /**
+     * The color to apply, either to a texture if there is one, or just the
+     * direct color if there is no texture.
+     */
+    color?: Color;
 }
 
-export default Material;
+export default IMaterialOptions;

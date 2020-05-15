@@ -31,7 +31,7 @@ import ImageAsset from "../../rendering/image/image_asset";
 import Renderable from "../../rendering/renderable";
 import RenderSystem from "../render/render_system";
 import Polygon from "../shape/polygon";
-import Material from "../../rendering/material";
+import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
 import FontMapping from "./font_mapping";
 import Vector from "../../geometry/vector";
@@ -41,6 +41,7 @@ import Camera from "../camera/camera";
 import UI from "../ui/ui";
 import FontRequest from "../../rendering/font/font_request";
 import FontAsset from "../../rendering/font/font_asset";
+import DrawMode from "../../rendering/draw_mode";
 
 /**
  * TextSystem is a pre-rendering system, taking in text components and
@@ -341,15 +342,19 @@ class TextSystem extends System {
                     Polygon.RectangleByDimensions(1,1),
                     charTransform.InterpolatedMatrix4D(alpha),
                     new Material(
-                        new Texture(
-                            `font_${text.font}`,
-                            Polygon.RectangleByPoints(
-                                new Vector(x * charSize, y * charSize), 
-                                new Vector(x * charSize + charSize, y * charSize + charSize)
-                            ).GetFloat32Array()
-                        ),
-                        text.shaders
+                        {
+                            texture: new Texture(
+                                `font_${text.font}`,
+                                Polygon.RectangleByPoints(
+                                    new Vector(x * charSize, y * charSize), 
+                                    new Vector(x * charSize + charSize, y * charSize + charSize)
+                                )
+                            ),
+                            shaders: text.shaders,
+                            color: text.color
+                        }
                     ),
+                    DrawMode.TRIANGLE_FAN,
                     new TextRender(
                         mapping.asset.request.family,
                         mapping.asset.request.weight,

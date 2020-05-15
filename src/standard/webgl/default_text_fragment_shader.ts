@@ -18,8 +18,6 @@ import GLSLShader from "../glsl/glsl_shader";
 import GLSLContext from "../glsl/glsl_context";
 import ShaderAsset from "../../rendering/shader/shader_asset";
 import IRenderable from "../../rendering/irenderable";
-import Renderable from "../../rendering/renderable";
-import TextRender from "../text/text_render";
 
 /**
  * DefaultTextFragmentShader is the shader loaded for handling the
@@ -53,18 +51,12 @@ class DefaultTextFragmentShader extends GLSLShader {
         gl.uniform1i(textureLocation, 0);
     };
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, texture: WebGLTexture, renderable: IRenderable): void => {
-        // Text rendering pre-renderer adds a TextRender payload for storing
-        // data in the renderable, grab it, if it doesn't exist just exit.
-        const textRenderable = renderable as Renderable<TextRender>;
-        if (textRenderable.payload === undefined) {
-            return;
-        }
+    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
         const gl = context.gl;
         const program = context.program;
         // Add in color information
         const colorLocation = gl.getUniformLocation(program, "uColor");
-        gl.uniform4f(colorLocation, ...textRenderable.payload.color.GetTuple());
+        gl.uniform4f(colorLocation, ...renderable.material.color.GetTuple());
     };
 
     constructor() {

@@ -16,6 +16,7 @@
 * [KeyboardSystem](../classes/keyboardsystem.md)
 * [MotionSystem](../classes/motionsystem.md)
 * [PointerSystem](../classes/pointersystem.md)
+* [PrimitiveSystem](../classes/primitivesystem.md)
 * [RenderSystem](../classes/rendersystem.md)
 * [Scene](../classes/scene.md)
 * [SpriteSystem](../classes/spritesystem.md)

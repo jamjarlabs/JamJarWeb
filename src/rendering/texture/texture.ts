@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import Polygon from "../../standard/shape/polygon";
+
 /**
  * Texture is the mapping from an image that has been loaded, deciding
  * how the texture should be drawn and represented.
@@ -24,11 +26,11 @@ class Texture {
      */
     public image: string;
     /**
-     * Mapping in points on the image, represented as Float32Array for performance.
+     * Mapping in points on the image.
      */
-    public points?: Float32Array;
+    public points: Polygon;
 
-    constructor(image: string, points?: Float32Array) {
+    constructor(image: string, points: Polygon) {
         this.image = image;
         this.points = points;
     }

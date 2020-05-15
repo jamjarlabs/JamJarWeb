@@ -60,7 +60,7 @@ describe("MessageBus - Dispatch", () => {
                     new FakeSubscriber(7, [new Reactor("OnMessage", () => { throw("unexpected match"); })])
                 ]
             }, [new Message("test")])
-        ]
+        ],
     ])("%p", (description: string, expected: Error | undefined, messageBus: MessageBus) => {
         if (expected instanceof Error) {
             expect(() => { messageBus.Dispatch(); }).toThrow(expected);

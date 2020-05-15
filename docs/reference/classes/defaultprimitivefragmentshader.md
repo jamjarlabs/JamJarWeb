@@ -1,15 +1,11 @@
 
-# Class: DefaultFragmentShader
-
-DefaultFragmentShader is the shader loaded for handling the
-"default_fragment" shader choice, used as the default shader
-and expected to be loaded.
+# Class: DefaultPrimitiveFragmentShader
 
 ## Hierarchy
 
 * [GLSLShader](glslshader.md)
 
-  ↳ **DefaultFragmentShader**
+  ↳ **DefaultPrimitiveFragmentShader**
 
 ## Implements
 
@@ -19,30 +15,30 @@ and expected to be loaded.
 
 ### Constructors
 
-* [constructor](defaultfragmentshader.md#constructor)
+* [constructor](defaultprimitivefragmentshader.md#constructor)
 
 ### Properties
 
-* [perRenderable](defaultfragmentshader.md#optional-perrenderable)
-* [perShader](defaultfragmentshader.md#optional-pershader)
-* [perTexture](defaultfragmentshader.md#optional-pertexture)
-* [source](defaultfragmentshader.md#source)
-* [type](defaultfragmentshader.md#type)
-* [SOURCE](defaultfragmentshader.md#static-private-source)
+* [perRenderable](defaultprimitivefragmentshader.md#optional-perrenderable)
+* [perShader](defaultprimitivefragmentshader.md#optional-pershader)
+* [perTexture](defaultprimitivefragmentshader.md#optional-pertexture)
+* [source](defaultprimitivefragmentshader.md#source)
+* [type](defaultprimitivefragmentshader.md#type)
+* [SOURCE](defaultprimitivefragmentshader.md#static-private-source)
 
 ### Methods
 
-* [PER_TEXTURE](defaultfragmentshader.md#static-private-per_texture)
+* [PER_RENDERABLE](defaultprimitivefragmentshader.md#static-private-per_renderable)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new DefaultFragmentShader**(): *[DefaultFragmentShader](defaultfragmentshader.md)*
+\+ **new DefaultPrimitiveFragmentShader**(): *[DefaultPrimitiveFragmentShader](defaultprimitivefragmentshader.md)*
 
 *Overrides [GLSLShader](glslshader.md).[constructor](glslshader.md#constructor)*
 
-**Returns:** *[DefaultFragmentShader](defaultfragmentshader.md)*
+**Returns:** *[DefaultPrimitiveFragmentShader](defaultprimitivefragmentshader.md)*
 
 ## Properties
 
@@ -115,40 +111,35 @@ ___
 ▪ **SOURCE**: *"#version 300 es
         precision mediump float;
 
-        uniform sampler2D uTexture;
-
-        in vec2 vTextureCoordinate;
-
+        uniform vec4 uColor;
         out vec4 outColor;
 
         void main() {
-            outColor = texture(uTexture, vTextureCoordinate);
+            outColor = uColor;
         }
     "* = `#version 300 es
         precision mediump float;
 
-        uniform sampler2D uTexture;
-
-        in vec2 vTextureCoordinate;
-
+        uniform vec4 uColor;
         out vec4 outColor;
 
         void main() {
-            outColor = texture(uTexture, vTextureCoordinate);
+            outColor = uColor;
         }
     `
 
 ## Methods
 
-### `Static` `Private` PER_TEXTURE
+### `Static` `Private` PER_RENDERABLE
 
-▸ **PER_TEXTURE**(`context`: [GLSLContext](glslcontext.md), `texture`: WebGLTexture): *void*
+▸ **PER_RENDERABLE**(`context`: [GLSLContext](glslcontext.md), `renderable`: [IRenderable](../interfaces/irenderable.md), `texture?`: WebGLTexture): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `context` | [GLSLContext](glslcontext.md) |
-`texture` | WebGLTexture |
+`renderable` | [IRenderable](../interfaces/irenderable.md) |
+`texture?` | WebGLTexture |
 
 **Returns:** *void*
