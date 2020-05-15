@@ -37,7 +37,7 @@ class DefaultTextureFragmentShader extends GLSLShader {
 
         void main() {
             outColor = texture(uTexture, vTextureCoordinate);
-            outColor.rgb = mix(outColor.rgb, vec3(1.0), uColor.a);
+            outColor = outColor * uColor;
         }
     `;
 

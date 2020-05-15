@@ -21,18 +21,18 @@ import MessageBus from "jamjar/lib/message/message_bus";
 import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
 import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
 import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
-import ShaderAsset from "jamjar/lib/rendering/shader_asset";
 import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
 import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/standard/transform/transform";
 import Sprite from "jamjar/lib/standard/sprite/sprite";
 import Polygon from "jamjar/lib/standard/shape/polygon";
-import ImageAsset from "jamjar/lib/rendering/image_asset";
 import Camera from "jamjar/lib/standard/camera/camera";
-import Material from "jamjar/lib/rendering/material";
+import Material from "jamjar/lib/rendering/material/material";
 import Message from "jamjar/lib/message/message";
-import Texture from "jamjar/lib/rendering/texture";
+import Texture from "jamjar/lib/rendering/texture/texture";
 import Vector from "jamjar/lib/geometry/vector";
+import ImageRequest from "jamjar/lib/rendering/image/image_request";
+import ShaderAsset from "jamjar/lib/rendering/shader/shader_asset";
 
 // Game definition
 class ShaderGame extends Game {
@@ -59,10 +59,13 @@ class ShaderGame extends Game {
         this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "example-shader",
             shader
-        )))
+        )));
 
         // Load texture, will be overridden by custom shader
-        this.messageBus.Publish(new Message<[string, string]>(ImageAsset.MESSAGE_REQUEST_LOAD, ["example", "assets/example.png"]));
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+            "example",
+            "assets/example.png"
+        )));
 
         // Create camera
         const cameraEntity = new Entity(this.messageBus);
@@ -77,10 +80,12 @@ class ShaderGame extends Game {
         // alongside using our custom fragment shader with the default
         // vertex shader
         example.Add(new Sprite(
-            new Material(
-                new Texture("example", Polygon.RectangleByDimensions(1,1).GetFloat32Array()),
-                [ "example-shader", ShaderAsset.DEFAULT_VERTEX_SHADER_NAME ]
-            ), 0, Polygon.RectangleByDimensions(1,1)
+            new Material({
+                texture: new Texture("example", Polygon.RectangleByDimensions(1,1)),
+                shaders: [ "example-shader", ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME ]
+            }), 
+            0, 
+            Polygon.RectangleByDimensions(1,1)
         ));
     }
 }

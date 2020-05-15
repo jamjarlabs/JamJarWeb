@@ -9,11 +9,15 @@ etc.
 
 * **GLSLShader**
 
-  ↳ [DefaultFragmentShader](defaultfragmentshader.md)
+  ↳ [DefaultPrimitiveFragmentShader](defaultprimitivefragmentshader.md)
+
+  ↳ [DefaultPrimitiveVertexShader](defaultprimitivevertexshader.md)
 
   ↳ [DefaultTextFragmentShader](defaulttextfragmentshader.md)
 
-  ↳ [DefaultVertexShader](defaultvertexshader.md)
+  ↳ [DefaultTextureFragmentShader](defaulttexturefragmentshader.md)
+
+  ↳ [DefaultTextureVertexShader](defaulttexturevertexshader.md)
 
 ## Implements
 

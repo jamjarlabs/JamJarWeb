@@ -32,6 +32,12 @@ global.window.WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR = 0;
 global.window.WebGL2RenderingContext.REPEAT = 0;
 global.window.WebGL2RenderingContext.MIRRORED_REPEAT = 0;
 global.window.WebGL2RenderingContext.CLAMP_TO_EDGE = 0;
+global.window.WebGL2RenderingContext.POINTS = 0;
+global.window.WebGL2RenderingContext.LINES = 0;
+global.window.WebGL2RenderingContext.LINE_STRIP = 0;
+global.window.WebGL2RenderingContext.TRIANGLES = 0;
+global.window.WebGL2RenderingContext.TRIANGLE_STRIP = 0;
+global.window.WebGL2RenderingContext.TRIANGLE_FAN = 0;
 
 global.window.WebGLTexture = function () {
     return {};

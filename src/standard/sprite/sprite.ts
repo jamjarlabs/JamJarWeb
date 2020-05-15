@@ -39,8 +39,10 @@ class Sprite extends Component {
     /**
      * The shape of the sprite to draw, represented by a Polygon.
      */
-    public bounds: Polygon;
-
+    public shape: Polygon;
+    /**
+     * Material to apply when rendering the Sprite.
+     */
     public material: Material;
 
     constructor(material: Material,
@@ -49,7 +51,7 @@ class Sprite extends Component {
         super(Sprite.KEY);
         this.material = material;
         this.zOrder = zOrder;
-        this.bounds = bounds;
+        this.shape = bounds;
     }
 }
 

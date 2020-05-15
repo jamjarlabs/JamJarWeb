@@ -1,16 +1,15 @@
 
-# Class: DefaultTextFragmentShader
+# Class: DefaultTextureVertexShader
 
-DefaultTextFragmentShader is the shader loaded for handling the
-"default_text_fragment" shader choice, used as defaults in
-rendering text. Allows specifying text color to override the
-default texture.
+DefaultVertexShader is the shader loaded for handling the
+"default_vertex" shader choice, used as the default shader
+and expected to be loaded.
 
 ## Hierarchy
 
 * [GLSLShader](glslshader.md)
 
-  ↳ **DefaultTextFragmentShader**
+  ↳ **DefaultTextureVertexShader**
 
 ## Implements
 
@@ -20,31 +19,31 @@ default texture.
 
 ### Constructors
 
-* [constructor](defaulttextfragmentshader.md#constructor)
+* [constructor](defaulttexturevertexshader.md#constructor)
 
 ### Properties
 
-* [perRenderable](defaulttextfragmentshader.md#optional-perrenderable)
-* [perShader](defaulttextfragmentshader.md#optional-pershader)
-* [perTexture](defaulttextfragmentshader.md#optional-pertexture)
-* [source](defaulttextfragmentshader.md#source)
-* [type](defaulttextfragmentshader.md#type)
-* [SOURCE](defaulttextfragmentshader.md#static-private-source)
+* [perRenderable](defaulttexturevertexshader.md#optional-perrenderable)
+* [perShader](defaulttexturevertexshader.md#optional-pershader)
+* [perTexture](defaulttexturevertexshader.md#optional-pertexture)
+* [source](defaulttexturevertexshader.md#source)
+* [type](defaulttexturevertexshader.md#type)
+* [SOURCE](defaulttexturevertexshader.md#static-private-source)
 
 ### Methods
 
-* [PER_RENDERABLE](defaulttextfragmentshader.md#static-private-per_renderable)
-* [PER_TEXTURE](defaulttextfragmentshader.md#static-private-per_texture)
+* [PER_RENDERABLE](defaulttexturevertexshader.md#static-private-per_renderable)
+* [PER_SHADER](defaulttexturevertexshader.md#static-private-per_shader)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new DefaultTextFragmentShader**(): *[DefaultTextFragmentShader](defaulttextfragmentshader.md)*
+\+ **new DefaultTextureVertexShader**(): *[DefaultTextureVertexShader](defaulttexturevertexshader.md)*
 
 *Overrides [GLSLShader](glslshader.md).[constructor](glslshader.md#constructor)*
 
-**Returns:** *[DefaultTextFragmentShader](defaulttextfragmentshader.md)*
+**Returns:** *[DefaultTextureVertexShader](defaulttexturevertexshader.md)*
 
 ## Properties
 
@@ -115,32 +114,32 @@ ___
 ### `Static` `Private` SOURCE
 
 ▪ **SOURCE**: *"#version 300 es
-        precision mediump float;
+        in vec2 aVertexPosition;
+        in vec2 aTexturePosition;
 
-        uniform sampler2D uTexture;
-        uniform vec4 uColor;
+        uniform mat4 uViewMatrix;
+        uniform mat4 uModelMatrix;
+        uniform mat4 uProjectionMatrix;
 
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
+        out vec2 vTextureCoordinate;
 
         void main() {
-            float alpha = texture(uTexture, vTextureCoordinate).r;
-            outColor = vec4(uColor.rgb, alpha * uColor.a);
+            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
+            vTextureCoordinate = aTexturePosition;
         }
     "* = `#version 300 es
-        precision mediump float;
+        in vec2 aVertexPosition;
+        in vec2 aTexturePosition;
 
-        uniform sampler2D uTexture;
-        uniform vec4 uColor;
+        uniform mat4 uViewMatrix;
+        uniform mat4 uModelMatrix;
+        uniform mat4 uProjectionMatrix;
 
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
+        out vec2 vTextureCoordinate;
 
         void main() {
-            float alpha = texture(uTexture, vTextureCoordinate).r;
-            outColor = vec4(uColor.rgb, alpha * uColor.a);
+            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 0, 1);
+            vTextureCoordinate = aTexturePosition;
         }
     `
 
@@ -162,15 +161,14 @@ Name | Type |
 
 ___
 
-### `Static` `Private` PER_TEXTURE
+### `Static` `Private` PER_SHADER
 
-▸ **PER_TEXTURE**(`context`: [GLSLContext](glslcontext.md), `texture`: WebGLTexture): *void*
+▸ **PER_SHADER**(`context`: [GLSLContext](glslcontext.md)): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `context` | [GLSLContext](glslcontext.md) |
-`texture` | WebGLTexture |
 
 **Returns:** *void*

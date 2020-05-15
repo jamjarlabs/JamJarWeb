@@ -86,7 +86,7 @@ class DefaultTextureVertexShader extends GLSLShader {
         const positionBuffer = gl.createBuffer();
         const textureBuffer = gl.createBuffer();
 
-        let texturePoints = renderable.material.texture.points.GetFloat32Array();
+        const texturePoints = renderable.material.texture.points.GetFloat32Array();
 
         // bind vao
         gl.bindVertexArray(vao);

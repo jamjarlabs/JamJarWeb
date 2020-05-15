@@ -1,16 +1,15 @@
 
-# Class: DefaultTextFragmentShader
+# Class: DefaultTextureFragmentShader
 
-DefaultTextFragmentShader is the shader loaded for handling the
-"default_text_fragment" shader choice, used as defaults in
-rendering text. Allows specifying text color to override the
-default texture.
+DefaultFragmentShader is the shader loaded for handling the
+"default_fragment" shader choice, used as the default shader
+and expected to be loaded.
 
 ## Hierarchy
 
 * [GLSLShader](glslshader.md)
 
-  ↳ **DefaultTextFragmentShader**
+  ↳ **DefaultTextureFragmentShader**
 
 ## Implements
 
@@ -20,31 +19,31 @@ default texture.
 
 ### Constructors
 
-* [constructor](defaulttextfragmentshader.md#constructor)
+* [constructor](defaulttexturefragmentshader.md#constructor)
 
 ### Properties
 
-* [perRenderable](defaulttextfragmentshader.md#optional-perrenderable)
-* [perShader](defaulttextfragmentshader.md#optional-pershader)
-* [perTexture](defaulttextfragmentshader.md#optional-pertexture)
-* [source](defaulttextfragmentshader.md#source)
-* [type](defaulttextfragmentshader.md#type)
-* [SOURCE](defaulttextfragmentshader.md#static-private-source)
+* [perRenderable](defaulttexturefragmentshader.md#optional-perrenderable)
+* [perShader](defaulttexturefragmentshader.md#optional-pershader)
+* [perTexture](defaulttexturefragmentshader.md#optional-pertexture)
+* [source](defaulttexturefragmentshader.md#source)
+* [type](defaulttexturefragmentshader.md#type)
+* [SOURCE](defaulttexturefragmentshader.md#static-private-source)
 
 ### Methods
 
-* [PER_RENDERABLE](defaulttextfragmentshader.md#static-private-per_renderable)
-* [PER_TEXTURE](defaulttextfragmentshader.md#static-private-per_texture)
+* [PER_RENDERABLE](defaulttexturefragmentshader.md#static-private-per_renderable)
+* [PER_TEXTURE](defaulttexturefragmentshader.md#static-private-per_texture)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new DefaultTextFragmentShader**(): *[DefaultTextFragmentShader](defaulttextfragmentshader.md)*
+\+ **new DefaultTextureFragmentShader**(): *[DefaultTextureFragmentShader](defaulttexturefragmentshader.md)*
 
 *Overrides [GLSLShader](glslshader.md).[constructor](glslshader.md#constructor)*
 
-**Returns:** *[DefaultTextFragmentShader](defaulttextfragmentshader.md)*
+**Returns:** *[DefaultTextureFragmentShader](defaulttexturefragmentshader.md)*
 
 ## Properties
 
@@ -125,8 +124,8 @@ ___
         out vec4 outColor;
 
         void main() {
-            float alpha = texture(uTexture, vTextureCoordinate).r;
-            outColor = vec4(uColor.rgb, alpha * uColor.a);
+            outColor = texture(uTexture, vTextureCoordinate);
+            outColor = outColor * uColor;
         }
     "* = `#version 300 es
         precision mediump float;
@@ -139,8 +138,8 @@ ___
         out vec4 outColor;
 
         void main() {
-            float alpha = texture(uTexture, vTextureCoordinate).r;
-            outColor = vec4(uColor.rgb, alpha * uColor.a);
+            outColor = texture(uTexture, vTextureCoordinate);
+            outColor = outColor * uColor;
         }
     `
 

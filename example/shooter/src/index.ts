@@ -288,7 +288,9 @@ class AsteroidSystem extends System {
             scale,
             Math.random() * (0 - Math.PI * 2) + Math.PI * 2));
         asteroid.Add(new Primitive(
-            new Material(),
+            new Material({
+                color: new Color(1,1,1,1)
+            }),
             0,
             shape,
             DrawMode.LINE_STRIP
@@ -437,7 +439,9 @@ class ControllerSystem extends System {
 
                     bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.4, 3), orientation));
                     bullet.Add(new Primitive(
-                        new Material(),
+                        new Material({
+                            color: new Color(0.54,1,0.54,1)
+                        }),
                         1,
                         new Polygon([
                             new Vector(0, -0.5),
@@ -517,7 +521,9 @@ class GameOverScene extends Scene {
         const crosshair = new Entity(this.messageBus);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Primitive(
-            new Material(),
+            new Material({
+                color: new Color(1,1,1,1)
+            }),
             1,
             new Polygon([
                 new Vector(-0.25,-0.25),
@@ -594,7 +600,9 @@ class MainScene extends Scene {
         const player = new Entity(this.messageBus);
         player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
         player.Add(new Primitive(
-            new Material(),
+            new Material({
+                color: new Color(1,1,1,1)
+            }),
             0,
             new Polygon([
                 new Vector(0,0.5),
@@ -615,7 +623,9 @@ class MainScene extends Scene {
         const crosshair = new Entity(this.messageBus);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Primitive(
-            new Material(),
+            new Material({
+                color: new Color(1,1,1,1)
+            }),
             1,
             new Polygon([
                 new Vector(-0.25,-0.25),

@@ -20,9 +20,11 @@ load the requested shaders if valid.
 
 * [name](shaderasset.md#name)
 * [shader](shaderasset.md#shader)
-* [DEFAULT_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_fragment_shader_name)
+* [DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_primitive_fragment_shader_name)
+* [DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME](shaderasset.md#static-default_primitive_vertex_shader_name)
+* [DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_texture_fragment_shader_name)
+* [DEFAULT_TEXTURE_VERTEX_SHADER_NAME](shaderasset.md#static-default_texture_vertex_shader_name)
 * [DEFAULT_TEXT_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_text_fragment_shader_name)
-* [DEFAULT_VERTEX_SHADER_NAME](shaderasset.md#static-default_vertex_shader_name)
 * [FRAGMENT_TYPE](shaderasset.md#static-fragment_type)
 * [MESSAGE_FINISH_LOAD](shaderasset.md#static-message_finish_load)
 * [MESSAGE_REQUEST_LOAD](shaderasset.md#static-message_request_load)
@@ -61,11 +63,32 @@ Generic shader.
 
 ___
 
-### `Static` DEFAULT_FRAGMENT_SHADER_NAME
+### `Static` DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME
 
-▪ **DEFAULT_FRAGMENT_SHADER_NAME**: *"default_fragment"* = "default_fragment"
+▪ **DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME**: *"default_primitive_fragment"* = "default_primitive_fragment"
+
+___
+
+### `Static` DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME
+
+▪ **DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME**: *"default_primitive_vertex"* = "default_primitive_vertex"
+
+___
+
+### `Static` DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME
+
+▪ **DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME**: *"default_texture_fragment"* = "default_texture_fragment"
 
 Default fragment shader name, render systems will generally load this
+by default, and it will therefore be always available.
+
+___
+
+### `Static` DEFAULT_TEXTURE_VERTEX_SHADER_NAME
+
+▪ **DEFAULT_TEXTURE_VERTEX_SHADER_NAME**: *"default_texture_vertex"* = "default_texture_vertex"
+
+Default vertex shader name, render systems will generally load this
 by default, and it will therefore be always available.
 
 ___
@@ -77,15 +100,6 @@ ___
 Default text fragment shader name, render systems will generally load this
 by default, and it will therefore be always available. Default fragment shader
 for text.
-
-___
-
-### `Static` DEFAULT_VERTEX_SHADER_NAME
-
-▪ **DEFAULT_VERTEX_SHADER_NAME**: *"default_vertex"* = "default_vertex"
-
-Default vertex shader name, render systems will generally load this
-by default, and it will therefore be always available.
 
 ___
 

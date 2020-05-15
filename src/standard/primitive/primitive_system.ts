@@ -31,8 +31,14 @@ import IRenderable from "../../rendering/irenderable";
 import Camera from "../camera/camera";
 import Primitive from "./primitive";
 
+/**
+ * PrimitiveSystem handles processing primitives for render systems, tracking
+ * primitives and generating renderables from them.
+ */
 class PrimitiveSystem extends System {
-
+    /**
+     * Track primitives and cameras.
+     */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Primitive.KEY].every((type) => components.some(
             component => component.key === type
@@ -57,19 +63,19 @@ class PrimitiveSystem extends System {
                 if (renderMessage.payload === undefined) {
                     return;
                 }
-                this.prepareSprites(renderMessage.payload);
+                this.preparePrimitives(renderMessage.payload);
                 break;
             }
         }
     }
 
-    private prepareSprites(alpha: number): void {
+    private preparePrimitives(alpha: number): void {
         const renderables: IRenderable[] = [];
-        // Get sprite entities
-        const spriteEntities = [...this.entities.values()].filter((entity) => {
+        // Get primitive entities
+        const primitiveEntities = [...this.entities.values()].filter((entity) => {
             return entity.Get(Primitive.KEY);
         });
-        for (const entity of spriteEntities) {
+        for (const entity of primitiveEntities) {
             const primitive = entity.Get(Primitive.KEY) as Primitive;
             const transform = entity.Get(Transform.KEY) as Transform;
             const ui = entity.Get(UI.KEY) as UI | undefined;
@@ -78,7 +84,7 @@ class PrimitiveSystem extends System {
                 // Not UI
                 renderables.push(new Renderable(
                     primitive.zOrder,
-                    primitive.shape,
+                    primitive.points,
                     transform.InterpolatedMatrix4D(alpha),
                     primitive.material,
                     primitive.drawMode,
@@ -112,7 +118,7 @@ class PrimitiveSystem extends System {
                 // Create the renderable for use by rendering systems
                 renderables.push(new Renderable(
                     primitive.zOrder,
-                    primitive.shape,
+                    primitive.points,
                     relativeTransform.InterpolatedMatrix4D(alpha),
                     primitive.material,
                     primitive.drawMode,

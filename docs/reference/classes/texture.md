@@ -17,20 +17,20 @@ how the texture should be drawn and represented.
 ### Properties
 
 * [image](texture.md#image)
-* [points](texture.md#optional-points)
+* [points](texture.md#points)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Texture**(`image`: string, `points?`: Float32Array): *[Texture](texture.md)*
+\+ **new Texture**(`image`: string, `points`: [Polygon](polygon.md)): *[Texture](texture.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `image` | string |
-`points?` | Float32Array |
+`points` | [Polygon](polygon.md) |
 
 **Returns:** *[Texture](texture.md)*
 
@@ -44,8 +44,8 @@ Name of the image the texture refers to.
 
 ___
 
-### `Optional` points
+###  points
 
-• **points**? : *Float32Array*
+• **points**: *[Polygon](polygon.md)*
 
-Mapping in points on the image, represented as Float32Array for performance.
+Mapping in points on the image.

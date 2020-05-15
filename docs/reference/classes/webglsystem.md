@@ -33,6 +33,7 @@ renders them onto a canvas.
 * [shaders](webglsystem.md#private-shaders)
 * [subscriberID](webglsystem.md#subscriberid)
 * [textures](webglsystem.md#private-textures)
+* [DRAW_MODES](webglsystem.md#static-private-draw_modes)
 * [FILTER_MODES](webglsystem.md#static-private-filter_modes)
 * [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
 * [MESSAGE_LOAD_RENDERABLES](webglsystem.md#static-message_load_renderables)
@@ -68,9 +69,11 @@ Name | Type | Default |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
 `defaultShaderAssets` | [ShaderAsset](shaderasset.md)[] | [
-            new ShaderAsset(ShaderAsset.DEFAULT_FRAGMENT_SHADER_NAME, new DefaultFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_VERTEX_SHADER_NAME, new DefaultVertexShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader())
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME, new DefaultTextureFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME, new DefaultPrimitiveFragmentShader()),
+            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, new DefaultPrimitiveVertexShader())
         ] |
 `shaders` | Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]› | new Map() |
 `textures` | Map‹string, WebGLTexture› | new Map() |
@@ -167,6 +170,19 @@ ___
 ### `Private` textures
 
 • **textures**: *Map‹string, WebGLTexture›*
+
+___
+
+### `Static` `Private` DRAW_MODES
+
+▪ **DRAW_MODES**: *Map‹[DrawMode](../enums/drawmode.md), number›* = new Map<DrawMode, number>(new Map([
+        [DrawMode.POINTS, WebGL2RenderingContext.POINTS],
+        [DrawMode.LINES, WebGL2RenderingContext.LINES],
+        [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
+        [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
+        [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
+        [DrawMode.TRIANGLE_FAN, WebGL2RenderingContext.TRIANGLE_FAN],
+    ]))
 
 ___
 

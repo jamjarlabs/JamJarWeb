@@ -24,14 +24,19 @@ import IMaterialOptions from "./imaterial_options";
  * shaders, textures and colors.
  */
 class Material {
+    private static readonly NO_TEXTURE_COLOR = new Color(0.54, 0, 0.54, 1);
     /**
      * List of shaders to apply.
      */
     public shaders: string[];
     /**
-     * The texture to apply
+     * The texture to apply.
      */
     public texture?: Texture;
+    /**
+     * The color to apply, if there is a texture the texture output is mixed
+     * this color, if there is no texture the color is used directly.
+     */
     public color: Color;
 
     constructor(options: IMaterialOptions = {}) {
@@ -40,15 +45,17 @@ class Material {
             ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, 
             ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME
         ];
+        let defaultColor = new Color(1,1,1,1);
         if (options.texture === undefined) {
             // Default shaders for no texture
             defaultShaders = [
                 ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, 
                 ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME
             ];
+            defaultColor = Material.NO_TEXTURE_COLOR;
         }
         const matOptions = {
-            color: new Color(1,1,1,1),
+            color: defaultColor,
             shaders: defaultShaders,
             ...options
         };

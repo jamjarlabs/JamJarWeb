@@ -86,7 +86,7 @@ class SpriteSystem extends System {
                 // Not UI
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    sprite.bounds,
+                    sprite.shape,
                     transform.InterpolatedMatrix4D(alpha),
                     sprite.material,
                     DrawMode.TRIANGLE_FAN,
@@ -120,7 +120,7 @@ class SpriteSystem extends System {
                 // Create the renderable for use by rendering systems
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    sprite.bounds,
+                    sprite.shape,
                     relativeTransform.InterpolatedMatrix4D(alpha),
                     sprite.material,
                     DrawMode.TRIANGLE_FAN,

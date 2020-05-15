@@ -21,9 +21,11 @@ Each entity can only have 1 component of each type.
 
   ↳ [Motion](motion.md)
 
-  ↳ [Sprite](sprite.md)
+  ↳ [Primitive](primitive.md)
 
   ↳ [UI](ui.md)
+
+  ↳ [Sprite](sprite.md)
 
   ↳ [Text](text.md)
 

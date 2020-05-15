@@ -26,6 +26,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [RenderSystem](rendersystem.md)
 
+  ↳ [PrimitiveSystem](primitivesystem.md)
+
   ↳ [SpriteSystem](spritesystem.md)
 
   ↳ [TextSystem](textsystem.md)

@@ -19,26 +19,47 @@ import Polygon from "../shape/polygon";
 import Material from "../../rendering/material/material";
 import DrawMode from "../../rendering/draw_mode";
 
+/**
+ * Primitive allows for a more direct level of control over how an object is
+ * rendered, allowing drawing points, lines and polygons; with specifications
+ * over the draw mode. The shape is passed to the render system as is, without
+ * modification.
+ */
 class Primitive extends Component {
-
+    /**
+     * Key of the primitive component.
+     */
     public static readonly KEY = "primitive";
 
+    /**
+     * Order which the primitive should appear, if it should appear
+     * infront/behind other objects, the higher the value the more precedence it
+     * is given and will appear in front of objects with a lower value.
+     */
     public zOrder: number;
-
-    public shape: Polygon;
-
+    /**
+     * List of points to pass to the render system, the shape that will be
+     * rendered.
+     */
+    public points: Polygon;
+    /**
+     * Material to apply when rendering the primitive.
+     */
     public material: Material;
-
+    /**
+     * Draw mode of the primitive, allows direct control over how the primitive
+     * is rendered.
+     */
     public drawMode: DrawMode;
 
     constructor(material: Material,
         zOrder: number,
-        shape: Polygon = Polygon.RectangleByDimensions(1, 1),
+        points: Polygon = Polygon.RectangleByDimensions(1, 1),
         drawMode: DrawMode = DrawMode.LINE_STRIP) {
         super(Primitive.KEY);
         this.material = material;
         this.zOrder = zOrder;
-        this.shape = shape;
+        this.points = points;
         this.drawMode = drawMode;
     }
 }
