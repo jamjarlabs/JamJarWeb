@@ -26,6 +26,7 @@ Once it has determined all collisions, it broadcasts them as messages.
 ### Properties
 
 * [broadAlgorithm](collisionsystem.md#private-broadalgorithm)
+* [collisionLayerPairs](collisionsystem.md#private-collisionlayerpairs)
 * [entities](collisionsystem.md#protected-entities)
 * [messageBus](collisionsystem.md#protected-messagebus)
 * [narrowAlgorithm](collisionsystem.md#private-narrowalgorithm)
@@ -48,7 +49,7 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 ###  constructor
 
-\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
+\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `collisionLayerPairs`: [string, string][], `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -57,6 +58,7 @@ Once it has determined all collisions, it broadcasts them as messages.
 Name | Type | Default |
 ------ | ------ | ------ |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`collisionLayerPairs` | [string, string][] | [] |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new GJKAlgorithm() |
 `broadAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AlwaysCollideAlgorithm() |
@@ -70,6 +72,12 @@ Name | Type | Default |
 ### `Private` broadAlgorithm
 
 • **broadAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
+
+___
+
+### `Private` collisionLayerPairs
+
+• **collisionLayerPairs**: *[string, string][]*
 
 ___
 

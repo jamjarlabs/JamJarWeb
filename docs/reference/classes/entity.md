@@ -4,7 +4,8 @@
 Entity is one of the key elements of the Entity-Component-System architecture.
 Entity is just to tie components together, and to give Systems ways to group
 and link components.
-The entity is basically just an ID, alongside some helper functions for
+The entity is basically just an ID, with some meta information of tags and
+layers for grouping and filtering, alongside some helper functions for
 adding/removing components and destroying itself.
 
 ## Hierarchy
@@ -24,9 +25,10 @@ adding/removing components and destroying itself.
 ### Properties
 
 * [id](entity.md#id)
+* [layers](entity.md#layers)
 * [messageBus](entity.md#private-messagebus)
+* [tags](entity.md#tags)
 * [ID](entity.md#static-private-id)
-* [KEY](entity.md#static-key)
 * [MESSAGE_DESTROY](entity.md#static-message_destroy)
 
 ### Methods
@@ -39,13 +41,15 @@ adding/removing components and destroying itself.
 
 ###  constructor
 
-\+ **new Entity**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `id`: number): *[Entity](entity.md)*
+\+ **new Entity**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `tags`: string[], `layers`: string[], `id`: number): *[Entity](entity.md)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`tags` | string[] | [] |
+`layers` | string[] | [] |
 `id` | number | Entity.ID++ |
 
 **Returns:** *[Entity](entity.md)*
@@ -60,9 +64,25 @@ Name | Type | Default |
 
 ___
 
+###  layers
+
+• **layers**: *string[]*
+
+*Implementation of [IEntity](../interfaces/ientity.md).[layers](../interfaces/ientity.md#layers)*
+
+___
+
 ### `Private` messageBus
 
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+
+___
+
+###  tags
+
+• **tags**: *string[]*
+
+*Implementation of [IEntity](../interfaces/ientity.md).[tags](../interfaces/ientity.md#tags)*
 
 ___
 
@@ -72,15 +92,11 @@ ___
 
 ___
 
-### `Static` KEY
-
-▪ **KEY**: *"entity"* = "entity"
-
-___
-
 ### `Static` MESSAGE_DESTROY
 
 ▪ **MESSAGE_DESTROY**: *"entity_destroy"* = "entity_destroy"
+
+Message broadcast when an entity is destroyed.
 
 ## Methods
 
@@ -88,13 +104,11 @@ ___
 
 ▸ **Add**(`component`: [Component](component.md)): *void*
 
-Add adds a component to the entity.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`component` | [Component](component.md) | The component to add  |
+Name | Type |
+------ | ------ |
+`component` | [Component](component.md) |
 
 **Returns:** *void*
 
@@ -104,8 +118,6 @@ ___
 
 ▸ **Destroy**(): *void*
 
-Destroy deletes the entity and all associated components.
-
 **Returns:** *void*
 
 ___
@@ -114,12 +126,10 @@ ___
 
 ▸ **Remove**(`key`: string): *void*
 
-Remove removes a component from the entity.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`key` | string | The component to remove  |
+Name | Type |
+------ | ------ |
+`key` | string |
 
 **Returns:** *void*

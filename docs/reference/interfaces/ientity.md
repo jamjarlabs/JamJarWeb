@@ -1,6 +1,9 @@
 
 # Interface: IEntity
 
+IEntity defines how an entity should behave, and it's underlying core
+requirements - an ID, tags, and layers.
+
 ## Hierarchy
 
 * **IEntity**
@@ -18,13 +21,18 @@
 * [Destroy](ientity.md#destroy)
 * [Remove](ientity.md#remove)
 * [id](ientity.md#id)
-* [scene](ientity.md#optional-scene)
+* [layers](ientity.md#layers)
+* [tags](ientity.md#tags)
 
 ## Properties
 
 ###  Add
 
 • **Add**: *function*
+
+Add adds a component to the entity.
+
+**`param`** The component to add
 
 #### Type declaration:
 
@@ -42,6 +50,8 @@ ___
 
 • **Destroy**: *function*
 
+Destroy deletes the entity and all associated components.
+
 #### Type declaration:
 
 ▸ (): *void*
@@ -51,6 +61,10 @@ ___
 ###  Remove
 
 • **Remove**: *function*
+
+Remove removes a component from the entity.
+
+**`param`** The component to remove
 
 #### Type declaration:
 
@@ -68,8 +82,21 @@ ___
 
 • **id**: *number*
 
+Unique numeric identifier of the entity.
+
 ___
 
-### `Optional` scene
+###  layers
 
-• **scene**? : *[Scene](../classes/scene.md)*
+• **layers**: *string[]*
+
+A list of layers the entity belongs to, used for grouping entities.
+
+___
+
+###  tags
+
+• **tags**: *string[]*
+
+A list of tags the entity has, used for discriminating between entities
+without having to add custom components.

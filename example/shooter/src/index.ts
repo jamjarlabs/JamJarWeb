@@ -57,39 +57,6 @@ import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
 import FontRequest from "jamjar/lib/rendering/font/font_request";
 import DrawMode from "jamjar/lib/rendering/draw_mode";
 
-class Player extends Component {
-    public static readonly KEY = "player";
-    constructor() {
-        super(Player.KEY);
-    }
-}
-
-class Bullet extends Component {
-    public static readonly SPEED = 50;
-    public static readonly KEY = "bullet";
-    constructor() {
-        super(Bullet.KEY);
-    }
-}
-
-class Asteroid extends Component {
-    public static readonly MIN_SPEED = 20;
-    public static readonly MAX_SPEED = 40;
-    public static readonly KEY = "asteroid";
-
-    constructor() {
-        super(Asteroid.KEY);
-    }
-}
-
-class Crosshair extends Component {
-    public static readonly KEY = "crosshair";
-
-    constructor() {
-        super(Crosshair.KEY);
-    }
-}
-
 class ScoreCounter extends Component {
     public static readonly KEY = "score_counter";
 
@@ -136,21 +103,26 @@ class ScoreSystem extends System {
 }
 
 class AsteroidSystem extends System {
-    // Only entities with transform and asteroid components.
-    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Asteroid.KEY, Transform.KEY].every((type) => components.some(
-            component => component.key == type
-        )) || [Bullet.KEY].every((type) => components.some(
-            component => component.key == type
-        )) || [Player.KEY].every((type) => components.some(
-            component => component.key == type
-        ));
-    };
-
+    public static readonly ASTEROID_TAG = "asteroid";
+    public static readonly ASTEROID_LAYER= "asteroid";
     public static readonly BASE_SPAWN_INTERVAL: number = 3000;
-    private static readonly MIN_SPAWN_INTERVAL: number = 500;
+
+    private static readonly MIN_SPEED = 10;
+    private static readonly MAX_SPEED = 50;
+    private static readonly MIN_SPAWN_INTERVAL: number = 250;
     private static readonly SPAWN_MULTIPLIER: number = 0.95;
     private static readonly SPAWN_DISTANCE: number = 90;
+
+    // Entities with transform and tagged as either asteroid, bullet, or player.
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
+        // Has transform
+        if (components.some(component => component.key === Transform.KEY)) {
+            return entity.tags.includes(AsteroidSystem.ASTEROID_TAG) ||
+                entity.tags.includes(BulletSystem.BULLET_TAG) ||
+                entity.tags.includes(PlayerSystem.PLAYER_TAG);
+        } 
+        return false;
+    };
 
     private lastSpawnTime: number;
     private spawnInterval: number;
@@ -184,13 +156,13 @@ class AsteroidSystem extends System {
                 .Normalize()
                 .Scale(AsteroidSystem.SPAWN_DISTANCE);
 
-            const size = new Vector(randomBetweenInts(5, 30), randomBetweenInts(5, 30));
+            const size = new Vector(randomBetweenInts(1, 15), randomBetweenInts(1, 15));
 
-            this.createAsteroid(startPosition, size, Asteroid.MAX_SPEED);
+            this.createAsteroid(startPosition, size, AsteroidSystem.MAX_SPEED);
         }
 
         const asteroids = [...this.entities.values()].filter((entity) => {
-            return entity.Get(Asteroid.KEY);
+            return entity.entity.tags.includes(AsteroidSystem.ASTEROID_TAG);
         });
 
         for (let i = 0; i < asteroids.length; i++) {
@@ -213,13 +185,13 @@ class AsteroidSystem extends System {
                     return;
                 }
                 const asteroids = [...this.entities.values()].filter((entity) => {
-                    return entity.Get(Asteroid.KEY);
+                    return entity.entity.tags.includes(AsteroidSystem.ASTEROID_TAG);
                 });
                 const bullets = [...this.entities.values()].filter((entity) => {
-                    return entity.Get(Bullet.KEY);
+                    return entity.entity.tags.includes(BulletSystem.BULLET_TAG);
                 });
                 const players = [...this.entities.values()].filter((entity) => {
-                    return entity.Get(Player.KEY);
+                    return entity.entity.tags.includes(PlayerSystem.PLAYER_TAG);
                 });
                 for (const bullet of bullets) {
                     let destroyEntity: IEntity | undefined = undefined;
@@ -270,7 +242,7 @@ class AsteroidSystem extends System {
     }
 
     private createAsteroid(position: Vector, scale: Vector, maxSpeed: number): void {
-        const asteroid = new Entity(this.messageBus);
+        const asteroid = new Entity(this.messageBus, [AsteroidSystem.ASTEROID_TAG], [AsteroidSystem.ASTEROID_LAYER]);
 
         const towardsVector = new Vector(0, 0).Sub(position).Normalize();
 
@@ -296,8 +268,7 @@ class AsteroidSystem extends System {
             DrawMode.LINE_STRIP
         ));
         asteroid.Add(new Collider(shape));
-        asteroid.Add(new Motion(towardsVector.Scale(Math.random() * randomBetweenInts(Asteroid.MIN_SPEED, maxSpeed))));
-        asteroid.Add(new Asteroid());
+        asteroid.Add(new Motion(towardsVector.Scale(Math.random() * randomBetweenInts(AsteroidSystem.MIN_SPEED, maxSpeed))));
         if (this.scene !== undefined) {
             this.scene.AddEntity(asteroid);
         }
@@ -305,11 +276,15 @@ class AsteroidSystem extends System {
 }
 
 class BulletSystem extends System {
-    // Only entities with transform and bullet components.
+    public static readonly BULLET_TAG = "bullet";
+    public static readonly BULLET_LAYER = "bullet";
+    public static readonly SPEED = 40;
+
+
+    // Only entities with transform component and bullet tag.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Bullet.KEY, Transform.KEY].every((type) => components.some(
-            component => component.key == type
-        ));
+        return components.some(component => component.key === Transform.KEY) &&
+            entity.tags.includes(BulletSystem.BULLET_TAG);
     };
 
     constructor(messageBus: IMessageBus, 
@@ -333,11 +308,12 @@ class BulletSystem extends System {
 }
 
 class CrosshairSystem extends System {
-    // Only entities with transform and crosshair components.
+    public static readonly CROSSHAIR_TAG = "crosshair";
+    // Only entities with transform, UI component and crosshair tag
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Crosshair.KEY, Transform.KEY, UI.KEY].every((type) => components.some(
+        return [Transform.KEY, UI.KEY].every((type) => components.some(
             component => component.key == type
-        ));
+        )) && entity.tags.includes(CrosshairSystem.CROSSHAIR_TAG);
     };
 
     constructor(messageBus: IMessageBus, 
@@ -383,12 +359,14 @@ class CrosshairSystem extends System {
 
 }
 
-class ControllerSystem extends System {
-    // Only entities with transform and player components.
+class PlayerSystem extends System {
+    public static readonly PLAYER_TAG = "player";
+    public static readonly PLAYER_LAYER = "player";
+
+    // Only entities with transform component and player tag.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Player.KEY, Transform.KEY].every((type) => components.some(
-            component => component.key == type
-        ));
+        return components.some(component => component.key === Transform.KEY) &&
+            entity.tags.includes(PlayerSystem.PLAYER_TAG);
     };
 
     private targetedPosition: Vector;
@@ -398,7 +376,7 @@ class ControllerSystem extends System {
         entities?: Map<number, SystemEntity>, 
         subscriberID?: number,
         targetedPosition: Vector = new Vector(0,0)) {
-        super(messageBus, scene, ControllerSystem.EVALUATOR, entities, subscriberID);
+        super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointermove", "pointerdown"]);
         this.targetedPosition = targetedPosition;
     }
@@ -434,7 +412,7 @@ class ControllerSystem extends System {
                     
                     const transform = player.Get(Transform.KEY) as Transform;
                     const orientation = this.getOrientationToTarget(transform.position);
-                    const bullet = new Entity(this.messageBus);
+                    const bullet = new Entity(this.messageBus, [BulletSystem.BULLET_TAG], [BulletSystem.BULLET_LAYER]);
                     const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
 
                     bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.4, 3), orientation));
@@ -456,8 +434,7 @@ class ControllerSystem extends System {
                         )
                     }), 1));
                     bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)))
-                    bullet.Add(new Motion(towardsVector.Scale(Bullet.SPEED)));
-                    bullet.Add(new Bullet());
+                    bullet.Add(new Motion(towardsVector.Scale(BulletSystem.SPEED)));
 
                     if (this.scene !== undefined) {
                         this.scene.AddEntity(bullet);
@@ -518,7 +495,7 @@ class GameOverScene extends Scene {
         playAgain.Add(new UI(camera));
         this.AddEntity(playAgain);
         
-        const crosshair = new Entity(this.messageBus);
+        const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Primitive(
             new Material({
@@ -535,7 +512,6 @@ class GameOverScene extends Scene {
             DrawMode.LINE_STRIP
         ))
         crosshair.Add(new UI(camera));
-        crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
 
     }
@@ -565,8 +541,11 @@ class MainScene extends Scene {
         new PrimitiveSystem(this.messageBus, this);
         new MotionSystem(this.messageBus, this);
         new InterpolationSystem(this.messageBus, this);
-        new CollisionSystem(this.messageBus, this);
-        new ControllerSystem(this.messageBus, this);
+        new CollisionSystem(this.messageBus, [
+            [BulletSystem.BULLET_LAYER, AsteroidSystem.ASTEROID_LAYER],
+            [AsteroidSystem.ASTEROID_LAYER, PlayerSystem.PLAYER_LAYER]
+        ], this);
+        new PlayerSystem(this.messageBus, this);
         new BulletSystem(this.messageBus, this);
         new ScoreSystem(this.messageBus, this);
         new AsteroidSystem(this.messageBus, this);
@@ -597,8 +576,8 @@ class MainScene extends Scene {
         camera.Add(new Camera(backgroundColor, viewportPosition, viewportScale, virtualSize));
         this.AddEntity(camera);
 
-        const player = new Entity(this.messageBus);
-        player.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
+        const player = new Entity(this.messageBus, [PlayerSystem.PLAYER_TAG], [PlayerSystem.PLAYER_LAYER]);
+        player.Add(new Transform(new Vector(0, 0), new Vector(2, 2)));
         player.Add(new Primitive(
             new Material({
                 color: new Color(1,1,1,1)
@@ -617,10 +596,9 @@ class MainScene extends Scene {
             new Vector(0.5, -0.5),
             new Vector(-0.5, -0.5),
         ])));
-        player.Add(new Player());
         this.AddEntity(player);
 
-        const crosshair = new Entity(this.messageBus);
+        const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Primitive(
             new Material({
@@ -637,7 +615,6 @@ class MainScene extends Scene {
             DrawMode.LINE_STRIP
         ))
         crosshair.Add(new UI(camera));
-        crosshair.Add(new Crosshair());
         this.AddEntity(crosshair);
 
         const scoreHeight = 0.06;

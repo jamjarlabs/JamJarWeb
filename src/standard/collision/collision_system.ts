@@ -46,16 +46,19 @@ class CollisionSystem extends System {
         ));
     };
 
+    private collisionLayerPairs: [string, string][];
     private narrowAlgorithm: ICollisionAlgorithm;
     private broadAlgorithm: ICollisionAlgorithm;
 
-    constructor(messageBus: IMessageBus, 
+    constructor(messageBus: IMessageBus,
+        collisionLayerPairs: [string, string][] = [],
         scene?: IScene, 
         narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm(),
         broadAlgorithm: ICollisionAlgorithm = new AlwaysCollideAlgorithm(),
         entities?: Map<number, SystemEntity>, 
         subscriberID?: number) {
         super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
+        this.collisionLayerPairs = collisionLayerPairs;
         this.narrowAlgorithm = narrowAlgorithm;
         this.broadAlgorithm = broadAlgorithm;
     }
@@ -84,6 +87,19 @@ class CollisionSystem extends System {
                     continue;
                 }
 
+                if (this.collisionLayerPairs.length !== 0) {
+                    let shouldCheck = false;
+                    for (const collisionPair of this.collisionLayerPairs) {
+                        if ((a.entity.layers.includes(collisionPair[0]) && b.entity.layers.includes(collisionPair[1])) ||
+                            (b.entity.layers.includes(collisionPair[0]) && a.entity.layers.includes(collisionPair[1]))) {
+                                shouldCheck = true;
+                        }
+                    }
+                    if (!shouldCheck) {
+                        continue;
+                    }
+                }
+
                 const bTransform = b.Get(Transform.KEY) as Transform;
                 const bCollider = b.Get(Collider.KEY) as Collider;
                 const bShape = bCollider.shape.Transform(bTransform);
@@ -106,6 +122,7 @@ class CollisionSystem extends System {
                 ));
             }
         }
+
 
         // Publish collisions
         for (const collision of collisions) {

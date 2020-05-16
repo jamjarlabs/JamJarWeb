@@ -24,6 +24,14 @@ Versioning](https://semver.org/spec/v2.0.0.html).
     has a fixed draw mode and is further processed by the `SpriteSystem`.
 - `Material` property `color` added, if there is a texture the texture will be
   mixed with this color, if there is no texture the color will be used directly.
+- Simple `tags` option for entities, an array of string tags that can be used to
+  discriminate between entities without requiring an entirely new component.
+- Simple `layers` option for entities, an array of string layers, intended for
+  grouping entities and treating them differently.
+- `CollisionSystem` now takes an optional `collisionLayerPairs` parameter, if
+  this is provided it allows for filtering collisions by layers - with only
+  specified layers allowed to collide. If no `collisionLayerPairs` provided,
+  no filtering is applied.
 ### Changed
 - Images now loaded with a new `ImageRequest` rather than an `ImageAsset` -
   `ImageAsset` used internally.
