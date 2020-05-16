@@ -104,7 +104,7 @@ describe("Scene - Destroy", () => {
         [
             "Single entity, fail to destroy",
             new Error("fail to destroy"),
-            new TestScene(new FakeMessageBus(), 0, [ new FakeEntity(0, undefined, [
+            new TestScene(new FakeMessageBus(), 0, [ new FakeEntity(0, undefined, undefined, [
                 new Reactor("Destroy", () => { throw("fail to destroy"); })
             ])]),
         ],

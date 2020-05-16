@@ -57,7 +57,7 @@ describe("SystemEntity - Add", () => {
         [
             "Fail to add component",
             new Error("fail to add component"),
-            new FakeEntity(0, undefined, [new Reactor("Add", (args) => {
+            new FakeEntity(0, undefined, undefined, [new Reactor("Add", (args) => {
                 throw ("fail to add component");
             })]),
             [],
@@ -88,7 +88,7 @@ describe("SystemEntity - Remove", () => {
         [
             "Fail to remove component",
             new Error("fail to remove component"),
-            new FakeEntity(0, undefined, [new Reactor("Remove", (args) => {
+            new FakeEntity(0, undefined, undefined, [new Reactor("Remove", (args) => {
                 throw ("fail to remove component");
             })]),
             [],
@@ -119,7 +119,7 @@ describe("SystemEntity - Destroy", () => {
         [
             "Fail to destroy entity",
             new Error("fail to destroy entity"),
-            new FakeEntity(0, undefined, [new Reactor("Destroy", (args) => {
+            new FakeEntity(0, undefined, undefined, [new Reactor("Destroy", (args) => {
                 throw ("fail to destroy entity");
             })]),
             []

@@ -23,42 +23,42 @@ import IEntity from "./ientity";
  * Entity is one of the key elements of the Entity-Component-System architecture.
  * Entity is just to tie components together, and to give Systems ways to group
  * and link components.
- * The entity is basically just an ID, alongside some helper functions for
+ * The entity is basically just an ID, with some meta information of tags and
+ * layers for grouping and filtering, alongside some helper functions for
  * adding/removing components and destroying itself.
  */
-class Entity implements IEntity{
+class Entity implements IEntity {
     private static ID = 0;
-    public static readonly MESSAGE_DESTROY = "entity_destroy";
-    public static readonly KEY = "entity";
 
+    /**
+     * Message broadcast when an entity is destroyed.
+     */
+    public static readonly MESSAGE_DESTROY = "entity_destroy";
+
+    public tags: string[];
+    public layers: string[];
     public id: number;
 
     private messageBus: IMessageBus
 
-    constructor(messageBus: IMessageBus, id: number = Entity.ID++) {
+    constructor(messageBus: IMessageBus, 
+        tags: string[] = [], 
+        layers: string[] = [], 
+        id: number = Entity.ID++) {
         this.messageBus = messageBus;
+        this.tags = tags;
+        this.layers = layers;
         this.id = id;
     }
 
-    /**
-     * Add adds a component to the entity.
-     * @param {Component} component The component to add
-     */
     Add(component: Component): void {
         this.messageBus.Publish(new Message<[Entity, Component]>(Component.MESSAGE_ADD, [this, component]));
     }
 
-    /**
-     * Remove removes a component from the entity.
-     * @param {string} key The component to remove 
-     */
     Remove(key: string): void {
         this.messageBus.Publish(new Message<[Entity, string]>(Component.MESSAGE_REMOVE, [this, key]));
     }
 
-    /**
-     * Destroy deletes the entity and all associated components.
-     */
     Destroy(): void {
         this.messageBus.Publish(new Message<Entity>(Entity.MESSAGE_DESTROY, this));
     }

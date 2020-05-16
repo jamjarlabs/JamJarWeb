@@ -15,13 +15,38 @@ limitations under the License.
 */
 
 import Component from "../component/component";
-import Scene from "../scene/scene";
 
+/**
+ * IEntity defines how an entity should behave, and it's underlying core
+ * requirements - an ID, tags, and layers.
+ */
 interface IEntity {
+    /**
+     * Unique numeric identifier of the entity.
+     */
     id: number;
-    scene?: Scene;
+    /**
+     * A list of tags the entity has, used for discriminating between entities
+     * without having to add custom components.
+     */
+    tags: string[];
+    /**
+     * A list of layers the entity belongs to, used for grouping entities.
+     */
+    layers: string[];
+    /**
+     * Add adds a component to the entity.
+     * @param {Component} component The component to add
+     */
     Add: (component: Component) => void;
+    /**
+     * Remove removes a component from the entity.
+     * @param {string} key The component to remove 
+     */
     Remove: (key: string) => void;
+    /**
+     * Destroy deletes the entity and all associated components.
+     */
     Destroy: () => void;
 }
 

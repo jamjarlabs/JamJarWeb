@@ -20,7 +20,8 @@
 ### Properties
 
 * [id](fakeentity.md#id)
-* [scene](fakeentity.md#optional-scene)
+* [layers](fakeentity.md#layers)
+* [tags](fakeentity.md#tags)
 
 ### Methods
 
@@ -32,7 +33,7 @@
 
 ###  constructor
 
-\+ **new FakeEntity**(`id`: number, `scene?`: [Scene](scene.md), `reactors`: [Reactor](reactor.md)[]): *[FakeEntity](fakeentity.md)*
+\+ **new FakeEntity**(`id`: number, `tags`: string[], `layers`: string[], `reactors`: [Reactor](reactor.md)[]): *[FakeEntity](fakeentity.md)*
 
 *Overrides [Fake](fake.md).[constructor](fake.md#constructor)*
 
@@ -41,7 +42,8 @@
 Name | Type | Default |
 ------ | ------ | ------ |
 `id` | number | - |
-`scene?` | [Scene](scene.md) | - |
+`tags` | string[] | [] |
+`layers` | string[] | [] |
 `reactors` | [Reactor](reactor.md)[] | [] |
 
 **Returns:** *[FakeEntity](fakeentity.md)*
@@ -56,11 +58,19 @@ Name | Type | Default |
 
 ___
 
-### `Optional` scene
+###  layers
 
-• **scene**? : *[Scene](scene.md)*
+• **layers**: *string[]*
 
-*Implementation of [IEntity](../interfaces/ientity.md).[scene](../interfaces/ientity.md#optional-scene)*
+*Implementation of [IEntity](../interfaces/ientity.md).[layers](../interfaces/ientity.md#layers)*
+
+___
+
+###  tags
+
+• **tags**: *string[]*
+
+*Implementation of [IEntity](../interfaces/ientity.md).[tags](../interfaces/ientity.md#tags)*
 
 ## Methods
 

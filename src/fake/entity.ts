@@ -16,18 +16,19 @@ limitations under the License.
 
 import IEntity from "../entity/ientity";
 import Fake from "./fake";
-import Scene from "../scene/scene";
 import Reactor from "./reactor";
 import Component from "../component/component";
 
 class FakeEntity extends Fake implements IEntity {
     public id: number;
-    public scene?: Scene;
+    public tags: string[];
+    public layers: string[];
 
-    constructor(id: number, scene?: Scene, reactors: Reactor[] = []) {
+    constructor(id: number, tags: string[] = [], layers: string[] = [], reactors: Reactor[] = []) {
         super(reactors);
         this.id = id;
-        this.scene = scene;
+        this.tags = tags;
+        this.layers = layers;
     }
 
     Add(component: Component): void {
