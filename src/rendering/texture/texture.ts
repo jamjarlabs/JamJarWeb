@@ -42,7 +42,7 @@ class Texture {
         return new Texture(
             this.image,
             this.points.Copy()
-        )
+        );
     }
 }
 

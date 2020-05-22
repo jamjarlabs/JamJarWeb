@@ -52,7 +52,7 @@ class Polygon implements IShape {
         const vertices: number[] = [];
         for (const point of this.points) {
             vertices.push(point.x);
-            vertices.push(point.y)
+            vertices.push(point.y);
         }
         const triangulationIndices = earcut(vertices, undefined, 2);
         const triangulated: Vector[] = [];
