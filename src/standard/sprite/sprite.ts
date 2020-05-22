@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import Material from "../../rendering/material/material";
 
 /**

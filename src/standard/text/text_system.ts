@@ -30,7 +30,7 @@ import Text from "./text";
 import ImageAsset from "../../rendering/image/image_asset";
 import Renderable from "../../rendering/renderable";
 import RenderSystem from "../render/render_system";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
 import FontMapping from "./font_mapping";
@@ -136,7 +136,7 @@ class TextSystem extends System {
         // Build up the glyph atlas, inserting each character's glyph
         // data into the atlas
         /**
-         * The atlas array operates left to right, then top to bottom, meaning that
+         * The atlas array operates left to right, then bottom to top, meaning that
          * a row-by-row approach is required. For the first row, it first inserts
          * the first row of the first image, then inserts the first row of the
          * second image, then the first row of the third image. For the second
@@ -146,20 +146,20 @@ class TextSystem extends System {
          * If all the images are inserted, the rest of the entries should be
          * blank (all 0).
          * |------------------|
-         * | 1  1  2  2  3  3 |
-         * | 1  1  2  2  3  3 |
+         * | -  -  -  -  -  - |
+         * | -  -  -  -  -  - |
+         * | -  -  -  -  -  - |
+         * | -  -  -  -  -  - |
          * | 4  4  5  5  >  - |
-         * | -  -  -  -  -  - |
-         * | -  -  -  -  -  - |
-         * | -  -  -  -  -  - |
-         * | -  -  -  -  -  - |
+         * | 1  1  2  2  3  3 |
+         * | 1  1  2  2  3  3 |
          * |------------------|
          */
-        // Iterate down every row in the glyph atlas
+        // Iterate up every row in the glyph atlas
         for (let i = 0; i < glyphSize * atlasSize; i++) {
             // Get the index of the character for the first column
             // of this row
-            const rowIndex = Math.floor(i / glyphSize) * atlasSize;
+            const rowIndex = (atlasSize * atlasSize - (Math.floor(i / glyphSize) * atlasSize)) - atlasSize;
             // Iterate across for the number of images that can fit in
             // horizontally
             for (let j = 0; j < atlasSize; j++) {
@@ -207,7 +207,8 @@ class TextSystem extends System {
             request.yWrap,
             request.magFilter,
             request.minFilter,
-            request.generateMipmaps
+            request.generateMipmaps,
+            false
         )));
     }
 
@@ -339,22 +340,22 @@ class TextSystem extends System {
                 // information for shaders to use
                 renderables.push(new Renderable<TextRender>(
                     text.zOrder,
-                    Polygon.RectangleByDimensions(1,1),
+                    new Polygon(Polygon.RectangleByDimensions(1,1).Triangulate()),
                     charTransform.InterpolatedMatrix4D(alpha),
                     new Material(
                         {
                             texture: new Texture(
                                 `font_${text.font}`,
-                                Polygon.RectangleByPoints(
+                                new Polygon(Polygon.RectangleByPoints(
                                     new Vector(x * charSize, y * charSize), 
                                     new Vector(x * charSize + charSize, y * charSize + charSize)
-                                )
+                                ).Triangulate())
                             ),
                             shaders: text.shaders,
                             color: text.color
                         }
                     ),
-                    DrawMode.TRIANGLE_FAN,
+                    DrawMode.TRIANGLES,
                     new TextRender(
                         mapping.asset.request.family,
                         mapping.asset.request.weight,

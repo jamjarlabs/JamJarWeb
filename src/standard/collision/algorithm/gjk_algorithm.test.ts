@@ -14,12 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IShape from "../../shape/ishape";
+import IShape from "../../../shape/ishape";
 import GJKAlgorithm from "./gjk_algorithm";
 import CollisionInfo from "../collision_info";
-import Polygon from "../../shape/polygon";
+import Polygon from "../../../shape/polygon";
 import Vector from "../../../geometry/vector";
-import Ellipse from "../../shape/ellipse";
+import Ellipse from "../../../shape/ellipse";
 
 describe("GJKAlgorithm - CalculateCollision", () => {
     type TestTuple = [string, CollisionInfo | undefined, IShape, IShape, GJKAlgorithm];

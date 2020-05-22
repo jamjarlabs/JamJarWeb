@@ -70,6 +70,11 @@ class ImageAsset {
      * True = generate mipmaps, false = don't generate mipmaps.
      */
     public generateMipmaps: boolean;
+    /**
+     * Option for mirroring the texture when loading it (vertical and horizontal
+     * flip). True = mirror, false = don't mirror.
+     */
+    public mirror: boolean;
 
     constructor(name: string, 
         image: HTMLImageElement | ImageData, 
@@ -79,6 +84,7 @@ class ImageAsset {
         magFilter: TextureFiltering,
         minFilter: TextureFiltering,
         generateMipmaps: boolean, 
+        mirror: boolean,
         error?: Error) {
         this.name = name;
         this.image = image;
@@ -89,6 +95,7 @@ class ImageAsset {
         this.magFilter = magFilter;
         this.minFilter = minFilter;
         this.generateMipmaps = generateMipmaps;
+        this.mirror = mirror;
     }
 }
 

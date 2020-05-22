@@ -19,6 +19,10 @@ how the texture should be drawn and represented.
 * [image](texture.md#image)
 * [points](texture.md#points)
 
+### Methods
+
+* [Copy](texture.md#copy)
+
 ## Constructors
 
 ###  constructor
@@ -49,3 +53,13 @@ ___
 • **points**: *[Polygon](polygon.md)*
 
 Mapping in points on the image.
+
+## Methods
+
+###  Copy
+
+▸ **Copy**(): *[Texture](texture.md)*
+
+Make a value copy of the texture.
+
+**Returns:** *[Texture](texture.md)*

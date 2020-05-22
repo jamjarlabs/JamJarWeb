@@ -25,6 +25,7 @@ Vector is the 2 dimensional representation of a vector, with two values (x,y).
 * [Apply4D](vector.md#apply4d)
 * [Copy](vector.md#copy)
 * [Dot](vector.md#dot)
+* [Equals](vector.md#equals)
 * [Invert](vector.md#invert)
 * [Magnitude](vector.md#magnitude)
 * [Multiply](vector.md#multiply)
@@ -145,6 +146,20 @@ Name | Type | Description |
 **Returns:** *number*
 
 The result of the dot product
+
+___
+
+###  Equals
+
+▸ **Equals**(`other`: [Vector](vector.md)): *boolean*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`other` | [Vector](vector.md) |
+
+**Returns:** *boolean*
 
 ___
 

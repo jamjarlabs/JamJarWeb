@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IShape from "../shape/ishape";
+import IShape from "../../shape/ishape";
 import FrustumCuller from "./frustum_culler";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import AlwaysCollideAlgorithm from "../collision/algorithm/always_collide_algorithm";
 import NeverCollideAlgorithm from "../collision/algorithm/never_collide_algorithm";
 

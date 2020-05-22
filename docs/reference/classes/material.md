@@ -21,6 +21,10 @@ shaders, textures and colors.
 * [texture](material.md#optional-texture)
 * [NO_TEXTURE_COLOR](material.md#static-private-no_texture_color)
 
+### Methods
+
+* [Copy](material.md#copy)
+
 ## Constructors
 
 ###  constructor
@@ -65,3 +69,13 @@ ___
 ### `Static` `Private` NO_TEXTURE_COLOR
 
 ▪ **NO_TEXTURE_COLOR**: *[Color](color.md)‹›* = new Color(0.54, 0, 0.54, 1)
+
+## Methods
+
+###  Copy
+
+▸ **Copy**(): *[Material](material.md)*
+
+Makes a value copy of the material.
+
+**Returns:** *[Material](material.md)*

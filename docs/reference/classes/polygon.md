@@ -26,11 +26,13 @@ Can be used in collision detection and rendering.
 
 * [Apply4D](polygon.md#apply4d)
 * [Center](polygon.md#center)
+* [Copy](polygon.md#copy)
 * [FarthestPointInDirection](polygon.md#farthestpointindirection)
 * [GetArray](polygon.md#getarray)
 * [GetFloat32Array](polygon.md#getfloat32array)
 * [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
+* [Triangulate](polygon.md#triangulate)
 * [RectangleByDimensions](polygon.md#static-rectanglebydimensions)
 * [RectangleByPoints](polygon.md#static-rectanglebypoints)
 
@@ -77,6 +79,16 @@ ___
 *Implementation of [IShape](../interfaces/ishape.md)*
 
 **Returns:** *[Vector](vector.md)*
+
+___
+
+###  Copy
+
+▸ **Copy**(): *[Polygon](polygon.md)*
+
+Make a value copy of the Polygon.
+
+**Returns:** *[Polygon](polygon.md)*
 
 ___
 
@@ -149,6 +161,17 @@ Name | Type |
 `transform` | [Transform](transform.md) |
 
 **Returns:** *[Polygon](polygon.md)*
+
+___
+
+###  Triangulate
+
+▸ **Triangulate**(): *[Vector](vector.md)[]*
+
+Triangulates the Polygon, converting it into a list of vertices
+specifying triangles that compose the Polygon.
+
+**Returns:** *[Vector](vector.md)[]*
 
 ___
 

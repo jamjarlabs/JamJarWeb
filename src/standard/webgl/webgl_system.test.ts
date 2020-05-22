@@ -33,7 +33,7 @@ import FakeWebGL2RenderingContext from "../../fake/webgl2_rendering_context";
 import Reactor from "../../fake/reactor";
 import Game from "../../game";
 import Renderable from "../../rendering/renderable";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import Matrix4D from "../../geometry/matrix_4d";
 import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
@@ -43,7 +43,7 @@ import AlwaysCollideAlgorithm from "../collision/algorithm/always_collide_algori
 import ICollisionAlgorithm from "../collision/algorithm/icollision_algorithm";
 import Vector from "../../geometry/vector";
 import CollisionInfo from "../collision/collision_info";
-import IShape from "../shape/ishape";
+import IShape from "../../shape/ishape";
 import TextureFiltering from "../../rendering/texture/texture_filtering";
 import TextureWrapping from "../../rendering/texture/texture_wrapping";
 import DrawMode from "../../rendering/draw_mode";
@@ -299,6 +299,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -339,6 +340,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -379,6 +381,7 @@ describe("WebGLSystem - OnMessage", () => {
                 100,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -419,6 +422,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 23,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -459,6 +463,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.NEAREST,
                 88,
+                false,
                 false
             ))
         ],
@@ -499,6 +504,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -549,6 +555,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -599,7 +606,8 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
-                true
+                true,
+                false
             ))
         ],
         [
@@ -651,6 +659,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -701,6 +710,7 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
+                false,
                 false
             ))
         ],
@@ -751,7 +761,8 @@ describe("WebGLSystem - OnMessage", () => {
                 TextureWrapping.MIRRORED_REPEAT,
                 TextureFiltering.TRILINEAR,
                 TextureFiltering.NEAREST,
-                true
+                true,
+                false
             ))
         ],
         [

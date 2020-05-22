@@ -32,6 +32,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   this is provided it allows for filtering collisions by layers - with only
   specified layers allowed to collide. If no `collisionLayerPairs` provided,
   no filtering is applied.
+- New option for loading textures, `mirror` - allows loading textures in a
+  mirrored mode (flip horizontally and vertically).
 ### Changed
 - Images now loaded with a new `ImageRequest` rather than an `ImageAsset` -
   `ImageAsset` used internally.
@@ -43,6 +45,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   and `shaders`.
 - `Material` property `texture` now optional, if none provided it will render
   only using the `color`.
+- `TRIANGLES` draw mode now used instead of `TRIANGLES_FAN` for sprites.
 ### Fixed
 - Z order bug where an error was thrown if there were gaps between z orders,
   e.g. `0, 1, 3` would error because `2` was missing - caused due to internal
@@ -50,6 +53,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - Dispatches in the message bus could be skipped if a subscriber unsubscribed
   from the message, causing the order to be confused and subscribers to be
   skipped. Fixed by cloning the dispatch queue before dispatching.
+### Removed
+- Cannot draw with `TRIANGLES_FAN` draw mode.
 
 ## [v0.7.0] - 2020-05-04
 ### Added

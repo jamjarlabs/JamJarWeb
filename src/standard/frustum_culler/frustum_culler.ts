@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import IFrustumCuller from "./ifrustum_culler";
-import IShape from "../shape/ishape";
+import IShape from "../../shape/ishape";
 import ICollisionAlgorithm from "../collision/algorithm/icollision_algorithm";
 import GJKAlgorithm from "../collision/algorithm/gjk_algorithm";
 

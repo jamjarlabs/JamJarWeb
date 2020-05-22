@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IShape from "../shape/ishape";
+import IShape from "../../shape/ishape";
 
 /**
  * IFrustumCuller represents a structure that can determine if shapes are

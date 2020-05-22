@@ -28,6 +28,10 @@ class Vector {
         this.y = y;
     }
 
+    public Equals(other: Vector): boolean {
+        return this.x === other.x && this.y === other.y;
+    }
+
     /**
      * Apply3D applies a 3x3 matrix to the vector and returns the result.
      * @param {Matrix3D} matrix Matrix to apply to the vector

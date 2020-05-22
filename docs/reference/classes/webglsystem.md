@@ -181,7 +181,6 @@ ___
         [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
         [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
         [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
-        [DrawMode.TRIANGLE_FAN, WebGL2RenderingContext.TRIANGLE_FAN],
     ]))
 
 ___

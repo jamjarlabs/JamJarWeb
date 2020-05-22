@@ -18,7 +18,7 @@ import IEntity from "../entity/ientity";
 import Material from "./material/material";
 import IRenderable from "./irenderable";
 import Matrix4D from "../geometry/matrix_4d";
-import Polygon from "../standard/shape/polygon";
+import Polygon from "../shape/polygon";
 import DrawMode from "./draw_mode";
 
 /**

@@ -62,6 +62,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -72,6 +73,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT,
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -82,6 +84,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     )
                 ]
@@ -102,6 +105,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -112,6 +116,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT,
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -122,6 +127,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     )
                 ]
@@ -145,7 +151,8 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
-                        false
+                        false,
+                        true
                     ),
                     new ImageAsset(
                         "test1", 
@@ -155,6 +162,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT,
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -165,6 +173,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     )
                 ]
@@ -183,7 +192,8 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
-                        false
+                        false,
+                        true
                     ),
                     new ImageAsset(
                         "test1", 
@@ -193,6 +203,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT,
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -203,6 +214,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     )
                 ]
@@ -233,7 +245,8 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
-                        false
+                        false,
+                        true
                     ),
                     new ImageAsset(
                         "test1", 
@@ -243,6 +256,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT,
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     ),
                     new ImageAsset(
@@ -253,6 +267,7 @@ describe("HTTPImageSystem - OnMessage", () => {
                         TextureWrapping.MIRRORED_REPEAT, 
                         TextureFiltering.NEAREST, 
                         TextureFiltering.BILINEAR, 
+                        false,
                         false
                     )
                 ]

@@ -23,6 +23,7 @@ Values from 0 to 1.
 
 ### Methods
 
+* [Copy](color.md#copy)
 * [GetTuple](color.md#gettuple)
 * [Mix](color.md#mix)
 
@@ -68,6 +69,16 @@ ___
 • **red**: *number*
 
 ## Methods
+
+###  Copy
+
+▸ **Copy**(): *[Color](color.md)*
+
+Make a value copy of the color.
+
+**Returns:** *[Color](color.md)*
+
+___
 
 ###  GetTuple
 

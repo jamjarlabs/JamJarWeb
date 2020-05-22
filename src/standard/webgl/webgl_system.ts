@@ -36,7 +36,7 @@ import DefaultTextFragmentShader from "./default_text_fragment_shader";
 import IRenderable from "../../rendering/irenderable";
 import IFrustumCuller from "../frustum_culler/ifrustum_culler";
 import FrustumCuller from "../frustum_culler/frustum_culler";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import TextureFiltering from "../../rendering/texture/texture_filtering";
 import TextureWrapping from "../../rendering/texture/texture_wrapping";
 import DrawMode from "../../rendering/draw_mode";
@@ -74,7 +74,6 @@ class WebGLSystem extends RenderSystem {
         [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
         [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
         [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
-        [DrawMode.TRIANGLE_FAN, WebGL2RenderingContext.TRIANGLE_FAN],
     ]));
 
     private gl: WebGL2RenderingContext;
@@ -229,6 +228,9 @@ class WebGLSystem extends RenderSystem {
         const glTexture = gl.createTexture();
 
         gl.bindTexture(gl.TEXTURE_2D, glTexture);
+        if (!asset.mirror) {
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); 
+        }
         if (asset.image instanceof(HTMLImageElement)) {
             gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, xWrap);

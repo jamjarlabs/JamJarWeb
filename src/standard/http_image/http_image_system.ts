@@ -78,7 +78,8 @@ class HTTPImageSystem extends System {
             request.yWrap,
             request.magFilter,
             request.minFilter,
-            request.generateMipmaps
+            request.generateMipmaps,
+            request.mirror,
         );
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
@@ -94,6 +95,7 @@ class HTTPImageSystem extends System {
             request.magFilter,
             request.minFilter,
             request.generateMipmaps,
+            request.mirror,
             new Error(`Failed to load image ${request.name} from source ${request.source}`)
         );
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));

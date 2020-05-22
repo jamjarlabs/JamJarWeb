@@ -58,7 +58,6 @@ class DefaultTextureVertexShader extends GLSLShader {
         const viewLocation = gl.getUniformLocation(program, "uViewMatrix");
         const projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
 
-
         gl.uniformMatrix4fv(
             viewLocation,
             false,

@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import CollisionInfo from "../collision_info";
-import IShape from "../../shape/ishape";
+import IShape from "../../../shape/ishape";
 
 /**
  * ICollisionAlgorithm represents a collision detection algorithm.

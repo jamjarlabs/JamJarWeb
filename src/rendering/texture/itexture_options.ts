@@ -42,6 +42,11 @@ interface ITextureOptions {
      * Flag for generating mipmaps or not, true = generate, false = don't generate
      */
     generateMipmaps?: boolean;
+    /**
+     * Flag for determining if the texture should be mirrored or not (flip
+     * horizontal and vertical), true = mirror, false = don't mirror.
+     */
+    mirror?: boolean;
 }
 
 export default ITextureOptions;
