@@ -47,7 +47,6 @@ enum DrawMode {
      * Each successive triangle will have its effective face order reversed.
      */
     TRIANGLE_STRIP = 4,
-    TRIANGLE_FAN = 5
 }
 
 export default DrawMode;

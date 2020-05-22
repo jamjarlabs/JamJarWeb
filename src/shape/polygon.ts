@@ -14,10 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Vector from "../../geometry/vector";
+import Vector from "../geometry/vector";
 import IShape from "./ishape";
-import Transform from "../transform/transform";
-import Matrix4D from "../../geometry/matrix_4d";
+import Transform from "../standard/transform/transform";
+import Matrix4D from "../geometry/matrix_4d";
+import earcut from "earcut";
 
 /**
  * Polygon is the representation of a 2D Polygon shape. 
@@ -28,6 +29,37 @@ class Polygon implements IShape {
 
     constructor(points: Vector[]) {
         this.points = points;
+    }
+
+    /**
+     * Make a value copy of the Polygon.
+     */
+    public Copy(): Polygon {
+        const points: Vector[] = [];
+        for (const point of this.points) {
+            points.push(point.Copy());
+        }
+        return new Polygon(
+            points,
+        );
+    }
+
+    /**
+     * Triangulates the Polygon, converting it into a list of vertices
+     * specifying triangles that compose the Polygon.
+     */
+    public Triangulate(): Vector[] {
+        const vertices: number[] = [];
+        for (const point of this.points) {
+            vertices.push(point.x);
+            vertices.push(point.y)
+        }
+        const triangulationIndices = earcut(vertices, undefined, 2);
+        const triangulated: Vector[] = [];
+        for (let i = 0; i < triangulationIndices.length; i++) {
+            triangulated.push(this.points[triangulationIndices[i]].Copy());
+        }
+        return triangulated;
     }
 
     public Apply4D(matrix: Matrix4D): Polygon {

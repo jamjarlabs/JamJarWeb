@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Vector from "../../geometry/vector";
+import Vector from "../geometry/vector";
 import Ellipse from "./ellipse";
-import Transform from "../transform/transform";
+import Transform from "../standard/transform/transform";
 
 describe("Ellise - FarthestPointInDirection", () => {
     type TestTuple = [string, Vector, Ellipse, Vector];

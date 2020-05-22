@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,21 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../../component/component";
-import IShape from "../../shape/ishape";
+declare module 'earcut' {
 
-/**
- * Collider is a component that defines a shape for detecting collisions
- * with other Colliders.
- */
-class Collider extends Component {
-    public static readonly KEY = "collider";
-    public shape: IShape;
+    function earcut(vertices: number[], holes?: number[], dimensions?: number): number[];
 
-    constructor(shape: IShape) {
-        super(Collider.KEY);
-        this.shape = shape;
-    }
+    export = earcut;
 }
-
-export default Collider;

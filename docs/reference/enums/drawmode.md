@@ -12,7 +12,6 @@ systems interpret how to render renderables.
 * [LINE_STRIP](drawmode.md#line_strip)
 * [POINTS](drawmode.md#points)
 * [TRIANGLES](drawmode.md#triangles)
-* [TRIANGLE_FAN](drawmode.md#triangle_fan)
 * [TRIANGLE_STRIP](drawmode.md#triangle_strip)
 
 ## Enumeration members
@@ -52,12 +51,6 @@ ___
 Every 3 vertices make up a triangle, triangles are not continous, e.g in
 ABCDEF A-B-C make up a triangle, D-E-F make up a triangle, A-B-C and
 D-E-F are not connected.
-
-___
-
-###  TRIANGLE_FAN
-
-• **TRIANGLE_FAN**: = 5
 
 ___
 

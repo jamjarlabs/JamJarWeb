@@ -24,14 +24,14 @@ import SystemEntity from "../../system/system_entity";
 import FakeEntity from "../../fake/entity";
 import Transform from "../transform/transform";
 import Collider from "./collider";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import AlwaysCollideAlgorithm from "./algorithm/always_collide_algorithm";
 import NeverCollideAlgorithm from "./algorithm/never_collide_algorithm";
 import ICollisionAlgorithm from "./algorithm/icollision_algorithm";
-import IShape from "../shape/ishape";
+import IShape from "../../shape/ishape";
 import Vector from "../../geometry/vector";
 import CollisionInfo from "./collision_info";
-import Ellipse from "../shape/ellipse";
+import Ellipse from "../../shape/ellipse";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 

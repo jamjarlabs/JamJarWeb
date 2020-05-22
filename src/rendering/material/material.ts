@@ -63,6 +63,29 @@ class Material {
         this.texture = matOptions.texture;
         this.color = matOptions.color;
     }
+
+    /**
+     * Makes a value copy of the material.
+     */
+    public Copy(): Material {
+        const shaders: string[] = [];
+        for (const shader of this.shaders) {
+            shaders.push(shader);
+        }
+        let texture: Texture | undefined = undefined;
+        if (this.texture !== undefined) {
+            texture = this.texture.Copy();
+        }
+        let color: Color | undefined = undefined;
+        if (this.color !== undefined) {
+            color = this.color.Copy();
+        }
+        return new Material({
+            shaders: shaders,
+            texture: texture,
+            color: color
+        });
+    }
 }
 
 export default Material;

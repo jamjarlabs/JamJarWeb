@@ -30,12 +30,24 @@ class Color {
 		this.blue = blue;
 		this.alpha = alpha;
 	}
+
+	/**
+	 * Make a value copy of the color.
+	 */
+	public Copy(): Color {
+		return new Color(
+			this.red,
+			this.green,
+			this.blue,
+			this.alpha
+		);
+	}
 	
 	/**
 	 * Returns the color in the form of a tuple `[red, green, blue, alpha]`.
 	 * @returns {[number, number, number, number]} The tuple representation of the color
 	 */
-	GetTuple(): [number, number, number, number] {
+	public GetTuple(): [number, number, number, number] {
 		return [
 			this.red,
 			this.green,
@@ -49,7 +61,7 @@ class Color {
 	 * @param {Color} color The color to mix with this one
 	 * @returns {Color} The mixed color
 	 */
-    Mix(color: Color): Color {
+    public Mix(color: Color): Color {
 		return new Color(
 			(color.red + this.red) / 2,
 			(color.green + this.green) / 2,

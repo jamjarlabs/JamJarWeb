@@ -16,7 +16,7 @@ limitations under the License.
 
 import ICollisionAlgorithm from "./icollision_algorithm";
 import CollisionInfo from "../collision_info";
-import IShape from "../../shape/ishape";
+import IShape from "../../../shape/ishape";
 
 /**
  * NeverCollideAlgorithm provides an algorithm that never detects a collision

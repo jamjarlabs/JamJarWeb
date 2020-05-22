@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Polygon from "../../standard/shape/polygon";
+import Polygon from "../../shape/polygon";
 
 /**
  * Texture is the mapping from an image that has been loaded, deciding
@@ -33,6 +33,16 @@ class Texture {
     constructor(image: string, points: Polygon) {
         this.image = image;
         this.points = points;
+    }
+
+    /**
+     * Make a value copy of the texture.
+     */
+    public Copy(): Texture {
+        return new Texture(
+            this.image,
+            this.points.Copy()
+        )
     }
 }
 

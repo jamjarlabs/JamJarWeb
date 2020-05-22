@@ -24,6 +24,7 @@ Also stores the image itself.
 * [image](imageasset.md#image)
 * [magFilter](imageasset.md#magfilter)
 * [minFilter](imageasset.md#minfilter)
+* [mirror](imageasset.md#mirror)
 * [name](imageasset.md#name)
 * [success](imageasset.md#success)
 * [xWrap](imageasset.md#xwrap)
@@ -34,7 +35,7 @@ Also stores the image itself.
 
 ###  constructor
 
-\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement | ImageData, `success`: boolean, `xWrap`: [TextureWrapping](../enums/texturewrapping.md), `yWrap`: [TextureWrapping](../enums/texturewrapping.md), `magFilter`: [TextureFiltering](../enums/texturefiltering.md), `minFilter`: [TextureFiltering](../enums/texturefiltering.md), `generateMipmaps`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
+\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement | ImageData, `success`: boolean, `xWrap`: [TextureWrapping](../enums/texturewrapping.md), `yWrap`: [TextureWrapping](../enums/texturewrapping.md), `magFilter`: [TextureFiltering](../enums/texturefiltering.md), `minFilter`: [TextureFiltering](../enums/texturefiltering.md), `generateMipmaps`: boolean, `mirror`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
 
 **Parameters:**
 
@@ -48,6 +49,7 @@ Name | Type |
 `magFilter` | [TextureFiltering](../enums/texturefiltering.md) |
 `minFilter` | [TextureFiltering](../enums/texturefiltering.md) |
 `generateMipmaps` | boolean |
+`mirror` | boolean |
 `error?` | Error |
 
 **Returns:** *[ImageAsset](imageasset.md)*
@@ -93,6 +95,15 @@ ___
 • **minFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
 
 Texture minification filter.
+
+___
+
+###  mirror
+
+• **mirror**: *boolean*
+
+Option for mirroring the texture when loading it (vertical and horizontal
+flip). True = mirror, false = don't mirror.
 
 ___
 

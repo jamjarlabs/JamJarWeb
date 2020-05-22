@@ -25,7 +25,7 @@ import GLSLShader from "jamjar/lib/standard/glsl/glsl_shader";
 import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/standard/transform/transform";
 import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Polygon from "jamjar/lib/standard/shape/polygon";
+import Polygon from "jamjar/lib/shape/polygon";
 import Camera from "jamjar/lib/standard/camera/camera";
 import Material from "jamjar/lib/rendering/material/material";
 import Message from "jamjar/lib/message/message";

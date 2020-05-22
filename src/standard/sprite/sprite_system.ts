@@ -31,6 +31,7 @@ import RenderSystem from "../render/render_system";
 import IRenderable from "../../rendering/irenderable";
 import Camera from "../camera/camera";
 import DrawMode from "../../rendering/draw_mode";
+import Polygon from "../../shape/polygon";
 
 /**
  * SpriteSystem handles converting sprites into renderable objects that are fed into 
@@ -81,15 +82,20 @@ class SpriteSystem extends System {
             const sprite = entity.Get(Sprite.KEY) as Sprite;
             const transform = entity.Get(Transform.KEY) as Transform;
             const ui = entity.Get(UI.KEY) as UI | undefined;
+
+            const triangulatedMaterial = sprite.material.Copy();
             
             if (ui === undefined) {
+                if (sprite.material.texture !== undefined && triangulatedMaterial.texture !== undefined) {
+                    triangulatedMaterial.texture.points = new Polygon(sprite.material.texture.points.Triangulate());
+                }
                 // Not UI
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    sprite.shape,
+                    new Polygon(sprite.shape.Triangulate()),
                     transform.InterpolatedMatrix4D(alpha),
-                    sprite.material,
-                    DrawMode.TRIANGLE_FAN,
+                    triangulatedMaterial,
+                    DrawMode.TRIANGLES,
                     undefined,
                 ));
             } else {
@@ -109,6 +115,10 @@ class SpriteSystem extends System {
                     continue;
                 }
 
+                if (sprite.material.texture !== undefined && triangulatedMaterial.texture !== undefined) {
+                    triangulatedMaterial.texture.points = new Polygon(sprite.material.texture.points.Triangulate());
+                }
+
                 const relativeTransform = new Transform(
                     // camera position + UI element position * camera virtual scale
                     cameraTransform.position.Add(transform.position.Multiply(camera.virtualScale.Scale(0.5))),
@@ -120,10 +130,10 @@ class SpriteSystem extends System {
                 // Create the renderable for use by rendering systems
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    sprite.shape,
+                    new Polygon(sprite.shape.Triangulate()),
                     relativeTransform.InterpolatedMatrix4D(alpha),
-                    sprite.material,
-                    DrawMode.TRIANGLE_FAN,
+                    triangulatedMaterial,
+                    DrawMode.TRIANGLES,
                     ui.camera,
                 ));
             }

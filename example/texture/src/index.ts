@@ -27,13 +27,13 @@ import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
 import Entity from "jamjar/lib/entity/entity";
 import Transform from "jamjar/lib/standard/transform/transform";
 import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Polygon from "jamjar/lib/standard/shape/polygon";
+import Polygon from "jamjar/lib/shape/polygon";
 import Camera from "jamjar/lib/standard/camera/camera";
 import Material from "jamjar/lib/rendering/material/material";
 import Texture from "jamjar/lib/rendering/texture/texture";
 import Vector from "jamjar/lib/geometry/vector";
-import Color from "../../../lib/rendering/color";
-import TextureWrapping from "../../../lib/rendering/texture/texture_wrapping";
+import Color from "jamjar/lib/rendering/color";
+import TextureWrapping from "jamjar/lib/rendering/texture/texture_wrapping";
 
 class TextureGame extends Game {
     constructor(messageBus: IMessageBus) {
@@ -85,7 +85,6 @@ class TextureGame extends Game {
                 yWrap: TextureWrapping.MIRRORED_REPEAT,
             }
         )));
-        
 
         // Create camera
         const cameraEntity = new Entity(this.messageBus);

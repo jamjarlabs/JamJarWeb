@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Vector from "../../geometry/vector";
+import Vector from "../geometry/vector";
 import Polygon from "./polygon";
-import Transform from "../transform/transform";
-import Matrix4D from "../../geometry/matrix_4d";
+import Transform from "../standard/transform/transform";
+import Matrix4D from "../geometry/matrix_4d";
 
 describe("Polygon - FarthestPointInDirection", () => {
     type TestTuple = [string, Vector, Polygon, Vector];

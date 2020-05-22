@@ -37,7 +37,7 @@ import Color from "jamjar/lib/rendering/color";
 import IMessageBus from "jamjar/lib/message/imessage_bus";
 import Motion from "jamjar/lib/standard/motion/motion";
 import Scene from "jamjar/lib/scene/scene";
-import Polygon from "jamjar/lib/standard/shape/polygon";
+import Polygon from "jamjar/lib/shape/polygon";
 import Message from "jamjar/lib/message/message";
 import Texture from "jamjar/lib/rendering/texture/texture";
 import Component from "jamjar/lib/component/component";

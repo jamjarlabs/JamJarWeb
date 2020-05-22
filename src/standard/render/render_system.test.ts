@@ -22,7 +22,7 @@ import Renderable from "../../rendering/renderable";
 import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
 import IRenderable from "../../rendering/irenderable";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import Matrix4D from "../../geometry/matrix_4d";
 import DrawMode from "../../rendering/draw_mode";
 

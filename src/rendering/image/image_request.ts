@@ -60,6 +60,11 @@ class ImageRequest {
      * True = generate mipmaps, false = don't generate mipmaps.
      */
     public generateMipmaps: boolean;
+    /**
+     * Option for mirroring the texture when loading it (vertical and horizontal
+     * flip). True = mirror, false = don't mirror.
+     */
+    public mirror: boolean;
 
     constructor(name: string, source: string, textureOptions: ITextureOptions = {}) {
         this.name = name;
@@ -72,6 +77,7 @@ class ImageRequest {
             xWrap: TextureWrapping.CLAMP_TO_EDGE,
             yWrap: TextureWrapping.CLAMP_TO_EDGE,
             generateMipmaps: true,
+            mirror: false,
             ...textureOptions
         };
         this.minFilter = optionalTextureOptions.minFilter;
@@ -79,6 +85,7 @@ class ImageRequest {
         this.xWrap = optionalTextureOptions.xWrap;
         this.yWrap = optionalTextureOptions.yWrap;
         this.generateMipmaps = optionalTextureOptions.generateMipmaps;
+        this.mirror = optionalTextureOptions.mirror;
     }
 }
 

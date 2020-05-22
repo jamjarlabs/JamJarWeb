@@ -21,7 +21,7 @@ import Game from "../../game";
 import SystemEntity from "../../system/system_entity";
 import FakeEntity from "../../fake/entity";
 import Transform from "../transform/transform";
-import Polygon from "../shape/polygon";
+import Polygon from "../../shape/polygon";
 import Reactor from "../../fake/reactor";
 import Component from "../../component/component";
 import System from "../../system/system";

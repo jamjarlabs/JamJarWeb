@@ -15,6 +15,7 @@ will generally be used with defaults that are overridden.
 * [generateMipmaps](itextureoptions.md#optional-generatemipmaps)
 * [magFilter](itextureoptions.md#optional-magfilter)
 * [minFilter](itextureoptions.md#optional-minfilter)
+* [mirror](itextureoptions.md#optional-mirror)
 * [xWrap](itextureoptions.md#optional-xwrap)
 * [yWrap](itextureoptions.md#optional-ywrap)
 
@@ -41,6 +42,15 @@ ___
 • **minFilter**? : *[TextureFiltering](../enums/texturefiltering.md)*
 
 Minification filter.
+
+___
+
+### `Optional` mirror
+
+• **mirror**? : *undefined | false | true*
+
+Flag for determining if the texture should be mirrored or not (flip
+horizontal and vertical), true = mirror, false = don't mirror.
 
 ___
 

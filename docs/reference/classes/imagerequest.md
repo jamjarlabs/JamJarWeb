@@ -21,6 +21,7 @@ rendered to should be generated.
 * [generateMipmaps](imagerequest.md#generatemipmaps)
 * [magFilter](imagerequest.md#magfilter)
 * [minFilter](imagerequest.md#minfilter)
+* [mirror](imagerequest.md#mirror)
 * [name](imagerequest.md#name)
 * [source](imagerequest.md#source)
 * [xWrap](imagerequest.md#xwrap)
@@ -67,6 +68,15 @@ ___
 • **minFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
 
 Texture minification filter.
+
+___
+
+###  mirror
+
+• **mirror**: *boolean*
+
+Option for mirroring the texture when loading it (vertical and horizontal
+flip). True = mirror, false = don't mirror.
 
 ___
 

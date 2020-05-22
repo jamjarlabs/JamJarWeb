@@ -16,7 +16,7 @@ limitations under the License.
 
 import ICollisionAlgorithm from "./icollision_algorithm";
 import Vector from "../../../geometry/vector";
-import IShape from "../../shape/ishape";
+import IShape from "../../../shape/ishape";
 import CollisionInfo from "../collision_info";
 
 /**
