@@ -340,16 +340,16 @@ class TextSystem extends System {
                 // information for shaders to use
                 renderables.push(new Renderable<TextRender>(
                     text.zOrder,
-                    new Polygon(Polygon.RectangleByDimensions(1,1).Triangulate()),
+                    Polygon.QuadByDimensions(1,1),
                     charTransform.InterpolatedMatrix4D(alpha),
                     new Material(
                         {
                             texture: new Texture(
                                 `font_${text.font}`,
-                                new Polygon(Polygon.RectangleByPoints(
+                                Polygon.QuadByPoints(
                                     new Vector(x * charSize, y * charSize), 
                                     new Vector(x * charSize + charSize, y * charSize + charSize)
-                                ).Triangulate())
+                                )
                             ),
                             shaders: text.shaders,
                             color: text.color

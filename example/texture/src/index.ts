@@ -96,63 +96,52 @@ class TextureGame extends Game {
         nearest.Add(new Transform(new Vector(-40, 20), new Vector(20,20)));
         nearest.Add(new Sprite(
             new Material({
-                texture: new Texture("nearest", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))),
+                texture: new Texture("nearest"),
             }), 
-            0, 
-            Polygon.RectangleByDimensions(1,1)
         ));
 
         const bilinear = new Entity(this.messageBus);
         bilinear.Add(new Transform(new Vector(0, 20), new Vector(20,20)));
         bilinear.Add(new Sprite(
             new Material({
-                texture: new Texture("bilinear", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))),
+                texture: new Texture("bilinear"),
             }), 
-            0, 
-            Polygon.RectangleByDimensions(1,1)
         ));
 
         const trilinear = new Entity(this.messageBus);
         trilinear.Add(new Transform(new Vector(40, 20), new Vector(20,20)));
         trilinear.Add(new Sprite(
             new Material({
-                texture: new Texture("trilinear", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))),
+                texture: new Texture("trilinear"),
             }), 
-            0, 
-            Polygon.RectangleByDimensions(1,1)
         ));
 
         const nearestRed = new Entity(this.messageBus);
         nearestRed.Add(new Transform(new Vector(-40, -20), new Vector(20,20)));
         nearestRed.Add(new Sprite(
             new Material({
-                texture: new Texture("nearest", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))),
+                texture: new Texture("nearest"),
                 color: new Color(1,0,0,1)
             }), 
-            0, 
-            Polygon.RectangleByDimensions(1,1)
         ));
 
         const bilinearMirroRepeat = new Entity(this.messageBus);
         bilinearMirroRepeat.Add(new Transform(new Vector(0, -20), new Vector(20,20)));
         bilinearMirroRepeat.Add(new Sprite(
             new Material({
-                texture: new Texture("bilinear_mirror_repeat", Polygon.RectangleByPoints(new Vector(0,0), new Vector(5,5))),
+                texture: new Texture("bilinear_mirror_repeat", Polygon.QuadByPoints(new Vector(0,0), new Vector(5,5))),
                 color: new Color(1,1,1,0.5)
             }), 
-            0, 
-            Polygon.RectangleByDimensions(1,1)
         ));
 
         const trilinearRepeat = new Entity(this.messageBus);
         trilinearRepeat.Add(new Transform(new Vector(40, -20), new Vector(20,20)));
         trilinearRepeat.Add(new Sprite(
             new Material({
-                texture: new Texture("trilinear_repeat", Polygon.RectangleByPoints(new Vector(0,0), new Vector(5,5))),
+                texture: new Texture("trilinear_repeat", Polygon.QuadByPoints(new Vector(0,0), new Vector(5,5))),
                 color: new Color(0,1,0,1)
             }), 
             0, 
-            Polygon.RectangleByDimensions(1,1)
         ));
     }
 }

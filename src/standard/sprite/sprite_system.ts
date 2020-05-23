@@ -82,19 +82,14 @@ class SpriteSystem extends System {
             const sprite = entity.Get(Sprite.KEY) as Sprite;
             const transform = entity.Get(Transform.KEY) as Transform;
             const ui = entity.Get(UI.KEY) as UI | undefined;
-
-            const triangulatedMaterial = sprite.material.Copy();
             
             if (ui === undefined) {
-                if (sprite.material.texture !== undefined && triangulatedMaterial.texture !== undefined) {
-                    triangulatedMaterial.texture.points = new Polygon(sprite.material.texture.points.Triangulate());
-                }
                 // Not UI
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    new Polygon(sprite.shape.Triangulate()),
+                    Polygon.QuadByDimensions(1,1),
                     transform.InterpolatedMatrix4D(alpha),
-                    triangulatedMaterial,
+                    sprite.material,
                     DrawMode.TRIANGLES,
                     undefined,
                 ));
@@ -115,9 +110,6 @@ class SpriteSystem extends System {
                     continue;
                 }
 
-                if (sprite.material.texture !== undefined && triangulatedMaterial.texture !== undefined) {
-                    triangulatedMaterial.texture.points = new Polygon(sprite.material.texture.points.Triangulate());
-                }
 
                 const relativeTransform = new Transform(
                     // camera position + UI element position * camera virtual scale
@@ -130,9 +122,9 @@ class SpriteSystem extends System {
                 // Create the renderable for use by rendering systems
                 renderables.push(new Renderable(
                     sprite.zOrder,
-                    new Polygon(sprite.shape.Triangulate()),
+                    Polygon.QuadByDimensions(1,1),
                     relativeTransform.InterpolatedMatrix4D(alpha),
-                    triangulatedMaterial,
+                    sprite.material,
                     DrawMode.TRIANGLES,
                     ui.camera,
                 ));

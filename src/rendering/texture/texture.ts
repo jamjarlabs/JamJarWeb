@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 import Polygon from "../../shape/polygon";
+import Vector from "../../geometry/vector";
 
 /**
  * Texture is the mapping from an image that has been loaded, deciding
@@ -30,7 +31,7 @@ class Texture {
      */
     public points: Polygon;
 
-    constructor(image: string, points: Polygon) {
+    constructor(image: string, points: Polygon = Polygon.QuadByPoints(new Vector(0,0), new Vector(1,1))) {
         this.image = image;
         this.points = points;
     }

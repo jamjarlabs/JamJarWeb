@@ -32,7 +32,8 @@ Can be used in collision detection and rendering.
 * [GetFloat32Array](polygon.md#getfloat32array)
 * [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
-* [Triangulate](polygon.md#triangulate)
+* [QuadByDimensions](polygon.md#static-quadbydimensions)
+* [QuadByPoints](polygon.md#static-quadbypoints)
 * [RectangleByDimensions](polygon.md#static-rectanglebydimensions)
 * [RectangleByPoints](polygon.md#static-rectanglebypoints)
 
@@ -164,14 +165,40 @@ Name | Type |
 
 ___
 
-###  Triangulate
+### `Static` QuadByDimensions
 
-▸ **Triangulate**(): *[Vector](vector.md)[]*
+▸ **QuadByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md)): *[Polygon](polygon.md)*
 
-Triangulates the Polygon, converting it into a list of vertices
-specifying triangles that compose the Polygon.
+QuadByDimensions returns a new polygon in a quad shape with the width and
+height provided, optionally around an origin point
 
-**Returns:** *[Vector](vector.md)[]*
+**Parameters:**
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`width` | number | - | Width of the quad |
+`height` | number | - | Height of the quad |
+`origin` | [Vector](vector.md) | new Vector(0,0) | Center point of the quad  |
+
+**Returns:** *[Polygon](polygon.md)*
+
+___
+
+### `Static` QuadByPoints
+
+▸ **QuadByPoints**(`bottomLeft`: [Vector](vector.md), `topRight`: [Vector](vector.md)): *[Polygon](polygon.md)*
+
+QuadByPoints returns a new polygon in a quad shape between the two
+provided points.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`bottomLeft` | [Vector](vector.md) | Bottom left of the quad |
+`topRight` | [Vector](vector.md) | Top right of the quad  |
+
+**Returns:** *[Polygon](polygon.md)*
 
 ___
 
