@@ -18,7 +18,6 @@ import Vector from "../geometry/vector";
 import IShape from "./ishape";
 import Transform from "../standard/transform/transform";
 import Matrix4D from "../geometry/matrix_4d";
-import earcut from "earcut";
 
 /**
  * Polygon is the representation of a 2D Polygon shape. 
@@ -42,24 +41,6 @@ class Polygon implements IShape {
         return new Polygon(
             points,
         );
-    }
-
-    /**
-     * Triangulates the Polygon, converting it into a list of vertices
-     * specifying triangles that compose the Polygon.
-     */
-    public Triangulate(): Vector[] {
-        const vertices: number[] = [];
-        for (const point of this.points) {
-            vertices.push(point.x);
-            vertices.push(point.y);
-        }
-        const triangulationIndices = earcut(vertices, undefined, 2);
-        const triangulated: Vector[] = [];
-        for (let i = 0; i < triangulationIndices.length; i++) {
-            triangulated.push(this.points[triangulationIndices[i]].Copy());
-        }
-        return triangulated;
     }
 
     public Apply4D(matrix: Matrix4D): Polygon {
@@ -163,10 +144,10 @@ class Polygon implements IShape {
 		const halfWidth = width/2;
         const halfHeight = height/2;
 		return new Polygon([
-			new Vector(origin.x - halfWidth, origin.y + halfHeight),
-			new Vector(origin.x + halfWidth, origin.y + halfHeight),
-			new Vector(origin.x + halfWidth, origin.y - halfHeight),
-			new Vector(origin.x - halfWidth, origin.y - halfHeight),
+			new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
+			new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
+			new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
+			new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
 		]);
     }
 
@@ -182,6 +163,44 @@ class Polygon implements IShape {
             bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
             topRight, 
             topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+        ]);
+    }
+
+    /**
+     * QuadByDimensions returns a new polygon in a quad shape with the width and
+     * height provided, optionally around an origin point
+     * @param {number} width Width of the quad
+     * @param {number} height Height of the quad
+     * @param {Vector} origin Center point of the quad
+     */
+    public static QuadByDimensions(width: number, height: number, origin: Vector = new Vector(0,0)): Polygon {
+        const halfWidth = width/2;
+        const halfHeight = height/2;
+        return new Polygon([
+            new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
+            new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
+            new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
+            
+            new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
+            new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
+            new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
+		]);
+    }
+
+    /**
+     * QuadByPoints returns a new polygon in a quad shape between the two
+     * provided points.
+     * @param {Vector} bottomLeft Bottom left of the quad
+     * @param {Vector} topRight Top right of the quad
+     */
+    public static QuadByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
+        return new Polygon([
+            bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            bottomLeft, 
+            topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            topRight, 
+            bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
         ]);
     }
 }

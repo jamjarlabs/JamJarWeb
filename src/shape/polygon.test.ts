@@ -352,3 +352,134 @@ describe("Polygon - RectangleByPoints", () => {
         expect(Polygon.RectangleByPoints(bottomLeft, topRight)).toEqual(expected);
     });
 });
+
+describe("Polygon - QuadByDimensions", () => {
+    type TestTuple = [string, Polygon, number, number, Vector | undefined];
+    test.each<TestTuple>([
+        [
+            "0*0",
+            new Polygon([
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+            ]),
+            0,
+            0,
+            undefined
+        ],
+        [
+            "2*2",
+            new Polygon([
+                new Vector(1, -1),  // bottom right
+                new Vector(-1, -1), // bottom left
+                new Vector(-1, 1),  // top left
+                
+                new Vector(-1, 1),  // top left
+                new Vector(1, 1),   // top right
+                new Vector(1, -1),  // bottom right
+            ]),
+            2,
+            2,
+            undefined
+        ],
+        [
+            "3*2",
+            new Polygon([
+                new Vector(1.5, -1),  // bottom right
+                new Vector(-1.5, -1), // bottom left
+                new Vector(-1.5, 1),  // top left
+                
+                new Vector(-1.5, 1),  // top left
+                new Vector(1.5, 1),   // top right
+                new Vector(1.5, -1),  // bottom right
+            ]),
+            3,
+            2,
+            undefined
+        ],
+        [
+            "2*2 around (4,4)",
+            new Polygon([
+                new Vector(5, 3), // bottom right
+                new Vector(3, 3), // bottom left
+                new Vector(3, 5), // top left
+                
+                new Vector(3, 5), // top left
+                new Vector(5, 5), // top right
+                new Vector(5, 3), // bottom right
+            ]),
+            2,
+            2,
+            new Vector(4,4)
+        ],
+    ])("%p", (description: string, expected: Polygon, width: number, height: number, origin: Vector | undefined) => {
+        expect(Polygon.QuadByDimensions(width, height, origin)).toEqual(expected);
+    });
+});
+
+describe("Polygon - QuadByPoints", () => {
+    type TestTuple = [string, Polygon, Vector, Vector];
+    test.each<TestTuple>([
+        [
+            "0,0 to 1,1",
+            new Polygon([
+                new Vector(1, 0), // bottom right
+                new Vector(0, 0), // bottom left
+                new Vector(0, 1), // top left
+                
+                new Vector(0, 1), // top left
+                new Vector(1, 1), // top right
+                new Vector(1, 0), // bottom right
+            ]),
+            new Vector(0,0),
+            new Vector(1,1)
+        ],
+        [
+            "0,0 to 5,5",
+            new Polygon([
+                new Vector(5, 0), // bottom right
+                new Vector(0, 0), // bottom left
+                new Vector(0, 5), // top left
+                
+                new Vector(0, 5), // top left
+                new Vector(5, 5), // top right
+                new Vector(5, 0), // bottom right
+            ]),
+            new Vector(0,0),
+            new Vector(5,5)
+        ],
+        [
+            "2,3 to 10,9",
+            new Polygon([
+                new Vector(10, 3), // bottom right
+                new Vector(2, 3), // bottom left
+                new Vector(2, 9), // top left
+                
+                new Vector(2, 9), // top left
+                new Vector(10, 9), // top right
+                new Vector(10, 3), // bottom right
+            ]),
+            new Vector(2,3),
+            new Vector(10,9)
+        ],
+        [
+            "0,0 to 0,0",
+            new Polygon([
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+
+                new Vector(0,0),
+                new Vector(0,0),
+                new Vector(0,0),
+            ]),
+            new Vector(0,0),
+            new Vector(0,0)
+        ],
+    ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector) => {
+        expect(Polygon.QuadByPoints(bottomLeft, topRight)).toEqual(expected);
+    });
+});

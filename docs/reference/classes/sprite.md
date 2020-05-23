@@ -23,7 +23,6 @@ Can contain texture information such as bounds and a texture.
 
 * [key](sprite.md#key)
 * [material](sprite.md#material)
-* [shape](sprite.md#shape)
 * [zOrder](sprite.md#zorder)
 * [KEY](sprite.md#static-key)
 * [MESSAGE_ADD](sprite.md#static-message_add)
@@ -33,7 +32,7 @@ Can contain texture information such as bounds and a texture.
 
 ###  constructor
 
-\+ **new Sprite**(`material`: [Material](material.md), `zOrder`: number, `bounds`: [Polygon](polygon.md)): *[Sprite](sprite.md)*
+\+ **new Sprite**(`material`: [Material](material.md), `zOrder`: number): *[Sprite](sprite.md)*
 
 *Overrides [Component](component.md).[constructor](component.md#constructor)*
 
@@ -42,8 +41,7 @@ Can contain texture information such as bounds and a texture.
 Name | Type | Default |
 ------ | ------ | ------ |
 `material` | [Material](material.md) | - |
-`zOrder` | number | - |
-`bounds` | [Polygon](polygon.md) | Polygon.RectangleByDimensions(1, 1) |
+`zOrder` | number | 0 |
 
 **Returns:** *[Sprite](sprite.md)*
 
@@ -62,14 +60,6 @@ ___
 • **material**: *[Material](material.md)*
 
 Material to apply when rendering the Sprite.
-
-___
-
-###  shape
-
-• **shape**: *[Polygon](polygon.md)*
-
-The shape of the sprite to draw, represented by a Polygon.
 
 ___
 

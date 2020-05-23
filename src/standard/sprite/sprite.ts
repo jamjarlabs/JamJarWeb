@@ -15,7 +15,6 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
-import Polygon from "../../shape/polygon";
 import Material from "../../rendering/material/material";
 
 /**
@@ -37,21 +36,14 @@ class Sprite extends Component {
      */
     public zOrder: number;
     /**
-     * The shape of the sprite to draw, represented by a Polygon.
-     */
-    public shape: Polygon;
-    /**
      * Material to apply when rendering the Sprite.
      */
     public material: Material;
 
-    constructor(material: Material,
-        zOrder: number,
-        bounds: Polygon = Polygon.RectangleByDimensions(1, 1)) {
+    constructor(material: Material, zOrder = 0) {
         super(Sprite.KEY);
         this.material = material;
         this.zOrder = zOrder;
-        this.shape = bounds;
     }
 }
 

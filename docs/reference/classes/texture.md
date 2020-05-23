@@ -31,10 +31,10 @@ how the texture should be drawn and represented.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`image` | string |
-`points` | [Polygon](polygon.md) |
+Name | Type | Default |
+------ | ------ | ------ |
+`image` | string | - |
+`points` | [Polygon](polygon.md) | Polygon.QuadByPoints(new Vector(0,0), new Vector(1,1)) |
 
 **Returns:** *[Texture](texture.md)*
 

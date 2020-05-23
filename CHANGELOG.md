@@ -34,6 +34,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   no filtering is applied.
 - New option for loading textures, `mirror` - allows loading textures in a
   mirrored mode (flip horizontally and vertically).
+- New static quad functions in `Polygon`, `UuadByPoints` and `QuadByDimensions`
+  to generate quads easily.
 ### Changed
 - Images now loaded with a new `ImageRequest` rather than an `ImageAsset` -
   `ImageAsset` used internally.
@@ -46,6 +48,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - `Material` property `texture` now optional, if none provided it will render
   only using the `color`.
 - `TRIANGLES` draw mode now used instead of `TRIANGLES_FAN` for sprites.
+- Sprites and text now rendered exclusively using quads, sprite shape can no
+  longer be specified.
 ### Fixed
 - Z order bug where an error was thrown if there were gaps between z orders,
   e.g. `0, 1, 3` would error because `2` was missing - caused due to internal
