@@ -34,8 +34,18 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   no filtering is applied.
 - New option for loading textures, `mirror` - allows loading textures in a
   mirrored mode (flip horizontally and vertically).
-- New static quad functions in `Polygon`, `UuadByPoints` and `QuadByDimensions`
+- New static quad functions in `Polygon`, `QuadByPoints` and `QuadByDimensions`
   to generate quads easily.
+- Sprite Animation through the `SpriteAnimator` components and
+  `SpriteAnimatorSystem`. 
+  - Can make animations with a `SpriteAnimation`, allows switching between
+    animation states.
+  - `SpriteAnimation` allows specifying animation frame rate.
+  - `SpriteAnimation` defined as an array of `SpriteKeyFrame`, which contain
+    information such as the material to render with, the duration of the
+    keyframe etc.
+- New `GenerateSpritesheetIndex` static function for `Texture`, allows creation
+  of an indexed sprite sheet for ease of use with a texture.
 ### Changed
 - Images now loaded with a new `ImageRequest` rather than an `ImageAsset` -
   `ImageAsset` used internally.

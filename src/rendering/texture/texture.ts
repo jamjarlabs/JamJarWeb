@@ -45,6 +45,47 @@ class Texture {
             this.points.Copy()
         );
     }
+
+    /**
+     * GenerateSpritesheetIndex generates an indexed array of shapes to access
+     * each sprite in a sprite sheet. The sprite sheet must have all sprites the
+     * same width, and height - empty sprite positions work.
+     * The indexed sprite sheet operates from left to right, bottom to top.
+     * For example, the following shows the indexes of each position in the
+     * sprite sheet:
+     * 
+     * |---------|
+     * | 0  1  2 |
+     * | 3  4  5 |
+     * | 6  7  8 |
+     * |---------|
+     * 
+     * @param {number} rowCount - number of rows in the sprite sheet (vertically).
+     * @param {number} columnCount - number of columns in the sprite sheet (horizontally).
+     * @returns {Polygon[]} - An indexed array of shapes to access each sprite.
+     */
+    public static GenerateSpritesheetIndex(rowCount: number, columnCount: number): Polygon[] {
+        const spriteSheetIndex: Polygon[] = [];
+
+        // Determine width and height of each sprite relative to the width and
+        // height of the spritesheet
+        const spriteWidth = 1 / columnCount;
+        const spriteHeight = 1 / rowCount;
+
+        for (let i = rowCount - 1; i >= 0; i--) {
+            for (let j = 0; j < columnCount; j++) {
+                // Push each quad for sprite texture into the indexed sprite
+                // sheet
+                const xStart = j * spriteWidth;
+                const yStart = i * spriteHeight;
+                spriteSheetIndex.push(Polygon.QuadByPoints(
+                    new Vector(xStart, yStart),
+                    new Vector(xStart + spriteWidth, yStart + spriteHeight)
+                ));
+            }
+        }
+        return spriteSheetIndex;
+    }
 }
 
 export default Texture;
