@@ -17,18 +17,21 @@ The engine is built for the source to be looked at and understood, to help in
 understanding game dev concepts.  
 
 JamJar provides the following:
-
 * Entity-Component-System architecture.
 * Composition based entities and components.
+* Messaging.
 * Regular game loop.
+* Custom shader support.
 * Set of standard systems to use
-  * UI System - user interfaces (HUDs etc.).
-  * WebGL System - rendering using WebGL onto a HTML5 canvas.
-  * Collision System - collisions between colliders.
-  * Fullscreen System - fullscreen events and pointer lock.
-  * Interpolation System - smoothing movements between frames.
-  * Keyboard System - keyboard input.
-  * Pointer System - browser pointer input (mouse, touch etc.)
-  * Image System - loading image assets.
-  * Sprite System - processing sprites and images before rendering.
-  * Motion System - simple motion; velocity, acceleration, angular velocity etc.
+  * WebGL - rendering using WebGL onto a HTML5 canvas.
+  * Collision - collisions between colliders.
+  * Fullscreen - fullscreen events and pointer lock.
+  * Interpolation - smoothing movements between frames.
+  * Keyboard - keyboard input.
+  * Pointer - browser pointer input (mouse, touch etc.)
+  * HTTP Image - loading image assets over HTTP.
+  * Sprite - processing sprites and images before rendering.
+  * Motion - simple motion; velocity, acceleration, angular velocity etc.
+  * UI - user interfaces (HUDs etc.).
+  * Text - processing text before rendering, handling fonts.
+  * Sprite Animation - Animation through sprites.

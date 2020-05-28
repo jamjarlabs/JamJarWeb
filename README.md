@@ -23,17 +23,18 @@ JamJar provides the following:
 * Regular game loop.
 * Custom shader support.
 * Set of standard systems to use
-  * WebGL System - rendering using WebGL onto a HTML5 canvas.
-  * Collision System - collisions between colliders.
-  * Fullscreen System - fullscreen events and pointer lock.
-  * Interpolation System - smoothing movements between frames.
-  * Keyboard System - keyboard input.
-  * Pointer System - browser pointer input (mouse, touch etc.)
-  * HTTP Image System - loading image assets over HTTP.
-  * Sprite System - processing sprites and images before rendering.
-  * Motion System - simple motion; velocity, acceleration, angular velocity etc.
+  * WebGL - rendering using WebGL onto a HTML5 canvas.
+  * Collision - collisions between colliders.
+  * Fullscreen - fullscreen events and pointer lock.
+  * Interpolation - smoothing movements between frames.
+  * Keyboard - keyboard input.
+  * Pointer - browser pointer input (mouse, touch etc.)
+  * HTTP Image - loading image assets over HTTP.
+  * Sprite - processing sprites and images before rendering.
+  * Motion - simple motion; velocity, acceleration, angular velocity etc.
   * UI - user interfaces (HUDs etc.).
-  * Text System - processing text before rendering, handling fonts.
+  * Text - processing text before rendering, handling fonts.
+  * Sprite Animation - Animation through sprites.
 
 ## More information
 
