@@ -30,6 +30,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [SpriteSystem](spritesystem.md)
 
+  ↳ [SpriteAnimatorSystem](spriteanimatorsystem.md)
+
   ↳ [TextSystem](textsystem.md)
 
   ↳ [TestSystem](testsystem.md)
