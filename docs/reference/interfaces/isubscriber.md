@@ -19,6 +19,7 @@
 * [PrimitiveSystem](../classes/primitivesystem.md)
 * [RenderSystem](../classes/rendersystem.md)
 * [Scene](../classes/scene.md)
+* [SpriteAnimatorSystem](../classes/spriteanimatorsystem.md)
 * [SpriteSystem](../classes/spritesystem.md)
 * [Subscriber](../classes/subscriber.md)
 * [System](../classes/system.md)
