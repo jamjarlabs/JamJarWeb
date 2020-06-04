@@ -52,7 +52,7 @@ class EntityManager extends Subscriber {
     }
 
     public OnMessage(message: IMessage): void {
-		switch(message.type) {
+        switch(message.type) {
             case Entity.MESSAGE_DESTROY: {
                 const destroyMessage = message as Message<IEntity>;
                 if (!destroyMessage.payload) {
@@ -81,7 +81,7 @@ class EntityManager extends Subscriber {
                 this.removeComponent(entity, component);
                 break;
             }
-		}
+        }
     }
 
     /**
@@ -91,7 +91,7 @@ class EntityManager extends Subscriber {
      */
     private registerEntity(entity: IEntity): void {
         const components = this.getComponents(entity);
-		this.messageBus.Publish(new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [entity, components]));
+        this.messageBus.Publish(new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [entity, components]));
     }
 
     /**
@@ -126,10 +126,10 @@ class EntityManager extends Subscriber {
      */
     private addComponent(entity: IEntity, component: Component): void {
         let componentManager = this.getComponentManager(component.key);
-		if (!componentManager) {
-			componentManager = new ComponentManager(component.key);
-			this.componentManagers.push(componentManager);
-		}
+        if (!componentManager) {
+            componentManager = new ComponentManager(component.key);
+            this.componentManagers.push(componentManager);
+        }
         componentManager.Add(entity, component);
         this.registerEntity(entity);
     }

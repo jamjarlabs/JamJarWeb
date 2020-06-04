@@ -64,7 +64,7 @@ abstract class Game implements IGame {
         this.OnStart();
         this.messageBus.Dispatch();
         this.accumulator = 0;
-		this.currentTime = Date.now();
+        this.currentTime = Date.now();
         this.loop();
     }
 
@@ -77,16 +77,16 @@ abstract class Game implements IGame {
      * See: https://gameprogrammingpatterns.com/game-loop.html
      */
     private loop(): void  {
-		const newTime = Date.now();
-		const frameTime = newTime - this.currentTime;
-		this.currentTime = newTime;
+        const newTime = Date.now();
+        const frameTime = newTime - this.currentTime;
+        this.currentTime = newTime;
 
-		this.accumulator += frameTime;
-		while (this.accumulator >= Game.TIME_STEP) {
-			this.messageBus.Publish(new Message(System.MESSAGE_UPDATE, Game.TIME_STEP / 1000));
-			this.messageBus.Dispatch();
-			this.accumulator -= Game.TIME_STEP;
-		}
+        this.accumulator += frameTime;
+        while (this.accumulator >= Game.TIME_STEP) {
+            this.messageBus.Publish(new Message(System.MESSAGE_UPDATE, Game.TIME_STEP / 1000));
+            this.messageBus.Dispatch();
+            this.accumulator -= Game.TIME_STEP;
+        }
         const alpha = this.accumulator / Game.TIME_STEP;
         // pre-render and dispatch, must be immediately dispatched to allow pre-render systems to
         // send messages to the renderer before the actual render call.
@@ -96,8 +96,8 @@ abstract class Game implements IGame {
         this.messageBus.Publish(new Message(Game.MESSAGE_RENDER, alpha));
         // post render
         this.messageBus.Publish(new Message(Game.MESSAGE_POST_RENDER, alpha));
-		this.messageBus.Dispatch();
-		this.frameRequestCallback(() => { this.loop(); });
+        this.messageBus.Dispatch();
+        this.frameRequestCallback(() => { this.loop(); });
     }
 }
 

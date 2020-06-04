@@ -141,14 +141,14 @@ class Polygon implements IShape {
      * @param {origin} origin Center point of the rectangle
      */
     public static RectangleByDimensions(width: number, height: number, origin: Vector = new Vector(0,0)): Polygon {
-		const halfWidth = width/2;
+        const halfWidth = width/2;
         const halfHeight = height/2;
-		return new Polygon([
-			new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
-			new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
-			new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
-			new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
-		]);
+        return new Polygon([
+            new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
+            new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
+            new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
+            new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
+        ]);
     }
 
     /**
@@ -184,7 +184,7 @@ class Polygon implements IShape {
             new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
             new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
             new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
-		]);
+        ]);
     }
 
     /**
