@@ -1,0 +1,117 @@
+/*
+Copyright 2020 JamJar Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+import Game from "jamjar/lib/game"
+import IMessageBus from "jamjar/lib/message/imessage_bus";
+import EntityManager from "jamjar/lib/entity/entity_manager";
+import MessageBus from "jamjar/lib/message/message_bus";
+import Message from "jamjar/lib/message/message";
+import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
+import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
+import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
+import ImageRequest from "jamjar/lib/rendering/image/image_request";
+import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
+import Entity from "jamjar/lib/entity/entity";
+import Transform from "jamjar/lib/standard/transform/transform";
+import Sprite from "jamjar/lib/standard/sprite/sprite";
+import Camera from "jamjar/lib/standard/camera/camera";
+import Material from "jamjar/lib/rendering/material/material";
+import Texture from "jamjar/lib/rendering/texture/texture";
+import Vector from "jamjar/lib/geometry/vector";
+
+class ZOrderGame extends Game {
+    constructor(messageBus: IMessageBus) {
+        super(messageBus, "z-order-example");
+    }
+
+    OnStart(): void {
+        // Load sprite sheet
+        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+            "example_sheet",
+            "assets/example.png",
+            {
+                minFilter: TextureFiltering.NEAREST,
+                magFilter: TextureFiltering.NEAREST,
+            }
+        )));
+        
+        // Divide sprite sheet
+        const exampleSpriteSheet = Texture.GenerateSpritesheetIndex(1, 4);
+
+        // Create camera
+        const cameraEntity = new Entity(this.messageBus);
+        cameraEntity.Add(new Camera());
+        cameraEntity.Add(new Transform());
+
+        // Create entities
+        const near = new Entity(this.messageBus);
+        near.Add(new Transform(new Vector(-11, 0), new Vector(20,20)));
+        near.Add(new Sprite(
+            new Material({
+                texture: new Texture("example_sheet", exampleSpriteSheet[3]),
+            }), 5
+        ));
+
+        const medium = new Entity(this.messageBus);
+        medium.Add(new Transform(new Vector(0, 11), new Vector(20,20)));
+        medium.Add(new Sprite(
+            new Material({
+                texture: new Texture("example_sheet", exampleSpriteSheet[2]),
+            }), 2
+        ));
+
+        const far = new Entity(this.messageBus);
+        far.Add(new Transform(new Vector(11, 0), new Vector(20,20)));
+        far.Add(new Sprite(
+            new Material({
+                texture: new Texture("example_sheet", exampleSpriteSheet[1]),
+            }), 1
+        ));
+
+        const evenFurther = new Entity(this.messageBus);
+        evenFurther.Add(new Transform(new Vector(0, -11), new Vector(20,20)));
+        evenFurther.Add(new Sprite(
+            new Material({
+                texture: new Texture("example_sheet", exampleSpriteSheet[0]),
+            }), 0
+        ));
+    }
+}
+
+// Get canvas
+const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
+
+// Get WebGL2 context
+const gl = canvas.getContext("webgl2", { alpha: false });
+if (!gl) {
+    throw ("WebGL2 not supported in this browser")
+}
+
+// Create message bus and entity manager
+const messageBus = new MessageBus();
+new EntityManager(messageBus);
+
+// Create WebGLSystem
+new WebGLSystem(messageBus, gl);
+
+// Create SpriteSystem
+new SpriteSystem(messageBus);
+
+// Create Image loading system
+new HTTPImageSystem(messageBus);
+
+// Create and start game
+new ZOrderGame(messageBus).Start();
