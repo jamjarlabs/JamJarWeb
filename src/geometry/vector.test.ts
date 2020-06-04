@@ -102,36 +102,92 @@ describe("Vector - Dot", () => {
 
 
 describe("Vector - Rotate", () => {
-    type TestTuple = [string, Vector, number, number, Vector, number];
+    type TestTuple = [string, Vector, Vector, Vector, number];
     test.each<TestTuple>([
         [
-            "Rotate 90 degrees",
+            "Rotate 90 degrees from diagonal",
             new Vector(-10, 10),
-            10,
-            10,
+            new Vector(10, 10),
             new Vector(0, 0),
             Math.PI / 2
         ],
-    ])("%p", (description: string, expected: Vector, x: number, y: number, center: Vector, angle: number) => {
-        const vec = new Vector(x, y);
-        expect(vec.Rotate(center, angle)).toEqual(expected);
+        [
+            "Rotate 90 degrees from vertical",
+            new Vector(-10, 0),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            Math.PI / 2
+        ],
+        [
+            "Rotate 180 degrees from vertical",
+            new Vector(0, -10),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            Math.PI
+        ],
+        [
+            "Rotate 540 degrees from vertical",
+            new Vector(0, -10),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            Math.PI
+        ],
+        [
+            "Rotate -45 degrees from horizontal",
+            new Vector(7.071, 7.071),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            -Math.PI / 4
+        ]
+    ])("%p", (description: string, expected: Vector, vector: Vector, center: Vector, angle: number) => {
+        const result = vector.Rotate(center, angle);
+        expect(result.x).toBeCloseTo(expected.x);
+        expect(result.y).toBeCloseTo(expected.y);
     });
 });
 
 describe("Vector - RotateDeg", () => {
-    type TestTuple = [string, Vector, number, number, Vector, number];
+    type TestTuple = [string, Vector, Vector, Vector, number];
     test.each<TestTuple>([
         [
-            "Rotate 90 degrees",
+            "Rotate 90 degrees from diagonal",
             new Vector(-10, 10),
-            10,
-            10,
+            new Vector(10, 10),
             new Vector(0, 0),
             90
         ],
-    ])("%p", (description: string, expected: Vector, x: number, y: number, center: Vector, angle: number) => {
-        const vec = new Vector(x, y);
-        expect(vec.RotateDeg(center, angle)).toEqual(expected);
+        [
+            "Rotate 90 degrees from vertical",
+            new Vector(-10, 0),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            90
+        ],
+        [
+            "Rotate 180 degrees from vertical",
+            new Vector(0, -10),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            180
+        ],
+        [
+            "Rotate 540 degrees from vertical",
+            new Vector(0, -10),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            540
+        ],
+        [
+            "Rotate -45 degrees from horizontal",
+            new Vector(7.071, 7.071),
+            new Vector(0, 10),
+            new Vector(0, 0),
+            -45
+        ]
+    ])("%p", (description: string, expected: Vector, vector: Vector, center: Vector, angle: number) => {
+        const result = vector.RotateDeg(center, angle);
+        expect(result.x).toBeCloseTo(expected.x);
+        expect(result.y).toBeCloseTo(expected.y);
     });
 });
 
@@ -221,7 +277,7 @@ describe("Vector - Magnitude", () => {
         [
             "Magnitude of vector (0.0001,0.002)",
             0.0020024984394500784,
-            new Vector(0.0001,0.002)
+            new Vector(0.0001, 0.002)
         ],
     ])("%p", (description: string, expected: number, vector: Vector) => {
         expect(vector.Magnitude()).toEqual(expected);
@@ -244,7 +300,7 @@ describe("Vector - Normalize", () => {
         [
             "Normalize vector (0.0001,0.002)",
             new Vector(0.04993761694389224, 0.9987523388778448),
-            new Vector(0.0001,0.002)
+            new Vector(0.0001, 0.002)
         ],
         [
             "Normalize vector (0,0)",
