@@ -91,9 +91,9 @@ class Transform extends Component {
     public InterpolatedMatrix4D(alpha: number): Matrix4D {
         const matrix = new Matrix4D();
         matrix.Translate(new Vector(
-			this.previous.x * alpha + this.position.x * (1 - alpha),
-			this.previous.y * alpha + this.position.y * (1 - alpha)
-		));
+            this.previous.x * alpha + this.position.x * (1 - alpha),
+            this.previous.y * alpha + this.position.y * (1 - alpha)
+        ));
         matrix.Rotate(this.angle);
         matrix.Scale(this.scale);
         return matrix;

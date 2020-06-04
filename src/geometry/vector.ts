@@ -123,13 +123,13 @@ class Vector {
         const s = Math.sin(angle);
         const c = Math.cos(angle);
 
-		const x = this.x - center.x;
+        const x = this.x - center.x;
         const y = this.y - center.y;
         
-		return new Vector(
-			(x * c - y * s) + center.x,
-			(x * s + y * c) + center.y
-		);
+        return new Vector(
+            (x * c - y * s) + center.x,
+            (x * s + y * c) + center.y
+        );
     }
     
     /**
@@ -158,8 +158,8 @@ class Vector {
      * @returns {number} The magnitude
      */
     public Magnitude(): number {
-		return Math.sqrt(this.x * this.x + this.y * this.y);
-	}
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
 
     /**
      * Returns a normalized version of the vector.
@@ -167,10 +167,10 @@ class Vector {
      */
     public Normalize(): Vector {
         let magnitude = this.Magnitude();
-		if (magnitude > 0) {
-			magnitude = 1 / magnitude;
-		}
-		return this.Scale(magnitude);
+        if (magnitude > 0) {
+            magnitude = 1 / magnitude;
+        }
+        return this.Scale(magnitude);
     }
 
     /**
