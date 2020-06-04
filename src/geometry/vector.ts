@@ -120,11 +120,15 @@ class Vector {
      * @returns {Vector} The result of the rotation
      */
     public Rotate(center: Vector, angle: number): Vector {
+        const s = Math.sin(angle);
+        const c = Math.cos(angle);
+
 		const x = this.x - center.x;
-		const y = this.y - center.y;
+        const y = this.y - center.y;
+        
 		return new Vector(
-			(x * Math.cos(angle) - y * Math.sin(angle)) + center.x,
-			(y * Math.sin(angle) + y * Math.cos(angle)) + center.y
+			(x * c - y * s) + center.x,
+			(x * s + y * c) + center.y
 		);
     }
     

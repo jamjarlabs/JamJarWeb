@@ -9,6 +9,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ### Fixed
 - The zOrder is now correctly interpreted in `WebGLSystem` rather than being
   in order of renderable creation.
+- `Rotate` and `RotateDeg` now calculating correctly.
 
 ## [v0.8.0] - 2020-05-28
 ### Added
