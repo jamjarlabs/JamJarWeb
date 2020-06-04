@@ -332,7 +332,8 @@ class WebGLSystem extends RenderSystem {
                     zOrderGroup.push(renderable);
                 }
             }
-            for (const zOrderGroup of zOrderGroups.values()) {
+            for (const zOrderGroupKeyValue of [...zOrderGroups].sort()) {
+                const zOrderGroup = zOrderGroupKeyValue[1];
                 // Group by program
                 const programGroups: Map<string, IRenderable[]> = new Map();
                 for (const renderable of zOrderGroup) {
