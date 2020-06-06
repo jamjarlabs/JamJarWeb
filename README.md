@@ -35,6 +35,7 @@ JamJar provides the following:
   * UI - user interfaces (HUDs etc.).
   * Text - processing text before rendering, handling fonts.
   * Sprite Animation - Animation through sprites.
+  * Audio - Audio playback.
 
 ## More information
 

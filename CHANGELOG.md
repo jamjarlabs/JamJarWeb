@@ -6,6 +6,12 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `HTTPAudioSystem` for loading audio assets over HTTP.
+- `AudioSourceSystem` for interpreting `AudioSource` components and using them
+  to play audio.
+  - Audio can be played by adding an `AudioSource` to an entity and configuring
+    it.
 ### Fixed
 - The zOrder is now correctly interpreted in `WebGLSystem` rather than being
   in order of renderable creation.

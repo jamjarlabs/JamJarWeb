@@ -30,7 +30,7 @@ import Color from "../../rendering/color";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 
-describe("CollisionSystem - Update", () => {
+describe("SpriteAnimatorSystem - Update", () => {
     type TestTuple = [string, Error | undefined, SpriteAnimatorSystem, SpriteAnimatorSystem, IMessage];
     test.each<TestTuple>([
         [
@@ -523,7 +523,7 @@ describe("CollisionSystem - Update", () => {
     });
 });
 
-describe("CollisionSystem - Register", () => {
+describe("SpriteAnimatorSystem - Register", () => {
     type TestTuple = [string, Error | undefined, SpriteAnimatorSystem, SpriteAnimatorSystem, IMessage];
     test.each<TestTuple>([
         [

@@ -39,6 +39,97 @@ global.window.WebGL2RenderingContext.TRIANGLES = 0;
 global.window.WebGL2RenderingContext.TRIANGLE_STRIP = 0;
 global.window.WebGL2RenderingContext.TRIANGLE_FAN = 0;
 
+global.window.AudioContext = function() {
+    return {};
+};
+global.window.AudioBuffer = function() {
+    return {};
+};
+global.window.AudioBufferSourceNode = function() {
+    return {};
+};
+global.window.MediaElementAudioSourceNode = function() {
+    return {};
+};
+global.window.HTMLMediaElement = function() {
+    return {};
+};
+global.window.MediaStreamAudioDestinationNode = function() {
+    return {};
+};
+global.window.MediaStreamAudioSourceNode = function() {
+    return {};
+};
+global.window.MediaStream = function() {
+    return {};
+};
+global.window.MediaStreamTrackAudioSourceNode = function() {
+    return {};
+};
+global.window.AnalyserNode = function() {
+    return {};
+};
+global.window.BiquadFilterNode = function() {
+    return {};
+};
+global.window.AudioBufferSourceNode = function() {
+    return {};
+};
+global.window.ChannelMergerNode = function() {
+    return {};
+};
+global.window.ChannelSplitterNode = function() {
+    return {};
+};
+global.window.ConstantSourceNode = function() {
+    return {};
+};
+global.window.ConvolverNode = function() {
+    return {};
+};
+global.window.DelayNode = function() {
+    return {};
+};
+global.window.DynamicsCompressorNode = function() {
+    return {};
+};
+global.window.GainNode = function() {
+    return {};
+};
+global.window.IIRFilterNode = function() {
+    return {};
+};
+global.window.OscillatorNode = function() {
+    return {};
+};
+global.window.PannerNode = function() {
+    return {};
+};
+global.window.PeriodicWave = function() {
+    return {};
+};
+global.window.ScriptProcessorNode = function() {
+    return {};
+};
+global.window.StereoPannerNode = function() {
+    return {};
+};
+global.window.WaveShaperNode = function() {
+    return {};
+};
+global.window.AudioParam = function() {
+    return {};
+};
+global.window.AudioNode = function() {
+    return {};
+};
+global.window.Response = function() {
+    return {};
+};
+global.window.fetch = function() {
+    return Promise.resolve();
+};
+
 global.window.WebGLTexture = function () {
     return {};
 };

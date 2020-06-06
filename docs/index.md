@@ -17,6 +17,7 @@ The engine is built for the source to be looked at and understood, to help in
 understanding game dev concepts.  
 
 JamJar provides the following:
+
 * Entity-Component-System architecture.
 * Composition based entities and components.
 * Messaging.
@@ -35,3 +36,4 @@ JamJar provides the following:
   * UI - user interfaces (HUDs etc.).
   * Text - processing text before rendering, handling fonts.
   * Sprite Animation - Animation through sprites.
+  * Audio - Audio playback.

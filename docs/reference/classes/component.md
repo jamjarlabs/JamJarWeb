@@ -15,6 +15,8 @@ Each entity can only have 1 component of each type.
 
   ↳ [Transform](transform.md)
 
+  ↳ [AudioSource](audiosource.md)
+
   ↳ [Camera](camera.md)
 
   ↳ [Collider](collider.md)
