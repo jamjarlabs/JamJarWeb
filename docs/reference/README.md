@@ -13,6 +13,10 @@
 ### Classes
 
 * [AlwaysCollideAlgorithm](classes/alwayscollidealgorithm.md)
+* [AudioAsset](classes/audioasset.md)
+* [AudioRequest](classes/audiorequest.md)
+* [AudioSource](classes/audiosource.md)
+* [AudioSourceSystem](classes/audiosourcesystem.md)
 * [Camera](classes/camera.md)
 * [Collider](classes/collider.md)
 * [Collision](classes/collision.md)
@@ -30,9 +34,13 @@
 * [Entity](classes/entity.md)
 * [EntityManager](classes/entitymanager.md)
 * [Fake](classes/fake.md)
+* [FakeAudioBufferSourceNode](classes/fakeaudiobuffersourcenode.md)
+* [FakeAudioContext](classes/fakeaudiocontext.md)
 * [FakeComponent](classes/fakecomponent.md)
 * [FakeEntity](classes/fakeentity.md)
+* [FakeGainNode](classes/fakegainnode.md)
 * [FakeMessageBus](classes/fakemessagebus.md)
+* [FakeResponse](classes/fakeresponse.md)
 * [FakeSDFGenerator](classes/fakesdfgenerator.md)
 * [FakeScene](classes/fakescene.md)
 * [FakeSubscriber](classes/fakesubscriber.md)
@@ -46,6 +54,7 @@
 * [GLSLContext](classes/glslcontext.md)
 * [GLSLShader](classes/glslshader.md)
 * [Game](classes/game.md)
+* [HTTPAudioSystem](classes/httpaudiosystem.md)
 * [HTTPImageSystem](classes/httpimagesystem.md)
 * [ImageAsset](classes/imageasset.md)
 * [ImageRequest](classes/imagerequest.md)
@@ -79,9 +88,11 @@
 * [Subscriber](classes/subscriber.md)
 * [System](classes/system.md)
 * [SystemEntity](classes/systementity.md)
+* [TestAudioSourceSystem](classes/testaudiosourcesystem.md)
 * [TestCollisionAlgorithm](classes/testcollisionalgorithm.md)
 * [TestFullscreenSystem](classes/testfullscreensystem.md)
 * [TestGame](classes/testgame.md)
+* [TestHTTPAudioSystem](classes/testhttpaudiosystem.md)
 * [TestKeyboardSystem](classes/testkeyboardsystem.md)
 * [TestPointerSystem](classes/testpointersystem.md)
 * [TestRenderSystem](classes/testrendersystem.md)
@@ -100,6 +111,7 @@
 
 ### Interfaces
 
+* [IAudioOptions](interfaces/iaudiooptions.md)
 * [ICollisionAlgorithm](interfaces/icollisionalgorithm.md)
 * [IEntity](interfaces/ientity.md)
 * [IFontOptions](interfaces/ifontoptions.md)

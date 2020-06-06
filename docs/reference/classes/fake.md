@@ -9,6 +9,14 @@
 
   ↳ [FakeMessageBus](fakemessagebus.md)
 
+  ↳ [FakeAudioBufferSourceNode](fakeaudiobuffersourcenode.md)
+
+  ↳ [FakeAudioContext](fakeaudiocontext.md)
+
+  ↳ [FakeGainNode](fakegainnode.md)
+
+  ↳ [FakeResponse](fakeresponse.md)
+
   ↳ [FakeScene](fakescene.md)
 
   ↳ [FakeSubscriber](fakesubscriber.md)
