@@ -12,6 +12,16 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   to play audio.
   - Audio can be played by adding an `AudioSource` to an entity and configuring
     it.
+- Scripting system.
+  - `HTTPScriptSystem` loads scripts over HTTP.
+  - `ScriptTriggerSystem` handles standalone scripts that can be triggered on
+  events, currently only event supported is `Update`.
+  - `ScriptEngineSystem` handles executing scripts and provides an interface
+  between the game engine and the script.
+  - `Collider` now has an optional `script` string, which allows triggering a
+  script on collision.
+  - Scripts can be manually triggered by sending a `ScriptTriggerRequest` as a
+  message.
 ### Fixed
 - The zOrder is now correctly interpreted in `WebGLSystem` rather than being
   in order of renderable creation.
@@ -49,7 +59,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - New static quad functions in `Polygon`, `QuadByPoints` and `QuadByDimensions`
   to generate quads easily.
 - Sprite Animation through the `SpriteAnimator` components and
-  `SpriteAnimatorSystem`. 
+  `SpriteAnimatorSystem`.
   - Can make animations with a `SpriteAnimation`, allows switching between
     animation states.
   - `SpriteAnimation` allows specifying animation frame rate.
@@ -112,7 +122,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   - Specify font size, weight, family, and other tuning options through
     `FontAsset` for a font.
   - Specify z order, alignment, spacing, color, offset and shaders through
-    `Text` component for a specific piece of text. 
+    `Text` component for a specific piece of text.
   - New fragment shader for rendering text, `default_text_fragment`.
 - `Renderable` can now have additional information attached to them by
   pre-rendering systems, which can be accessed by shaders.
@@ -128,7 +138,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - Group by texture for WebGL rendering to reduce texture switching and improve
   performance.
 ### Fixed
-- `Polygon.PointInside` does not mistakenly predict point to the right of the 
+- `Polygon.PointInside` does not mistakenly predict point to the right of the
   polygon are inside.
 
 ## [v0.5.0] - 2020-03-22
@@ -195,25 +205,25 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - Camera systems.
 - Basic physics for velocities/acceleration/rotation.
 
-[Unreleased]: 
+[Unreleased]:
 https://github.com/jamjarlabs/jamjar/compare/v0.8.0...HEAD
-[v0.8.0]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.7.0...v0.8.0 
-[v0.7.0]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.6.1...v0.7.0 
-[v0.6.1]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.6.0...v0.6.1 
-[v0.6.0]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.5.0...v0.6.0 
-[v0.5.0]: 
-https://github.com/jamjarlabs/jamjar/compare/v0.4.1...v0.5.0 
+[v0.8.0]:
+https://github.com/jamjarlabs/jamjar/compare/v0.7.0...v0.8.0
+[v0.7.0]:
+https://github.com/jamjarlabs/jamjar/compare/v0.6.1...v0.7.0
+[v0.6.1]:
+https://github.com/jamjarlabs/jamjar/compare/v0.6.0...v0.6.1
+[v0.6.0]:
+https://github.com/jamjarlabs/jamjar/compare/v0.5.0...v0.6.0
+[v0.5.0]:
+https://github.com/jamjarlabs/jamjar/compare/v0.4.1...v0.5.0
 [v0.4.1]:
-https://github.com/jamjarlabs/jamjar/compare/v0.4.0...v0.4.1 
+https://github.com/jamjarlabs/jamjar/compare/v0.4.0...v0.4.1
 [v0.4.0]:
-https://github.com/jamjarlabs/jamjar/compare/v0.3.0...v0.4.0 
+https://github.com/jamjarlabs/jamjar/compare/v0.3.0...v0.4.0
 [v0.3.0]:
-https://github.com/jamjarlabs/jamjar/compare/v0.2.0...v0.3.0 
+https://github.com/jamjarlabs/jamjar/compare/v0.2.0...v0.3.0
 [v0.2.0]:
-https://github.com/jamjarlabs/jamjar/compare/0.1.0...v0.2.0 
+https://github.com/jamjarlabs/jamjar/compare/0.1.0...v0.2.0
 [0.1.0]:
 https://github.com/jamjarlabs/jamjar/releases/tag/0.1.0

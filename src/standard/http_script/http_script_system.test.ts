@@ -14,28 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import HTTPAudioSystem from "./http_audio_system";
 import IMessage from "../../message/imessage";
 import FakeMessageBus from "../../fake/message_bus";
 import Message from "../../message/message";
-import AudioAsset from "../../audio/audio_asset";
-import AudioRequest from "../../audio/audio_request";
+import HTTPScriptSystem from "./http_script_system";
+import ScriptAsset from "../../scripting/script_asset";
+import ScriptRequest from "../../scripting/script_request";
 import FakeResponse from "../../fake/response";
 import Reactor from "../../fake/reactor";
 
-describe("HTTPAudioSystem - OnMessage", () => {
-    type TestTuple = [string, Error | undefined, HTTPAudioSystem, HTTPAudioSystem, IMessage];
+describe("HTTPScriptSystem - OnMessage", () => {
+    type TestTuple = [string, Error | undefined, HTTPScriptSystem, HTTPScriptSystem, IMessage];
     test.each<TestTuple>([
         [
             "Unknown message",
             undefined,
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0
             ),
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
@@ -46,96 +46,94 @@ describe("HTTPAudioSystem - OnMessage", () => {
         [
             "Flush",
             undefined,
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test"))
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "", new Error("test"))
                 ]
             ),
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test"))
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "", new Error("test"))
                 ]
             ),
-            new Message(HTTPAudioSystem.MESSAGE_REQUEST_FLUSH)
+            new Message(HTTPScriptSystem.MESSAGE_REQUEST_FLUSH)
         ],
         [
             "Clear",
             undefined,
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 []
             ),
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test"))
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "console.log('test');"),
+                    new ScriptAsset("test", "", new Error("test")),
                 ]
             ),
-            new Message(HTTPAudioSystem.MESSAGE_REQUEST_CLEAR)
+            new Message(HTTPScriptSystem.MESSAGE_REQUEST_CLEAR)
         ],
         [
             "Request load, no payload",
             undefined,
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 []
             ),
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0
             ),
-            new Message(AudioRequest.MESSAGE_REQUEST_LOAD)
+            new Message(ScriptRequest.MESSAGE_REQUEST_LOAD)
         ],
         [
             "Request load, success",
             undefined,
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [],
-                undefined,
             ),
-            new HTTPAudioSystem(
+            new HTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [],
-                undefined,
             ),
-            new Message<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest("test", "test"))
+            new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest("test", "test"))
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: HTTPAudioSystem, system: HTTPAudioSystem, message: IMessage) => {
+    ])("%p", (description: string, expected: Error | undefined, expectedState: HTTPScriptSystem, system: HTTPScriptSystem, message: IMessage) => {
         if (expected instanceof Error) {
             expect(() => {
                 system.OnMessage(message);
@@ -148,31 +146,31 @@ describe("HTTPAudioSystem - OnMessage", () => {
     });
 });
 
-class TestHTTPAudioSystem extends HTTPAudioSystem {
-    SimulateHandleResponse(response: Response): Promise<ArrayBuffer> {
+class TestHTTPScriptSystem extends HTTPScriptSystem {
+    SimulateHandleResponse(response: Response): Promise<string> {
         return this.handleResponse(response);
     }
-    SimulateHTTPSuccess(buffer: AudioBuffer, request: AudioRequest): void {
-        return this.httpSuccess(buffer, request);
+    SimulateHTTPSuccess(code: string, request: ScriptRequest): void {
+        return this.httpSuccess(code, request);
     }
-    SimulateHTTPError(request: AudioRequest, error: Error): void {
+    SimulateHTTPError(request: ScriptRequest, error: Error): void {
         return this.httpError(request, error);
     }
 }
 
-describe("HTTPAudioSystem - HandleResponse", () => {
-    type TestTuple = [string, Error | ArrayBuffer, TestHTTPAudioSystem, TestHTTPAudioSystem, Response];
+describe("HTTPScriptSystem - HandleResponse", () => {
+    type TestTuple = [string, Error | string, TestHTTPScriptSystem, TestHTTPScriptSystem, Response];
     test.each<TestTuple>([
         [
             "Handle response, error",
             new Error("test error!"),
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0
             ),
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
@@ -188,14 +186,14 @@ describe("HTTPAudioSystem - HandleResponse", () => {
         ],
         [
             "Handle response, success",
-            new ArrayBuffer(0),
-            new TestHTTPAudioSystem(
+            "console.log('success');",
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0
             ),
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
@@ -204,13 +202,13 @@ describe("HTTPAudioSystem - HandleResponse", () => {
             ),
             ((): Response => {
                 const response = new FakeResponse([
-                    new Reactor("arrayBuffer", (): ArrayBuffer => new ArrayBuffer(0))
+                    new Reactor("text", (): string => "console.log('success');")
                 ]);
                 response.ok = true;
                 return response;
             })()
         ]
-    ])("%p", (description: string, expected: Error | ArrayBuffer, expectedState: TestHTTPAudioSystem, system: TestHTTPAudioSystem, response: Response) => {
+    ])("%p", (description: string, expected: Error | string, expectedState: TestHTTPScriptSystem, system: TestHTTPScriptSystem, response: Response) => {
         if (expected instanceof Error) {
             expect(() => {
                 system.SimulateHandleResponse(response);
@@ -222,69 +220,69 @@ describe("HTTPAudioSystem - HandleResponse", () => {
     });
 });
 
-describe("HTTPAudioSystem - HTTP Success", () => {
-    type TestTuple = [string, Error | undefined, TestHTTPAudioSystem, TestHTTPAudioSystem, AudioBuffer, AudioRequest];
+describe("HTTPScriptSystem - HTTP Success", () => {
+    type TestTuple = [string, Error | undefined, TestHTTPScriptSystem, TestHTTPScriptSystem, string, ScriptRequest];
     test.each<TestTuple>([
         [
             "Success",
             undefined,
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }))
+                    new ScriptAsset("test", "console.log('success');")
                 ]
             ),
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 []
             ),
-            new AudioBuffer({ length: 0, sampleRate: 0 }),
-            new AudioRequest("test", "test")
+            "console.log('success');",
+            new ScriptRequest("test", "test")
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPAudioSystem, system: TestHTTPAudioSystem, buffer: AudioBuffer, request: AudioRequest) => {
+    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPScriptSystem, system: TestHTTPScriptSystem, code: string, request: ScriptRequest) => {
         if (expected instanceof Error) {
             expect(() => {
-                system.SimulateHTTPSuccess(buffer, request);
+                system.SimulateHTTPSuccess(code, request);
             }).toThrow(expected);
         } else {
-            expect(system.SimulateHTTPSuccess(buffer, request)).toEqual(expected);
+            expect(system.SimulateHTTPSuccess(code, request)).toEqual(expected);
         }
         expect(system).toEqual(expectedState);
     });
 });
 
 describe("HTTPAudioSystem - HTTP Failure", () => {
-    type TestTuple = [string, Error | undefined, TestHTTPAudioSystem, TestHTTPAudioSystem, AudioRequest, Error];
+    type TestTuple = [string, Error | undefined, TestHTTPScriptSystem, TestHTTPScriptSystem, ScriptRequest, Error];
     test.each<TestTuple>([
         [
             "Failure",
             undefined,
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test error"))
+                    new ScriptAsset("test", "", new Error("test error"))
                 ]
             ),
-            new TestHTTPAudioSystem(
+            new TestHTTPScriptSystem(
                 new FakeMessageBus(),
                 undefined,
                 undefined,
                 0,
                 []
             ),
-            new AudioRequest("test", "test"),
+            new ScriptRequest("test", "test"),
             new Error("test error")
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPAudioSystem, system: TestHTTPAudioSystem, request: AudioRequest, error: Error) => {
+    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPScriptSystem, system: TestHTTPScriptSystem, request: ScriptRequest, error: Error) => {
         if (expected instanceof Error) {
             expect(() => {
                 system.SimulateHTTPError(request, error);

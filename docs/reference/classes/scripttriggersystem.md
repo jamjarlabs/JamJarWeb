@@ -1,17 +1,15 @@
 
-# Class: CollisionSystem
+# Class: ScriptTriggerSystem
 
-CollisionSystem watches for collisions between entities with Colliders and Transforms.
-It uses a number of algorithms to first do a broad sweep of possible collisions,
-then do a narrow sweep of the possible collisions to determine actual collisions and
-info around them.
-Once it has determined all collisions, it broadcasts them as messages.
+ScriptTriggerSystem handles triggering scripts to be executed based on the
+Script component. Interprets Script components to trigger events at the
+expected times.
 
 ## Hierarchy
 
   ↳ [System](system.md)
 
-  ↳ **CollisionSystem**
+  ↳ **ScriptTriggerSystem**
 
 ## Implements
 
@@ -21,66 +19,47 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 ### Constructors
 
-* [constructor](collisionsystem.md#constructor)
+* [constructor](scripttriggersystem.md#constructor)
 
 ### Properties
 
-* [broadAlgorithm](collisionsystem.md#private-broadalgorithm)
-* [collisionLayerPairs](collisionsystem.md#private-collisionlayerpairs)
-* [entities](collisionsystem.md#protected-entities)
-* [messageBus](collisionsystem.md#protected-messagebus)
-* [narrowAlgorithm](collisionsystem.md#private-narrowalgorithm)
-* [scene](collisionsystem.md#protected-optional-scene)
-* [subscriberID](collisionsystem.md#subscriberid)
-* [DESCRIPTOR_COLLISION](collisionsystem.md#static-descriptor_collision)
-* [MESSAGE_COLLISION_DETECTED](collisionsystem.md#static-message_collision_detected)
-* [MESSAGE_DEREGISTER](collisionsystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](collisionsystem.md#static-message_register)
-* [MESSAGE_UPDATE](collisionsystem.md#static-message_update)
+* [entities](scripttriggersystem.md#protected-entities)
+* [messageBus](scripttriggersystem.md#protected-messagebus)
+* [scene](scripttriggersystem.md#protected-optional-scene)
+* [subscriberID](scripttriggersystem.md#subscriberid)
+* [DESCRIPTOR_UPDATE](scripttriggersystem.md#static-descriptor_update)
+* [MESSAGE_DEREGISTER](scripttriggersystem.md#static-message_deregister)
+* [MESSAGE_REGISTER](scripttriggersystem.md#static-message_register)
+* [MESSAGE_UPDATE](scripttriggersystem.md#static-message_update)
 
 ### Methods
 
-* [Destroy](collisionsystem.md#destroy)
-* [OnDestroy](collisionsystem.md#protected-ondestroy)
-* [OnMessage](collisionsystem.md#onmessage)
-* [Update](collisionsystem.md#update)
-* [EVALUATOR](collisionsystem.md#static-private-evaluator)
+* [Destroy](scripttriggersystem.md#destroy)
+* [OnDestroy](scripttriggersystem.md#protected-ondestroy)
+* [OnMessage](scripttriggersystem.md#onmessage)
+* [Update](scripttriggersystem.md#update)
+* [EVALUATOR](scripttriggersystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `collisionLayerPairs`: [string, string][], `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
+\+ **new ScriptTriggerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[ScriptTriggerSystem](scripttriggersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-Name | Type | Default |
------- | ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`collisionLayerPairs` | [string, string][] | [] |
-`scene?` | [IScene](../interfaces/iscene.md) | - |
-`narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new GJKAlgorithm() |
-`broadAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AlwaysCollideAlgorithm() |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
-`subscriberID?` | undefined &#124; number | - |
+Name | Type |
+------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
+`scene?` | [IScene](../interfaces/iscene.md) |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› |
+`subscriberID?` | undefined &#124; number |
 
-**Returns:** *[CollisionSystem](collisionsystem.md)*
+**Returns:** *[ScriptTriggerSystem](scripttriggersystem.md)*
 
 ## Properties
-
-### `Private` broadAlgorithm
-
-• **broadAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
-
-___
-
-### `Private` collisionLayerPairs
-
-• **collisionLayerPairs**: *[string, string][]*
-
-___
 
 ### `Protected` entities
 
@@ -107,12 +86,6 @@ for communicating with other parts of the engine.
 
 ___
 
-### `Private` narrowAlgorithm
-
-• **narrowAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
-
-___
-
 ### `Protected` `Optional` scene
 
 • **scene**? : *[IScene](../interfaces/iscene.md)*
@@ -135,15 +108,11 @@ ___
 
 ___
 
-### `Static` DESCRIPTOR_COLLISION
+### `Static` DESCRIPTOR_UPDATE
 
-▪ **DESCRIPTOR_COLLISION**: *"collision"* = "collision"
+▪ **DESCRIPTOR_UPDATE**: *"update"* = "update"
 
-___
-
-### `Static` MESSAGE_COLLISION_DETECTED
-
-▪ **MESSAGE_COLLISION_DETECTED**: *"collision_detected"* = "collision_detected"
+Descriptor for a script triggered as part of an update event.
 
 ___
 
@@ -220,9 +189,15 @@ ___
 
 ###  Update
 
-▸ **Update**(): *void*
+▸ **Update**(`dt`: number): *void*
 
 *Overrides [System](system.md).[Update](system.md#protected-update)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`dt` | number |
 
 **Returns:** *void*
 

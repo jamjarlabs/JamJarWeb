@@ -27,6 +27,7 @@ import IScene from "../../scene/iscene";
 import ICollisionAlgorithm from "./algorithm/icollision_algorithm";
 import GJKAlgorithm from "./algorithm/gjk_algorithm";
 import AlwaysCollideAlgorithm from "./algorithm/always_collide_algorithm";
+import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
 
 /**
  * CollisionSystem watches for collisions between entities with Colliders and Transforms.
@@ -36,6 +37,8 @@ import AlwaysCollideAlgorithm from "./algorithm/always_collide_algorithm";
  * Once it has determined all collisions, it broadcasts them as messages.
  */
 class CollisionSystem extends System {
+
+    public static readonly DESCRIPTOR_COLLISION = "collision";
 
     public static readonly MESSAGE_COLLISION_DETECTED = "collision_detected";
 
@@ -52,10 +55,10 @@ class CollisionSystem extends System {
 
     constructor(messageBus: IMessageBus,
         collisionLayerPairs: [string, string][] = [],
-        scene?: IScene, 
+        scene?: IScene,
         narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm(),
         broadAlgorithm: ICollisionAlgorithm = new AlwaysCollideAlgorithm(),
-        entities?: Map<number, SystemEntity>, 
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
         this.collisionLayerPairs = collisionLayerPairs;
@@ -64,6 +67,7 @@ class CollisionSystem extends System {
     }
 
     Update(): void {
+        const triggers: ScriptTriggerRequest<Collision>[] = [];
         // Get collisions
         const collisions: Collision[] = [];
         for (const a of this.entities.values()) {
@@ -113,13 +117,32 @@ class CollisionSystem extends System {
                     // No collision
                     continue;
                 }
-                
-                // Collision detected
-                collisions.push(new Collision(
+
+                const collision = new Collision(
                     a.entity,
                     b.entity,
                     collisionInfo
-                ));
+                );
+
+                // Collision detected
+                collisions.push(collision);
+
+                if (aCollider.script !== undefined) {
+                    triggers.push(new ScriptTriggerRequest<Collision>(
+                        aCollider.script,
+                        CollisionSystem.DESCRIPTOR_COLLISION,
+                        a.entity,
+                        collision
+                    ));
+                }
+                if (bCollider.script !== undefined) {
+                    triggers.push(new ScriptTriggerRequest<Collision>(
+                        bCollider.script,
+                        CollisionSystem.DESCRIPTOR_COLLISION,
+                        b.entity,
+                        collision
+                    ));
+                }
             }
         }
 
@@ -127,6 +150,11 @@ class CollisionSystem extends System {
         // Publish collisions
         for (const collision of collisions) {
             this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_DETECTED, collision));
+        }
+
+        // Publish collision triggers
+        for (const trigger of triggers) {
+            this.messageBus.Publish(new Message<ScriptTriggerRequest<Collision>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, trigger));
         }
     }
 }

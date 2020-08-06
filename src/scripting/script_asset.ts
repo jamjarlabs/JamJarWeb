@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,23 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../../component/component";
-import IShape from "../../shape/ishape";
+class ScriptAsset {
+    public static readonly MESSAGE_FINISH_LOAD = "finish_script_load";
 
-/**
- * Collider is a component that defines a shape for detecting collisions
- * with other Colliders.
- */
-class Collider extends Component {
-    public static readonly KEY = "collider";
-    public shape: IShape;
-    public script?: string;
+    public name: string;
+    public code: string;
+    public error?: Error;
 
-    constructor(shape: IShape, script?: string) {
-        super(Collider.KEY);
-        this.shape = shape;
-        this.script = script;
+    constructor(name: string,
+        code: string,
+        error?: Error) {
+        this.name = name;
+        this.code = code;
+        this.error = error;
     }
 }
 
-export default Collider;
+export default ScriptAsset;

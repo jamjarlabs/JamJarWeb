@@ -152,11 +152,11 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])]
                 ]),
                 0
@@ -174,11 +174,11 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])]
                 ]),
                 0
@@ -292,7 +292,9 @@ describe("CollisionSystem - Update", () => {
             new CollisionSystem(
                 new FakeMessageBus([
                     new Reactor("Publish", (message: IMessage): void => {
-                        collisionCounter++;
+                        if (message.type === CollisionSystem.MESSAGE_COLLISION_DETECTED) {
+                            collisionCounter ++;
+                        }
                     })
                 ]),
                 undefined,
@@ -302,11 +304,11 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])]
                 ]),
                 0
@@ -314,7 +316,9 @@ describe("CollisionSystem - Update", () => {
             new CollisionSystem(
                 new FakeMessageBus([
                     new Reactor("Publish", (message: IMessage): void => {
-                        collisionCounter ++;
+                        if (message.type === CollisionSystem.MESSAGE_COLLISION_DETECTED) {
+                            collisionCounter ++;
+                        }
                     })
                 ]),
                 undefined,
@@ -324,11 +328,11 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1, 1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1), "test")
                     ])]
                 ]),
                 0
@@ -434,7 +438,7 @@ describe("CollisionSystem - Update", () => {
                     new Reactor("Publish", (message: IMessage): void => {
                         collisionCounter ++;
                     })
-                ]), 
+                ]),
                 [["test1", "test2"]],
                 undefined,
                 new AlwaysCollideAlgorithm(),
@@ -467,7 +471,7 @@ describe("CollisionSystem - Update", () => {
                     new Reactor("Publish", (message: IMessage): void => {
                         collisionCounter ++;
                     })
-                ]), 
+                ]),
                 [["test1", "test2"]],
                 undefined,
                 new AlwaysCollideAlgorithm(),

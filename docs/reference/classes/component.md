@@ -27,6 +27,8 @@ Each entity can only have 1 component of each type.
 
   ↳ [UI](ui.md)
 
+  ↳ [Script](script.md)
+
   ↳ [Sprite](sprite.md)
 
   ↳ [SpriteAnimator](spriteanimator.md)
