@@ -1,7 +1,7 @@
 {
-  "name": "texture",
+  "name": "scripting",
   "version": "0.0.0",
-  "description": "Example of applying textures in JamJar",
+  "description": "Example of using a runtime script in JamJar",
   "main": "index.js",
   "author": "jthomperoo",
   "license": "Apache-2.0",

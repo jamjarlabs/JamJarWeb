@@ -20,105 +20,100 @@ import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
 import IMessage from "../../message/imessage";
 import Message from "../../message/message";
-import AudioRequest from "../../audio/audio_request";
-import AudioAsset from "../../audio/audio_asset";
+import ScriptAsset from "../../scripting/script_asset";
+import ScriptRequest from "../../scripting/script_request";
 
 /**
- * HTTPAudioSystem handles loading audio assets over HTTP and making them
- * available to the engine for playing.
+ * HTTPScriptSystem handles loading script assets over HTTP and making them
+ * available to the engine for execution.
  */
-class HTTPAudioSystem extends System {
+class HTTPScriptSystem extends System {
+
     /**
-     * Message to send out all loaded asset messages that are currently loaded.
+     * Message to send out all loaded script messages that are currently loaded.
      */
-    public static readonly MESSAGE_REQUEST_FLUSH = "request_audio_flush";
+    public static readonly MESSAGE_REQUEST_FLUSH = "request_script_flush";
     /**
      * Message to clear out loaded assets.
      */
-    public static readonly MESSAGE_REQUEST_CLEAR = "request_audio_clear";
+    public static readonly MESSAGE_REQUEST_CLEAR = "request_script_clear";
 
-    private assets: AudioAsset[];
-    private context: AudioContext;
+    private assets: ScriptAsset[];
 
     constructor(messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        assets: AudioAsset[] = [],
-        context: AudioContext = new AudioContext()) {
+        assets: ScriptAsset[] = []) {
         super(messageBus, scene, undefined, entities, subscriberID);
-
         this.assets = assets;
-        this.context = context;
-
         this.messageBus.Subscribe(this, [
-            AudioRequest.MESSAGE_REQUEST_LOAD,
-            HTTPAudioSystem.MESSAGE_REQUEST_FLUSH,
-            HTTPAudioSystem.MESSAGE_REQUEST_CLEAR
+            ScriptRequest.MESSAGE_REQUEST_LOAD,
+            HTTPScriptSystem.MESSAGE_REQUEST_FLUSH,
+            HTTPScriptSystem.MESSAGE_REQUEST_CLEAR
         ]);
     }
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case AudioRequest.MESSAGE_REQUEST_LOAD: {
-                const loadMessage = message as Message<AudioRequest>;
+            case ScriptRequest.MESSAGE_REQUEST_LOAD: {
+                const loadMessage = message as Message<ScriptRequest>;
                 if (loadMessage.payload === undefined) {
                     return;
                 }
                 this.load(loadMessage.payload);
                 break;
             }
-            case HTTPAudioSystem.MESSAGE_REQUEST_FLUSH: {
+            case HTTPScriptSystem.MESSAGE_REQUEST_FLUSH: {
                 this.flush();
                 break;
             }
-            case HTTPAudioSystem.MESSAGE_REQUEST_CLEAR: {
+            case HTTPScriptSystem.MESSAGE_REQUEST_CLEAR: {
                 this.clear();
                 break;
             }
         }
     }
 
-    protected httpSuccess(buffer: AudioBuffer, request: AudioRequest): void {
-        const asset = new AudioAsset(
+    protected httpSuccess(code: string, request: ScriptRequest): void {
+        const asset = new ScriptAsset(
             request.name,
-            buffer,
+            code,
         );
-        this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
-    protected httpError(request: AudioRequest, error: Error): void {
-        const asset = new AudioAsset(
+    protected httpError(request: ScriptRequest, error: Error): void {
+        const asset = new ScriptAsset(
             request.name,
-            new AudioBuffer({length: 1, sampleRate: 3000}),
+            "",
             error
         );
-        this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
-    protected handleResponse(response: Response): Promise<ArrayBuffer> {
+    protected handleResponse(response: Response): Promise<string> {
         if (!response.ok) {
             // Non 404 response code
             throw Error(response.statusText);
         }
-        return response.arrayBuffer();
+        return response.text();
     }
 
-    private load(request: AudioRequest): void {
+    private load(request: ScriptRequest): void {
         // HTTP fetch request to source
         fetch(request.source)
             .then(this.handleResponse)
-            .then((buffer) => this.context.decodeAudioData(buffer))
             .then((buffer) => this.httpSuccess(buffer, request))
             .catch((error) => this.httpError(request, error));
     }
 
     private flush(): void {
         for (let i = 0; i < this.assets.length; i++) {
-            this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, this.assets[i]));
+            this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, this.assets[i]));
         }
     }
 
@@ -128,4 +123,4 @@ class HTTPAudioSystem extends System {
 
 }
 
-export default HTTPAudioSystem;
+export default HTTPScriptSystem;

@@ -20,6 +20,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳ [HTTPImageSystem](httpimagesystem.md)
 
+  ↳ [HTTPScriptSystem](httpscriptsystem.md)
+
   ↳ [InterpolationSystem](interpolationsystem.md)
 
   ↳ [KeyboardSystem](keyboardsystem.md)
@@ -31,6 +33,10 @@ A system is for implementing logic, manipulating entities and their components.
   ↳ [RenderSystem](rendersystem.md)
 
   ↳ [PrimitiveSystem](primitivesystem.md)
+
+  ↳ [ScriptTriggerSystem](scripttriggersystem.md)
+
+  ↳ [ScriptingEngineSystem](scriptingenginesystem.md)
 
   ↳ [SpriteSystem](spritesystem.md)
 

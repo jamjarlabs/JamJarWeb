@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,23 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Component from "../../component/component";
-import IShape from "../../shape/ishape";
-
 /**
- * Collider is a component that defines a shape for detecting collisions
- * with other Colliders.
+ * ScriptTrigger defines the possible triggers to cause a script to execute.
  */
-class Collider extends Component {
-    public static readonly KEY = "collider";
-    public shape: IShape;
-    public script?: string;
-
-    constructor(shape: IShape, script?: string) {
-        super(Collider.KEY);
-        this.shape = shape;
-        this.script = script;
-    }
+enum ScriptTrigger {
+    /**
+     * Trigger script on every update, deltatime provided as data.
+     */
+    UPDATE = 0,
 }
 
-export default Collider;
+export default ScriptTrigger;

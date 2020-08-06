@@ -3,7 +3,7 @@ Status](https://github.com/jamjarlabs/jamjar/workflows/JamJar/badge.svg)](https:
 [![CodeCov
 Report](https://codecov.io/gh/jamjarlabs/jamjar/branch/master/graph/badge.svg)](https://codecov.io/gh/jamjarlabs/jamjar)
 [![License - Apache
-2.0](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+2.0](https://img.shields.io/:license-apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation
 Status](https://readthedocs.org/projects/jamjar/badge/?version=latest)](https://jamjar.readthedocs.io/en/latest)
 [![NPM
@@ -12,11 +12,12 @@ Package](https://img.shields.io/npm/v/jamjar)](https://www.npmjs.com/package/jam
 # JamJar 2D Typescript Game Engine
 
 JamJar is a 2D typescript game engine, designed to simplify building browser
-WebGL based games.  
+WebGL based games.
 The engine is built for the source to be looked at and understood, to help in
-understanding game dev concepts.  
+understanding game dev concepts.
 
 JamJar provides the following:
+
 * Entity-Component-System architecture.
 * Composition based entities and components.
 * Messaging.
@@ -34,8 +35,10 @@ JamJar provides the following:
   * Motion - simple motion; velocity, acceleration, angular velocity etc.
   * UI - user interfaces (HUDs etc.).
   * Text - processing text before rendering, handling fonts.
-  * Sprite Animation - Animation through sprites.
-  * Audio - Audio playback.
+  * Sprite Animation - animation through sprites.
+  * Audio - audio playback.
+  * Scripting - runtime execution of scripts, interface for interacting with
+  core the game logic
 
 ## More information
 
@@ -46,7 +49,7 @@ information](https://jamjar.readthedocs.io/en/latest).
 
 Dependencies for developing this project:
 
-* [`node`](https://nodejs.org/en/) >= `v12.14.x` 
+* [`node`](https://nodejs.org/en/) >= `v12.14.x`
 * [`yarn`](https://legacy.yarnpkg.com/en/) >= `1.19.x`
 
 Dependencies to view docs locally:
