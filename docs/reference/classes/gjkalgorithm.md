@@ -16,15 +16,16 @@ algorithm for collision detection.
 
 ### Methods
 
-* [CalculateCollision](gjkalgorithm.md#calculatecollision)
+* [CalculateCollisions](gjkalgorithm.md#calculatecollisions)
 * [calculateDirection](gjkalgorithm.md#private-calculatedirection)
+* [gjk](gjkalgorithm.md#private-gjk)
 * [support](gjkalgorithm.md#private-support)
 
 ## Methods
 
-###  CalculateCollision
+###  CalculateCollisions
 
-▸ **CalculateCollision**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md)): *[CollisionInfo](collisioninfo.md) | undefined*
+▸ **CalculateCollisions**(`shapes`: [IShape](../interfaces/ishape.md)[]): *[CollisionInfo](collisioninfo.md)[]*
 
 *Implementation of [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
 
@@ -32,10 +33,9 @@ algorithm for collision detection.
 
 Name | Type |
 ------ | ------ |
-`a` | [IShape](../interfaces/ishape.md) |
-`b` | [IShape](../interfaces/ishape.md) |
+`shapes` | [IShape](../interfaces/ishape.md)[] |
 
-**Returns:** *[CollisionInfo](collisioninfo.md) | undefined*
+**Returns:** *[CollisionInfo](collisioninfo.md)[]*
 
 ___
 
@@ -50,6 +50,21 @@ Name | Type |
 `points` | [Vector](vector.md)[] |
 
 **Returns:** *[Vector](vector.md) | undefined*
+
+___
+
+### `Private` gjk
+
+▸ **gjk**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md)): *[CollisionInfo](collisioninfo.md) | undefined*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`a` | [IShape](../interfaces/ishape.md) |
+`b` | [IShape](../interfaces/ishape.md) |
+
+**Returns:** *[CollisionInfo](collisioninfo.md) | undefined*
 
 ___
 

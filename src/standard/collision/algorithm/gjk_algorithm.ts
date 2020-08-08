@@ -24,8 +24,22 @@ import CollisionInfo from "../collision_info";
  * algorithm for collision detection.
  */
 class GJKAlgorithm implements ICollisionAlgorithm {
-    public CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined {
+    public CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
+        const collisions: CollisionInfo[] = [];
+        for (let i = 0; i < shapes.length; i++) {
+            for (let j = i + 1; j < shapes.length; j++) {
+                const a = shapes[i];
+                const b = shapes[j];
+                const collision = this.gjk(a,b);
+                if (collision !== undefined) {
+                    collisions.push(collision);
+                }
+            }
+        }
+        return collisions;
+    }
 
+    private gjk(a: IShape, b: IShape): CollisionInfo | undefined {
         // Build a new Simplex for determining if a collision has occurred
         const simplex: Vector[] = [];
 
@@ -41,7 +55,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         direction = initSupportPoint.Invert();
 
         // Keep iterating until the direction is undefined, this will occur when
-        // 'CalculateDirection' doesn't return a direction, indicating that an 
+        // 'CalculateDirection' doesn't return a direction, indicating that an
         // intersection has been detected
         while(direction) {
             const supportPoint = this.support(a, b, direction);
@@ -71,7 +85,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
     private calculateDirection(points: Vector[]): Vector | undefined {
         // Get a, the last point added to the simplex
         const a = points[points.length - 1];
-        // Since a was just added, we know that the inverse of a points 
+        // Since a was just added, we know that the inverse of a points
         // towards the origin
         const ao = a.Invert();
         // If the simplex is a triangle

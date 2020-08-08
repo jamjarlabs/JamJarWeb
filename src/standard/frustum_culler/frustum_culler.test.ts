@@ -17,8 +17,8 @@ limitations under the License.
 import IShape from "../../shape/ishape";
 import FrustumCuller from "./frustum_culler";
 import Polygon from "../../shape/polygon";
-import AlwaysCollideAlgorithm from "../collision/algorithm/always_collide_algorithm";
-import NeverCollideAlgorithm from "../collision/algorithm/never_collide_algorithm";
+import AllCollideAlgorithm from "../collision/algorithm/all_collide_algorithm";
+import NoneCollideAlgorithm from "../collision/algorithm/none_collide_algorithm";
 
 describe("FrustumCuller - Cull", () => {
     type TestTuple = [string, boolean, IShape, IShape, FrustumCuller];
@@ -29,7 +29,7 @@ describe("FrustumCuller - Cull", () => {
             Polygon.RectangleByDimensions(1,1),
             Polygon.RectangleByDimensions(1,1),
             new FrustumCuller(
-                new AlwaysCollideAlgorithm()
+                new AllCollideAlgorithm()
             )
         ],
         [
@@ -38,7 +38,7 @@ describe("FrustumCuller - Cull", () => {
             Polygon.RectangleByDimensions(1,1),
             Polygon.RectangleByDimensions(1,1),
             new FrustumCuller(
-                new NeverCollideAlgorithm()
+                new NoneCollideAlgorithm()
             )
         ],
     ])("%p", (description: string, expected: boolean, frustumPlaneShape: IShape, shape: IShape, culler: FrustumCuller) => {

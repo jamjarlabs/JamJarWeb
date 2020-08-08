@@ -24,12 +24,14 @@ import IShape from "../../shape/ishape";
 class Collider extends Component {
     public static readonly KEY = "collider";
     public shape: IShape;
-    public script?: string;
+    public enterScript?: string;
+    public exitScript?: string;
 
-    constructor(shape: IShape, script?: string) {
+    constructor(shape: IShape, enterScript?: string, exitScript?: string) {
         super(Collider.KEY);
         this.shape = shape;
-        this.script = script;
+        this.enterScript = enterScript;
+        this.exitScript = exitScript;
     }
 }
 

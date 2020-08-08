@@ -13,7 +13,7 @@
 
 ### Classes
 
-* [AlwaysCollideAlgorithm](classes/alwayscollidealgorithm.md)
+* [AllCollideAlgorithm](classes/allcollidealgorithm.md)
 * [AudioAsset](classes/audioasset.md)
 * [AudioRequest](classes/audiorequest.md)
 * [AudioSource](classes/audiosource.md)
@@ -69,7 +69,7 @@
 * [MessageBus](classes/messagebus.md)
 * [Motion](classes/motion.md)
 * [MotionSystem](classes/motionsystem.md)
-* [NeverCollideAlgorithm](classes/nevercollidealgorithm.md)
+* [NoneCollideAlgorithm](classes/nonecollidealgorithm.md)
 * [Pointer](classes/pointer.md)
 * [PointerCameraInfo](classes/pointercamerainfo.md)
 * [PointerSystem](classes/pointersystem.md)

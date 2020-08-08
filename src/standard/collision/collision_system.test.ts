@@ -17,7 +17,6 @@ limitations under the License.
 import CollisionSystem from "./collision_system";
 import IMessage from "../../message/imessage";
 import FakeMessageBus from "../../fake/message_bus";
-import Reactor from "../../fake/reactor";
 import Message from "../../message/message";
 import System from "../../system/system";
 import SystemEntity from "../../system/system_entity";
@@ -25,15 +24,16 @@ import FakeEntity from "../../fake/entity";
 import Transform from "../transform/transform";
 import Collider from "./collider";
 import Polygon from "../../shape/polygon";
-import AlwaysCollideAlgorithm from "./algorithm/always_collide_algorithm";
-import NeverCollideAlgorithm from "./algorithm/never_collide_algorithm";
-import ICollisionAlgorithm from "./algorithm/icollision_algorithm";
-import IShape from "../../shape/ishape";
-import Vector from "../../geometry/vector";
-import CollisionInfo from "./collision_info";
-import Ellipse from "../../shape/ellipse";
+import AllCollideAlgorithm from "./algorithm/all_collide_algorithm";
+import NoneCollideAlgorithm from "./algorithm/none_collide_algorithm";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
+import Collision from "./collision";
+import CollisionInfo from "./collision_info";
+import Ellipse from "../../shape/ellipse";
+import Vector from "../../geometry/vector";
+import ICollisionAlgorithm from "./algorithm/icollision_algorithm";
+import IShape from "../../shape/ishape";
 
 class TestCollisionAlgorithm implements ICollisionAlgorithm {
     private centerPairs: [Vector, Vector][];
@@ -41,53 +41,67 @@ class TestCollisionAlgorithm implements ICollisionAlgorithm {
         this.centerPairs = centerPairs;
     }
 
-    public CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined {
-        const aCenter = a.Center();
-        const bCenter = b.Center();
-        for (const pair of this.centerPairs) {
-            if (aCenter.x === pair[0].x && aCenter.y === pair[0].y && bCenter.x === pair[1].x && bCenter.y === pair[1].y ||
-                aCenter.x === pair[1].x && aCenter.y === pair[1].y && bCenter.x === pair[0].x && bCenter.y === pair[0].y) {
-                return new CollisionInfo(
-                    a,
-                    b
-                );
+    public CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
+        const alreadyChecked: [number, number][] = [];
+        const collisions: CollisionInfo[] = [];
+        for (let i = 0; i < shapes.length; i++) {
+            for (let j = shapes.length - 1; j >= 0; j--) {
+                if (i === j) {
+                    continue;
+                }
+                const checked = alreadyChecked.some((pair) => {
+                    return pair[0] === i && pair[1] === j ||
+                        pair[0] === j && pair[1] === i;
+                });
+                if (checked) {
+                    // Don't check the same collision twice
+                    continue;
+                }
+
+                const a = shapes[i];
+                const b = shapes[j];
+
+                const aCenter = a.Center();
+                const bCenter = b.Center();
+                for (const pair of this.centerPairs) {
+                    if (aCenter.x === pair[0].x && aCenter.y === pair[0].y && bCenter.x === pair[1].x && bCenter.y === pair[1].y ||
+                        aCenter.x === pair[1].x && aCenter.y === pair[1].y && bCenter.x === pair[0].x && bCenter.y === pair[0].y) {
+                        collisions.push(new CollisionInfo(
+                            a,
+                            b
+                        ));
+                    }
+                }
+                alreadyChecked.push([i, j]);
             }
         }
-        return;
+        return collisions;
     }
 }
 
 describe("CollisionSystem - Update", () => {
-    type TestTuple = [string, Error | undefined, number, CollisionSystem, CollisionSystem, IMessage];
-    let collisionCounter = 0;
+    type TestTuple = [string, Error | undefined, CollisionSystem, CollisionSystem, IMessage];
     test.each<TestTuple>([
         [
             "No entities",
             undefined,
-            0,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
@@ -96,17 +110,13 @@ describe("CollisionSystem - Update", () => {
         [
             "One entity",
             undefined,
-            0,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -116,15 +126,12 @@ describe("CollisionSystem - Update", () => {
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -138,17 +145,13 @@ describe("CollisionSystem - Update", () => {
         [
             "Two entities, no broad collide, no narrow collide, no collision",
             undefined,
-            0,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new NeverCollideAlgorithm(),
-                new NeverCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -162,15 +165,12 @@ describe("CollisionSystem - Update", () => {
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new NeverCollideAlgorithm(),
-                new NeverCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -188,17 +188,13 @@ describe("CollisionSystem - Update", () => {
         [
             "Two entities, broad collide, no narrow collide, no collision",
             undefined,
-            0,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new NeverCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -212,15 +208,12 @@ describe("CollisionSystem - Update", () => {
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new NeverCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -238,17 +231,13 @@ describe("CollisionSystem - Update", () => {
         [
             "Two entities, no broad collide, narrow collide, no collision",
             undefined,
-            0,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new NeverCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -262,15 +251,12 @@ describe("CollisionSystem - Update", () => {
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        throw ("No collisions expected");
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new NeverCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -288,19 +274,22 @@ describe("CollisionSystem - Update", () => {
         [
             "Two entities, broad collide, narrow collide, collision",
             undefined,
-            1,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        if (message.type === CollisionSystem.MESSAGE_COLLISION_DETECTED) {
-                            collisionCounter ++;
-                        }
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [
+                    new Collision(
+                        new FakeEntity(0),
+                        new FakeEntity(1),
+                        new CollisionInfo(
+                            Polygon.RectangleByDimensions(1, 1),
+                            Polygon.RectangleByDimensions(1, 1),
+                        )
+                    )
+                ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -314,17 +303,12 @@ describe("CollisionSystem - Update", () => {
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        if (message.type === CollisionSystem.MESSAGE_COLLISION_DETECTED) {
-                            collisionCounter ++;
-                        }
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -342,87 +326,97 @@ describe("CollisionSystem - Update", () => {
         [
             "Five entities, four broad collisions, two narrow collisions, two collisions",
             undefined,
-            2,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        collisionCounter ++;
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
                 new TestCollisionAlgorithm([
-                    [new Vector(0,0), new Vector(1,0)],
-                    [new Vector(3,0), new Vector(4,0)],
+                    [new Vector(0, 0), new Vector(1, 0)],
+                    [new Vector(3, 0), new Vector(4, 0)],
                 ]),
                 new TestCollisionAlgorithm([
-                    [new Vector(0,0), new Vector(1,0)],
-                    [new Vector(0,0), new Vector(3,0)],
-                    [new Vector(3,0), new Vector(4,0)],
-                    [new Vector(1,0), new Vector(4,0)]
+                    [new Vector(0, 0), new Vector(1, 0)],
+                    [new Vector(0, 0), new Vector(3, 0)],
+                    [new Vector(3, 0), new Vector(4, 0)],
+                    [new Vector(1, 0), new Vector(4, 0)]
                 ]),
+                [
+                    new Collision(
+                        new FakeEntity(0),
+                        new FakeEntity(1),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                    new Collision(
+                        new FakeEntity(3),
+                        new FakeEntity(4),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(3, 0)),
+                            Ellipse.Circle(1, new Vector(4, 0))
+                        )
+                    )
+                ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
                     ])]
                 ]),
                 0
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        collisionCounter ++;
-                    })
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 undefined,
                 new TestCollisionAlgorithm([
-                    [new Vector(0,0), new Vector(1,0)],
-                    [new Vector(3,0), new Vector(4,0)],
+                    [new Vector(0, 0), new Vector(1, 0)],
+                    [new Vector(3, 0), new Vector(4, 0)],
                 ]),
                 new TestCollisionAlgorithm([
-                    [new Vector(0,0), new Vector(1,0)],
-                    [new Vector(0,0), new Vector(3,0)],
-                    [new Vector(3,0), new Vector(4,0)],
-                    [new Vector(1,0), new Vector(4,0)]
+                    [new Vector(0, 0), new Vector(1, 0)],
+                    [new Vector(0, 0), new Vector(3, 0)],
+                    [new Vector(3, 0), new Vector(4, 0)],
+                    [new Vector(1, 0), new Vector(4, 0)]
                 ]),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
                     ])]
                 ]),
                 0
@@ -432,77 +426,331 @@ describe("CollisionSystem - Update", () => {
         [
             "Five entities, four entities with layers, four potential collisions, all collide",
             undefined,
-            4,
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        collisionCounter ++;
-                    })
-                ]),
+                new FakeMessageBus(),
                 [["test1", "test2"]],
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, ["test1"]),
+                        new FakeEntity(1, undefined, ["test2"]),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                    new Collision(
+                        new FakeEntity(0, undefined, ["test1"]),
+                        new FakeEntity(3, undefined, ["test2"]),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(3, 0))
+                        )
+                    ),
+                    new Collision(
+                        new FakeEntity(1, undefined, ["test2"]),
+                        new FakeEntity(2, undefined, ["test1"]),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(1, 0)),
+                            Ellipse.Circle(1, new Vector(2, 0))
+                        )
+                    ),
+                    new Collision(
+                        new FakeEntity(2, undefined, ["test1"]),
+                        new FakeEntity(3, undefined, ["test2"]),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(2, 0)),
+                            Ellipse.Circle(1, new Vector(3, 0))
+                        )
+                    ),
+                ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4, undefined, []), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
                     ])]
                 ]),
             ),
             new CollisionSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: IMessage): void => {
-                        collisionCounter ++;
-                    })
-                ]),
+                new FakeMessageBus(),
                 [["test1", "test2"]],
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4, undefined, []), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4,0)))
+                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
                     ])]
                 ]),
                 0
             ),
             new Message<number>(System.MESSAGE_UPDATE, 1.0)
-        ]
-    ])("%p", (description: string, expected: Error | undefined, expectedCollisionCount: number, expectedState: CollisionSystem, system: CollisionSystem, message: IMessage) => {
+        ],
+        [
+            "2 entities, already colliding, continue colliding",
+            undefined,
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, undefined),
+                        new FakeEntity(1, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                ],
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                    ])],
+                ]),
+                0
+            ),
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, undefined),
+                        new FakeEntity(1, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                ],
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                    ])],
+                ]),
+                0
+            ),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+        [
+            "2 entities, already colliding, no longer colliding",
+            undefined,
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                [],
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                    ])],
+                ]),
+                0
+            ),
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new NoneCollideAlgorithm(),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, undefined),
+                        new FakeEntity(1, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                ],
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                    ])],
+                ]),
+                0
+            ),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+        [
+            "3 entities, already colliding, 1 no longer colliding, 1 still colliding",
+            undefined,
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new TestCollisionAlgorithm([
+                    [new Vector(0, 0), new Vector(1, 0)],
+                ]),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, undefined),
+                        new FakeEntity(1, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                ],
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)), undefined, "exit-script")
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(2, 0)), undefined, "exit-script")
+                    ])],
+                ]),
+                0
+            ),
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new TestCollisionAlgorithm([
+                    [new Vector(0, 0), new Vector(1, 0)],
+                ]),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, undefined),
+                        new FakeEntity(1, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                    new Collision(
+                        new FakeEntity(1, undefined, undefined),
+                        new FakeEntity(2, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(1, 0)),
+                            Ellipse.Circle(1, new Vector(2, 0))
+                        )
+                    ),
+                ],
+                new Map<number, SystemEntity>([
+                    [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(1, 0)), undefined, "exit-script")
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2, undefined, undefined), [
+                        new Transform(),
+                        new Collider(Ellipse.Circle(1, new Vector(2, 0)), undefined, "exit-script")
+                    ])],
+                ]),
+                0
+            ),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+        [
+            "Collision expiring, entities no longer exist",
+            undefined,
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
+                new Map<number, SystemEntity>(),
+                0
+            ),
+            new CollisionSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [
+                    new Collision(
+                        new FakeEntity(0, undefined, undefined),
+                        new FakeEntity(1, undefined, undefined),
+                        new CollisionInfo(
+                            Ellipse.Circle(1, new Vector(0, 0)),
+                            Ellipse.Circle(1, new Vector(1, 0))
+                        )
+                    ),
+                ],
+                new Map<number, SystemEntity>(),
+                0
+            ),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+        ],
+    ])("%p", (description: string, expected: Error | undefined, expectedState: CollisionSystem, system: CollisionSystem, message: IMessage) => {
         if (expected instanceof Error) {
             expect(() => {
                 system.OnMessage(message);
@@ -511,8 +759,6 @@ describe("CollisionSystem - Update", () => {
             expect(system.OnMessage(message)).toEqual(expected);
         }
         expect(system).toEqual(expectedState);
-        expect(collisionCounter).toEqual(expectedCollisionCount);
-        collisionCounter = 0;
     });
 });
 
@@ -526,8 +772,9 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
@@ -535,8 +782,9 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
@@ -552,8 +800,9 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
@@ -561,14 +810,15 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
                 new FakeEntity(0), [
-                    new Collider(Polygon.RectangleByDimensions(1,1))
+                    new Collider(Polygon.RectangleByDimensions(1, 1))
                 ]
             ])
         ],
@@ -579,8 +829,9 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
@@ -588,8 +839,9 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
@@ -606,12 +858,13 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Polygon.RectangleByDimensions(1,1))
+                        new Collider(Polygon.RectangleByDimensions(1, 1))
                     ])]
                 ]),
                 0
@@ -620,15 +873,16 @@ describe("CollisionSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                new AlwaysCollideAlgorithm(),
-                new AlwaysCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                new AllCollideAlgorithm(),
+                [],
                 new Map<number, SystemEntity>([]),
                 0
             ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
                 new FakeEntity(0), [
                     new Transform(),
-                    new Collider(Polygon.RectangleByDimensions(1,1))
+                    new Collider(Polygon.RectangleByDimensions(1, 1))
                 ]
             ])
         ],

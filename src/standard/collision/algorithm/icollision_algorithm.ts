@@ -22,13 +22,12 @@ import IShape from "../../../shape/ishape";
  */
 interface ICollisionAlgorithm {
     /**
-     * CalculateCollision calculates if there is a collision between two shapes,
-     * if there is a collision a CollisionInfo will be returned, if there is no
-     * collision undefined will be returned.
-     * @param a First shape to use in the collision check
-     * @param b Second shape to use in the collision check
+     * CalculateCollisions calculates all collisions between the shapes
+     * provided, returning a list of CollisionInfos, each representing a
+     * Collision.
+     * @param shapes The shapes to check for collisions
      */
-    CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined;
+    CalculateCollisions(shapes: IShape[]): CollisionInfo[];
 }
 
 export default ICollisionAlgorithm;

@@ -38,8 +38,8 @@ import Matrix4D from "../../geometry/matrix_4d";
 import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
 import FrustumCuller from "../frustum_culler/frustum_culler";
-import NeverCollideAlgorithm from "../collision/algorithm/never_collide_algorithm";
-import AlwaysCollideAlgorithm from "../collision/algorithm/always_collide_algorithm";
+import NoneCollideAlgorithm from "../collision/algorithm/none_collide_algorithm";
+import AllCollideAlgorithm from "../collision/algorithm/all_collide_algorithm";
 import ICollisionAlgorithm from "../collision/algorithm/icollision_algorithm";
 import Vector from "../../geometry/vector";
 import CollisionInfo from "../collision/collision_info";
@@ -54,19 +54,41 @@ class TestCollisionAlgorithm implements ICollisionAlgorithm {
         this.centerPairs = centerPairs;
     }
 
-    public CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined {
-        const aCenter = a.Center();
-        const bCenter = b.Center();
-        for (const pair of this.centerPairs) {
-            if (aCenter.x === pair[0].x && aCenter.y === pair[0].y && bCenter.x === pair[1].x && bCenter.y === pair[1].y ||
-                aCenter.x === pair[1].x && aCenter.y === pair[1].y && bCenter.x === pair[0].x && bCenter.y === pair[0].y) {
-                return new CollisionInfo(
-                    a,
-                    b
-                );
+    public CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
+        const alreadyChecked: [number,number][] = [];
+        const collisions: CollisionInfo[] = [];
+        for (let i = 0; i < shapes.length; i++) {
+            for (let j = shapes.length - 1; j >= 0; j--) {
+                if (i === j) {
+                    continue;
+                }
+                const checked = alreadyChecked.some((pair) => {
+                    return pair[0] === i && pair[1] === j ||
+                        pair[0] === j && pair[1] === i;
+                });
+                if (checked) {
+                    // Don't check the same collision twice
+                    continue;
+                }
+
+                const a = shapes[i];
+                const b = shapes[j];
+
+                const aCenter = a.Center();
+                const bCenter = b.Center();
+                for (const pair of this.centerPairs) {
+                    if (aCenter.x === pair[0].x && aCenter.y === pair[0].y && bCenter.x === pair[1].x && bCenter.y === pair[1].y ||
+                        aCenter.x === pair[1].x && aCenter.y === pair[1].y && bCenter.x === pair[0].x && bCenter.y === pair[0].y) {
+                        collisions.push(new CollisionInfo(
+                            a,
+                            b
+                        ));
+                    }
+                }
+                alreadyChecked.push([i,j]);
             }
         }
-        return;
+        return collisions;
     }
 }
 
@@ -1550,7 +1572,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new NeverCollideAlgorithm()),
+                new FrustumCuller(new NoneCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -1595,7 +1617,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new NeverCollideAlgorithm()),
+                new FrustumCuller(new NoneCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -1636,7 +1658,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new NeverCollideAlgorithm()),
+                new FrustumCuller(new NoneCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -1681,7 +1703,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new AlwaysCollideAlgorithm()),
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -1997,7 +2019,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new NeverCollideAlgorithm()),
+                new FrustumCuller(new NoneCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -2042,7 +2064,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new AlwaysCollideAlgorithm()),
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -2083,7 +2105,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new AlwaysCollideAlgorithm()),
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(new Vector(1, 1)),
@@ -2164,7 +2186,7 @@ describe("WebGLSystem - Render", () => {
                 new Map<string, WebGLProgram>([
                     ["_test_vert_test_frag", new WebGLProgram()]
                 ]),
-                new FrustumCuller(new AlwaysCollideAlgorithm()),
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(new Vector(1, 1)),
@@ -2189,4 +2211,3 @@ describe("WebGLSystem - Render", () => {
         drawCount = 0;
     });
 });
-

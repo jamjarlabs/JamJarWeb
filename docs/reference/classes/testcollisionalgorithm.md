@@ -22,7 +22,7 @@
 
 ### Methods
 
-* [CalculateCollision](testcollisionalgorithm.md#calculatecollision)
+* [CalculateCollisions](testcollisionalgorithm.md#calculatecollisions)
 
 ## Constructors
 
@@ -46,9 +46,9 @@ Name | Type |
 
 ## Methods
 
-###  CalculateCollision
+###  CalculateCollisions
 
-▸ **CalculateCollision**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md)): *[CollisionInfo](collisioninfo.md) | undefined*
+▸ **CalculateCollisions**(`shapes`: [IShape](../interfaces/ishape.md)[]): *[CollisionInfo](collisioninfo.md)[]*
 
 *Implementation of [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
 
@@ -56,7 +56,6 @@ Name | Type |
 
 Name | Type |
 ------ | ------ |
-`a` | [IShape](../interfaces/ishape.md) |
-`b` | [IShape](../interfaces/ishape.md) |
+`shapes` | [IShape](../interfaces/ishape.md)[] |
 
-**Returns:** *[CollisionInfo](collisioninfo.md) | undefined*
+**Returns:** *[CollisionInfo](collisioninfo.md)[]*

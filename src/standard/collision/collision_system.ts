@@ -26,7 +26,8 @@ import IEntity from "../../entity/ientity";
 import IScene from "../../scene/iscene";
 import ICollisionAlgorithm from "./algorithm/icollision_algorithm";
 import GJKAlgorithm from "./algorithm/gjk_algorithm";
-import AlwaysCollideAlgorithm from "./algorithm/always_collide_algorithm";
+import AllCollideAlgorithm from "./algorithm/all_collide_algorithm";
+import IShape from "../../shape/ishape";
 import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
 
 /**
@@ -38,9 +39,22 @@ import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
  */
 class CollisionSystem extends System {
 
-    public static readonly DESCRIPTOR_COLLISION = "collision";
-
-    public static readonly MESSAGE_COLLISION_DETECTED = "collision_detected";
+    /**
+     * Descriptor of a script triggered when a collision enter occurs.
+     */
+    public static readonly DESCRIPTOR_COLLISION_ENTER = "collision_enter";
+    /**
+     * Descriptor of a script triggered when a collision exit occurs.
+     */
+    public static readonly DESCRIPTOR_COLLISION_EXIT = "collision_exit";
+    /**
+     * Message published when a collision enter occurs.
+     */
+    public static readonly MESSAGE_COLLISION_ENTER = "collision_enter";
+    /**
+     * Message published when a collision exit occurs.
+     */
+    public static readonly MESSAGE_COLLISION_EXIT = "collision_exit";
 
     // Only entities with a transform and camera
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -49,112 +63,163 @@ class CollisionSystem extends System {
         ));
     };
 
-    private collisionLayerPairs: [string, string][];
+    private layerPairs: [string, string][];
     private narrowAlgorithm: ICollisionAlgorithm;
     private broadAlgorithm: ICollisionAlgorithm;
+    private colliding: Collision[];
 
     constructor(messageBus: IMessageBus,
-        collisionLayerPairs: [string, string][] = [],
+        layerPairs: [string, string][] = [],
         scene?: IScene,
         narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm(),
-        broadAlgorithm: ICollisionAlgorithm = new AlwaysCollideAlgorithm(),
+        broadAlgorithm: ICollisionAlgorithm = new AllCollideAlgorithm(),
+        colliding: Collision[] = [],
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
-        this.collisionLayerPairs = collisionLayerPairs;
+        this.layerPairs = layerPairs;
         this.narrowAlgorithm = narrowAlgorithm;
         this.broadAlgorithm = broadAlgorithm;
+        this.colliding = colliding;
     }
 
     Update(): void {
+        // Calculate shapes in worldspace, using transform and collider, store
+        // shapes in a mapping of shape -> entity so the entity information can
+        // be retrieved later using the shape reference
+        const shapes: Map<IShape, SystemEntity> = new Map();
+        for (const entity of this.entities.values()) {
+            const transform = entity.Get(Transform.KEY) as Transform;
+            const collider = entity.Get(Collider.KEY) as Collider;
+            const shape = collider.shape.Transform(transform);
+            shapes.set(shape, entity);
+        }
+
+        // Triggers are script triggers to execute after handling collisions
         const triggers: ScriptTriggerRequest<Collision>[] = [];
-        // Get collisions
+
+        // Expired are existing collisions that are no longer colliding
+        const expiredCollisions: Collision[] = [...this.colliding];
+
+        // Collisions stores all new and continued collisions in this update
         const collisions: Collision[] = [];
-        for (const a of this.entities.values()) {
 
-            const aTransform = a.Get(Transform.KEY) as Transform;
-            const aCollider = a.Get(Collider.KEY) as Collider;
-            const aShape = aCollider.shape.Transform(aTransform);
+        const broadCollisions = this.broadAlgorithm.CalculateCollisions([...shapes.keys()]);
+        for (const broadCollision of broadCollisions) {
+            // These null assertions can be made as the shapes returned by the
+            // collision detection must retain references
+            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+            const a = shapes.get(broadCollision.a)!;
+            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+            const b = shapes.get(broadCollision.b)!;
 
-            for (const b of this.entities.values()) {
-                if (a.entity.id === b.entity.id) {
-                    // Don't check for collisions with same entity
-                    continue;
-                }
-
-                const alreadyChecked = collisions.some((collision) => {
-                    return collision.a.id === a.entity.id && collision.b.id === b.entity.id ||
-                        collision.a.id === b.entity.id && collision.b.id === a.entity.id;
-                });
-                if (alreadyChecked) {
-                    // Don't check the same collision twice
-                    continue;
-                }
-
-                if (this.collisionLayerPairs.length !== 0) {
-                    let shouldCheck = false;
-                    for (const collisionPair of this.collisionLayerPairs) {
-                        if ((a.entity.layers.includes(collisionPair[0]) && b.entity.layers.includes(collisionPair[1])) ||
-                            (b.entity.layers.includes(collisionPair[0]) && a.entity.layers.includes(collisionPair[1]))) {
-                                shouldCheck = true;
-                        }
-                    }
-                    if (!shouldCheck) {
-                        continue;
+            // Only allow collision with objects that are designated as
+            // colliding by the collision pairs provided
+            if (this.layerPairs.length !== 0) {
+                let shouldCheck = false;
+                for (const collisionPair of this.layerPairs) {
+                    if ((a.entity.layers.includes(collisionPair[0]) && b.entity.layers.includes(collisionPair[1])) ||
+                        (b.entity.layers.includes(collisionPair[0]) && a.entity.layers.includes(collisionPair[1]))) {
+                        shouldCheck = true;
                     }
                 }
-
-                const bTransform = b.Get(Transform.KEY) as Transform;
-                const bCollider = b.Get(Collider.KEY) as Collider;
-                const bShape = bCollider.shape.Transform(bTransform);
-                if (!this.broadAlgorithm.CalculateCollision(aShape, bShape)) {
-                    // Broad algorithm discount collision
+                if (!shouldCheck) {
                     continue;
                 }
+            }
 
-                const collisionInfo = this.narrowAlgorithm.CalculateCollision(aShape, bShape);
-                if (collisionInfo === undefined) {
-                    // No collision
-                    continue;
+            const narrowCollision = this.narrowAlgorithm.CalculateCollisions([broadCollision.a, broadCollision.b]);
+            if (narrowCollision.length === 0) {
+                // No collision
+                continue;
+            }
+
+            const collision = new Collision(
+                a.entity,
+                b.entity,
+                narrowCollision[0]
+            );
+            collisions.push(collision);
+
+            // Determine if new collision
+            let newCollision = true;
+            for (let i = expiredCollisions.length - 1; i >= 0; i--) {
+                const existing = this.colliding[i];
+                if (existing.a.id === a.entity.id && existing.b.id === b.entity.id ||
+                    existing.a.id === b.entity.id && existing.b.id === a.entity.id) {
+                    newCollision = false;
+                    expiredCollisions.splice(i, 1);
+                    break;
                 }
+            }
 
-                const collision = new Collision(
-                    a.entity,
-                    b.entity,
-                    collisionInfo
-                );
+            if (newCollision) {
+                // New collision, counts as collision enter, send message and
+                // trigger scripts
+                this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_ENTER, collision));
 
-                // Collision detected
-                collisions.push(collision);
-
-                if (aCollider.script !== undefined) {
+                const aCollider = a.Get(Collider.KEY) as Collider;
+                if (aCollider.enterScript !== undefined) {
                     triggers.push(new ScriptTriggerRequest<Collision>(
-                        aCollider.script,
-                        CollisionSystem.DESCRIPTOR_COLLISION,
-                        a.entity,
+                        aCollider.enterScript,
+                        CollisionSystem.DESCRIPTOR_COLLISION_ENTER,
+                        collision.a,
                         collision
                     ));
                 }
-                if (bCollider.script !== undefined) {
+
+                const bCollider = b.Get(Collider.KEY) as Collider;
+                if (bCollider.enterScript !== undefined) {
                     triggers.push(new ScriptTriggerRequest<Collision>(
-                        bCollider.script,
-                        CollisionSystem.DESCRIPTOR_COLLISION,
-                        b.entity,
+                        bCollider.enterScript,
+                        CollisionSystem.DESCRIPTOR_COLLISION_ENTER,
+                        collision.b,
                         collision
                     ));
                 }
             }
         }
 
+        // Clear out expired (exited) collisions
+        for (const expired of expiredCollisions) {
+            this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_EXIT, expired));
 
-        // Publish collisions
-        for (const collision of collisions) {
-            this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_DETECTED, collision));
+            const aSystemEntity = this.entities.get(expired.a.id);
+            if (aSystemEntity !== undefined) {
+                const aCollider = aSystemEntity.Get(Collider.KEY) as Collider;
+                if (aCollider.exitScript !== undefined) {
+                    triggers.push(new ScriptTriggerRequest<Collision>(
+                        aCollider.exitScript,
+                        CollisionSystem.DESCRIPTOR_COLLISION_EXIT,
+                        expired.a,
+                        expired
+                    ));
+                }
+            }
+            const bSystemEntity = this.entities.get(expired.b.id);
+            if (bSystemEntity !== undefined) {
+                const bCollider = bSystemEntity.Get(Collider.KEY) as Collider;
+                if (bCollider.exitScript !== undefined) {
+                    triggers.push(new ScriptTriggerRequest<Collision>(
+                        bCollider.exitScript,
+                        CollisionSystem.DESCRIPTOR_COLLISION_EXIT,
+                        expired.b,
+                        expired
+                    ));
+                }
+            }
         }
+
+        this.colliding = [...collisions];
 
         // Publish collision triggers
         for (const trigger of triggers) {
-            this.messageBus.Publish(new Message<ScriptTriggerRequest<Collision>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, trigger));
+            this.messageBus.Publish(
+                new Message<ScriptTriggerRequest<Collision>>(
+                    ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                    trigger
+                )
+            );
         }
     }
 }
