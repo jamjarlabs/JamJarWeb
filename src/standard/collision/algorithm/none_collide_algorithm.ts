@@ -19,13 +19,13 @@ import CollisionInfo from "../collision_info";
 import IShape from "../../../shape/ishape";
 
 /**
- * AlwaysCollideAlgorithm provides an algorithm that always detects a collision
- * between two shapes, used in testing or as a placeholder algorithm
+ * NoneCollideAlgorithm provides an algorithm that never detects a collision
+ * between shapes, used in testing or as a placeholder algorithm
  */
-class AlwaysCollideAlgorithm implements ICollisionAlgorithm {
-    CalculateCollision(a: IShape, b: IShape): CollisionInfo | undefined {
-        return new CollisionInfo(a, b);
+class NoneCollideAlgorithm implements ICollisionAlgorithm {
+    CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
+        return [];
     }
 }
 
-export default AlwaysCollideAlgorithm;
+export default NoneCollideAlgorithm;

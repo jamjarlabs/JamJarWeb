@@ -26,14 +26,17 @@ Once it has determined all collisions, it broadcasts them as messages.
 ### Properties
 
 * [broadAlgorithm](collisionsystem.md#private-broadalgorithm)
-* [collisionLayerPairs](collisionsystem.md#private-collisionlayerpairs)
+* [colliding](collisionsystem.md#private-colliding)
 * [entities](collisionsystem.md#protected-entities)
+* [layerPairs](collisionsystem.md#private-layerpairs)
 * [messageBus](collisionsystem.md#protected-messagebus)
 * [narrowAlgorithm](collisionsystem.md#private-narrowalgorithm)
 * [scene](collisionsystem.md#protected-optional-scene)
 * [subscriberID](collisionsystem.md#subscriberid)
-* [DESCRIPTOR_COLLISION](collisionsystem.md#static-descriptor_collision)
-* [MESSAGE_COLLISION_DETECTED](collisionsystem.md#static-message_collision_detected)
+* [DESCRIPTOR_COLLISION_ENTER](collisionsystem.md#static-descriptor_collision_enter)
+* [DESCRIPTOR_COLLISION_EXIT](collisionsystem.md#static-descriptor_collision_exit)
+* [MESSAGE_COLLISION_ENTER](collisionsystem.md#static-message_collision_enter)
+* [MESSAGE_COLLISION_EXIT](collisionsystem.md#static-message_collision_exit)
 * [MESSAGE_DEREGISTER](collisionsystem.md#static-message_deregister)
 * [MESSAGE_REGISTER](collisionsystem.md#static-message_register)
 * [MESSAGE_UPDATE](collisionsystem.md#static-message_update)
@@ -50,7 +53,7 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 ###  constructor
 
-\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `collisionLayerPairs`: [string, string][], `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
+\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `layerPairs`: [string, string][], `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `colliding`: [Collision](collision.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -59,10 +62,11 @@ Once it has determined all collisions, it broadcasts them as messages.
 Name | Type | Default |
 ------ | ------ | ------ |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`collisionLayerPairs` | [string, string][] | [] |
+`layerPairs` | [string, string][] | [] |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new GJKAlgorithm() |
-`broadAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AlwaysCollideAlgorithm() |
+`broadAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AllCollideAlgorithm() |
+`colliding` | [Collision](collision.md)[] | [] |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
@@ -76,9 +80,9 @@ Name | Type | Default |
 
 ___
 
-### `Private` collisionLayerPairs
+### `Private` colliding
 
-• **collisionLayerPairs**: *[string, string][]*
+• **colliding**: *[Collision](collision.md)[]*
 
 ___
 
@@ -93,6 +97,12 @@ ID: Entity
 0: PlayerEntity
 1: ObstacleEntity
 etc.
+
+___
+
+### `Private` layerPairs
+
+• **layerPairs**: *[string, string][]*
 
 ___
 
@@ -135,15 +145,35 @@ ___
 
 ___
 
-### `Static` DESCRIPTOR_COLLISION
+### `Static` DESCRIPTOR_COLLISION_ENTER
 
-▪ **DESCRIPTOR_COLLISION**: *"collision"* = "collision"
+▪ **DESCRIPTOR_COLLISION_ENTER**: *"collision_enter"* = "collision_enter"
+
+Descriptor of a script triggered when a collision enter occurs.
 
 ___
 
-### `Static` MESSAGE_COLLISION_DETECTED
+### `Static` DESCRIPTOR_COLLISION_EXIT
 
-▪ **MESSAGE_COLLISION_DETECTED**: *"collision_detected"* = "collision_detected"
+▪ **DESCRIPTOR_COLLISION_EXIT**: *"collision_exit"* = "collision_exit"
+
+Descriptor of a script triggered when a collision exit occurs.
+
+___
+
+### `Static` MESSAGE_COLLISION_ENTER
+
+▪ **MESSAGE_COLLISION_ENTER**: *"collision_enter"* = "collision_enter"
+
+Message published when a collision enter occurs.
+
+___
+
+### `Static` MESSAGE_COLLISION_EXIT
+
+▪ **MESSAGE_COLLISION_EXIT**: *"collision_exit"* = "collision_exit"
+
+Message published when a collision exit occurs.
 
 ___
 

@@ -77,9 +77,9 @@ class ScoreSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, ScoreSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ScoreSystem.MESSAGE_SCORE_INCREMENT)
@@ -120,7 +120,7 @@ class AsteroidSystem extends System {
             return entity.tags.includes(AsteroidSystem.ASTEROID_TAG) ||
                 entity.tags.includes(BulletSystem.BULLET_TAG) ||
                 entity.tags.includes(PlayerSystem.PLAYER_TAG);
-        } 
+        }
         return false;
     };
 
@@ -128,15 +128,15 @@ class AsteroidSystem extends System {
     private spawnInterval: number;
     private destroyed: number[];
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
         lastSpawnTime: number = 0,
         spawnInterval: number = AsteroidSystem.BASE_SPAWN_INTERVAL,
-        entities?: Map<number, SystemEntity>, 
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number,
         ) {
         super(messageBus, scene, AsteroidSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_DETECTED);
+        this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_ENTER);
         this.lastSpawnTime = lastSpawnTime;
         this.spawnInterval = spawnInterval;
         this.destroyed = [];
@@ -179,7 +179,7 @@ class AsteroidSystem extends System {
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
         switch (message.type) {
-            case CollisionSystem.MESSAGE_COLLISION_DETECTED: {
+            case CollisionSystem.MESSAGE_COLLISION_ENTER: {
                 const collisionMessage = message as Message<Collision>;
                 if (collisionMessage.payload === undefined) {
                     return;
@@ -287,9 +287,9 @@ class BulletSystem extends System {
             entity.tags.includes(BulletSystem.BULLET_TAG);
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, BulletSystem.EVALUATOR, entities, subscriberID);
     }
@@ -316,9 +316,9 @@ class CrosshairSystem extends System {
         )) && entity.tags.includes(CrosshairSystem.CROSSHAIR_TAG);
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, CrosshairSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointermove", "pointerdown", "keydown"])
@@ -371,9 +371,9 @@ class PlayerSystem extends System {
 
     private targetedPosition: Vector;
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number,
         targetedPosition: Vector = new Vector(0,0)) {
         super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
@@ -409,7 +409,7 @@ class PlayerSystem extends System {
                         }
                         this.targetedPosition = cameraInfo.worldPosition;
                     }
-                    
+
                     const transform = player.Get(Transform.KEY) as Transform;
                     const orientation = this.getOrientationToTarget(transform.position);
                     const bullet = new Entity(this.messageBus, [BulletSystem.BULLET_TAG], [BulletSystem.BULLET_LAYER]);
@@ -429,7 +429,7 @@ class PlayerSystem extends System {
                     ))
                     bullet.Add(new Sprite(new Material({
                         texture: new Texture(
-                            "bullet", 
+                            "bullet",
                             Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))
                         )
                     }), 1));
@@ -494,7 +494,7 @@ class GameOverScene extends Scene {
         playAgain.Add(new Text(2, "REFRESH TO REPLAY", "test", TextAlignment.Center, 0.3, undefined, new Color(1,1,1,1)));
         playAgain.Add(new UI(camera));
         this.AddEntity(playAgain);
-        
+
         const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
         crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
         crosshair.Add(new Primitive(

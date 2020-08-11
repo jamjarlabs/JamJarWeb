@@ -22,6 +22,20 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   script on collision.
   - Scripts can be manually triggered by sending a `ScriptTriggerRequest` as a
   message.
+### Changed
+- Collision events now set to be on collision enter and exit only, not every
+update that the collision is occurring for.
+- Scripts can now be set to be trigged on collision enter or exit in the
+`Collider` component. Scripts no longer can be triggered on every update for
+the duration of a collision.
+- Collision algorithms now take as input an array of `IShape` to check, rather
+than simply two `IShape`, and returns a list of `CollisionInfo`, rather than a
+single `CollisionInfo` or undefined.
+- Renamed `CalculateCollision` -> `CalculateCollisions` in
+`ICollisionAlgorithm`
+- `GJKAlgorithm` updated to match new `ICollisionAlgorithm` interface.
+- `AlwaysCollideAlgorithm` renamed `AllCollideAlgorithm`.
+- `NeverCollideAlgorithm` renamed `NoneCollideAlgorithm`.
 ### Fixed
 - The zOrder is now correctly interpreted in `WebGLSystem` rather than being
   in order of renderable creation.

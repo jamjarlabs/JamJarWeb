@@ -9,9 +9,9 @@ ICollisionAlgorithm represents a collision detection algorithm.
 
 ## Implemented by
 
-* [AlwaysCollideAlgorithm](../classes/alwayscollidealgorithm.md)
+* [AllCollideAlgorithm](../classes/allcollidealgorithm.md)
 * [GJKAlgorithm](../classes/gjkalgorithm.md)
-* [NeverCollideAlgorithm](../classes/nevercollidealgorithm.md)
+* [NoneCollideAlgorithm](../classes/nonecollidealgorithm.md)
 * [TestCollisionAlgorithm](../classes/testcollisionalgorithm.md)
 * [TestCollisionAlgorithm](../classes/testcollisionalgorithm.md)
 
@@ -19,23 +19,22 @@ ICollisionAlgorithm represents a collision detection algorithm.
 
 ### Methods
 
-* [CalculateCollision](icollisionalgorithm.md#calculatecollision)
+* [CalculateCollisions](icollisionalgorithm.md#calculatecollisions)
 
 ## Methods
 
-###  CalculateCollision
+###  CalculateCollisions
 
-▸ **CalculateCollision**(`a`: [IShape](ishape.md), `b`: [IShape](ishape.md)): *[CollisionInfo](../classes/collisioninfo.md) | undefined*
+▸ **CalculateCollisions**(`shapes`: [IShape](ishape.md)[]): *[CollisionInfo](../classes/collisioninfo.md)[]*
 
-CalculateCollision calculates if there is a collision between two shapes,
-if there is a collision a CollisionInfo will be returned, if there is no
-collision undefined will be returned.
+CalculateCollisions calculates all collisions between the shapes
+provided, returning a list of CollisionInfos, each representing a
+Collision.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`a` | [IShape](ishape.md) | First shape to use in the collision check |
-`b` | [IShape](ishape.md) | Second shape to use in the collision check  |
+`shapes` | [IShape](ishape.md)[] | The shapes to check for collisions  |
 
-**Returns:** *[CollisionInfo](../classes/collisioninfo.md) | undefined*
+**Returns:** *[CollisionInfo](../classes/collisioninfo.md)[]*

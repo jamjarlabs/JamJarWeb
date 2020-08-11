@@ -46,8 +46,13 @@ class ScriptingGame extends Game {
 
     OnStart(): void {
         this.messageBus.Publish(new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest(
-            "test-script",
-            "assets/script.js"
+            "enter-script",
+            "assets/collision_enter.js"
+        )));
+
+        this.messageBus.Publish(new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest(
+            "exit-script",
+            "assets/collision_exit.js"
         )));
 
         const virtualSize = new Vector(160, 90);
@@ -61,11 +66,11 @@ class ScriptingGame extends Game {
 
         const a = new Entity(this.messageBus);
         a.Add(new Transform(new Vector(-70, 0), new Vector(12, 12)));
-        a.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "test-script"));
+        a.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "enter-script", "exit-script"));
         a.Add(new Motion(new Vector(20,0)));
         a.Add(new Primitive(
             new Material({
-                color: new Color(0.54,1,0.54,1)
+                color: new Color(0,1,0,1)
             }),
             0,
             new Polygon([
@@ -80,11 +85,11 @@ class ScriptingGame extends Game {
 
         const b = new Entity(this.messageBus);
         b.Add(new Transform(new Vector(10, 30), new Vector(12, 12)));
-        b.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "test-script"));
+        b.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "enter-script", "exit-script"));
         b.Add(new Motion(new Vector(0,-20)));
         b.Add(new Primitive(
             new Material({
-                color: new Color(0.54,1,0.54,1)
+                color: new Color(0,1,0,1)
             }),
             0,
             new Polygon([
@@ -99,11 +104,11 @@ class ScriptingGame extends Game {
 
         const c = new Entity(this.messageBus);
         c.Add(new Transform(new Vector(70, 20), new Vector(12, 12)));
-        c.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "test-script"));
+        c.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "enter-script", "exit-script"));
         c.Add(new Motion(new Vector(-30,0)));
         c.Add(new Primitive(
             new Material({
-                color: new Color(0.54,1,0.54,1)
+                color: new Color(0,1,0,1)
             }),
             0,
             new Polygon([

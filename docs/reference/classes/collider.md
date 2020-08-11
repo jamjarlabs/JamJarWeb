@@ -18,8 +18,9 @@ with other Colliders.
 
 ### Properties
 
+* [enterScript](collider.md#optional-enterscript)
+* [exitScript](collider.md#optional-exitscript)
 * [key](collider.md#key)
-* [script](collider.md#optional-script)
 * [shape](collider.md#shape)
 * [KEY](collider.md#static-key)
 * [MESSAGE_ADD](collider.md#static-message_add)
@@ -29,7 +30,7 @@ with other Colliders.
 
 ###  constructor
 
-\+ **new Collider**(`shape`: [IShape](../interfaces/ishape.md), `script?`: undefined | string): *[Collider](collider.md)*
+\+ **new Collider**(`shape`: [IShape](../interfaces/ishape.md), `enterScript?`: undefined | string, `exitScript?`: undefined | string): *[Collider](collider.md)*
 
 *Overrides [Component](component.md).[constructor](component.md#constructor)*
 
@@ -38,23 +39,30 @@ with other Colliders.
 Name | Type |
 ------ | ------ |
 `shape` | [IShape](../interfaces/ishape.md) |
-`script?` | undefined &#124; string |
+`enterScript?` | undefined &#124; string |
+`exitScript?` | undefined &#124; string |
 
 **Returns:** *[Collider](collider.md)*
 
 ## Properties
+
+### `Optional` enterScript
+
+• **enterScript**? : *undefined | string*
+
+___
+
+### `Optional` exitScript
+
+• **exitScript**? : *undefined | string*
+
+___
 
 ###  key
 
 • **key**: *string*
 
 *Inherited from [Component](component.md).[key](component.md#key)*
-
-___
-
-### `Optional` script
-
-• **script**? : *undefined | string*
 
 ___
 

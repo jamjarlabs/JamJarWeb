@@ -21,7 +21,7 @@ import GJKAlgorithm from "../collision/algorithm/gjk_algorithm";
 
 /**
  * FrustumCuller is used to cull shapes that are outside of another shape (not
- * colliding) - used in rendering to avoid unneccesary rendering. 
+ * colliding) - used in rendering to avoid unneccesary rendering.
  */
 class FrustumCuller implements IFrustumCuller {
 
@@ -40,8 +40,8 @@ class FrustumCuller implements IFrustumCuller {
      * @param shape Shape to check if it is within the frustum
      */
     public Cull(frustumPlaneShape: IShape, shape: IShape): boolean {
-        const narrow = this.narrowAlgorithm.CalculateCollision(frustumPlaneShape, shape);
-        if (narrow === undefined) {
+        const narrow = this.narrowAlgorithm.CalculateCollisions([frustumPlaneShape, shape]);
+        if (narrow.length === 0) {
             return true;
         }
         return false;
