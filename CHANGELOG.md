@@ -22,6 +22,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   script on collision.
   - Scripts can be manually triggered by sending a `ScriptTriggerRequest` as a
   message.
+- `AABB` shape, Axis-Aligned Bounding Box - ignores rotation, good for faster
+collision detection than fully defined Polygons.
+- `AABBAlgorithm` for detecting collisions between AABBs, can take any shape,
+only does checks in 4 directions.
 ### Changed
 - Collision events now set to be on collision enter and exit only, not every
 update that the collision is occurring for.

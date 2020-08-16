@@ -18,7 +18,7 @@ import Vector from "../geometry/vector";
 import Ellipse from "./ellipse";
 import Transform from "../standard/transform/transform";
 
-describe("Ellise - FarthestPointInDirection", () => {
+describe("Ellipse - FarthestPointInDirection", () => {
     type TestTuple = [string, Vector, Ellipse, Vector];
     test.each<TestTuple>([
         [
