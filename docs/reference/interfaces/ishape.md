@@ -10,6 +10,7 @@ for the shape to be used with collision detection.
 
 ## Implemented by
 
+* [AABB](../classes/aabb.md)
 * [Ellipse](../classes/ellipse.md)
 * [Polygon](../classes/polygon.md)
 

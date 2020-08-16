@@ -9,6 +9,7 @@ ICollisionAlgorithm represents a collision detection algorithm.
 
 ## Implemented by
 
+* [AABBAlgorithm](../classes/aabbalgorithm.md)
 * [AllCollideAlgorithm](../classes/allcollidealgorithm.md)
 * [GJKAlgorithm](../classes/gjkalgorithm.md)
 * [NoneCollideAlgorithm](../classes/nonecollidealgorithm.md)
