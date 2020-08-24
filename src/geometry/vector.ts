@@ -33,12 +33,12 @@ class Vector {
         return this.data[0];
     }
 
-    get y(): number {
-        return this.data[1];
-    }
-
     set x(value: number) {
         this.data[0] = value;
+    }
+
+    get y(): number {
+        return this.data[1];
     }
 
     set y(value: number) {

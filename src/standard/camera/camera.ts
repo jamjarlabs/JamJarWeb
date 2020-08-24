@@ -75,7 +75,7 @@ class Camera extends Component {
             halfHeight,
             0,
             100
-        );;
+        );
     }
 }
 
