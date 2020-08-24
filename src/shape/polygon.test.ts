@@ -163,28 +163,6 @@ describe("Polygon - PointInside", () => {
     });
 });
 
-describe("Polygon - GetArray", () => {
-    type TestTuple = [string, number[], Polygon];
-    test.each<TestTuple>([
-        [
-            "No points",
-            [],
-            new Polygon([])
-        ],
-        [
-            "Triangle",
-            [-1, -1, 1, -1, 0, 1],
-            new Polygon([
-                new Vector(-1, -1),
-                new Vector(1, -1),
-                new Vector(0, 1)
-            ]),
-        ],
-    ])("%p", (description: string, expected: number[], polygon: Polygon) => {
-        expect(polygon.GetArray()).toEqual(expected);
-    });
-});
-
 describe("Polygon - GetFloat32Array", () => {
     type TestTuple = [string, Float32Array, Polygon];
     test.each<TestTuple>([
@@ -376,7 +354,7 @@ describe("Polygon - QuadByDimensions", () => {
                 new Vector(1, -1),  // bottom right
                 new Vector(-1, -1), // bottom left
                 new Vector(-1, 1),  // top left
-                
+
                 new Vector(-1, 1),  // top left
                 new Vector(1, 1),   // top right
                 new Vector(1, -1),  // bottom right
@@ -391,7 +369,7 @@ describe("Polygon - QuadByDimensions", () => {
                 new Vector(1.5, -1),  // bottom right
                 new Vector(-1.5, -1), // bottom left
                 new Vector(-1.5, 1),  // top left
-                
+
                 new Vector(-1.5, 1),  // top left
                 new Vector(1.5, 1),   // top right
                 new Vector(1.5, -1),  // bottom right
@@ -406,7 +384,7 @@ describe("Polygon - QuadByDimensions", () => {
                 new Vector(5, 3), // bottom right
                 new Vector(3, 3), // bottom left
                 new Vector(3, 5), // top left
-                
+
                 new Vector(3, 5), // top left
                 new Vector(5, 5), // top right
                 new Vector(5, 3), // bottom right
@@ -429,7 +407,7 @@ describe("Polygon - QuadByPoints", () => {
                 new Vector(1, 0), // bottom right
                 new Vector(0, 0), // bottom left
                 new Vector(0, 1), // top left
-                
+
                 new Vector(0, 1), // top left
                 new Vector(1, 1), // top right
                 new Vector(1, 0), // bottom right
@@ -443,7 +421,7 @@ describe("Polygon - QuadByPoints", () => {
                 new Vector(5, 0), // bottom right
                 new Vector(0, 0), // bottom left
                 new Vector(0, 5), // top left
-                
+
                 new Vector(0, 5), // top left
                 new Vector(5, 5), // top right
                 new Vector(5, 0), // bottom right
@@ -457,7 +435,7 @@ describe("Polygon - QuadByPoints", () => {
                 new Vector(10, 3), // bottom right
                 new Vector(2, 3), // bottom left
                 new Vector(2, 9), // top left
-                
+
                 new Vector(2, 9), // top left
                 new Vector(10, 9), // top right
                 new Vector(10, 3), // bottom right

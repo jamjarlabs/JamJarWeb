@@ -20,7 +20,7 @@ import Transform from "../standard/transform/transform";
 import Matrix4D from "../geometry/matrix_4d";
 
 /**
- * Polygon is the representation of a 2D Polygon shape. 
+ * Polygon is the representation of a 2D Polygon shape.
  * Can be used in collision detection and rendering.
  */
 class Polygon implements IShape {
@@ -73,7 +73,7 @@ class Polygon implements IShape {
             ySum += point.y;
         }
         return new Vector(
-            xSum / this.points.length, 
+            xSum / this.points.length,
             ySum / this.points.length
         );
     }
@@ -113,24 +113,16 @@ class Polygon implements IShape {
     }
 
     /**
-     * GetArray returns the points of this polygon in an array form, of `[x1,y1,x2,y2...xn,yn]`.
-     * @returns {number[]} The array of points in the polygon
-     */
-    public GetArray(): number[] {
-        const arr = [];
-        for(const point of this.points) {
-            arr.push(point.x);
-            arr.push(point.y);
-        }
-        return arr;
-    }
-
-    /**
      * GetFloat32Array converts the polygon to a WebGL/glMatrix compatible Float32Array
      * @returns {Float32Array} The array representation of the polygon
      */
     public GetFloat32Array(): Float32Array {
-        return new Float32Array(this.GetArray());
+        const arr = new Float32Array(this.points.length * 2);
+        for (let i = 0; i < this.points.length; i++) {
+            arr[i * 2] = this.points[i].x;
+            arr[i * 2 + 1] = this.points[i].y;
+        }
+        return arr;
     }
 
     /**
@@ -159,9 +151,9 @@ class Polygon implements IShape {
      */
     public static RectangleByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
         return new Polygon([
-            bottomLeft, 
+            bottomLeft,
             bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
-            topRight, 
+            topRight,
             topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
         ]);
     }
@@ -180,7 +172,7 @@ class Polygon implements IShape {
             new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
             new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
             new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
-            
+
             new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
             new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
             new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
@@ -196,10 +188,10 @@ class Polygon implements IShape {
     public static QuadByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
         return new Polygon([
             bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
-            bottomLeft, 
+            bottomLeft,
             topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
             topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
-            topRight, 
+            topRight,
             bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
         ]);
     }

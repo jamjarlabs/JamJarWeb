@@ -23,8 +23,8 @@ describe("Transform - Matrix3D", () => {
     type TestTuple = [string, Matrix3D, Vector, Vector, number];
     test.each<TestTuple>([
             [
-                "Unchanged", 
-                new Matrix3D([
+                "Unchanged",
+                new Matrix3D().Set([
                     [1,0,0],
                     [0,1,0],
                     [0,0,1]
@@ -34,8 +34,8 @@ describe("Transform - Matrix3D", () => {
                 0,
             ],
             [
-                "Up 3, 180 degrees rotated, scale by 2", 
-                new Matrix3D([
+                "Up 3, 180 degrees rotated, scale by 2",
+                new Matrix3D().Set([
                     [-2,-2.4492935982947064e-16,-0],
                     [2.4492935982947064e-16,-2,0],
                     [0,3,1]
@@ -54,8 +54,8 @@ describe("Transform - Matrix4D", () => {
     type TestTuple = [string, Matrix4D, Vector, Vector, number];
     test.each<TestTuple>([
             [
-                "Unchanged", 
-                new Matrix4D([
+                "Unchanged",
+                new Matrix4D().Set([
                     [1,0,0,0],
                     [0,1,0,0],
                     [0,0,0,0],
@@ -66,8 +66,8 @@ describe("Transform - Matrix4D", () => {
                 0,
             ],
             [
-                "Up 3, 180 degrees rotated, scale by 2", 
-                new Matrix4D([
+                "Up 3, 180 degrees rotated, scale by 2",
+                new Matrix4D().Set([
                     [-2,-2.4492935982947064e-16,0,0],
                     [2.4492935982947064e-16,-2,0,0],
                     [0,0,0,0],
@@ -87,8 +87,8 @@ describe("Transform - InterpolatedMatrix4D", () => {
     type TestTuple = [string, Matrix4D, Vector, Vector, number, Vector, number];
     test.each<TestTuple>([
             [
-                "Unchanged", 
-                new Matrix4D([
+                "Unchanged",
+                new Matrix4D().Set([
                     [1,0,0,0],
                     [0,1,0,0],
                     [0,0,0,0],
@@ -101,8 +101,8 @@ describe("Transform - InterpolatedMatrix4D", () => {
                 0.5,
             ],
             [
-                "Up 3, 180 degrees rotated, scale by 2", 
-                new Matrix4D([
+                "Up 3, 180 degrees rotated, scale by 2",
+                new Matrix4D().Set([
                     [-2,-2.4492935982947064e-16,0,0],
                     [2.4492935982947064e-16,-2,0,0],
                     [0,0,0,0],

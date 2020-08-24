@@ -27,13 +27,13 @@ describe("Matrix4D - Translate", () => {
     test.each<TestTuple>([
         [
             "Translate up 3",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
                 [0, 3, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -43,13 +43,13 @@ describe("Matrix4D - Translate", () => {
         ],
         [
             "Translate up 5 and right 3",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
                 [3, 5, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -73,13 +73,13 @@ describe("Matrix4D - Scale", () => {
     test.each<TestTuple>([
         [
             "Scale y by 3",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 3, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -89,13 +89,13 @@ describe("Matrix4D - Scale", () => {
         ],
         [
             "Scale y by 5 and x by 3",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [3, 0, 0, 0],
                 [0, 5, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -119,13 +119,13 @@ describe("Matrix4D - Rotate", () => {
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [0.7071067811865476, -0.7071067811865475, 0, 0],
                 [0.7071067811865475, 0.7071067811865476, 0, 0],
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -135,13 +135,13 @@ describe("Matrix4D - Rotate", () => {
         ],
         [
             "Rotate by 180 degrees",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [-1, -1.2246467991473532e-16, 0, 0],
                 [1.2246467991473532e-16, -1, 0, 0],
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -165,13 +165,13 @@ describe("Matrix4D - RotateDeg", () => {
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [0.7071067811865476, -0.7071067811865475, 0, 0],
                 [0.7071067811865475, 0.7071067811865476, 0, 0],
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -181,13 +181,13 @@ describe("Matrix4D - RotateDeg", () => {
         ],
         [
             "Rotate by 180 degrees",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [-1, -1.2246467991473532e-16, 0, 0],
                 [1.2246467991473532e-16, -1, 0, 0],
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -204,8 +204,7 @@ describe("Matrix4D - RotateDeg", () => {
 describe("Matrix4D - Ortho", () => {
     type TestTuple = [
         string,
-        Error | undefined,
-        Matrix4D,
+        Error | Matrix4D,
         Matrix4D,
         number,
         number,
@@ -218,13 +217,7 @@ describe("Matrix4D - Ortho", () => {
         [
             "left -5, right -5, bottom -5, top -5, near -5, far -5",
             new Error("Invalid parameters for Orthograhic projection, will result in division by zero."),
-            new Matrix4D([
-                [1, 0, 0, 0],
-                [0, 1, 0, 0],
-                [0, 0, 1, 0],
-                [0, 0, 0, 1],
-            ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -239,14 +232,13 @@ describe("Matrix4D - Ortho", () => {
         ],
         [
             "left -5, right 5, bottom -5, top 5, near -5, far 5",
-            undefined,
-            new Matrix4D([
+            new Matrix4D().Set([
                 [0.2, 0, 0, 0],
                 [0, 0.2, 0, 0],
                 [0, 0, -0.2, 0],
                 [-0, -0, -0, 1],
             ]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
@@ -261,8 +253,7 @@ describe("Matrix4D - Ortho", () => {
         ],
     ])("%p", (
         description: string,
-        expected: Error | undefined,
-        expectedState: Matrix4D,
+        expected: Error | Matrix4D,
         matrix: Matrix4D,
         left: number,
         right: number,
@@ -275,7 +266,6 @@ describe("Matrix4D - Ortho", () => {
         } else {
             expect(matrix.Ortho(left, right, bottom, top, near, far)).toEqual(expected);
         }
-        expect(matrix).toEqual(expectedState);
     });
 });
 
@@ -289,7 +279,7 @@ describe("Matrix4D - GetFloat32Array", () => {
         [
             "Success",
             new Float32Array([1, 2, 3, 4, 0, 1, 0, 0, 5, 6, 7, 8, 0, 0, 0, 1]),
-            new Matrix4D([
+            new Matrix4D().Set([
                 [1, 2, 3, 4],
                 [0, 1, 0, 0],
                 [5, 6, 7, 8],
@@ -298,26 +288,5 @@ describe("Matrix4D - GetFloat32Array", () => {
         ],
     ])("%p", (description: string, expected: Float32Array, matrix: Matrix4D) => {
         expect(matrix.GetFloat32Array()).toEqual(expected);
-    });
-});
-
-
-describe("Matrix4D - Identity", () => {
-    type TestTuple = [
-        string,
-        Matrix4D
-    ];
-    test.each<TestTuple>([
-        [
-            "Success",
-            new Matrix4D([
-                [1, 0, 0, 0],
-                [0, 1, 0, 0],
-                [0, 0, 1, 0],
-                [0, 0, 0, 1],
-            ]),
-        ],
-    ])("%p", (description: string, expected: Matrix4D) => {
-        expect(Matrix4D.Identity()).toEqual(expected);
     });
 });

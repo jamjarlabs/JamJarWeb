@@ -27,12 +27,12 @@ describe("Matrix3D - Translate", () => {
     test.each<TestTuple>([
         [
             "Translate up 3",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 3, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -41,12 +41,12 @@ describe("Matrix3D - Translate", () => {
         ],
         [
             "Translate up 5 and right 3",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [3, 5, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -69,12 +69,12 @@ describe("Matrix3D - Scale", () => {
     test.each<TestTuple>([
         [
             "Scale y by 3",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 3, 0],
                 [0, 0, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -83,12 +83,12 @@ describe("Matrix3D - Scale", () => {
         ],
         [
             "Scale y by 5 and x by 3",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [3, 0, 0],
                 [0, 5, 0],
                 [0, 0, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -111,12 +111,12 @@ describe("Matrix3D - Rotate", () => {
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [0.7071067811865476, -0.7071067811865475, 0],
                 [0.7071067811865475, 0.7071067811865476, 0],
                 [0, 0, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -125,12 +125,12 @@ describe("Matrix3D - Rotate", () => {
         ],
         [
             "Rotate by 180 degrees",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [-1, -1.2246467991473532e-16, -0],
                 [1.2246467991473532e-16, -1, 0],
                 [0, 0, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -153,12 +153,12 @@ describe("Matrix3D - RotateDeg", () => {
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [0.7071067811865476, -0.7071067811865475, 0],
                 [0.7071067811865475, 0.7071067811865476, 0],
                 [0, 0, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -167,12 +167,12 @@ describe("Matrix3D - RotateDeg", () => {
         ],
         [
             "Rotate by 180 degrees",
-            new Matrix3D([
+            new Matrix3D().Set([
                 [-1, -1.2246467991473532e-16, -0],
                 [1.2246467991473532e-16, -1, 0],
                 [0, 0, 1],
             ]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 1],
@@ -195,7 +195,7 @@ describe("Matrix3D - GetFloat32Array", () => {
         [
             "Success",
             new Float32Array([1, 2, 3, 0, 1, 0, 5, 6, 7]),
-            new Matrix3D([
+            new Matrix3D().Set([
                 [1, 2, 3],
                 [0, 1, 0],
                 [5, 6, 7],
@@ -203,25 +203,5 @@ describe("Matrix3D - GetFloat32Array", () => {
         ],
     ])("%p", (description: string, expected: Float32Array, matrix: Matrix3D) => {
         expect(matrix.GetFloat32Array()).toEqual(expected);
-    });
-});
-
-
-describe("Matrix3D - Identity", () => {
-    type TestTuple = [
-        string,
-        Matrix3D
-    ];
-    test.each<TestTuple>([
-        [
-            "Success",
-            new Matrix3D([
-                [1, 0, 0],
-                [0, 1, 0],
-                [0, 0, 1],
-            ]),
-        ],
-    ])("%p", (description: string, expected: Matrix3D) => {
-        expect(Matrix3D.Identity()).toEqual(expected);
     });
 });

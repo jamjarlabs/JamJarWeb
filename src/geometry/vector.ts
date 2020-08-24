@@ -21,11 +21,28 @@ import Matrix4D from "./matrix_4d";
  * Vector is the 2 dimensional representation of a vector, with two values (x,y).
  */
 class Vector {
-    public x: number;
-    public y: number;
+    private data: Float32Array;
+
     constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+        this.data = new Float32Array(2);
+        this.data[0] = x;
+        this.data[1] = y;
+    }
+
+    get x(): number {
+        return this.data[0];
+    }
+
+    set x(value: number) {
+        this.data[0] = value;
+    }
+
+    get y(): number {
+        return this.data[1];
+    }
+
+    set y(value: number) {
+        this.data[1] = value;
     }
 
     public Equals(other: Vector): boolean {
@@ -39,8 +56,8 @@ class Vector {
      */
     public Apply3D(matrix: Matrix3D): Vector {
         return new Vector(
-            matrix.values[0][0] * this.x + matrix.values[1][0] * this.y + matrix.values[2][0],
-            matrix.values[0][1] * this.x + matrix.values[1][1] * this.y + matrix.values[2][1]
+            matrix.values[0] * this.x + matrix.values[3] * this.y + matrix.values[6],
+            matrix.values[1] * this.x + matrix.values[4] * this.y + matrix.values[7]
         );
     }
 
@@ -51,8 +68,8 @@ class Vector {
      */
     public Apply4D(matrix: Matrix4D): Vector {
         return new Vector(
-            matrix.values[0][0] * this.x + matrix.values[1][0] * this.y + matrix.values[3][0],
-            matrix.values[0][1] * this.x + matrix.values[1][1] * this.y + matrix.values[3][1]
+            matrix.values[0] * this.x + matrix.values[4] * this.y + matrix.values[12],
+            matrix.values[1] * this.x + matrix.values[5] * this.y + matrix.values[13]
         );
     }
 
@@ -125,13 +142,13 @@ class Vector {
 
         const x = this.x - center.x;
         const y = this.y - center.y;
-        
+
         return new Vector(
             (x * c - y * s) + center.x,
             (x * s + y * c) + center.y
         );
     }
-    
+
     /**
      * RotateDeg applies a rotation around a point to the vector in degrees.
      * @param {Vector} center The point to rotate around

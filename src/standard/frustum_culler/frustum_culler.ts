@@ -17,7 +17,7 @@ limitations under the License.
 import IFrustumCuller from "./ifrustum_culler";
 import IShape from "../../shape/ishape";
 import ICollisionAlgorithm from "../collision/algorithm/icollision_algorithm";
-import GJKAlgorithm from "../collision/algorithm/gjk_algorithm";
+import AABBAlgorithm from "../collision/algorithm/aabb_algorithm";
 
 /**
  * FrustumCuller is used to cull shapes that are outside of another shape (not
@@ -27,7 +27,7 @@ class FrustumCuller implements IFrustumCuller {
 
     private narrowAlgorithm: ICollisionAlgorithm;
 
-    constructor(narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm()) {
+    constructor(narrowAlgorithm: ICollisionAlgorithm = new AABBAlgorithm()) {
         this.narrowAlgorithm = narrowAlgorithm;
     }
 

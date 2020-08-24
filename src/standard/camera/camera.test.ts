@@ -24,7 +24,7 @@ describe("Camera - GetProjectionMatrix", () => {
     test.each<TestTuple>([
         [
             "Test orthographic, default camera",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [0.0125, 0, 0, 0],
                 [0, 0.022222222222222223, 0, 0],
                 [0, 0, -0.02, 0],
@@ -34,7 +34,7 @@ describe("Camera - GetProjectionMatrix", () => {
         ],
         [
             "Test orthographic projection, modified camera",
-            new Matrix4D([
+            new Matrix4D().Set([
                 [2, 0, 0, 0],
                 [0, 2, 0, 0],
                 [0, 0, -0.02, 0],

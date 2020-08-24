@@ -15,6 +15,10 @@ Vector is the 2 dimensional representation of a vector, with two values (x,y).
 
 ### Properties
 
+* [data](vector.md#private-data)
+
+### Accessors
+
 * [x](vector.md#x)
 * [y](vector.md#y)
 
@@ -52,15 +56,45 @@ Name | Type |
 
 ## Properties
 
+### `Private` data
+
+• **data**: *Float32Array*
+
+## Accessors
+
 ###  x
 
-• **x**: *number*
+• **get x**(): *number*
+
+**Returns:** *number*
+
+• **set x**(`value`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | number |
+
+**Returns:** *void*
 
 ___
 
 ###  y
 
-• **y**: *number*
+• **get y**(): *number*
+
+**Returns:** *number*
+
+• **set y**(`value`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | number |
+
+**Returns:** *void*
 
 ## Methods
 
