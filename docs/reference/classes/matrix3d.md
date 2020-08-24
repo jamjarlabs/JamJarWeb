@@ -27,24 +27,14 @@ https://github.com/toji/gl-matrix
 * [Rotate](matrix3d.md#rotate)
 * [RotateDeg](matrix3d.md#rotatedeg)
 * [Scale](matrix3d.md#scale)
+* [Set](matrix3d.md#set)
 * [Translate](matrix3d.md#translate)
-* [Identity](matrix3d.md#static-identity)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Matrix3D**(`values`: [Matrix3DValues](../README.md#matrix3dvalues)): *[Matrix3D](matrix3d.md)*
-
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`values` | [Matrix3DValues](../README.md#matrix3dvalues) | [
-        [1,0,0],
-        [0,1,0],
-        [0,0,1],
-    ] |
+\+ **new Matrix3D**(): *[Matrix3D](matrix3d.md)*
 
 **Returns:** *[Matrix3D](matrix3d.md)*
 
@@ -52,7 +42,7 @@ Name | Type | Default |
 
 ###  values
 
-• **values**: *[Matrix3DValues](../README.md#matrix3dvalues)*
+• **values**: *Float32Array*
 
 ## Methods
 
@@ -70,7 +60,7 @@ ___
 
 ###  Rotate
 
-▸ **Rotate**(`angle`: number): *void*
+▸ **Rotate**(`angle`: number): *[Matrix3D](matrix3d.md)*
 
 Rotate applies a radians rotation along the z axis to the matrix (clockwise).
 This is an in-place transformation.
@@ -81,13 +71,13 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `angle` | number | The angle in radians to rotate the matrix by  |
 
-**Returns:** *void*
+**Returns:** *[Matrix3D](matrix3d.md)*
 
 ___
 
 ###  RotateDeg
 
-▸ **RotateDeg**(`angle`: number): *void*
+▸ **RotateDeg**(`angle`: number): *[Matrix3D](matrix3d.md)*
 
 RotateDeg applies a degrees rotation along the z axis to the matrix (clockwise).
 This is an in-place transformation.
@@ -98,13 +88,13 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `angle` | number | The angle in degrees to rotate the matrix by  |
 
-**Returns:** *void*
+**Returns:** *[Matrix3D](matrix3d.md)*
 
 ___
 
 ###  Scale
 
-▸ **Scale**(`scale`: [Vector](vector.md)): *void*
+▸ **Scale**(`scale`: [Vector](vector.md)): *[Matrix3D](matrix3d.md)*
 
 Scale applies a scaling vector to the matrix.
 This is an in-place transformation.
@@ -115,13 +105,27 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `scale` | [Vector](vector.md) | The vector scaling to apply to the matrix  |
 
-**Returns:** *void*
+**Returns:** *[Matrix3D](matrix3d.md)*
+
+___
+
+###  Set
+
+▸ **Set**(`values`: [Matrix3DValues](../README.md#matrix3dvalues)): *[Matrix3D](matrix3d.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`values` | [Matrix3DValues](../README.md#matrix3dvalues) |
+
+**Returns:** *[Matrix3D](matrix3d.md)*
 
 ___
 
 ###  Translate
 
-▸ **Translate**(`translation`: [Vector](vector.md)): *void*
+▸ **Translate**(`translation`: [Vector](vector.md)): *[Matrix3D](matrix3d.md)*
 
 Translate applies a vector translation to the matrix.
 This is an in-place transformation.
@@ -132,16 +136,4 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `translation` | [Vector](vector.md) | The vector transformation to apply to the matrix  |
 
-**Returns:** *void*
-
-___
-
-### `Static` Identity
-
-▸ **Identity**(): *[Matrix3D](matrix3d.md)*
-
-Identity creates a new Matrix3D with an identity matrix configuration.
-
 **Returns:** *[Matrix3D](matrix3d.md)*
-
-Identity matrix

@@ -36,7 +36,7 @@ colliding) - used in rendering to avoid unneccesary rendering.
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new GJKAlgorithm() |
+`narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AABBAlgorithm() |
 
 **Returns:** *[FrustumCuller](frustumculler.md)*
 

@@ -26,7 +26,13 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 collision detection than fully defined Polygons.
 - `AABBAlgorithm` for detecting collisions between AABBs, can take any shape,
 only does checks in 4 directions.
+- `Matrix3D` and `Matrix4D` have new `Set` function for settings Matrix values.
 ### Changed
+- `Vector` changed to use Float32Array behind the scenes.
+- `Matrix3D` and `Matrix4D` changed to use Float32Array behind the scenes.
+- `Matrix3D` and `Matrix4D` operations now return a reference to themselves.
+- `Matrix3D` and `Matrix4D` can no longer be value initialised through
+constructor.
 - Collision events now set to be on collision enter and exit only, not every
 update that the collision is occurring for.
 - Scripts can now be set to be trigged on collision enter or exit in the
@@ -44,6 +50,9 @@ single `CollisionInfo` or undefined.
 - The zOrder is now correctly interpreted in `WebGLSystem` rather than being
   in order of renderable creation.
 - `Rotate` and `RotateDeg` now calculating correctly.
+### Removed
+- `Matrix3D` and `Matrix4D` `Identity()` function removed.
+- `Polygon` `GetArray()` function removed.
 
 ## [v0.8.0] - 2020-05-28
 ### Added

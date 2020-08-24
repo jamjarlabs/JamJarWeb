@@ -276,7 +276,7 @@ describe("Vector - Magnitude", () => {
         ],
         [
             "Magnitude of vector (0.0001,0.002)",
-            0.0020024984394500784,
+            0.0020024985342003065,
             new Vector(0.0001, 0.002)
         ],
     ])("%p", (description: string, expected: number, vector: Vector) => {
@@ -299,7 +299,7 @@ describe("Vector - Normalize", () => {
         ],
         [
             "Normalize vector (0.0001,0.002)",
-            new Vector(0.04993761694389224, 0.9987523388778448),
+            new Vector(0.04993761330842972, 0.9987523388778448),
             new Vector(0.0001, 0.002)
         ],
         [

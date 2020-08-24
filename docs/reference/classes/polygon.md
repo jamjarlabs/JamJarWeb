@@ -28,7 +28,6 @@ Can be used in collision detection and rendering.
 * [Center](polygon.md#center)
 * [Copy](polygon.md#copy)
 * [FarthestPointInDirection](polygon.md#farthestpointindirection)
-* [GetArray](polygon.md#getarray)
 * [GetFloat32Array](polygon.md#getfloat32array)
 * [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
@@ -106,18 +105,6 @@ Name | Type |
 `direction` | [Vector](vector.md) |
 
 **Returns:** *[Vector](vector.md)*
-
-___
-
-###  GetArray
-
-▸ **GetArray**(): *number[]*
-
-GetArray returns the points of this polygon in an array form, of `[x1,y1,x2,y2...xn,yn]`.
-
-**Returns:** *number[]*
-
-The array of points in the polygon
 
 ___
 

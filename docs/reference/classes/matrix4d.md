@@ -28,25 +28,14 @@ https://github.com/toji/gl-matrix
 * [Rotate](matrix4d.md#rotate)
 * [RotateDeg](matrix4d.md#rotatedeg)
 * [Scale](matrix4d.md#scale)
+* [Set](matrix4d.md#set)
 * [Translate](matrix4d.md#translate)
-* [Identity](matrix4d.md#static-identity)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Matrix4D**(`values`: [Matrix4DValues](../README.md#matrix4dvalues)): *[Matrix4D](matrix4d.md)*
-
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`values` | [Matrix4DValues](../README.md#matrix4dvalues) | [
-        [1,0,0,0],
-        [0,1,0,0],
-        [0,0,1,0],
-        [0,0,0,1]
-    ] |
+\+ **new Matrix4D**(): *[Matrix4D](matrix4d.md)*
 
 **Returns:** *[Matrix4D](matrix4d.md)*
 
@@ -54,7 +43,7 @@ Name | Type | Default |
 
 ###  values
 
-• **values**: *[Matrix4DValues](../README.md#matrix4dvalues)*
+• **values**: *Float32Array*
 
 ## Methods
 
@@ -72,7 +61,7 @@ ___
 
 ###  Ortho
 
-▸ **Ortho**(`left`: number, `right`: number, `bottom`: number, `top`: number, `near`: number, `far`: number): *void*
+▸ **Ortho**(`left`: number, `right`: number, `bottom`: number, `top`: number, `near`: number, `far`: number): *[Matrix4D](matrix4d.md)*
 
 Sets the matrix to be an orthogonal projection matrix.
 This is an in-place transformation.
@@ -88,13 +77,13 @@ Name | Type | Description |
 `near` | number | Near bound |
 `far` | number | Far bound  |
 
-**Returns:** *void*
+**Returns:** *[Matrix4D](matrix4d.md)*
 
 ___
 
 ###  Rotate
 
-▸ **Rotate**(`angle`: number): *void*
+▸ **Rotate**(`angle`: number): *[Matrix4D](matrix4d.md)*
 
 Rotate applies a radians rotation along the z axis to the matrix (clockwise).
 This is an in-place transformation.
@@ -105,13 +94,13 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `angle` | number | The angle in radians to rotate the matrix by  |
 
-**Returns:** *void*
+**Returns:** *[Matrix4D](matrix4d.md)*
 
 ___
 
 ###  RotateDeg
 
-▸ **RotateDeg**(`angle`: number): *void*
+▸ **RotateDeg**(`angle`: number): *[Matrix4D](matrix4d.md)*
 
 RotateDeg applies a degrees rotation along the z axis to the matrix (clockwise).
 This is an in-place transformation.
@@ -122,13 +111,13 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `angle` | number | The angle in degrees to rotate the matrix by  |
 
-**Returns:** *void*
+**Returns:** *[Matrix4D](matrix4d.md)*
 
 ___
 
 ###  Scale
 
-▸ **Scale**(`scale`: [Vector](vector.md)): *void*
+▸ **Scale**(`scale`: [Vector](vector.md)): *[Matrix4D](matrix4d.md)*
 
 Scale applies a scaling vector to the matrix. The Z part of the vector is assumed to be 0.
 This is an in-place transformation.
@@ -139,13 +128,27 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `scale` | [Vector](vector.md) | The vector scaling to apply to the matrix  |
 
-**Returns:** *void*
+**Returns:** *[Matrix4D](matrix4d.md)*
+
+___
+
+###  Set
+
+▸ **Set**(`values`: [Matrix4DValues](../README.md#matrix4dvalues)): *[Matrix4D](matrix4d.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`values` | [Matrix4DValues](../README.md#matrix4dvalues) |
+
+**Returns:** *[Matrix4D](matrix4d.md)*
 
 ___
 
 ###  Translate
 
-▸ **Translate**(`translation`: [Vector](vector.md)): *void*
+▸ **Translate**(`translation`: [Vector](vector.md)): *[Matrix4D](matrix4d.md)*
 
 Translate applies a vector translation to the matrix. The Z part of the vector is assumed to be 0.
 This is an in-place transformation.
@@ -156,16 +159,4 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `translation` | [Vector](vector.md) | The vector transformation to apply to the matrix  |
 
-**Returns:** *void*
-
-___
-
-### `Static` Identity
-
-▸ **Identity**(): *[Matrix4D](matrix4d.md)*
-
-Identity creates a new Matrix4D with an identity matrix configuration.
-
 **Returns:** *[Matrix4D](matrix4d.md)*
-
-Identity matrix

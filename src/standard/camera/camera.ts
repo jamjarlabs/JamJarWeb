@@ -31,13 +31,13 @@ class Camera extends Component {
      */
     public backgroundColor: Color;
     /**
-     * Position of the camera's viewport on the screen, with from 
+     * Position of the camera's viewport on the screen, with from
      * bottom left (-1, -1) to top right (1, 1) with (0, 0) as the center.
      */
     public viewportPosition: Vector;
     /**
      * Scale of the camera's viewport, relative to the canvas/rendering surface.
-     * A viewport scale of (1, 1) would take up the entire canvas, while a scale 
+     * A viewport scale of (1, 1) would take up the entire canvas, while a scale
      * of (0.5, 0.5) would only take up half of the screen (width and height).
      */
     public viewportScale: Vector;
@@ -48,9 +48,9 @@ class Camera extends Component {
      */
     public virtualScale: Vector;
 
-    constructor(backgroundColor: Color = new Color(0,0,0,1), 
-        viewportPosition: Vector = new Vector(0,0), 
-        viewportScale: Vector = new Vector(1,1), 
+    constructor(backgroundColor: Color = new Color(0,0,0,1),
+        viewportPosition: Vector = new Vector(0,0),
+        viewportScale: Vector = new Vector(1,1),
         virtualScale: Vector = new Vector(160,90)) {
         super(Camera.KEY);
         this.backgroundColor = backgroundColor;
@@ -68,15 +68,14 @@ class Camera extends Component {
         const halfWidth = this.virtualScale.x / 2;
         const halfHeight = this.virtualScale.y / 2;
         const projectionMatrix = new Matrix4D();
-        projectionMatrix.Ortho(
+        return projectionMatrix.Ortho(
             -halfWidth,
             halfWidth,
             -halfHeight,
             halfHeight,
             0,
             100
-        );
-        return projectionMatrix;
+        );;
     }
 }
 

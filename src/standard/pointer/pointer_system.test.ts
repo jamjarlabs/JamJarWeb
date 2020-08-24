@@ -131,45 +131,45 @@ describe("PointerSystem - OnMessage", () => {
             undefined,
             new PointerSystem(new FakeMessageBus([
                 new Reactor("Publish", () => { throw("unexpected wheel event publish"); })
-            ]), 
-                document.createElement("canvas"), 
-                undefined, 
-                undefined, 
-                0, 
-                undefined, 
-                undefined, 
+            ]),
+                document.createElement("canvas"),
+                undefined,
+                undefined,
+                0,
+                undefined,
+                undefined,
                 undefined
             ),
-             new PointerSystem(new FakeMessageBus(), 
-                document.createElement("canvas"), 
-                undefined, 
-                undefined, 
-                0, 
-                undefined, 
-                undefined, 
+             new PointerSystem(new FakeMessageBus(),
+                document.createElement("canvas"),
+                undefined,
+                undefined,
+                0,
+                undefined,
+                undefined,
                 undefined
-            ),            
+            ),
             new Message<number>(System.MESSAGE_UPDATE, 1.0)
         ],
         [
             "Update, wheel message",
             undefined,
-            new PointerSystem(new FakeMessageBus(), 
-                document.createElement("canvas"), 
-                undefined, 
-                undefined, 
-                0, 
-                undefined, 
-                undefined, 
+            new PointerSystem(new FakeMessageBus(),
+                document.createElement("canvas"),
+                undefined,
+                undefined,
+                0,
+                undefined,
+                undefined,
                 undefined
             ),
-            new PointerSystem(new FakeMessageBus(), 
-                document.createElement("canvas"), 
-                undefined, 
-                undefined, 
-                0, 
-                undefined, 
-                undefined, 
+            new PointerSystem(new FakeMessageBus(),
+                document.createElement("canvas"),
+                undefined,
+                undefined,
+                0,
+                undefined,
+                undefined,
                 new WheelEvent("test")
             ),
             new Message<number>(System.MESSAGE_UPDATE, 1.0)
@@ -290,7 +290,7 @@ describe("PointerSystem - pointer input", () => {
                     "pointermove",
                     new Pointer(new PointerEvent("pointermove", { clientX: 3, clientY: 2 }), new Vector(0.6, 1.6), [
                         new PointerCameraInfo(new FakeEntity(0), new Vector(0.6, 1.6), new Vector(3, 8), false),
-                        new PointerCameraInfo(new FakeEntity(1), new Vector(0.6, 1.6), new Vector(30, 80), false)
+                        new PointerCameraInfo(new FakeEntity(1), new Vector(0.6, 1.6), new Vector(30.000001907348633, 80), false)
                     ])
                 ));
             })]), ((): HTMLElement => {
