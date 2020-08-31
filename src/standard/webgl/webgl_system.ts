@@ -109,8 +109,8 @@ class WebGLSystem extends RenderSystem {
 
         // Subscribe to messages
         this.messageBus.Subscribe(this, [
-            Game.MESSAGE_RENDER, 
-            RenderSystem.MESSAGE_LOAD_RENDERABLES, 
+            Game.MESSAGE_RENDER,
+            RenderSystem.MESSAGE_LOAD_RENDERABLES,
             ImageAsset.MESSAGE_FINISH_LOAD,
             ShaderAsset.MESSAGE_REQUEST_LOAD
         ]);
@@ -118,7 +118,7 @@ class WebGLSystem extends RenderSystem {
         // Load default shaders
         for (const asset of defaultShaderAssets) {
             this.messageBus.Publish(new Message<ShaderAsset>(
-                ShaderAsset.MESSAGE_REQUEST_LOAD, 
+                ShaderAsset.MESSAGE_REQUEST_LOAD,
                 asset
             ));
         }
@@ -229,7 +229,7 @@ class WebGLSystem extends RenderSystem {
 
         gl.bindTexture(gl.TEXTURE_2D, glTexture);
         if (!asset.mirror) {
-            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); 
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         }
         if (asset.image instanceof(HTMLImageElement)) {
             gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
@@ -272,7 +272,7 @@ class WebGLSystem extends RenderSystem {
             const realWidth = canvasWidth * camera.viewportScale.x;
             const realHeight = canvasHeight * camera.viewportScale.y;
 
-            // realPosition is the center position of the camera viewport in relation to 
+            // realPosition is the center position of the camera viewport in relation to
             // the canvas converted from the -1 to +1 coordinates of the viewportPosition
             // combined with the real width and height to make sure it is in the center
             // of the viewport.
@@ -281,7 +281,8 @@ class WebGLSystem extends RenderSystem {
                 (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
             );
 
-            const cameraViewShape = Polygon.RectangleByDimensions(camera.virtualScale.x, camera.virtualScale.y).Transform(transform);
+            const cameraViewShape = Polygon.RectangleByDimensions(camera.virtualScale.x, camera.virtualScale.y)
+                .Transform(transform);
 
             // Define the viewport position of the camera
             gl.viewport(
@@ -428,7 +429,7 @@ class WebGLSystem extends RenderSystem {
                                 // Texture not loaded, skip rendering for this texture
                                 continue;
                             }
-    
+
                             for (const shader of shaders) {
                                 if (shader[1].perTexture !== undefined) {
                                     shader[1].perTexture(glslContext, texture);

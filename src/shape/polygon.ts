@@ -46,7 +46,7 @@ class Polygon implements IShape {
     public Apply4D(matrix: Matrix4D): Polygon {
         const appliedPoints: Vector[] = [];
         for (const point of this.points) {
-            appliedPoints.push(point.Apply4D(matrix));
+            appliedPoints.push(point.Copy().Apply4D(matrix));
         }
         return new Polygon(appliedPoints);
     }
@@ -62,7 +62,7 @@ class Polygon implements IShape {
                 farthestDistance = distanceInDirection;
             }
         }
-        return farthestPoint;
+        return farthestPoint.Copy();
     }
 
     public Center(): Vector {
@@ -83,7 +83,7 @@ class Polygon implements IShape {
         const matrix = transform.Matrix3D();
         const transformedPoints = [];
         for (const point of this.points) {
-            transformedPoints.push(point.Apply3D(matrix));
+            transformedPoints.push(point.Copy().Apply3D(matrix));
         }
         return new Polygon(transformedPoints);
     }
@@ -151,10 +151,10 @@ class Polygon implements IShape {
      */
     public static RectangleByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
         return new Polygon([
-            bottomLeft,
-            bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
-            topRight,
-            topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            bottomLeft.Copy(),
+            bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            topRight.Copy(),
+            topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
         ]);
     }
 
@@ -187,12 +187,12 @@ class Polygon implements IShape {
      */
     public static QuadByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
         return new Polygon([
-            bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
-            bottomLeft,
-            topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
-            topRight.Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
-            topRight,
-            bottomLeft.Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            bottomLeft.Copy(),
+            topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            topRight.Copy(),
+            bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
         ]);
     }
 }

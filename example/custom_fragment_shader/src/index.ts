@@ -102,13 +102,9 @@ if (!gl) {
 const messageBus = new MessageBus();
 new EntityManager(messageBus);
 
-// Create WebGLSystem
+// Create game systems
 new WebGLSystem(messageBus, gl);
-
-// Create SpriteSystem
 new SpriteSystem(messageBus);
-
-// Create Image loading system
 new HTTPImageSystem(messageBus);
 
 // Create and start game

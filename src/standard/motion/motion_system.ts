@@ -37,9 +37,9 @@ class MotionSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, MotionSystem.EVALUATOR, entities, subscriberID);
     }
@@ -50,9 +50,9 @@ class MotionSystem extends System {
             const motion = entity.Get(Motion.KEY) as Motion;
 
             // v += a * dt
-            motion.velocity = motion.velocity.Add(motion.acceleration.Scale(dt));
+            motion.velocity.Add(motion.acceleration.Copy().Scale(dt));
             // p += v * dt
-            transform.position = transform.position.Add(motion.velocity.Scale(dt));
+            transform.position.Add(motion.velocity.Copy().Scale(dt));
 
             // v += a * dt
             motion.angularVelocity += motion.angularAcceleration * dt;

@@ -33,15 +33,15 @@ class Ellipse implements IShape {
     }
 
     public Center(): Vector {
-        return this.center;
+        return this.center.Copy();
     }
 
     public Transform(transform: Transform): IShape {
         const matrix = transform.Matrix3D();
         return new Ellipse(
-            this.dimensions.Multiply(transform.scale),
+            this.dimensions.Copy().Multiply(transform.scale),
             this.orientation + transform.angle,
-            this.center.Apply3D(matrix)
+            this.center.Copy().Apply3D(matrix)
         );
     }
 

@@ -63,7 +63,7 @@ class TextureGame extends Game {
         )));
 
         const spriteSheetIndices = Texture.GenerateSpritesheetIndex(1, 13);
-        
+
         // Create camera
         const cameraEntity = new Entity(this.messageBus);
         cameraEntity.Add(new Camera(new Color(1,1,1,1)));
@@ -75,7 +75,7 @@ class TextureGame extends Game {
         player.Add(new Sprite(
             new Material({
                 texture: new Texture("animation_sheet", spriteSheetIndices[0]),
-            }), 
+            }),
         ));
         player.Add(new Motion());
         player.Add(new Player(40));
@@ -202,9 +202,9 @@ class PlayerSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["keydown", "keyup"])
@@ -290,7 +290,8 @@ class PlayerSystem extends System {
         for (const entity of this.entities.values()) {
             const motion = entity.Get(Motion.KEY) as Motion;
             const player = entity.Get(Player.KEY) as Player;
-            motion.velocity = player.direction.Scale(player.speed);
+            const playerVelocity = player.direction.Copy().Scale(player.speed);
+            motion.velocity = playerVelocity;
         }
     }
 }
@@ -321,28 +322,14 @@ if (!gl) {
 const messageBus = new MessageBus();
 new EntityManager(messageBus);
 
-// Create WebGLSystem
+// Set up game systems
 new WebGLSystem(messageBus, gl);
-
-// Create SpriteSystem
 new SpriteSystem(messageBus);
-
-// Create SpriteAnimationSystem
 new SpriteAnimatorSystem(messageBus);
-
-// Create Image loading system
 new HTTPImageSystem(messageBus);
-
-// Create Keyboard System
 new KeyboardSystem(messageBus, document);
-
-// Create Motion System
 new MotionSystem(messageBus);
-
-// Create Interpolation System
 new InterpolationSystem(messageBus);
-
-// Create custom Player System
 new PlayerSystem(messageBus);
 
 // Create and start game

@@ -41,7 +41,7 @@ class DefaultPrimitiveVertexShader extends GLSLShader {
 
         const viewMatrix = new Matrix4D();
 
-        viewMatrix.Translate(transform.position.Invert());
+        viewMatrix.Translate(transform.position.Copy().Invert());
 
         const projectionMatrix = camera.GetProjectionMatrix();
 
@@ -90,8 +90,8 @@ class DefaultPrimitiveVertexShader extends GLSLShader {
 
     constructor() {
         super(
-            ShaderAsset.VERTEX_TYPE, 
-            DefaultPrimitiveVertexShader.SOURCE, 
+            ShaderAsset.VERTEX_TYPE,
+            DefaultPrimitiveVertexShader.SOURCE,
             DefaultPrimitiveVertexShader.PER_SHADER,
             undefined,
             DefaultPrimitiveVertexShader.PER_RENDERABLE
