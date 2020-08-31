@@ -19,6 +19,7 @@ import Matrix4D from "./matrix_4d";
 
 /**
  * Vector is the 2 dimensional representation of a vector, with two values (x,y).
+ * This is a mutable data structure, operations on Vector objects will affect the original object.
  */
 class Vector {
     private data: Float32Array;
@@ -45,14 +46,18 @@ class Vector {
         this.data[1] = value;
     }
 
+    /**
+     * Equals determines if another
+     * @param other
+     */
     public Equals(other: Vector): boolean {
         return this.x === other.x && this.y === other.y;
     }
 
     /**
-     * Apply3D applies a 3x3 matrix to the vector and returns the result.
-     * @param {Matrix3D} matrix Matrix to apply to the vector
-     * @returns {Vector} Vector that has the matrix applied to it
+     * Apply3D applies a 3x3 matrix to this vector, result saved to the original Vector and returned.
+     * @param {Matrix3D} matrix Matrix to apply to this vector
+     * @returns {Vector} This vector to allow chaining, Vector that has the matrix applied to it
      */
     public Apply3D(matrix: Matrix3D): Vector {
         const x = this.x;
@@ -63,9 +68,9 @@ class Vector {
     }
 
     /**
-     * Apply4D applies a 4x4 matrix to the vector and returns the result.
-     * @param {Matrix4D} matrix Matrix to apply to the vector
-     * @returns {Vector} Vector that has the matrix applied to it
+     * Apply4D applies a 4x4 matrix to this vector, result saved to the original Vector and returned.
+     * @param {Matrix4D} matrix Matrix to apply to this vector
+     * @returns {Vector} This vector to allow chaining, Vector that has the matrix applied to it
      */
     public Apply4D(matrix: Matrix4D): Vector {
         const x = this.x;
@@ -76,9 +81,9 @@ class Vector {
     }
 
     /**
-     * Multiply multiplies two vectors together
+     * Multiply multiplies two vectors together, result saved to the original Vector and returned.
      * @param {Vector} vector The matrix to multiply this one by
-     * @returns {Vector} The result of the multiplication
+     * @returns {Vector} This vector to allow chaining, the result of the multiplication
      */
     public Multiply(vector: Vector): Vector {
         this.x = this.x * vector.x;
@@ -87,9 +92,9 @@ class Vector {
     }
 
     /**
-     * Add adds two vectors together
+     * Add adds two vectors together, result saved to the original Vector and returned.
      * @param {Vector} vector The vector to add to this one
-     * @returns {Vector} The result of the addition
+     * @returns {Vector} This vector to allow chaining, the result of the addition
      */
     public Add(vector: Vector): Vector {
         this.x = this.x + vector.x;
@@ -98,9 +103,9 @@ class Vector {
     }
 
     /**
-     * Sub takes one vector from another
+     * Sub takes one vector from another, result saved to the original Vector and returned.
      * @param  {Vector} vector The vector to subtract from this one
-     * @returns {Vector} The result of the subtraction
+     * @returns {Vector} This vector to allow chaining, the result result of the subtraction
      */
     public Sub(vector: Vector): Vector {
         this.x = this.x - vector.x;
@@ -109,9 +114,9 @@ class Vector {
     }
 
     /**
-     * Scale multiplies this vector by a scalar value (non-vector).
-     * @param {Vector} scalar The scalar value to multiply the vector by
-     * @returns {Vector} The result of the scaling
+     * Scale multiplies this vector by a scalar value (non-vector), result saved to the original Vector and returned.
+     * @param {Vector} scalar The scalar value to multiply this vector by
+     * @returns {Vector} This vector to allow chaining, the result of the scaling
      */
     public Scale(scalar: number): Vector {
         this.x = this.x * scalar;
@@ -129,10 +134,11 @@ class Vector {
     }
 
     /**
-     * Rotate applies a rotation around a point to the vector in radians.
+     * Rotate applies a rotation around a point to the vector in radians, result saved to the original Vector and
+     * returned.
      * @param {Vector} center The point to rotate around
      * @param {number} angle The angle in radians to rotate by
-     * @returns {Vector} The result of the rotation
+     * @returns {Vector} This vector to allow chaining, the result of the rotation
      */
     public Rotate(center: Vector, angle: number): Vector {
         const s = Math.sin(angle);
@@ -148,18 +154,20 @@ class Vector {
     }
 
     /**
-     * RotateDeg applies a rotation around a point to the vector in degrees.
+     * RotateDeg applies a rotation around a point to the vector in degrees, result saved to the original Vector and
+     * returned.
      * @param {Vector} center The point to rotate around
      * @param {number} angle The angle in degrees to rotate by
-     * @returns {Vector} The result of the rotation
+     * @returns {Vector} This vector to allow chaining, the result of the rotation
      */
     public RotateDeg(center: Vector, angle: number): Vector {
         return this.Rotate(center, angle * (Math.PI/180));
     }
 
     /**
-     * Invert flips the values of the vector, `x -> -x` and `y -> -y`.
-     * @returns {Vector} The result of the inverting
+     * Invert flips the values of this vector, `x -> -x` and `y -> -y`, result saved to the original Vector and
+     * returned.
+     * @returns {Vector} This vector to allow chaining, the result of the inverting
      */
     public Invert(): Vector {
         this.x = -this.x;
@@ -176,8 +184,8 @@ class Vector {
     }
 
     /**
-     * Returns a normalized version of the vector.
-     * @returns {Vector} The normalized vector
+     * Returns a normalized version of this vector, result saved to the original Vector and returned.
+     * @returns {Vector} This vector to allow chaining, the normalized vector
      */
     public Normalize(): Vector {
         let magnitude = this.Magnitude();
@@ -188,9 +196,8 @@ class Vector {
     }
 
     /**
-     * Copy produces a copy of the vector and its values, rather than pointing to
-     * the same vector.
-     * @returns {Vector} The copy of the vector
+     * Copy produces a copy of this vector and its values, rather than pointing to the same vector.
+     * @returns {Vector} The copy of this vector
      */
     public Copy(): Vector {
         return new Vector(

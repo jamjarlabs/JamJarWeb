@@ -2,6 +2,7 @@
 # Class: Vector
 
 Vector is the 2 dimensional representation of a vector, with two values (x,y).
+This is a mutable data structure, operations on Vector objects will affect the original object.
 
 ## Hierarchy
 
@@ -102,7 +103,7 @@ Name | Type |
 
 ▸ **Add**(`vector`: [Vector](vector.md)): *[Vector](vector.md)*
 
-Add adds two vectors together
+Add adds two vectors together, result saved to the original Vector and returned.
 
 **Parameters:**
 
@@ -112,7 +113,7 @@ Name | Type | Description |
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the addition
+This vector to allow chaining, the result of the addition
 
 ___
 
@@ -120,17 +121,17 @@ ___
 
 ▸ **Apply3D**(`matrix`: [Matrix3D](matrix3d.md)): *[Vector](vector.md)*
 
-Apply3D applies a 3x3 matrix to the vector and returns the result.
+Apply3D applies a 3x3 matrix to this vector, result saved to the original Vector and returned.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`matrix` | [Matrix3D](matrix3d.md) | Matrix to apply to the vector |
+`matrix` | [Matrix3D](matrix3d.md) | Matrix to apply to this vector |
 
 **Returns:** *[Vector](vector.md)*
 
-Vector that has the matrix applied to it
+This vector to allow chaining, Vector that has the matrix applied to it
 
 ___
 
@@ -138,17 +139,17 @@ ___
 
 ▸ **Apply4D**(`matrix`: [Matrix4D](matrix4d.md)): *[Vector](vector.md)*
 
-Apply4D applies a 4x4 matrix to the vector and returns the result.
+Apply4D applies a 4x4 matrix to this vector, result saved to the original Vector and returned.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`matrix` | [Matrix4D](matrix4d.md) | Matrix to apply to the vector |
+`matrix` | [Matrix4D](matrix4d.md) | Matrix to apply to this vector |
 
 **Returns:** *[Vector](vector.md)*
 
-Vector that has the matrix applied to it
+This vector to allow chaining, Vector that has the matrix applied to it
 
 ___
 
@@ -156,12 +157,11 @@ ___
 
 ▸ **Copy**(): *[Vector](vector.md)*
 
-Copy produces a copy of the vector and its values, rather than pointing to
-the same vector.
+Copy produces a copy of this vector and its values, rather than pointing to the same vector.
 
 **Returns:** *[Vector](vector.md)*
 
-The copy of the vector
+The copy of this vector
 
 ___
 
@@ -187,11 +187,13 @@ ___
 
 ▸ **Equals**(`other`: [Vector](vector.md)): *boolean*
 
+Equals determines if another
+
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`other` | [Vector](vector.md) |
+Name | Type | Description |
+------ | ------ | ------ |
+`other` | [Vector](vector.md) |   |
 
 **Returns:** *boolean*
 
@@ -201,11 +203,12 @@ ___
 
 ▸ **Invert**(): *[Vector](vector.md)*
 
-Invert flips the values of the vector, `x -> -x` and `y -> -y`.
+Invert flips the values of this vector, `x -> -x` and `y -> -y`, result saved to the original Vector and
+returned.
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the inverting
+This vector to allow chaining, the result of the inverting
 
 ___
 
@@ -225,7 +228,7 @@ ___
 
 ▸ **Multiply**(`vector`: [Vector](vector.md)): *[Vector](vector.md)*
 
-Multiply multiplies two vectors together
+Multiply multiplies two vectors together, result saved to the original Vector and returned.
 
 **Parameters:**
 
@@ -235,7 +238,7 @@ Name | Type | Description |
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the multiplication
+This vector to allow chaining, the result of the multiplication
 
 ___
 
@@ -243,11 +246,11 @@ ___
 
 ▸ **Normalize**(): *[Vector](vector.md)*
 
-Returns a normalized version of the vector.
+Returns a normalized version of this vector, result saved to the original Vector and returned.
 
 **Returns:** *[Vector](vector.md)*
 
-The normalized vector
+This vector to allow chaining, the normalized vector
 
 ___
 
@@ -255,7 +258,8 @@ ___
 
 ▸ **Rotate**(`center`: [Vector](vector.md), `angle`: number): *[Vector](vector.md)*
 
-Rotate applies a rotation around a point to the vector in radians.
+Rotate applies a rotation around a point to the vector in radians, result saved to the original Vector and
+returned.
 
 **Parameters:**
 
@@ -266,7 +270,7 @@ Name | Type | Description |
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the rotation
+This vector to allow chaining, the result of the rotation
 
 ___
 
@@ -274,7 +278,8 @@ ___
 
 ▸ **RotateDeg**(`center`: [Vector](vector.md), `angle`: number): *[Vector](vector.md)*
 
-RotateDeg applies a rotation around a point to the vector in degrees.
+RotateDeg applies a rotation around a point to the vector in degrees, result saved to the original Vector and
+returned.
 
 **Parameters:**
 
@@ -285,7 +290,7 @@ Name | Type | Description |
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the rotation
+This vector to allow chaining, the result of the rotation
 
 ___
 
@@ -293,17 +298,17 @@ ___
 
 ▸ **Scale**(`scalar`: number): *[Vector](vector.md)*
 
-Scale multiplies this vector by a scalar value (non-vector).
+Scale multiplies this vector by a scalar value (non-vector), result saved to the original Vector and returned.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`scalar` | number | The scalar value to multiply the vector by |
+`scalar` | number | The scalar value to multiply this vector by |
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the scaling
+This vector to allow chaining, the result of the scaling
 
 ___
 
@@ -311,7 +316,7 @@ ___
 
 ▸ **Sub**(`vector`: [Vector](vector.md)): *[Vector](vector.md)*
 
-Sub takes one vector from another
+Sub takes one vector from another, result saved to the original Vector and returned.
 
 **Parameters:**
 
@@ -321,4 +326,4 @@ Name | Type | Description |
 
 **Returns:** *[Vector](vector.md)*
 
-The result of the subtraction
+This vector to allow chaining, the result result of the subtraction
