@@ -56,9 +56,9 @@ class AudioButtonSystem extends System {
         ));
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, AudioButtonSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointerdown"])
@@ -187,25 +187,13 @@ startButton.onclick = () => {
     const messageBus = new MessageBus();
     new EntityManager(messageBus);
 
-    // Create WebGLSystem
+    // Create game systems
     new WebGLSystem(messageBus, gl);
-
-    // Create SpriteSystem
     new SpriteSystem(messageBus);
-
-    // Create Image loading system
     new HTTPImageSystem(messageBus);
-
-    // Create Audio loading system
     new HTTPAudioSystem(messageBus);
-
-    // Create Audio Source system
     new AudioSourceSystem(messageBus);
-
-    // Create Pointer System
     new PointerSystem(messageBus, canvas);
-
-    // Create Button system
     new AudioButtonSystem(messageBus);
 
     canvas.style.display = "block";

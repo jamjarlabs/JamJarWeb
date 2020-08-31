@@ -46,6 +46,7 @@ single `CollisionInfo` or undefined.
 - `GJKAlgorithm` updated to match new `ICollisionAlgorithm` interface.
 - `AlwaysCollideAlgorithm` renamed `AllCollideAlgorithm`.
 - `NeverCollideAlgorithm` renamed `NoneCollideAlgorithm`.
+- All `Vector` methods are now mutable, no longer immutable to try and reduce number of JS objects created.
 ### Fixed
 - The zOrder is now correctly interpreted in `WebGLSystem` rather than being
   in order of renderable creation.

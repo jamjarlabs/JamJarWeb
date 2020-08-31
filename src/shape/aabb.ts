@@ -40,8 +40,8 @@ class AABB implements IShape {
 
     public Transform(transform: Transform): IShape {
         return new AABB(
-            this.size.Multiply(transform.scale),
-            this.center.Add(transform.position),
+            this.size.Copy().Multiply(transform.scale),
+            this.center.Copy().Add(transform.position),
         );
     }
 

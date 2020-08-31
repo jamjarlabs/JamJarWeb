@@ -413,9 +413,9 @@ class PlayerSystem extends System {
                     const transform = player.Get(Transform.KEY) as Transform;
                     const orientation = this.getOrientationToTarget(transform.position);
                     const bullet = new Entity(this.messageBus, [BulletSystem.BULLET_TAG], [BulletSystem.BULLET_LAYER]);
-                    const towardsVector = this.targetedPosition.Sub(transform.position).Normalize();
+                    const towardsVector = this.targetedPosition.Copy().Sub(transform.position).Normalize();
 
-                    bullet.Add(new Transform(towardsVector.Scale(6), new Vector(0.4, 3), orientation));
+                    bullet.Add(new Transform(towardsVector.Copy().Scale(6), new Vector(0.4, 3), orientation));
                     bullet.Add(new Primitive(
                         new Material({
                             color: new Color(0.54,1,0.54,1)
@@ -434,7 +434,7 @@ class PlayerSystem extends System {
                         )
                     }), 1));
                     bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)))
-                    bullet.Add(new Motion(towardsVector.Scale(BulletSystem.SPEED)));
+                    bullet.Add(new Motion(towardsVector.Copy().Scale(BulletSystem.SPEED)));
 
                     if (this.scene !== undefined) {
                         this.scene.AddEntity(bullet);

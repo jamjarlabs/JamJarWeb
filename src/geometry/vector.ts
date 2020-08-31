@@ -55,10 +55,11 @@ class Vector {
      * @returns {Vector} Vector that has the matrix applied to it
      */
     public Apply3D(matrix: Matrix3D): Vector {
-        return new Vector(
-            matrix.values[0] * this.x + matrix.values[3] * this.y + matrix.values[6],
-            matrix.values[1] * this.x + matrix.values[4] * this.y + matrix.values[7]
-        );
+        const x = this.x;
+        const y = this.y;
+        this.x = matrix.values[0] * x + matrix.values[3] * y + matrix.values[6];
+        this.y = matrix.values[1] * x + matrix.values[4] * y + matrix.values[7];
+        return this;
     }
 
     /**
@@ -67,10 +68,11 @@ class Vector {
      * @returns {Vector} Vector that has the matrix applied to it
      */
     public Apply4D(matrix: Matrix4D): Vector {
-        return new Vector(
-            matrix.values[0] * this.x + matrix.values[4] * this.y + matrix.values[12],
-            matrix.values[1] * this.x + matrix.values[5] * this.y + matrix.values[13]
-        );
+        const x = this.x;
+        const y = this.y;
+        this.x = matrix.values[0] * x + matrix.values[4] * y + matrix.values[12];
+        this.y = matrix.values[1] * x + matrix.values[5] * y + matrix.values[13];
+        return this;
     }
 
     /**
@@ -79,10 +81,9 @@ class Vector {
      * @returns {Vector} The result of the multiplication
      */
     public Multiply(vector: Vector): Vector {
-        return new Vector(
-            this.x * vector.x,
-            this.y * vector.y
-        );
+        this.x = this.x * vector.x;
+        this.y = this.y * vector.y;
+        return this;
     }
 
     /**
@@ -91,10 +92,9 @@ class Vector {
      * @returns {Vector} The result of the addition
      */
     public Add(vector: Vector): Vector {
-        return new Vector(
-            this.x + vector.x,
-            this.y + vector.y
-        );
+        this.x = this.x + vector.x;
+        this.y = this.y + vector.y;
+        return this;
     }
 
     /**
@@ -103,10 +103,9 @@ class Vector {
      * @returns {Vector} The result of the subtraction
      */
     public Sub(vector: Vector): Vector {
-        return new Vector(
-            this.x - vector.x,
-            this.y - vector.y
-        );
+        this.x = this.x - vector.x;
+        this.y = this.y - vector.y;
+        return this;
     }
 
     /**
@@ -115,10 +114,9 @@ class Vector {
      * @returns {Vector} The result of the scaling
      */
     public Scale(scalar: number): Vector {
-        return new Vector(
-            this.x * scalar,
-            this.y * scalar
-        );
+        this.x = this.x * scalar;
+        this.y = this.y * scalar;
+        return this;
     }
 
     /**
@@ -143,10 +141,10 @@ class Vector {
         const x = this.x - center.x;
         const y = this.y - center.y;
 
-        return new Vector(
-            (x * c - y * s) + center.x,
-            (x * s + y * c) + center.y
-        );
+        this.x = (x * c - y * s) + center.x;
+        this.y = (x * s + y * c) + center.y;
+
+        return this;
     }
 
     /**
@@ -164,10 +162,9 @@ class Vector {
      * @returns {Vector} The result of the inverting
      */
     public Invert(): Vector {
-        return new Vector(
-            -this.x,
-            -this.y
-        );
+        this.x = -this.x;
+        this.y = -this.y;
+        return this;
     }
 
     /**

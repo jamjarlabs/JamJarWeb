@@ -97,7 +97,7 @@ class TextureGame extends Game {
         nearest.Add(new Sprite(
             new Material({
                 texture: new Texture("nearest"),
-            }), 
+            }),
         ));
 
         const bilinear = new Entity(this.messageBus);
@@ -105,7 +105,7 @@ class TextureGame extends Game {
         bilinear.Add(new Sprite(
             new Material({
                 texture: new Texture("bilinear"),
-            }), 
+            }),
         ));
 
         const trilinear = new Entity(this.messageBus);
@@ -113,7 +113,7 @@ class TextureGame extends Game {
         trilinear.Add(new Sprite(
             new Material({
                 texture: new Texture("trilinear"),
-            }), 
+            }),
         ));
 
         const nearestRed = new Entity(this.messageBus);
@@ -122,7 +122,7 @@ class TextureGame extends Game {
             new Material({
                 texture: new Texture("nearest"),
                 color: new Color(1,0,0,1)
-            }), 
+            }),
         ));
 
         const bilinearMirroRepeat = new Entity(this.messageBus);
@@ -131,7 +131,7 @@ class TextureGame extends Game {
             new Material({
                 texture: new Texture("bilinear_mirror_repeat", Polygon.QuadByPoints(new Vector(0,0), new Vector(5,5))),
                 color: new Color(1,1,1,0.5)
-            }), 
+            }),
         ));
 
         const trilinearRepeat = new Entity(this.messageBus);
@@ -140,8 +140,8 @@ class TextureGame extends Game {
             new Material({
                 texture: new Texture("trilinear_repeat", Polygon.QuadByPoints(new Vector(0,0), new Vector(5,5))),
                 color: new Color(0,1,0,1)
-            }), 
-            0, 
+            }),
+            0,
         ));
     }
 }
@@ -159,13 +159,9 @@ if (!gl) {
 const messageBus = new MessageBus();
 new EntityManager(messageBus);
 
-// Create WebGLSystem
+// Create game systems
 new WebGLSystem(messageBus, gl);
-
-// Create SpriteSystem
 new SpriteSystem(messageBus);
-
-// Create Image loading system
 new HTTPImageSystem(messageBus);
 
 // Create and start game

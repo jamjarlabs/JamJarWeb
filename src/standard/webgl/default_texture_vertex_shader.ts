@@ -50,7 +50,7 @@ class DefaultTextureVertexShader extends GLSLShader {
 
         const viewMatrix = new Matrix4D();
 
-        viewMatrix.Translate(transform.position.Invert());
+        viewMatrix.Translate(transform.position.Copy().Invert());
 
         const projectionMatrix = camera.GetProjectionMatrix();
 
@@ -115,8 +115,8 @@ class DefaultTextureVertexShader extends GLSLShader {
 
     constructor() {
         super(
-            ShaderAsset.VERTEX_TYPE, 
-            DefaultTextureVertexShader.SOURCE, 
+            ShaderAsset.VERTEX_TYPE,
+            DefaultTextureVertexShader.SOURCE,
             DefaultTextureVertexShader.PER_SHADER,
             undefined,
             DefaultTextureVertexShader.PER_RENDERABLE

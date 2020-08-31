@@ -67,15 +67,15 @@ class Camera extends Component {
     GetProjectionMatrix(): Matrix4D {
         const halfWidth = this.virtualScale.x / 2;
         const halfHeight = this.virtualScale.y / 2;
-        const projectionMatrix = new Matrix4D();
-        return projectionMatrix.Ortho(
-            -halfWidth,
-            halfWidth,
-            -halfHeight,
-            halfHeight,
-            0,
-            100
-        );
+        return new Matrix4D()
+            .Ortho(
+                -halfWidth,
+                halfWidth,
+                -halfHeight,
+                halfHeight,
+                0,
+                100
+            );
     }
 }
 

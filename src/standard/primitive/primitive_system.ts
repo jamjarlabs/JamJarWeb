@@ -79,7 +79,7 @@ class PrimitiveSystem extends System {
             const primitive = entity.Get(Primitive.KEY) as Primitive;
             const transform = entity.Get(Transform.KEY) as Transform;
             const ui = entity.Get(UI.KEY) as UI | undefined;
-            
+
             if (ui === undefined) {
                 // Not UI
                 renderables.push(new Renderable(
@@ -91,7 +91,7 @@ class PrimitiveSystem extends System {
                     undefined,
                 ));
             } else {
-                // UI 
+                // UI
                 // Get the camera the UI component is targeting
                 const cameraEntity = this.entities.get(ui.camera.id);
                 if (cameraEntity === undefined) {
@@ -109,9 +109,10 @@ class PrimitiveSystem extends System {
 
                 const relativeTransform = new Transform(
                     // camera position + UI element position * camera virtual scale
-                    cameraTransform.position.Add(transform.position.Multiply(camera.virtualScale.Scale(0.5))),
+                    cameraTransform.position.Copy()
+                        .Add(transform.position.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5))),
                     // element scale * camera virtual scale
-                    transform.scale.Multiply(camera.virtualScale),
+                    transform.scale.Copy().Multiply(camera.virtualScale),
                     transform.angle
                 );
 

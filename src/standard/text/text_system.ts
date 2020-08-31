@@ -60,11 +60,11 @@ class TextSystem extends System {
     };
 
     private static readonly DEFAULT_SDF_GENERATOR_FACTORY = (
-        fontSize?: number, 
-        buffer?: number, 
-        radius?: number, 
-        cutoff?: number, 
-        fontFamily?: string, 
+        fontSize?: number,
+        buffer?: number,
+        radius?: number,
+        cutoff?: number,
+        fontFamily?: string,
         fontWeight?: string): ISDFGenerator => new TinySDF(fontSize, buffer, radius, cutoff, fontFamily, fontWeight);
 
     private mappings: Map<string, FontMapping>;
@@ -79,8 +79,8 @@ class TextSystem extends System {
         super(messageBus, scene, TextSystem.EVALUATOR, entities, subscriberID);
         this.mappings = mappings;
         this.sdfGeneratorFactory = sdfGeneratorFactory;
-        this.messageBus.Subscribe(this, [ 
-            Game.MESSAGE_PRE_RENDER, 
+        this.messageBus.Subscribe(this, [
+            Game.MESSAGE_PRE_RENDER,
             FontRequest.MESSAGE_REQUEST_LOAD,
         ]);
     }
@@ -132,7 +132,7 @@ class TextSystem extends System {
         // characters in a glyph atlas, contains enough entries for each
         // glyph's pixels, represented in RGBA (4 channels)
         const glyphAtlas = new Uint8ClampedArray((glyphSize * glyphSize * 4) * (atlasSize * atlasSize));
-        
+
         // Build up the glyph atlas, inserting each character's glyph
         // data into the atlas
         /**
@@ -140,7 +140,7 @@ class TextSystem extends System {
          * a row-by-row approach is required. For the first row, it first inserts
          * the first row of the first image, then inserts the first row of the
          * second image, then the first row of the third image. For the second
-         * row it will do the same with the second row of each image. 
+         * row it will do the same with the second row of each image.
          * The algorithm needs to understand how many images will fit in each
          * column, and also which images are in which row.
          * If all the images are inserted, the rest of the entries should be
@@ -238,7 +238,7 @@ class TextSystem extends System {
             // Iterate over each character to be rendered
             for (let i = 0; i < text.value.length; i++) {
                 const char = text.value[i];
-                
+
                 // Get the character's mapping value, if it doesn't
                 // exist skip rendering this character
                 const position = mapping.characters.get(char);
@@ -282,24 +282,24 @@ class TextSystem extends System {
                      * determines spacing between characters
                      */
                     charTransform = new Transform(
-                        transform.position
+                        transform.position.Copy()
                             .Add(text.offset)
                             .Add(new Vector((xAlign * transform.scale.x/2) + (xAlign * text.spacing * transform.scale.x/2), 0)),
-                        transform.scale,
+                        transform.scale.Copy(),
                         transform.angle
                     );
-        
+
                 } else {
                     // Part of the UI
                     // Get the camera entity this is assigned to, if no camera
-                    // found, skip this entity 
+                    // found, skip this entity
                     const cameraEntity = this.entities.get(ui.camera.id);
                     if (cameraEntity === undefined) {
                         break;
                     }
                     // Get components of the camera entity, if the components
                     // are not found, must not be a valid camera, skip this
-                    // entity 
+                    // entity
                     const camera = cameraEntity.Get(Camera.KEY) as Camera | undefined;
                     const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform | undefined;
                     if (camera === undefined || cameraTransform === undefined) {
@@ -307,13 +307,13 @@ class TextSystem extends System {
                     }
 
                     // Convert the transform.position to be relative to the camera
-                    const textPosition = cameraTransform.position
-                        .Add(transform.position.Multiply(camera.virtualScale.Scale(0.5)))
-                        .Add(text.offset.Multiply(camera.virtualScale.Scale(0.5)));
-                    
-                    
+                    const textPosition = cameraTransform.position.Copy()
+                        .Add(transform.position.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5)))
+                        .Add(text.offset.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5)));
+
+
                     // Convert the scale to be relative to the camera
-                    const charScale = transform.scale.Multiply(camera.virtualScale);
+                    const charScale = transform.scale.Copy().Multiply(camera.virtualScale);
                     /**
                      * (xAlign * charScale.x / 2) -> determines alignment
                      * left, center, right
@@ -321,8 +321,9 @@ class TextSystem extends System {
                      * determines spacing between characters
                      */
                     charTransform = new Transform(
-                        textPosition.Add(new Vector((xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x/2), 0)),
-                        charScale,
+                        textPosition.Copy()
+                            .Add(new Vector((xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x/2), 0)),
+                        charScale.Copy(),
                         transform.angle
                     );
                 }
@@ -347,7 +348,7 @@ class TextSystem extends System {
                             texture: new Texture(
                                 `font_${text.font}`,
                                 Polygon.QuadByPoints(
-                                    new Vector(x * charSize, y * charSize), 
+                                    new Vector(x * charSize, y * charSize),
                                     new Vector(x * charSize + charSize, y * charSize + charSize)
                                 )
                             ),
@@ -369,7 +370,7 @@ class TextSystem extends System {
                     )
                 ));
             }
-            
+
         }
         this.messageBus.Publish(new Message<Renderable<TextRender>[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
