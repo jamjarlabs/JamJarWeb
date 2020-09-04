@@ -461,3 +461,23 @@ describe("Polygon - QuadByPoints", () => {
         expect(Polygon.QuadByPoints(bottomLeft, topRight)).toEqual(expected);
     });
 });
+
+describe("Polygon - EllipseEstimation", () => {
+    type TestTuple = [string, Polygon, number, Vector, Vector];
+    test.each<TestTuple>([
+        [
+            "1,1, 4 point circle around 0,0",
+            new Polygon([
+                new Vector(1,0),
+                new Vector(6.123234262925839e-17, 1),
+                new Vector(-1, 1.2246468525851679e-16),
+                new Vector(-1.8369701465288538e-16, -1)
+            ]),
+            4,
+            new Vector(1,1),
+            new Vector(0,0)
+        ],
+    ])("%p", (description: string, expected: Polygon, numOfEdges: number, dimensions: Vector, center: Vector) => {
+        expect(Polygon.EllipseEstimation(numOfEdges, dimensions, center)).toEqual(expected);
+    });
+});

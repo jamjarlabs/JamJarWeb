@@ -26,8 +26,11 @@ import Matrix4D from "../geometry/matrix_4d";
 class Polygon implements IShape {
     public points: Vector[];
 
-    constructor(points: Vector[]) {
+    constructor(points: Vector[], wrap = false) {
         this.points = points;
+        if (wrap && points.length > 0) {
+            this.points.push(points[0].Copy());
+        }
     }
 
     /**
@@ -132,7 +135,7 @@ class Polygon implements IShape {
      * @param {number} height Height of the rectangle
      * @param {origin} origin Center point of the rectangle
      */
-    public static RectangleByDimensions(width: number, height: number, origin: Vector = new Vector(0,0)): Polygon {
+    public static RectangleByDimensions(width: number, height: number, origin: Vector = new Vector(0,0), wrap = false): Polygon {
         const halfWidth = width/2;
         const halfHeight = height/2;
         return new Polygon([
@@ -140,7 +143,7 @@ class Polygon implements IShape {
             new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
             new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
             new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
-        ]);
+        ], wrap);
     }
 
     /**
@@ -149,13 +152,13 @@ class Polygon implements IShape {
      * @param {Vector} bottomLeft Bottom left of the rectangle
      * @param {Vector} topRight Top right of the rectangle
      */
-    public static RectangleByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
+    public static RectangleByPoints(bottomLeft: Vector, topRight: Vector, wrap = false): Polygon {
         return new Polygon([
             bottomLeft.Copy(),
             bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
             topRight.Copy(),
             topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
-        ]);
+        ], wrap);
     }
 
     /**
@@ -194,6 +197,27 @@ class Polygon implements IShape {
             topRight.Copy(),
             bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
         ]);
+    }
+
+    /**
+     * EllipseEstimation provides a new polygon that estimates the shape of an ellipse.
+     * @param numOfPoints Number of points the estimation should have
+     * @param dimensions Ellipse dimensions
+     * @param center Ellipse center
+     * @param wrap If the polygon should wrap on itself (first point == last point)
+     */
+    public static EllipseEstimation(numOfPoints: number, dimensions: Vector,
+        center: Vector = new Vector(0, 0), wrap = false): Polygon {
+        const points: Vector[] = [];
+        for (let i = 0; i < numOfPoints; i++) {
+            const done = i / numOfPoints;
+            const angle = done * 2 * Math.PI;
+            points.push(new Vector(
+                dimensions.x * Math.cos(angle) + center.x,
+                dimensions.y * Math.sin(angle) + center.y,
+            ));
+        }
+        return new Polygon(points, wrap);
     }
 }
 

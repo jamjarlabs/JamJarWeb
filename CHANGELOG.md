@@ -7,6 +7,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### Added
+- `Polygon` has a new static method `EllipseEstimation` for creating a `Polygon` that estimates an ellipse.
+- `Polygon` objects can now be initialised to be wrapped.
 - New `index` links all exported types, allows for easier imports.
   - Instead of `import x from "jamjar/lib/path";` it is now `import { x } from "jamjar";`
 - `HTTPAudioSystem` for loading audio assets over HTTP.
