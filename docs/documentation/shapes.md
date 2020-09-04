@@ -33,6 +33,29 @@ const triangle = new Polygon([
 ]);
 ```
 
+The [Polygon] allows itself to be 'wrapped', meaning that the first and last points are the same. This is useful as it
+allows these Polygons to be used in rendering, which often require pairs of lines to render.
+
+To wrap a [Polygon]:
+
+```typescript
+const triangle = new Polygon([
+    new Vector(-1, -1),
+    new Vector(1, -1),
+    new Vector(0, 1)
+], true);
+```
+
+### Helpers
+
+There are some static helper methods to make [Polygon] creation easier:
+
+- [RectangleByDimensions] -> Creates a new rectangular polygon based on dimension data.
+- [RectangleByPoints] -> Creates a new rectangular polygon based on bottom left and top right points.
+- [QuadByDimensions] -> Creates a quad based on dimension data.
+- [QuadByPoints] -> Creates a quad based on bottom left and top right points.
+- [EllipseEstimation] -> Creates an estimation of an ellipse.
+
 ## Ellipse
 
 The [Ellipse] is an elliptical representation of a shape, for example an oval or
@@ -63,5 +86,10 @@ const rectangle = new AABB(new Vector(2,4));
 
 [IShape]: ../../reference/interfaces/ishape
 [Polygon]: ../../reference/classes/polygon
+[RectangleByDimensions]: ../../reference/classes/polygon#static-rectanglebydimensions
+[RectangleByPoints]: ../../reference/classes/polygon#static-rectanglebypoints
+[QuadByDimensions]: ../../reference/classes/polygon#static-quadbydimensions
+[QuadByPoints]: ../../reference/classes/polygon#static-quadbypoints
+[EllipseEstimation]: ../../reference/classes/polygon#static-ellipseestimation
 [Ellipse]: ../../reference/classes/ellipse
 [AABB]: ../../reference/classes/aabb

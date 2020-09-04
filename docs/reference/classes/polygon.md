@@ -31,6 +31,7 @@ Can be used in collision detection and rendering.
 * [GetFloat32Array](polygon.md#getfloat32array)
 * [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
+* [EllipseEstimation](polygon.md#static-ellipseestimation)
 * [QuadByDimensions](polygon.md#static-quadbydimensions)
 * [QuadByPoints](polygon.md#static-quadbypoints)
 * [RectangleByDimensions](polygon.md#static-rectanglebydimensions)
@@ -40,13 +41,14 @@ Can be used in collision detection and rendering.
 
 ###  constructor
 
-\+ **new Polygon**(`points`: [Vector](vector.md)[]): *[Polygon](polygon.md)*
+\+ **new Polygon**(`points`: [Vector](vector.md)[], `wrap`: boolean): *[Polygon](polygon.md)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`points` | [Vector](vector.md)[] |
+Name | Type | Default |
+------ | ------ | ------ |
+`points` | [Vector](vector.md)[] | - |
+`wrap` | boolean | false |
 
 **Returns:** *[Polygon](polygon.md)*
 
@@ -152,6 +154,25 @@ Name | Type |
 
 ___
 
+### `Static` EllipseEstimation
+
+▸ **EllipseEstimation**(`numOfPoints`: number, `dimensions`: [Vector](vector.md), `center`: [Vector](vector.md), `wrap`: boolean): *[Polygon](polygon.md)*
+
+EllipseEstimation provides a new polygon that estimates the shape of an ellipse.
+
+**Parameters:**
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`numOfPoints` | number | - | Number of points the estimation should have |
+`dimensions` | [Vector](vector.md) | - | Ellipse dimensions |
+`center` | [Vector](vector.md) | new Vector(0, 0) | Ellipse center |
+`wrap` | boolean | false | If the polygon should wrap on itself (first point == last point)  |
+
+**Returns:** *[Polygon](polygon.md)*
+
+___
+
 ### `Static` QuadByDimensions
 
 ▸ **QuadByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md)): *[Polygon](polygon.md)*
@@ -191,7 +212,7 @@ ___
 
 ### `Static` RectangleByDimensions
 
-▸ **RectangleByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md)): *[Polygon](polygon.md)*
+▸ **RectangleByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md), `wrap`: boolean): *[Polygon](polygon.md)*
 
 RectangleByDimensions returns a new polygon in a rectangle shape with the
 width and height provided, optionally around an origin point.
@@ -203,6 +224,7 @@ Name | Type | Default | Description |
 `width` | number | - | Width of the rectangle |
 `height` | number | - | Height of the rectangle |
 `origin` | [Vector](vector.md) | new Vector(0,0) | Center point of the rectangle  |
+`wrap` | boolean | false | - |
 
 **Returns:** *[Polygon](polygon.md)*
 
@@ -210,16 +232,17 @@ ___
 
 ### `Static` RectangleByPoints
 
-▸ **RectangleByPoints**(`bottomLeft`: [Vector](vector.md), `topRight`: [Vector](vector.md)): *[Polygon](polygon.md)*
+▸ **RectangleByPoints**(`bottomLeft`: [Vector](vector.md), `topRight`: [Vector](vector.md), `wrap`: boolean): *[Polygon](polygon.md)*
 
 RectangleByPoints returns a new polygon in a rectangle shape between the
 two provided points.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`bottomLeft` | [Vector](vector.md) | Bottom left of the rectangle |
-`topRight` | [Vector](vector.md) | Top right of the rectangle  |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`bottomLeft` | [Vector](vector.md) | - | Bottom left of the rectangle |
+`topRight` | [Vector](vector.md) | - | Top right of the rectangle  |
+`wrap` | boolean | false | - |
 
 **Returns:** *[Polygon](polygon.md)*

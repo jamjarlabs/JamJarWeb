@@ -239,7 +239,7 @@ describe("Polygon - Apply4D", () => {
 });
 
 describe("Polygon - RectangleByDimensions", () => {
-    type TestTuple = [string, Polygon, number, number];
+    type TestTuple = [string, Polygon, number, number, Vector, boolean];
     test.each<TestTuple>([
         [
             "0*0 rectangle",
@@ -250,7 +250,9 @@ describe("Polygon - RectangleByDimensions", () => {
                 new Vector(0,0),
             ]),
             0,
-            0
+            0,
+            new Vector(0,0),
+            false
         ],
         [
             "2*2 square",
@@ -261,7 +263,9 @@ describe("Polygon - RectangleByDimensions", () => {
                 new Vector(-1,-1),
             ]),
             2,
-            2
+            2,
+            new Vector(0,0),
+            false
         ],
         [
             "3*2 rectangle",
@@ -272,15 +276,31 @@ describe("Polygon - RectangleByDimensions", () => {
                 new Vector(-1.5,-1),
             ]),
             3,
-            2
+            2,
+            new Vector(0,0),
+            false
         ],
-    ])("%p", (description: string, expected: Polygon, width: number, height: number) => {
-        expect(Polygon.RectangleByDimensions(width, height)).toEqual(expected);
+        [
+            "3*2 rectangle, wrapped",
+            new Polygon([
+                new Vector(-1.5,1),
+                new Vector(1.5,1),
+                new Vector(1.5,-1),
+                new Vector(-1.5,-1),
+                new Vector(-1.5,1),
+            ]),
+            3,
+            2,
+            new Vector(0,0),
+            true
+        ],
+    ])("%p", (description: string, expected: Polygon, width: number, height: number, origin: Vector, wrap: boolean) => {
+        expect(Polygon.RectangleByDimensions(width, height, origin, wrap)).toEqual(expected);
     });
 });
 
 describe("Polygon - RectangleByPoints", () => {
-    type TestTuple = [string, Polygon, Vector, Vector];
+    type TestTuple = [string, Polygon, Vector, Vector, boolean];
     test.each<TestTuple>([
         [
             "0,0 to 1,1 rectangle",
@@ -291,7 +311,8 @@ describe("Polygon - RectangleByPoints", () => {
                 new Vector(0,1),
             ]),
             new Vector(0,0),
-            new Vector(1,1)
+            new Vector(1,1),
+            false
         ],
         [
             "0,0 to 5,5 rectangle",
@@ -302,7 +323,8 @@ describe("Polygon - RectangleByPoints", () => {
                 new Vector(0,5),
             ]),
             new Vector(0,0),
-            new Vector(5,5)
+            new Vector(5,5),
+            false
         ],
         [
             "2,3 to 10,9 rectangle",
@@ -313,7 +335,21 @@ describe("Polygon - RectangleByPoints", () => {
                 new Vector(2,9),
             ]),
             new Vector(2,3),
-            new Vector(10,9)
+            new Vector(10,9),
+            false
+        ],
+        [
+            "2,3 to 10,9 rectangle wrapped",
+            new Polygon([
+                new Vector(2,3),
+                new Vector(10,3),
+                new Vector(10,9),
+                new Vector(2,9),
+                new Vector(2,3),
+            ]),
+            new Vector(2,3),
+            new Vector(10,9),
+            true
         ],
         [
             "0,0 to 0,0 rectangle",
@@ -324,10 +360,11 @@ describe("Polygon - RectangleByPoints", () => {
                 new Vector(0,0),
             ]),
             new Vector(0,0),
-            new Vector(0,0)
+            new Vector(0,0),
+            false
         ],
-    ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector) => {
-        expect(Polygon.RectangleByPoints(bottomLeft, topRight)).toEqual(expected);
+    ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector, wrap: boolean) => {
+        expect(Polygon.RectangleByPoints(bottomLeft, topRight, wrap)).toEqual(expected);
     });
 });
 
@@ -459,5 +496,41 @@ describe("Polygon - QuadByPoints", () => {
         ],
     ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector) => {
         expect(Polygon.QuadByPoints(bottomLeft, topRight)).toEqual(expected);
+    });
+});
+
+describe("Polygon - EllipseEstimation", () => {
+    type TestTuple = [string, Polygon, number, Vector, Vector, boolean];
+    test.each<TestTuple>([
+        [
+            "1,1, 4 point circle around 0,0",
+            new Polygon([
+                new Vector(1,0),
+                new Vector(6.123234262925839e-17, 1),
+                new Vector(-1, 1.2246468525851679e-16),
+                new Vector(-1.8369701465288538e-16, -1)
+            ]),
+            4,
+            new Vector(1,1),
+            new Vector(0,0),
+            false
+        ],
+        [
+            "1,1, 4 point circle around 0,0, wrapped",
+            new Polygon([
+                new Vector(1,0),
+                new Vector(6.123234262925839e-17, 1),
+                new Vector(-1, 1.2246468525851679e-16),
+                new Vector(-1.8369701465288538e-16, -1),
+                new Vector(1,0),
+            ]),
+            4,
+            new Vector(1,1),
+            new Vector(0,0),
+            true
+        ],
+    ])("%p", (description: string, expected: Polygon, numOfEdges: number, dimensions: Vector, center: Vector,
+        wrap: boolean) => {
+        expect(Polygon.EllipseEstimation(numOfEdges, dimensions, center, wrap)).toEqual(expected);
     });
 });
