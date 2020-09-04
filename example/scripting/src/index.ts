@@ -14,30 +14,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Game from "jamjar/lib/game"
-import IMessageBus from "jamjar/lib/message/imessage_bus";
-import EntityManager from "jamjar/lib/entity/entity_manager";
-import MessageBus from "jamjar/lib/message/message_bus";
-import Message from "jamjar/lib/message/message";
-import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
-import ScriptingEngineSystem from "jamjar/lib/standard/scripting_engine/scripting_engine_system";
-import HTTPScriptSystem from "jamjar/lib/standard/http_script/http_script_system";
-import ScriptRequest from "jamjar/lib/scripting/script_request";
-import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/standard/transform/transform";
-import Vector from "jamjar/lib/geometry/vector";
-import Collider from "jamjar/lib/standard/collision/collider";
-import Polygon from "jamjar/lib/shape/polygon";
-import Primitive from "jamjar/lib/standard/primitive/primitive";
-import Color from "jamjar/lib/rendering/color";
-import Material from "jamjar/lib/rendering/material/material";
-import DrawMode from "jamjar/lib/rendering/draw_mode";
-import PrimitiveSystem from "jamjar/lib/standard/primitive/primitive_system";
-import MotionSystem from "jamjar/lib/standard/motion/motion_system";
-import InterpolationSystem from "jamjar/lib/standard/interpolation/interpolation_system";
-import Camera from "jamjar/lib/standard/camera/camera";
-import CollisionSystem from "jamjar/lib/standard/collision/collision_system";
-import Motion from "jamjar/lib/standard/motion/motion";
+import {
+    Game,
+    IMessageBus,
+    EntityManager,
+    MessageBus,
+    Message,
+    WebGLSystem,
+    ScriptingEngineSystem,
+    HTTPScriptSystem,
+    ScriptRequest,
+    Entity,
+    Transform,
+    Vector,
+    Collider,
+    Polygon,
+    Primitive,
+    Color,
+    Material,
+    DrawMode,
+    PrimitiveSystem,
+    MotionSystem,
+    InterpolationSystem,
+    Camera,
+    CollisionSystem,
+    Motion
+} from "jamjar";
 
 class ScriptingGame extends Game {
     constructor(messageBus: IMessageBus) {

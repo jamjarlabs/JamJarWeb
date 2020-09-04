@@ -11,9 +11,9 @@ Contains the message constant for loading renderables.
 
   ↳ **RenderSystem**
 
-  ↳ [TestRenderSystem](testrendersystem.md)
-
   ↳ [WebGLSystem](webglsystem.md)
+
+  ↳ [TestRenderSystem](testrendersystem.md)
 
 ## Implements
 

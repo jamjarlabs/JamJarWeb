@@ -14,26 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Game from "jamjar/lib/game"
-import IMessageBus from "jamjar/lib/message/imessage_bus";
-import EntityManager from "jamjar/lib/entity/entity_manager";
-import MessageBus from "jamjar/lib/message/message_bus";
-import Message from "jamjar/lib/message/message";
-import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
-import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
-import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
-import ImageRequest from "jamjar/lib/rendering/image/image_request";
-import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
-import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/standard/transform/transform";
-import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Polygon from "jamjar/lib/shape/polygon";
-import Camera from "jamjar/lib/standard/camera/camera";
-import Material from "jamjar/lib/rendering/material/material";
-import Texture from "jamjar/lib/rendering/texture/texture";
-import Vector from "jamjar/lib/geometry/vector";
-import Color from "jamjar/lib/rendering/color";
-import TextureWrapping from "jamjar/lib/rendering/texture/texture_wrapping";
+import {
+    Game,
+    IMessageBus,
+    EntityManager,
+    MessageBus,
+    Message,
+    WebGLSystem,
+    HTTPImageSystem,
+    SpriteSystem,
+    ImageRequest,
+    TextureFiltering,
+    Entity,
+    Transform,
+    Sprite,
+    Polygon,
+    Camera,
+    Material,
+    Texture,
+    Vector,
+    Color,
+    TextureWrapping,
+} from "jamjar";
 
 class TextureGame extends Game {
     constructor(messageBus: IMessageBus) {
