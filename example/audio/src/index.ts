@@ -14,38 +14,39 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Game from "jamjar/lib/game"
-import IMessageBus from "jamjar/lib/message/imessage_bus";
-import EntityManager from "jamjar/lib/entity/entity_manager";
-import MessageBus from "jamjar/lib/message/message_bus";
-import Message from "jamjar/lib/message/message";
-import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
-import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
-import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
-import ImageRequest from "jamjar/lib/rendering/image/image_request";
-import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
-import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/standard/transform/transform";
-import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Camera from "jamjar/lib/standard/camera/camera";
-import Material from "jamjar/lib/rendering/material/material";
-import Texture from "jamjar/lib/rendering/texture/texture";
-import Vector from "jamjar/lib/geometry/vector";
-import HTTPAudioSystem from "jamjar/lib/standard/http_audio/http_audio_system";
-import AudioRequest from "jamjar/lib/audio/audio_request";
-import AudioSource from "jamjar/lib/standard/audio_source/audio_source";
-import AudioSourceSystem from "jamjar/lib/standard/audio_source/audio_source_system";
-import Polygon from "jamjar/lib/shape/polygon";
-import IEntity from "jamjar/lib/entity/ientity";
-import Component from "jamjar/lib/component/component";
-import System from "jamjar/lib/system/system";
-import SystemEntity from "jamjar/lib/system/system_entity";
-import IScene from "jamjar/lib/scene/iscene";
-import IMessage from "jamjar/lib/message/imessage";
-import Collider from "jamjar/lib/standard/collision/collider";
-import Pointer from "jamjar/lib/standard/pointer/pointer";
-import PointerSystem from "jamjar/lib/standard/pointer/pointer_system";
-
+import {
+    Game,
+    IMessageBus,
+    EntityManager,
+    MessageBus,
+    Message,
+    WebGLSystem,
+    HTTPImageSystem,
+    SpriteSystem,
+    ImageRequest,
+    TextureFiltering,
+    Entity,
+    Transform,
+    Sprite,
+    Camera,
+    Material,
+    Texture,
+    Vector,
+    HTTPAudioSystem,
+    AudioRequest,
+    AudioSource,
+    AudioSourceSystem,
+    Polygon,
+    IEntity,
+    Component,
+    System,
+    SystemEntity,
+    IScene,
+    IMessage,
+    Collider,
+    Pointer,
+    PointerSystem,
+} from "jamjar";
 
 class AudioButtonSystem extends System {
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {

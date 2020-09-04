@@ -14,48 +14,50 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Game from "jamjar/lib/game"
-import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/standard/transform/transform";
-import Vector from "jamjar/lib/geometry/vector";
-import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
-import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
-import PrimitiveSystem from "jamjar/lib/standard/primitive/primitive_system";
-import MotionSystem from "jamjar/lib/standard/motion/motion_system";
-import FullscreenSystem from "jamjar/lib/standard/fullscreen/fullscreen_system";
-import KeyboardSystem from "jamjar/lib/standard/keyboard/keyboard_system";
-import Collider from "jamjar/lib/standard/collision/collider";
-import CollisionSystem from "jamjar/lib/standard/collision/collision_system";
-import PointerSystem from "jamjar/lib/standard/pointer/pointer_system";
-import InterpolationSystem from "jamjar/lib/standard/interpolation/interpolation_system";
-import EntityManager from "jamjar/lib/entity/entity_manager";
-import MessageBus from "jamjar/lib/message/message_bus";
-import Camera from "jamjar/lib/standard/camera/camera";
-import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Primitive from "jamjar/lib/standard/primitive/primitive";
-import Color from "jamjar/lib/rendering/color";
-import IMessageBus from "jamjar/lib/message/imessage_bus";
-import Motion from "jamjar/lib/standard/motion/motion";
-import Scene from "jamjar/lib/scene/scene";
-import Polygon from "jamjar/lib/shape/polygon";
-import Message from "jamjar/lib/message/message";
-import Texture from "jamjar/lib/rendering/texture/texture";
-import Component from "jamjar/lib/component/component";
-import System from "jamjar/lib/system/system";
-import IEntity from "jamjar/lib/entity/ientity";
-import SystemEntity from "jamjar/lib/system/system_entity";
-import IScene from "jamjar/lib/scene/iscene";
-import IMessage from "jamjar/lib/message/imessage";
-import Pointer from "jamjar/lib/standard/pointer/pointer";
-import Collision from "jamjar/lib/standard/collision/collision";
-import UI from "jamjar/lib/standard/ui/ui";
-import Material from "jamjar/lib/rendering/material/material";
-import TextSystem from "jamjar/lib/standard/text/text_system";
-import Text from "jamjar/lib/standard/text/text";
-import TextAlignment from "jamjar/lib/standard/text/text_alignment";
-import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
-import FontRequest from "jamjar/lib/rendering/font/font_request";
-import DrawMode from "jamjar/lib/rendering/draw_mode";
+import {
+    Game,
+    Entity,
+    Transform,
+    Vector,
+    WebGLSystem,
+    SpriteSystem,
+    PrimitiveSystem,
+    MotionSystem,
+    FullscreenSystem,
+    KeyboardSystem,
+    Collider,
+    CollisionSystem,
+    PointerSystem,
+    InterpolationSystem,
+    EntityManager,
+    MessageBus,
+    Camera,
+    Sprite,
+    Primitive,
+    Color,
+    IMessageBus,
+    Motion,
+    Scene,
+    Polygon,
+    Message,
+    Texture,
+    Component,
+    System,
+    IEntity,
+    SystemEntity,
+    IScene,
+    IMessage,
+    Pointer,
+    Collision,
+    UI,
+    Material,
+    TextSystem,
+    Text,
+    TextAlignment,
+    TextureFiltering,
+    FontRequest,
+    DrawMode
+} from "jamjar"
 
 class ScoreCounter extends Component {
     public static readonly KEY = "score_counter";

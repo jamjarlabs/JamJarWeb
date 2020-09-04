@@ -7,6 +7,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 ### Added
+- New `index` links all exported types, allows for easier imports.
+  - Instead of `import x from "jamjar/lib/path";` it is now `import { x } from "jamjar";`
 - `HTTPAudioSystem` for loading audio assets over HTTP.
 - `AudioSourceSystem` for interpreting `AudioSource` components and using them
   to play audio.
@@ -28,6 +30,7 @@ collision detection than fully defined Polygons.
 only does checks in 4 directions.
 - `Matrix3D` and `Matrix4D` have new `Set` function for settings Matrix values.
 ### Changed
+- Entry point changed from `game.js` to `index.js`.
 - `Vector` changed to use Float32Array behind the scenes.
 - `Matrix3D` and `Matrix4D` changed to use Float32Array behind the scenes.
 - `Matrix3D` and `Matrix4D` operations now return a reference to themselves.

@@ -14,38 +14,40 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Game from "jamjar/lib/game"
-import IMessageBus from "jamjar/lib/message/imessage_bus";
-import EntityManager from "jamjar/lib/entity/entity_manager";
-import MessageBus from "jamjar/lib/message/message_bus";
-import Message from "jamjar/lib/message/message";
-import WebGLSystem from "jamjar/lib/standard/webgl/webgl_system";
-import HTTPImageSystem from "jamjar/lib/standard/http_image/http_image_system";
-import SpriteSystem from "jamjar/lib/standard/sprite/sprite_system";
-import ImageRequest from "jamjar/lib/rendering/image/image_request";
-import TextureFiltering from "jamjar/lib/rendering/texture/texture_filtering";
-import Entity from "jamjar/lib/entity/entity";
-import Transform from "jamjar/lib/standard/transform/transform";
-import Sprite from "jamjar/lib/standard/sprite/sprite";
-import Camera from "jamjar/lib/standard/camera/camera";
-import Material from "jamjar/lib/rendering/material/material";
-import Texture from "jamjar/lib/rendering/texture/texture";
-import Vector from "jamjar/lib/geometry/vector";
-import Color from "jamjar/lib/rendering/color";
-import SpriteAnimatorSystem from "jamjar/lib/standard/sprite_animator/sprite_animator_system";
-import SpriteAnimator from "jamjar/lib/standard/sprite_animator/sprite_animator";
-import SpriteAnimation from "jamjar/lib/standard/sprite_animator/sprite_animation";
-import SpriteKeyFrame from "jamjar/lib/standard/sprite_animator/sprite_key_frame";
-import KeyboardSystem from "jamjar/lib/standard/keyboard/keyboard_system";
-import System from "jamjar/lib/system/system";
-import IMessage from "jamjar/lib/message/imessage";
-import IEntity from "jamjar/lib/entity/ientity";
-import Component from "jamjar/lib/component/component";
-import IScene from "jamjar/lib/scene/iscene";
-import SystemEntity from "jamjar/lib/system/system_entity";
-import Motion from "jamjar/lib/standard/motion/motion";
-import MotionSystem from "jamjar/lib/standard/motion/motion_system";
-import InterpolationSystem from "jamjar/lib/standard/interpolation/interpolation_system";
+import {
+    Game,
+    IMessageBus,
+    EntityManager,
+    MessageBus,
+    Message,
+    WebGLSystem,
+    HTTPImageSystem,
+    SpriteSystem,
+    ImageRequest,
+    TextureFiltering,
+    Entity,
+    Transform,
+    Sprite,
+    Camera,
+    Material,
+    Texture,
+    Vector,
+    Color,
+    SpriteAnimatorSystem,
+    SpriteAnimator,
+    SpriteAnimation,
+    SpriteKeyFrame,
+    KeyboardSystem,
+    System,
+    IMessage,
+    IEntity,
+    Component,
+    IScene,
+    SystemEntity,
+    Motion,
+    MotionSystem,
+    InterpolationSystem,
+} from "jamjar";
 
 class TextureGame extends Game {
     constructor(messageBus: IMessageBus) {
