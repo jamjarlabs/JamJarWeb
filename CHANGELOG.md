@@ -6,6 +6,8 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v0.9.0] - 2020-09-05
 ### Added
 - `Polygon` has a new static method `EllipseEstimation` for creating a `Polygon` that estimates an ellipse.
 - `Polygon` objects can now be initialised to be wrapped.
@@ -239,7 +241,9 @@ single `CollisionInfo` or undefined.
 - Basic physics for velocities/acceleration/rotation.
 
 [Unreleased]:
-https://github.com/jamjarlabs/jamjar/compare/v0.8.0...HEAD
+https://github.com/jamjarlabs/jamjar/compare/v0.9.0...HEAD
+[v0.9.0]:
+https://github.com/jamjarlabs/jamjar/compare/v0.8.0...v0.9.0
 [v0.8.0]:
 https://github.com/jamjarlabs/jamjar/compare/v0.7.0...v0.8.0
 [v0.7.0]:
