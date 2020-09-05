@@ -125,7 +125,7 @@ ___
 
 ### `Static` `Private` TIME_STEP
 
-▪ **TIME_STEP**: *number* = 1000 / 100
+▪ **TIME_STEP**: *0.01* = 0.01
 
 ## Methods
 
@@ -151,7 +151,7 @@ ___
 
 ### `Private` loop
 
-▸ **loop**(): *void*
+▸ **loop**(`timestamp`: number): *void*
 
 loop is the core game loop, it handles repeatedly calling itself to manage updates and rendering.
 Updates should be fixed and occur consistently, therefore there is an accumulator to make sure
@@ -159,5 +159,11 @@ that enough updates happen to keep up with the time step.
 Rendering can occur as fast as possible, rendering systems will have to account for interpolation,
 which uses the alpha value that is calculated.
 See: https://gameprogrammingpatterns.com/game-loop.html
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`timestamp` | number |
 
 **Returns:** *void*

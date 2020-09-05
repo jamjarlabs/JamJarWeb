@@ -31,7 +31,7 @@ abstract class Game implements IGame {
     public static readonly MESSAGE_RENDER = "render"
     public static readonly MESSAGE_POST_RENDER = "post_render"
 
-    private static readonly TIME_STEP = 1000 / 100;
+    private static readonly TIME_STEP = 0.01;
 
     public readonly name: string;
 
@@ -56,7 +56,7 @@ abstract class Game implements IGame {
     protected OnStart(): void {
         return;
     }
-    
+
     /**
      * Start kicks off the game, setting up systems and starting the game loop.
      */
@@ -64,8 +64,8 @@ abstract class Game implements IGame {
         this.OnStart();
         this.messageBus.Dispatch();
         this.accumulator = 0;
-        this.currentTime = Date.now();
-        this.loop();
+        this.currentTime = 0;
+        this.loop(0);
     }
 
     /**
@@ -76,28 +76,36 @@ abstract class Game implements IGame {
      * which uses the alpha value that is calculated.
      * See: https://gameprogrammingpatterns.com/game-loop.html
      */
-    private loop(): void  {
-        const newTime = Date.now();
-        const frameTime = newTime - this.currentTime;
-        this.currentTime = newTime;
+    private loop(timestamp: number): void  {
+        // Calculate time since last frame.
+        let frameTime = (timestamp - this.currentTime) / 1000;
+        if (frameTime > 0.25) {
+            // If frametime gets execssive, cap it.
+            // This can occur if the browser is switched to another tab.
+            frameTime = 0.25;
+        }
+
+        this.currentTime = timestamp;
 
         this.accumulator += frameTime;
         while (this.accumulator >= Game.TIME_STEP) {
-            this.messageBus.Publish(new Message(System.MESSAGE_UPDATE, Game.TIME_STEP / 1000));
+            this.messageBus.Publish(new Message(System.MESSAGE_UPDATE, Game.TIME_STEP));
             this.messageBus.Dispatch();
             this.accumulator -= Game.TIME_STEP;
         }
+
+        // Alpha constant for interpolation calculations
         const alpha = this.accumulator / Game.TIME_STEP;
-        // pre-render and dispatch, must be immediately dispatched to allow pre-render systems to
+        // Pre-render and dispatch, must be immediately dispatched to allow pre-render systems to
         // send messages to the renderer before the actual render call.
         this.messageBus.Publish(new Message(Game.MESSAGE_PRE_RENDER, alpha));
         this.messageBus.Dispatch();
-        // render
+        // Render
         this.messageBus.Publish(new Message(Game.MESSAGE_RENDER, alpha));
-        // post render
+        // Post render
         this.messageBus.Publish(new Message(Game.MESSAGE_POST_RENDER, alpha));
         this.messageBus.Dispatch();
-        this.frameRequestCallback(() => { this.loop(); });
+        this.frameRequestCallback((timestamp: number) => { this.loop(timestamp); });
     }
 }
 
