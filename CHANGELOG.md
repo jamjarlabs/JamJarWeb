@@ -32,6 +32,7 @@ collision detection than fully defined Polygons.
 only does checks in 4 directions.
 - `Matrix3D` and `Matrix4D` have new `Set` function for settings Matrix values.
 ### Changed
+- Game loop now relies on more accurate timing method, using `requestAnimationFrame` over `Date.now()`.
 - Entry point changed from `game.js` to `index.js`.
 - `Vector` changed to use Float32Array behind the scenes.
 - `Matrix3D` and `Matrix4D` changed to use Float32Array behind the scenes.

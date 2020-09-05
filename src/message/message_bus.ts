@@ -72,7 +72,7 @@ class MessageBus implements IMessageBus {
 
     /**
      * Subscribe subscibes a subscriber to a particular message type or types.
-     * @param {ISubscriber} subscriber The subscriber to the message type(s) 
+     * @param {ISubscriber} subscriber The subscriber to the message type(s)
      * @param {string|string[]} types The message type(s) to subscribe to
      */
     public Subscribe(subscriber: ISubscriber, types: string | string[]): void {
