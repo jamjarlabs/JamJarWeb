@@ -43,10 +43,10 @@ class AABBAlgorithm implements ICollisionAlgorithm {
     }
 
     private aabb(a: IShape, b: IShape): CollisionInfo | undefined {
-        const aTopLeft = a.FarthestPointInDirection(new Vector(-1, 1));
-        const aBottomRight = a.FarthestPointInDirection(new Vector(1, -1));
-        const bTopLeft = b.FarthestPointInDirection(new Vector(-1, 1));
-        const bBottomRight = b.FarthestPointInDirection(new Vector(1, -1));
+        const aTopLeft = a.FarthestPointInDirection(Vector.New(-1, 1));
+        const aBottomRight = a.FarthestPointInDirection(Vector.New(1, -1));
+        const bTopLeft = b.FarthestPointInDirection(Vector.New(-1, 1));
+        const bBottomRight = b.FarthestPointInDirection(Vector.New(1, -1));
         if (aTopLeft.x < bBottomRight.x &&
             aBottomRight.x > bTopLeft.x &&
             aBottomRight.y < bTopLeft.y &&

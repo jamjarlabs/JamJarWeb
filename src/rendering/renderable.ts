@@ -20,12 +20,32 @@ import IRenderable from "./irenderable";
 import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../shape/polygon";
 import DrawMode from "./draw_mode";
+import Pooled from "../pooling/pooled";
 
 /**
  * Renderable represents something that can be rendered.
  * Contains information for rendering.
  */
-class Renderable<T> implements IRenderable {
+class Renderable<T> extends Pooled implements IRenderable {
+
+    public static New<T>(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode,
+        payload?: T, camera?: IEntity): Renderable<T> {
+        return this.new<Renderable<T>>(Renderable.POOL_KEY, Renderable, zOrder, vertices, modelMatrix, material,
+            drawMode, payload, camera);
+    }
+
+    public static Free<T>(obj: Renderable<T>): void {
+        this.free(Renderable.POOL_KEY, obj);
+    }
+
+    public static Init(size: number): void {
+        this.init(Renderable.POOL_KEY, () => {
+            return new Renderable(0, new Polygon([]), new Matrix4D(), new Material(), DrawMode.POINTS);
+        }, size);
+    }
+
+    private static POOL_KEY = "jamjar_renderable";
+
     /**
      * The Z-Order of the object, the order at which the object will appear
      * infront or behind other objects. A higher Z-Order means in front, a
@@ -60,6 +80,7 @@ class Renderable<T> implements IRenderable {
     public camera?: IEntity;
 
     constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode, payload?: T, camera?: IEntity) {
+        super();
         this.zOrder = zOrder;
         this.vertices = vertices;
         this.modelMatrix = modelMatrix;
@@ -67,6 +88,24 @@ class Renderable<T> implements IRenderable {
         this.drawMode = drawMode;
         this.payload = payload;
         this.camera = camera;
+    }
+
+    public Recycle(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode,
+        payload?: T, camera?: IEntity): Renderable<T> {
+        this.zOrder = zOrder;
+        this.vertices = vertices;
+        this.modelMatrix = modelMatrix;
+        this.material = material;
+        this.drawMode = drawMode;
+        this.payload = payload;
+        this.camera = camera;
+        return this;
+    }
+
+    public Free(): void {
+        this.vertices.Free();
+        this.material.Free();
+        Renderable.Free<T>(this);
     }
 }
 

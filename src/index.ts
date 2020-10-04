@@ -128,6 +128,9 @@ import DefaultTextFragmentShader from "./standard/webgl/default_text_fragment_sh
 import DefaultTextureFragmentShader from "./standard/webgl/default_texture_fragment_shader";
 import DefaultTextureVertexShader from "./standard/webgl/default_texture_vertex_shader";
 import WebGLSystem from "./standard/webgl/webgl_system";
+import Pooled from "./pooling/pooled";
+import IPoolable from "./pooling/ipoolable";
+import IFreeable from "./pooling/ifreeable";
 
 export {
     // Core
@@ -178,6 +181,11 @@ export {
     Evaluator,
     System,
     SystemEntity,
+
+    // Pooling
+    Pooled,
+    IPoolable,
+    IFreeable,
 
     // Fake
     FakeAudioBufferSourceNode,

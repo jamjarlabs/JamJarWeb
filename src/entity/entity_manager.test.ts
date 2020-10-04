@@ -60,14 +60,14 @@ describe("EntityManager - OnMessage", () => {
             "Destroy success, remove from three component managers",
             undefined,
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", { 1: new FakeComponent("test1") }),
-                new ComponentManager("test2", {}),
-                new ComponentManager("test3", {})
+                new ComponentManager("test1", new Map([[1, new FakeComponent("test1")]])),
+                new ComponentManager("test2", new Map()),
+                new ComponentManager("test3", new Map())
             ], 0),
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", { 0: new FakeComponent("test1"), 1: new FakeComponent("test1") }),
-                new ComponentManager("test2", { 0: new FakeComponent("test2") }),
-                new ComponentManager("test3", { 0: new FakeComponent("test3") })
+                new ComponentManager("test1", new Map([[0, new FakeComponent("test1")], [1, new FakeComponent("test1")]])),
+                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
             ], 0),
             new Message<IEntity>(Entity.MESSAGE_DESTROY, new FakeEntity(0))
         ],
@@ -89,7 +89,7 @@ describe("EntityManager - OnMessage", () => {
             "Add, success new component manager",
             undefined,
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test", { 0: new FakeComponent("test") })
+                new ComponentManager("test", new Map([[0, new FakeComponent("test")]]))
             ], 0),
             new EntityManager(new FakeMessageBus(), [], 0),
             new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")])
@@ -98,10 +98,10 @@ describe("EntityManager - OnMessage", () => {
             "Add, success existing component manager",
             undefined,
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test", { 0: new FakeComponent("test"), 1: new FakeComponent("test"), 2: new FakeComponent("test") })
+                new ComponentManager("test", new Map([[0, new FakeComponent("test")],[1, new FakeComponent("test")],[2, new FakeComponent("test") ]]))
             ], 0),
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test", { 1: new FakeComponent("test"), 2: new FakeComponent("test") })
+                new ComponentManager("test", new Map([[1, new FakeComponent("test")],[2, new FakeComponent("test") ]]))
             ], 0),
             new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")])
         ],
@@ -136,14 +136,14 @@ describe("EntityManager - OnMessage", () => {
             "Remove, found matching",
             undefined,
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", {}),
-                new ComponentManager("test2", { 0: new FakeComponent("test2") }),
-                new ComponentManager("test3", { 0: new FakeComponent("test3") })
+                new ComponentManager("test1", new Map()),
+                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
             ], 0),
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", { 0: new FakeComponent("test1") }),
-                new ComponentManager("test2", { 0: new FakeComponent("test2") }),
-                new ComponentManager("test3", { 0: new FakeComponent("test3") })
+                new ComponentManager("test1", new Map([[0, new FakeComponent("test1")]])),
+                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
             ], 0),
             new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test1"])
         ],
@@ -151,14 +151,14 @@ describe("EntityManager - OnMessage", () => {
             "Remove, found matching",
             undefined,
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", {}),
-                new ComponentManager("test2", { 0: new FakeComponent("test2") }),
-                new ComponentManager("test3", { 0: new FakeComponent("test3") })
+                new ComponentManager("test1", new Map()),
+                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
             ], 0),
             new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", { 0: new FakeComponent("test1") }),
-                new ComponentManager("test2", { 0: new FakeComponent("test2") }),
-                new ComponentManager("test3", { 0: new FakeComponent("test3") })
+                new ComponentManager("test1", new Map([[0, new FakeComponent("test1")]])),
+                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
             ], 0),
             new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test1"])
         ],

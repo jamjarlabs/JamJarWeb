@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -49,9 +49,9 @@ class Camera extends Component {
     public virtualScale: Vector;
 
     constructor(backgroundColor: Color = new Color(0,0,0,1),
-        viewportPosition: Vector = new Vector(0,0),
-        viewportScale: Vector = new Vector(1,1),
-        virtualScale: Vector = new Vector(160,90)) {
+        viewportPosition: Vector = Vector.New(0,0),
+        viewportScale: Vector = Vector.New(1,1),
+        virtualScale: Vector = Vector.New(160,90)) {
         super(Camera.KEY);
         this.backgroundColor = backgroundColor;
         this.viewportPosition = viewportPosition;
@@ -76,6 +76,12 @@ class Camera extends Component {
                 0,
                 100
             );
+    }
+
+    public Free(): void {
+        this.viewportPosition.Free();
+        this.viewportScale.Free();
+        this.virtualScale.Free();
     }
 }
 

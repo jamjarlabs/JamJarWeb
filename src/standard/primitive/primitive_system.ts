@@ -82,9 +82,9 @@ class PrimitiveSystem extends System {
 
             if (ui === undefined) {
                 // Not UI
-                renderables.push(new Renderable(
+                renderables.push(Renderable.New(
                     primitive.zOrder,
-                    primitive.points,
+                    primitive.points.Copy(),
                     transform.InterpolatedMatrix4D(alpha),
                     primitive.material,
                     primitive.drawMode,
@@ -117,9 +117,9 @@ class PrimitiveSystem extends System {
                 );
 
                 // Create the renderable for use by rendering systems
-                renderables.push(new Renderable(
+                renderables.push(Renderable.New(
                     primitive.zOrder,
-                    primitive.points,
+                    primitive.points.Copy(),
                     relativeTransform.InterpolatedMatrix4D(alpha),
                     primitive.material,
                     primitive.drawMode,

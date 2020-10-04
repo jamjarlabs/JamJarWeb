@@ -57,7 +57,7 @@ class Polygon implements IShape {
     public FarthestPointInDirection(direction: Vector): Vector {
         let farthestDistance = -Infinity;
         // If there are no points, just return point 0,0
-        let farthestPoint: Vector = new Vector(0,0);
+        let farthestPoint: Vector = Vector.New(0, 0);
         for (const point of this.points) {
             const distanceInDirection = point.Dot(direction);
             if (distanceInDirection > farthestDistance) {
@@ -75,7 +75,7 @@ class Polygon implements IShape {
             xSum += point.x;
             ySum += point.y;
         }
-        return new Vector(
+        return Vector.New(
             xSum / this.points.length,
             ySum / this.points.length
         );
@@ -106,13 +106,19 @@ class Polygon implements IShape {
             if ((cornerA.y < point.y && cornerB.y >= point.y ||
                 cornerB.y < point.y && cornerA.y >= point.y) &&
                 (cornerA.x <= point.x || cornerB.x <= point.x)) {
-                if (cornerA.x + (point.y - cornerA.y)/(cornerB.y-cornerA.y)*(cornerB.x-cornerA.x) < point.x) {
+                if (cornerA.x + (point.y - cornerA.y) / (cornerB.y - cornerA.y) * (cornerB.x - cornerA.x) < point.x) {
                     inPolygon = !inPolygon;
                 }
             }
-            j=i;
+            j = i;
         }
         return inPolygon;
+    }
+
+    public Free(): void {
+        for (const point of this.points) {
+            point.Free();
+        }
     }
 
     /**
@@ -135,14 +141,14 @@ class Polygon implements IShape {
      * @param {number} height Height of the rectangle
      * @param {origin} origin Center point of the rectangle
      */
-    public static RectangleByDimensions(width: number, height: number, origin: Vector = new Vector(0,0), wrap = false): Polygon {
-        const halfWidth = width/2;
-        const halfHeight = height/2;
+    public static RectangleByDimensions(width: number, height: number, originX = 0, originY = 0, wrap = false): Polygon {
+        const halfWidth = width / 2;
+        const halfHeight = height / 2;
         return new Polygon([
-            new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
-            new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
-            new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
-            new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
+            Vector.New(originX - halfWidth, originY + halfHeight), // top left
+            Vector.New(originX + halfWidth, originY + halfHeight), // top right
+            Vector.New(originX + halfWidth, originY - halfHeight), // bottom right
+            Vector.New(originX - halfWidth, originY - halfHeight), // bottom left
         ], wrap);
     }
 
@@ -153,11 +159,15 @@ class Polygon implements IShape {
      * @param {Vector} topRight Top right of the rectangle
      */
     public static RectangleByPoints(bottomLeft: Vector, topRight: Vector, wrap = false): Polygon {
+        const bottomRight = bottomLeft.Copy();
+        bottomRight.x += topRight.x - bottomLeft.x;
+        const topLeft = topRight.Copy();
+        topLeft.x -= topRight.x - bottomLeft.x;
         return new Polygon([
             bottomLeft.Copy(),
-            bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            bottomRight,
             topRight.Copy(),
-            topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            topLeft
         ], wrap);
     }
 
@@ -168,17 +178,23 @@ class Polygon implements IShape {
      * @param {number} height Height of the quad
      * @param {Vector} origin Center point of the quad
      */
-    public static QuadByDimensions(width: number, height: number, origin: Vector = new Vector(0,0)): Polygon {
-        const halfWidth = width/2;
-        const halfHeight = height/2;
-        return new Polygon([
-            new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
-            new Vector(origin.x - halfWidth, origin.y - halfHeight), // bottom left
-            new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
+    public static QuadByDimensions(width: number, height: number, originX = 0, originY = 0): Polygon {
+        const halfWidth = width / 2;
+        const halfHeight = height / 2;
 
-            new Vector(origin.x - halfWidth, origin.y + halfHeight), // top left
-            new Vector(origin.x + halfWidth, origin.y + halfHeight), // top right
-            new Vector(origin.x + halfWidth, origin.y - halfHeight), // bottom right
+        const bottomRight = Vector.New(originX + halfWidth, originY - halfHeight);
+        const bottomLeft = Vector.New(originX - halfWidth, originY - halfHeight);
+        const topLeft = Vector.New(originX - halfWidth, originY + halfHeight);
+        const topRight = Vector.New(originX + halfWidth, originY + halfHeight);
+
+        return new Polygon([
+            bottomRight,
+            bottomLeft,
+            topLeft,
+
+            topLeft.Copy(),
+            topRight,
+            bottomRight.Copy(),
         ]);
     }
 
@@ -189,13 +205,17 @@ class Polygon implements IShape {
      * @param {Vector} topRight Top right of the quad
      */
     public static QuadByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
+        const bottomRight = bottomLeft.Copy();
+        bottomRight.x += topRight.x - bottomLeft.x;
+        const topLeft = topRight.Copy();
+        topLeft.x -= topRight.x - bottomLeft.x;
         return new Polygon([
-            bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            bottomRight,
             bottomLeft.Copy(),
-            topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
-            topRight.Copy().Sub(new Vector(topRight.x - bottomLeft.x, 0)), // top left
+            topLeft,
+            topLeft.Copy(),
             topRight.Copy(),
-            bottomLeft.Copy().Add(new Vector(topRight.x - bottomLeft.x, 0)), // bottom right
+            bottomRight.Copy()
         ]);
     }
 
@@ -206,15 +226,15 @@ class Polygon implements IShape {
      * @param center Ellipse center
      * @param wrap If the polygon should wrap on itself (first point == last point)
      */
-    public static EllipseEstimation(numOfPoints: number, dimensions: Vector,
-        center: Vector = new Vector(0, 0), wrap = false): Polygon {
+    public static EllipseEstimation(numOfPoints: number, dimensions: Vector, centerX = 0, centerY = 0,
+        wrap = false): Polygon {
         const points: Vector[] = [];
         for (let i = 0; i < numOfPoints; i++) {
             const done = i / numOfPoints;
             const angle = done * 2 * Math.PI;
-            points.push(new Vector(
-                dimensions.x * Math.cos(angle) + center.x,
-                dimensions.y * Math.sin(angle) + center.y,
+            points.push(Vector.New(
+                dimensions.x * Math.cos(angle) + centerX,
+                dimensions.y * Math.sin(angle) + centerY,
             ));
         }
         return new Polygon(points, wrap);

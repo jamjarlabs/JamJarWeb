@@ -1780,7 +1780,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 [
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 0, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1789,7 +1789,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(1, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 1, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1798,7 +1798,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(2, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 2, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1807,7 +1807,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(3, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 3, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1816,7 +1816,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(4, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 4, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1924,7 +1924,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 [
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 0, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1935,7 +1935,7 @@ describe("WebGLSystem - Render", () => {
                         new FakeEntity(0)
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(1, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 1, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -1946,7 +1946,7 @@ describe("WebGLSystem - Render", () => {
                         new FakeEntity(0)
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(2, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 2, 0),
                         new Matrix4D(),
                         new Material({
                             shaders: ["test_vert", "test_frag"]
@@ -2130,7 +2130,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 [
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 0, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -2139,7 +2139,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(1,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(1, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 1, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -2148,7 +2148,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(0,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(2, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 2, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -2157,7 +2157,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(3,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(3, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 3, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
@@ -2166,7 +2166,7 @@ describe("WebGLSystem - Render", () => {
                         DrawMode.TRIANGLE_STRIP
                     ),
                     new Renderable(5,
-                        Polygon.RectangleByDimensions(1, 1, new Vector(4, 0)),
+                        Polygon.RectangleByDimensions(1, 1, 4, 0),
                         new Matrix4D(),
                         new Material({
                             texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),

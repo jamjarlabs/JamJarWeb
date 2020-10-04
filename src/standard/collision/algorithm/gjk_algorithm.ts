@@ -100,7 +100,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             const ac = c.Copy().Sub(a);
 
             // Determine perpendicular of the a->b line
-            let abPerp = new Vector(ab.y, -ab.x);
+            let abPerp = Vector.New(ab.y, -ab.x);
 
             // Check the handedness of the perpendicular, it should
             // face AWAY from the simplex
@@ -118,7 +118,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             }
 
             // Determine perpendicular of the a->c line
-            let acPerp = new Vector(ac.y, -ac.x);
+            let acPerp = Vector.New(ac.y, -ac.x);
 
             // Check the handedness of the perpendicular, it should
             // face AWAY from the simplex
@@ -144,7 +144,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         const ab = b.Copy().Sub(a);
 
         // Get the perpendicular of the a->b line
-        let abPerp = new Vector(ab.y, -ab.x);
+        let abPerp = Vector.New(ab.y, -ab.x);
 
         // Check the handedness of the perpendicular, it should
         // face TOWARDS the origin

@@ -42,6 +42,7 @@ import UI from "../ui/ui";
 import FontRequest from "../../rendering/font/font_request";
 import FontAsset from "../../rendering/font/font_asset";
 import DrawMode from "../../rendering/draw_mode";
+import Matrix4D from "../../geometry/matrix_4d";
 
 /**
  * TextSystem is a pre-rendering system, taking in text components and
@@ -242,14 +243,14 @@ class TextSystem extends System {
                 // Get the character's mapping value, if it doesn't
                 // exist skip rendering this character
                 const position = mapping.characters.get(char);
-                if(position === undefined) {
+                if (position === undefined) {
                     continue;
                 }
 
                 // Determine the x alignment of the text, based
                 // on the text alignment options provided
                 let xAlign;
-                switch(text.align) {
+                switch (text.align) {
                     case TextAlignment.Left: {
                         // +0.5 to shift first character from being centered on
                         // transform position to the right of it
@@ -257,22 +258,22 @@ class TextSystem extends System {
                         break;
                     }
                     case TextAlignment.Center: {
-                        xAlign = i - (text.value.length-1)/2;
+                        xAlign = i - (text.value.length - 1) / 2;
                         break;
                     }
                     case TextAlignment.Right: {
                         // Inverse of left align, with transform position set to
                         // right of the last character
-                        xAlign = i - (text.value.length-1) - 0.5;
+                        xAlign = i - (text.value.length - 1) - 0.5;
                         break;
                     }
                     default: {
-                        throw(`Invalid text alignment: ${text.align}`);
+                        throw (`Invalid text alignment: ${text.align}`);
                     }
                 }
 
                 // Transform for character
-                let charTransform: Transform;
+                const interpolatedMatrix = new Matrix4D();
                 if (ui === undefined) {
                     // Not part of the UI
                     /**
@@ -281,14 +282,10 @@ class TextSystem extends System {
                      * (xAlign * text.spacing * transform.scale.x/2) ->
                      * determines spacing between characters
                      */
-                    charTransform = new Transform(
-                        transform.position.Copy()
-                            .Add(text.offset)
-                            .Add(new Vector((xAlign * transform.scale.x/2) + (xAlign * text.spacing * transform.scale.x/2), 0)),
-                        transform.scale.Copy(),
-                        transform.angle
-                    );
-
+                    const translation = transform.position.Copy();
+                    translation.x += text.offset.x + (xAlign * transform.scale.x / 2) + (xAlign * text.spacing * transform.scale.x / 2);
+                    translation.y += text.offset.y;
+                    interpolatedMatrix.Translate(translation).Scale(transform.scale).Rotate(transform.angle);
                 } else {
                     // Part of the UI
                     // Get the camera entity this is assigned to, if no camera
@@ -320,12 +317,9 @@ class TextSystem extends System {
                      * (xAlign * text.spacing * charScale.x/2) ->
                      * determines spacing between characters
                      */
-                    charTransform = new Transform(
-                        textPosition.Copy()
-                            .Add(new Vector((xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x/2), 0)),
-                        charScale.Copy(),
-                        transform.angle
-                    );
+                    const translation = textPosition.Copy();
+                    translation.x += (xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x / 2);
+                    interpolatedMatrix.Translate(translation).Scale(charScale).Rotate(transform.angle);
                 }
 
                 // Determine the position in the glyph to extract the text glyph
@@ -339,17 +333,17 @@ class TextSystem extends System {
                 const charSize = 1 / mapping.width;
                 // Create renderable for the character, include extra TextRender
                 // information for shaders to use
-                renderables.push(new Renderable<TextRender>(
+                renderables.push(Renderable.New<TextRender>(
                     text.zOrder,
-                    Polygon.QuadByDimensions(1,1),
-                    charTransform.InterpolatedMatrix4D(alpha),
+                    Polygon.QuadByDimensions(1, 1, 0, 0),
+                    interpolatedMatrix,
                     new Material(
                         {
                             texture: new Texture(
                                 `font_${text.font}`,
                                 Polygon.QuadByPoints(
-                                    new Vector(x * charSize, y * charSize),
-                                    new Vector(x * charSize + charSize, y * charSize + charSize)
+                                    Vector.New(x * charSize, y * charSize),
+                                    Vector.New(x * charSize + charSize, y * charSize + charSize)
                                 )
                             ),
                             shaders: text.shaders,

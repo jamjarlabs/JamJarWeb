@@ -50,9 +50,12 @@ class MotionSystem extends System {
             const motion = entity.Get(Motion.KEY) as Motion;
 
             // v += a * dt
-            motion.velocity.Add(motion.acceleration.Copy().Scale(dt));
+            motion.velocity.x += motion.acceleration.x * dt;
+            motion.velocity.y += motion.acceleration.y * dt;
+
             // p += v * dt
-            transform.position.Add(motion.velocity.Copy().Scale(dt));
+            transform.position.x += motion.velocity.x * dt;
+            transform.position.y += motion.velocity.y * dt;
 
             // v += a * dt
             motion.angularVelocity += motion.angularAcceleration * dt;

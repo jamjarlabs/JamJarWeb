@@ -33,6 +33,7 @@ The dispatch should probably be left to the core game loop for triggering.
 ### Methods
 
 * [Dispatch](messagebus.md#dispatch)
+* [DispatchUntilEmpty](messagebus.md#dispatchuntilempty)
 * [Publish](messagebus.md#publish)
 * [Subscribe](messagebus.md#subscribe)
 * [Unsubscribe](messagebus.md#unsubscribe)
@@ -71,8 +72,13 @@ ___
 
 ▸ **Dispatch**(): *void*
 
-Processes the message bus queue and forwards the messages to the subscribers.
-who have subscribed to each message type.
+**Returns:** *void*
+
+___
+
+###  DispatchUntilEmpty
+
+▸ **DispatchUntilEmpty**(): *void*
 
 **Returns:** *void*
 
@@ -82,13 +88,11 @@ ___
 
 ▸ **Publish**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-Publish adds a message to the message bus queue to be dispatched.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`message` | [IMessage](../interfaces/imessage.md) | The message to send  |
+Name | Type |
+------ | ------ |
+`message` | [IMessage](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
@@ -98,14 +102,12 @@ ___
 
 ▸ **Subscribe**(`subscriber`: [ISubscriber](../interfaces/isubscriber.md), `types`: string | string[]): *void*
 
-Subscribe subscibes a subscriber to a particular message type or types.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`subscriber` | [ISubscriber](../interfaces/isubscriber.md) | The subscriber to the message type(s) |
-`types` | string &#124; string[] | The message type(s) to subscribe to  |
+Name | Type |
+------ | ------ |
+`subscriber` | [ISubscriber](../interfaces/isubscriber.md) |
+`types` | string &#124; string[] |
 
 **Returns:** *void*
 
@@ -115,14 +117,12 @@ ___
 
 ▸ **Unsubscribe**(`subscriber`: [ISubscriber](../interfaces/isubscriber.md), `types`: string | string[]): *void*
 
-Unsubscribe unsubscribes a subscriber from a specific message type or types.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`subscriber` | [ISubscriber](../interfaces/isubscriber.md) | The subscriber to unsubscribe |
-`types` | string &#124; string[] | The message type(s) to unsubscribe from  |
+Name | Type |
+------ | ------ |
+`subscriber` | [ISubscriber](../interfaces/isubscriber.md) |
+`types` | string &#124; string[] |
 
 **Returns:** *void*
 
@@ -132,12 +132,10 @@ ___
 
 ▸ **UnsubscribeAll**(`subscriber`: [ISubscriber](../interfaces/isubscriber.md)): *void*
 
-UnsubscribeAll unsubscribes a Subscriber from all messages.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`subscriber` | [ISubscriber](../interfaces/isubscriber.md) | The subscriber to unsubscribe  |
+Name | Type |
+------ | ------ |
+`subscriber` | [ISubscriber](../interfaces/isubscriber.md) |
 
 **Returns:** *void*

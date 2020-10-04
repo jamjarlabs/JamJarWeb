@@ -27,9 +27,9 @@ For example:
 
 ```typescript
 const triangle = new Polygon([
-    new Vector(-1, -1),
-    new Vector(1, -1),
-    new Vector(0, 1)
+    Vector.New(-1, -1),
+    Vector.New(1, -1),
+    Vector.New(0, 1)
 ]);
 ```
 
@@ -40,9 +40,9 @@ To wrap a [Polygon]:
 
 ```typescript
 const triangle = new Polygon([
-    new Vector(-1, -1),
-    new Vector(1, -1),
-    new Vector(0, 1)
+    Vector.New(-1, -1),
+    Vector.New(1, -1),
+    Vector.New(0, 1)
 ], true);
 ```
 
@@ -64,7 +64,7 @@ a circle. It is represented by a center position, dimensions, and a rotation.
 For example:
 
 ```typescript
-const oval = new Ellipse(new Vector(4, 2), Math.PI / 4, new Vector(2, 2));
+const oval = new Ellipse(Vector.New(4, 2), Math.PI / 4, Vector.New(2, 2));
 ```
 
 ## AABB
@@ -79,9 +79,9 @@ less calculations than a fully defined polygon.
 For example:
 
 ```typescript
-const square = new AABB(new Vector(2,2));
-const squareAroundPoint = new AABB(new Vector(2,2), new Vector(5,3));
-const rectangle = new AABB(new Vector(2,4));
+const square = new AABB(Vector.New(2,2));
+const squareAroundPoint = new AABB(Vector.New(2,2), Vector.New(5,3));
+const rectangle = new AABB(Vector.New(2,4));
 ```
 
 [IShape]: ../../reference/interfaces/ishape

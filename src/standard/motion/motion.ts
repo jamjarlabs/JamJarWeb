@@ -43,12 +43,20 @@ class Motion extends Component {
      */
     public angularAcceleration: number;
 
-    constructor(velocity = new Vector(0,0), acceleration = new Vector(0,0), angularVelocity = 0, angularAcceleration = 0) {
+    constructor(velocity = Vector.New(0, 0),
+        acceleration = Vector.New(0, 0),
+        angularVelocity = 0,
+        angularAcceleration = 0) {
         super(Motion.KEY);
         this.velocity = velocity;
         this.acceleration = acceleration;
         this.angularVelocity = angularVelocity;
         this.angularAcceleration = angularAcceleration;
+    }
+
+    public Free(): void {
+        this.velocity.Free();
+        this.acceleration.Free();
     }
 }
 

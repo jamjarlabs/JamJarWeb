@@ -29,15 +29,15 @@ entity.
 
 ```typescript
 const primitiveEntity = new Entity(messageBus);
-primitiveEntity.Add(new Transform(new Vector(0, 0), new Vector(5,5)));
+primitiveEntity.Add(new Transform(Vector.New(0, 0), Vector.New(5,5)));
 primitiveEntity.Add(new Primitive(
     new Material(),
     0,
     new Polygon([
-        new Vector(0,0.5),
-        new Vector(0.5, -0.5),
-        new Vector(-0.5, -0.5),
-        new Vector(0,0.5)
+        Vector.New(0,0.5),
+        Vector.New(0.5, -0.5),
+        Vector.New(-0.5, -0.5),
+        Vector.New(0,0.5)
     ]),
     DrawMode.LINE_STRIP
 ));
@@ -49,7 +49,7 @@ to render.
 
 Primitives contain a field [zOrder], which determines the precendence with which
 primitives will appear on the screen. Objects with a higher z order will appear
-ahead of objects with a lower z order. 
+ahead of objects with a lower z order.
 
 ![Example Z Order](../assets/z_order.svg)
 
@@ -71,19 +71,19 @@ required [Transform] and [Primitive] components.
 
 ```typescript
 const gameCamera = new Entity(messageBus);
-gameCamera.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
+gameCamera.Add(new Transform(Vector.New(0, 0), Vector.New(5, 5)));
 gameCamera.Add(new Camera());
 
 const uiElement = new Entity(messageBus);
-uiElement.Add(new Transform(new Vector(0, 0), new Vector(0.2,0.2)));
+uiElement.Add(new Transform(Vector.New(0, 0), Vector.New(0.2,0.2)));
 uiElement.Add(new Primitive(
     new Material(),
     0,
     new Polygon([
-        new Vector(0,0.5),
-        new Vector(0.5, -0.5),
-        new Vector(-0.5, -0.5),
-        new Vector(0,0.5)
+        Vector.New(0,0.5),
+        Vector.New(0.5, -0.5),
+        Vector.New(-0.5, -0.5),
+        Vector.New(0,0.5)
     ]),
     DrawMode.LINE_STRIP
 ));

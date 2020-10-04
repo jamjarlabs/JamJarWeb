@@ -30,7 +30,7 @@ class Sprite extends Component {
      */
     public static readonly KEY = "sprite";
     /**
-     * Order which the sprite should appear, if it should appear infront/behind other 
+     * Order which the sprite should appear, if it should appear infront/behind other
      * objects, the higher the value the more precedence it is given and will
      * appear in front of objects with a lower value.
      */
@@ -44,6 +44,10 @@ class Sprite extends Component {
         super(Sprite.KEY);
         this.material = material;
         this.zOrder = zOrder;
+    }
+
+    public Free(): void {
+        this.material.Free();
     }
 }
 

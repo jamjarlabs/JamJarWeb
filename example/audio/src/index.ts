@@ -45,7 +45,7 @@ import {
     IMessage,
     Collider,
     Pointer,
-    PointerSystem,
+    PointerSystem,, Renderable
 } from "jamjar";
 
 class AudioButtonSystem extends System {
@@ -145,7 +145,7 @@ class AudioGame extends Game {
 
         // Create entities
         const stopButton = new Entity(this.messageBus, ["stop"]);
-        stopButton.Add(new Transform(new Vector(-40, 0), new Vector(40,40)));
+        stopButton.Add(new Transform(Vector.New(-40, 0), Vector.New(40,40)));
         stopButton.Add(new Sprite(
             new Material({
                 texture: new Texture("button", buttonSpriteSheet[0]),
@@ -157,7 +157,7 @@ class AudioGame extends Game {
 
         // Create entities
         const playButton = new Entity(this.messageBus, ["play"]);
-        playButton.Add(new Transform(new Vector(40, 0), new Vector(40,40)));
+        playButton.Add(new Transform(Vector.New(40, 0), Vector.New(40,40)));
         playButton.Add(new Sprite(
             new Material({
                 texture: new Texture("button", buttonSpriteSheet[1]),
@@ -184,6 +184,10 @@ if (startButton === null) {
 }
 
 startButton.onclick = () => {
+    // Set up pooling
+    Vector.Init(200);
+    Renderable.Init(200);
+
     // Create message bus and entity manager
     const messageBus = new MessageBus();
     new EntityManager(messageBus);

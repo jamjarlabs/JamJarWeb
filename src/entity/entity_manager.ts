@@ -1,5 +1,5 @@
 /*
-Copyright 2019 JamJar Authors
+Copyright 2020 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,10 +26,10 @@ import IEntity from "./ientity";
 
 /**
  * EntityManager keeps tracks of all entities and their components/changes in their components.
- * The EntityManager watches for changes in which components belong to an entity (add/remove), and 
+ * The EntityManager watches for changes in which components belong to an entity (add/remove), and
  * when a change is detected it will broadcast that a change has been detected in the entity and the
  * entity's new list of components.
- * The EntityManager also watches for entities being deleted and removes the deleted entity's 
+ * The EntityManager also watches for entities being deleted and removes the deleted entity's
  * components.
  */
 class EntityManager extends Subscriber {
@@ -45,8 +45,8 @@ class EntityManager extends Subscriber {
         this.messageBus = messageBus;
         this.componentManagers = componentManagers;
         this.messageBus.Subscribe(this, [
-            Component.MESSAGE_ADD, 
-            Component.MESSAGE_REMOVE, 
+            Component.MESSAGE_ADD,
+            Component.MESSAGE_REMOVE,
             Entity.MESSAGE_DESTROY
         ]);
     }
@@ -104,7 +104,7 @@ class EntityManager extends Subscriber {
         }
         this.messageBus.Publish(new Message<IEntity>(System.MESSAGE_DEREGISTER, entity));
     }
-    
+
     /**
      * removeComponent removes an entity's component by the component key provided.
      * @param {IEntity} entity Entity to remove the component from
@@ -152,7 +152,7 @@ class EntityManager extends Subscriber {
     /**
      * getComponents gets all components belonging to an entity.
      * @param {IEntity} entity The entity to get the components of
-     * @returns {Component[]} The list of components for the entity 
+     * @returns {Component[]} The list of components for the entity
      */
     private getComponents(entity: IEntity): Component[] {
         const components: Component[] = [];

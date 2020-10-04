@@ -16,12 +16,13 @@ limitations under the License.
 
 import Polygon from "../../shape/polygon";
 import Vector from "../../geometry/vector";
+import IFreeable from "../../pooling/ifreeable";
 
 /**
  * Texture is the mapping from an image that has been loaded, deciding
  * how the texture should be drawn and represented.
  */
-class Texture {
+class Texture implements IFreeable {
     /**
      * Name of the image the texture refers to.
      */
@@ -31,7 +32,7 @@ class Texture {
      */
     public points: Polygon;
 
-    constructor(image: string, points: Polygon = Polygon.QuadByPoints(new Vector(0,0), new Vector(1,1))) {
+    constructor(image: string, points: Polygon = Polygon.QuadByPoints(Vector.New(0,0), Vector.New(1,1))) {
         this.image = image;
         this.points = points;
     }
@@ -40,10 +41,12 @@ class Texture {
      * Make a value copy of the texture.
      */
     public Copy(): Texture {
-        return new Texture(
+        const tex = new Texture(
             this.image,
             this.points.Copy()
         );
+
+        return tex;
     }
 
     /**
@@ -53,13 +56,13 @@ class Texture {
      * The indexed sprite sheet operates from left to right, bottom to top.
      * For example, the following shows the indexes of each position in the
      * sprite sheet:
-     * 
+     *
      * |---------|
      * | 0  1  2 |
      * | 3  4  5 |
      * | 6  7  8 |
      * |---------|
-     * 
+     *
      * @param {number} rowCount - number of rows in the sprite sheet (vertically).
      * @param {number} columnCount - number of columns in the sprite sheet (horizontally).
      * @returns {Polygon[]} - An indexed array of shapes to access each sprite.
@@ -79,12 +82,16 @@ class Texture {
                 const xStart = j * spriteWidth;
                 const yStart = i * spriteHeight;
                 spriteSheetIndex.push(Polygon.QuadByPoints(
-                    new Vector(xStart, yStart),
-                    new Vector(xStart + spriteWidth, yStart + spriteHeight)
+                    Vector.New(xStart, yStart),
+                    Vector.New(xStart + spriteWidth, yStart + spriteHeight)
                 ));
             }
         }
         return spriteSheetIndex;
+    }
+
+    public Free(): void {
+        this.points.Free();
     }
 }
 

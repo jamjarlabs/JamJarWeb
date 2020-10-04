@@ -6,6 +6,25 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Object pooling, allows reusing objects in memory to avoid the garbage collection churn of create -> delete -> create.
+This can help prevent stuttering due to minor and major garbage collection occurring between frames by reducing the
+volume of objects that need garbage collected.
+- `Vector` object is now poolable, with helper static functions added to `Vector`
+  - `New` -> provisions a `Vector` from the object pool if available, if not it creates a new instance.
+  - `Free` -> releases a `Vector` back into the object pool if available.
+  - `Init` -> initializes the `Vector` object pool to a specified size.
+- `Renderable` object is now poolable, with similar helper static functions as `Vector`.
+- `DispatchUntilEmpty` method added to `MessageBus`, allows repeated dispatching until the message queue is empty.
+### Changed
+- In `Polygon` -> `RectangleByDimensions`, `QuadByDimensions`, and `EllipseEstimation` all now represent center/origin
+using two X and Y numbers rather than a vector object to avoid unneeded object creation.
+- In `Ellipse` -> `Circle` represnts center using two X and Y numbers rather than a vector object to avoid unneeded
+object creation.
+- `Component` implements `IFreeable`, allowing component values to be freed upon removal/entity destruction. This
+must be implemented on a per `Component` basis by overriding this function.
+- The game loop now ensures all game logic messages are processed using `DispatchUntilEmpty` before executing any
+render logic.
 
 ## [v0.9.0] - 2020-09-05
 ### Added

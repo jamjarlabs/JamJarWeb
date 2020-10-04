@@ -20,6 +20,7 @@
 ### Methods
 
 * [Dispatch](fakemessagebus.md#dispatch)
+* [DispatchUntilEmpty](fakemessagebus.md#dispatchuntilempty)
 * [Publish](fakemessagebus.md#publish)
 * [Subscribe](fakemessagebus.md#subscribe)
 * [Unsubscribe](fakemessagebus.md#unsubscribe)
@@ -46,6 +47,14 @@ Name | Type | Default |
 ###  Dispatch
 
 ▸ **Dispatch**(): *void*
+
+**Returns:** *void*
+
+___
+
+###  DispatchUntilEmpty
+
+▸ **DispatchUntilEmpty**(): *void*
 
 **Returns:** *void*
 

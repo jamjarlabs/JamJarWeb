@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
+import IEntity from "../../entity/ientity";
 import IShape from "../../shape/ishape";
 
 /**
@@ -26,12 +27,19 @@ class Collider extends Component {
     public shape: IShape;
     public enterScript?: string;
     public exitScript?: string;
+    public currentlyCollidingWith: IEntity[];
 
-    constructor(shape: IShape, enterScript?: string, exitScript?: string) {
+    constructor(shape: IShape, enterScript?: string, exitScript?: string, currentlyCollidingWith: IEntity[] = []) {
         super(Collider.KEY);
         this.shape = shape;
         this.enterScript = enterScript;
         this.exitScript = exitScript;
+        this.currentlyCollidingWith = currentlyCollidingWith;
+    }
+
+    public Free(): void {
+        this.currentlyCollidingWith = [];
+        this.shape.Free();
     }
 }
 

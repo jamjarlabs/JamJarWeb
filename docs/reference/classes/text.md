@@ -10,6 +10,10 @@ rendering it such as font, alignment, color and shaders.
 
   ↳ **Text**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -32,6 +36,10 @@ rendering it such as font, alignment, color and shaders.
 * [MESSAGE_ADD](text.md#static-message_add)
 * [MESSAGE_REMOVE](text.md#static-message_remove)
 
+### Methods
+
+* [Free](text.md#free)
+
 ## Constructors
 
 ###  constructor
@@ -49,7 +57,7 @@ Name | Type | Default |
 `font` | string | - |
 `align` | [TextAlignment](../enums/textalignment.md) | TextAlignment.Left |
 `spacing` | number | Text.DEFAULT_SPACING |
-`offset` | [Vector](vector.md) | new Vector(0,0) |
+`offset` | [Vector](vector.md) | Vector.New(0,0) |
 `color` | [Color](color.md) | new Color(0, 0, 0, 1) |
 `shaders` | string[] | [
             ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
@@ -165,3 +173,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Overrides [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*

@@ -35,6 +35,7 @@ import {
     Vector,
     Color,
     TextureWrapping,
+    Renderable
 } from "jamjar";
 
 class TextureGame extends Game {
@@ -95,7 +96,7 @@ class TextureGame extends Game {
 
         // Create entities
         const nearest = new Entity(this.messageBus);
-        nearest.Add(new Transform(new Vector(-40, 20), new Vector(20,20)));
+        nearest.Add(new Transform(Vector.New(-40, 20), Vector.New(20,20)));
         nearest.Add(new Sprite(
             new Material({
                 texture: new Texture("nearest"),
@@ -103,7 +104,7 @@ class TextureGame extends Game {
         ));
 
         const bilinear = new Entity(this.messageBus);
-        bilinear.Add(new Transform(new Vector(0, 20), new Vector(20,20)));
+        bilinear.Add(new Transform(Vector.New(0, 20), Vector.New(20,20)));
         bilinear.Add(new Sprite(
             new Material({
                 texture: new Texture("bilinear"),
@@ -111,7 +112,7 @@ class TextureGame extends Game {
         ));
 
         const trilinear = new Entity(this.messageBus);
-        trilinear.Add(new Transform(new Vector(40, 20), new Vector(20,20)));
+        trilinear.Add(new Transform(Vector.New(40, 20), Vector.New(20,20)));
         trilinear.Add(new Sprite(
             new Material({
                 texture: new Texture("trilinear"),
@@ -119,7 +120,7 @@ class TextureGame extends Game {
         ));
 
         const nearestRed = new Entity(this.messageBus);
-        nearestRed.Add(new Transform(new Vector(-40, -20), new Vector(20,20)));
+        nearestRed.Add(new Transform(Vector.New(-40, -20), Vector.New(20,20)));
         nearestRed.Add(new Sprite(
             new Material({
                 texture: new Texture("nearest"),
@@ -128,19 +129,19 @@ class TextureGame extends Game {
         ));
 
         const bilinearMirroRepeat = new Entity(this.messageBus);
-        bilinearMirroRepeat.Add(new Transform(new Vector(0, -20), new Vector(20,20)));
+        bilinearMirroRepeat.Add(new Transform(Vector.New(0, -20), Vector.New(20,20)));
         bilinearMirroRepeat.Add(new Sprite(
             new Material({
-                texture: new Texture("bilinear_mirror_repeat", Polygon.QuadByPoints(new Vector(0,0), new Vector(5,5))),
+                texture: new Texture("bilinear_mirror_repeat", Polygon.QuadByPoints(Vector.New(0,0), Vector.New(5,5))),
                 color: new Color(1,1,1,0.5)
             }),
         ));
 
         const trilinearRepeat = new Entity(this.messageBus);
-        trilinearRepeat.Add(new Transform(new Vector(40, -20), new Vector(20,20)));
+        trilinearRepeat.Add(new Transform(Vector.New(40, -20), Vector.New(20,20)));
         trilinearRepeat.Add(new Sprite(
             new Material({
-                texture: new Texture("trilinear_repeat", Polygon.QuadByPoints(new Vector(0,0), new Vector(5,5))),
+                texture: new Texture("trilinear_repeat", Polygon.QuadByPoints(Vector.New(0,0), Vector.New(5,5))),
                 color: new Color(0,1,0,1)
             }),
             0,
@@ -156,6 +157,10 @@ const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+// Set up vector and renderable pooling
+Vector.Init(200);
+Renderable.Init(100);
 
 // Create message bus and entity manager
 const messageBus = new MessageBus();

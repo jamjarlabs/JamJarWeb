@@ -35,6 +35,10 @@ Each entity can only have 1 component of each type.
 
   ↳ [Text](text.md)
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -46,6 +50,10 @@ Each entity can only have 1 component of each type.
 * [key](component.md#key)
 * [MESSAGE_ADD](component.md#static-message_add)
 * [MESSAGE_REMOVE](component.md#static-message_remove)
+
+### Methods
+
+* [Free](component.md#free)
 
 ## Constructors
 
@@ -78,3 +86,13 @@ ___
 ### `Static` MESSAGE_REMOVE
 
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+**Returns:** *void*

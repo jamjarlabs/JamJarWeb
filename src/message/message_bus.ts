@@ -38,20 +38,19 @@ class MessageBus implements IMessageBus {
         this.messageQueue = messageQueue;
     }
 
-    /**
-     * Processes the message bus queue and forwards the messages to the subscribers.
-     * who have subscribed to each message type.
-     */
     public Dispatch(): void {
-        const queueLength = this.messageQueue.length;
+        const messageQueue = [...this.messageQueue];
+        this.messageQueue = [];
+        const queueLength = messageQueue.length;
         for (let i = 0; i < queueLength; i++) {
             // Will always be non null
             /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-            const message = this.messageQueue.shift()!;
+            const message = messageQueue.shift()!;
             const messageSubs = this.subscribers[message.type];
             if (!messageSubs) {
                 continue;
             }
+
             // Take a copy of the array, otherwise subscribers might unsubscribe
             // as part of this message, mixing the dispatch order and causing
             // other subscribers to not recieve a message
@@ -62,19 +61,16 @@ class MessageBus implements IMessageBus {
         }
     }
 
-    /**
-     * Publish adds a message to the message bus queue to be dispatched.
-     * @param {IMessage} message The message to send
-     */
+    public DispatchUntilEmpty(): void {
+        while (this.messageQueue.length > 0) {
+            this.Dispatch();
+        }
+    }
+
     public Publish(message: IMessage): void {
         this.messageQueue.push(message);
     }
 
-    /**
-     * Subscribe subscibes a subscriber to a particular message type or types.
-     * @param {ISubscriber} subscriber The subscriber to the message type(s)
-     * @param {string|string[]} types The message type(s) to subscribe to
-     */
     public Subscribe(subscriber: ISubscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for (const type of types) {
@@ -90,10 +86,6 @@ class MessageBus implements IMessageBus {
         this.subscribers[types] = typeSubs;
     }
 
-    /**
-     * UnsubscribeAll unsubscribes a Subscriber from all messages.
-     * @param {ISubscriber} subscriber The subscriber to unsubscribe
-     */
     public UnsubscribeAll(subscriber: ISubscriber): void {
         for (const key in this.subscribers) {
             const subscribers = this.subscribers[key];
@@ -106,11 +98,6 @@ class MessageBus implements IMessageBus {
         }
     }
 
-    /**
-     * Unsubscribe unsubscribes a subscriber from a specific message type or types.
-     * @param {ISubscriber} subscriber The subscriber to unsubscribe
-     * @param {string|strings} types The message type(s) to unsubscribe from
-     */
     public Unsubscribe(subscriber: ISubscriber, types: string | string[]): void {
         if (types instanceof Array) {
             for (const type of types) {

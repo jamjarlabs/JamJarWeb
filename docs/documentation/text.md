@@ -68,7 +68,7 @@ process it before sending it to a [RenderSystem].
 
 ```typescript
 const textEntity = new Entity(messageBus);
-textEntity.Add(new Transform(new Vector(0, 0), new Vector(5,5)));
+textEntity.Add(new Transform(Vector.New(0, 0), Vector.New(5,5)));
 textEntity.Add(new Text(1, "hello world", "example_font", TextAlignment.Center, 2.5, new Color(0,1,0)));
 ```
 

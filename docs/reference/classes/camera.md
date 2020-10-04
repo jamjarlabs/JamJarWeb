@@ -11,6 +11,10 @@ In-game camera position should be managed in the transform.
 
   ↳ **Camera**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -30,6 +34,7 @@ In-game camera position should be managed in the transform.
 
 ### Methods
 
+* [Free](camera.md#free)
 * [GetProjectionMatrix](camera.md#getprojectionmatrix)
 
 ## Constructors
@@ -45,9 +50,9 @@ In-game camera position should be managed in the transform.
 Name | Type | Default |
 ------ | ------ | ------ |
 `backgroundColor` | [Color](color.md) | new Color(0,0,0,1) |
-`viewportPosition` | [Vector](vector.md) | new Vector(0,0) |
-`viewportScale` | [Vector](vector.md) | new Vector(1,1) |
-`virtualScale` | [Vector](vector.md) | new Vector(160,90) |
+`viewportPosition` | [Vector](vector.md) | Vector.New(0,0) |
+`viewportScale` | [Vector](vector.md) | Vector.New(1,1) |
+`virtualScale` | [Vector](vector.md) | Vector.New(160,90) |
 
 **Returns:** *[Camera](camera.md)*
 
@@ -119,6 +124,18 @@ ___
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
 
 ## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Overrides [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*
+
+___
 
 ###  GetProjectionMatrix
 

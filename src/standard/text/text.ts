@@ -34,7 +34,7 @@ class Text extends Component {
      */
     private static readonly DEFAULT_SPACING = 0.3;
     /**
-     * Order which the text should appear, if it should appear infront/behind other 
+     * Order which the text should appear, if it should appear infront/behind other
      * objects, the higher the value the more precedence it is given and will
      * appear in front of objects with a lower value.
      */
@@ -76,7 +76,7 @@ class Text extends Component {
         font: string,
         align: TextAlignment = TextAlignment.Left,
         spacing: number = Text.DEFAULT_SPACING,
-        offset: Vector = new Vector(0,0),
+        offset: Vector = Vector.New(0,0),
         color: Color = new Color(0, 0, 0, 1),
         shaders: string[] = [
             ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
@@ -91,6 +91,10 @@ class Text extends Component {
         this.offset = offset;
         this.color = color;
         this.shaders = shaders;
+    }
+
+    public Free(): void {
+        this.offset.Free();
     }
 }
 

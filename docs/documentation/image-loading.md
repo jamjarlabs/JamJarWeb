@@ -16,7 +16,7 @@ attached [ImageRequest] to specify the image.
 
 ```typescript
 this.messageBus.Publish(new Message<ImageRequest>(
-    ImageRequest.MESSAGE_REQUEST_LOAD, 
+    ImageRequest.MESSAGE_REQUEST_LOAD,
     new ImageRequest("bullet", "assets/bullet.png")
 ));
 ```
@@ -31,11 +31,11 @@ such as in a sprite:
 
 ```typescript
 const bullet = new Entity();
-bullet.Add(new Transform(new Vector(0,0), new Vector(5,5)));
+bullet.Add(new Transform(Vector.New(0,0), Vector.New(5,5)));
 bullet.Add(new Sprite(new Material(
     new Texture(
-        "bullet", 
-        Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1)).GetFloat32Array()
+        "bullet",
+        Polygon.RectangleByPoints(Vector.New(0,0), Vector.New(1,1)).GetFloat32Array()
     )), 1)
 );
 ```
@@ -49,9 +49,9 @@ options provided to the [ImageRequest] in the form of [ITextureOptions].
 
 ```typescript
 this.messageBus.Publish(new Message<ImageRequest>(
-    ImageRequest.MESSAGE_REQUEST_LOAD, 
+    ImageRequest.MESSAGE_REQUEST_LOAD,
     new ImageRequest(
-        "bullet", 
+        "bullet",
         "assets/bullet.png",
         {
             minFilter: TextureFiltering.NEAREST,

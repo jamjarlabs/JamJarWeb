@@ -98,7 +98,7 @@ referenced.
 
 ```typescript
 const collidable = new Entity(this.messageBus);
-collidable.Add(new Transform(new Vector(0, 0), new Vector(1, 1)));
+collidable.Add(new Transform(Vector.New(0, 0), Vector.New(1, 1)));
 collidable.Add(new Collider(Polygon.RectangleByDimensions(1, 1), "test-script"));
 ```
 

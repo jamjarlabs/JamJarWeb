@@ -18,7 +18,6 @@ import IShape from "../../../shape/ishape";
 import GJKAlgorithm from "./gjk_algorithm";
 import CollisionInfo from "../collision_info";
 import Polygon from "../../../shape/polygon";
-import Vector from "../../../geometry/vector";
 import Ellipse from "../../../shape/ellipse";
 
 describe("GJKAlgorithm - CalculateCollision", () => {
@@ -28,20 +27,20 @@ describe("GJKAlgorithm - CalculateCollision", () => {
             "Squares, no collision",
             [],
             [
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Polygon.RectangleByDimensions(1, 1, new Vector(3, 3))
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Polygon.RectangleByDimensions(1, 1, 3, 3)
             ],
             new GJKAlgorithm()
         ],
         [
             "Squares, collision",
             [new CollisionInfo(
-                Polygon.RectangleByDimensions(3, 3, new Vector(0, 0)),
-                Polygon.RectangleByDimensions(3, 3, new Vector(1, 1))
+                Polygon.RectangleByDimensions(3, 3, 0, 0),
+                Polygon.RectangleByDimensions(3, 3, 1, 1)
             )],
             [
-                Polygon.RectangleByDimensions(3, 3, new Vector(0, 0)),
-                Polygon.RectangleByDimensions(3, 3, new Vector(1, 1))
+                Polygon.RectangleByDimensions(3, 3, 0, 0),
+                Polygon.RectangleByDimensions(3, 3, 1, 1)
             ],
             new GJKAlgorithm()
         ],
@@ -49,20 +48,20 @@ describe("GJKAlgorithm - CalculateCollision", () => {
             "Squares, edge no collision",
             [],
             [
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Polygon.RectangleByDimensions(1, 1, new Vector(1, 1))
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Polygon.RectangleByDimensions(1, 1, 1, 1)
             ],
             new GJKAlgorithm()
         ],
         [
             "Squares, edge collision",
             [new CollisionInfo(
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Polygon.RectangleByDimensions(1, 1, new Vector(0.999, 0.999))
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
             )],
             [
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Polygon.RectangleByDimensions(1, 1, new Vector(0.999, 0.999))
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
             ],
             new GJKAlgorithm()
         ],
@@ -70,20 +69,20 @@ describe("GJKAlgorithm - CalculateCollision", () => {
             "Ellipse and rectangle, no collision",
             [],
             [
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Ellipse.Circle(2, new Vector(5, 5))
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Ellipse.Circle(2, 5, 5)
             ],
             new GJKAlgorithm()
         ],
         [
             "Ellipse and rectangle, collision",
             [new CollisionInfo(
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Ellipse.Circle(2, new Vector(-1, 0)),
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Ellipse.Circle(2, -1, 0),
             )],
             [
-                Polygon.RectangleByDimensions(1, 1, new Vector(0, 0)),
-                Ellipse.Circle(2, new Vector(-1, 0))
+                Polygon.RectangleByDimensions(1, 1, 0, 0),
+                Ellipse.Circle(2, -1, 0)
             ],
             new GJKAlgorithm()
         ],

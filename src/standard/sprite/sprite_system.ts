@@ -85,11 +85,11 @@ class SpriteSystem extends System {
 
             if (ui === undefined) {
                 // Not UI
-                renderables.push(new Renderable(
+                renderables.push(Renderable.New(
                     sprite.zOrder,
-                    Polygon.QuadByDimensions(1,1),
+                    Polygon.QuadByDimensions(1, 1, 0, 0),
                     transform.InterpolatedMatrix4D(alpha),
-                    sprite.material,
+                    sprite.material.Copy(),
                     DrawMode.TRIANGLES,
                     undefined,
                 ));
@@ -120,12 +120,16 @@ class SpriteSystem extends System {
                     transform.angle
                 );
 
+                const matrix = relativeTransform.InterpolatedMatrix4D(alpha);
+
+                relativeTransform.Free();
+
                 // Create the renderable for use by rendering systems
-                renderables.push(new Renderable(
+                renderables.push(Renderable.New(
                     sprite.zOrder,
-                    Polygon.QuadByDimensions(1,1),
-                    relativeTransform.InterpolatedMatrix4D(alpha),
-                    sprite.material,
+                    Polygon.QuadByDimensions(1, 1, 0, 0),
+                    matrix,
+                    sprite.material.Copy(),
                     DrawMode.TRIANGLES,
                     ui.camera,
                 ));

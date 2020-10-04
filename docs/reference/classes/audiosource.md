@@ -10,6 +10,10 @@ should be played.
 
   ↳ **AudioSource**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -32,6 +36,7 @@ should be played.
 
 ### Methods
 
+* [Free](audiosource.md#free)
 * [Play](audiosource.md#play)
 * [Stop](audiosource.md#stop)
 
@@ -150,6 +155,18 @@ ___
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
 
 ## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Inherited from [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*
+
+___
 
 ###  Play
 
