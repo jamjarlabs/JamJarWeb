@@ -45,7 +45,7 @@ requiring less calculations than a fully defined polygon.
 Name | Type | Default |
 ------ | ------ | ------ |
 `size` | [Vector](vector.md) | - |
-`center` | [Vector](vector.md) | Vector.New(0,0) |
+`center` | [Vector](vector.md) | Vector.New(0, 0) |
 
 **Returns:** *[AABB](aabb.md)*
 

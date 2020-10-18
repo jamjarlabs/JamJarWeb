@@ -18,7 +18,6 @@ This algorithm sacrifices some collision accuracy for performance.
 ### Methods
 
 * [CalculateCollisions](aabbalgorithm.md#calculatecollisions)
-* [aabb](aabbalgorithm.md#private-aabb)
 
 ## Methods
 
@@ -35,18 +34,3 @@ Name | Type |
 `shapes` | [IShape](../interfaces/ishape.md)[] |
 
 **Returns:** *[CollisionInfo](collisioninfo.md)[]*
-
-___
-
-### `Private` aabb
-
-▸ **aabb**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md)): *[CollisionInfo](collisioninfo.md) | undefined*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`a` | [IShape](../interfaces/ishape.md) |
-`b` | [IShape](../interfaces/ishape.md) |
-
-**Returns:** *[CollisionInfo](collisioninfo.md) | undefined*

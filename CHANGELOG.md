@@ -25,6 +25,8 @@ object creation.
 must be implemented on a per `Component` basis by overriding this function.
 - The game loop now ensures all game logic messages are processed using `DispatchUntilEmpty` before executing any
 render logic.
+- `AABBAlgorithm` more efficient algorithm involving sweeping horizontal then vertical.
+- `AABB` method `FarthestPointInDirection` faster and using less `Vector` objects.
 
 ## [v0.9.0] - 2020-09-05
 ### Added

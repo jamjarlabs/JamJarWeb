@@ -29,7 +29,7 @@ class AABB implements IShape {
     public center: Vector;
     public size: Vector;
 
-    constructor(size: Vector, center: Vector = Vector.New(0,0)) {
+    constructor(size: Vector, center: Vector = Vector.New(0, 0)) {
         this.center = center;
         this.size = size;
     }
@@ -46,30 +46,21 @@ class AABB implements IShape {
     }
 
     public FarthestPointInDirection(direction: Vector): Vector {
-        const left = this.center.x - this.size.x / 2;
-        const right = this.center.x + this.size.x / 2;
-        const top = this.center.y + this.size.y / 2;
-        const bottom = this.center.y - this.size.y / 2;
-
-        const points = [
-            Vector.New(left, top),
-            Vector.New(right, top),
-            Vector.New(left, bottom),
-            Vector.New(right, bottom)
-        ];
-
-        let farthestDistance = points[0].Dot(direction);
-        let farthestPoint = points[0];
-
-        for (let i = 1; i < points.length; i++) {
-            const distanceInDirection = points[i].Dot(direction);
-            if (distanceInDirection > farthestDistance) {
-                farthestPoint = points[i];
-                farthestDistance = distanceInDirection;
+        if (direction.x >= 0) {
+            const right = this.center.x + this.size.x / 2;
+            if (direction.y >= 0) {
+                return new Vector(right, this.center.y + this.size.y / 2); // top right
+            } else {
+                return new Vector(right, this.center.y - this.size.y / 2); // bottom right
+            }
+        } else {
+            const left = this.center.x - this.size.x / 2;
+            if (direction.y >= 0) {
+                return new Vector(left, this.center.y + this.size.y / 2); // top left
+            } else {
+                return new Vector(left, this.center.y - this.size.y / 2); // bottom left
             }
         }
-
-        return farthestPoint;
     }
 
     public PointInside(point: Vector): boolean {
