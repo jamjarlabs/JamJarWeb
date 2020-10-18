@@ -26,34 +26,52 @@ import Vector from "../../../geometry/vector";
  */
 class AABBAlgorithm implements ICollisionAlgorithm {
     public CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
-        const collisions: CollisionInfo[] = [];
-        // Iterate over collision pairs
+
+        const horizontalOverlap: [IShape, IShape][] = [];;
+
+        const leftDir = Vector.New(-1, 0);
+        const rightDir = Vector.New(1, 0);
+
         for (let i = 0; i < shapes.length; i++) {
+            const a = shapes[i];
+            const aLeft = a.FarthestPointInDirection(leftDir);
+            const aRight = a.FarthestPointInDirection(rightDir);
             for (let j = i + 1; j < shapes.length; j++) {
-                const a = shapes[i];
                 const b = shapes[j];
-                // Detect collision
-                const collision = this.aabb(a,b);
-                if (collision !== undefined) {
-                    collisions.push(collision);
+                const bLeft = b.FarthestPointInDirection(leftDir);
+                const bRight = b.FarthestPointInDirection(rightDir);
+                if (aLeft.x < bRight.x &&
+                    aRight.x > bLeft.x) {
+                    horizontalOverlap.push([a, b]);
                 }
             }
         }
-        return collisions;
-    }
 
-    private aabb(a: IShape, b: IShape): CollisionInfo | undefined {
-        const aTopLeft = a.FarthestPointInDirection(Vector.New(-1, 1));
-        const aBottomRight = a.FarthestPointInDirection(Vector.New(1, -1));
-        const bTopLeft = b.FarthestPointInDirection(Vector.New(-1, 1));
-        const bBottomRight = b.FarthestPointInDirection(Vector.New(1, -1));
-        if (aTopLeft.x < bBottomRight.x &&
-            aBottomRight.x > bTopLeft.x &&
-            aBottomRight.y < bTopLeft.y &&
-            aTopLeft.y > bBottomRight.y) {
-            return new CollisionInfo(a, b);
+        leftDir.Free();
+        rightDir.Free();
+
+        const collisions: CollisionInfo[] = [];
+
+        const upDir = Vector.New(0, 1);
+        const downDir = Vector.New(0, -1);
+
+        for (let i = 0; i < horizontalOverlap.length; i++) {
+            const a = horizontalOverlap[i][0];
+            const b = horizontalOverlap[i][1];
+            const aUp = a.FarthestPointInDirection(upDir);
+            const aDown = a.FarthestPointInDirection(downDir);
+            const bUp = b.FarthestPointInDirection(upDir);
+            const bDown = b.FarthestPointInDirection(downDir);
+            if (aDown.y < bUp.y &&
+                aUp.y > bDown.y) {
+                collisions.push(new CollisionInfo(a, b));
+            }
         }
-        return;
+
+        upDir.Free();
+        downDir.Free();
+
+        return collisions;
     }
 }
 
