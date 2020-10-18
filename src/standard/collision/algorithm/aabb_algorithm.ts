@@ -27,7 +27,7 @@ import Vector from "../../../geometry/vector";
 class AABBAlgorithm implements ICollisionAlgorithm {
     public CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
 
-        const horizontalOverlap: [IShape, IShape][] = [];;
+        const horizontalOverlap: [IShape, IShape][] = [];
 
         const leftDir = Vector.New(-1, 0);
         const rightDir = Vector.New(1, 0);
