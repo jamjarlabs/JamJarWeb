@@ -28,6 +28,7 @@ Can be used in collision detection and rendering.
 * [Center](polygon.md#center)
 * [Copy](polygon.md#copy)
 * [FarthestPointInDirection](polygon.md#farthestpointindirection)
+* [Free](polygon.md#free)
 * [GetFloat32Array](polygon.md#getfloat32array)
 * [PointInside](polygon.md#pointinside)
 * [Transform](polygon.md#transform)
@@ -110,6 +111,16 @@ Name | Type |
 
 ___
 
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Returns:** *void*
+
+___
+
 ###  GetFloat32Array
 
 ▸ **GetFloat32Array**(): *Float32Array*
@@ -156,7 +167,7 @@ ___
 
 ### `Static` EllipseEstimation
 
-▸ **EllipseEstimation**(`numOfPoints`: number, `dimensions`: [Vector](vector.md), `center`: [Vector](vector.md), `wrap`: boolean): *[Polygon](polygon.md)*
+▸ **EllipseEstimation**(`numOfPoints`: number, `dimensions`: [Vector](vector.md), `centerX`: number, `centerY`: number, `wrap`: boolean): *[Polygon](polygon.md)*
 
 EllipseEstimation provides a new polygon that estimates the shape of an ellipse.
 
@@ -166,7 +177,8 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `numOfPoints` | number | - | Number of points the estimation should have |
 `dimensions` | [Vector](vector.md) | - | Ellipse dimensions |
-`center` | [Vector](vector.md) | new Vector(0, 0) | Ellipse center |
+`centerX` | number | 0 | - |
+`centerY` | number | 0 | - |
 `wrap` | boolean | false | If the polygon should wrap on itself (first point == last point)  |
 
 **Returns:** *[Polygon](polygon.md)*
@@ -175,7 +187,7 @@ ___
 
 ### `Static` QuadByDimensions
 
-▸ **QuadByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md)): *[Polygon](polygon.md)*
+▸ **QuadByDimensions**(`width`: number, `height`: number, `originX`: number, `originY`: number): *[Polygon](polygon.md)*
 
 QuadByDimensions returns a new polygon in a quad shape with the width and
 height provided, optionally around an origin point
@@ -186,7 +198,8 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `width` | number | - | Width of the quad |
 `height` | number | - | Height of the quad |
-`origin` | [Vector](vector.md) | new Vector(0,0) | Center point of the quad  |
+`originX` | number | 0 | - |
+`originY` | number | 0 | - |
 
 **Returns:** *[Polygon](polygon.md)*
 
@@ -212,7 +225,7 @@ ___
 
 ### `Static` RectangleByDimensions
 
-▸ **RectangleByDimensions**(`width`: number, `height`: number, `origin`: [Vector](vector.md), `wrap`: boolean): *[Polygon](polygon.md)*
+▸ **RectangleByDimensions**(`width`: number, `height`: number, `originX`: number, `originY`: number, `wrap`: boolean): *[Polygon](polygon.md)*
 
 RectangleByDimensions returns a new polygon in a rectangle shape with the
 width and height provided, optionally around an origin point.
@@ -223,7 +236,8 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `width` | number | - | Width of the rectangle |
 `height` | number | - | Height of the rectangle |
-`origin` | [Vector](vector.md) | new Vector(0,0) | Center point of the rectangle  |
+`originX` | number | 0 | - |
+`originY` | number | 0 | - |
 `wrap` | boolean | false | - |
 
 **Returns:** *[Polygon](polygon.md)*

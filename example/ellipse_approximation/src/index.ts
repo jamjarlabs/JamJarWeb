@@ -15,7 +15,7 @@ import {
     MotionSystem,
     Material,
     Polygon,
-    Color
+    Color, Renderable
 } from "jamjar";
 
 const OBJ_COUNT = 40;
@@ -29,7 +29,6 @@ const MIN_Y = -45;
 const MAX_Y = 45;
 const MAX_POINTS = 40;
 const MIN_POINTS = 4;
-
 
 class EllipseApproximation extends Game {
     constructor(messageBus: IMessageBus) {
@@ -48,8 +47,8 @@ class EllipseApproximation extends Game {
             // Create entities
             const nearest = new Entity(this.messageBus);
             nearest.Add(new Transform(
-                new Vector(randomBetweenInts(MIN_X, MAX_X), randomBetweenInts(MIN_Y, MAX_Y)),
-                new Vector(randomBetweenInts(MIN_SCALE, MAX_SCALE), randomBetweenInts(MIN_SCALE, MAX_SCALE))
+                Vector.New(randomBetweenInts(MIN_X, MAX_X), randomBetweenInts(MIN_Y, MAX_Y)),
+                Vector.New(randomBetweenInts(MIN_SCALE, MAX_SCALE), randomBetweenInts(MIN_SCALE, MAX_SCALE))
             ));
             nearest.Add(new Primitive(
                 new Material({
@@ -58,7 +57,8 @@ class EllipseApproximation extends Game {
                 1,
                 Polygon.EllipseEstimation(
                     randomBetweenInts(MIN_POINTS, MAX_POINTS),
-                    new Vector(xDimension, yDimension),
+                    Vector.New(xDimension, yDimension),
+                    undefined,
                     undefined,
                     true
                 )
@@ -76,6 +76,10 @@ const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+// Set up pooling
+Vector.Init(400);
+Renderable.Init(200);
 
 const messageBus = new MessageBus();
 

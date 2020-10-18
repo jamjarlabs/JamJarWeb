@@ -276,7 +276,7 @@ class WebGLSystem extends RenderSystem {
             // the canvas converted from the -1 to +1 coordinates of the viewportPosition
             // combined with the real width and height to make sure it is in the center
             // of the viewport.
-            const realPosition = new Vector(
+            const realPosition = Vector.New(
                 (canvasWidth / 2 + (camera.viewportPosition.x / 2) * canvasWidth) - realWidth / 2,
                 (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
             );
@@ -459,6 +459,7 @@ class WebGLSystem extends RenderSystem {
                                     shader[1].perRenderable(glslContext, renderable, texture);
                                 }
                             }
+
                             gl.drawArrays(drawMode, 0, renderable.vertices.GetFloat32Array().length / 2);
                         }
                     }
@@ -466,6 +467,11 @@ class WebGLSystem extends RenderSystem {
 
             }
         }
+
+        for (const renderable of this.renderables) {
+            renderable.Free();
+        }
+
         this.renderables = [];
     }
 }

@@ -46,7 +46,7 @@ import {
     SystemEntity,
     Motion,
     MotionSystem,
-    InterpolationSystem,
+    InterpolationSystem,, Renderable
 } from "jamjar";
 
 class TextureGame extends Game {
@@ -73,7 +73,7 @@ class TextureGame extends Game {
 
         // Create player
         const player = new Entity(this.messageBus, ["player"]);
-        player.Add(new Transform(new Vector(0, 0), new Vector(20,20)));
+        player.Add(new Transform(Vector.New(0, 0), Vector.New(20,20)));
         player.Add(new Sprite(
             new Material({
                 texture: new Texture("animation_sheet", spriteSheetIndices[0]),
@@ -224,22 +224,22 @@ class PlayerSystem extends System {
                     const player = entity.Get(Player.KEY) as Player;
                     const animator = entity.Get(SpriteAnimator.KEY) as SpriteAnimator;
                     if (keyMessage.payload === "KeyW") {
-                        player.direction = new Vector(0, 1);
+                        player.direction = Vector.New(0, 1);
                         if (animator.current !== undefined) {
                             animator.current = "up";
                         }
                     } else if (keyMessage.payload === "KeyS") {
-                        player.direction = new Vector(0, -1);
+                        player.direction = Vector.New(0, -1);
                         if (animator.current !== undefined) {
                             animator.current = "down";
                         }
                     } else if (keyMessage.payload === "KeyA") {
-                        player.direction = new Vector(-1, 0);
+                        player.direction = Vector.New(-1, 0);
                         if (animator.current !== undefined) {
                             animator.current = "left";
                         }
                     } else if (keyMessage.payload === "KeyD") {
-                        player.direction = new Vector(1, 0);
+                        player.direction = Vector.New(1, 0);
                         if (animator.current !== undefined) {
                             animator.current = "right";
                         }
@@ -262,22 +262,22 @@ class PlayerSystem extends System {
                     const player = entity.Get(Player.KEY) as Player;
                     const animator = entity.Get(SpriteAnimator.KEY) as SpriteAnimator;
                     if (keyMessage.payload === "KeyW" && player.direction.y === 1) {
-                        player.direction = new Vector(0, 0);
+                        player.direction = Vector.New(0, 0);
                         if (animator.current !== undefined) {
                             animator.current = "idle";
                         }
                     } else if (keyMessage.payload === "KeyS" && player.direction.y === -1) {
-                        player.direction = new Vector(0, 0);
+                        player.direction = Vector.New(0, 0);
                         if (animator.current !== undefined) {
                             animator.current = "idle";
                         }
                     } else if (keyMessage.payload === "KeyA" && player.direction.x === -1) {
-                        player.direction = new Vector(0, 0);
+                        player.direction = Vector.New(0, 0);
                         if (animator.current !== undefined) {
                             animator.current = "idle";
                         }
                     } else if (keyMessage.payload === "KeyD" && player.direction.x === 1) {
-                        player.direction = new Vector(0, 0);
+                        player.direction = Vector.New(0, 0);
                         if (animator.current !== undefined) {
                             animator.current = "idle";
                         }
@@ -304,7 +304,7 @@ class Player extends Component {
     public speed: number;
     public direction: Vector;
 
-    constructor(speed: number, direction: Vector = new Vector(0,0)) {
+    constructor(speed: number, direction: Vector = Vector.New(0,0)) {
         super(Player.KEY);
         this.speed = speed;
         this.direction = direction;
@@ -319,6 +319,10 @@ const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+// Set up object pools
+Vector.Init(200);
+Renderable.Init(200);
 
 // Create message bus and entity manager
 const messageBus = new MessageBus();

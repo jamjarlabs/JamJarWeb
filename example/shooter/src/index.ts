@@ -56,7 +56,8 @@ import {
     TextAlignment,
     TextureFiltering,
     FontRequest,
-    DrawMode
+    DrawMode,
+    Renderable
 } from "jamjar"
 
 class ScoreCounter extends Component {
@@ -89,7 +90,7 @@ class ScoreSystem extends System {
 
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
-        switch(message.type) {
+        switch (message.type) {
             case ScoreSystem.MESSAGE_SCORE_INCREMENT: {
                 for (const entity of this.entities.values()) {
                     const counter = entity.Get(ScoreCounter.KEY) as ScoreCounter;
@@ -106,7 +107,7 @@ class ScoreSystem extends System {
 
 class AsteroidSystem extends System {
     public static readonly ASTEROID_TAG = "asteroid";
-    public static readonly ASTEROID_LAYER= "asteroid";
+    public static readonly ASTEROID_LAYER = "asteroid";
     public static readonly BASE_SPAWN_INTERVAL: number = 3000;
 
     private static readonly MIN_SPEED = 10;
@@ -128,7 +129,6 @@ class AsteroidSystem extends System {
 
     private lastSpawnTime: number;
     private spawnInterval: number;
-    private destroyed: number[];
 
     constructor(messageBus: IMessageBus,
         scene?: IScene,
@@ -136,12 +136,11 @@ class AsteroidSystem extends System {
         spawnInterval: number = AsteroidSystem.BASE_SPAWN_INTERVAL,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        ) {
+    ) {
         super(messageBus, scene, AsteroidSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_ENTER);
         this.lastSpawnTime = lastSpawnTime;
         this.spawnInterval = spawnInterval;
-        this.destroyed = [];
     }
 
     protected Update(dt: number): void {
@@ -153,12 +152,12 @@ class AsteroidSystem extends System {
             }
             this.lastSpawnTime = time;
 
-            const startPosition = new Vector(0, 1)
-                .RotateDeg(new Vector(0, 0), randomBetweenInts(0, 359))
+            const startPosition = Vector.New(0, 1)
+                .RotateDeg(Vector.New(0, 0), randomBetweenInts(0, 359))
                 .Normalize()
                 .Scale(AsteroidSystem.SPAWN_DISTANCE);
 
-            const size = new Vector(randomBetweenInts(1, 15), randomBetweenInts(1, 15));
+            const size = Vector.New(randomBetweenInts(1, 15), randomBetweenInts(1, 15));
 
             this.createAsteroid(startPosition, size, AsteroidSystem.MAX_SPEED);
         }
@@ -204,16 +203,16 @@ class AsteroidSystem extends System {
                         destroyEntity = collisionMessage.payload.a;
                     }
 
-                    if (destroyEntity === undefined || this.destroyed.includes(destroyEntity.id)) {
+                    if (destroyEntity === undefined) {
                         continue;
                     }
+
                     for (const entity of asteroids) {
                         if (entity === undefined || entity.entity.id != destroyEntity.id) {
                             continue;
                         }
                         entity.Destroy();
                         this.messageBus.Publish(new Message(ScoreSystem.MESSAGE_SCORE_INCREMENT));
-                        this.destroyed.push(entity.entity.id);
                         return;
                     }
                 }
@@ -246,13 +245,13 @@ class AsteroidSystem extends System {
     private createAsteroid(position: Vector, scale: Vector, maxSpeed: number): void {
         const asteroid = new Entity(this.messageBus, [AsteroidSystem.ASTEROID_TAG], [AsteroidSystem.ASTEROID_LAYER]);
 
-        const towardsVector = new Vector(0, 0).Sub(position).Normalize();
+        const towardsVector = Vector.New(0, 0).Sub(position).Normalize();
 
         const numberOfSides = randomBetweenInts(6, 10);
 
         let points: Vector[] = [];
         for (let i = 0; i < numberOfSides; i++) {
-            points.push(new Vector(Math.cos(2 * Math.PI * i / numberOfSides), Math.sin(2 * Math.PI * i / numberOfSides)).Scale(Math.random() * (0.5 - 1.5) + 1.5));
+            points.push(Vector.New(Math.cos(2 * Math.PI * i / numberOfSides), Math.sin(2 * Math.PI * i / numberOfSides)).Scale(Math.random() * (0.5 - 1.5) + 1.5));
         }
         points.push(points[0]);
         const shape = new Polygon(points);
@@ -263,7 +262,7 @@ class AsteroidSystem extends System {
             Math.random() * (0 - Math.PI * 2) + Math.PI * 2));
         asteroid.Add(new Primitive(
             new Material({
-                color: new Color(1,1,1,1)
+                color: new Color(1, 1, 1, 1)
             }),
             0,
             shape,
@@ -377,7 +376,7 @@ class PlayerSystem extends System {
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        targetedPosition: Vector = new Vector(0,0)) {
+        targetedPosition: Vector = Vector.New(0, 0)) {
         super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointermove", "pointerdown"]);
         this.targetedPosition = targetedPosition;
@@ -417,22 +416,22 @@ class PlayerSystem extends System {
                     const bullet = new Entity(this.messageBus, [BulletSystem.BULLET_TAG], [BulletSystem.BULLET_LAYER]);
                     const towardsVector = this.targetedPosition.Copy().Sub(transform.position).Normalize();
 
-                    bullet.Add(new Transform(towardsVector.Copy().Scale(6), new Vector(0.4, 3), orientation));
+                    bullet.Add(new Transform(towardsVector.Copy().Scale(6), Vector.New(0.4, 3), orientation));
                     bullet.Add(new Primitive(
                         new Material({
-                            color: new Color(0.54,1,0.54,1)
+                            color: new Color(0.54, 1, 0.54, 1)
                         }),
                         1,
                         new Polygon([
-                            new Vector(0, -0.5),
-                            new Vector(0, 0.5),
+                            Vector.New(0, -0.5),
+                            Vector.New(0, 0.5),
                         ]),
                         DrawMode.LINES
                     ))
                     bullet.Add(new Sprite(new Material({
                         texture: new Texture(
                             "bullet",
-                            Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))
+                            Polygon.RectangleByPoints(Vector.New(0, 0), Vector.New(1, 1))
                         )
                     }), 1));
                     bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)))
@@ -470,21 +469,21 @@ class GameOverScene extends Scene {
         new PrimitiveSystem(this.messageBus, this);
         new InterpolationSystem(this.messageBus, this);
 
-        const virtualSize = new Vector(160, 90);
-        const viewportPosition = new Vector(0, 0);
-        const viewportScale = new Vector(1, 1);
+        const virtualSize = Vector.New(160, 90);
+        const viewportPosition = Vector.New(0, 0);
+        const viewportScale = Vector.New(1, 1);
         const backgroundColor = new Color(0, 0, 0, 1);
 
         const camera = new Entity(this.messageBus);
-        camera.Add(new Transform(new Vector(0, 0)));
+        camera.Add(new Transform(Vector.New(0, 0)));
         camera.Add(new Camera(backgroundColor, viewportPosition, viewportScale, virtualSize));
         this.AddEntity(camera);
 
         const gameOverHeight = 0.1;
         const gameOverWidth = gameOverHeight * (virtualSize.y / virtualSize.x);
         const gameOver = new Entity(this.messageBus);
-        gameOver.Add(new Transform(new Vector(0, 0), new Vector(gameOverWidth, gameOverHeight)));
-        gameOver.Add(new Text(2, "GAMEOVER", "test", TextAlignment.Center, 0.3, undefined, new Color(1,1,1,1)));
+        gameOver.Add(new Transform(Vector.New(0, 0), Vector.New(gameOverWidth, gameOverHeight)));
+        gameOver.Add(new Text(2, "GAMEOVER", "test", TextAlignment.Center, 0.3, undefined, new Color(1, 1, 1, 1)));
         gameOver.Add(new UI(camera));
         this.AddEntity(gameOver);
 
@@ -492,24 +491,24 @@ class GameOverScene extends Scene {
         const playAgainHeight = 0.05;
         const playAgainWidth = playAgainHeight * (virtualSize.y / virtualSize.x);
         const playAgain = new Entity(this.messageBus);
-        playAgain.Add(new Transform(new Vector(0, -0.2), new Vector(playAgainWidth, playAgainHeight)));
-        playAgain.Add(new Text(2, "REFRESH TO REPLAY", "test", TextAlignment.Center, 0.3, undefined, new Color(1,1,1,1)));
+        playAgain.Add(new Transform(Vector.New(0, -0.2), Vector.New(playAgainWidth, playAgainHeight)));
+        playAgain.Add(new Text(2, "REFRESH TO REPLAY", "test", TextAlignment.Center, 0.3, undefined, new Color(1, 1, 1, 1)));
         playAgain.Add(new UI(camera));
         this.AddEntity(playAgain);
 
         const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
-        crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
+        crosshair.Add(new Transform(Vector.New(0, 0), Vector.New(0.03, 0.053)));
         crosshair.Add(new Primitive(
             new Material({
-                color: new Color(1,1,1,1)
+                color: new Color(1, 1, 1, 1)
             }),
             1,
             new Polygon([
-                new Vector(-0.25,-0.25),
-                new Vector(0.25,0.25),
-                new Vector(0,0),
-                new Vector(-0.25,0.25),
-                new Vector(0.25,-0.25),
+                Vector.New(-0.25, -0.25),
+                Vector.New(0.25, 0.25),
+                Vector.New(0, 0),
+                Vector.New(-0.25, 0.25),
+                Vector.New(0.25, -0.25),
             ]),
             DrawMode.LINE_STRIP
         ))
@@ -529,7 +528,7 @@ class MainScene extends Scene {
 
     OnMessage(message: IMessage): void {
         super.OnMessage(message);
-        switch(message.type) {
+        switch (message.type) {
             case MainScene.MESSAGE_GAME_OVER: {
                 new GameOverScene(this.messageBus).Start();
                 this.Destroy();
@@ -568,51 +567,51 @@ class MainScene extends Scene {
             }
         )));
 
-        const virtualSize = new Vector(160, 90);
-        const viewportPosition = new Vector(0, 0);
-        const viewportScale = new Vector(1, 1);
+        const virtualSize = Vector.New(160, 90);
+        const viewportPosition = Vector.New(0, 0);
+        const viewportScale = Vector.New(1, 1);
         const backgroundColor = new Color(0, 0, 0, 1);
 
         const camera = new Entity(this.messageBus);
-        camera.Add(new Transform(new Vector(0, 0)));
+        camera.Add(new Transform(Vector.New(0, 0)));
         camera.Add(new Camera(backgroundColor, viewportPosition, viewportScale, virtualSize));
         this.AddEntity(camera);
 
         const player = new Entity(this.messageBus, [PlayerSystem.PLAYER_TAG], [PlayerSystem.PLAYER_LAYER]);
-        player.Add(new Transform(new Vector(0, 0), new Vector(2, 2)));
+        player.Add(new Transform(Vector.New(0, 0), Vector.New(2, 2)));
         player.Add(new Primitive(
             new Material({
-                color: new Color(1,1,1,1)
+                color: new Color(1, 1, 1, 1)
             }),
             0,
             new Polygon([
-                new Vector(0,0.5),
-                new Vector(0.5, -0.5),
-                new Vector(-0.5, -0.5),
-                new Vector(0,0.5)
+                Vector.New(0, 0.5),
+                Vector.New(0.5, -0.5),
+                Vector.New(-0.5, -0.5),
+                Vector.New(0, 0.5)
             ]),
             DrawMode.LINE_STRIP
         ));
         player.Add(new Collider(new Polygon([
-            new Vector(0,0.5),
-            new Vector(0.5, -0.5),
-            new Vector(-0.5, -0.5),
+            Vector.New(0, 0.5),
+            Vector.New(0.5, -0.5),
+            Vector.New(-0.5, -0.5),
         ])));
         this.AddEntity(player);
 
         const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
-        crosshair.Add(new Transform(new Vector(0, 0), new Vector(0.03, 0.053)));
+        crosshair.Add(new Transform(Vector.New(0, 0), Vector.New(0.03, 0.053)));
         crosshair.Add(new Primitive(
             new Material({
-                color: new Color(1,1,1,1)
+                color: new Color(1, 1, 1, 1)
             }),
             1,
             new Polygon([
-                new Vector(-0.25,-0.25),
-                new Vector(0.25,0.25),
-                new Vector(0,0),
-                new Vector(-0.25,0.25),
-                new Vector(0.25,-0.25),
+                Vector.New(-0.25, -0.25),
+                Vector.New(0.25, 0.25),
+                Vector.New(0, 0),
+                Vector.New(-0.25, 0.25),
+                Vector.New(0.25, -0.25),
             ]),
             DrawMode.LINE_STRIP
         ))
@@ -622,8 +621,8 @@ class MainScene extends Scene {
         const scoreHeight = 0.06;
         const scoreCharWidth = scoreHeight * (virtualSize.y / virtualSize.x);
         const scoreCounter = new Entity(this.messageBus);
-        scoreCounter.Add(new Transform(new Vector(0, 0.9), new Vector(scoreCharWidth, scoreHeight)));
-        scoreCounter.Add(new Text(2, "SCORE:0", "test", TextAlignment.Center, 0.3, undefined, new Color(1,1,1,1)));
+        scoreCounter.Add(new Transform(Vector.New(0, 0.9), Vector.New(scoreCharWidth, scoreHeight)));
+        scoreCounter.Add(new Text(2, "SCORE:0", "test", TextAlignment.Center, 0.3, undefined, new Color(1, 1, 1, 1)));
         scoreCounter.Add(new ScoreCounter());
         scoreCounter.Add(new UI(camera));
         this.AddEntity(scoreCounter);
@@ -649,6 +648,9 @@ const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+Vector.Init(5000);
+Renderable.Init(500);
 
 const messageBus = new MessageBus();
 

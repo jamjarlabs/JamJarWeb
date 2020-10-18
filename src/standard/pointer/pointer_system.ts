@@ -110,7 +110,7 @@ class PointerSystem extends System {
      * When a Wheel Event occurs; used to store the last wheel event to be
      * dispatched at the next update. This is to throttle this event which can
      * be fired many times.
-     * @param {WheelEvent} event Fired wheel event 
+     * @param {WheelEvent} event Fired wheel event
      */
     protected wheelEvent(event: WheelEvent): void {
         this.lastWheelEvent = event;
@@ -137,14 +137,14 @@ class PointerSystem extends System {
             // lockedPointerPosition is undefined when not fullscreen, when fullscreen it is used to
             // keep track of the last pointer position
             if (this.lockedPointerPosition !== undefined) {
-                this.lockedPointerPosition = this.lockedPointerPosition.Add(new Vector(event.movementX, event.movementY));
+                this.lockedPointerPosition = this.lockedPointerPosition.Add(Vector.New(event.movementX, event.movementY));
                 pointerX = this.lockedPointerPosition.x;
                 pointerY = this.lockedPointerPosition.y;
             } else {
-                this.lockedPointerPosition = new Vector(event.clientX, event.clientY);
+                this.lockedPointerPosition = Vector.New(event.clientX, event.clientY);
             }
         }
-        const elementPosition = new Vector(
+        const elementPosition = Vector.New(
             ((pointerX - rect.left) - (rect.width / 2)) / (rect.width / 2),
             -((pointerY - rect.top) - (rect.height / 2)) / (rect.height / 2)
         );
@@ -168,13 +168,13 @@ class PointerSystem extends System {
                 elementPosition.y > viewportPosition.y - viewportScale.y;
 
             // Position relative to camera viewport
-            const cameraPosition = new Vector(
+            const cameraPosition = Vector.New(
                 (elementPosition.x - viewportPosition.x) / viewportScale.x,
                 (elementPosition.y - viewportPosition.y) / viewportScale.y
             );
 
             // Position in the world according to the camera
-            const worldPosition = new Vector(
+            const worldPosition = Vector.New(
                 cameraWorldPosition.x + virtualScale.x * (cameraPosition.x / 2),
                 cameraWorldPosition.y + virtualScale.y * (cameraPosition.y / 2)
             );

@@ -24,9 +24,9 @@ import IEntity from "../entity/ientity";
  */
 class ComponentManager {
     public key: string;
-    private components: Record<number, Component>;
+    private components: Map<number, Component>;
 
-    constructor(key: string, components: Record<number, Component> = {}) {
+    constructor(key: string, components: Map<number, Component> = new Map()) {
         this.key = key;
         this.components = components;
     }
@@ -38,7 +38,7 @@ class ComponentManager {
      * @returns {Component|undefined} Component retrieved, if doesn't exist, undefined
      */
     public Get(entity: IEntity): Component | undefined {
-        return this.components[entity.id];
+        return this.components.get(entity.id);
     }
 
     /**
@@ -48,7 +48,7 @@ class ComponentManager {
      * @param {Component} component Component to add
      */
     public Add(entity: IEntity, component: Component): void {
-        this.components[entity.id] = component;
+        this.components.set(entity.id, component);
     }
 
     /**
@@ -57,7 +57,11 @@ class ComponentManager {
      * @param {IEntity} entity Entity of the component to remove
      */
     public Remove(entity: IEntity): void {
-        delete this.components[entity.id];
+        const component = this.components.get(entity.id);
+        if (component !== undefined) {
+            this.components.delete(entity.id);
+            component.Free();
+        }
     }
 }
 

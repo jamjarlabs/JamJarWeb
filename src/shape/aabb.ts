@@ -29,7 +29,7 @@ class AABB implements IShape {
     public center: Vector;
     public size: Vector;
 
-    constructor(size: Vector, center: Vector = new Vector(0,0)) {
+    constructor(size: Vector, center: Vector = Vector.New(0,0)) {
         this.center = center;
         this.size = size;
     }
@@ -52,10 +52,10 @@ class AABB implements IShape {
         const bottom = this.center.y - this.size.y / 2;
 
         const points = [
-            new Vector(left, top),
-            new Vector(right, top),
-            new Vector(left, bottom),
-            new Vector(right, bottom)
+            Vector.New(left, top),
+            Vector.New(right, top),
+            Vector.New(left, bottom),
+            Vector.New(right, bottom)
         ];
 
         let farthestDistance = points[0].Dot(direction);
@@ -78,6 +78,11 @@ class AABB implements IShape {
         const top = this.center.y + this.size.y / 2;
         const bottom = this.center.y - this.size.y / 2;
         return point.x < right && point.x > left && point.y < top && point.y > bottom;
+    }
+
+    public Free(): void {
+        this.center.Free();
+        this.size.Free();
     }
 }
 

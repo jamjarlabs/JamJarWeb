@@ -1,7 +1,7 @@
 # Sprites
 
 Sprites are simple renderable components, allowing shapes to be rendered with
-materials applied to them to specify texture, color and shaders.  
+materials applied to them to specify texture, color and shaders.
 
 The [SpriteSystem] allows rendering [Sprite] components - by tracking [Sprite]
 components and generating a list of [IRenderable] for render systems to use.
@@ -26,12 +26,12 @@ An [Entity] can be given a sprite by adding the [Sprite] component to an entity.
 
 ```typescript
 const spriteEntity = new Entity(messageBus);
-spriteEntity.Add(new Transform(new Vector(0, 0), new Vector(5,5)));
+spriteEntity.Add(new Transform(Vector.New(0, 0), Vector.New(5,5)));
 spriteEntity.Add(new Sprite(
     new Material({
-        texture: new Texture("example_texture", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))),
-    }), 
-    0, 
+        texture: new Texture("example_texture", Polygon.RectangleByPoints(Vector.New(0,0), Vector.New(1,1))),
+    }),
+    0,
     Polygon.RectangleByDimensions(1,1)
 ));
 ```
@@ -59,16 +59,16 @@ required [Transform] and [Sprite] components.
 
 ```typescript
 const gameCamera = new Entity(messageBus);
-gameCamera.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
+gameCamera.Add(new Transform(Vector.New(0, 0), Vector.New(5, 5)));
 gameCamera.Add(new Camera());
 
 const uiElement = new Entity(messageBus);
-uiElement.Add(new Transform(new Vector(0, 0), new Vector(0.2,0.2)));
+uiElement.Add(new Transform(Vector.New(0, 0), Vector.New(0.2,0.2)));
 uiElement.Add(new Sprite(
     new Material({
-        texture: new Texture("example_texture", Polygon.RectangleByPoints(new Vector(0,0), new Vector(1,1))),
-    }), 
-    0, 
+        texture: new Texture("example_texture", Polygon.RectangleByPoints(Vector.New(0,0), Vector.New(1,1))),
+    }),
+    0,
     Polygon.RectangleByDimensions(1,1)
 ));
 uiElement.Add(new UI(gameCamera));

@@ -11,6 +11,10 @@ Frequently used in rendering, collisions and physics.
 
   ↳ **Transform**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -30,6 +34,7 @@ Frequently used in rendering, collisions and physics.
 
 ### Methods
 
+* [Free](transform.md#free)
 * [InterpolatedMatrix4D](transform.md#interpolatedmatrix4d)
 * [Matrix3D](transform.md#matrix3d)
 * [Matrix4D](transform.md#matrix4d)
@@ -46,8 +51,8 @@ Frequently used in rendering, collisions and physics.
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`position` | [Vector](vector.md)‹› | new Vector(0,0) |
-`scale` | [Vector](vector.md)‹› | new Vector(1,1) |
+`position` | [Vector](vector.md)‹› | Vector.New(0, 0) |
+`scale` | [Vector](vector.md)‹› | Vector.New(1, 1) |
 `angle` | number | 0 |
 
 **Returns:** *[Transform](transform.md)*
@@ -117,6 +122,18 @@ ___
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
 
 ## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Overrides [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*
+
+___
 
 ###  InterpolatedMatrix4D
 

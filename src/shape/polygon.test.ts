@@ -196,17 +196,17 @@ describe("Polygon - Center", () => {
         [
             "Square around origin",
             new Vector(0,0),
-            Polygon.RectangleByDimensions(1, 1, new Vector(0,0))
+            Polygon.RectangleByDimensions(1, 1, 0, 0)
         ],
         [
             "Rectangle around origin",
             new Vector(0,0),
-            Polygon.RectangleByDimensions(10, 1, new Vector(0,0))
+            Polygon.RectangleByDimensions(10, 1, 0, 0)
         ],
         [
             "Rectangle around point",
             new Vector(10,5),
-            Polygon.RectangleByDimensions(10, 3, new Vector(10,5))
+            Polygon.RectangleByDimensions(10, 3, 10, 5)
         ],
     ])("%p", (description: string, expected: Vector, polygon: Polygon) => {
         expect(polygon.Center()).toEqual(expected);
@@ -224,8 +224,8 @@ describe("Polygon - Apply4D", () => {
         ],
         [
             "Square, move up 3, scale 2",
-            Polygon.RectangleByDimensions(2, 2, new Vector(0,3)),
-            Polygon.RectangleByDimensions(1, 1, new Vector(0,0)),
+            Polygon.RectangleByDimensions(2, 2, 0, 3),
+            Polygon.RectangleByDimensions(1, 1, 0, 0),
             ((): Matrix4D => {
                 const mat = new Matrix4D();
                 mat.Translate(new Vector(0,3));
@@ -295,7 +295,7 @@ describe("Polygon - RectangleByDimensions", () => {
             true
         ],
     ])("%p", (description: string, expected: Polygon, width: number, height: number, origin: Vector, wrap: boolean) => {
-        expect(Polygon.RectangleByDimensions(width, height, origin, wrap)).toEqual(expected);
+        expect(Polygon.RectangleByDimensions(width, height, origin.x, origin.y, wrap)).toEqual(expected);
     });
 });
 
@@ -369,7 +369,7 @@ describe("Polygon - RectangleByPoints", () => {
 });
 
 describe("Polygon - QuadByDimensions", () => {
-    type TestTuple = [string, Polygon, number, number, Vector | undefined];
+    type TestTuple = [string, Polygon, number, number, number | undefined, number | undefined];
     test.each<TestTuple>([
         [
             "0*0",
@@ -383,6 +383,7 @@ describe("Polygon - QuadByDimensions", () => {
             ]),
             0,
             0,
+            undefined,
             undefined
         ],
         [
@@ -398,6 +399,7 @@ describe("Polygon - QuadByDimensions", () => {
             ]),
             2,
             2,
+            undefined,
             undefined
         ],
         [
@@ -413,6 +415,7 @@ describe("Polygon - QuadByDimensions", () => {
             ]),
             3,
             2,
+            undefined,
             undefined
         ],
         [
@@ -428,10 +431,11 @@ describe("Polygon - QuadByDimensions", () => {
             ]),
             2,
             2,
-            new Vector(4,4)
+            4,
+            4
         ],
-    ])("%p", (description: string, expected: Polygon, width: number, height: number, origin: Vector | undefined) => {
-        expect(Polygon.QuadByDimensions(width, height, origin)).toEqual(expected);
+    ])("%p", (description: string, expected: Polygon, width: number, height: number, originX: number | undefined, originY: number | undefined) => {
+        expect(Polygon.QuadByDimensions(width, height, originX, originY)).toEqual(expected);
     });
 });
 
@@ -531,6 +535,6 @@ describe("Polygon - EllipseEstimation", () => {
         ],
     ])("%p", (description: string, expected: Polygon, numOfEdges: number, dimensions: Vector, center: Vector,
         wrap: boolean) => {
-        expect(Polygon.EllipseEstimation(numOfEdges, dimensions, center, wrap)).toEqual(expected);
+        expect(Polygon.EllipseEstimation(numOfEdges, dimensions, center.x, center.y, wrap)).toEqual(expected);
     });
 });

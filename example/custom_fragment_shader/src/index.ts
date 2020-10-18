@@ -33,7 +33,7 @@ import {
     Texture,
     Vector,
     ImageRequest,
-    ShaderAsset,
+    ShaderAsset,, Renderable
 } from "jamjar";
 
 // Game definition
@@ -76,7 +76,7 @@ class ShaderGame extends Game {
 
         // Create example entity
         const example = new Entity(this.messageBus);
-        example.Add(new Transform(new Vector(0,0), new Vector(10,10)));
+        example.Add(new Transform(Vector.New(0,0), Vector.New(10,10)));
 
         // Create sprite using a material with the previously loaded texture,
         // alongside using our custom fragment shader with the default
@@ -99,6 +99,10 @@ const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+// Set up pooling
+Vector.Init(200);
+Renderable.Init(200);
 
 // Create message bus and entity manager
 const messageBus = new MessageBus();

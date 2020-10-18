@@ -10,6 +10,10 @@ to an entity that will be available to the script at runtime.
 
   ↳ **Script**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -24,6 +28,10 @@ to an entity that will be available to the script at runtime.
 * [KEY](script.md#static-key)
 * [MESSAGE_ADD](script.md#static-message_add)
 * [MESSAGE_REMOVE](script.md#static-message_remove)
+
+### Methods
+
+* [Free](script.md#free)
 
 ## Constructors
 
@@ -87,3 +95,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Inherited from [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*

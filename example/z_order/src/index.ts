@@ -31,7 +31,7 @@ import {
     Camera,
     Material,
     Texture,
-    Vector,
+    Vector,, Renderable
 } from "jamjar";
 
 class ZOrderGame extends Game {
@@ -46,7 +46,7 @@ class ZOrderGame extends Game {
             "assets/example.png",
             {
                 minFilter: TextureFiltering.NEAREST,
-                magFilter: TextureFiltering.NEAREST,
+                magFilter: TextureFiltering.NEARESRenderableT,
             }
         )));
 
@@ -60,7 +60,7 @@ class ZOrderGame extends Game {
 
         // Create entities
         const near = new Entity(this.messageBus);
-        near.Add(new Transform(new Vector(-11, 0), new Vector(20,20)));
+        near.Add(new Transform(Vector.New(-11, 0), Vector.New(20,20)));
         near.Add(new Sprite(
             new Material({
                 texture: new Texture("example_sheet", exampleSpriteSheet[3]),
@@ -68,7 +68,7 @@ class ZOrderGame extends Game {
         ));
 
         const medium = new Entity(this.messageBus);
-        medium.Add(new Transform(new Vector(0, 11), new Vector(20,20)));
+        medium.Add(new Transform(Vector.New(0, 11), Vector.New(20,20)));
         medium.Add(new Sprite(
             new Material({
                 texture: new Texture("example_sheet", exampleSpriteSheet[2]),
@@ -76,7 +76,7 @@ class ZOrderGame extends Game {
         ));
 
         const far = new Entity(this.messageBus);
-        far.Add(new Transform(new Vector(11, 0), new Vector(20,20)));
+        far.Add(new Transform(Vector.New(11, 0), Vector.New(20,20)));
         far.Add(new Sprite(
             new Material({
                 texture: new Texture("example_sheet", exampleSpriteSheet[1]),
@@ -84,7 +84,7 @@ class ZOrderGame extends Game {
         ));
 
         const evenFurther = new Entity(this.messageBus);
-        evenFurther.Add(new Transform(new Vector(0, -11), new Vector(20,20)));
+        evenFurther.Add(new Transform(Vector.New(0, -11), Vector.New(20,20)));
         evenFurther.Add(new Sprite(
             new Material({
                 texture: new Texture("example_sheet", exampleSpriteSheet[0]),
@@ -101,6 +101,10 @@ const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+// Set up pooling
+Vector.Init(400);
+Renderable.Init(200);
 
 // Create message bus and entity manager
 const messageBus = new MessageBus();

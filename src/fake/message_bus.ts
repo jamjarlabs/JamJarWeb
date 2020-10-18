@@ -24,6 +24,10 @@ class FakeMessageBus extends Fake implements IMessageBus {
         return;
     }
 
+    public DispatchUntilEmpty(): void {
+        return;
+    }
+
     public Publish(message: IMessage): void {
         return;
     }

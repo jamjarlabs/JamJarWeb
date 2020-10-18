@@ -30,6 +30,7 @@ requiring less calculations than a fully defined polygon.
 
 * [Center](aabb.md#center)
 * [FarthestPointInDirection](aabb.md#farthestpointindirection)
+* [Free](aabb.md#free)
 * [PointInside](aabb.md#pointinside)
 * [Transform](aabb.md#transform)
 
@@ -44,7 +45,7 @@ requiring less calculations than a fully defined polygon.
 Name | Type | Default |
 ------ | ------ | ------ |
 `size` | [Vector](vector.md) | - |
-`center` | [Vector](vector.md) | new Vector(0,0) |
+`center` | [Vector](vector.md) | Vector.New(0,0) |
 
 **Returns:** *[AABB](aabb.md)*
 
@@ -85,6 +86,16 @@ Name | Type |
 `direction` | [Vector](vector.md) |
 
 **Returns:** *[Vector](vector.md)*
+
+___
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Returns:** *void*
 
 ___
 

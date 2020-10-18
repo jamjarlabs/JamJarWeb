@@ -13,6 +13,10 @@ Can contain texture information such as bounds and a texture.
 
   ↳ **Sprite**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -27,6 +31,10 @@ Can contain texture information such as bounds and a texture.
 * [KEY](sprite.md#static-key)
 * [MESSAGE_ADD](sprite.md#static-message_add)
 * [MESSAGE_REMOVE](sprite.md#static-message_remove)
+
+### Methods
+
+* [Free](sprite.md#free)
 
 ## Constructors
 
@@ -94,3 +102,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Overrides [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*

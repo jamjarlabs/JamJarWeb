@@ -39,9 +39,9 @@ class InterpolationSystem extends System {
         );
     };
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, InterpolationSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
@@ -61,12 +61,12 @@ class InterpolationSystem extends System {
      * interpolateTransforms updates the `previous` member to be the current position of the transform.
      * This is used in rendering, allowing render systems to use the previous and current position to
      * interpolate its position when drawing.
-     * @param {SystemEntity[]} entities The entities to update the interpolation positions of 
+     * @param {SystemEntity[]} entities The entities to update the interpolation positions of
      */
     private interpolateTransforms(): void {
         for (const entity of this.entities.values()) {
             const transform = entity.Get(Transform.KEY) as Transform;
-            transform.previous = transform.position.Copy();
+            transform.previous = transform.previous.Recycle(transform.position.x, transform.position.y);
         }
     }
 }

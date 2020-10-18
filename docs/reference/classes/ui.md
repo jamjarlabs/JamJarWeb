@@ -13,6 +13,10 @@ than in world space.
 
   ↳ **UI**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -26,6 +30,10 @@ than in world space.
 * [KEY](ui.md#static-key)
 * [MESSAGE_ADD](ui.md#static-message_add)
 * [MESSAGE_REMOVE](ui.md#static-message_remove)
+
+### Methods
+
+* [Free](ui.md#free)
 
 ## Constructors
 
@@ -82,3 +90,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Inherited from [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*

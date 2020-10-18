@@ -18,12 +18,13 @@ import Texture from "../texture/texture";
 import ShaderAsset from "../shader/shader_asset";
 import Color from "../color";
 import IMaterialOptions from "./imaterial_options";
+import IFreeable from "../../pooling/ifreeable";
 
 /**
  * Material represents how something is displayed and rendered, specifying
  * shaders, textures and colors.
  */
-class Material {
+class Material implements IFreeable {
     private static readonly NO_TEXTURE_COLOR = new Color(0.54, 0, 0.54, 1);
     /**
      * List of shaders to apply.
@@ -42,14 +43,14 @@ class Material {
     constructor(options: IMaterialOptions = {}) {
         // Default shaders if a texture is present
         let defaultShaders = [
-            ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, 
+            ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
             ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME
         ];
         let defaultColor = new Color(1,1,1,1);
         if (options.texture === undefined) {
             // Default shaders for no texture
             defaultShaders = [
-                ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, 
+                ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME,
                 ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME
             ];
             defaultColor = Material.NO_TEXTURE_COLOR;
@@ -85,6 +86,12 @@ class Material {
             texture: texture,
             color: color
         });
+    }
+
+    public Free(): void {
+        if (this.texture !== undefined) {
+            this.texture.Free();
+        }
     }
 }
 

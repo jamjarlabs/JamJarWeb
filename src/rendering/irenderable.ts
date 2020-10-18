@@ -19,12 +19,13 @@ import Material from "./material/material";
 import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../shape/polygon";
 import DrawMode from "./draw_mode";
+import IPoolable from "../pooling/ipoolable";
 
 /**
  * Renderable represents something that can be rendered.
  * Contains information for rendering.
  */
-interface IRenderable {
+interface IRenderable extends IPoolable {
     /**
      * The Z-Order of the object, the order at which the object will appear
      * infront or behind other objects. A higher Z-Order means in front, a

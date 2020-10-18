@@ -6,7 +6,13 @@ This is a mutable data structure, operations on Vector objects will affect the o
 
 ## Hierarchy
 
-* **Vector**
+* [Pooled](pooled.md)
+
+  ↳ **Vector**
+
+## Implements
+
+* [IPoolable](../interfaces/ipoolable.md)
 
 ## Index
 
@@ -17,6 +23,9 @@ This is a mutable data structure, operations on Vector objects will affect the o
 ### Properties
 
 * [data](vector.md#private-data)
+* [objectInPool](vector.md#objectinpool)
+* [POOL_KEY](vector.md#static-private-pool_key)
+* [pools](vector.md#static-protected-pools)
 
 ### Accessors
 
@@ -31,14 +40,22 @@ This is a mutable data structure, operations on Vector objects will affect the o
 * [Copy](vector.md#copy)
 * [Dot](vector.md#dot)
 * [Equals](vector.md#equals)
+* [Free](vector.md#free)
 * [Invert](vector.md#invert)
 * [Magnitude](vector.md#magnitude)
 * [Multiply](vector.md#multiply)
 * [Normalize](vector.md#normalize)
+* [Recycle](vector.md#recycle)
 * [Rotate](vector.md#rotate)
 * [RotateDeg](vector.md#rotatedeg)
 * [Scale](vector.md#scale)
 * [Sub](vector.md#sub)
+* [Free](vector.md#static-free)
+* [Init](vector.md#static-init)
+* [New](vector.md#static-new)
+* [free](vector.md#static-protected-free)
+* [init](vector.md#static-protected-init)
+* [new](vector.md#static-protected-new)
 
 ## Constructors
 
@@ -60,6 +77,41 @@ Name | Type |
 ### `Private` data
 
 • **data**: *Float32Array*
+
+___
+
+###  objectInPool
+
+• **objectInPool**: *boolean* = false
+
+*Implementation of [IPoolable](../interfaces/ipoolable.md).[objectInPool](../interfaces/ipoolable.md#objectinpool)*
+
+*Inherited from [Pooled](pooled.md).[objectInPool](pooled.md#objectinpool)*
+
+objectInPool is true if an object is made available in the object pool. If it is false it is not
+currently available in the object pool.
+This is used to avoid adding the same object to the same object pool multiple times if there are successive
+calls to free the the same object.
+
+___
+
+### `Static` `Private` POOL_KEY
+
+▪ **POOL_KEY**: *string* = "jamjar_vector"
+
+Value of the Vector object pool.
+
+___
+
+### `Static` `Protected` pools
+
+▪ **pools**: *Map‹string, [number, [IPoolable](../interfaces/ipoolable.md)[]]›* = new Map()
+
+*Inherited from [Pooled](pooled.md).[pools](pooled.md#static-protected-pools)*
+
+pools is the global, static mapping of string keys to object pools.
+An object pool contains two pieces of data, the maximum size of the pool (first value), and the objects that
+make up the pool as an array (second value).
 
 ## Accessors
 
@@ -199,6 +251,16 @@ Name | Type | Description |
 
 ___
 
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IPoolable](../interfaces/ipoolable.md)*
+
+**Returns:** *void*
+
+___
+
 ###  Invert
 
 ▸ **Invert**(): *[Vector](vector.md)*
@@ -251,6 +313,21 @@ Returns a normalized version of this vector, result saved to the original Vector
 **Returns:** *[Vector](vector.md)*
 
 This vector to allow chaining, the normalized vector
+
+___
+
+###  Recycle
+
+▸ **Recycle**(`x`: number, `y`: number): *[Vector](vector.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`x` | number |
+`y` | number |
+
+**Returns:** *[Vector](vector.md)*
 
 ___
 
@@ -327,3 +404,134 @@ Name | Type | Description |
 **Returns:** *[Vector](vector.md)*
 
 This vector to allow chaining, the result result of the subtraction
+
+___
+
+### `Static` Free
+
+▸ **Free**(`obj`: [Vector](vector.md)): *void*
+
+Free the provided vector.
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`obj` | [Vector](vector.md) |
+
+**Returns:** *void*
+
+___
+
+### `Static` Init
+
+▸ **Init**(`size`: number): *void*
+
+Initialize the Vector pool to the size provided.
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`size` | number |
+
+**Returns:** *void*
+
+___
+
+### `Static` New
+
+▸ **New**(`x`: number, `y`: number): *[Vector](vector.md)*
+
+Create a Vector.New, using pooling if available.
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`x` | number |
+`y` | number |
+
+**Returns:** *[Vector](vector.md)*
+
+___
+
+### `Static` `Protected` free
+
+▸ **free**(`poolKey`: string, `obj`: [IPoolable](../interfaces/ipoolable.md)): *void*
+
+*Inherited from [Pooled](pooled.md).[free](pooled.md#static-protected-free)*
+
+free is used to mark a provided object as free in the pool provided. This method can be called multiple times
+with the same object, it will only add one entry to the pool.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`poolKey` | string | The key of the pool to add the object to. |
+`obj` | [IPoolable](../interfaces/ipoolable.md) | The object to add to the pool.  |
+
+**Returns:** *void*
+
+___
+
+### `Static` `Protected` init
+
+▸ **init**(`poolKey`: string, `emptyGenerator`: function, `size`: number): *void*
+
+*Inherited from [Pooled](pooled.md).[init](pooled.md#static-protected-init)*
+
+init is used to initialize an object pool to a certain size. This method takes a key of the pool to initialize,
+an 'empty generator' which is a function that should return an empty/blank instance of the object being pooled
+which can be overwritten at a later point, and the maximum size of the pool (which it will be initialized to
+at the start using the empty generator).
+
+**Parameters:**
+
+▪ **poolKey**: *string*
+
+▪ **emptyGenerator**: *function*
+
+▸ (): *[IPoolable](../interfaces/ipoolable.md)*
+
+▪ **size**: *number*
+
+**Returns:** *void*
+
+___
+
+### `Static` `Protected` new
+
+▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
+
+*Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
+
+new is used to request a new object from the pool specified, if the pool is unavailable or empty it will use
+the type to provision a new object through a constructor.
+This is a generic method, it includes a cast to the generic type provided - this cast can fail if the objects
+returned from the pool are not the type expected.
+
+**Type parameters:**
+
+▪ **T**: *[IPoolable](../interfaces/ipoolable.md)*
+
+**Parameters:**
+
+▪ **poolKey**: *string*
+
+The key of the pool to retrieve from.
+
+▪ **type**: *object*
+
+The fallback constructor to use if the pool is not initialized/empty.
+
+Name | Type |
+------ | ------ |
+`constructor` |  |
+
+▪... **args**: *any*
+
+The args to use when creating/recycling the object.
+
+**Returns:** *T*

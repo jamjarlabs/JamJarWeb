@@ -30,14 +30,14 @@ Used in conjunction with the EntityManager for managing Entities/Components.
 
 ###  constructor
 
-\+ **new ComponentManager**(`key`: string, `components`: Record‹number, [Component](component.md)›): *[ComponentManager](componentmanager.md)*
+\+ **new ComponentManager**(`key`: string, `components`: Map‹number, [Component](component.md)›): *[ComponentManager](componentmanager.md)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
 `key` | string | - |
-`components` | Record‹number, [Component](component.md)› | {} |
+`components` | Map‹number, [Component](component.md)› | new Map() |
 
 **Returns:** *[ComponentManager](componentmanager.md)*
 
@@ -45,7 +45,7 @@ Name | Type | Default |
 
 ### `Private` components
 
-• **components**: *Record‹number, [Component](component.md)›*
+• **components**: *Map‹number, [Component](component.md)›*
 
 ___
 

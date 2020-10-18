@@ -8,6 +8,10 @@ how the texture should be drawn and represented.
 
 * **Texture**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -22,6 +26,7 @@ how the texture should be drawn and represented.
 ### Methods
 
 * [Copy](texture.md#copy)
+* [Free](texture.md#free)
 * [GenerateSpritesheetIndex](texture.md#static-generatespritesheetindex)
 
 ## Constructors
@@ -35,7 +40,7 @@ how the texture should be drawn and represented.
 Name | Type | Default |
 ------ | ------ | ------ |
 `image` | string | - |
-`points` | [Polygon](polygon.md) | Polygon.QuadByPoints(new Vector(0,0), new Vector(1,1)) |
+`points` | [Polygon](polygon.md) | Polygon.QuadByPoints(Vector.New(0,0), Vector.New(1,1)) |
 
 **Returns:** *[Texture](texture.md)*
 
@@ -64,6 +69,16 @@ Mapping in points on the image.
 Make a value copy of the texture.
 
 **Returns:** *[Texture](texture.md)*
+
+___
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+**Returns:** *void*
 
 ___
 

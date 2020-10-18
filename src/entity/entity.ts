@@ -41,9 +41,9 @@ class Entity implements IEntity {
 
     private messageBus: IMessageBus
 
-    constructor(messageBus: IMessageBus, 
-        tags: string[] = [], 
-        layers: string[] = [], 
+    constructor(messageBus: IMessageBus,
+        tags: string[] = [],
+        layers: string[] = [],
         id: number = Entity.ID++) {
         this.messageBus = messageBus;
         this.tags = tags;
@@ -51,15 +51,15 @@ class Entity implements IEntity {
         this.id = id;
     }
 
-    Add(component: Component): void {
+    public Add(component: Component): void {
         this.messageBus.Publish(new Message<[Entity, Component]>(Component.MESSAGE_ADD, [this, component]));
     }
 
-    Remove(key: string): void {
+    public Remove(key: string): void {
         this.messageBus.Publish(new Message<[Entity, string]>(Component.MESSAGE_REMOVE, [this, key]));
     }
 
-    Destroy(): void {
+    public Destroy(): void {
         this.messageBus.Publish(new Message<Entity>(Entity.MESSAGE_DESTROY, this));
     }
 }

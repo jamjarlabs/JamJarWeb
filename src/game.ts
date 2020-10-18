@@ -94,6 +94,8 @@ abstract class Game implements IGame {
             this.accumulator -= Game.TIME_STEP;
         }
 
+        this.messageBus.DispatchUntilEmpty();
+
         // Alpha constant for interpolation calculations
         const alpha = this.accumulator / Game.TIME_STEP;
         // Pre-render and dispatch, must be immediately dispatched to allow pre-render systems to
@@ -105,7 +107,7 @@ abstract class Game implements IGame {
         // Post render
         this.messageBus.Publish(new Message(Game.MESSAGE_POST_RENDER, alpha));
         this.messageBus.Dispatch();
-        this.frameRequestCallback((timestamp: number) => { this.loop(timestamp); });
+        this.frameRequestCallback(this.loop.bind(this));
     }
 }
 

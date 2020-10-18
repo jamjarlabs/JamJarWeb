@@ -6,7 +6,9 @@ for the shape to be used with collision detection.
 
 ## Hierarchy
 
-* **IShape**
+* [IFreeable](ifreeable.md)
+
+  ↳ **IShape**
 
 ## Implemented by
 
@@ -20,6 +22,7 @@ for the shape to be used with collision detection.
 
 * [Center](ishape.md#center)
 * [FarthestPointInDirection](ishape.md#farthestpointindirection)
+* [Free](ishape.md#free)
 * [PointInside](ishape.md#pointinside)
 * [Transform](ishape.md#transform)
 
@@ -53,6 +56,18 @@ Name | Type | Description |
 **Returns:** *[Vector](../classes/vector.md)*
 
 The farthest point in the direction provided
+
+___
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Inherited from [IFreeable](ifreeable.md).[Free](ifreeable.md#free)*
+
+Free releases an object or it's constituent parts back into any available object pools.
+
+**Returns:** *void*
 
 ___
 

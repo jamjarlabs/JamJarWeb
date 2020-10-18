@@ -7,6 +7,10 @@
 
   ↳ **FakeComponent**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -18,6 +22,10 @@
 * [key](fakecomponent.md#key)
 * [MESSAGE_ADD](fakecomponent.md#static-message_add)
 * [MESSAGE_REMOVE](fakecomponent.md#static-message_remove)
+
+### Methods
+
+* [Free](fakecomponent.md#free)
 
 ## Constructors
 
@@ -58,3 +66,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Inherited from [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*

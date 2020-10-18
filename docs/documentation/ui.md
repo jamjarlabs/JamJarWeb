@@ -10,7 +10,7 @@ than world space.
 
 The UI uses a coordinate system relative to the camera it is assigned to. All of
 the UI layout is through the [Transform] component, which is interpreted
-differently for UI elements. 
+differently for UI elements.
 
 ### Position
 The coordinates go from `(-1,-1)` (bottom left) to `(1,1)` (top right). This
@@ -22,7 +22,7 @@ right](../assets/ui_example_position.svg)
 
 This UI element would be at position `(0.5,0)`.
 ```typescript
-new Transform(new Vector(0.5, 0));
+new Transform(Vector.New(0.5, 0));
 ```
 
 ### Scale

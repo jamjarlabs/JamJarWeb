@@ -15,13 +15,18 @@ limitations under the License.
 */
 
 import Vector from "../geometry/vector";
+import IFreeable from "../pooling/ifreeable";
 import Transform from "../standard/transform/transform";
 
 /**
  * IShape is the interface for a shape, defining all methods that need implemented in order
  * for the shape to be used with collision detection.
  */
-interface IShape {
+interface IShape extends IFreeable {
+    /**
+     * Center calculates/retrieves the center of a shape.
+     * @returns {Vector} The center point of the shape
+     */
     /**
      * Center calculates/retrieves the center of a shape.
      * @returns {Vector} The center point of the shape

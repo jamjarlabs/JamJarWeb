@@ -14,7 +14,7 @@ new SpriteAnimatorSystem(messageBus);
 ## Creating an Entity with Sprite Animation
 
 To set up an [Entity] with Sprite Animation, there are three components
-required, a [Transform], a [Sprite], and a [SpriteAnimator]. 
+required, a [Transform], a [Sprite], and a [SpriteAnimator].
 
 The following sample creates an entity with Sprite Animation, using a 2x2 sprite
 sheet. The sprite sheet is accessed uing [Texture.GenerateSpritesheetIndex]
@@ -28,12 +28,12 @@ The animation is set to loop infinitely.
 const spriteSheetIndices = Texture.GenerateSpritesheetIndex(2, 2);
 
 const animationEntity = new Entity(messageBus);
-animationEntity.Add(new Transform(new Vector(0, 0), new Vector(5,5)));
+animationEntity.Add(new Transform(Vector.New(0, 0), Vector.New(5,5)));
 animationEntity.Add(new Sprite(
     new Material({
         texture: new Texture("example_spritesheet", spriteSheetIndices[0]),
-    }), 
-    0, 
+    }),
+    0,
     Polygon.RectangleByDimensions(1,1)
 ));
 animationEntity.Add(new SpriteAnimator(
@@ -68,7 +68,7 @@ animationEntity.Add(new SpriteAnimator(
             10,
             -1
         )],
-    ]), 
+    ]),
     "example"
 ));
 ```

@@ -73,11 +73,11 @@ class ShaderGame extends Game {
             ShaderAsset.FRAGMENT_TYPE,
             `#version 300 es
             precision mediump float;
-            
+
             in vec2 vTextureCoordinate;
-    
+
             out vec4 outColor;
-    
+
             void main() {
                 outColor = vec4(0,1,0,1);
             }
@@ -111,11 +111,11 @@ class ShaderGame extends Game {
             ShaderAsset.FRAGMENT_TYPE,
             `#version 300 es
             precision mediump float;
-            
+
             in vec2 vTextureCoordinate;
-    
+
             out vec4 outColor;
-    
+
             void main() {
                 outColor = vec4(0,1,0,1);
             }
@@ -139,7 +139,7 @@ class ShaderGame extends Game {
 
         // Create example entity
         const example = new Entity(this.messageBus);
-        example.Add(new Transform(new Vector(0,0), new Vector(10,10)));
+        example.Add(new Transform(Vector.New(0,0), Vector.New(10,10)));
 
         // Create sprite using a material with the previously loaded texture,
         // alongside using our custom fragment shader with the default
@@ -148,8 +148,8 @@ class ShaderGame extends Game {
             new Material({
                 texture: new Texture("example", Polygon.RectangleByDimensions(1,1)),
                 shaders: [ "example-shader", ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME ]
-            }), 
-            0, 
+            }),
+            0,
             Polygon.RectangleByDimensions(1,1)
         ));
     }

@@ -3,7 +3,7 @@
 Cameras are important parts of the JamJar game engine, they define how the game
 world is viewed and rendered. A camera is a
 [`Component`](../../reference/classes/component), any entity can be made into a
-camera by simply adding a [`Camera`](../../reference/classes/camera) to it.  
+camera by simply adding a [`Camera`](../../reference/classes/camera) to it.
 
 ## Camera World Position
 
@@ -32,7 +32,7 @@ rendered. This is defined with two properties of the
 [`viewportScale`](../../reference/classes/camera#viewportscale).
 The [`viewportPosition`](../../reference/classes/camera#viewportposition) is the
 position of the camera's viewport on the screen, with from the bottom left
-`(-1,-1)` to top right `(1,1)` with `(0,0)` as the center.  
+`(-1,-1)` to top right `(1,1)` with `(0,0)` as the center.
 The [`viewportScale`](../../reference/classes/camera#viewportscale) is the scale
 of the camera's viewport, relative to the canvas/rendering surface. A viewport
 scale of `(1,1)` would take up the entire canvas, while a scale of `(0.5, 0.5)`
@@ -44,11 +44,11 @@ would only take up half of the screen (width and height).
 
 ```typescript
 const cameraEntity = new Entity(messageBus);
-cameraEntity.Add(new Transform(new Vector(0, 0), new Vector(5, 5)));
+cameraEntity.Add(new Transform(Vector.New(0, 0), Vector.New(5, 5)));
 cameraEntity.Add(new Camera(
     new Color(1, 0, 0, 1), // Red
-    new Vector(0.5, 0.5), // Top right
-    new Vector(0.5, 0.5), // Half width and height of canvas/screen
-    new Vector(160, 90) // 16*9 screen, show 160 * 90 world units
+    Vector.New(0.5, 0.5), // Top right
+    Vector.New(0.5, 0.5), // Half width and height of canvas/screen
+    Vector.New(160, 90) // 16*9 screen, show 160 * 90 world units
 ));
 ```

@@ -345,39 +345,39 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0),
                         new FakeEntity(1),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                     new Collision(
                         new FakeEntity(3),
                         new FakeEntity(4),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(3, 0)),
-                            Ellipse.Circle(1, new Vector(4, 0))
+                            Ellipse.Circle(1, 3, 0),
+                            Ellipse.Circle(1, 4, 0)
                         )
                     )
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
+                        new Collider(Ellipse.Circle(1, 2, 0))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
+                        new Collider(Ellipse.Circle(1, 3, 0))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
+                        new Collider(Ellipse.Circle(1, 4, 0))
                     ])]
                 ]),
                 0
@@ -400,23 +400,23 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
+                        new Collider(Ellipse.Circle(1, 2, 0))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
+                        new Collider(Ellipse.Circle(1, 3, 0))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
+                        new Collider(Ellipse.Circle(1, 4, 0))
                     ])]
                 ]),
                 0
@@ -437,55 +437,55 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, ["test1"]),
                         new FakeEntity(1, undefined, ["test2"]),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                     new Collision(
                         new FakeEntity(0, undefined, ["test1"]),
                         new FakeEntity(3, undefined, ["test2"]),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(3, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 3, 0)
                         )
                     ),
                     new Collision(
                         new FakeEntity(1, undefined, ["test2"]),
                         new FakeEntity(2, undefined, ["test1"]),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(1, 0)),
-                            Ellipse.Circle(1, new Vector(2, 0))
+                            Ellipse.Circle(1, 1, 0),
+                            Ellipse.Circle(1, 2, 0)
                         )
                     ),
                     new Collision(
                         new FakeEntity(2, undefined, ["test1"]),
                         new FakeEntity(3, undefined, ["test2"]),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(2, 0)),
-                            Ellipse.Circle(1, new Vector(3, 0))
+                            Ellipse.Circle(1, 2, 0),
+                            Ellipse.Circle(1, 3, 0)
                         )
                     ),
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
+                        new Collider(Ellipse.Circle(1, 2, 0))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
+                        new Collider(Ellipse.Circle(1, 3, 0))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4, undefined, []), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
+                        new Collider(Ellipse.Circle(1, 4, 0))
                     ])]
                 ]),
             ),
@@ -499,23 +499,23 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2, undefined, ["test1"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2, 0)))
+                        new Collider(Ellipse.Circle(1, 2, 0))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3, undefined, ["test2"]), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(3, 0)))
+                        new Collider(Ellipse.Circle(1, 3, 0))
                     ])],
                     [4, new SystemEntity(new FakeEntity(4, undefined, []), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(4, 0)))
+                        new Collider(Ellipse.Circle(1, 4, 0))
                     ])]
                 ]),
                 0
@@ -536,19 +536,19 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, undefined),
                         new FakeEntity(1, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                 ]),
                 0
@@ -564,19 +564,19 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, undefined),
                         new FakeEntity(1, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                 ]),
                 0
@@ -596,11 +596,11 @@ describe("CollisionSystem - Update", () => {
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                 ]),
                 0
@@ -616,19 +616,19 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, undefined),
                         new FakeEntity(1, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)))
+                        new Collider(Ellipse.Circle(1, 1, 0))
                     ])],
                 ]),
                 0
@@ -651,23 +651,23 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, undefined),
                         new FakeEntity(1, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)), undefined, "exit-script")
+                        new Collider(Ellipse.Circle(1, 1, 0), undefined, "exit-script")
                     ])],
                     [2, new SystemEntity(new FakeEntity(2, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2, 0)), undefined, "exit-script")
+                        new Collider(Ellipse.Circle(1, 2, 0), undefined, "exit-script")
                     ])],
                 ]),
                 0
@@ -685,31 +685,31 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, undefined),
                         new FakeEntity(1, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                     new Collision(
                         new FakeEntity(1, undefined, undefined),
                         new FakeEntity(2, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(1, 0)),
-                            Ellipse.Circle(1, new Vector(2, 0))
+                            Ellipse.Circle(1, 1, 0),
+                            Ellipse.Circle(1, 2, 0)
                         )
                     ),
                 ],
                 new Map<number, SystemEntity>([
                     [0, new SystemEntity(new FakeEntity(0, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(0, 0)))
+                        new Collider(Ellipse.Circle(1, 0, 0))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(1, 0)), undefined, "exit-script")
+                        new Collider(Ellipse.Circle(1, 1, 0), undefined, "exit-script")
                     ])],
                     [2, new SystemEntity(new FakeEntity(2, undefined, undefined), [
                         new Transform(),
-                        new Collider(Ellipse.Circle(1, new Vector(2, 0)), undefined, "exit-script")
+                        new Collider(Ellipse.Circle(1, 2, 0), undefined, "exit-script")
                     ])],
                 ]),
                 0
@@ -740,8 +740,8 @@ describe("CollisionSystem - Update", () => {
                         new FakeEntity(0, undefined, undefined),
                         new FakeEntity(1, undefined, undefined),
                         new CollisionInfo(
-                            Ellipse.Circle(1, new Vector(0, 0)),
-                            Ellipse.Circle(1, new Vector(1, 0))
+                            Ellipse.Circle(1, 0, 0),
+                            Ellipse.Circle(1, 1, 0)
                         )
                     ),
                 ],

@@ -46,7 +46,7 @@ class Transform extends Component {
      */
     public angle: number;
 
-    constructor(position = new Vector(0,0), scale = new Vector(1,1), angle = 0) {
+    constructor(position = Vector.New(0, 0), scale = Vector.New(1, 1), angle = 0) {
         super(Transform.KEY);
         this.previous = position;
         this.position = position;
@@ -87,13 +87,17 @@ class Transform extends Component {
      * @returns {Matrix4D} Matrix of the interpolated transform.
      */
     public InterpolatedMatrix4D(alpha: number): Matrix4D {
-        return new Matrix4D()
-            .Translate(new Vector(
+        return new Matrix4D().Translate(
+            Vector.New(
                 this.previous.x * alpha + this.position.x * (1 - alpha),
                 this.previous.y * alpha + this.position.y * (1 - alpha)
-            ))
-            .Rotate(this.angle)
-            .Scale(this.scale);
+            )).Rotate(this.angle).Scale(this.scale);
+    }
+
+    public Free(): void {
+        this.position.Free();
+        this.previous.Free();
+        this.scale.Free();
     }
 }
 

@@ -26,7 +26,7 @@ class Ellipse implements IShape {
     public dimensions: Vector;
     public orientation: number;
 
-    constructor(dimensions: Vector, orientation = 0, center: Vector = new Vector(0, 0)) {
+    constructor(dimensions: Vector, orientation = 0, center: Vector = Vector.New(0, 0)) {
         this.center = center;
         this.dimensions = dimensions;
         this.orientation = orientation;
@@ -52,11 +52,16 @@ class Ellipse implements IShape {
 
     public FarthestPointInDirection(direction: Vector): Vector {
         const angle = Math.atan2(direction.y, direction.x);
-        const angledDimensions = this.dimensions.Rotate(new Vector(0, 0), this.orientation);
-        return new Vector(
+        const angledDimensions = this.dimensions.Rotate(Vector.New(0, 0), this.orientation);
+        return Vector.New(
             this.center.x + (angledDimensions.x * Math.cos(angle)),
             this.center.y + (angledDimensions.y * Math.sin(angle))
         );
+    }
+
+    public Free(): void {
+        this.center.Free();
+        this.dimensions.Free();
     }
 
     /**
@@ -64,8 +69,8 @@ class Ellipse implements IShape {
      * @param {number} radius Radius of the circle
      * @param {Vector} center Centre of the circle
      */
-    public static Circle(radius: number, center: Vector = new Vector(0, 0)): Ellipse {
-        return new Ellipse(new Vector(radius, radius), 0, center);
+    public static Circle(radius: number, centerX = 0, centerY = 0): Ellipse {
+        return new Ellipse(Vector.New(radius, radius), 0, Vector.New(centerX, centerY));
     }
 
 }

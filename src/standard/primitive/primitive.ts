@@ -62,6 +62,10 @@ class Primitive extends Component {
         this.points = points;
         this.drawMode = drawMode;
     }
+
+    public Free(): void {
+        this.points.Free();
+    }
 }
 
 export default Primitive;

@@ -8,6 +8,10 @@ shaders, textures and colors.
 
 * **Material**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -24,6 +28,7 @@ shaders, textures and colors.
 ### Methods
 
 * [Copy](material.md#copy)
+* [Free](material.md#free)
 
 ## Constructors
 
@@ -79,3 +84,13 @@ ___
 Makes a value copy of the material.
 
 **Returns:** *[Material](material.md)*
+
+___
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+**Returns:** *void*

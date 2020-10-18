@@ -10,6 +10,10 @@ Holds info such as velocity, acceleration, angular velocity and angular accelera
 
   ↳ **Motion**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -27,6 +31,10 @@ Holds info such as velocity, acceleration, angular velocity and angular accelera
 * [MESSAGE_ADD](motion.md#static-message_add)
 * [MESSAGE_REMOVE](motion.md#static-message_remove)
 
+### Methods
+
+* [Free](motion.md#free)
+
 ## Constructors
 
 ###  constructor
@@ -39,8 +47,8 @@ Holds info such as velocity, acceleration, angular velocity and angular accelera
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`velocity` | [Vector](vector.md)‹› | new Vector(0,0) |
-`acceleration` | [Vector](vector.md)‹› | new Vector(0,0) |
+`velocity` | [Vector](vector.md)‹› | Vector.New(0, 0) |
+`acceleration` | [Vector](vector.md)‹› | Vector.New(0, 0) |
 `angularVelocity` | number | 0 |
 `angularAcceleration` | number | 0 |
 
@@ -109,3 +117,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Overrides [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*

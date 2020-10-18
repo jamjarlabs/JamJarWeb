@@ -123,7 +123,7 @@ describe("Polygon - Circle", () => {
         [
             "2r circle around origin",
             new Ellipse(new Vector(2, 2), 0, new Vector(0, 0)),
-            Ellipse.Circle(2, new Vector(0, 0))
+            Ellipse.Circle(2, 0, 0)
         ],
     ])("%p", (description: string, expected: Ellipse, ellipse: Ellipse) => {
         expect(ellipse).toEqual(expected);

@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import IPoolable from "../pooling/ipoolable";
+import Pooled from "../pooling/pooled";
 import Matrix3D from "./matrix_3d";
 import Matrix4D from "./matrix_4d";
 
@@ -21,10 +23,40 @@ import Matrix4D from "./matrix_4d";
  * Vector is the 2 dimensional representation of a vector, with two values (x,y).
  * This is a mutable data structure, operations on Vector objects will affect the original object.
  */
-class Vector {
+class Vector extends Pooled implements IPoolable {
+
+    /**
+     * Value of the Vector object pool.
+     */
+    private static POOL_KEY = "jamjar_vector";
+
+    /**
+     * Create a Vector.New, using pooling if available.
+     */
+    public static New(x: number, y: number): Vector {
+        return this.new<Vector>(Vector.POOL_KEY, Vector, x, y);
+    }
+
+    /**
+     * Free the provided vector.
+     */
+    public static Free(obj: Vector): void {
+        this.free(Vector.POOL_KEY, obj);
+    }
+
+    /**
+     * Initialize the Vector pool to the size provided.
+     */
+    public static Init(size: number): void {
+        this.init(Vector.POOL_KEY, () => {
+            return Vector.New(0, 0);
+        }, size);
+    }
+
     private data: Float32Array;
 
     constructor(x: number, y: number) {
+        super();
         this.data = new Float32Array(2);
         this.data[0] = x;
         this.data[1] = y;
@@ -161,7 +193,7 @@ class Vector {
      * @returns {Vector} This vector to allow chaining, the result of the rotation
      */
     public RotateDeg(center: Vector, angle: number): Vector {
-        return this.Rotate(center, angle * (Math.PI/180));
+        return this.Rotate(center, angle * (Math.PI / 180));
     }
 
     /**
@@ -200,10 +232,20 @@ class Vector {
      * @returns {Vector} The copy of this vector
      */
     public Copy(): Vector {
-        return new Vector(
+        return Vector.New(
             this.x,
             this.y
         );
+    }
+
+    public Recycle(x: number, y: number): Vector {
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
+    public Free(): void {
+        Vector.Free(this);
     }
 }
 

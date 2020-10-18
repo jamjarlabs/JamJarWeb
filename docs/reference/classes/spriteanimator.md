@@ -14,6 +14,10 @@ SpriteAnimator should be used with a Sprite component in conjunction.
 
   ↳ **SpriteAnimator**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -28,6 +32,10 @@ SpriteAnimator should be used with a Sprite component in conjunction.
 * [KEY](spriteanimator.md#static-key)
 * [MESSAGE_ADD](spriteanimator.md#static-message_add)
 * [MESSAGE_REMOVE](spriteanimator.md#static-message_remove)
+
+### Methods
+
+* [Free](spriteanimator.md#free)
 
 ## Constructors
 
@@ -95,3 +103,15 @@ ___
 ▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
 
 *Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+*Inherited from [Component](component.md).[Free](component.md#free)*
+
+**Returns:** *void*
