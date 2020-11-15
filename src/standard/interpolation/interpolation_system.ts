@@ -66,7 +66,8 @@ class InterpolationSystem extends System {
     private interpolateTransforms(): void {
         for (const entity of this.entities.values()) {
             const transform = entity.Get(Transform.KEY) as Transform;
-            transform.previous = transform.previous.Recycle(transform.position.x, transform.position.y);
+            transform.previous.x = transform.position.x;
+            transform.previous.y = transform.position.y;
         }
     }
 }

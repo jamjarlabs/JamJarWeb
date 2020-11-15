@@ -8,7 +8,6 @@
 ## Implements
 
 * [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)
-* [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)
 
 ## Index
 

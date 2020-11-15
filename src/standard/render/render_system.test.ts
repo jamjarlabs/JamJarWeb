@@ -84,13 +84,13 @@ describe("WebGLSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test1", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test2", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test3", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test4", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test5", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP)
-                ],
+                ]]]),
                 undefined,
                 0
             ),
@@ -98,20 +98,20 @@ describe("WebGLSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test1", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test2", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test3", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP)
-                ],
+                ]]]),
                 undefined,
                 0
             ),
-            new Message<IRenderable[]>(
+            new Message<Map<number, IRenderable[]>>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test4", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test5", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP)
-                ]
+                ]]])
             )
         ],
         [
@@ -121,11 +121,11 @@ describe("WebGLSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test1", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test2", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test3", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
-                ],
+                ]]]),
                 undefined,
                 0
             ),
@@ -137,13 +137,13 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<IRenderable[]>(
+            new Message<Map<number, IRenderable[]>>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test1", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test2", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test3", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
-                ]
+                ]]])
             )
         ],
         [
@@ -153,9 +153,9 @@ describe("WebGLSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 undefined,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test1", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
-                ],
+                ]]]),
                 undefined,
                 0
             ),
@@ -167,11 +167,11 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<IRenderable[]>(
+            new Message<Map<number, IRenderable[]>>(
                 RenderSystem.MESSAGE_LOAD_RENDERABLES,
-                [
+                new Map([[0,[
                     new Renderable(0, Polygon.RectangleByDimensions(1,1), new Matrix4D(), new Material({ texture: new Texture("test1", Polygon.RectangleByDimensions(1,1))}), DrawMode.TRIANGLE_STRIP),
-                ]
+                ]]])
             )
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: RenderSystem, system: RenderSystem, message: IMessage) => {

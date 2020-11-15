@@ -35,8 +35,11 @@ allows testing them without having to use JS event listeners
 * [Destroy](testpointersystem.md#destroy)
 * [OnDestroy](testpointersystem.md#protected-ondestroy)
 * [OnMessage](testpointersystem.md#onmessage)
+* [SimulateMoveEvent](testpointersystem.md#simulatemoveevent)
 * [SimulatePointerEvent](testpointersystem.md#simulatepointerevent)
+* [SimulateWheelEvent](testpointersystem.md#simulatewheelevent)
 * [Update](testpointersystem.md#update)
+* [moveEvent](testpointersystem.md#protected-moveevent)
 * [pointerEvent](testpointersystem.md#protected-pointerevent)
 * [wheelEvent](testpointersystem.md#protected-wheelevent)
 
@@ -44,7 +47,7 @@ allows testing them without having to use JS event listeners
 
 ###  constructor
 
-\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent): *[TestPointerSystem](testpointersystem.md)*
+\+ **new TestPointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent, `lastMoveEvent?`: PointerEvent, `pointersToPublish`: PointerEvent[], `lastPublishedPointers`: [Pointer](pointer.md)[]): *[TestPointerSystem](testpointersystem.md)*
 
 *Inherited from [PointerSystem](pointersystem.md).[constructor](pointersystem.md#constructor)*
 
@@ -62,6 +65,9 @@ Name | Type | Default |
 `isFullscreen` | boolean | false |
 `lockedPointerPosition?` | [Vector](vector.md) | - |
 `lastWheelEvent?` | WheelEvent | - |
+`lastMoveEvent?` | PointerEvent | - |
+`pointersToPublish` | PointerEvent[] | [] |
+`lastPublishedPointers` | [Pointer](pointer.md)[] | [] |
 
 **Returns:** *[TestPointerSystem](testpointersystem.md)*
 
@@ -185,6 +191,20 @@ Name | Type |
 
 ___
 
+###  SimulateMoveEvent
+
+▸ **SimulateMoveEvent**(`event`: PointerEvent): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | PointerEvent |
+
+**Returns:** *void*
+
+___
+
 ###  SimulatePointerEvent
 
 ▸ **SimulatePointerEvent**(`event`: PointerEvent): *void*
@@ -194,6 +214,20 @@ ___
 Name | Type |
 ------ | ------ |
 `event` | PointerEvent |
+
+**Returns:** *void*
+
+___
+
+###  SimulateWheelEvent
+
+▸ **SimulateWheelEvent**(`event`: WheelEvent): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | WheelEvent |
 
 **Returns:** *void*
 
@@ -211,23 +245,33 @@ ___
 
 ___
 
+### `Protected` moveEvent
+
+▸ **moveEvent**(`event`: PointerEvent): *void*
+
+*Inherited from [PointerSystem](pointersystem.md).[moveEvent](pointersystem.md#protected-moveevent)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | PointerEvent |
+
+**Returns:** *void*
+
+___
+
 ### `Protected` pointerEvent
 
 ▸ **pointerEvent**(`event`: PointerEvent): *void*
 
 *Inherited from [PointerSystem](pointersystem.md).[pointerEvent](pointersystem.md#protected-pointerevent)*
 
-When a Pointer Event occurs; dispatches the pointer event with extra info
-through the JamJar messaging system as a Pointer.
-Adds in useful information, such as pointer position within camera
-bounds, pointer world position for each camera and if the pointer is
-within a camera's bounds.
-
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`event` | PointerEvent | Pointer Event  |
+Name | Type |
+------ | ------ |
+`event` | PointerEvent |
 
 **Returns:** *void*
 

@@ -305,10 +305,10 @@ describe("Polygon - RectangleByPoints", () => {
         [
             "0,0 to 1,1 rectangle",
             new Polygon([
-                new Vector(0,0),
-                new Vector(1,0),
-                new Vector(1,1),
                 new Vector(0,1),
+                new Vector(1,1),
+                new Vector(1,0),
+                new Vector(0,0),
             ]),
             new Vector(0,0),
             new Vector(1,1),
@@ -317,10 +317,10 @@ describe("Polygon - RectangleByPoints", () => {
         [
             "0,0 to 5,5 rectangle",
             new Polygon([
-                new Vector(0,0),
-                new Vector(5,0),
-                new Vector(5,5),
                 new Vector(0,5),
+                new Vector(5,5),
+                new Vector(5,0),
+                new Vector(0,0),
             ]),
             new Vector(0,0),
             new Vector(5,5),
@@ -329,10 +329,10 @@ describe("Polygon - RectangleByPoints", () => {
         [
             "2,3 to 10,9 rectangle",
             new Polygon([
-                new Vector(2,3),
-                new Vector(10,3),
-                new Vector(10,9),
                 new Vector(2,9),
+                new Vector(10,9),
+                new Vector(10,3),
+                new Vector(2,3),
             ]),
             new Vector(2,3),
             new Vector(10,9),
@@ -341,11 +341,11 @@ describe("Polygon - RectangleByPoints", () => {
         [
             "2,3 to 10,9 rectangle wrapped",
             new Polygon([
-                new Vector(2,3),
-                new Vector(10,3),
-                new Vector(10,9),
                 new Vector(2,9),
+                new Vector(10,9),
+                new Vector(10,3),
                 new Vector(2,3),
+                new Vector(2,9),
             ]),
             new Vector(2,3),
             new Vector(10,9),

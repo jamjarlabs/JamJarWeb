@@ -180,6 +180,11 @@ class CollisionSystem extends System {
             }
         }
 
+        for (const shape of shapes.keys()) {
+            shape.Free();
+        }
+        shapes.clear();
+
         // Clear out expired (exited) collisions
         for (const expired of expiredCollisions) {
             this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_EXIT, expired));
@@ -210,7 +215,11 @@ class CollisionSystem extends System {
             }
         }
 
-        this.colliding = [...collisions];
+        this.colliding = [];
+
+        for (const collision of collisions) {
+            this.colliding.push(collision);
+        }
 
         // Publish collision triggers
         for (const trigger of triggers) {

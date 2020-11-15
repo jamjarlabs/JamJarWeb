@@ -7,6 +7,10 @@ PointerCameraInfo pointer information relevant to a camera.
 
 * **PointerCameraInfo**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -19,6 +23,10 @@ PointerCameraInfo pointer information relevant to a camera.
 * [cameraPosition](pointercamerainfo.md#cameraposition)
 * [withinBounds](pointercamerainfo.md#withinbounds)
 * [worldPosition](pointercamerainfo.md#worldposition)
+
+### Methods
+
+* [Free](pointercamerainfo.md#free)
 
 ## Constructors
 
@@ -68,3 +76,13 @@ ___
 • **worldPosition**: *[Vector](vector.md)*
 
 Position in the world of the pointer using this camera.
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+**Returns:** *void*

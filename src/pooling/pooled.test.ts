@@ -24,7 +24,7 @@ class TestPooledObject extends Pooled {
     public id: number;
 
     public static SimulateNew(): TestPooledObject {
-        return this.new<TestPooledObject>(TestPooledObject.POOL_KEY, TestPooledObject);
+        return this.new<TestPooledObject>(TestPooledObject.POOL_KEY, TestPooledObject, []);
     }
 
     public static SimulateFree(obj: TestPooledObject): void {

@@ -32,6 +32,10 @@ import UI from "../ui/ui";
 import Camera from "../camera/camera";
 import PrimitiveSystem from "./primitive_system";
 import Primitive from "./primitive";
+import FrustumCuller from "../frustum_culler/frustum_culler";
+import AllCollideAlgorithm from "../collision/algorithm/all_collide_algorithm";
+import IRenderable from "../../rendering/irenderable";
+import NoneCollideAlgorithm from "../collision/algorithm/none_collide_algorithm";
 
 describe("PrimitiveSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, PrimitiveSystem, PrimitiveSystem, IMessage];
@@ -39,15 +43,15 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Unknown message type",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new PrimitiveSystem(new FakeMessageBus()),
             new Message("unknown")
         ],
         [
             "Pre render no payload",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER)
         ],
         [
@@ -55,6 +59,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new Error("fail to publish"),
             new PrimitiveSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -65,6 +70,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             ),
             new PrimitiveSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -76,10 +82,12 @@ describe("PrimitiveSystem - OnMessage", () => {
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
-            "Pre render render 3 primitives",
+            "Pre render, skip 3 primitives, no camera",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(),
+            new PrimitiveSystem(
+                new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -96,8 +104,12 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(),
+            new PrimitiveSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(0);
+                })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -110,6 +122,118 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
                         new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, skip 3 primitives, one camera, cull",
+            undefined,
+            new PrimitiveSystem(
+                new FakeMessageBus(),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0
+            ),
+            new PrimitiveSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(3)?.length).toEqual(0);
+                })]),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, render 3 primitives, one camera",
+            undefined,
+            new PrimitiveSystem(
+                new FakeMessageBus(),
+                undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0
+            ),
+            new PrimitiveSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(3)?.length).toEqual(3);
+                })]),
+                undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Camera()
                     ])]
                 ]),
                 0
@@ -119,8 +243,10 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Pre render, UI, render 2, skip 1 no camera",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(),
+            new PrimitiveSystem(
+                new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -144,8 +270,13 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(),
+            new PrimitiveSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(2)?.length).toEqual(2);
+                })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -164,6 +295,68 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(4)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, UI, skip 3, one camera, cull",
+            undefined,
+            new PrimitiveSystem(
+                new FakeMessageBus(),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(4), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])]
+                ]),
+                0
+            ),
+            new PrimitiveSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(2)?.length).toEqual(0);
+                })]),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Camera()
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(4), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
                         new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
@@ -174,8 +367,10 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Pre render, UI, render 2, skip 1 invalid camera",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(),
+            new PrimitiveSystem(
+                new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -199,8 +394,13 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(),
+            new PrimitiveSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(2)?.length).toEqual(2);
+                })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -231,6 +431,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             undefined,
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -239,7 +440,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
@@ -250,6 +451,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             undefined,
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -259,7 +461,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2)),
@@ -271,6 +473,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             undefined,
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -279,7 +482,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Camera()
@@ -290,6 +493,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             undefined,
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -312,6 +516,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             ),
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -336,8 +541,8 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Correctly reject non-ui primitive new entity, missing transform",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
@@ -345,15 +550,15 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Correctly reject non-ui primitive new entity, missing primitive",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
         [
             "Correctly reject camera new entity, missing transform",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Camera()
             ]])
@@ -361,8 +566,8 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Correctly reject camera new entity, missing camera",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: PrimitiveSystem, PrimitiveSystem: PrimitiveSystem, message: IMessage) => {

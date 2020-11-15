@@ -43,6 +43,9 @@ import FontRequest from "../../rendering/font/font_request";
 import FontAsset from "../../rendering/font/font_asset";
 import DrawMode from "../../rendering/draw_mode";
 import Matrix4D from "../../geometry/matrix_4d";
+import IFrustumCuller from "../frustum_culler/ifrustum_culler";
+import FrustumCuller from "../frustum_culler/frustum_culler";
+import AABB from "../../shape/aabb";
 
 /**
  * TextSystem is a pre-rendering system, taking in text components and
@@ -70,14 +73,17 @@ class TextSystem extends System {
 
     private mappings: Map<string, FontMapping>;
     private sdfGeneratorFactory: SDFGeneratorFactory;
+    private frustumCuller: IFrustumCuller;
 
     constructor(messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
+        frustumCuller: IFrustumCuller = new FrustumCuller(),
         mappings: Map<string, FontMapping> = new Map(),
         sdfGeneratorFactory: SDFGeneratorFactory = TextSystem.DEFAULT_SDF_GENERATOR_FACTORY,
         subscriberID?: number) {
         super(messageBus, scene, TextSystem.EVALUATOR, entities, subscriberID);
+        this.frustumCuller = frustumCuller;
         this.mappings = mappings;
         this.sdfGeneratorFactory = sdfGeneratorFactory;
         this.messageBus.Subscribe(this, [
@@ -110,7 +116,8 @@ class TextSystem extends System {
 
     private loadFont(request: FontRequest): void {
         // Set up SDF generator
-        const generator = this.sdfGeneratorFactory(request.size, request.buffer, request.radius, request.cutoff, request.family, request.weight);
+        const generator = this.sdfGeneratorFactory(request.size, request.buffer, request.radius, request.cutoff,
+            request.family, request.weight);
 
         // Calculate size of each character glyph in pixels
         const glyphSize = request.size + request.buffer * 2;
@@ -214,159 +221,195 @@ class TextSystem extends System {
     }
 
     private prepareText(alpha: number): void {
-        const renderables: Renderable<TextRender>[] = [];
+        const renderables: Map<number, Renderable<TextRender>[]> = new Map();
 
-        // Get text entities
+        const cameraEntities = [...this.entities.values()].filter((entity) => {
+            return entity.Get(Camera.KEY);
+        });
+
         const textEntities = [...this.entities.values()].filter((entity) => {
             return entity.Get(Text.KEY) && entity.Get(Transform.KEY);
         });
 
-        // Iterate over each entity that has text to be rendered
-        for (const entity of textEntities) {
-            const text = entity.Get(Text.KEY) as Text;
-            const transform = entity.Get(Transform.KEY) as Transform;
+        const characterScale = Vector.New(1, 1);
 
-            // Get font mapping, if it doesn't exist, skip rendering
-            // this text
-            const mapping = this.mappings.get(text.font);
-            if (mapping === undefined) {
-                continue;
-            }
+        const viewportAABB = new AABB(Vector.New(2, 2));
 
-            // Get a UI element if it is attached to the entity
-            const ui = entity.Get(UI.KEY) as UI | undefined;
+        for (const cameraEntity of cameraEntities) {
+            const camera = cameraEntity.Get(Camera.KEY) as Camera;
+            const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform;
 
-            // Iterate over each character to be rendered
-            for (let i = 0; i < text.value.length; i++) {
-                const char = text.value[i];
+            const cameraViewShape = new AABB(camera.virtualScale.Copy()).Transform(cameraTransform);
 
-                // Get the character's mapping value, if it doesn't
-                // exist skip rendering this character
-                const position = mapping.characters.get(char);
-                if (position === undefined) {
+            const cameraVirtualScaleHalf = camera.virtualScale.Copy().Scale(0.5);
+
+            const cameraRenderables: Renderable<TextRender>[] = [];
+            for (const entity of textEntities) {
+                const text = entity.Get(Text.KEY) as Text;
+                const transform = entity.Get(Transform.KEY) as Transform;
+
+                // Get font mapping, if it doesn't exist, skip rendering
+                // this text
+                const mapping = this.mappings.get(text.font);
+                if (mapping === undefined) {
                     continue;
                 }
 
-                // Determine the x alignment of the text, based
-                // on the text alignment options provided
-                let xAlign;
-                switch (text.align) {
-                    case TextAlignment.Left: {
-                        // +0.5 to shift first character from being centered on
-                        // transform position to the right of it
-                        xAlign = i + 0.5;
-                        break;
-                    }
-                    case TextAlignment.Center: {
-                        xAlign = i - (text.value.length - 1) / 2;
-                        break;
-                    }
-                    case TextAlignment.Right: {
-                        // Inverse of left align, with transform position set to
-                        // right of the last character
-                        xAlign = i - (text.value.length - 1) - 0.5;
-                        break;
-                    }
-                    default: {
-                        throw (`Invalid text alignment: ${text.align}`);
-                    }
-                }
+                const transformVirtualPosition = transform.position.Copy().Multiply(cameraVirtualScaleHalf);
+                const offsetVirtualPosition = text.offset.Copy().Multiply(cameraVirtualScaleHalf);
 
-                // Transform for character
-                const interpolatedMatrix = new Matrix4D();
-                if (ui === undefined) {
-                    // Not part of the UI
-                    /**
-                     * (xAlign * transform.scale.x/2) -> determines alignment
-                     * left, center, right
-                     * (xAlign * text.spacing * transform.scale.x/2) ->
-                     * determines spacing between characters
-                     */
-                    const translation = transform.position.Copy();
-                    translation.x += text.offset.x + (xAlign * transform.scale.x / 2) + (xAlign * text.spacing * transform.scale.x / 2);
-                    translation.y += text.offset.y;
-                    interpolatedMatrix.Translate(translation).Scale(transform.scale).Rotate(transform.angle);
-                } else {
-                    // Part of the UI
-                    // Get the camera entity this is assigned to, if no camera
-                    // found, skip this entity
-                    const cameraEntity = this.entities.get(ui.camera.id);
-                    if (cameraEntity === undefined) {
-                        break;
-                    }
-                    // Get components of the camera entity, if the components
-                    // are not found, must not be a valid camera, skip this
-                    // entity
-                    const camera = cameraEntity.Get(Camera.KEY) as Camera | undefined;
-                    const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform | undefined;
-                    if (camera === undefined || cameraTransform === undefined) {
-                        break;
+                // Get a UI element if it is attached to the entity
+                const ui = entity.Get(UI.KEY) as UI | undefined;
+
+                // Iterate over each character to be rendered
+                for (let i = 0; i < text.value.length; i++) {
+                    const char = text.value[i];
+
+                    // Get the character's mapping value, if it doesn't
+                    // exist skip rendering this character
+                    const position = mapping.characters.get(char);
+                    if (position === undefined) {
+                        continue;
                     }
 
-                    // Convert the transform.position to be relative to the camera
-                    const textPosition = cameraTransform.position.Copy()
-                        .Add(transform.position.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5)))
-                        .Add(text.offset.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5)));
-
-
-                    // Convert the scale to be relative to the camera
-                    const charScale = transform.scale.Copy().Multiply(camera.virtualScale);
-                    /**
-                     * (xAlign * charScale.x / 2) -> determines alignment
-                     * left, center, right
-                     * (xAlign * text.spacing * charScale.x/2) ->
-                     * determines spacing between characters
-                     */
-                    const translation = textPosition.Copy();
-                    translation.x += (xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x / 2);
-                    interpolatedMatrix.Translate(translation).Scale(charScale).Rotate(transform.angle);
-                }
-
-                // Determine the position in the glyph to extract the text glyph
-                // from
-                const x = position % mapping.width;
-                const y = Math.floor(position / mapping.width);
-                // Determine how wide and tall each glyph is in the texture
-                // (which goes from 0 -> 1, so a glyph atlas with 10*10
-                // dimensions - 100 characters - would have a character size of
-                // 0.1)
-                const charSize = 1 / mapping.width;
-                // Create renderable for the character, include extra TextRender
-                // information for shaders to use
-                renderables.push(Renderable.New<TextRender>(
-                    text.zOrder,
-                    Polygon.QuadByDimensions(1, 1, 0, 0),
-                    interpolatedMatrix,
-                    new Material(
-                        {
-                            texture: new Texture(
-                                `font_${text.font}`,
-                                Polygon.QuadByPoints(
-                                    Vector.New(x * charSize, y * charSize),
-                                    Vector.New(x * charSize + charSize, y * charSize + charSize)
-                                )
-                            ),
-                            shaders: text.shaders,
-                            color: text.color
+                    // Determine the x alignment of the text, based
+                    // on the text alignment options provided
+                    let xAlign;
+                    switch (text.align) {
+                        case TextAlignment.Left: {
+                            // +0.5 to shift first character from being centered on
+                            // transform position to the right of it
+                            xAlign = i + 0.5;
+                            break;
                         }
-                    ),
-                    DrawMode.TRIANGLES,
-                    new TextRender(
-                        mapping.asset.request.family,
-                        mapping.asset.request.weight,
-                        mapping.asset.request.buffer,
-                        mapping.asset.request.radius,
-                        mapping.asset.request.cutoff,
-                        mapping.asset.request.size,
-                        text.color,
-                        text.zOrder,
-                        text.align
-                    )
-                ));
-            }
+                        case TextAlignment.Center: {
+                            xAlign = i - (text.value.length - 1) / 2;
+                            break;
+                        }
+                        case TextAlignment.Right: {
+                            // Inverse of left align, with transform position set to
+                            // right of the last character
+                            xAlign = i - (text.value.length - 1) - 0.5;
+                            break;
+                        }
+                        default: {
+                            throw (`Invalid text alignment: ${text.align}`);
+                        }
+                    }
 
+                    // Transform for character
+                    const interpolatedMatrix = new Matrix4D();
+                    if (ui === undefined) {
+                        // Not part of the UI
+
+                        /**
+                         * (xAlign * transform.scale.x/2) -> determines alignment
+                         * left, center, right
+                         * (xAlign * text.spacing * transform.scale.x/2) ->
+                         * determines spacing between characters
+                         */
+                        const translation = transform.position.Copy();
+                        translation.x += text.offset.x + (xAlign * transform.scale.x / 2) + (xAlign * text.spacing * transform.scale.x / 2);
+                        translation.y += text.offset.y;
+
+                        const textTransform = new Transform(
+                            translation,
+                            transform.scale.Copy(),
+                            transform.angle
+                        );
+
+                        interpolatedMatrix.Translate(translation).Scale(transform.scale).Rotate(transform.angle);
+
+                        translation.Free();
+
+                        if (this.frustumCuller.Cull(cameraViewShape, new AABB(characterScale).Transform(textTransform))) {
+                            // Not in camera view, skip rendering
+                            textTransform.Free();
+                            continue;
+                        }
+                        textTransform.Free();
+                    } else {
+                        // Part of the UI
+                        if (cameraEntity.entity.id !== ui.camera.id) {
+                            // If camera is not the one targeted, skip
+                            continue;
+                        }
+
+                        if (this.frustumCuller.Cull(viewportAABB, new AABB(characterScale).Transform(transform))) {
+                            // Not in camera view, skip rendering
+                            continue;
+                        }
+
+                        // Convert the transform.position to be relative to the camera
+                        const textPosition = cameraTransform.position.Copy()
+                            .Add(transformVirtualPosition)
+                            .Add(offsetVirtualPosition);
+
+                        // Convert the scale to be relative to the camera
+                        const charScale = transform.scale.Copy().Multiply(camera.virtualScale);
+                        /**
+                         * (xAlign * charScale.x / 2) -> determines alignment
+                         * left, center, right
+                         * (xAlign * text.spacing * charScale.x/2) ->
+                         * determines spacing between characters
+                         */
+                        textPosition.x += (xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x / 2);
+                        interpolatedMatrix.Translate(textPosition).Scale(charScale).Rotate(transform.angle);
+                        textPosition.Free();
+                        charScale.Free();
+                    }
+
+                    // Determine the position in the glyph to extract the text glyph
+                    // from
+                    const x = position % mapping.width;
+                    const y = Math.floor(position / mapping.width);
+                    // Determine how wide and tall each glyph is in the texture
+                    // (which goes from 0 -> 1, so a glyph atlas with 10*10
+                    // dimensions - 100 characters - would have a character size of
+                    // 0.1)
+                    const charSize = 1 / mapping.width;
+                    // Create renderable for the character, include extra TextRender
+                    // information for shaders to use
+                    cameraRenderables.push(Renderable.New<TextRender>(
+                        text.zOrder,
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        interpolatedMatrix,
+                        new Material(
+                            {
+                                texture: new Texture(
+                                    `font_${text.font}`,
+                                    Polygon.QuadByPoints(
+                                        Vector.New(x * charSize, y * charSize),
+                                        Vector.New(x * charSize + charSize, y * charSize + charSize)
+                                    )
+                                ),
+                                shaders: text.shaders,
+                                color: text.color
+                            }
+                        ),
+                        DrawMode.TRIANGLES,
+                        new TextRender(
+                            mapping.asset.request.family,
+                            mapping.asset.request.weight,
+                            mapping.asset.request.buffer,
+                            mapping.asset.request.radius,
+                            mapping.asset.request.cutoff,
+                            mapping.asset.request.size,
+                            text.color,
+                            text.zOrder,
+                            text.align
+                        )
+                    ));
+                }
+                transformVirtualPosition.Free();
+                offsetVirtualPosition.Free();
+            }
+            renderables.set(cameraEntity.entity.id, cameraRenderables);
+            cameraViewShape.Free();
+            cameraVirtualScaleHalf.Free();
         }
-        this.messageBus.Publish(new Message<Renderable<TextRender>[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        viewportAABB.Free();
+        this.messageBus.Publish(new Message<Map<number, Renderable<TextRender>[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 

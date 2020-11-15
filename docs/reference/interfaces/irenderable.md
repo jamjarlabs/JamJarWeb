@@ -109,7 +109,7 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(...`args`: any): *[IPoolable](ipoolable.md)*
+▸ **Recycle**(`args`: any[]): *[IPoolable](ipoolable.md)*
 
 *Inherited from [IPoolable](ipoolable.md).[Recycle](ipoolable.md#recycle)*
 
@@ -120,6 +120,6 @@ but must be repeatable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`...args` | any | The arguments to use when recycling the object instance  |
+`args` | any[] | The arguments to use when recycling the object instance  |
 
 **Returns:** *[IPoolable](ipoolable.md)*

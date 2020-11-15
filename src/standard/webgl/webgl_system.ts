@@ -34,9 +34,6 @@ import DefaultTextureFragmentShader from "./default_texture_fragment_shader";
 import RenderSystem from "../render/render_system";
 import DefaultTextFragmentShader from "./default_text_fragment_shader";
 import IRenderable from "../../rendering/irenderable";
-import IFrustumCuller from "../frustum_culler/ifrustum_culler";
-import FrustumCuller from "../frustum_culler/frustum_culler";
-import Polygon from "../../shape/polygon";
 import TextureFiltering from "../../rendering/texture/texture_filtering";
 import TextureWrapping from "../../rendering/texture/texture_wrapping";
 import DrawMode from "../../rendering/draw_mode";
@@ -80,12 +77,11 @@ class WebGLSystem extends RenderSystem {
     private textures: Map<string, WebGLTexture>;
     private shaders: Map<string, [WebGLShader, GLSLShader]>;
     private programs: Map<string, WebGLProgram>;
-    private frustumCuller: IFrustumCuller;
 
     constructor(messageBus: IMessageBus,
         gl: WebGL2RenderingContext,
         scene?: IScene,
-        renderables: IRenderable[] = [],
+        renderables: Map<number, IRenderable[]> = new Map(),
         defaultShaderAssets: ShaderAsset[] = [
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME, new DefaultTextureFragmentShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
@@ -96,7 +92,6 @@ class WebGLSystem extends RenderSystem {
         shaders: Map<string, [WebGLShader, GLSLShader]> = new Map(),
         textures: Map<string, WebGLTexture> = new Map(),
         programs: Map<string, WebGLProgram> = new Map(),
-        frustumCuller: IFrustumCuller = new FrustumCuller(),
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, WebGLSystem.EVALUATOR, renderables, entities, subscriberID);
@@ -105,7 +100,6 @@ class WebGLSystem extends RenderSystem {
         this.textures = textures;
         this.shaders = shaders;
         this.programs = programs;
-        this.frustumCuller = frustumCuller;
 
         // Subscribe to messages
         this.messageBus.Subscribe(this, [
@@ -281,9 +275,6 @@ class WebGLSystem extends RenderSystem {
                 (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
             );
 
-            const cameraViewShape = Polygon.RectangleByDimensions(camera.virtualScale.x, camera.virtualScale.y)
-                .Transform(transform);
-
             // Define the viewport position of the camera
             gl.viewport(
                 realPosition.x,
@@ -323,9 +314,16 @@ class WebGLSystem extends RenderSystem {
             gl.enable(gl.BLEND);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
+            const cameraRenderables = this.renderables.get(cameraEntity.entity.id);
+
+            if (cameraRenderables === undefined) {
+                // No renderables prepared for camera
+                continue;
+            }
+
             // Group by z order
             const zOrderGroups: Map<number, IRenderable[]> = new Map();
-            for (const renderable of this.renderables) {
+            for (const renderable of cameraRenderables) {
                 const zOrderGroup = zOrderGroups.get(renderable.zOrder);
                 if (zOrderGroup === undefined) {
                     zOrderGroups.set(renderable.zOrder, [renderable]);
@@ -448,12 +446,6 @@ class WebGLSystem extends RenderSystem {
                                 continue;
                             }
 
-                            // Frustum culling
-                            if (this.frustumCuller.Cull(cameraViewShape, renderable.vertices.Apply4D(renderable.modelMatrix))) {
-                                // Not in camera view, skip rendering
-                                continue;
-                            }
-
                             for (const shader of shaders) {
                                 if (shader[1].perRenderable !== undefined) {
                                     shader[1].perRenderable(glslContext, renderable, texture);
@@ -466,13 +458,14 @@ class WebGLSystem extends RenderSystem {
                 }
 
             }
+
+            for (const renderable of cameraRenderables) {
+                renderable.Free();
+            }
         }
 
-        for (const renderable of this.renderables) {
-            renderable.Free();
-        }
 
-        this.renderables = [];
+        this.renderables = new Map();
     }
 }
 

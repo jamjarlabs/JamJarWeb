@@ -97,7 +97,7 @@ ___
 
 ### `Static` `Protected` new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
+▸ **new**<**T**>(`poolKey`: string, `type`: object, `args`: any[]): *T*
 
 new is used to request a new object from the pool specified, if the pool is unavailable or empty it will use
 the type to provision a new object through a constructor.
@@ -122,7 +122,7 @@ Name | Type |
 ------ | ------ |
 `constructor` |  |
 
-▪... **args**: *any*
+▪ **args**: *any[]*
 
 The args to use when creating/recycling the object.
 

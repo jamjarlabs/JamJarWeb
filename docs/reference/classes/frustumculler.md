@@ -20,7 +20,7 @@ colliding) - used in rendering to avoid unneccesary rendering.
 
 ### Properties
 
-* [narrowAlgorithm](frustumculler.md#private-narrowalgorithm)
+* [collisionAlgorithm](frustumculler.md#private-collisionalgorithm)
 
 ### Methods
 
@@ -30,21 +30,21 @@ colliding) - used in rendering to avoid unneccesary rendering.
 
 ###  constructor
 
-\+ **new FrustumCuller**(`narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)): *[FrustumCuller](frustumculler.md)*
+\+ **new FrustumCuller**(`collisionAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)): *[FrustumCuller](frustumculler.md)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AABBAlgorithm() |
+`collisionAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AABBAlgorithm() |
 
 **Returns:** *[FrustumCuller](frustumculler.md)*
 
 ## Properties
 
-### `Private` narrowAlgorithm
+### `Private` collisionAlgorithm
 
-• **narrowAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
+• **collisionAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
 
 ## Methods
 

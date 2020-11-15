@@ -50,7 +50,7 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(...`args`: any): *[IPoolable](ipoolable.md)*
+▸ **Recycle**(`args`: any[]): *[IPoolable](ipoolable.md)*
 
 Recycle is used to reuse an existing object instance, using the arguments provided - similar to a constructor,
 but must be repeatable.
@@ -59,6 +59,6 @@ but must be repeatable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`...args` | any | The arguments to use when recycling the object instance  |
+`args` | any[] | The arguments to use when recycling the object instance  |
 
 **Returns:** *[IPoolable](ipoolable.md)*

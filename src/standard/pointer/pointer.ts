@@ -15,13 +15,14 @@ limitations under the License.
 */
 
 import Vector from "../../geometry/vector";
+import IFreeable from "../../pooling/ifreeable";
 import PointerCameraInfo from "./pointer_camera_info";
 
 /**
  * Pointer describes a pointer event with additional information around cameras and position within
  * the element the game is running in.
  */
-class Pointer {
+class Pointer implements IFreeable {
     /**
      * Standard PointerEvent dispatched from JS.
      */
@@ -39,6 +40,13 @@ class Pointer {
         this.event = event;
         this.elementPosition = elementPosition;
         this.cameraInfos = cameraInfos;
+    }
+
+    public Free(): void {
+        this.elementPosition.Free();
+        for (const cameraInfo of this.cameraInfos) {
+            cameraInfo.Free();
+        }
     }
 }
 

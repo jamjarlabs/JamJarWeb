@@ -25,6 +25,7 @@ be loaded as textures by rendering systems.
 ### Properties
 
 * [entities](textsystem.md#protected-entities)
+* [frustumCuller](textsystem.md#private-frustumculler)
 * [mappings](textsystem.md#private-mappings)
 * [messageBus](textsystem.md#protected-messagebus)
 * [scene](textsystem.md#protected-optional-scene)
@@ -49,7 +50,7 @@ be loaded as textures by rendering systems.
 
 ###  constructor
 
-\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `sdfGeneratorFactory`: SDFGeneratorFactory, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
+\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `sdfGeneratorFactory`: SDFGeneratorFactory, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -60,6 +61,7 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
 `mappings` | Map‹string, [FontMapping](fontmapping.md)› | new Map() |
 `sdfGeneratorFactory` | SDFGeneratorFactory | TextSystem.DEFAULT_SDF_GENERATOR_FACTORY |
 `subscriberID?` | undefined &#124; number | - |
@@ -79,6 +81,12 @@ ID: Entity
 0: PlayerEntity
 1: ObstacleEntity
 etc.
+
+___
+
+### `Private` frustumCuller
+
+• **frustumCuller**: *[IFrustumCuller](../interfaces/ifrustumculler.md)*
 
 ___
 

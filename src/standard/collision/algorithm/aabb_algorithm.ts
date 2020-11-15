@@ -44,7 +44,11 @@ class AABBAlgorithm implements ICollisionAlgorithm {
                     aRight.x > bLeft.x) {
                     horizontalOverlap.push([a, b]);
                 }
+                bLeft.Free();
+                bRight.Free();
             }
+            aLeft.Free();
+            aRight.Free();
         }
 
         leftDir.Free();
@@ -66,6 +70,10 @@ class AABBAlgorithm implements ICollisionAlgorithm {
                 aUp.y > bDown.y) {
                 collisions.push(new CollisionInfo(a, b));
             }
+            aUp.Free();
+            aDown.Free();
+            bUp.Free();
+            bDown.Free();
         }
 
         upDir.Free();

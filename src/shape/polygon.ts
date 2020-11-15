@@ -24,12 +24,31 @@ import Matrix4D from "../geometry/matrix_4d";
  * Can be used in collision detection and rendering.
  */
 class Polygon implements IShape {
-    public points: Vector[];
+    public points: Float32Array;
 
-    constructor(points: Vector[], wrap = false) {
-        this.points = points;
-        if (wrap && points.length > 0) {
-            this.points.push(points[0].Copy());
+    constructor(points: Vector[] | Float32Array, wrap = false) {
+        if (points instanceof Float32Array) {
+            this.points = points;
+        } else {
+            if (wrap) {
+                this.points = new Float32Array(points.length * 2 + 2);
+            } else {
+                this.points = new Float32Array(points.length * 2);
+            }
+            for (let i = 0; i < points.length; i++) {
+                this.points[i * 2] = points[i].x;
+                this.points[i * 2 + 1] = points[i].y;
+                if (i !== points.length - 1) {
+                    points[i].Free();
+                }
+            }
+            if (points.length > 0) {
+                if (wrap) {
+                    this.points[points.length * 2] = points[0].x;
+                    this.points[points.length * 2 + 1] = points[0].y;
+                }
+                points[points.length - 1].Free();
+            }
         }
     }
 
@@ -37,58 +56,60 @@ class Polygon implements IShape {
      * Make a value copy of the Polygon.
      */
     public Copy(): Polygon {
-        const points: Vector[] = [];
-        for (const point of this.points) {
-            points.push(point.Copy());
-        }
-        return new Polygon(
-            points,
-        );
+        return new Polygon(this.points.subarray());
     }
 
     public Apply4D(matrix: Matrix4D): Polygon {
-        const appliedPoints: Vector[] = [];
-        for (const point of this.points) {
-            appliedPoints.push(point.Copy().Apply4D(matrix));
+        const points = this.points.subarray();
+        for (let i = 0; i < this.points.length; i += 2) {
+            const x = points[i];
+            const y = points[i + 1];
+            points[i] = matrix.values[0] * x + matrix.values[4] * y + matrix.values[12];
+            points[i + 1]= matrix.values[1] * x + matrix.values[5] * y + matrix.values[13];
         }
-        return new Polygon(appliedPoints);
+        return new Polygon(points);
     }
 
     public FarthestPointInDirection(direction: Vector): Vector {
         let farthestDistance = -Infinity;
         // If there are no points, just return point 0,0
-        let farthestPoint: Vector = Vector.New(0, 0);
-        for (const point of this.points) {
-            const distanceInDirection = point.Dot(direction);
+        let farthestPoint: [number, number] = [0, 0];
+        for (let i = 0; i < this.points.length; i += 2) {
+            const x = this.points[i];
+            const y = this.points[i + 1];
+            const distanceInDirection = x * direction.x + y * direction.y;
             if (distanceInDirection > farthestDistance) {
-                farthestPoint = point;
+                farthestPoint = [x, y];
                 farthestDistance = distanceInDirection;
             }
         }
-        return farthestPoint.Copy();
+        return Vector.New(farthestPoint[0], farthestPoint[1]);
     }
 
     public Center(): Vector {
         let xSum = 0;
         let ySum = 0;
-        for (const point of this.points) {
-            xSum += point.x;
-            ySum += point.y;
+        for (let i = 0; i < this.points.length; i += 2) {
+            xSum += this.points[i];
+            ySum += this.points[i + 1];
         }
         return Vector.New(
-            xSum / this.points.length,
-            ySum / this.points.length
+            xSum / (this.points.length / 2),
+            ySum / (this.points.length / 2)
         );
     }
 
 
     public Transform(transform: Transform): Polygon {
         const matrix = transform.Matrix3D();
-        const transformedPoints = [];
-        for (const point of this.points) {
-            transformedPoints.push(point.Copy().Apply3D(matrix));
+        const points = this.points.slice();
+        for (let i = 0; i < points.length; i += 2) {
+            const x = points[i];
+            const y = points[i + 1];
+            points[i] = matrix.values[0] * x + matrix.values[3] * y + matrix.values[6];
+            points[i + 1] = matrix.values[1] * x + matrix.values[4] * y + matrix.values[7];
         }
-        return new Polygon(transformedPoints);
+        return new Polygon(points);
     }
 
     public PointInside(point: Vector): boolean {
@@ -98,15 +119,17 @@ class Polygon implements IShape {
          * Based on description here:
          * http://alienryderflex.com/polygon/
          */
-        let j = this.points.length - 1;
+        let j = this.points.length - 2;
         let inPolygon = false;
-        for (let i = 0; i < this.points.length; i++) {
-            const cornerA = this.points[i];
-            const cornerB = this.points[j];
-            if ((cornerA.y < point.y && cornerB.y >= point.y ||
-                cornerB.y < point.y && cornerA.y >= point.y) &&
-                (cornerA.x <= point.x || cornerB.x <= point.x)) {
-                if (cornerA.x + (point.y - cornerA.y) / (cornerB.y - cornerA.y) * (cornerB.x - cornerA.x) < point.x) {
+        for (let i = 0; i < this.points.length; i += 2) {
+            const cornerAX = this.points[i];
+            const cornerAY = this.points[i + 1];
+            const cornerBX = this.points[j];
+            const cornerBY = this.points[j + 1];
+            if ((cornerAY < point.y && cornerBY >= point.y ||
+                cornerBY < point.y && cornerAY >= point.y) &&
+                (cornerAX <= point.x || cornerBX <= point.x)) {
+                if (cornerAX + (point.y - cornerAY) / (cornerBY - cornerAY) * (cornerBX - cornerAX) < point.x) {
                     inPolygon = !inPolygon;
                 }
             }
@@ -116,9 +139,7 @@ class Polygon implements IShape {
     }
 
     public Free(): void {
-        for (const point of this.points) {
-            point.Free();
-        }
+        // Nothing to return to the pool
     }
 
     /**
@@ -126,12 +147,7 @@ class Polygon implements IShape {
      * @returns {Float32Array} The array representation of the polygon
      */
     public GetFloat32Array(): Float32Array {
-        const arr = new Float32Array(this.points.length * 2);
-        for (let i = 0; i < this.points.length; i++) {
-            arr[i * 2] = this.points[i].x;
-            arr[i * 2 + 1] = this.points[i].y;
-        }
-        return arr;
+        return this.points;
     }
 
     /**
@@ -144,12 +160,36 @@ class Polygon implements IShape {
     public static RectangleByDimensions(width: number, height: number, originX = 0, originY = 0, wrap = false): Polygon {
         const halfWidth = width / 2;
         const halfHeight = height / 2;
-        return new Polygon([
-            Vector.New(originX - halfWidth, originY + halfHeight), // top left
-            Vector.New(originX + halfWidth, originY + halfHeight), // top right
-            Vector.New(originX + halfWidth, originY - halfHeight), // bottom right
-            Vector.New(originX - halfWidth, originY - halfHeight), // bottom left
-        ], wrap);
+
+        let typedArraySize = 8;
+        if (wrap) {
+            typedArraySize += 2;
+        }
+
+        const points = new Float32Array(typedArraySize);
+
+        // Top left
+        points[0] = originX - halfWidth;
+        points[1] = originY + halfHeight;
+
+        // Top right
+        points[2] = originX + halfWidth;
+        points[3] = originY + halfHeight;
+
+        // Bottom right
+        points[4] = originX + halfWidth;
+        points[5] = originY - halfHeight;
+
+        // Bottom left
+        points[6] = originX - halfWidth;
+        points[7] = originY - halfHeight;
+
+        if (wrap) {
+            points[typedArraySize - 2] = points[0];
+            points[typedArraySize - 1] = points[1];
+        }
+
+        return new Polygon(points);
     }
 
     /**
@@ -159,16 +199,13 @@ class Polygon implements IShape {
      * @param {Vector} topRight Top right of the rectangle
      */
     public static RectangleByPoints(bottomLeft: Vector, topRight: Vector, wrap = false): Polygon {
-        const bottomRight = bottomLeft.Copy();
-        bottomRight.x += topRight.x - bottomLeft.x;
-        const topLeft = topRight.Copy();
-        topLeft.x -= topRight.x - bottomLeft.x;
-        return new Polygon([
-            bottomLeft.Copy(),
-            bottomRight,
-            topRight.Copy(),
-            topLeft
-        ], wrap);
+
+        const width = topRight.x - bottomLeft.x;
+        const height = topRight.y - bottomLeft.y;
+        const originX = (topRight.x + bottomLeft.x) / 2;
+        const originY = (topRight.y + bottomLeft.y) / 2;
+
+        return Polygon.RectangleByDimensions(width, height, originX, originY, wrap);
     }
 
     /**
@@ -182,20 +219,33 @@ class Polygon implements IShape {
         const halfWidth = width / 2;
         const halfHeight = height / 2;
 
-        const bottomRight = Vector.New(originX + halfWidth, originY - halfHeight);
-        const bottomLeft = Vector.New(originX - halfWidth, originY - halfHeight);
-        const topLeft = Vector.New(originX - halfWidth, originY + halfHeight);
-        const topRight = Vector.New(originX + halfWidth, originY + halfHeight);
+        const points = new Float32Array(12);
 
-        return new Polygon([
-            bottomRight,
-            bottomLeft,
-            topLeft,
+        // Bottom right
+        points[0] = originX + halfWidth;
+        points[1] = originY - halfHeight;
 
-            topLeft.Copy(),
-            topRight,
-            bottomRight.Copy(),
-        ]);
+        // Bottom left
+        points[2] = originX - halfWidth;
+        points[3] = originY - halfHeight;
+
+        // Top left
+        points[4] = originX - halfWidth;
+        points[5] = originY + halfHeight;
+
+        // Top left
+        points[6] = originX - halfWidth;
+        points[7] = originY + halfHeight;
+
+        // Top right
+        points[8] = originX + halfWidth;
+        points[9] = originY + halfHeight;
+
+        // Bottom right
+        points[10] = originX + halfWidth;
+        points[11] = originY - halfHeight;
+
+        return new Polygon(points);
     }
 
     /**
@@ -205,18 +255,13 @@ class Polygon implements IShape {
      * @param {Vector} topRight Top right of the quad
      */
     public static QuadByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
-        const bottomRight = bottomLeft.Copy();
-        bottomRight.x += topRight.x - bottomLeft.x;
-        const topLeft = topRight.Copy();
-        topLeft.x -= topRight.x - bottomLeft.x;
-        return new Polygon([
-            bottomRight,
-            bottomLeft.Copy(),
-            topLeft,
-            topLeft.Copy(),
-            topRight.Copy(),
-            bottomRight.Copy()
-        ]);
+
+        const width = topRight.x - bottomLeft.x;
+        const height = topRight.y - bottomLeft.y;
+        const originX = (topRight.x + bottomLeft.x) / 2;
+        const originY = (topRight.y + bottomLeft.y) / 2;
+
+        return Polygon.QuadByDimensions(width, height, originX, originY);
     }
 
     /**
@@ -228,16 +273,26 @@ class Polygon implements IShape {
      */
     public static EllipseEstimation(numOfPoints: number, dimensions: Vector, centerX = 0, centerY = 0,
         wrap = false): Polygon {
-        const points: Vector[] = [];
+
+        let typedArraySize = numOfPoints * 2;
+        if (wrap && numOfPoints > 0) {
+            typedArraySize += 2;
+        }
+
+        const points: Float32Array = new Float32Array(typedArraySize);
         for (let i = 0; i < numOfPoints; i++) {
             const done = i / numOfPoints;
             const angle = done * 2 * Math.PI;
-            points.push(Vector.New(
-                dimensions.x * Math.cos(angle) + centerX,
-                dimensions.y * Math.sin(angle) + centerY,
-            ));
+            points[i * 2] = dimensions.x * Math.cos(angle) + centerX;
+            points[i * 2 + 1] = dimensions.y * Math.sin(angle) + centerY;
         }
-        return new Polygon(points, wrap);
+
+        if (wrap && numOfPoints > 0) {
+            points[typedArraySize - 2] = points[0];
+            points[typedArraySize - 1] = points[1];
+        }
+
+        return new Polygon(points);
     }
 }
 

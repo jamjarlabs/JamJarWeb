@@ -340,7 +340,7 @@ class CrosshairSystem extends System {
                         if (cameraInfo.camera.id != ui.camera.id) {
                             continue;
                         }
-                        transform.position = cameraInfo.cameraPosition;
+                        transform.position = cameraInfo.cameraPosition.Copy();
                     }
                 }
                 break;
@@ -394,7 +394,7 @@ class PlayerSystem extends System {
                     if (!cameraInfo.withinBounds) {
                         continue;
                     }
-                    this.targetedPosition = cameraInfo.worldPosition;
+                    this.targetedPosition = cameraInfo.worldPosition.Copy();
                 }
                 break;
             }
@@ -408,7 +408,7 @@ class PlayerSystem extends System {
                         if (!cameraInfo.withinBounds) {
                             continue;
                         }
-                        this.targetedPosition = cameraInfo.worldPosition;
+                        this.targetedPosition = cameraInfo.worldPosition.Copy();
                     }
 
                     const transform = player.Get(Transform.KEY) as Transform;

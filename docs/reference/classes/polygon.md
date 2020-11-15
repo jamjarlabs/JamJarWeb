@@ -42,13 +42,13 @@ Can be used in collision detection and rendering.
 
 ###  constructor
 
-\+ **new Polygon**(`points`: [Vector](vector.md)[], `wrap`: boolean): *[Polygon](polygon.md)*
+\+ **new Polygon**(`points`: [Vector](vector.md)[] | Float32Array, `wrap`: boolean): *[Polygon](polygon.md)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`points` | [Vector](vector.md)[] | - |
+`points` | [Vector](vector.md)[] &#124; Float32Array | - |
 `wrap` | boolean | false |
 
 **Returns:** *[Polygon](polygon.md)*
@@ -57,7 +57,7 @@ Name | Type | Default |
 
 ###  points
 
-• **points**: *[Vector](vector.md)[]*
+• **points**: *Float32Array*
 
 ## Methods
 
