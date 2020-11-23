@@ -23,6 +23,7 @@ primitives and generating renderables from them.
 ### Properties
 
 * [entities](primitivesystem.md#protected-entities)
+* [frustumCuller](primitivesystem.md#private-frustumculler)
 * [messageBus](primitivesystem.md#protected-messagebus)
 * [scene](primitivesystem.md#protected-optional-scene)
 * [subscriberID](primitivesystem.md#subscriberid)
@@ -43,18 +44,19 @@ primitives and generating renderables from them.
 
 ###  constructor
 
-\+ **new PrimitiveSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[PrimitiveSystem](primitivesystem.md)*
+\+ **new PrimitiveSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[PrimitiveSystem](primitivesystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`scene?` | [IScene](../interfaces/iscene.md) |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› |
-`subscriberID?` | undefined &#124; number |
+Name | Type | Default |
+------ | ------ | ------ |
+`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+`scene?` | [IScene](../interfaces/iscene.md) | - |
+`frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
+`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[PrimitiveSystem](primitivesystem.md)*
 
@@ -71,6 +73,12 @@ ID: Entity
 0: PlayerEntity
 1: ObstacleEntity
 etc.
+
+___
+
+### `Private` frustumCuller
+
+• **frustumCuller**: *[IFrustumCuller](../interfaces/ifrustumculler.md)*
 
 ___
 

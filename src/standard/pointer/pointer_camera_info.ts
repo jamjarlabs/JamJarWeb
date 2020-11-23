@@ -16,11 +16,12 @@ limitations under the License.
 
 import IEntity from "../../entity/ientity";
 import Vector from "../../geometry/vector";
+import IFreeable from "../../pooling/ifreeable";
 
 /**
  * PointerCameraInfo pointer information relevant to a camera.
  */
-class PointerCameraInfo {
+class PointerCameraInfo implements IFreeable {
     /**
      * Entity of the camera.
      */
@@ -43,6 +44,11 @@ class PointerCameraInfo {
         this.cameraPosition = cameraPosition;
         this.worldPosition = worldPosition;
         this.withinBounds = withinBounds;
+    }
+
+    public Free(): void {
+        this.cameraPosition.Free();
+        this.worldPosition.Free();
     }
 }
 

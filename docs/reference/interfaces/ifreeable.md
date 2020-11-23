@@ -21,6 +21,8 @@ object to be freed/it's constituent parts freed back to object pools.
 * [FakeComponent](../classes/fakecomponent.md)
 * [Material](../classes/material.md)
 * [Motion](../classes/motion.md)
+* [Pointer](../classes/pointer.md)
+* [PointerCameraInfo](../classes/pointercamerainfo.md)
 * [Primitive](../classes/primitive.md)
 * [Script](../classes/script.md)
 * [Sprite](../classes/sprite.md)

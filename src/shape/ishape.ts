@@ -27,10 +27,6 @@ interface IShape extends IFreeable {
      * Center calculates/retrieves the center of a shape.
      * @returns {Vector} The center point of the shape
      */
-    /**
-     * Center calculates/retrieves the center of a shape.
-     * @returns {Vector} The center point of the shape
-     */
     Center(): Vector;
     /**
      * Transform takes a transform and applies it to shape.

@@ -46,7 +46,8 @@ import {
     SystemEntity,
     Motion,
     MotionSystem,
-    InterpolationSystem,, Renderable
+    InterpolationSystem,
+    Renderable
 } from "jamjar";
 
 class TextureGame extends Game {

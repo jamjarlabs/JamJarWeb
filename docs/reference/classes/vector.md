@@ -318,14 +318,13 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(`x`: number, `y`: number): *[Vector](vector.md)*
+▸ **Recycle**(`args`: [number, number]): *[Vector](vector.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`x` | number |
-`y` | number |
+`args` | [number, number] |
 
 **Returns:** *[Vector](vector.md)*
 
@@ -503,7 +502,7 @@ ___
 
 ### `Static` `Protected` new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
+▸ **new**<**T**>(`poolKey`: string, `type`: object, `args`: any[]): *T*
 
 *Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
 
@@ -530,7 +529,7 @@ Name | Type |
 ------ | ------ |
 `constructor` |  |
 
-▪... **args**: *any*
+▪ **args**: *any[]*
 
 The args to use when creating/recycling the object.
 

@@ -18,6 +18,7 @@ algorithm for collision detection.
 
 * [CalculateCollisions](gjkalgorithm.md#calculatecollisions)
 * [calculateDirection](gjkalgorithm.md#private-calculatedirection)
+* [freeSimplex](gjkalgorithm.md#private-freesimplex)
 * [gjk](gjkalgorithm.md#private-gjk)
 * [support](gjkalgorithm.md#private-support)
 
@@ -50,6 +51,20 @@ Name | Type |
 `points` | [Vector](vector.md)[] |
 
 **Returns:** *[Vector](vector.md) | undefined*
+
+___
+
+### `Private` freeSimplex
+
+▸ **freeSimplex**(`simplex`: [Vector](vector.md)[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`simplex` | [Vector](vector.md)[] |
+
+**Returns:** *void*
 
 ___
 

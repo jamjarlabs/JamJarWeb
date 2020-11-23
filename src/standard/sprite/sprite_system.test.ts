@@ -32,6 +32,10 @@ import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
 import UI from "../ui/ui";
 import Camera from "../camera/camera";
+import FrustumCuller from "../frustum_culler/frustum_culler";
+import AllCollideAlgorithm from "../collision/algorithm/all_collide_algorithm";
+import IRenderable from "../../rendering/irenderable";
+import NoneCollideAlgorithm from "../collision/algorithm/none_collide_algorithm";
 
 describe("SpriteSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, SpriteSystem, SpriteSystem, IMessage];
@@ -39,15 +43,15 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Unknown message type",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus()),
             new Message("unknown")
         ],
         [
             "Pre render no payload",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER)
         ],
         [
@@ -55,6 +59,7 @@ describe("SpriteSystem - OnMessage", () => {
             new Error("fail to publish"),
             new SpriteSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -65,6 +70,7 @@ describe("SpriteSystem - OnMessage", () => {
             ),
             new SpriteSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -76,10 +82,12 @@ describe("SpriteSystem - OnMessage", () => {
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
-            "Pre render render 3 sprites",
+            "Pre render, skip 3 sprites, no camera",
             undefined,
-            new SpriteSystem(new FakeMessageBus(),
+            new SpriteSystem(
+                new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -96,8 +104,12 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(),
+            new SpriteSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(0);
+                })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -117,10 +129,123 @@ describe("SpriteSystem - OnMessage", () => {
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
         ],
         [
-            "Pre render, UI, render 2, skip 1 no camera",
+            "Pre render, skip 3 sprites, cull",
+            undefined,
+            new SpriteSystem(
+                new FakeMessageBus(),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Camera(),
+                        new Transform()
+                    ])]
+                ]),
+                0
+            ),
+            new SpriteSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(3)?.length).toEqual(0);
+                })]),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Camera(),
+                        new Transform()
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, render 3 sprites, one camera",
+            undefined,
+            new SpriteSystem(
+                new FakeMessageBus(),
+                undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Camera(),
+                        new Transform()
+                    ])]
+                ]),
+                0
+            ),
+            new SpriteSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(3)?.length).toEqual(3);
+                })]),
+                undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Camera(),
+                        new Transform()
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, UI, render 2, skip 1, no camera",
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -144,8 +269,13 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(),
+            new SpriteSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(2)?.length).toEqual(2);
+                })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -165,6 +295,68 @@ describe("SpriteSystem - OnMessage", () => {
                         new Transform(),
                         new UI(new FakeEntity(4)),
                         new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])]
+                ]),
+                0
+            ),
+            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0)
+        ],
+        [
+            "Pre render, UI, skip 3, one camera, culled",
+            undefined,
+            new SpriteSystem(
+                new FakeMessageBus(),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Camera()
+                    ])]
+                ]),
+                0
+            ),
+            new SpriteSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(3)?.length).toEqual(0);
+                })]),
+                undefined,
+                new FrustumCuller(new NoneCollideAlgorithm()),
+                new Map([
+                    [0, new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [1, new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [2, new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
+                    ])],
+                    [3, new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Camera()
                     ])]
                 ]),
                 0
@@ -174,8 +366,10 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Pre render, UI, render 2, skip 1 invalid camera",
             undefined,
-            new SpriteSystem(new FakeMessageBus(),
+            new SpriteSystem(
+                new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -191,7 +385,7 @@ describe("SpriteSystem - OnMessage", () => {
                         new Transform(),
                         new Camera()
                     ])],
-                    [3, new SystemEntity(new FakeEntity(4), [
+                    [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(1)),
                         new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
@@ -199,8 +393,13 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(),
+            new SpriteSystem(
+                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
+                    expect(message.payload?.size).toEqual(1);
+                    expect(message.payload?.get(2)?.length).toEqual(2);
+                })]),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -216,7 +415,7 @@ describe("SpriteSystem - OnMessage", () => {
                         new Transform(),
                         new Camera()
                     ])],
-                    [3, new SystemEntity(new FakeEntity(4), [
+                    [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(1)),
                         new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
@@ -231,6 +430,7 @@ describe("SpriteSystem - OnMessage", () => {
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -239,7 +439,7 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
@@ -250,6 +450,7 @@ describe("SpriteSystem - OnMessage", () => {
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -259,7 +460,7 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0),
@@ -271,6 +472,7 @@ describe("SpriteSystem - OnMessage", () => {
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -279,7 +481,7 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Camera()
@@ -290,6 +492,7 @@ describe("SpriteSystem - OnMessage", () => {
             undefined,
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -312,6 +515,7 @@ describe("SpriteSystem - OnMessage", () => {
             ),
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
+                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -336,8 +540,8 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject non-ui sprite new entity, missing transform",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
             ]])
@@ -345,15 +549,15 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject non-ui sprite new entity, missing sprite",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
         [
             "Correctly reject camera new entity, missing transform",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Camera()
             ]])
@@ -361,8 +565,8 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject camera new entity, missing camera",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: SpriteSystem, spriteSystem: SpriteSystem, message: IMessage) => {

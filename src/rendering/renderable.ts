@@ -30,8 +30,8 @@ class Renderable<T> extends Pooled implements IRenderable {
 
     public static New<T>(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode,
         payload?: T, camera?: IEntity): Renderable<T> {
-        return this.new<Renderable<T>>(Renderable.POOL_KEY, Renderable, zOrder, vertices, modelMatrix, material,
-            drawMode, payload, camera);
+        return this.new<Renderable<T>>(Renderable.POOL_KEY, Renderable, [ zOrder, vertices, modelMatrix, material,
+            drawMode, payload, camera ]);
     }
 
     public static Free<T>(obj: Renderable<T>): void {
@@ -90,15 +90,14 @@ class Renderable<T> extends Pooled implements IRenderable {
         this.camera = camera;
     }
 
-    public Recycle(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode,
-        payload?: T, camera?: IEntity): Renderable<T> {
-        this.zOrder = zOrder;
-        this.vertices = vertices;
-        this.modelMatrix = modelMatrix;
-        this.material = material;
-        this.drawMode = drawMode;
-        this.payload = payload;
-        this.camera = camera;
+    public Recycle(args: [number, Polygon, Matrix4D, Material, DrawMode, T, IEntity]): Renderable<T> {
+        this.zOrder = args[0];
+        this.vertices = args[1];
+        this.modelMatrix = args[2];
+        this.material = args[3];
+        this.drawMode = args[4];
+        this.payload = args[5];
+        this.camera = args[6];
         return this;
     }
 

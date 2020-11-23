@@ -37,12 +37,12 @@ abstract class RenderSystem extends System {
     /**
      * A list of things to be rendered.
      */
-    protected renderables: IRenderable[];
+    protected renderables: Map<number, IRenderable[]>;
 
     constructor(messageBus: IMessageBus,
         scene?: IScene,
         evaluator?: Evaluator,
-        renderables: IRenderable[] = [],
+        renderables: Map<number, IRenderable[]> = new Map(),
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, evaluator, entities, subscriberID);
@@ -53,11 +53,20 @@ abstract class RenderSystem extends System {
         super.OnMessage(message);
         switch (message.type) {
             case RenderSystem.MESSAGE_LOAD_RENDERABLES: {
-                const renderMessage = message as Message<IRenderable[]>;
+                const renderMessage = message as Message<[number, IRenderable[]][]>;
                 if (renderMessage.payload === undefined) {
                     return;
                 }
-                this.renderables.push(...renderMessage.payload);
+                for (const cameraRenderGroup of renderMessage.payload) {
+                    const existing = this.renderables.get(cameraRenderGroup[0]);
+                    if (existing === undefined) {
+                        this.renderables.set(cameraRenderGroup[0], cameraRenderGroup[1]);
+                        continue;
+                    }
+
+                    existing.push(...cameraRenderGroup[1]);
+                    this.renderables.set(cameraRenderGroup[0], existing);
+                }
                 break;
             }
         }

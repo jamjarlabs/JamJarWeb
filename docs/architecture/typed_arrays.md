@@ -1,6 +1,6 @@
 # Typed Arrays
 
-Key JamJar geometry objects use typed arrays behind the scenes, such as [Vector], [Matrix3D] and [Matrix4D].
+Key JamJar geometry objects use typed arrays behind the scenes, such as [Vector], [Polygon], [Matrix3D] and [Matrix4D].
 
 ## What are typed arrays?
 
@@ -33,6 +33,7 @@ This ultimately doesn't affect the geometry objects, the typed arrays are wrappe
 by a more intuiative API, rather than direct array access.
 
 [Vector]:../../reference/classes/vector
+[Polygon]:../../reference/classes/polygon
 [Matrix3D]:../../reference/classes/matrix3d
 [Matrix4D]:../../reference/classes/matrix4d
 [Float32Array]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32array

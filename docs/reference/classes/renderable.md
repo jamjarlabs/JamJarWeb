@@ -187,19 +187,13 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `payload?`: T, `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)‹T›*
+▸ **Recycle**(`args`: [number, [Polygon](polygon.md), [Matrix4D](matrix4d.md), [Material](material.md), [DrawMode](../enums/drawmode.md), T, [IEntity](../interfaces/ientity.md)]): *[Renderable](renderable.md)‹T›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`zOrder` | number |
-`vertices` | [Polygon](polygon.md) |
-`modelMatrix` | [Matrix4D](matrix4d.md) |
-`material` | [Material](material.md) |
-`drawMode` | [DrawMode](../enums/drawmode.md) |
-`payload?` | T |
-`camera?` | [IEntity](../interfaces/ientity.md) |
+`args` | [number, [Polygon](polygon.md), [Matrix4D](matrix4d.md), [Material](material.md), [DrawMode](../enums/drawmode.md), T, [IEntity](../interfaces/ientity.md)] |
 
 **Returns:** *[Renderable](renderable.md)‹T›*
 
@@ -308,7 +302,7 @@ ___
 
 ### `Static` `Protected` new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
+▸ **new**<**T**>(`poolKey`: string, `type`: object, `args`: any[]): *T*
 
 *Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
 
@@ -335,7 +329,7 @@ Name | Type |
 ------ | ------ |
 `constructor` |  |
 
-▪... **args**: *any*
+▪ **args**: *any[]*
 
 The args to use when creating/recycling the object.
 

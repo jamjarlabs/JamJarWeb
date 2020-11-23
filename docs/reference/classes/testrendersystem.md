@@ -43,7 +43,7 @@ only for testing
 
 ###  constructor
 
-\+ **new TestRenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[TestRenderSystem](testrendersystem.md)*
+\+ **new TestRenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: Map‹number, [IRenderable](../interfaces/irenderable.md)[]›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[TestRenderSystem](testrendersystem.md)*
 
 *Inherited from [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
 
@@ -56,7 +56,7 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `evaluator?` | [Evaluator](../README.md#evaluator) | - |
-`renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
+`renderables` | Map‹number, [IRenderable](../interfaces/irenderable.md)[]› | new Map() |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
@@ -91,7 +91,7 @@ ___
 
 ### `Protected` renderables
 
-• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
+• **renderables**: *Map‹number, [IRenderable](../interfaces/irenderable.md)[]›*
 
 *Inherited from [RenderSystem](rendersystem.md).[renderables](rendersystem.md#protected-renderables)*
 

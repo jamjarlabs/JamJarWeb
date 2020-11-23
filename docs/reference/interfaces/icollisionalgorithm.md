@@ -14,7 +14,6 @@ ICollisionAlgorithm represents a collision detection algorithm.
 * [GJKAlgorithm](../classes/gjkalgorithm.md)
 * [NoneCollideAlgorithm](../classes/nonecollidealgorithm.md)
 * [TestCollisionAlgorithm](../classes/testcollisionalgorithm.md)
-* [TestCollisionAlgorithm](../classes/testcollisionalgorithm.md)
 
 ## Index
 

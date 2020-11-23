@@ -30,7 +30,7 @@ interface IPoolable extends IFreeable {
      * @param args The arguments to use when recycling the object instance
      */
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-    Recycle(...args: any): IPoolable;
+    Recycle(args: any[]): IPoolable;
 }
 
 export default IPoolable;

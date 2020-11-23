@@ -27,6 +27,10 @@ must be implemented on a per `Component` basis by overriding this function.
 render logic.
 - `AABBAlgorithm` more efficient algorithm involving sweeping horizontal then vertical.
 - `AABB` method `FarthestPointInDirection` faster and using less `Vector` objects.
+- Pointer, pointer move, and wheel events synced up and dispatched within the engine update loop.
+- `Polygon` uses `Float32Array` internally.
+- `Polygon` can now be initialised with a `Float32Array`.
+- Frustum culling moved to preprocessing and removed from render pipeline.
 
 ## [v0.9.0] - 2020-09-05
 ### Added

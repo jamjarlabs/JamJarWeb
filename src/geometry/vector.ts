@@ -34,7 +34,7 @@ class Vector extends Pooled implements IPoolable {
      * Create a Vector.New, using pooling if available.
      */
     public static New(x: number, y: number): Vector {
-        return this.new<Vector>(Vector.POOL_KEY, Vector, x, y);
+        return this.new<Vector>(Vector.POOL_KEY, Vector, [x, y]);
     }
 
     /**
@@ -238,9 +238,9 @@ class Vector extends Pooled implements IPoolable {
         );
     }
 
-    public Recycle(x: number, y: number): Vector {
-        this.x = x;
-        this.y = y;
+    public Recycle(args: [number, number]): Vector {
+        this.x = args[0];
+        this.y = args[1];
         return this;
     }
 

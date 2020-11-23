@@ -49,6 +49,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         // Get the first support point and add it to the simplex
         const initSupportPoint = this.support(a, b, direction);
         simplex.push(initSupportPoint);
+        direction.Free();
 
         // First support point was calculated from the origin, so the next search direction
         // should be its inverse to get a point on the opposite side of the Minkowski Difference
@@ -65,21 +66,33 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             // intersection
             if (supportPoint.Dot(direction) <= 0) {
                 // No intersection
+                direction.Free();
+                this.freeSimplex(simplex);
                 return;
             }
 
             // Add the simplex and determine a new direction
             simplex.push(supportPoint);
+            direction.Free();
             direction = this.calculateDirection(simplex);
         }
         // No direction calculated, intersection detected
+        this.freeSimplex(simplex);
         return new CollisionInfo(a, b);
+    }
+
+    private freeSimplex(simplex: Vector[]): void {
+        for (const point of simplex) {
+            point.Free();
+        }
     }
 
     private support(a: IShape, b: IShape, direction: Vector): Vector {
         const aFar = a.FarthestPointInDirection(direction);
         const bFar = b.FarthestPointInDirection(direction.Invert());
-        return aFar.Sub(bFar);
+        const support = aFar.Sub(bFar);
+        bFar.Free();
+        return support;
     }
 
     private calculateDirection(points: Vector[]): Vector | undefined {
@@ -113,9 +126,13 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             // of the perpendicular; aiming to try to encapsulate
             // the origin that lies outside
             if (abPerp.Dot(ao) > 0) {
+                ao.Free();
+                points[0].Free();
                 points.splice(0, 1);
                 return abPerp;
             }
+
+            abPerp.Free();
 
             // Determine perpendicular of the a->c line
             let acPerp = Vector.New(ac.y, -ac.x);
@@ -123,7 +140,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             // Check the handedness of the perpendicular, it should
             // face AWAY from the simplex
             if (acPerp.Dot(b) >= 0) {
-                acPerp = acPerp.Copy().Invert();
+                acPerp = acPerp.Invert();
             }
 
             // If the origin lies outside of the simplex. remove the
@@ -131,9 +148,13 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             // of the perpendicular; aiming to try to encapsulate
             // the origin that lies outside
             if (acPerp.Dot(ao) > 0) {
+                ao.Free();
+                points[1].Free();
                 points.splice(1, 1);
                 return acPerp;
             }
+            ao.Free();
+            acPerp.Free();
             return undefined;
         }
         // Otherwise the simplex is just a line
@@ -146,10 +167,12 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         // Get the perpendicular of the a->b line
         let abPerp = Vector.New(ab.y, -ab.x);
 
+        ab.Free();
+
         // Check the handedness of the perpendicular, it should
         // face TOWARDS the origin
         if (abPerp.Dot(ao) <= 0) {
-            abPerp = abPerp.Copy().Invert();
+            abPerp = abPerp.Invert();
         }
         return abPerp;
     }

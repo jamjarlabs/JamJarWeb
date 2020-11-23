@@ -11,8 +11,6 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
   ↳ [TestPointerSystem](testpointersystem.md)
 
-  ↳ [TestWheelSystem](testwheelsystem.md)
-
 ## Implements
 
 * [ISubscriber](../interfaces/isubscriber.md)
@@ -28,9 +26,12 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 * [entities](pointersystem.md#protected-entities)
 * [inputElement](pointersystem.md#private-inputelement)
 * [isFullscreen](pointersystem.md#private-isfullscreen)
+* [lastMoveEvent](pointersystem.md#private-lastmoveevent)
+* [lastPublishedPointers](pointersystem.md#private-lastpublishedpointers)
 * [lastWheelEvent](pointersystem.md#private-lastwheelevent)
 * [lockedPointerPosition](pointersystem.md#private-lockedpointerposition)
 * [messageBus](pointersystem.md#protected-messagebus)
+* [pointerEventsToPublish](pointersystem.md#private-pointereventstopublish)
 * [scene](pointersystem.md#protected-optional-scene)
 * [subscriberID](pointersystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](pointersystem.md#static-message_deregister)
@@ -43,7 +44,9 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 * [OnDestroy](pointersystem.md#protected-ondestroy)
 * [OnMessage](pointersystem.md#onmessage)
 * [Update](pointersystem.md#update)
+* [moveEvent](pointersystem.md#protected-moveevent)
 * [pointerEvent](pointersystem.md#protected-pointerevent)
+* [processPointerEvent](pointersystem.md#private-processpointerevent)
 * [wheelEvent](pointersystem.md#protected-wheelevent)
 * [EVALUATOR](pointersystem.md#static-private-evaluator)
 
@@ -51,7 +54,7 @@ PointerSystem handles Pointer (mouse, touch etc.) input events, converting them 
 
 ###  constructor
 
-\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent): *[PointerSystem](pointersystem.md)*
+\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent, `lastMoveEvent?`: PointerEvent, `pointersToPublish`: PointerEvent[], `lastPublishedPointers`: [Pointer](pointer.md)[]): *[PointerSystem](pointersystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -67,6 +70,9 @@ Name | Type | Default |
 `isFullscreen` | boolean | false |
 `lockedPointerPosition?` | [Vector](vector.md) | - |
 `lastWheelEvent?` | WheelEvent | - |
+`lastMoveEvent?` | PointerEvent | - |
+`pointersToPublish` | PointerEvent[] | [] |
+`lastPublishedPointers` | [Pointer](pointer.md)[] | [] |
 
 **Returns:** *[PointerSystem](pointersystem.md)*
 
@@ -103,12 +109,28 @@ true = in fullscreen, false = not in fullscreen
 
 ___
 
+### `Private` lastMoveEvent
+
+• **lastMoveEvent**: *PointerEvent | undefined*
+
+Last pointer move event captured, stored here to throttle a potentially frequently firing event.
+
+___
+
+### `Private` lastPublishedPointers
+
+• **lastPublishedPointers**: *[Pointer](pointer.md)[]*
+
+The pointers published in the last update.
+Used to free up objects back into pools.
+
+___
+
 ### `Private` lastWheelEvent
 
 • **lastWheelEvent**: *WheelEvent | undefined*
 
-Last wheel event captured, stored here to throttle a potentially
-frequently firing event
+Last wheel event captured, stored here to throttle a potentially frequently firing event.
 
 ___
 
@@ -116,8 +138,8 @@ ___
 
 • **lockedPointerPosition**: *[Vector](vector.md) | undefined*
 
-Position of the pointer if it is locked, used with the PointerAPI to
-keep track of pointer position using movementX and movementY.
+Position of the pointer if it is locked, used with the PointerAPI to keep track of pointer position using
+movementX and movementY.
 If it is undefined there is no pointer lock.
 
 ___
@@ -130,6 +152,14 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
+
+___
+
+### `Private` pointerEventsToPublish
+
+• **pointerEventsToPublish**: *PointerEvent[]*
+
+The pointer events recieved since the last update that should be published.
 
 ___
 
@@ -234,9 +264,37 @@ ___
 
 ___
 
+### `Protected` moveEvent
+
+▸ **moveEvent**(`event`: PointerEvent): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | PointerEvent |
+
+**Returns:** *void*
+
+___
+
 ### `Protected` pointerEvent
 
 ▸ **pointerEvent**(`event`: PointerEvent): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`event` | PointerEvent |
+
+**Returns:** *void*
+
+___
+
+### `Private` processPointerEvent
+
+▸ **processPointerEvent**(`event`: PointerEvent): *[Pointer](pointer.md)*
 
 When a Pointer Event occurs; dispatches the pointer event with extra info
 through the JamJar messaging system as a Pointer.
@@ -250,7 +308,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `event` | PointerEvent | Pointer Event  |
 
-**Returns:** *void*
+**Returns:** *[Pointer](pointer.md)*
 
 ___
 

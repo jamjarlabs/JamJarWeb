@@ -52,16 +52,28 @@ class PointerSystem extends System {
      */
     private isFullscreen: boolean;
     /**
-     * Position of the pointer if it is locked, used with the PointerAPI to
-     * keep track of pointer position using movementX and movementY.
+     * Position of the pointer if it is locked, used with the PointerAPI to keep track of pointer position using
+     * movementX and movementY.
      * If it is undefined there is no pointer lock.
      */
     private lockedPointerPosition: Vector | undefined;
     /**
-     * Last wheel event captured, stored here to throttle a potentially
-     * frequently firing event
+     * Last wheel event captured, stored here to throttle a potentially frequently firing event.
      */
     private lastWheelEvent: WheelEvent | undefined;
+    /**
+     * Last pointer move event captured, stored here to throttle a potentially frequently firing event.
+     */
+    private lastMoveEvent: PointerEvent | undefined;
+    /**
+     * The pointers published in the last update.
+     * Used to free up objects back into pools.
+     */
+    private lastPublishedPointers: Pointer[];
+    /**
+     * The pointer events recieved since the last update that should be published.
+     */
+    private pointerEventsToPublish: PointerEvent[];
 
     constructor(messageBus: IMessageBus, inputElement: HTMLElement,
         scene?: IScene,
@@ -69,15 +81,21 @@ class PointerSystem extends System {
         subscriberID?: number,
         isFullscreen = false,
         lockedPointerPosition?: Vector,
-        lastWheelEvent?: WheelEvent) {
+        lastWheelEvent?: WheelEvent,
+        lastMoveEvent?: PointerEvent,
+        pointersToPublish: PointerEvent[] = [],
+        lastPublishedPointers: Pointer[] = []) {
         super(messageBus, scene, PointerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, [FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, FullscreenSystem.MESSAGE_EXIT_FULLSCREEN]);
         this.inputElement = inputElement;
+        this.pointerEventsToPublish = pointersToPublish;
         this.isFullscreen = isFullscreen;
         this.lockedPointerPosition = lockedPointerPosition;
         this.lastWheelEvent = lastWheelEvent;
+        this.lastMoveEvent = lastMoveEvent;
+        this.lastPublishedPointers = lastPublishedPointers;
         // Set up listeners
-        this.inputElement.addEventListener("pointermove", this.pointerEvent.bind(this));
+        this.inputElement.addEventListener("pointermove", this.moveEvent.bind(this));
         this.inputElement.addEventListener("pointerdown", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("pointerup", this.pointerEvent.bind(this));
         this.inputElement.addEventListener("wheel", this.wheelEvent.bind(this));
@@ -99,11 +117,28 @@ class PointerSystem extends System {
     }
 
     public Update(): void {
+        // If move event waiting, process it before publishing it
+        if (this.lastMoveEvent !== undefined) {
+            this.pointerEventsToPublish.push(this.lastMoveEvent);
+            this.lastMoveEvent = undefined;
+        }
         // If wheel event waiting, publish it - in a throttled way
         if (this.lastWheelEvent !== undefined) {
             this.messageBus.Publish(new Message<WheelEvent>("wheel", this.lastWheelEvent));
             this.lastWheelEvent = undefined;
         }
+        // Free any previously published pointers
+        for (const freePointer of this.lastPublishedPointers) {
+            freePointer.Free();
+        }
+        this.lastPublishedPointers = [];
+        // Publish any stored pointer events
+        for (const pointerEvent of this.pointerEventsToPublish) {
+            const pointer = this.processPointerEvent(pointerEvent);
+            this.messageBus.Publish(new Message<Pointer>(pointer.event.type, pointer));
+            this.lastPublishedPointers.push(pointer);
+        }
+        this.pointerEventsToPublish = [];
     }
 
     /**
@@ -116,6 +151,14 @@ class PointerSystem extends System {
         this.lastWheelEvent = event;
     }
 
+    protected moveEvent(event: PointerEvent): void {
+        this.lastMoveEvent = event;
+    }
+
+    protected pointerEvent(event: PointerEvent): void {
+        this.pointerEventsToPublish.push(event);
+    }
+
     /**
      * When a Pointer Event occurs; dispatches the pointer event with extra info
      * through the JamJar messaging system as a Pointer.
@@ -124,7 +167,7 @@ class PointerSystem extends System {
      * within a camera's bounds.
      * @param {PointerEvent} event Pointer Event
      */
-    protected pointerEvent(event: PointerEvent): void {
+    private processPointerEvent(event: PointerEvent): Pointer {
         // Get HTML element dimensions, calculate relative position within element
         const rect = this.inputElement.getBoundingClientRect();
         let pointerX = event.clientX;
@@ -137,13 +180,15 @@ class PointerSystem extends System {
             // lockedPointerPosition is undefined when not fullscreen, when fullscreen it is used to
             // keep track of the last pointer position
             if (this.lockedPointerPosition !== undefined) {
-                this.lockedPointerPosition = this.lockedPointerPosition.Add(Vector.New(event.movementX, event.movementY));
+                this.lockedPointerPosition.x += event.movementX;
+                this.lockedPointerPosition.y += event.movementY;
                 pointerX = this.lockedPointerPosition.x;
                 pointerY = this.lockedPointerPosition.y;
             } else {
                 this.lockedPointerPosition = Vector.New(event.clientX, event.clientY);
             }
         }
+
         const elementPosition = Vector.New(
             ((pointerX - rect.left) - (rect.width / 2)) / (rect.width / 2),
             -((pointerY - rect.top) - (rect.height / 2)) / (rect.height / 2)
@@ -186,7 +231,7 @@ class PointerSystem extends System {
                 withinBounds
             ));
         }
-        this.messageBus.Publish(new Message<Pointer>(event.type, new Pointer(event, elementPosition, pointerCameraInfos)));
+        return new Pointer(event, elementPosition, pointerCameraInfos);
     }
 }
 

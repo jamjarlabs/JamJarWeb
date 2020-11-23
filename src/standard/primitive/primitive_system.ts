@@ -30,6 +30,10 @@ import RenderSystem from "../render/render_system";
 import IRenderable from "../../rendering/irenderable";
 import Camera from "../camera/camera";
 import Primitive from "./primitive";
+import IFrustumCuller from "../frustum_culler/ifrustum_culler";
+import FrustumCuller from "../frustum_culler/frustum_culler";
+import Vector from "../../geometry/vector";
+import AABB from "../../shape/aabb";
 
 /**
  * PrimitiveSystem handles processing primitives for render systems, tracking
@@ -47,11 +51,15 @@ class PrimitiveSystem extends System {
         ));
     };
 
+    private frustumCuller: IFrustumCuller;
+
     constructor(messageBus: IMessageBus,
         scene?: IScene,
+        frustumCuller: IFrustumCuller = new FrustumCuller(),
         entities?: Map<number, SystemEntity>,
         subscriberID?: number) {
         super(messageBus, scene, PrimitiveSystem.EVALUATOR, entities, subscriberID);
+        this.frustumCuller = frustumCuller;
         this.messageBus.Subscribe(this, Game.MESSAGE_PRE_RENDER);
     }
 
@@ -70,64 +78,83 @@ class PrimitiveSystem extends System {
     }
 
     private preparePrimitives(alpha: number): void {
-        const renderables: IRenderable[] = [];
-        // Get primitive entities
+        const renderables: Map<number, IRenderable[]> = new Map();
+
+        const cameraEntities = [...this.entities.values()].filter((entity) => {
+            return entity.Get(Camera.KEY);
+        });
+
         const primitiveEntities = [...this.entities.values()].filter((entity) => {
             return entity.Get(Primitive.KEY);
         });
-        for (const entity of primitiveEntities) {
-            const primitive = entity.Get(Primitive.KEY) as Primitive;
-            const transform = entity.Get(Transform.KEY) as Transform;
-            const ui = entity.Get(UI.KEY) as UI | undefined;
 
-            if (ui === undefined) {
-                // Not UI
-                renderables.push(Renderable.New(
-                    primitive.zOrder,
-                    primitive.points.Copy(),
-                    transform.InterpolatedMatrix4D(alpha),
-                    primitive.material,
-                    primitive.drawMode,
-                    undefined,
-                ));
-            } else {
-                // UI
-                // Get the camera the UI component is targeting
-                const cameraEntity = this.entities.get(ui.camera.id);
-                if (cameraEntity === undefined) {
-                    // If no camera found, skip this entity
-                    continue;
+        const viewportAABB = new AABB(Vector.New(2,2));
+
+        for (const cameraEntity of cameraEntities) {
+            const camera = cameraEntity.Get(Camera.KEY) as Camera;
+            const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform;
+
+            const cameraViewShape = new AABB(camera.virtualScale.Copy()).Transform(cameraTransform);
+
+            const cameraRenderables: IRenderable[] = [];
+
+            for (const entity of primitiveEntities) {
+                const primitive = entity.Get(Primitive.KEY) as Primitive;
+                const transform = entity.Get(Transform.KEY) as Transform;
+                const ui = entity.Get(UI.KEY) as UI | undefined;
+
+                if (ui === undefined) {
+                    // Not UI
+
+                    if (this.frustumCuller.Cull(cameraViewShape, primitive.points.Transform(transform))) {
+                        // Not in camera view, skip rendering
+                        continue;
+                    }
+
+                    cameraRenderables.push(Renderable.New(
+                        primitive.zOrder,
+                        primitive.points.Copy(),
+                        transform.InterpolatedMatrix4D(alpha),
+                        primitive.material,
+                        primitive.drawMode,
+                        undefined,
+                    ));
+                } else {
+                    // UI
+                    if (cameraEntity.entity.id !== ui.camera.id) {
+                        // If camera is not the one targeted, skip
+                        continue;
+                    }
+
+                    if (this.frustumCuller.Cull(viewportAABB, primitive.points.Transform(transform))) {
+                        // Not in camera view, skip rendering
+                        continue;
+                    }
+
+                    const relativeTransform = new Transform(
+                        // camera position + UI element position * camera virtual scale
+                        cameraTransform.position.Copy()
+                            .Add(transform.position.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5))),
+                        // element scale * camera virtual scale
+                        transform.scale.Copy().Multiply(camera.virtualScale),
+                        transform.angle
+                    );
+
+                    // Create the renderable for use by rendering systems
+                    cameraRenderables.push(Renderable.New(
+                        primitive.zOrder,
+                        primitive.points.Copy(),
+                        relativeTransform.InterpolatedMatrix4D(alpha),
+                        primitive.material,
+                        primitive.drawMode,
+                        ui.camera,
+                    ));
                 }
-
-                // Get components of the camera entity
-                const camera = cameraEntity.Get(Camera.KEY) as Camera | undefined;
-                const cameraTransform = cameraEntity.Get(Transform.KEY) as Transform | undefined;
-                if (camera === undefined || cameraTransform === undefined) {
-                    // If the components are not found, must not be a valid camera, skip this entity
-                    continue;
-                }
-
-                const relativeTransform = new Transform(
-                    // camera position + UI element position * camera virtual scale
-                    cameraTransform.position.Copy()
-                        .Add(transform.position.Copy().Multiply(camera.virtualScale.Copy().Scale(0.5))),
-                    // element scale * camera virtual scale
-                    transform.scale.Copy().Multiply(camera.virtualScale),
-                    transform.angle
-                );
-
-                // Create the renderable for use by rendering systems
-                renderables.push(Renderable.New(
-                    primitive.zOrder,
-                    primitive.points.Copy(),
-                    relativeTransform.InterpolatedMatrix4D(alpha),
-                    primitive.material,
-                    primitive.drawMode,
-                    ui.camera,
-                ));
             }
+            renderables.set(cameraEntity.entity.id, cameraRenderables);
         }
-        this.messageBus.Publish(new Message<IRenderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        viewportAABB.Free();
+        this.messageBus.Publish(new Message<Map<number, IRenderable[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
     }
 }
 

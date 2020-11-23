@@ -8,6 +8,10 @@ the element the game is running in.
 
 * **Pointer**
 
+## Implements
+
+* [IFreeable](../interfaces/ifreeable.md)
+
 ## Index
 
 ### Constructors
@@ -19,6 +23,10 @@ the element the game is running in.
 * [cameraInfos](pointer.md#camerainfos)
 * [elementPosition](pointer.md#elementposition)
 * [event](pointer.md#event)
+
+### Methods
+
+* [Free](pointer.md#free)
 
 ## Constructors
 
@@ -59,3 +67,13 @@ ___
 • **event**: *PointerEvent*
 
 Standard PointerEvent dispatched from JS.
+
+## Methods
+
+###  Free
+
+▸ **Free**(): *void*
+
+*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+
+**Returns:** *void*
