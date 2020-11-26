@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { mat3 } from "gl-matrix";
 import Vector from "./vector";
 
 /**
@@ -34,35 +35,35 @@ type Matrix3DValues = [
  */
 class Matrix3D {
 
-    public values: Float32Array;
+    public data: Float32Array;
 
     constructor() {
-        this.values = new Float32Array(9);
-        this.values[0] = 1;
-        this.values[1] = 0;
-        this.values[2] = 0;
+        this.data = new Float32Array(9);
+        this.data[0] = 1;
+        this.data[1] = 0;
+        this.data[2] = 0;
 
-        this.values[3] = 0;
-        this.values[4] = 1;
-        this.values[5] = 0;
+        this.data[3] = 0;
+        this.data[4] = 1;
+        this.data[5] = 0;
 
-        this.values[6] = 0;
-        this.values[7] = 0;
-        this.values[8] = 1;
+        this.data[6] = 0;
+        this.data[7] = 0;
+        this.data[8] = 1;
     }
 
     public Set(values: Matrix3DValues): Matrix3D {
-        this.values[0] = values[0][0];
-        this.values[1] = values[0][1];
-        this.values[2] = values[0][2];
+        this.data[0] = values[0][0];
+        this.data[1] = values[0][1];
+        this.data[2] = values[0][2];
 
-        this.values[3] = values[1][0];
-        this.values[4] = values[1][1];
-        this.values[5] = values[1][2];
+        this.data[3] = values[1][0];
+        this.data[4] = values[1][1];
+        this.data[5] = values[1][2];
 
-        this.values[6] = values[2][0];
-        this.values[7] = values[2][1];
-        this.values[8] = values[2][2];
+        this.data[6] = values[2][0];
+        this.data[7] = values[2][1];
+        this.data[8] = values[2][2];
         return this;
     }
 
@@ -72,9 +73,7 @@ class Matrix3D {
      * @param {Vector} translation The vector transformation to apply to the matrix
      */
     public Translate(translation: Vector): Matrix3D {
-        this.values[6] = translation.x * this.values[0] + translation.y * this.values[3] + this.values[6];
-        this.values[7] = translation.x * this.values[1] + translation.y * this.values[4] + this.values[7];
-        this.values[8] = translation.x * this.values[2] + translation.y * this.values[5] + this.values[8];
+        mat3.translate(this.data, this.data, translation.data);
         return this;
     }
 
@@ -84,12 +83,7 @@ class Matrix3D {
      * @param {Vector} scale The vector scaling to apply to the matrix
      */
     public Scale(scale: Vector): Matrix3D {
-        this.values[0] = scale.x * this.values[0];
-        this.values[1] = scale.x * this.values[1];
-        this.values[2] = scale.x * this.values[2];
-        this.values[3] = scale.y * this.values[3];
-        this.values[4] = scale.y * this.values[4];
-        this.values[5] = scale.y * this.values[5];
+        mat3.scale(this.data, this.data, scale.data);
         return this;
     }
 
@@ -101,22 +95,7 @@ class Matrix3D {
     public Rotate(angle: number): Matrix3D {
         // Clockwise rotation
         angle = -angle;
-        const a00 = this.values[0];
-        const a01 = this.values[1];
-        const a02 = this.values[2];
-        const a10 = this.values[3];
-        const a11 = this.values[4];
-        const a12 = this.values[5];
-
-        const c = Math.cos(angle);
-        const s = Math.sin(angle);
-
-        this.values[0] = c * a00 + s * a10;
-        this.values[1] = c * a01 + s * a11;
-        this.values[2] = c * a02 + s * a12;
-        this.values[3] = c * a10 - s * a00;
-        this.values[4] = c * a11 - s * a01;
-        this.values[5] = c * a12 - s * a02;
+        mat3.rotate(this.data, this.data, angle);
         return this;
     }
 
@@ -134,7 +113,7 @@ class Matrix3D {
      * @returns {Float32Array} The array representation of the matrix
      */
     public GetFloat32Array(): Float32Array {
-        return this.values;
+        return this.data;
     }
 }
 

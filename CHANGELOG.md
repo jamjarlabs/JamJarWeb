@@ -31,6 +31,7 @@ render logic.
 - `Polygon` uses `Float32Array` internally.
 - `Polygon` can now be initialised with a `Float32Array`.
 - Frustum culling moved to preprocessing and removed from render pipeline.
+- Replaced in-house Vector and Matrix code with the `gl-matrix` library.
 
 ## [v0.9.0] - 2020-09-05
 ### Added

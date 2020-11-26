@@ -22,7 +22,7 @@ This is a mutable data structure, operations on Vector objects will affect the o
 
 ### Properties
 
-* [data](vector.md#private-data)
+* [data](vector.md#data)
 * [objectInPool](vector.md#objectinpool)
 * [POOL_KEY](vector.md#static-private-pool_key)
 * [pools](vector.md#static-protected-pools)
@@ -74,7 +74,7 @@ Name | Type |
 
 ## Properties
 
-### `Private` data
+###  data
 
 • **data**: *Float32Array*
 

@@ -19,7 +19,7 @@ https://github.com/toji/gl-matrix
 
 ### Properties
 
-* [values](matrix3d.md#values)
+* [data](matrix3d.md#data)
 
 ### Methods
 
@@ -40,9 +40,9 @@ https://github.com/toji/gl-matrix
 
 ## Properties
 
-###  values
+###  data
 
-• **values**: *Float32Array*
+• **data**: *Float32Array*
 
 ## Methods
 

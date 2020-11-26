@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { vec2 } from "gl-matrix";
 import IPoolable from "../pooling/ipoolable";
 import Pooled from "../pooling/pooled";
 import Matrix3D from "./matrix_3d";
@@ -53,7 +54,7 @@ class Vector extends Pooled implements IPoolable {
         }, size);
     }
 
-    private data: Float32Array;
+    public data: Float32Array;
 
     constructor(x: number, y: number) {
         super();
@@ -83,7 +84,7 @@ class Vector extends Pooled implements IPoolable {
      * @param other
      */
     public Equals(other: Vector): boolean {
-        return this.x === other.x && this.y === other.y;
+        return vec2.equals(this.data, other.data);
     }
 
     /**
@@ -92,10 +93,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, Vector that has the matrix applied to it
      */
     public Apply3D(matrix: Matrix3D): Vector {
-        const x = this.x;
-        const y = this.y;
-        this.x = matrix.values[0] * x + matrix.values[3] * y + matrix.values[6];
-        this.y = matrix.values[1] * x + matrix.values[4] * y + matrix.values[7];
+        vec2.transformMat3(this.data, this.data, matrix.data);
         return this;
     }
 
@@ -105,10 +103,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, Vector that has the matrix applied to it
      */
     public Apply4D(matrix: Matrix4D): Vector {
-        const x = this.x;
-        const y = this.y;
-        this.x = matrix.values[0] * x + matrix.values[4] * y + matrix.values[12];
-        this.y = matrix.values[1] * x + matrix.values[5] * y + matrix.values[13];
+        vec2.transformMat4(this.data, this.data, matrix.data);
         return this;
     }
 
@@ -118,8 +113,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, the result of the multiplication
      */
     public Multiply(vector: Vector): Vector {
-        this.x = this.x * vector.x;
-        this.y = this.y * vector.y;
+        vec2.multiply(this.data, this.data, vector.data);
         return this;
     }
 
@@ -129,8 +123,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, the result of the addition
      */
     public Add(vector: Vector): Vector {
-        this.x = this.x + vector.x;
-        this.y = this.y + vector.y;
+        vec2.add(this.data, this.data, vector.data);
         return this;
     }
 
@@ -140,8 +133,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, the result result of the subtraction
      */
     public Sub(vector: Vector): Vector {
-        this.x = this.x - vector.x;
-        this.y = this.y - vector.y;
+        vec2.sub(this.data, this.data, vector.data);
         return this;
     }
 
@@ -151,8 +143,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, the result of the scaling
      */
     public Scale(scalar: number): Vector {
-        this.x = this.x * scalar;
-        this.y = this.y * scalar;
+        vec2.scale(this.data, this.data, scalar);
         return this;
     }
 
@@ -162,7 +153,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {number} The result of the dot product
      */
     public Dot(vector: Vector): number {
-        return this.x * vector.x + this.y * vector.y;
+        return vec2.dot(this.data, vector.data);
     }
 
     /**
@@ -173,15 +164,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, the result of the rotation
      */
     public Rotate(center: Vector, angle: number): Vector {
-        const s = Math.sin(angle);
-        const c = Math.cos(angle);
-
-        const x = this.x - center.x;
-        const y = this.y - center.y;
-
-        this.x = (x * c - y * s) + center.x;
-        this.y = (x * s + y * c) + center.y;
-
+        vec2.rotate(this.data, this.data, center.data, angle);
         return this;
     }
 
@@ -220,11 +203,8 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} This vector to allow chaining, the normalized vector
      */
     public Normalize(): Vector {
-        let magnitude = this.Magnitude();
-        if (magnitude > 0) {
-            magnitude = 1 / magnitude;
-        }
-        return this.Scale(magnitude);
+        vec2.normalize(this.data, this.data);
+        return this;
     }
 
     /**
