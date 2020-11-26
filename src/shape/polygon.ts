@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { vec2 } from "gl-matrix";
 import Vector from "../geometry/vector";
 import IShape from "./ishape";
 import Transform from "../standard/transform/transform";
@@ -62,10 +63,8 @@ class Polygon implements IShape {
     public Apply4D(matrix: Matrix4D): Polygon {
         const points = this.points.subarray();
         for (let i = 0; i < this.points.length; i += 2) {
-            const x = points[i];
-            const y = points[i + 1];
-            points[i] = matrix.values[0] * x + matrix.values[4] * y + matrix.values[12];
-            points[i + 1]= matrix.values[1] * x + matrix.values[5] * y + matrix.values[13];
+            const position = points.subarray(i, i + 2);
+            vec2.transformMat4(position, position, matrix.data);
         }
         return new Polygon(points);
     }
@@ -104,10 +103,8 @@ class Polygon implements IShape {
         const matrix = transform.Matrix3D();
         const points = this.points.slice();
         for (let i = 0; i < points.length; i += 2) {
-            const x = points[i];
-            const y = points[i + 1];
-            points[i] = matrix.values[0] * x + matrix.values[3] * y + matrix.values[6];
-            points[i + 1] = matrix.values[1] * x + matrix.values[4] * y + matrix.values[7];
+            const position = points.subarray(i, i + 2);
+            vec2.transformMat3(position, position, matrix.data);
         }
         return new Polygon(points);
     }

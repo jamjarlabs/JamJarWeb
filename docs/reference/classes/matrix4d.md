@@ -19,7 +19,8 @@ https://github.com/toji/gl-matrix
 
 ### Properties
 
-* [values](matrix4d.md#values)
+* [data](matrix4d.md#data)
+* [Z_AXIS](matrix4d.md#static-private-z_axis)
 
 ### Methods
 
@@ -41,9 +42,15 @@ https://github.com/toji/gl-matrix
 
 ## Properties
 
-###  values
+###  data
 
-• **values**: *Float32Array*
+• **data**: *Float32Array*
+
+___
+
+### `Static` `Private` Z_AXIS
+
+▪ **Z_AXIS**: *Float32Array* = new Float32Array([0,0,1])
 
 ## Methods
 
