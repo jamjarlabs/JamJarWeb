@@ -57,7 +57,7 @@ class Polygon implements IShape {
      * Make a value copy of the Polygon.
      */
     public Copy(): Polygon {
-        return new Polygon(this.points.subarray());
+        return new Polygon(this.points.slice());
     }
 
     public Apply4D(matrix: Matrix4D): Polygon {
@@ -101,12 +101,11 @@ class Polygon implements IShape {
 
     public Transform(transform: Transform): Polygon {
         const matrix = transform.Matrix3D();
-        const points = this.points.slice();
-        for (let i = 0; i < points.length; i += 2) {
-            const position = points.subarray(i, i + 2);
+        for (let i = 0; i < this.points.length; i += 2) {
+            const position = this.points.subarray(i, i + 2);
             vec2.transformMat3(position, position, matrix.data);
         }
-        return new Polygon(points);
+        return this;
     }
 
     public PointInside(point: Vector): boolean {

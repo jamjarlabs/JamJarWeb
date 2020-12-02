@@ -43,15 +43,15 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Unknown message type",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new PrimitiveSystem(new FakeMessageBus()),
             new Message("unknown")
         ],
         [
             "Pre render no payload",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER)
         ],
         [
@@ -60,6 +60,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -71,6 +72,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -88,6 +90,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -110,6 +113,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -135,6 +139,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -162,6 +167,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -191,6 +197,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -218,6 +225,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -247,6 +255,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -277,6 +286,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -309,6 +319,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -339,6 +350,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -371,6 +383,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -401,6 +414,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -432,6 +446,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -440,7 +455,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
@@ -452,6 +467,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -461,7 +477,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2)),
@@ -474,6 +490,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -482,7 +499,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Camera()
@@ -494,6 +511,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -517,6 +535,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -541,8 +560,8 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Correctly reject non-ui primitive new entity, missing transform",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
@@ -550,15 +569,15 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Correctly reject non-ui primitive new entity, missing primitive",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
         [
             "Correctly reject camera new entity, missing transform",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Camera()
             ]])
@@ -566,8 +585,8 @@ describe("PrimitiveSystem - OnMessage", () => {
         [
             "Correctly reject camera new entity, missing camera",
             undefined,
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: PrimitiveSystem, PrimitiveSystem: PrimitiveSystem, message: IMessage) => {

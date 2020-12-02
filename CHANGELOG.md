@@ -32,6 +32,8 @@ render logic.
 - `Polygon` can now be initialised with a `Float32Array`.
 - Frustum culling moved to preprocessing and removed from render pipeline.
 - Replaced in-house Vector and Matrix code with the `gl-matrix` library.
+- Shapes' `Transform` method is now mutable, it affects the object it is being applied to.
+-
 
 ## [v0.9.0] - 2020-09-05
 ### Added

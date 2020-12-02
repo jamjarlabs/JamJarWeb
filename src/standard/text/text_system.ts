@@ -322,7 +322,7 @@ class TextSystem extends System {
 
                         translation.Free();
 
-                        if (this.frustumCuller.Cull(cameraViewShape, new AABB(characterScale).Transform(textTransform))) {
+                        if (this.frustumCuller.Cull(cameraViewShape, new AABB(characterScale.Copy()).Transform(textTransform))) {
                             // Not in camera view, skip rendering
                             textTransform.Free();
                             continue;
@@ -335,7 +335,7 @@ class TextSystem extends System {
                             continue;
                         }
 
-                        if (this.frustumCuller.Cull(viewportAABB, new AABB(characterScale).Transform(transform))) {
+                        if (this.frustumCuller.Cull(viewportAABB, new AABB(characterScale.Copy()).Transform(transform))) {
                             // Not in camera view, skip rendering
                             continue;
                         }

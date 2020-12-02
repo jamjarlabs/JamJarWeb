@@ -15,7 +15,9 @@ limitations under the License.
 */
 
 import Component from "../../component/component";
+import Vector from "../../geometry/vector";
 import Material from "../../rendering/material/material";
+import AABB from "../../shape/aabb";
 
 /**
  * Sprite is a component for storing information around a sprite
@@ -40,10 +42,13 @@ class Sprite extends Component {
      */
     public material: Material;
 
+    public transformedShape: AABB;
+
     constructor(material: Material, zOrder = 0) {
         super(Sprite.KEY);
         this.material = material;
         this.zOrder = zOrder;
+        this.transformedShape = new AABB(Vector.New(1,1));
     }
 
     public Free(): void {

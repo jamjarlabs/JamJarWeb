@@ -43,15 +43,15 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Unknown message type",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus()),
             new Message("unknown")
         ],
         [
             "Pre render no payload",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER)
         ],
         [
@@ -60,6 +60,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -71,6 +72,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -88,6 +90,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -110,6 +113,7 @@ describe("SpriteSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -135,6 +139,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -162,6 +167,7 @@ describe("SpriteSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -191,6 +197,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -218,6 +225,7 @@ describe("SpriteSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -246,6 +254,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -276,6 +285,7 @@ describe("SpriteSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -308,6 +318,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -338,6 +349,7 @@ describe("SpriteSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -370,6 +382,7 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -400,6 +413,7 @@ describe("SpriteSystem - OnMessage", () => {
                 })]),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -431,6 +445,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -439,7 +454,7 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
@@ -451,6 +466,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -460,7 +476,7 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0),
@@ -473,6 +489,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -481,7 +498,7 @@ describe("SpriteSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
                 new Camera()
@@ -493,6 +510,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -516,6 +534,7 @@ describe("SpriteSystem - OnMessage", () => {
             new SpriteSystem(new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
@@ -540,8 +559,8 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject non-ui sprite new entity, missing transform",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0)
             ]])
@@ -549,15 +568,15 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject non-ui sprite new entity, missing sprite",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
         [
             "Correctly reject camera new entity, missing transform",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Camera()
             ]])
@@ -565,8 +584,8 @@ describe("SpriteSystem - OnMessage", () => {
         [
             "Correctly reject camera new entity, missing camera",
             undefined,
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
-            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: SpriteSystem, spriteSystem: SpriteSystem, message: IMessage) => {

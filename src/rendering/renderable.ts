@@ -102,8 +102,6 @@ class Renderable<T> extends Pooled implements IRenderable {
     }
 
     public Free(): void {
-        this.vertices.Free();
-        this.material.Free();
         Renderable.Free<T>(this);
     }
 }

@@ -39,10 +39,9 @@ class AABB implements IShape {
     }
 
     public Transform(transform: Transform): IShape {
-        return new AABB(
-            this.size.Copy().Multiply(transform.scale),
-            this.center.Copy().Add(transform.position),
-        );
+        this.size.Multiply(transform.scale);
+        this.center.Add(transform.position);
+        return this;
     }
 
     public FarthestPointInDirection(direction: Vector): Vector {
@@ -69,6 +68,13 @@ class AABB implements IShape {
         const top = this.center.y + this.size.y / 2;
         const bottom = this.center.y - this.size.y / 2;
         return point.x < right && point.x > left && point.y < top && point.y > bottom;
+    }
+
+    public Copy(): AABB {
+        return new AABB(
+            this.size.Copy(),
+            this.center.Copy()
+        );
     }
 
     public Free(): void {

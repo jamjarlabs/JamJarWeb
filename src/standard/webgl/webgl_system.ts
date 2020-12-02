@@ -458,14 +458,8 @@ class WebGLSystem extends RenderSystem {
                 }
 
             }
-
-            for (const renderable of cameraRenderables) {
-                renderable.Free();
-            }
         }
-
-
-        this.renderables = new Map();
+        this.renderables.clear();
     }
 }
 
