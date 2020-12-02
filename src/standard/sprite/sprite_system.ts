@@ -67,7 +67,7 @@ class SpriteSystem extends System {
         super(messageBus, scene, SpriteSystem.EVALUATOR, entities, subscriberID);
         this.frustumCuller = frustumCuller;
         this.renderables = renderables;
-        this.messageBus.Subscribe(this, [ Game.MESSAGE_PRE_RENDER, Game.MESSAGE_POST_RENDER ]);
+        this.messageBus.Subscribe(this, [Game.MESSAGE_PRE_RENDER, Game.MESSAGE_POST_RENDER]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -90,7 +90,7 @@ class SpriteSystem extends System {
 
     private prepareSprites(alpha: number): void {
 
-        const viewportAABB = new AABB(Vector.New(2,2));
+        const viewportAABB = new AABB(Vector.New(2, 2));
 
         const spriteRenderableQuad = Polygon.QuadByDimensions(1, 1, 0, 0);
 
@@ -139,8 +139,7 @@ class SpriteSystem extends System {
                         spriteRenderableQuad,
                         transform.InterpolatedMatrix4D(alpha),
                         sprite.material,
-                        DrawMode.TRIANGLES,
-                        undefined,
+                        DrawMode.TRIANGLES
                     ));
                 } else {
                     // UI
@@ -159,7 +158,7 @@ class SpriteSystem extends System {
                     cameraRelativePosition.x += transform.position.x * cameraVirtualScaleHalf.x;
                     cameraRelativePosition.y += transform.position.y * cameraVirtualScaleHalf.y;
 
-                    const matrix =  new Matrix4D()
+                    const matrix = new Matrix4D()
                         .Translate(cameraRelativePosition)
                         .Rotate(transform.angle)
                         .Scale(transform.scale.Copy().Multiply(camera.virtualScale));
@@ -170,8 +169,7 @@ class SpriteSystem extends System {
                         spriteRenderableQuad,
                         matrix,
                         sprite.material,
-                        DrawMode.TRIANGLES,
-                        ui.camera,
+                        DrawMode.TRIANGLES
                     ));
                 }
             }

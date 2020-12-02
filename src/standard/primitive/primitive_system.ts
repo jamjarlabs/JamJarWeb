@@ -64,7 +64,7 @@ class PrimitiveSystem extends System {
         super(messageBus, scene, PrimitiveSystem.EVALUATOR, entities, subscriberID);
         this.frustumCuller = frustumCuller;
         this.renderables = renderables;
-        this.messageBus.Subscribe(this, [ Game.MESSAGE_PRE_RENDER, Game.MESSAGE_POST_RENDER ]);
+        this.messageBus.Subscribe(this, [Game.MESSAGE_PRE_RENDER, Game.MESSAGE_POST_RENDER]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -87,7 +87,7 @@ class PrimitiveSystem extends System {
 
     private preparePrimitives(alpha: number): void {
 
-        const viewportAABB = new AABB(Vector.New(2,2));
+        const viewportAABB = new AABB(Vector.New(2, 2));
 
         for (const cameraEntity of this.entities.values()) {
             if (cameraEntity.Get(Camera.KEY) === undefined) {
@@ -126,8 +126,7 @@ class PrimitiveSystem extends System {
                         primitive.points,
                         transform.InterpolatedMatrix4D(alpha),
                         primitive.material,
-                        primitive.drawMode,
-                        undefined,
+                        primitive.drawMode
                     ));
                 } else {
                     // UI
@@ -157,8 +156,7 @@ class PrimitiveSystem extends System {
                         primitive.points,
                         matrix,
                         primitive.material,
-                        primitive.drawMode,
-                        ui.camera,
+                        primitive.drawMode
                     ));
                 }
             }

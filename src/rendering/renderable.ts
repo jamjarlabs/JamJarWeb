@@ -73,13 +73,8 @@ class Renderable<T> extends Pooled implements IRenderable {
      * An optional payload of additional data.
      */
     public payload?: T;
-    /**
-     * Any camera to associate with the renderable, will only render on
-     * the camera supplied.
-     */
-    public camera?: IEntity;
 
-    constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode, payload?: T, camera?: IEntity) {
+    constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode, payload?: T) {
         super();
         this.zOrder = zOrder;
         this.vertices = vertices;
@@ -87,7 +82,6 @@ class Renderable<T> extends Pooled implements IRenderable {
         this.material = material;
         this.drawMode = drawMode;
         this.payload = payload;
-        this.camera = camera;
     }
 
     public Recycle(args: [number, Polygon, Matrix4D, Material, DrawMode, T, IEntity]): Renderable<T> {
@@ -97,7 +91,6 @@ class Renderable<T> extends Pooled implements IRenderable {
         this.material = args[3];
         this.drawMode = args[4];
         this.payload = args[5];
-        this.camera = args[6];
         return this;
     }
 

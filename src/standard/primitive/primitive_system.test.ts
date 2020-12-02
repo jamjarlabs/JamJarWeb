@@ -34,8 +34,12 @@ import PrimitiveSystem from "./primitive_system";
 import Primitive from "./primitive";
 import FrustumCuller from "../frustum_culler/frustum_culler";
 import AllCollideAlgorithm from "../collision/algorithm/all_collide_algorithm";
-import IRenderable from "../../rendering/irenderable";
 import NoneCollideAlgorithm from "../collision/algorithm/none_collide_algorithm";
+import Vector from "../../geometry/vector";
+import Matrix4D from "../../geometry/matrix_4d";
+import Renderable from "../../rendering/renderable";
+import DrawMode from "../../rendering/draw_mode";
+import Color from "../../rendering/color";
 
 describe("PrimitiveSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, PrimitiveSystem, PrimitiveSystem, IMessage];
@@ -64,7 +68,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -76,7 +80,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -94,38 +98,36 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
             ),
             new PrimitiveSystem(
-                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
-                    expect(message.payload?.size).toEqual(0);
-                })]),
+                new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -139,19 +141,21 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                undefined,
+                new Map([
+                    [3, []]
+                ]),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
@@ -161,25 +165,22 @@ describe("PrimitiveSystem - OnMessage", () => {
                 0
             ),
             new PrimitiveSystem(
-                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
-                    expect(message.payload?.size).toEqual(1);
-                    expect(message.payload?.get(3)?.length).toEqual(0);
-                })]),
+                new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                undefined,
+                new Map(),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
@@ -197,19 +198,73 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                undefined,
+                new Map([
+                    [3, [
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Scale(new Vector(1, 1)),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        ),
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Scale(new Vector(1, 1)),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        ),
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Scale(new Vector(1, 1)),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        )
+                    ]],
+                ]),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
@@ -219,25 +274,22 @@ describe("PrimitiveSystem - OnMessage", () => {
                 0
             ),
             new PrimitiveSystem(
-                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
-                    expect(message.payload?.size).toEqual(1);
-                    expect(message.payload?.get(3)?.length).toEqual(3);
-                })]),
+                new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                undefined,
+                new Map(),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
@@ -255,17 +307,58 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                undefined,
+                new Map([
+                    [2, [
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Translate(new Vector(0, 0))
+                                .Rotate(0)
+                                .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        ),
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Translate(new Vector(0, 0))
+                                .Rotate(0)
+                                .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        )
+                    ]],
+                ]),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -274,29 +367,26 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(4)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
             ),
             new PrimitiveSystem(
-                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
-                    expect(message.payload?.size).toEqual(1);
-                    expect(message.payload?.get(2)?.length).toEqual(2);
-                })]),
+                new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                undefined,
+                new Map(),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -305,7 +395,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
                         new UI(new FakeEntity(4)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -319,17 +409,19 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                undefined,
+                new Map([
+                    [2, []]
+                ]),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -338,29 +430,26 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
             ),
             new PrimitiveSystem(
-                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
-                    expect(message.payload?.size).toEqual(1);
-                    expect(message.payload?.get(2)?.length).toEqual(0);
-                })]),
+                new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                undefined,
+                new Map(),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -369,7 +458,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -383,17 +472,58 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                undefined,
+                new Map([
+                    [2, [
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Translate(new Vector(0, 0))
+                                .Rotate(0)
+                                .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        ),
+                        new Renderable(
+                            0,
+                            Polygon.RectangleByDimensions(2, 2),
+                            new Matrix4D().Translate(new Vector(0, 0))
+                                .Rotate(0)
+                                .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                            new Material({
+                                color: new Color(1, 1, 1, 1),
+                                shaders: [
+                                    "default_texture_vertex",
+                                    "default_texture_fragment"
+                                ],
+                                texture: new Texture(
+                                    "test",
+                                    Polygon.RectangleByDimensions(1, 1)
+                                )
+                            }),
+                            DrawMode.LINE_STRIP
+                        )
+                    ]],
+                ]),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -402,29 +532,26 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
                         new UI(new FakeEntity(1)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
             ),
             new PrimitiveSystem(
-                new FakeMessageBus([new Reactor("Publish", (message: Message<Map<number, IRenderable[]>>) => {
-                    expect(message.payload?.size).toEqual(1);
-                    expect(message.payload?.get(2)?.length).toEqual(2);
-                })]),
+                new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                undefined,
+                new Map(),
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
                         new UI(new FakeEntity(2)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
@@ -433,7 +560,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                     [3, new SystemEntity(new FakeEntity(4), [
                         new Transform(),
                         new UI(new FakeEntity(1)),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
@@ -450,7 +577,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                 ]),
                 0
@@ -458,7 +585,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
-                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
@@ -471,7 +598,7 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2)),
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2)),
                         new UI(new FakeEntity(0))
                     ])],
                 ]),
@@ -480,7 +607,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
                 new Transform(),
-                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2)),
+                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2)),
                 new UI(new FakeEntity(0))
             ]])
         ],
@@ -515,19 +642,19 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [3, new SystemEntity(new FakeEntity(3), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                 ]),
                 0
@@ -539,22 +666,22 @@ describe("PrimitiveSystem - OnMessage", () => {
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [1, new SystemEntity(new FakeEntity(1), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])],
                     [2, new SystemEntity(new FakeEntity(2), [
                         new Transform(),
-                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                        new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
                     ])]
                 ]),
                 0
             ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [
                 new Transform(),
-                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
@@ -563,7 +690,7 @@ describe("PrimitiveSystem - OnMessage", () => {
             new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new PrimitiveSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [
-                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1,1)) }), 0, Polygon.RectangleByDimensions(2, 2))
+                new Primitive(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0, Polygon.RectangleByDimensions(2, 2))
             ]])
         ],
         [
