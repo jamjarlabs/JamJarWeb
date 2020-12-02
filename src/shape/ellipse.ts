@@ -40,7 +40,7 @@ class Ellipse implements IShape {
         const matrix = transform.Matrix3D();
         this.dimensions.Multiply(transform.scale),
         this.orientation += transform.angle,
-        this.center.Apply3D(matrix)
+        this.center.Apply3D(matrix);
         return this;
     }
 
@@ -68,7 +68,7 @@ class Ellipse implements IShape {
             this.dimensions.Copy(),
             this.orientation,
             this.center.Copy()
-        )
+        );
     }
 
     /**

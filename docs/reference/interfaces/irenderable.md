@@ -18,7 +18,6 @@ Contains information for rendering.
 
 ### Properties
 
-* [camera](irenderable.md#optional-camera)
 * [drawMode](irenderable.md#drawmode)
 * [material](irenderable.md#material)
 * [modelMatrix](irenderable.md#modelmatrix)
@@ -32,15 +31,6 @@ Contains information for rendering.
 * [Recycle](irenderable.md#recycle)
 
 ## Properties
-
-### `Optional` camera
-
-• **camera**? : *[IEntity](ientity.md)*
-
-Any camera to associate with the renderable, will only render on
-the camera supplied.
-
-___
 
 ###  drawMode
 

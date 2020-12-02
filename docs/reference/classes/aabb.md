@@ -29,6 +29,7 @@ requiring less calculations than a fully defined polygon.
 ### Methods
 
 * [Center](aabb.md#center)
+* [Copy](aabb.md#copy)
 * [FarthestPointInDirection](aabb.md#farthestpointindirection)
 * [Free](aabb.md#free)
 * [PointInside](aabb.md#pointinside)
@@ -70,6 +71,16 @@ ___
 *Implementation of [IShape](../interfaces/ishape.md)*
 
 **Returns:** *[Vector](vector.md)*
+
+___
+
+###  Copy
+
+▸ **Copy**(): *[AABB](aabb.md)*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Returns:** *[AABB](aabb.md)*
 
 ___
 

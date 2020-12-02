@@ -166,7 +166,7 @@ class PrimitiveSystem extends System {
         this.messageBus.Publish(new Message<Map<number, IRenderable[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables));
     }
 
-    private freeRenderables() {
+    private freeRenderables(): void {
         for (const cameraRenderables of this.renderables.values()) {
             for (const renderable of cameraRenderables) {
                 renderable.Free();

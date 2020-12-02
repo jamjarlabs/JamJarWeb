@@ -27,6 +27,7 @@ Can contain texture information such as bounds and a texture.
 
 * [key](sprite.md#key)
 * [material](sprite.md#material)
+* [transformedShape](sprite.md#transformedshape)
 * [zOrder](sprite.md#zorder)
 * [KEY](sprite.md#static-key)
 * [MESSAGE_ADD](sprite.md#static-message_add)
@@ -68,6 +69,12 @@ ___
 • **material**: *[Material](material.md)*
 
 Material to apply when rendering the Sprite.
+
+___
+
+###  transformedShape
+
+• **transformedShape**: *[AABB](aabb.md)*
 
 ___
 

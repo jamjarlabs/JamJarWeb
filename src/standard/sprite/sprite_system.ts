@@ -184,14 +184,14 @@ class SpriteSystem extends System {
             RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables));
     }
 
-    private freeRenderables() {
+    private freeRenderables(): void {
         for (const cameraRenderables of this.renderables.values()) {
             for (const renderable of cameraRenderables) {
                 renderable.vertices.Free();
                 renderable.Free();
             }
         }
-        this.renderables.clear
+        this.renderables.clear;
     }
 
 }
