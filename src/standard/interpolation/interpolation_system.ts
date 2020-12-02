@@ -34,15 +34,10 @@ class InterpolationSystem extends System {
      * Ensure has Transform
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return components.some(
-            component => component.key === Transform.KEY
-        );
+        return components.some((component) => component.key === Transform.KEY);
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, InterpolationSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
     }

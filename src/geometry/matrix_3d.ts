@@ -20,11 +20,7 @@ import Vector from "./vector";
 /**
  * Matrix3DValues is shorthand for the 3x3 tuple of the matrix values
  */
-type Matrix3DValues = [
-    [number, number, number],
-    [number, number, number],
-    [number, number, number]
-]
+type Matrix3DValues = [[number, number, number], [number, number, number], [number, number, number]];
 
 /**
  * Matrix3D is the representation of a 3x3 matrix.
@@ -34,7 +30,6 @@ type Matrix3DValues = [
  * https://github.com/toji/gl-matrix
  */
 class Matrix3D {
-
     public data: Float32Array;
 
     constructor() {
@@ -105,7 +100,7 @@ class Matrix3D {
      * @param {number} angle The angle in degrees to rotate the matrix by
      */
     public RotateDeg(angle: number): Matrix3D {
-        return this.Rotate(angle * (Math.PI/180));
+        return this.Rotate(angle * (Math.PI / 180));
     }
 
     /**

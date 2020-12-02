@@ -40,12 +40,14 @@ class HTTPAudioSystem extends System {
     private assets: AudioAsset[];
     private context: AudioContext;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
         assets: AudioAsset[] = [],
-        context: AudioContext = new AudioContext()) {
+        context: AudioContext = new AudioContext()
+    ) {
         super(messageBus, scene, undefined, entities, subscriberID);
 
         this.assets = assets;
@@ -54,7 +56,7 @@ class HTTPAudioSystem extends System {
         this.messageBus.Subscribe(this, [
             AudioRequest.MESSAGE_REQUEST_LOAD,
             HTTPAudioSystem.MESSAGE_REQUEST_FLUSH,
-            HTTPAudioSystem.MESSAGE_REQUEST_CLEAR
+            HTTPAudioSystem.MESSAGE_REQUEST_CLEAR,
         ]);
     }
 
@@ -81,20 +83,13 @@ class HTTPAudioSystem extends System {
     }
 
     protected httpSuccess(buffer: AudioBuffer, request: AudioRequest): void {
-        const asset = new AudioAsset(
-            request.name,
-            buffer,
-        );
+        const asset = new AudioAsset(request.name, buffer);
         this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
     protected httpError(request: AudioRequest, error: Error): void {
-        const asset = new AudioAsset(
-            request.name,
-            new AudioBuffer({length: 1, sampleRate: 3000}),
-            error
-        );
+        const asset = new AudioAsset(request.name, new AudioBuffer({ length: 1, sampleRate: 3000 }), error);
         this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
@@ -125,7 +120,6 @@ class HTTPAudioSystem extends System {
     private clear(): void {
         this.assets = [];
     }
-
 }
 
 export default HTTPAudioSystem;

@@ -49,10 +49,10 @@ In-game camera position should be managed in the transform.
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`backgroundColor` | [Color](color.md) | new Color(0,0,0,1) |
-`viewportPosition` | [Vector](vector.md) | Vector.New(0,0) |
-`viewportScale` | [Vector](vector.md) | Vector.New(1,1) |
-`virtualScale` | [Vector](vector.md) | Vector.New(160,90) |
+`backgroundColor` | [Color](color.md) | new Color(0, 0, 0, 1) |
+`viewportPosition` | [Vector](vector.md) | Vector.New(0, 0) |
+`viewportScale` | [Vector](vector.md) | Vector.New(1, 1) |
+`virtualScale` | [Vector](vector.md) | Vector.New(160, 90) |
 
 **Returns:** *[Camera](camera.md)*
 

@@ -61,7 +61,7 @@ class FontRequest {
      */
     public radius: number;
     /**
-     * How much of the radius (relative) is used for the 
+     * How much of the radius (relative) is used for the
      * inside part the glyph.
      */
     public cutoff: number;
@@ -87,10 +87,11 @@ class FontRequest {
      */
     public generateMipmaps: boolean;
 
-    constructor(name: string,
-        family: string, 
-        weight: string, 
-        size: number, 
+    constructor(
+        name: string,
+        family: string,
+        weight: string,
+        size: number,
         fontOptions: IFontOptions = {},
         textureOptions: ITextureOptions = {}
     ) {
@@ -106,7 +107,7 @@ class FontRequest {
             buffer: 3,
             radius: 8,
             cutoff: 0.25,
-            ...fontOptions
+            ...fontOptions,
         };
         this.characters = optionalFontOptions.characters;
         this.buffer = optionalFontOptions.buffer;
@@ -120,14 +121,13 @@ class FontRequest {
             xWrap: TextureWrapping.CLAMP_TO_EDGE,
             yWrap: TextureWrapping.CLAMP_TO_EDGE,
             generateMipmaps: true,
-            ...textureOptions
+            ...textureOptions,
         };
         this.minFilter = optionalTextureOptions.minFilter;
         this.magFilter = optionalTextureOptions.magFilter;
         this.xWrap = optionalTextureOptions.xWrap;
         this.yWrap = optionalTextureOptions.yWrap;
         this.generateMipmaps = optionalTextureOptions.generateMipmaps;
-
     }
 }
 

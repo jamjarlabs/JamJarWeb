@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 /**
- * IShader is the interface representing a general shader. 
+ * IShader is the interface representing a general shader.
  * This is designed to allow the possiblity of switching out the
  * render technology, e.g. GLSL, HLSL etc.
  */

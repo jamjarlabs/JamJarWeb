@@ -16,12 +16,21 @@ limitations under the License.
 
 // Workaround for https://github.com/kulshekhar/ts-jest/issues/1035 https://github.com/jsdom/jsdom/issues/2527
 // Taken from: https://github.com/kulshekhar/ts-jest/issues/1035#issuecomment-486442977
-global.window.PointerEvent = function (type, eventInitDict) { 
-    return { type, ...eventInitDict }
+global.window.PointerEvent = function (type, eventInitDict) {
+    return { type, ...eventInitDict };
 };
-global.window.BeforeUnloadEvent = function () { };
+global.window.BeforeUnloadEvent = function () {};
 global.window.DOMRect = function (x, y, width, height) {
-    return { x, y, width, height, left: x - width / 2, right: x + width / 2, top: y + height / 2, bottom: y - height / 2 }
+    return {
+        x,
+        y,
+        width,
+        height,
+        left: x - width / 2,
+        right: x + width / 2,
+        top: y + height / 2,
+        bottom: y - height / 2,
+    };
 };
 global.window.WebGL2RenderingContext = function () {
     return {};
@@ -39,94 +48,94 @@ global.window.WebGL2RenderingContext.TRIANGLES = 0;
 global.window.WebGL2RenderingContext.TRIANGLE_STRIP = 0;
 global.window.WebGL2RenderingContext.TRIANGLE_FAN = 0;
 
-global.window.AudioContext = function() {
+global.window.AudioContext = function () {
     return {};
 };
-global.window.AudioBuffer = function() {
+global.window.AudioBuffer = function () {
     return {};
 };
-global.window.AudioBufferSourceNode = function() {
+global.window.AudioBufferSourceNode = function () {
     return {};
 };
-global.window.MediaElementAudioSourceNode = function() {
+global.window.MediaElementAudioSourceNode = function () {
     return {};
 };
-global.window.HTMLMediaElement = function() {
+global.window.HTMLMediaElement = function () {
     return {};
 };
-global.window.MediaStreamAudioDestinationNode = function() {
+global.window.MediaStreamAudioDestinationNode = function () {
     return {};
 };
-global.window.MediaStreamAudioSourceNode = function() {
+global.window.MediaStreamAudioSourceNode = function () {
     return {};
 };
-global.window.MediaStream = function() {
+global.window.MediaStream = function () {
     return {};
 };
-global.window.MediaStreamTrackAudioSourceNode = function() {
+global.window.MediaStreamTrackAudioSourceNode = function () {
     return {};
 };
-global.window.AnalyserNode = function() {
+global.window.AnalyserNode = function () {
     return {};
 };
-global.window.BiquadFilterNode = function() {
+global.window.BiquadFilterNode = function () {
     return {};
 };
-global.window.AudioBufferSourceNode = function() {
+global.window.AudioBufferSourceNode = function () {
     return {};
 };
-global.window.ChannelMergerNode = function() {
+global.window.ChannelMergerNode = function () {
     return {};
 };
-global.window.ChannelSplitterNode = function() {
+global.window.ChannelSplitterNode = function () {
     return {};
 };
-global.window.ConstantSourceNode = function() {
+global.window.ConstantSourceNode = function () {
     return {};
 };
-global.window.ConvolverNode = function() {
+global.window.ConvolverNode = function () {
     return {};
 };
-global.window.DelayNode = function() {
+global.window.DelayNode = function () {
     return {};
 };
-global.window.DynamicsCompressorNode = function() {
+global.window.DynamicsCompressorNode = function () {
     return {};
 };
-global.window.GainNode = function() {
+global.window.GainNode = function () {
     return {};
 };
-global.window.IIRFilterNode = function() {
+global.window.IIRFilterNode = function () {
     return {};
 };
-global.window.OscillatorNode = function() {
+global.window.OscillatorNode = function () {
     return {};
 };
-global.window.PannerNode = function() {
+global.window.PannerNode = function () {
     return {};
 };
-global.window.PeriodicWave = function() {
+global.window.PeriodicWave = function () {
     return {};
 };
-global.window.ScriptProcessorNode = function() {
+global.window.ScriptProcessorNode = function () {
     return {};
 };
-global.window.StereoPannerNode = function() {
+global.window.StereoPannerNode = function () {
     return {};
 };
-global.window.WaveShaperNode = function() {
+global.window.WaveShaperNode = function () {
     return {};
 };
-global.window.AudioParam = function() {
+global.window.AudioParam = function () {
     return {};
 };
-global.window.AudioNode = function() {
+global.window.AudioNode = function () {
     return {};
 };
-global.window.Response = function() {
+global.window.Response = function () {
     return {};
 };
-global.window.fetch = function() {
+global.window.fetch = function () {
     return Promise.resolve();
 };
 
@@ -139,7 +148,7 @@ global.window.WebGLShader = function () {
 global.window.WebGLProgram = function () {
     return {};
 };
-global.window.ImageData = function(width, height) {
+global.window.ImageData = function (width, height) {
     const data = new Uint8ClampedArray(width * height);
     data.fill(0);
     return { width, height, data };
@@ -147,5 +156,5 @@ global.window.ImageData = function(width, height) {
 // Workaround for JSON marshalling maps, used in testing
 // From https://stackoverflow.com/a/43705077/6052295
 Map.prototype.toJSON = function () {
-    return [...this]
-}
+    return [...this];
+};

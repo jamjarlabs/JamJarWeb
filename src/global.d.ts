@@ -21,7 +21,6 @@ export {};
 declare global {
     // Window is a globally defined interface, it does not conform to the I
     // prefix naming scheme.
-    /* eslint-disable-next-line @typescript-eslint/interface-name-prefix */
     interface Window {
         /**
          * JamJarRefs is a mapping between a key to a JamJar scripting

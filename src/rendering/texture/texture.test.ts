@@ -21,14 +21,7 @@ import Vector from "../../geometry/vector";
 describe("Texture - GenerateSpritesheetIndex", () => {
     type TestTuple = [string, Polygon[], number, number];
     test.each<TestTuple>([
-        [
-            "1 x 1 sprite sheet",
-            [
-                Polygon.QuadByPoints(new Vector(0, 0), new Vector(1, 1)),
-            ],
-            1,
-            1
-        ],
+        ["1 x 1 sprite sheet", [Polygon.QuadByPoints(new Vector(0, 0), new Vector(1, 1))], 1, 1],
         [
             "2 x 2 sprite sheet",
             [
@@ -38,7 +31,7 @@ describe("Texture - GenerateSpritesheetIndex", () => {
                 Polygon.QuadByPoints(new Vector(0.5, 0), new Vector(1, 0.5)),
             ],
             2,
-            2
+            2,
         ],
         [
             "3 x 2 sprite sheet",
@@ -49,7 +42,7 @@ describe("Texture - GenerateSpritesheetIndex", () => {
                 Polygon.QuadByPoints(new Vector(0.5, 0), new Vector(1, 0.5)),
             ],
             2,
-            2
+            2,
         ],
     ])("%p", (description: string, expected: Polygon[], rowCount: number, columnCount: number) => {
         expect(Texture.GenerateSpritesheetIndex(rowCount, columnCount)).toEqual(expected);

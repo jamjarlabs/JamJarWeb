@@ -48,7 +48,7 @@ class Sprite extends Component {
         super(Sprite.KEY);
         this.material = material;
         this.zOrder = zOrder;
-        this.transformedShape = new AABB(Vector.New(1,1));
+        this.transformedShape = new AABB(Vector.New(1, 1));
     }
 
     public Free(): void {

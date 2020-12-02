@@ -26,65 +26,43 @@ describe("GJKAlgorithm - CalculateCollision", () => {
         [
             "Squares, no collision",
             [],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 3, 3)
-            ],
-            new GJKAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Polygon.RectangleByDimensions(1, 1, 3, 3)],
+            new GJKAlgorithm(),
         ],
         [
             "Squares, collision",
-            [new CollisionInfo(
-                Polygon.RectangleByDimensions(3, 3, 0, 0),
-                Polygon.RectangleByDimensions(3, 3, 1, 1)
-            )],
-            [
-                Polygon.RectangleByDimensions(3, 3, 0, 0),
-                Polygon.RectangleByDimensions(3, 3, 1, 1)
-            ],
-            new GJKAlgorithm()
+            [new CollisionInfo(Polygon.RectangleByDimensions(3, 3, 0, 0), Polygon.RectangleByDimensions(3, 3, 1, 1))],
+            [Polygon.RectangleByDimensions(3, 3, 0, 0), Polygon.RectangleByDimensions(3, 3, 1, 1)],
+            new GJKAlgorithm(),
         ],
         [
             "Squares, edge no collision",
             [],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 1, 1)
-            ],
-            new GJKAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Polygon.RectangleByDimensions(1, 1, 1, 1)],
+            new GJKAlgorithm(),
         ],
         [
             "Squares, edge collision",
-            [new CollisionInfo(
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
-            )],
             [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
+                new CollisionInfo(
+                    Polygon.RectangleByDimensions(1, 1, 0, 0),
+                    Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
+                ),
             ],
-            new GJKAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)],
+            new GJKAlgorithm(),
         ],
         [
             "Ellipse and rectangle, no collision",
             [],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Ellipse.Circle(2, 5, 5)
-            ],
-            new GJKAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Ellipse.Circle(2, 5, 5)],
+            new GJKAlgorithm(),
         ],
         [
             "Ellipse and rectangle, collision",
-            [new CollisionInfo(
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Ellipse.Circle(2, -1, 0),
-            )],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Ellipse.Circle(2, -1, 0)
-            ],
-            new GJKAlgorithm()
+            [new CollisionInfo(Polygon.RectangleByDimensions(1, 1, 0, 0), Ellipse.Circle(2, -1, 0))],
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Ellipse.Circle(2, -1, 0)],
+            new GJKAlgorithm(),
         ],
     ])("%p", (description: string, expected: CollisionInfo[], shapes: IShape[], algorithm: GJKAlgorithm) => {
         expect(algorithm.CalculateCollisions(shapes)).toEqual(expected);

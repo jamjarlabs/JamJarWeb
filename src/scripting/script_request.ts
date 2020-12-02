@@ -23,7 +23,6 @@ class ScriptRequest {
     public name: string;
     public source: string;
 
-
     constructor(name: string, source: string) {
         this.name = name;
         this.source = source;

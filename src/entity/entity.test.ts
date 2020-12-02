@@ -21,28 +21,29 @@ import Reactor from "../fake/reactor";
 import FakeComponent from "../fake/component";
 
 describe("Entity - Add", () => {
-    type TestTuple = [
-        string,
-        Error | undefined,
-        Entity,
-        Component
-    ];
+    type TestTuple = [string, Error | undefined, Entity, Component];
     test.each<TestTuple>([
         [
             "Fail to publish",
             new Error("fail to publish"),
-            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), undefined, undefined, 0),
-            new FakeComponent("test")
+            new Entity(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                undefined,
+                undefined,
+                0
+            ),
+            new FakeComponent("test"),
         ],
-        [
-            "Success",
-            undefined,
-            new Entity(new FakeMessageBus()),
-            new FakeComponent("test")
-        ],
+        ["Success", undefined, new Entity(new FakeMessageBus()), new FakeComponent("test")],
     ])("%p", (description: string, expected: Error | undefined, entity: Entity, component: Component) => {
         if (expected instanceof Error) {
-            expect(() => { entity.Add(component); }).toThrow(expected);
+            expect(() => {
+                entity.Add(component);
+            }).toThrow(expected);
         } else {
             expect(entity.Add(component)).toEqual(expected);
         }
@@ -50,28 +51,29 @@ describe("Entity - Add", () => {
 });
 
 describe("Entity - Remove", () => {
-    type TestTuple = [
-        string,
-        Error | undefined,
-        Entity,
-        string
-    ];
+    type TestTuple = [string, Error | undefined, Entity, string];
     test.each<TestTuple>([
         [
             "Fail to publish",
             new Error("fail to publish"),
-            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), undefined, undefined, 0),
-            "test"
+            new Entity(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                undefined,
+                undefined,
+                0
+            ),
+            "test",
         ],
-        [
-            "Success",
-            undefined,
-            new Entity(new FakeMessageBus(), ["test"], ["test"]),
-            "test"
-        ],
+        ["Success", undefined, new Entity(new FakeMessageBus(), ["test"], ["test"]), "test"],
     ])("%p", (description: string, expected: Error | undefined, entity: Entity, key: string) => {
         if (expected instanceof Error) {
-            expect(() => { entity.Remove(key); }).toThrow(expected);
+            expect(() => {
+                entity.Remove(key);
+            }).toThrow(expected);
         } else {
             expect(entity.Remove(key)).toEqual(expected);
         }
@@ -79,25 +81,28 @@ describe("Entity - Remove", () => {
 });
 
 describe("Entity - Destroy", () => {
-    type TestTuple = [
-        string,
-        Error | undefined,
-        Entity
-    ];
+    type TestTuple = [string, Error | undefined, Entity];
     test.each<TestTuple>([
         [
             "Fail to publish",
             new Error("fail to publish"),
-            new Entity(new FakeMessageBus([new Reactor("Publish", () => { throw("fail to publish"); })]), undefined, undefined, 0)
+            new Entity(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                undefined,
+                undefined,
+                0
+            ),
         ],
-        [
-            "Success",
-            undefined,
-            new Entity(new FakeMessageBus())
-        ],
+        ["Success", undefined, new Entity(new FakeMessageBus())],
     ])("%p", (description: string, expected: Error | undefined, entity: Entity) => {
         if (expected instanceof Error) {
-            expect(() => { entity.Destroy(); }).toThrow(expected);
+            expect(() => {
+                entity.Destroy();
+            }).toThrow(expected);
         } else {
             expect(entity.Destroy()).toEqual(expected);
         }

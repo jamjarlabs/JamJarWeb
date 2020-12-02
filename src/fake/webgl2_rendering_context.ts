@@ -42,7 +42,18 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     bindVertexArray(array: WebGLVertexArrayObject | null): void {
         return;
     }
-    blitFramebuffer(srcX0: number, srcY0: number, srcX1: number, srcY1: number, dstX0: number, dstY0: number, dstX1: number, dstY1: number, mask: number, filter: number): void {
+    blitFramebuffer(
+        srcX0: number,
+        srcY0: number,
+        srcX1: number,
+        srcY1: number,
+        dstX0: number,
+        dstY0: number,
+        dstX1: number,
+        dstY1: number,
+        mask: number,
+        filter: number
+    ): void {
         return;
     }
     clearBufferfi(buffer: number, drawbuffer: number, depth: number, stencil: number): void {
@@ -60,20 +71,106 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     clientWaitSync(sync: WebGLSync, flags: number, timeout: number): number {
         return 0;
     }
-    compressedTexImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, imageSize: number, offset: number): void;
-    compressedTexImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, srcData: ArrayBufferView, srcOffset?: number | undefined, srcLengthOverride?: number | undefined): void;
-    compressedTexImage3D(target: any, level: any, internalformat: any, width: any, height: any, depth: any, border: any, srcData: any, srcOffset?: any, srcLengthOverride?: any) {
+    compressedTexImage3D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number,
+        border: number,
+        imageSize: number,
+        offset: number
+    ): void;
+    compressedTexImage3D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number,
+        border: number,
+        srcData: ArrayBufferView,
+        srcOffset?: number | undefined,
+        srcLengthOverride?: number | undefined
+    ): void;
+    compressedTexImage3D(
+        target: any,
+        level: any,
+        internalformat: any,
+        width: any,
+        height: any,
+        depth: any,
+        border: any,
+        srcData: any,
+        srcOffset?: any,
+        srcLengthOverride?: any
+    ) {
         return;
     }
-    compressedTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, imageSize: number, offset: number): void;
-    compressedTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, srcData: ArrayBufferView, srcOffset?: number | undefined, srcLengthOverride?: number | undefined): void;
-    compressedTexSubImage3D(target: any, level: any, xoffset: any, yoffset: any, zoffset: any, width: any, height: any, depth: any, format: any, srcData: any, srcOffset?: any, srcLengthOverride?: any) {
+    compressedTexSubImage3D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        zoffset: number,
+        width: number,
+        height: number,
+        depth: number,
+        format: number,
+        imageSize: number,
+        offset: number
+    ): void;
+    compressedTexSubImage3D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        zoffset: number,
+        width: number,
+        height: number,
+        depth: number,
+        format: number,
+        srcData: ArrayBufferView,
+        srcOffset?: number | undefined,
+        srcLengthOverride?: number | undefined
+    ): void;
+    compressedTexSubImage3D(
+        target: any,
+        level: any,
+        xoffset: any,
+        yoffset: any,
+        zoffset: any,
+        width: any,
+        height: any,
+        depth: any,
+        format: any,
+        srcData: any,
+        srcOffset?: any,
+        srcLengthOverride?: any
+    ) {
         return;
     }
-    copyBufferSubData(readTarget: number, writeTarget: number, readOffset: number, writeOffset: number, size: number): void {
+    copyBufferSubData(
+        readTarget: number,
+        writeTarget: number,
+        readOffset: number,
+        writeOffset: number,
+        size: number
+    ): void {
         return;
     }
-    copyTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, x: number, y: number, width: number, height: number): void {
+    copyTexSubImage3D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        zoffset: number,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): void {
         return;
     }
     createQuery(): WebGLQuery | null {
@@ -124,7 +221,13 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     fenceSync(condition: number, flags: number): WebGLSync | null {
         return null;
     }
-    framebufferTextureLayer(target: number, attachment: number, texture: WebGLTexture | null, level: number, layer: number): void {
+    framebufferTextureLayer(
+        target: number,
+        attachment: number,
+        texture: WebGLTexture | null,
+        level: number,
+        layer: number
+    ): void {
         return;
     }
     getActiveUniformBlockName(program: WebGLProgram, uniformBlockIndex: number): string | null {
@@ -136,7 +239,13 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     getActiveUniforms(program: WebGLProgram, uniformIndices: number[], pname: number) {
         return;
     }
-    getBufferSubData(target: number, srcByteOffset: number, dstBuffer: ArrayBufferView, dstOffset?: number | undefined, length?: number | undefined): void {
+    getBufferSubData(
+        target: number,
+        srcByteOffset: number,
+        dstBuffer: ArrayBufferView,
+        dstOffset?: number | undefined,
+        length?: number | undefined
+    ): void {
         return;
     }
     getFragDataLocation(program: WebGLProgram, name: string): number {
@@ -172,7 +281,14 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     invalidateFramebuffer(target: number, attachments: number[]): void {
         return;
     }
-    invalidateSubFramebuffer(target: number, attachments: number[], x: number, y: number, width: number, height: number): void {
+    invalidateSubFramebuffer(
+        target: number,
+        attachments: number[],
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): void {
         return;
     }
     isQuery(query: WebGLQuery | null): boolean {
@@ -196,7 +312,13 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     readBuffer(src: number): void {
         return;
     }
-    renderbufferStorageMultisample(target: number, samples: number, internalformat: number, width: number, height: number): void {
+    renderbufferStorageMultisample(
+        target: number,
+        samples: number,
+        internalformat: number,
+        width: number,
+        height: number
+    ): void {
         return;
     }
     resumeTransformFeedback(): void {
@@ -208,23 +330,137 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     samplerParameteri(sampler: WebGLSampler, pname: number, param: number): void {
         return;
     }
-    texImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, format: number, type: number, pboOffset: number): void;
-    texImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, format: number, type: number, source: TexImageSource): void;
-    texImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, format: number, type: number, srcData: ArrayBufferView | null): void;
-    texImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, format: number, type: number, srcData: ArrayBufferView, srcOffset: number): void;
-    texImage3D(target: any, level: any, internalformat: any, width: any, height: any, depth: any, border: any, format: any, type: any, srcData: any, srcOffset?: any) {
+    texImage3D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number,
+        border: number,
+        format: number,
+        type: number,
+        pboOffset: number
+    ): void;
+    texImage3D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number,
+        border: number,
+        format: number,
+        type: number,
+        source: TexImageSource
+    ): void;
+    texImage3D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number,
+        border: number,
+        format: number,
+        type: number,
+        srcData: ArrayBufferView | null
+    ): void;
+    texImage3D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number,
+        border: number,
+        format: number,
+        type: number,
+        srcData: ArrayBufferView,
+        srcOffset: number
+    ): void;
+    texImage3D(
+        target: any,
+        level: any,
+        internalformat: any,
+        width: any,
+        height: any,
+        depth: any,
+        border: any,
+        format: any,
+        type: any,
+        srcData: any,
+        srcOffset?: any
+    ) {
         return;
     }
     texStorage2D(target: number, levels: number, internalformat: number, width: number, height: number): void {
         return;
     }
-    texStorage3D(target: number, levels: number, internalformat: number, width: number, height: number, depth: number): void {
+    texStorage3D(
+        target: number,
+        levels: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        depth: number
+    ): void {
         return;
     }
-    texSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, type: number, pboOffset: number): void;
-    texSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, type: number, source: TexImageSource): void;
-    texSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, type: number, srcData: ArrayBufferView | null, srcOffset?: number | undefined): void;
-    texSubImage3D(target: any, level: any, xoffset: any, yoffset: any, zoffset: any, width: any, height: any, depth: any, format: any, type: any, srcData: any, srcOffset?: any) {
+    texSubImage3D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        zoffset: number,
+        width: number,
+        height: number,
+        depth: number,
+        format: number,
+        type: number,
+        pboOffset: number
+    ): void;
+    texSubImage3D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        zoffset: number,
+        width: number,
+        height: number,
+        depth: number,
+        format: number,
+        type: number,
+        source: TexImageSource
+    ): void;
+    texSubImage3D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        zoffset: number,
+        width: number,
+        height: number,
+        depth: number,
+        format: number,
+        type: number,
+        srcData: ArrayBufferView | null,
+        srcOffset?: number | undefined
+    ): void;
+    texSubImage3D(
+        target: any,
+        level: any,
+        xoffset: any,
+        yoffset: any,
+        zoffset: any,
+        width: any,
+        height: any,
+        depth: any,
+        format: any,
+        type: any,
+        srcData: any,
+        srcOffset?: any
+    ) {
         return;
     }
     transformFeedbackVaryings(program: WebGLProgram, varyings: string[], bufferMode: number): void {
@@ -233,46 +469,102 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     uniform1ui(location: WebGLUniformLocation | null, v0: number): void {
         return;
     }
-    uniform1uiv(location: WebGLUniformLocation | null, data: Uint32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform1uiv(
+        location: WebGLUniformLocation | null,
+        data: Uint32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
     uniform2ui(location: WebGLUniformLocation | null, v0: number, v1: number): void {
         return;
     }
-    uniform2uiv(location: WebGLUniformLocation | null, data: Uint32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform2uiv(
+        location: WebGLUniformLocation | null,
+        data: Uint32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
     uniform3ui(location: WebGLUniformLocation | null, v0: number, v1: number, v2: number): void {
         return;
     }
-    uniform3uiv(location: WebGLUniformLocation | null, data: Uint32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform3uiv(
+        location: WebGLUniformLocation | null,
+        data: Uint32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
     uniform4ui(location: WebGLUniformLocation | null, v0: number, v1: number, v2: number, v3: number): void {
         return;
     }
-    uniform4uiv(location: WebGLUniformLocation | null, data: Uint32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform4uiv(
+        location: WebGLUniformLocation | null,
+        data: Uint32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
     uniformBlockBinding(program: WebGLProgram, uniformBlockIndex: number, uniformBlockBinding: number): void {
         return;
     }
-    uniformMatrix2x3fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix2x3fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix2x4fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix2x4fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix3x2fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix3x2fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix3x4fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix3x4fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix4x2fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix4x2fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix4x3fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix4x3fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
     vertexAttribDivisor(index: number, divisor: number): void {
@@ -561,78 +853,345 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     WAIT_FAILED!: number;
     bufferData(target: number, size: number, usage: number): void;
     bufferData(target: number, srcData: ArrayBufferView | ArrayBuffer | null, usage: number): void;
-    bufferData(target: number, srcData: ArrayBufferView, usage: number, srcOffset: number, length?: number | undefined): void;
+    bufferData(
+        target: number,
+        srcData: ArrayBufferView,
+        usage: number,
+        srcOffset: number,
+        length?: number | undefined
+    ): void;
     bufferData(target: any, srcData: any, usage: any, srcOffset?: any, length?: any) {
         return;
     }
     bufferSubData(target: number, dstByteOffset: number, srcData: BufferSource): void;
-    bufferSubData(target: number, dstByteOffset: number, srcData: ArrayBufferView, srcOffset: number, length?: number | undefined): void;
+    bufferSubData(
+        target: number,
+        dstByteOffset: number,
+        srcData: ArrayBufferView,
+        srcOffset: number,
+        length?: number | undefined
+    ): void;
     bufferSubData(target: any, dstByteOffset: any, srcData: any, srcOffset?: any, length?: any) {
         return;
     }
-    compressedTexImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, imageSize: number, offset: number): void;
-    compressedTexImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, srcData: ArrayBufferView, srcOffset?: number | undefined, srcLengthOverride?: number | undefined): void;
-    compressedTexImage2D(target: any, level: any, internalformat: any, width: any, height: any, border: any, srcData: any, srcOffset?: any, srcLengthOverride?: any) {
+    compressedTexImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        border: number,
+        imageSize: number,
+        offset: number
+    ): void;
+    compressedTexImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        border: number,
+        srcData: ArrayBufferView,
+        srcOffset?: number | undefined,
+        srcLengthOverride?: number | undefined
+    ): void;
+    compressedTexImage2D(
+        target: any,
+        level: any,
+        internalformat: any,
+        width: any,
+        height: any,
+        border: any,
+        srcData: any,
+        srcOffset?: any,
+        srcLengthOverride?: any
+    ) {
         return;
     }
-    compressedTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, imageSize: number, offset: number): void;
-    compressedTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, srcData: ArrayBufferView, srcOffset?: number | undefined, srcLengthOverride?: number | undefined): void;
-    compressedTexSubImage2D(target: any, level: any, xoffset: any, yoffset: any, width: any, height: any, format: any, srcData: any, srcOffset?: any, srcLengthOverride?: any) {
+    compressedTexSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        width: number,
+        height: number,
+        format: number,
+        imageSize: number,
+        offset: number
+    ): void;
+    compressedTexSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        width: number,
+        height: number,
+        format: number,
+        srcData: ArrayBufferView,
+        srcOffset?: number | undefined,
+        srcLengthOverride?: number | undefined
+    ): void;
+    compressedTexSubImage2D(
+        target: any,
+        level: any,
+        xoffset: any,
+        yoffset: any,
+        width: any,
+        height: any,
+        format: any,
+        srcData: any,
+        srcOffset?: any,
+        srcLengthOverride?: any
+    ) {
         return;
     }
-    readPixels(x: number, y: number, width: number, height: number, format: number, type: number, dstData: ArrayBufferView | null): void;
+    readPixels(
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        format: number,
+        type: number,
+        dstData: ArrayBufferView | null
+    ): void;
     readPixels(x: number, y: number, width: number, height: number, format: number, type: number, offset: number): void;
-    readPixels(x: number, y: number, width: number, height: number, format: number, type: number, dstData: ArrayBufferView, dstOffset: number): void;
+    readPixels(
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        format: number,
+        type: number,
+        dstData: ArrayBufferView,
+        dstOffset: number
+    ): void;
     readPixels(x: any, y: any, width: any, height: any, format: any, type: any, dstData: any, dstOffset?: any) {
         return;
     }
-    texImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, format: number, type: number, pixels: ArrayBufferView | null): void;
-    texImage2D(target: number, level: number, internalformat: number, format: number, type: number, source: TexImageSource): void;
-    texImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, format: number, type: number, pboOffset: number): void;
-    texImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, format: number, type: number, source: TexImageSource): void;
-    texImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, format: number, type: number, srcData: ArrayBufferView, srcOffset: number): void;
-    texImage2D(target: any, level: any, internalformat: any, width: any, height: any, border: any, format?: any, type?: any, srcData?: any, srcOffset?: any) {
+    texImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        border: number,
+        format: number,
+        type: number,
+        pixels: ArrayBufferView | null
+    ): void;
+    texImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        format: number,
+        type: number,
+        source: TexImageSource
+    ): void;
+    texImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        border: number,
+        format: number,
+        type: number,
+        pboOffset: number
+    ): void;
+    texImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        border: number,
+        format: number,
+        type: number,
+        source: TexImageSource
+    ): void;
+    texImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        width: number,
+        height: number,
+        border: number,
+        format: number,
+        type: number,
+        srcData: ArrayBufferView,
+        srcOffset: number
+    ): void;
+    texImage2D(
+        target: any,
+        level: any,
+        internalformat: any,
+        width: any,
+        height: any,
+        border: any,
+        format?: any,
+        type?: any,
+        srcData?: any,
+        srcOffset?: any
+    ) {
         return;
     }
-    texSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, type: number, pixels: ArrayBufferView | null): void;
-    texSubImage2D(target: number, level: number, xoffset: number, yoffset: number, format: number, type: number, source: TexImageSource): void;
-    texSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, type: number, pboOffset: number): void;
-    texSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, type: number, source: TexImageSource): void;
-    texSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, type: number, srcData: ArrayBufferView, srcOffset: number): void;
-    texSubImage2D(target: any, level: any, xoffset: any, yoffset: any, width: any, height: any, format: any, type?: any, srcData?: any, srcOffset?: any) {
+    texSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        width: number,
+        height: number,
+        format: number,
+        type: number,
+        pixels: ArrayBufferView | null
+    ): void;
+    texSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        format: number,
+        type: number,
+        source: TexImageSource
+    ): void;
+    texSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        width: number,
+        height: number,
+        format: number,
+        type: number,
+        pboOffset: number
+    ): void;
+    texSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        width: number,
+        height: number,
+        format: number,
+        type: number,
+        source: TexImageSource
+    ): void;
+    texSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        width: number,
+        height: number,
+        format: number,
+        type: number,
+        srcData: ArrayBufferView,
+        srcOffset: number
+    ): void;
+    texSubImage2D(
+        target: any,
+        level: any,
+        xoffset: any,
+        yoffset: any,
+        width: any,
+        height: any,
+        format: any,
+        type?: any,
+        srcData?: any,
+        srcOffset?: any
+    ) {
         return;
     }
-    uniform1fv(location: WebGLUniformLocation | null, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform1fv(
+        location: WebGLUniformLocation | null,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform1iv(location: WebGLUniformLocation | null, data: Int32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform1iv(
+        location: WebGLUniformLocation | null,
+        data: Int32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform2fv(location: WebGLUniformLocation | null, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform2fv(
+        location: WebGLUniformLocation | null,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform2iv(location: WebGLUniformLocation | null, data: Int32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform2iv(
+        location: WebGLUniformLocation | null,
+        data: Int32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform3fv(location: WebGLUniformLocation | null, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform3fv(
+        location: WebGLUniformLocation | null,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform3iv(location: WebGLUniformLocation | null, data: Int32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform3iv(
+        location: WebGLUniformLocation | null,
+        data: Int32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform4fv(location: WebGLUniformLocation | null, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform4fv(
+        location: WebGLUniformLocation | null,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniform4iv(location: WebGLUniformLocation | null, data: Int32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniform4iv(
+        location: WebGLUniformLocation | null,
+        data: Int32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix2fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix2fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix3fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix3fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
-    uniformMatrix4fv(location: WebGLUniformLocation | null, transpose: boolean, data: Float32List, srcOffset?: number | undefined, srcLength?: number | undefined): void {
+    uniformMatrix4fv(
+        location: WebGLUniformLocation | null,
+        transpose: boolean,
+        data: Float32List,
+        srcOffset?: number | undefined,
+        srcLength?: number | undefined
+    ): void {
         return;
     }
     canvas!: HTMLCanvasElement | OffscreenCanvas;
@@ -695,10 +1254,28 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     compileShader(shader: WebGLShader): void {
         return;
     }
-    copyTexImage2D(target: number, level: number, internalformat: number, x: number, y: number, width: number, height: number, border: number): void {
+    copyTexImage2D(
+        target: number,
+        level: number,
+        internalformat: number,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        border: number
+    ): void {
         return;
     }
-    copyTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, x: number, y: number, width: number, height: number): void {
+    copyTexSubImage2D(
+        target: number,
+        level: number,
+        xoffset: number,
+        yoffset: number,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    ): void {
         return;
     }
     createBuffer(): WebGLBuffer | null {
@@ -776,10 +1353,21 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     flush(): void {
         return;
     }
-    framebufferRenderbuffer(target: number, attachment: number, renderbuffertarget: number, renderbuffer: WebGLRenderbuffer | null): void {
+    framebufferRenderbuffer(
+        target: number,
+        attachment: number,
+        renderbuffertarget: number,
+        renderbuffer: WebGLRenderbuffer | null
+    ): void {
         return;
     }
-    framebufferTexture2D(target: number, attachment: number, textarget: number, texture: WebGLTexture | null, level: number): void {
+    framebufferTexture2D(
+        target: number,
+        attachment: number,
+        textarget: number,
+        texture: WebGLTexture | null,
+        level: number
+    ): void {
         return;
     }
     frontFace(mode: number): void {
@@ -1009,7 +1597,14 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     vertexAttrib4fv(index: number, values: Float32List): void {
         return;
     }
-    vertexAttribPointer(index: number, size: number, type: number, normalized: boolean, stride: number, offset: number): void {
+    vertexAttribPointer(
+        index: number,
+        size: number,
+        type: number,
+        normalized: boolean,
+        stride: number,
+        offset: number
+    ): void {
         return;
     }
     viewport(x: number, y: number, width: number, height: number): void {
@@ -1311,7 +1906,6 @@ class FakeWebGL2RenderingContext extends Fake implements WebGL2RenderingContext 
     VERTEX_SHADER!: number;
     VIEWPORT!: number;
     ZERO!: number;
-
 }
 
 export default FakeWebGL2RenderingContext;

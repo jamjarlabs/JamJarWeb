@@ -76,12 +76,13 @@ class Text extends Component {
         font: string,
         align: TextAlignment = TextAlignment.Left,
         spacing: number = Text.DEFAULT_SPACING,
-        offset: Vector = Vector.New(0,0),
+        offset: Vector = Vector.New(0, 0),
         color: Color = new Color(0, 0, 0, 1),
         shaders: string[] = [
             ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
-            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
-        ]) {
+            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME,
+        ]
+    ) {
         super(Text.KEY);
         this.zOrder = zOrder;
         this.value = value;

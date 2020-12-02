@@ -51,7 +51,11 @@ class DefaultTextFragmentShader extends GLSLShader {
         gl.uniform1i(textureLocation, 0);
     };
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
+    private static readonly PER_RENDERABLE = (
+        context: GLSLContext,
+        renderable: IRenderable,
+        texture?: WebGLTexture
+    ): void => {
         const gl = context.gl;
         const program = context.program;
         // Add in color information
@@ -61,8 +65,8 @@ class DefaultTextFragmentShader extends GLSLShader {
 
     constructor() {
         super(
-            ShaderAsset.FRAGMENT_TYPE, 
-            DefaultTextFragmentShader.SOURCE, 
+            ShaderAsset.FRAGMENT_TYPE,
+            DefaultTextFragmentShader.SOURCE,
             undefined,
             DefaultTextFragmentShader.PER_TEXTURE,
             DefaultTextFragmentShader.PER_RENDERABLE

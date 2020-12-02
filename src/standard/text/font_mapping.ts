@@ -19,7 +19,7 @@ import FontAsset from "../../rendering/font/font_asset";
 class FontMapping {
     public width: number;
     public asset: FontAsset;
-    public characters: Map<string, number>
+    public characters: Map<string, number>;
 
     constructor(width: number, asset: FontAsset, characters: Map<string, number>) {
         this.width = width;

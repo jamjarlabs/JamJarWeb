@@ -28,12 +28,14 @@ class KeyboardSystem extends System {
 
     private keyEvents: [string, string][];
 
-    constructor(messageBus: IMessageBus, 
+    constructor(
+        messageBus: IMessageBus,
         inputElement: HTMLDocument,
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        keyEvents: [string, string][] = []) {
+        keyEvents: [string, string][] = []
+    ) {
         super(messageBus, scene, undefined, entities, subscriberID);
         this.inputElement = inputElement;
         this.keyEvents = keyEvents;
@@ -42,7 +44,7 @@ class KeyboardSystem extends System {
     }
 
     protected Update(): void {
-        for(let i = 0; i < this.keyEvents.length; i++) {
+        for (let i = 0; i < this.keyEvents.length; i++) {
             const keyEvent = this.keyEvents[i];
             this.messageBus.Publish(new Message<string>(keyEvent[0], keyEvent[1]));
         }

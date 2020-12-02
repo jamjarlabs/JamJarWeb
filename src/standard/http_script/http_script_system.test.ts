@@ -29,121 +29,73 @@ describe("HTTPScriptSystem - OnMessage", () => {
         [
             "Unknown message",
             undefined,
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message("unknown")
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message("unknown"),
         ],
         [
             "Flush",
             undefined,
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "", new Error("test"))
-                ]
-            ),
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "", new Error("test"))
-                ]
-            ),
-            new Message(HTTPScriptSystem.MESSAGE_REQUEST_FLUSH)
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "", new Error("test")),
+            ]),
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "", new Error("test")),
+            ]),
+            new Message(HTTPScriptSystem.MESSAGE_REQUEST_FLUSH),
         ],
         [
             "Clear",
             undefined,
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "console.log('test');"),
-                    new ScriptAsset("test", "", new Error("test")),
-                ]
-            ),
-            new Message(HTTPScriptSystem.MESSAGE_REQUEST_CLEAR)
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "console.log('test');"),
+                new ScriptAsset("test", "", new Error("test")),
+            ]),
+            new Message(HTTPScriptSystem.MESSAGE_REQUEST_CLEAR),
         ],
         [
             "Request load, no payload",
             undefined,
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message(ScriptRequest.MESSAGE_REQUEST_LOAD)
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message(ScriptRequest.MESSAGE_REQUEST_LOAD),
         ],
         [
             "Request load, success",
             undefined,
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [],
-            ),
-            new HTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [],
-            ),
-            new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest("test", "test"))
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest("test", "test")),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: HTTPScriptSystem, system: HTTPScriptSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: HTTPScriptSystem,
+            system: HTTPScriptSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            // Workaround for comparing anonymous/bound functions
+            expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
         }
-        // Workaround for comparing anonymous/bound functions
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
-    });
+    );
 });
 
 class TestHTTPScriptSystem extends HTTPScriptSystem {
@@ -164,60 +116,45 @@ describe("HTTPScriptSystem - HandleResponse", () => {
         [
             "Handle response, error",
             new Error("test error!"),
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             ((): Response => {
                 const response = new FakeResponse();
                 response.ok = false;
                 response.statusText = "test error!";
                 return response;
-            })()
+            })(),
         ],
         [
             "Handle response, success",
             "console.log('success');",
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             ((): Response => {
-                const response = new FakeResponse([
-                    new Reactor("text", (): string => "console.log('success');")
-                ]);
+                const response = new FakeResponse([new Reactor("text", (): string => "console.log('success');")]);
                 response.ok = true;
                 return response;
-            })()
-        ]
-    ])("%p", (description: string, expected: Error | string, expectedState: TestHTTPScriptSystem, system: TestHTTPScriptSystem, response: Response) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateHandleResponse(response);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateHandleResponse(response)).toEqual(expected);
+            })(),
+        ],
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | string,
+            expectedState: TestHTTPScriptSystem,
+            system: TestHTTPScriptSystem,
+            response: Response
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateHandleResponse(response);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateHandleResponse(response)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("HTTPScriptSystem - HTTP Success", () => {
@@ -226,35 +163,33 @@ describe("HTTPScriptSystem - HTTP Success", () => {
         [
             "Success",
             undefined,
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ScriptAsset("test", "console.log('success');")
-                ]
-            ),
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ScriptAsset("test", "console.log('success');"),
+            ]),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             "console.log('success');",
-            new ScriptRequest("test", "test")
+            new ScriptRequest("test", "test"),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPScriptSystem, system: TestHTTPScriptSystem, code: string, request: ScriptRequest) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateHTTPSuccess(code, request);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateHTTPSuccess(code, request)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: TestHTTPScriptSystem,
+            system: TestHTTPScriptSystem,
+            code: string,
+            request: ScriptRequest
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateHTTPSuccess(code, request);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateHTTPSuccess(code, request)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("HTTPAudioSystem - HTTP Failure", () => {
@@ -263,33 +198,31 @@ describe("HTTPAudioSystem - HTTP Failure", () => {
         [
             "Failure",
             undefined,
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ScriptAsset("test", "", new Error("test error"))
-                ]
-            ),
-            new TestHTTPScriptSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ScriptAsset("test", "", new Error("test error")),
+            ]),
+            new TestHTTPScriptSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             new ScriptRequest("test", "test"),
-            new Error("test error")
+            new Error("test error"),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPScriptSystem, system: TestHTTPScriptSystem, request: ScriptRequest, error: Error) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateHTTPError(request, error);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateHTTPError(request, error)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: TestHTTPScriptSystem,
+            system: TestHTTPScriptSystem,
+            request: ScriptRequest,
+            error: Error
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateHTTPError(request, error);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateHTTPError(request, error)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

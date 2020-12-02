@@ -19,17 +19,15 @@ import System from "./system/system";
 import IGame from "./igame";
 import IMessageBus from "./message/imessage_bus";
 
-
 /**
  * Game is the core engine class.
  * The game contains the game loop, which handles triggering updates in systems and
  * setting up rendering.
  */
 abstract class Game implements IGame {
-
-    public static readonly MESSAGE_PRE_RENDER = "pre_render"
-    public static readonly MESSAGE_RENDER = "render"
-    public static readonly MESSAGE_POST_RENDER = "post_render"
+    public static readonly MESSAGE_PRE_RENDER = "pre_render";
+    public static readonly MESSAGE_RENDER = "render";
+    public static readonly MESSAGE_POST_RENDER = "post_render";
 
     private static readonly TIME_STEP = 0.01;
 
@@ -40,9 +38,13 @@ abstract class Game implements IGame {
     private accumulator: number;
     private currentTime: number;
 
-    private frameRequestCallback: (callback: FrameRequestCallback) => number
+    private frameRequestCallback: (callback: FrameRequestCallback) => number;
 
-    constructor(messageBus: IMessageBus, name = "game", frameRequestCallback: (callback: FrameRequestCallback) => number = window.requestAnimationFrame.bind(window)) {
+    constructor(
+        messageBus: IMessageBus,
+        name = "game",
+        frameRequestCallback: (callback: FrameRequestCallback) => number = window.requestAnimationFrame.bind(window)
+    ) {
         this.name = name;
         this.messageBus = messageBus;
         this.accumulator = 0;
@@ -60,7 +62,7 @@ abstract class Game implements IGame {
     /**
      * Start kicks off the game, setting up systems and starting the game loop.
      */
-    public Start(): void  {
+    public Start(): void {
         this.OnStart();
         this.messageBus.Dispatch();
         this.accumulator = 0;
@@ -76,7 +78,7 @@ abstract class Game implements IGame {
      * which uses the alpha value that is calculated.
      * See: https://gameprogrammingpatterns.com/game-loop.html
      */
-    private loop(timestamp: number): void  {
+    private loop(timestamp: number): void {
         // Calculate time since last frame.
         let frameTime = (timestamp - this.currentTime) / 1000;
         if (frameTime > 0.25) {

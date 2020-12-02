@@ -22,7 +22,7 @@ import SpriteAnimation from "./sprite_animation";
  * SpriteAnimator can contain multiple SpriteAnimations, which can be selected
  * and set as the current animation.
  * SpriteAnimator can be used to add sprite animation, and allows defining
- * different animations. 
+ * different animations.
  * SpriteAnimator should be used with a Sprite component in conjunction.
  */
 class SpriteAnimator extends Component {

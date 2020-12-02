@@ -36,7 +36,7 @@ class ScriptingEngineSystem extends System {
     /**
      * Track all entities
      */
-    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => true
+    private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => true;
 
     private assets: Map<string, ScriptAsset>;
     private scriptEntity: SystemEntity | undefined;
@@ -47,14 +47,16 @@ class ScriptingEngineSystem extends System {
      */
     private reference: ScriptingReference;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         ref: string,
         scene?: IScene,
         scripts: Map<string, ScriptAsset> = new Map(),
         scriptEntity: SystemEntity | undefined = undefined,
         reference: ScriptingReference | undefined = undefined,
         entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+        subscriberID?: number
+    ) {
         super(messageBus, scene, ScriptingEngineSystem.EVALUATOR, entities, subscriberID);
 
         this.assets = scripts;
@@ -72,9 +74,7 @@ class ScriptingEngineSystem extends System {
 
             // Add a global window reference to reference
             if (window.JamJarRefs === undefined) {
-                window.JamJarRefs = new Map<string, ScriptingReference>([
-                    [ref, this.reference]
-                ]);
+                window.JamJarRefs = new Map<string, ScriptingReference>([[ref, this.reference]]);
             } else {
                 window.JamJarRefs.set(ref, this.reference);
             }
@@ -82,10 +82,7 @@ class ScriptingEngineSystem extends System {
             this.reference = reference;
         }
 
-        this.messageBus.Subscribe(this, [
-            ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-            ScriptAsset.MESSAGE_FINISH_LOAD
-        ]);
+        this.messageBus.Subscribe(this, [ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, ScriptAsset.MESSAGE_FINISH_LOAD]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -144,13 +141,13 @@ class ScriptingEngineSystem extends System {
     }
 
     private getEntitiesByTag(tag: string): SystemEntity[] {
-        return  [...this.entities.values()].filter((entity) => {
+        return [...this.entities.values()].filter((entity) => {
             return entity.entity.tags.includes(tag);
         });
     }
 
     private getEntitiesByLayer(layer: string): SystemEntity[] {
-        return  [...this.entities.values()].filter((entity) => {
+        return [...this.entities.values()].filter((entity) => {
             return entity.entity.layers.includes(layer);
         });
     }

@@ -29,7 +29,7 @@ abstract class Fake {
                     }
                 }
                 return Reflect.get(target, prop, receiver);
-            }
+            },
         });
     }
 }

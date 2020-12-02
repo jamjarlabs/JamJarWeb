@@ -20,7 +20,6 @@ import Reactor from "./reactor";
 import IMessage from "../message/imessage";
 
 class FakeSubscriber extends Fake implements ISubscriber {
-
     public subscriberID: number;
 
     constructor(subscriberID: number, reactors: Reactor[] = []) {

@@ -50,7 +50,7 @@ abstract class Pooled {
      * @param args The args to use when creating/recycling the object.
      */
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-    protected static new<T extends IPoolable>(poolKey: string, type: { new(...args: any): T }, args: any[]): T {
+    protected static new<T extends IPoolable>(poolKey: string, type: { new (...args: any): T }, args: any[]): T {
         // Get any object pool with matching key, if no pool just create unpooled object
         const pool = Pooled.pools.get(poolKey);
 

@@ -19,21 +19,9 @@ import Color from "./color";
 describe("Color - GetTuple", () => {
     type TestTuple = [string, [number, number, number, number], Color];
     test.each<TestTuple>([
-        [
-            "Get RGBA (1,0,1,0)",
-            [1,0,1,0],
-            new Color(1,0,1,0)
-        ],
-        [
-            "Get RGBA (1,0,1,1) (no alpha provided)",
-            [1,0,1,1],
-            new Color(1,0,1)
-        ],
-        [
-            "Get RGBA (0.2,0.5,0.32,0.243)",
-            [0.2,0.5,0.32,0.243],
-            new Color(0.2,0.5,0.32,0.243)
-        ],
+        ["Get RGBA (1,0,1,0)", [1, 0, 1, 0], new Color(1, 0, 1, 0)],
+        ["Get RGBA (1,0,1,1) (no alpha provided)", [1, 0, 1, 1], new Color(1, 0, 1)],
+        ["Get RGBA (0.2,0.5,0.32,0.243)", [0.2, 0.5, 0.32, 0.243], new Color(0.2, 0.5, 0.32, 0.243)],
     ])("%p", (description: string, expected: [number, number, number, number], color: Color) => {
         expect(color.GetTuple()).toEqual(expected);
     });
@@ -42,18 +30,8 @@ describe("Color - GetTuple", () => {
 describe("Color - Mix", () => {
     type TestTuple = [string, Color, Color, Color];
     test.each<TestTuple>([
-        [
-            "Mix red and blue",
-            new Color(0.5,0,0.5,0),
-            new Color(1,0,0,0),
-            new Color(0,0,1,0)
-        ],
-        [
-            "Mix red and green",
-            new Color(0.5,0.5,0,0),
-            new Color(1,0,0,0),
-            new Color(0,1,0,0)
-        ],
+        ["Mix red and blue", new Color(0.5, 0, 0.5, 0), new Color(1, 0, 0, 0), new Color(0, 0, 1, 0)],
+        ["Mix red and green", new Color(0.5, 0.5, 0, 0), new Color(1, 0, 0, 0), new Color(0, 1, 0, 0)],
     ])("%p", (description: string, expected: Color, color: Color, other: Color) => {
         expect(color.Mix(other)).toEqual(expected);
     });

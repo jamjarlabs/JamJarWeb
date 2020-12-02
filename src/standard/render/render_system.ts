@@ -39,12 +39,14 @@ abstract class RenderSystem extends System {
      */
     protected renderables: Map<number, IRenderable[]>;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         evaluator?: Evaluator,
         renderables: Map<number, IRenderable[]> = new Map(),
         entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+        subscriberID?: number
+    ) {
         super(messageBus, scene, evaluator, entities, subscriberID);
         this.renderables = renderables;
     }

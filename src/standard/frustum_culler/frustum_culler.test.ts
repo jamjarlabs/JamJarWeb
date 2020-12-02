@@ -26,22 +26,21 @@ describe("FrustumCuller - Cull", () => {
         [
             "Narrow algorithm within frustum - don't cull",
             false,
-            Polygon.RectangleByDimensions(1,1),
-            Polygon.RectangleByDimensions(1,1),
-            new FrustumCuller(
-                new AllCollideAlgorithm()
-            )
+            Polygon.RectangleByDimensions(1, 1),
+            Polygon.RectangleByDimensions(1, 1),
+            new FrustumCuller(new AllCollideAlgorithm()),
         ],
         [
             "Narrow algorithm outside frustum - cull",
             true,
-            Polygon.RectangleByDimensions(1,1),
-            Polygon.RectangleByDimensions(1,1),
-            new FrustumCuller(
-                new NoneCollideAlgorithm()
-            )
+            Polygon.RectangleByDimensions(1, 1),
+            Polygon.RectangleByDimensions(1, 1),
+            new FrustumCuller(new NoneCollideAlgorithm()),
         ],
-    ])("%p", (description: string, expected: boolean, frustumPlaneShape: IShape, shape: IShape, culler: FrustumCuller) => {
-        expect(culler.Cull(frustumPlaneShape, shape)).toEqual(expected);
-    });
+    ])(
+        "%p",
+        (description: string, expected: boolean, frustumPlaneShape: IShape, shape: IShape, culler: FrustumCuller) => {
+            expect(culler.Cull(frustumPlaneShape, shape)).toEqual(expected);
+        }
+    );
 });

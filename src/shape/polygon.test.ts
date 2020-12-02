@@ -22,41 +22,24 @@ import Matrix4D from "../geometry/matrix_4d";
 describe("Polygon - FarthestPointInDirection", () => {
     type TestTuple = [string, Vector, Polygon, Vector];
     test.each<TestTuple>([
-        [
-            "No points",
-            new Vector(0, 0),
-            new Polygon([]),
-            new Vector(1, 0)
-        ],
+        ["No points", new Vector(0, 0), new Polygon([]), new Vector(1, 0)],
         [
             "Triangle, most upwards point",
             new Vector(0, 1),
-            new Polygon([
-                new Vector(-1, -1),
-                new Vector(1, -1),
-                new Vector(0, 1)
-            ]),
-            new Vector(0, 1)
+            new Polygon([new Vector(-1, -1), new Vector(1, -1), new Vector(0, 1)]),
+            new Vector(0, 1),
         ],
         [
             "Triangle, most right point",
             new Vector(1, -1),
-            new Polygon([
-                new Vector(-1, -1),
-                new Vector(1, -1),
-                new Vector(0, 1)
-            ]),
-            new Vector(1, 0)
+            new Polygon([new Vector(-1, -1), new Vector(1, -1), new Vector(0, 1)]),
+            new Vector(1, 0),
         ],
         [
             "Triangle, most left point",
             new Vector(-1, -1),
-            new Polygon([
-                new Vector(-1, -1),
-                new Vector(1, -1),
-                new Vector(0, 1)
-            ]),
-            new Vector(-1, 0)
+            new Polygon([new Vector(-1, -1), new Vector(1, -1), new Vector(0, 1)]),
+            new Vector(-1, 0),
         ],
     ])("%p", (description: string, expected: Vector, polygon: Polygon, direction: Vector) => {
         expect(polygon.FarthestPointInDirection(direction)).toEqual(expected);
@@ -66,35 +49,12 @@ describe("Polygon - FarthestPointInDirection", () => {
 describe("Polygon - Transform", () => {
     type TestTuple = [string, Polygon, Polygon, Transform];
     test.each<TestTuple>([
-        [
-            "No points",
-            new Polygon([]),
-            new Polygon([]),
-            new Transform(
-                new Vector(0, 2),
-                new Vector(3,3),
-                Math.PI
-            )
-        ],
+        ["No points", new Polygon([]), new Polygon([]), new Transform(new Vector(0, 2), new Vector(3, 3), Math.PI)],
         [
             "Square, move up by 2",
-            new Polygon([
-                new Vector(1, 3),
-                new Vector(1, 1),
-                new Vector(-1, 1),
-                new Vector(-1, 3),
-            ]),
-            new Polygon([
-                new Vector(1, 1),
-                new Vector(1, -1),
-                new Vector(-1, -1),
-                new Vector(-1, 1),
-            ]),
-            new Transform(
-                new Vector(0, 2),
-                new Vector(1,1),
-                0
-            )
+            new Polygon([new Vector(1, 3), new Vector(1, 1), new Vector(-1, 1), new Vector(-1, 3)]),
+            new Polygon([new Vector(1, 1), new Vector(1, -1), new Vector(-1, -1), new Vector(-1, 1)]),
+            new Transform(new Vector(0, 2), new Vector(1, 1), 0),
         ],
     ])("%p", (description: string, expected: Polygon, polygon: Polygon, transform: Transform) => {
         expect(polygon.Transform(transform)).toEqual(expected);
@@ -104,59 +64,24 @@ describe("Polygon - Transform", () => {
 describe("Polygon - PointInside", () => {
     type TestTuple = [string, boolean, Polygon, Vector];
     test.each<TestTuple>([
-        [
-            "No points",
-            false,
-            new Polygon([]),
-            new Vector(0,0)
-        ],
-        [
-            "Rectangle around origin, point above",
-            false,
-            Polygon.RectangleByDimensions(2,2),
-            new Vector(0,3)
-        ],
-        [
-            "Rectangle around origin, point below",
-            false,
-            Polygon.RectangleByDimensions(2,2),
-            new Vector(0,-3)
-        ],
-        [
-            "Rectangle around origin, point left",
-            false,
-            Polygon.RectangleByDimensions(2,2),
-            new Vector(-3,0)
-        ],
-        [
-            "Rectangle around origin, point right",
-            false,
-            Polygon.RectangleByDimensions(2,2),
-            new Vector(3,0)
-        ],
-        [
-            "Rectangle around origin, point within",
-            true,
-            Polygon.RectangleByDimensions(2,2),
-            new Vector(0,0)
-        ],
-        [
-            "Rectangle around origin, point outside",
-            false,
-            Polygon.RectangleByDimensions(2,2),
-            new Vector(5,3)
-        ],
+        ["No points", false, new Polygon([]), new Vector(0, 0)],
+        ["Rectangle around origin, point above", false, Polygon.RectangleByDimensions(2, 2), new Vector(0, 3)],
+        ["Rectangle around origin, point below", false, Polygon.RectangleByDimensions(2, 2), new Vector(0, -3)],
+        ["Rectangle around origin, point left", false, Polygon.RectangleByDimensions(2, 2), new Vector(-3, 0)],
+        ["Rectangle around origin, point right", false, Polygon.RectangleByDimensions(2, 2), new Vector(3, 0)],
+        ["Rectangle around origin, point within", true, Polygon.RectangleByDimensions(2, 2), new Vector(0, 0)],
+        ["Rectangle around origin, point outside", false, Polygon.RectangleByDimensions(2, 2), new Vector(5, 3)],
         [
             "Rectangle around arbitrary point, point within",
             true,
-            Polygon.RectangleByDimensions(2,2).Transform(new Transform(new Vector(5,3))),
-            new Vector(5,4)
+            Polygon.RectangleByDimensions(2, 2).Transform(new Transform(new Vector(5, 3))),
+            new Vector(5, 4),
         ],
         [
             "Rectangle around arbitrary point, point outside",
             false,
-            Polygon.RectangleByDimensions(2,2).Transform(new Transform(new Vector(5,3))),
-            new Vector(2,1)
+            Polygon.RectangleByDimensions(2, 2).Transform(new Transform(new Vector(5, 3))),
+            new Vector(2, 1),
         ],
     ])("%p", (description: string, expected: boolean, polygon: Polygon, point: Vector) => {
         expect(polygon.PointInside(point)).toEqual(expected);
@@ -166,19 +91,11 @@ describe("Polygon - PointInside", () => {
 describe("Polygon - GetFloat32Array", () => {
     type TestTuple = [string, Float32Array, Polygon];
     test.each<TestTuple>([
-        [
-            "No points",
-            new Float32Array([]),
-            new Polygon([])
-        ],
+        ["No points", new Float32Array([]), new Polygon([])],
         [
             "Triangle",
             new Float32Array([-1, -1, 1, -1, 0, 1]),
-            new Polygon([
-                new Vector(-1, -1),
-                new Vector(1, -1),
-                new Vector(0, 1)
-            ]),
+            new Polygon([new Vector(-1, -1), new Vector(1, -1), new Vector(0, 1)]),
         ],
     ])("%p", (description: string, expected: Float32Array, polygon: Polygon) => {
         expect(polygon.GetFloat32Array()).toEqual(expected);
@@ -188,26 +105,10 @@ describe("Polygon - GetFloat32Array", () => {
 describe("Polygon - Center", () => {
     type TestTuple = [string, Vector, Polygon];
     test.each<TestTuple>([
-        [
-            "No points",
-            new Vector(NaN,NaN),
-            new Polygon([])
-        ],
-        [
-            "Square around origin",
-            new Vector(0,0),
-            Polygon.RectangleByDimensions(1, 1, 0, 0)
-        ],
-        [
-            "Rectangle around origin",
-            new Vector(0,0),
-            Polygon.RectangleByDimensions(10, 1, 0, 0)
-        ],
-        [
-            "Rectangle around point",
-            new Vector(10,5),
-            Polygon.RectangleByDimensions(10, 3, 10, 5)
-        ],
+        ["No points", new Vector(NaN, NaN), new Polygon([])],
+        ["Square around origin", new Vector(0, 0), Polygon.RectangleByDimensions(1, 1, 0, 0)],
+        ["Rectangle around origin", new Vector(0, 0), Polygon.RectangleByDimensions(10, 1, 0, 0)],
+        ["Rectangle around point", new Vector(10, 5), Polygon.RectangleByDimensions(10, 3, 10, 5)],
     ])("%p", (description: string, expected: Vector, polygon: Polygon) => {
         expect(polygon.Center()).toEqual(expected);
     });
@@ -216,22 +117,17 @@ describe("Polygon - Center", () => {
 describe("Polygon - Apply4D", () => {
     type TestTuple = [string, Polygon, Polygon, Matrix4D];
     test.each<TestTuple>([
-        [
-            "No points",
-            new Polygon([]),
-            new Polygon([]),
-            new Matrix4D()
-        ],
+        ["No points", new Polygon([]), new Polygon([]), new Matrix4D()],
         [
             "Square, move up 3, scale 2",
             Polygon.RectangleByDimensions(2, 2, 0, 3),
             Polygon.RectangleByDimensions(1, 1, 0, 0),
             ((): Matrix4D => {
                 const mat = new Matrix4D();
-                mat.Translate(new Vector(0,3));
-                mat.Scale(new Vector(2,2));
+                mat.Translate(new Vector(0, 3));
+                mat.Scale(new Vector(2, 2));
                 return mat;
-            })()
+            })(),
         ],
     ])("%p", (description: string, expected: Polygon, polygon: Polygon, matrix: Matrix4D) => {
         expect(polygon.Apply4D(matrix)).toEqual(expected);
@@ -243,56 +139,41 @@ describe("Polygon - RectangleByDimensions", () => {
     test.each<TestTuple>([
         [
             "0*0 rectangle",
-            new Polygon([
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-            ]),
+            new Polygon([new Vector(0, 0), new Vector(0, 0), new Vector(0, 0), new Vector(0, 0)]),
             0,
             0,
-            new Vector(0,0),
-            false
+            new Vector(0, 0),
+            false,
         ],
         [
             "2*2 square",
-            new Polygon([
-                new Vector(-1,1),
-                new Vector(1,1),
-                new Vector(1,-1),
-                new Vector(-1,-1),
-            ]),
+            new Polygon([new Vector(-1, 1), new Vector(1, 1), new Vector(1, -1), new Vector(-1, -1)]),
             2,
             2,
-            new Vector(0,0),
-            false
+            new Vector(0, 0),
+            false,
         ],
         [
             "3*2 rectangle",
-            new Polygon([
-                new Vector(-1.5,1),
-                new Vector(1.5,1),
-                new Vector(1.5,-1),
-                new Vector(-1.5,-1),
-            ]),
+            new Polygon([new Vector(-1.5, 1), new Vector(1.5, 1), new Vector(1.5, -1), new Vector(-1.5, -1)]),
             3,
             2,
-            new Vector(0,0),
-            false
+            new Vector(0, 0),
+            false,
         ],
         [
             "3*2 rectangle, wrapped",
             new Polygon([
-                new Vector(-1.5,1),
-                new Vector(1.5,1),
-                new Vector(1.5,-1),
-                new Vector(-1.5,-1),
-                new Vector(-1.5,1),
+                new Vector(-1.5, 1),
+                new Vector(1.5, 1),
+                new Vector(1.5, -1),
+                new Vector(-1.5, -1),
+                new Vector(-1.5, 1),
             ]),
             3,
             2,
-            new Vector(0,0),
-            true
+            new Vector(0, 0),
+            true,
         ],
     ])("%p", (description: string, expected: Polygon, width: number, height: number, origin: Vector, wrap: boolean) => {
         expect(Polygon.RectangleByDimensions(width, height, origin.x, origin.y, wrap)).toEqual(expected);
@@ -304,64 +185,38 @@ describe("Polygon - RectangleByPoints", () => {
     test.each<TestTuple>([
         [
             "0,0 to 1,1 rectangle",
-            new Polygon([
-                new Vector(0,1),
-                new Vector(1,1),
-                new Vector(1,0),
-                new Vector(0,0),
-            ]),
-            new Vector(0,0),
-            new Vector(1,1),
-            false
+            new Polygon([new Vector(0, 1), new Vector(1, 1), new Vector(1, 0), new Vector(0, 0)]),
+            new Vector(0, 0),
+            new Vector(1, 1),
+            false,
         ],
         [
             "0,0 to 5,5 rectangle",
-            new Polygon([
-                new Vector(0,5),
-                new Vector(5,5),
-                new Vector(5,0),
-                new Vector(0,0),
-            ]),
-            new Vector(0,0),
-            new Vector(5,5),
-            false
+            new Polygon([new Vector(0, 5), new Vector(5, 5), new Vector(5, 0), new Vector(0, 0)]),
+            new Vector(0, 0),
+            new Vector(5, 5),
+            false,
         ],
         [
             "2,3 to 10,9 rectangle",
-            new Polygon([
-                new Vector(2,9),
-                new Vector(10,9),
-                new Vector(10,3),
-                new Vector(2,3),
-            ]),
-            new Vector(2,3),
-            new Vector(10,9),
-            false
+            new Polygon([new Vector(2, 9), new Vector(10, 9), new Vector(10, 3), new Vector(2, 3)]),
+            new Vector(2, 3),
+            new Vector(10, 9),
+            false,
         ],
         [
             "2,3 to 10,9 rectangle wrapped",
-            new Polygon([
-                new Vector(2,9),
-                new Vector(10,9),
-                new Vector(10,3),
-                new Vector(2,3),
-                new Vector(2,9),
-            ]),
-            new Vector(2,3),
-            new Vector(10,9),
-            true
+            new Polygon([new Vector(2, 9), new Vector(10, 9), new Vector(10, 3), new Vector(2, 3), new Vector(2, 9)]),
+            new Vector(2, 3),
+            new Vector(10, 9),
+            true,
         ],
         [
             "0,0 to 0,0 rectangle",
-            new Polygon([
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-            ]),
-            new Vector(0,0),
-            new Vector(0,0),
-            false
+            new Polygon([new Vector(0, 0), new Vector(0, 0), new Vector(0, 0), new Vector(0, 0)]),
+            new Vector(0, 0),
+            new Vector(0, 0),
+            false,
         ],
     ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector, wrap: boolean) => {
         expect(Polygon.RectangleByPoints(bottomLeft, topRight, wrap)).toEqual(expected);
@@ -374,49 +229,49 @@ describe("Polygon - QuadByDimensions", () => {
         [
             "0*0",
             new Polygon([
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
+                new Vector(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
             ]),
             0,
             0,
             undefined,
-            undefined
+            undefined,
         ],
         [
             "2*2",
             new Polygon([
-                new Vector(1, -1),  // bottom right
+                new Vector(1, -1), // bottom right
                 new Vector(-1, -1), // bottom left
-                new Vector(-1, 1),  // top left
+                new Vector(-1, 1), // top left
 
-                new Vector(-1, 1),  // top left
-                new Vector(1, 1),   // top right
-                new Vector(1, -1),  // bottom right
+                new Vector(-1, 1), // top left
+                new Vector(1, 1), // top right
+                new Vector(1, -1), // bottom right
             ]),
             2,
             2,
             undefined,
-            undefined
+            undefined,
         ],
         [
             "3*2",
             new Polygon([
-                new Vector(1.5, -1),  // bottom right
+                new Vector(1.5, -1), // bottom right
                 new Vector(-1.5, -1), // bottom left
-                new Vector(-1.5, 1),  // top left
+                new Vector(-1.5, 1), // top left
 
-                new Vector(-1.5, 1),  // top left
-                new Vector(1.5, 1),   // top right
-                new Vector(1.5, -1),  // bottom right
+                new Vector(-1.5, 1), // top left
+                new Vector(1.5, 1), // top right
+                new Vector(1.5, -1), // bottom right
             ]),
             3,
             2,
             undefined,
-            undefined
+            undefined,
         ],
         [
             "2*2 around (4,4)",
@@ -432,11 +287,21 @@ describe("Polygon - QuadByDimensions", () => {
             2,
             2,
             4,
-            4
+            4,
         ],
-    ])("%p", (description: string, expected: Polygon, width: number, height: number, originX: number | undefined, originY: number | undefined) => {
-        expect(Polygon.QuadByDimensions(width, height, originX, originY)).toEqual(expected);
-    });
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Polygon,
+            width: number,
+            height: number,
+            originX: number | undefined,
+            originY: number | undefined
+        ) => {
+            expect(Polygon.QuadByDimensions(width, height, originX, originY)).toEqual(expected);
+        }
+    );
 });
 
 describe("Polygon - QuadByPoints", () => {
@@ -453,8 +318,8 @@ describe("Polygon - QuadByPoints", () => {
                 new Vector(1, 1), // top right
                 new Vector(1, 0), // bottom right
             ]),
-            new Vector(0,0),
-            new Vector(1,1)
+            new Vector(0, 0),
+            new Vector(1, 1),
         ],
         [
             "0,0 to 5,5",
@@ -467,8 +332,8 @@ describe("Polygon - QuadByPoints", () => {
                 new Vector(5, 5), // top right
                 new Vector(5, 0), // bottom right
             ]),
-            new Vector(0,0),
-            new Vector(5,5)
+            new Vector(0, 0),
+            new Vector(5, 5),
         ],
         [
             "2,3 to 10,9",
@@ -481,22 +346,22 @@ describe("Polygon - QuadByPoints", () => {
                 new Vector(10, 9), // top right
                 new Vector(10, 3), // bottom right
             ]),
-            new Vector(2,3),
-            new Vector(10,9)
+            new Vector(2, 3),
+            new Vector(10, 9),
         ],
         [
             "0,0 to 0,0",
             new Polygon([
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
+                new Vector(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
 
-                new Vector(0,0),
-                new Vector(0,0),
-                new Vector(0,0),
+                new Vector(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
             ]),
-            new Vector(0,0),
-            new Vector(0,0)
+            new Vector(0, 0),
+            new Vector(0, 0),
         ],
     ])("%p", (description: string, expected: Polygon, bottomLeft: Vector, topRight: Vector) => {
         expect(Polygon.QuadByPoints(bottomLeft, topRight)).toEqual(expected);
@@ -509,32 +374,41 @@ describe("Polygon - EllipseEstimation", () => {
         [
             "1,1, 4 point circle around 0,0",
             new Polygon([
-                new Vector(1,0),
+                new Vector(1, 0),
                 new Vector(6.123234262925839e-17, 1),
                 new Vector(-1, 1.2246468525851679e-16),
-                new Vector(-1.8369701465288538e-16, -1)
+                new Vector(-1.8369701465288538e-16, -1),
             ]),
             4,
-            new Vector(1,1),
-            new Vector(0,0),
-            false
+            new Vector(1, 1),
+            new Vector(0, 0),
+            false,
         ],
         [
             "1,1, 4 point circle around 0,0, wrapped",
             new Polygon([
-                new Vector(1,0),
+                new Vector(1, 0),
                 new Vector(6.123234262925839e-17, 1),
                 new Vector(-1, 1.2246468525851679e-16),
                 new Vector(-1.8369701465288538e-16, -1),
-                new Vector(1,0),
+                new Vector(1, 0),
             ]),
             4,
-            new Vector(1,1),
-            new Vector(0,0),
-            true
+            new Vector(1, 1),
+            new Vector(0, 0),
+            true,
         ],
-    ])("%p", (description: string, expected: Polygon, numOfEdges: number, dimensions: Vector, center: Vector,
-        wrap: boolean) => {
-        expect(Polygon.EllipseEstimation(numOfEdges, dimensions, center.x, center.y, wrap)).toEqual(expected);
-    });
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Polygon,
+            numOfEdges: number,
+            dimensions: Vector,
+            center: Vector,
+            wrap: boolean
+        ) => {
+            expect(Polygon.EllipseEstimation(numOfEdges, dimensions, center.x, center.y, wrap)).toEqual(expected);
+        }
+    );
 });

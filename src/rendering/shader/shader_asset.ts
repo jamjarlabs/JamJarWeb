@@ -70,7 +70,7 @@ class ShaderAsset {
      * Generic shader.
      */
     public shader: IShader;
-    
+
     constructor(name: string, shader: IShader) {
         this.name = name;
         this.shader = shader;

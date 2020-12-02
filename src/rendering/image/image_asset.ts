@@ -31,7 +31,7 @@ class ImageAsset {
     public static readonly MESSAGE_FINISH_LOAD = "finish_image_load";
 
     /**
-     * Name of the image asset, how it is referred to throughout the system, 
+     * Name of the image asset, how it is referred to throughout the system,
      * should be unique.
      */
     public name: string;
@@ -76,16 +76,18 @@ class ImageAsset {
      */
     public mirror: boolean;
 
-    constructor(name: string, 
-        image: HTMLImageElement | ImageData, 
-        success: boolean, 
+    constructor(
+        name: string,
+        image: HTMLImageElement | ImageData,
+        success: boolean,
         xWrap: TextureWrapping,
         yWrap: TextureWrapping,
         magFilter: TextureFiltering,
         minFilter: TextureFiltering,
-        generateMipmaps: boolean, 
+        generateMipmaps: boolean,
         mirror: boolean,
-        error?: Error) {
+        error?: Error
+    ) {
         this.name = name;
         this.image = image;
         this.success = success;

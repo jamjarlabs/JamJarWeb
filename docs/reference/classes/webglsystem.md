@@ -72,7 +72,7 @@ Name | Type | Default |
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME, new DefaultPrimitiveFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, new DefaultPrimitiveVertexShader())
+            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, new DefaultPrimitiveVertexShader()),
         ] |
 `shaders` | Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]› | new Map() |
 `textures` | Map‹string, WebGLTexture› | new Map() |
@@ -167,23 +167,27 @@ ___
 
 ### `Static` `Private` DRAW_MODES
 
-▪ **DRAW_MODES**: *Map‹[DrawMode](../enums/drawmode.md), number›* = new Map<DrawMode, number>(new Map([
-        [DrawMode.POINTS, WebGL2RenderingContext.POINTS],
-        [DrawMode.LINES, WebGL2RenderingContext.LINES],
-        [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
-        [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
-        [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
-    ]))
+▪ **DRAW_MODES**: *Map‹[DrawMode](../enums/drawmode.md), number›* = new Map<DrawMode, number>(
+        new Map([
+            [DrawMode.POINTS, WebGL2RenderingContext.POINTS],
+            [DrawMode.LINES, WebGL2RenderingContext.LINES],
+            [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
+            [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
+            [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
+        ])
+    )
 
 ___
 
 ### `Static` `Private` FILTER_MODES
 
-▪ **FILTER_MODES**: *Map‹[TextureFiltering](../enums/texturefiltering.md), number›* = new Map<TextureFiltering, number>(new Map([
-        [TextureFiltering.NEAREST, WebGL2RenderingContext.NEAREST],
-        [TextureFiltering.BILINEAR, WebGL2RenderingContext.LINEAR],
-        [TextureFiltering.TRILINEAR, WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR],
-    ]))
+▪ **FILTER_MODES**: *Map‹[TextureFiltering](../enums/texturefiltering.md), number›* = new Map<TextureFiltering, number>(
+        new Map([
+            [TextureFiltering.NEAREST, WebGL2RenderingContext.NEAREST],
+            [TextureFiltering.BILINEAR, WebGL2RenderingContext.LINEAR],
+            [TextureFiltering.TRILINEAR, WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR],
+        ])
+    )
 
 ___
 
@@ -223,11 +227,13 @@ ___
 
 ### `Static` `Private` WRAP_MODES
 
-▪ **WRAP_MODES**: *Map‹[TextureWrapping](../enums/texturewrapping.md), number›* = new Map<TextureWrapping, number>(new Map([
-        [TextureWrapping.REPEAT, WebGL2RenderingContext.REPEAT],
-        [TextureWrapping.MIRRORED_REPEAT, WebGL2RenderingContext.MIRRORED_REPEAT],
-        [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
-    ]))
+▪ **WRAP_MODES**: *Map‹[TextureWrapping](../enums/texturewrapping.md), number›* = new Map<TextureWrapping, number>(
+        new Map([
+            [TextureWrapping.REPEAT, WebGL2RenderingContext.REPEAT],
+            [TextureWrapping.MIRRORED_REPEAT, WebGL2RenderingContext.MIRRORED_REPEAT],
+            [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
+        ])
+    )
 
 ## Methods
 

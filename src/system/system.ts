@@ -30,8 +30,7 @@ import Evaluator from "./evaluator";
  * A system is for implementing logic, manipulating entities and their components.
  */
 abstract class System extends Subscriber {
-
-    public static readonly MESSAGE_UPDATE = "system_update"
+    public static readonly MESSAGE_UPDATE = "system_update";
     public static readonly MESSAGE_REGISTER = "system_register";
     public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
@@ -59,13 +58,15 @@ abstract class System extends Subscriber {
      * The evaluator is used to evaluate if an entity with its components should be
      * tracked by the system
      */
-    private evaluator?: Evaluator
+    private evaluator?: Evaluator;
 
-    constructor(messageBus: IMessageBus, 
-            scene?: IScene, 
-            evaluator?: Evaluator, 
-            entities: Map<number, SystemEntity> = new Map(), 
-            subscriberID?: number) {
+    constructor(
+        messageBus: IMessageBus,
+        scene?: IScene,
+        evaluator?: Evaluator,
+        entities: Map<number, SystemEntity> = new Map(),
+        subscriberID?: number
+    ) {
         super(subscriberID);
         this.messageBus = messageBus;
         this.entities = entities;
@@ -75,7 +76,7 @@ abstract class System extends Subscriber {
             System.MESSAGE_UPDATE,
             System.MESSAGE_REGISTER,
             System.MESSAGE_DEREGISTER,
-            Scene.MESSAGE_DESTROY
+            Scene.MESSAGE_DESTROY,
         ]);
     }
 

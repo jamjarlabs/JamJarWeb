@@ -21,7 +21,6 @@ import IEntity from "../entity/ientity";
 import Reactor from "./reactor";
 
 class FakeScene extends Fake implements IScene {
-
     public id: number;
     constructor(id: number, reactors: Reactor[] = []) {
         super(reactors);

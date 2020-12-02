@@ -34,7 +34,7 @@ import IEntity from "./ientity";
  */
 class EntityManager extends Subscriber {
     private componentManagers: ComponentManager[];
-    private messageBus: IMessageBus
+    private messageBus: IMessageBus;
 
     constructor(messageBus: IMessageBus, componentManagers: ComponentManager[] = [], subscriberID?: number) {
         if (subscriberID !== undefined) {
@@ -44,15 +44,11 @@ class EntityManager extends Subscriber {
         }
         this.messageBus = messageBus;
         this.componentManagers = componentManagers;
-        this.messageBus.Subscribe(this, [
-            Component.MESSAGE_ADD,
-            Component.MESSAGE_REMOVE,
-            Entity.MESSAGE_DESTROY
-        ]);
+        this.messageBus.Subscribe(this, [Component.MESSAGE_ADD, Component.MESSAGE_REMOVE, Entity.MESSAGE_DESTROY]);
     }
 
     public OnMessage(message: IMessage): void {
-        switch(message.type) {
+        switch (message.type) {
             case Entity.MESSAGE_DESTROY: {
                 const destroyMessage = message as Message<IEntity>;
                 if (!destroyMessage.payload) {
@@ -62,7 +58,7 @@ class EntityManager extends Subscriber {
                 break;
             }
             case Component.MESSAGE_ADD: {
-                const componentMessage = message as Message<[IEntity,Component]>;
+                const componentMessage = message as Message<[IEntity, Component]>;
                 if (!componentMessage.payload) {
                     return;
                 }
@@ -72,7 +68,7 @@ class EntityManager extends Subscriber {
                 break;
             }
             case Component.MESSAGE_REMOVE: {
-                const componentMessage = message as Message<[IEntity,string]>;
+                const componentMessage = message as Message<[IEntity, string]>;
                 if (!componentMessage.payload) {
                     return;
                 }
@@ -91,7 +87,9 @@ class EntityManager extends Subscriber {
      */
     private registerEntity(entity: IEntity): void {
         const components = this.getComponents(entity);
-        this.messageBus.Publish(new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [entity, components]));
+        this.messageBus.Publish(
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [entity, components])
+        );
     }
 
     /**

@@ -48,22 +48,23 @@ class SpriteSystem extends System {
      * Transform and Camera
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Sprite.KEY].every((type) => components.some(
-            component => component.key === type
-        )) || [Transform.KEY, Camera.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return (
+            [Transform.KEY, Sprite.KEY].every((type) => components.some((component) => component.key === type)) ||
+            [Transform.KEY, Camera.KEY].every((type) => components.some((component) => component.key === type))
+        );
     };
 
     private frustumCuller: IFrustumCuller;
     private renderables: Map<number, IRenderable[]>;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         frustumCuller: IFrustumCuller = new FrustumCuller(),
         renderables: Map<number, IRenderable[]> = new Map(),
         entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+        subscriberID?: number
+    ) {
         super(messageBus, scene, SpriteSystem.EVALUATOR, entities, subscriberID);
         this.frustumCuller = frustumCuller;
         this.renderables = renderables;
@@ -89,7 +90,6 @@ class SpriteSystem extends System {
     }
 
     private prepareSprites(alpha: number): void {
-
         const viewportAABB = new AABB(Vector.New(2, 2));
 
         const spriteRenderableQuad = Polygon.QuadByDimensions(1, 1, 0, 0);
@@ -134,13 +134,15 @@ class SpriteSystem extends System {
                         continue;
                     }
 
-                    cameraRenderables.push(Renderable.New(
-                        sprite.zOrder,
-                        spriteRenderableQuad,
-                        transform.InterpolatedMatrix4D(alpha),
-                        sprite.material,
-                        DrawMode.TRIANGLES
-                    ));
+                    cameraRenderables.push(
+                        Renderable.New(
+                            sprite.zOrder,
+                            spriteRenderableQuad,
+                            transform.InterpolatedMatrix4D(alpha),
+                            sprite.material,
+                            DrawMode.TRIANGLES
+                        )
+                    );
                 } else {
                     // UI
                     if (cameraEntity.entity.id !== ui.camera.id) {
@@ -164,13 +166,9 @@ class SpriteSystem extends System {
                         .Scale(transform.scale.Copy().Multiply(camera.virtualScale));
 
                     // Create the renderable for use by rendering systems
-                    cameraRenderables.push(Renderable.New(
-                        sprite.zOrder,
-                        spriteRenderableQuad,
-                        matrix,
-                        sprite.material,
-                        DrawMode.TRIANGLES
-                    ));
+                    cameraRenderables.push(
+                        Renderable.New(sprite.zOrder, spriteRenderableQuad, matrix, sprite.material, DrawMode.TRIANGLES)
+                    );
                 }
             }
             this.renderables.set(cameraEntity.entity.id, cameraRenderables);
@@ -180,8 +178,9 @@ class SpriteSystem extends System {
 
         viewportAABB.Free();
         spriteRenderableQuad.Free();
-        this.messageBus.Publish(new Message<Map<number, IRenderable[]>>(
-            RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables));
+        this.messageBus.Publish(
+            new Message<Map<number, IRenderable[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables)
+        );
     }
 
     private freeRenderables(): void {
@@ -193,7 +192,6 @@ class SpriteSystem extends System {
         }
         this.renderables.clear;
     }
-
 }
 
 export default SpriteSystem;

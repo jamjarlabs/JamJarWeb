@@ -33,22 +33,9 @@ describe("ScriptTriggerSystem - Update", () => {
         [
             "No entities",
             undefined,
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "5 Scripts, 3 Update",
@@ -57,21 +44,11 @@ describe("ScriptTriggerSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map([
-                    [ 0, new SystemEntity(new FakeEntity(0), [
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])],
-                    [ 1, new SystemEntity(new FakeEntity(1), [
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])],
-                    [ 2, new SystemEntity(new FakeEntity(2), [
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])],
-                    [ 3, new SystemEntity(new FakeEntity(3), [
-                        new Script("test", -1)
-                    ])],
-                    [ 4, new SystemEntity(new FakeEntity(4), [
-                        new Script("test", -1)
-                    ])],
+                    [0, new SystemEntity(new FakeEntity(0), [new Script("test", ScriptTrigger.UPDATE)])],
+                    [1, new SystemEntity(new FakeEntity(1), [new Script("test", ScriptTrigger.UPDATE)])],
+                    [2, new SystemEntity(new FakeEntity(2), [new Script("test", ScriptTrigger.UPDATE)])],
+                    [3, new SystemEntity(new FakeEntity(3), [new Script("test", -1)])],
+                    [4, new SystemEntity(new FakeEntity(4), [new Script("test", -1)])],
                 ]),
                 0
             ),
@@ -79,39 +56,35 @@ describe("ScriptTriggerSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map([
-                    [ 0, new SystemEntity(new FakeEntity(0), [
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])],
-                    [ 1, new SystemEntity(new FakeEntity(1), [
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])],
-                    [ 2, new SystemEntity(new FakeEntity(2), [
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])],
-                    [ 3, new SystemEntity(new FakeEntity(3), [
-                        new Script("test", -1)
-                    ])],
-                    [ 4, new SystemEntity(new FakeEntity(4), [
-                        new Script("test", -1)
-                    ])],
+                    [0, new SystemEntity(new FakeEntity(0), [new Script("test", ScriptTrigger.UPDATE)])],
+                    [1, new SystemEntity(new FakeEntity(1), [new Script("test", ScriptTrigger.UPDATE)])],
+                    [2, new SystemEntity(new FakeEntity(2), [new Script("test", ScriptTrigger.UPDATE)])],
+                    [3, new SystemEntity(new FakeEntity(3), [new Script("test", -1)])],
+                    [4, new SystemEntity(new FakeEntity(4), [new Script("test", -1)])],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: ScriptTriggerSystem, system: ScriptTriggerSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: ScriptTriggerSystem,
+            system: ScriptTriggerSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("ScriptTriggerSystem - Register", () => {
@@ -120,43 +93,16 @@ describe("ScriptTriggerSystem - Register", () => {
         [
             "Reject, no components",
             undefined,
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                ]
-            ])
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Reject, missing Script",
             undefined,
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new Transform()
-                ]
-            ])
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
         ],
         [
             "Accept",
@@ -165,34 +111,39 @@ describe("ScriptTriggerSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Script("test", ScriptTrigger.UPDATE)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Script("test", ScriptTrigger.UPDATE),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new ScriptTriggerSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
+            new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new Transform(),
-                    new Script("test", ScriptTrigger.UPDATE)
-                ]
-            ])
+                new FakeEntity(0),
+                [new Transform(), new Script("test", ScriptTrigger.UPDATE)],
+            ]),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: ScriptTriggerSystem, system: ScriptTriggerSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: ScriptTriggerSystem,
+            system: ScriptTriggerSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

@@ -92,12 +92,8 @@ class Polygon implements IShape {
             xSum += this.points[i];
             ySum += this.points[i + 1];
         }
-        return Vector.New(
-            xSum / (this.points.length / 2),
-            ySum / (this.points.length / 2)
-        );
+        return Vector.New(xSum / (this.points.length / 2), ySum / (this.points.length / 2));
     }
-
 
     public Transform(transform: Transform): Polygon {
         const matrix = transform.Matrix3D();
@@ -122,10 +118,11 @@ class Polygon implements IShape {
             const cornerAY = this.points[i + 1];
             const cornerBX = this.points[j];
             const cornerBY = this.points[j + 1];
-            if ((cornerAY < point.y && cornerBY >= point.y ||
-                cornerBY < point.y && cornerAY >= point.y) &&
-                (cornerAX <= point.x || cornerBX <= point.x)) {
-                if (cornerAX + (point.y - cornerAY) / (cornerBY - cornerAY) * (cornerBX - cornerAX) < point.x) {
+            if (
+                ((cornerAY < point.y && cornerBY >= point.y) || (cornerBY < point.y && cornerAY >= point.y)) &&
+                (cornerAX <= point.x || cornerBX <= point.x)
+            ) {
+                if (cornerAX + ((point.y - cornerAY) / (cornerBY - cornerAY)) * (cornerBX - cornerAX) < point.x) {
                     inPolygon = !inPolygon;
                 }
             }
@@ -153,7 +150,13 @@ class Polygon implements IShape {
      * @param {number} height Height of the rectangle
      * @param {origin} origin Center point of the rectangle
      */
-    public static RectangleByDimensions(width: number, height: number, originX = 0, originY = 0, wrap = false): Polygon {
+    public static RectangleByDimensions(
+        width: number,
+        height: number,
+        originX = 0,
+        originY = 0,
+        wrap = false
+    ): Polygon {
         const halfWidth = width / 2;
         const halfHeight = height / 2;
 
@@ -195,7 +198,6 @@ class Polygon implements IShape {
      * @param {Vector} topRight Top right of the rectangle
      */
     public static RectangleByPoints(bottomLeft: Vector, topRight: Vector, wrap = false): Polygon {
-
         const width = topRight.x - bottomLeft.x;
         const height = topRight.y - bottomLeft.y;
         const originX = (topRight.x + bottomLeft.x) / 2;
@@ -251,7 +253,6 @@ class Polygon implements IShape {
      * @param {Vector} topRight Top right of the quad
      */
     public static QuadByPoints(bottomLeft: Vector, topRight: Vector): Polygon {
-
         const width = topRight.x - bottomLeft.x;
         const height = topRight.y - bottomLeft.y;
         const originX = (topRight.x + bottomLeft.x) / 2;
@@ -267,9 +268,13 @@ class Polygon implements IShape {
      * @param center Ellipse center
      * @param wrap If the polygon should wrap on itself (first point == last point)
      */
-    public static EllipseEstimation(numOfPoints: number, dimensions: Vector, centerX = 0, centerY = 0,
-        wrap = false): Polygon {
-
+    public static EllipseEstimation(
+        numOfPoints: number,
+        dimensions: Vector,
+        centerX = 0,
+        centerY = 0,
+        wrap = false
+    ): Polygon {
         let typedArraySize = numOfPoints * 2;
         if (wrap && numOfPoints > 0) {
             typedArraySize += 2;

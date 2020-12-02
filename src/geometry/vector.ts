@@ -25,7 +25,6 @@ import Matrix4D from "./matrix_4d";
  * This is a mutable data structure, operations on Vector objects will affect the original object.
  */
 class Vector extends Pooled implements IPoolable {
-
     /**
      * Value of the Vector object pool.
      */
@@ -49,9 +48,13 @@ class Vector extends Pooled implements IPoolable {
      * Initialize the Vector pool to the size provided.
      */
     public static Init(size: number): void {
-        this.init(Vector.POOL_KEY, () => {
-            return Vector.New(0, 0);
-        }, size);
+        this.init(
+            Vector.POOL_KEY,
+            () => {
+                return Vector.New(0, 0);
+            },
+            size
+        );
     }
 
     public data: Float32Array;
@@ -212,10 +215,7 @@ class Vector extends Pooled implements IPoolable {
      * @returns {Vector} The copy of this vector
      */
     public Copy(): Vector {
-        return Vector.New(
-            this.x,
-            this.y
-        );
+        return Vector.New(this.x, this.y);
     }
 
     public Recycle(args: [number, number]): Vector {

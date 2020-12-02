@@ -38,7 +38,6 @@ import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
  * Once it has determined all collisions, it broadcasts them as messages.
  */
 class CollisionSystem extends System {
-
     /**
      * Descriptor of a script triggered when a collision enter occurs.
      */
@@ -58,9 +57,7 @@ class CollisionSystem extends System {
 
     // Only entities with a transform and camera
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Collider.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return [Transform.KEY, Collider.KEY].every((type) => components.some((component) => component.key === type));
     };
 
     private layerPairs: [string, string][];
@@ -68,14 +65,16 @@ class CollisionSystem extends System {
     private broadAlgorithm: ICollisionAlgorithm;
     private colliding: Collision[];
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         layerPairs: [string, string][] = [],
         scene?: IScene,
         narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm(),
         broadAlgorithm: ICollisionAlgorithm = new AllCollideAlgorithm(),
         colliding: Collision[] = [],
         entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+        subscriberID?: number
+    ) {
         super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
         this.layerPairs = layerPairs;
         this.narrowAlgorithm = narrowAlgorithm;
@@ -118,8 +117,10 @@ class CollisionSystem extends System {
             if (this.layerPairs.length !== 0) {
                 let shouldCheck = false;
                 for (const collisionPair of this.layerPairs) {
-                    if ((a.entity.layers.includes(collisionPair[0]) && b.entity.layers.includes(collisionPair[1])) ||
-                        (b.entity.layers.includes(collisionPair[0]) && a.entity.layers.includes(collisionPair[1]))) {
+                    if (
+                        (a.entity.layers.includes(collisionPair[0]) && b.entity.layers.includes(collisionPair[1])) ||
+                        (b.entity.layers.includes(collisionPair[0]) && a.entity.layers.includes(collisionPair[1]))
+                    ) {
                         shouldCheck = true;
                     }
                 }
@@ -134,19 +135,17 @@ class CollisionSystem extends System {
                 continue;
             }
 
-            const collision = new Collision(
-                a.entity,
-                b.entity,
-                narrowCollision[0]
-            );
+            const collision = new Collision(a.entity, b.entity, narrowCollision[0]);
             collisions.push(collision);
 
             // Determine if new collision
             let newCollision = true;
             for (let i = expiredCollisions.length - 1; i >= 0; i--) {
                 const existing = this.colliding[i];
-                if (existing.a.id === a.entity.id && existing.b.id === b.entity.id ||
-                    existing.a.id === b.entity.id && existing.b.id === a.entity.id) {
+                if (
+                    (existing.a.id === a.entity.id && existing.b.id === b.entity.id) ||
+                    (existing.a.id === b.entity.id && existing.b.id === a.entity.id)
+                ) {
                     newCollision = false;
                     expiredCollisions.splice(i, 1);
                     break;
@@ -160,22 +159,26 @@ class CollisionSystem extends System {
 
                 const aCollider = a.Get(Collider.KEY) as Collider;
                 if (aCollider.enterScript !== undefined) {
-                    triggers.push(new ScriptTriggerRequest<Collision>(
-                        aCollider.enterScript,
-                        CollisionSystem.DESCRIPTOR_COLLISION_ENTER,
-                        collision.a,
-                        collision
-                    ));
+                    triggers.push(
+                        new ScriptTriggerRequest<Collision>(
+                            aCollider.enterScript,
+                            CollisionSystem.DESCRIPTOR_COLLISION_ENTER,
+                            collision.a,
+                            collision
+                        )
+                    );
                 }
 
                 const bCollider = b.Get(Collider.KEY) as Collider;
                 if (bCollider.enterScript !== undefined) {
-                    triggers.push(new ScriptTriggerRequest<Collision>(
-                        bCollider.enterScript,
-                        CollisionSystem.DESCRIPTOR_COLLISION_ENTER,
-                        collision.b,
-                        collision
-                    ));
+                    triggers.push(
+                        new ScriptTriggerRequest<Collision>(
+                            bCollider.enterScript,
+                            CollisionSystem.DESCRIPTOR_COLLISION_ENTER,
+                            collision.b,
+                            collision
+                        )
+                    );
                 }
             }
         }
@@ -193,24 +196,28 @@ class CollisionSystem extends System {
             if (aSystemEntity !== undefined) {
                 const aCollider = aSystemEntity.Get(Collider.KEY) as Collider;
                 if (aCollider.exitScript !== undefined) {
-                    triggers.push(new ScriptTriggerRequest<Collision>(
-                        aCollider.exitScript,
-                        CollisionSystem.DESCRIPTOR_COLLISION_EXIT,
-                        expired.a,
-                        expired
-                    ));
+                    triggers.push(
+                        new ScriptTriggerRequest<Collision>(
+                            aCollider.exitScript,
+                            CollisionSystem.DESCRIPTOR_COLLISION_EXIT,
+                            expired.a,
+                            expired
+                        )
+                    );
                 }
             }
             const bSystemEntity = this.entities.get(expired.b.id);
             if (bSystemEntity !== undefined) {
                 const bCollider = bSystemEntity.Get(Collider.KEY) as Collider;
                 if (bCollider.exitScript !== undefined) {
-                    triggers.push(new ScriptTriggerRequest<Collision>(
-                        bCollider.exitScript,
-                        CollisionSystem.DESCRIPTOR_COLLISION_EXIT,
-                        expired.b,
-                        expired
-                    ));
+                    triggers.push(
+                        new ScriptTriggerRequest<Collision>(
+                            bCollider.exitScript,
+                            CollisionSystem.DESCRIPTOR_COLLISION_EXIT,
+                            expired.b,
+                            expired
+                        )
+                    );
                 }
             }
         }
@@ -224,10 +231,7 @@ class CollisionSystem extends System {
         // Publish collision triggers
         for (const trigger of triggers) {
             this.messageBus.Publish(
-                new Message<ScriptTriggerRequest<Collision>>(
-                    ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-                    trigger
-                )
+                new Message<ScriptTriggerRequest<Collision>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, trigger)
             );
         }
     }

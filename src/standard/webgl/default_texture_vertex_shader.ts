@@ -58,20 +58,18 @@ class DefaultTextureVertexShader extends GLSLShader {
         const viewLocation = gl.getUniformLocation(program, "uViewMatrix");
         const projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
 
-        gl.uniformMatrix4fv(
-            viewLocation,
-            false,
-            viewMatrix.GetFloat32Array());
+        gl.uniformMatrix4fv(viewLocation, false, viewMatrix.GetFloat32Array());
 
-        gl.uniformMatrix4fv(
-            projectionLocation,
-            false,
-            projectionMatrix.GetFloat32Array());
+        gl.uniformMatrix4fv(projectionLocation, false, projectionMatrix.GetFloat32Array());
     };
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
+    private static readonly PER_RENDERABLE = (
+        context: GLSLContext,
+        renderable: IRenderable,
+        texture?: WebGLTexture
+    ): void => {
         if (renderable.material.texture === undefined) {
-            throw(`Default texture vertex shader can only be used if a renderable has a texture to apply.`);
+            throw `Default texture vertex shader can only be used if a renderable has a texture to apply.`;
         }
         const gl = context.gl;
         const program = context.program;
@@ -106,11 +104,7 @@ class DefaultTextureVertexShader extends GLSLShader {
 
         gl.vertexAttribPointer(texturePositionLocation, 2, gl.FLOAT, false, 0, 0);
 
-        gl.uniformMatrix4fv(
-            modelLocation,
-            false,
-            renderable.modelMatrix.GetFloat32Array()
-        );
+        gl.uniformMatrix4fv(modelLocation, false, renderable.modelMatrix.GetFloat32Array());
     };
 
     constructor() {

@@ -1,7 +1,7 @@
 site_name: JamJar
 theme: material
 markdown_extensions:
-  - mdx_truly_sane_lists
-  - codehilite
+    - mdx_truly_sane_lists
+    - codehilite
 plugins:
-  - search
+    - search

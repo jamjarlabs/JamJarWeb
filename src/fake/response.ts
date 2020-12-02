@@ -32,7 +32,7 @@ class FakeResponse extends Fake implements Response {
     body!: ReadableStream<Uint8Array> | null;
     bodyUsed!: boolean;
     arrayBuffer(): Promise<ArrayBuffer> {
-        return Promise.resolve(new ArrayBuffer(0))
+        return Promise.resolve(new ArrayBuffer(0));
     }
     blob(): Promise<Blob> {
         return Promise.resolve(new Blob());
@@ -46,7 +46,6 @@ class FakeResponse extends Fake implements Response {
     text(): Promise<string> {
         return Promise.resolve("");
     }
-
 }
 
 export default FakeResponse;

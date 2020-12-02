@@ -27,7 +27,7 @@ class FakeAudioContext extends Fake implements AudioContext {
     onstatechange!: ((this: BaseAudioContext, ev: Event) => any) | null;
     sampleRate!: number;
     state!: AudioContextState;
-    
+
     close(): Promise<void> {
         return Promise.resolve();
     }
@@ -35,7 +35,7 @@ class FakeAudioContext extends Fake implements AudioContext {
         return new MediaElementAudioSourceNode(new AudioContext(), { mediaElement: new HTMLMediaElement() });
     }
     createMediaStreamDestination(): MediaStreamAudioDestinationNode {
-        return new MediaStreamAudioDestinationNode(new AudioContext);
+        return new MediaStreamAudioDestinationNode(new AudioContext());
     }
     createMediaStreamSource(mediaStream: MediaStream): MediaStreamAudioSourceNode {
         return new MediaStreamAudioSourceNode(new AudioContext(), { mediaStream: new MediaStream() });
@@ -52,13 +52,29 @@ class FakeAudioContext extends Fake implements AudioContext {
     suspend(): Promise<void> {
         return Promise.resolve();
     }
-    addEventListener<K extends "statechange">(type: K, listener: (this: AudioContext, ev: BaseAudioContextEventMap[K]) => any, options?: boolean | AddEventListenerOptions | undefined): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
+    addEventListener<K extends "statechange">(
+        type: K,
+        listener: (this: AudioContext, ev: BaseAudioContextEventMap[K]) => any,
+        options?: boolean | AddEventListenerOptions | undefined
+    ): void;
+    addEventListener(
+        type: string,
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | AddEventListenerOptions | undefined
+    ): void;
     addEventListener(type: any, listener: any, options?: any) {
         return;
     }
-    removeEventListener<K extends "statechange">(type: K, listener: (this: AudioContext, ev: BaseAudioContextEventMap[K]) => any, options?: boolean | EventListenerOptions | undefined): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void;
+    removeEventListener<K extends "statechange">(
+        type: K,
+        listener: (this: AudioContext, ev: BaseAudioContextEventMap[K]) => any,
+        options?: boolean | EventListenerOptions | undefined
+    ): void;
+    removeEventListener(
+        type: string,
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | EventListenerOptions | undefined
+    ): void;
     removeEventListener(type: any, listener: any, options?: any) {
         return;
     }
@@ -104,10 +120,18 @@ class FakeAudioContext extends Fake implements AudioContext {
     createPanner(): PannerNode {
         return new PannerNode(new AudioContext());
     }
-    createPeriodicWave(real: number[] | Float32Array, imag: number[] | Float32Array, constraints?: PeriodicWaveConstraints | undefined): PeriodicWave {
-        return new PeriodicWave(new AudioContext, { real, imag });
+    createPeriodicWave(
+        real: number[] | Float32Array,
+        imag: number[] | Float32Array,
+        constraints?: PeriodicWaveConstraints | undefined
+    ): PeriodicWave {
+        return new PeriodicWave(new AudioContext(), { real, imag });
     }
-    createScriptProcessor(bufferSize?: number | undefined, numberOfInputChannels?: number | undefined, numberOfOutputChannels?: number | undefined): ScriptProcessorNode {
+    createScriptProcessor(
+        bufferSize?: number | undefined,
+        numberOfInputChannels?: number | undefined,
+        numberOfOutputChannels?: number | undefined
+    ): ScriptProcessorNode {
         return new ScriptProcessorNode();
     }
     createStereoPanner(): StereoPannerNode {
@@ -116,13 +140,16 @@ class FakeAudioContext extends Fake implements AudioContext {
     createWaveShaper(): WaveShaperNode {
         return new WaveShaperNode(new AudioContext());
     }
-    decodeAudioData(audioData: ArrayBuffer, successCallback?: DecodeSuccessCallback | null | undefined, errorCallback?: DecodeErrorCallback | null | undefined): Promise<AudioBuffer> {
-        return Promise.resolve(new AudioBuffer({ length: 0, sampleRate: 0}));
+    decodeAudioData(
+        audioData: ArrayBuffer,
+        successCallback?: DecodeSuccessCallback | null | undefined,
+        errorCallback?: DecodeErrorCallback | null | undefined
+    ): Promise<AudioBuffer> {
+        return Promise.resolve(new AudioBuffer({ length: 0, sampleRate: 0 }));
     }
     dispatchEvent(event: Event): boolean {
         return false;
     }
-
 }
 
 export default FakeAudioContext;

@@ -49,18 +49,16 @@ class DefaultPrimitiveVertexShader extends GLSLShader {
         const viewLocation = gl.getUniformLocation(program, "uViewMatrix");
         const projectionLocation = gl.getUniformLocation(program, "uProjectionMatrix");
 
-        gl.uniformMatrix4fv(
-            viewLocation,
-            false,
-            viewMatrix.GetFloat32Array());
+        gl.uniformMatrix4fv(viewLocation, false, viewMatrix.GetFloat32Array());
 
-        gl.uniformMatrix4fv(
-            projectionLocation,
-            false,
-            projectionMatrix.GetFloat32Array());
+        gl.uniformMatrix4fv(projectionLocation, false, projectionMatrix.GetFloat32Array());
     };
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
+    private static readonly PER_RENDERABLE = (
+        context: GLSLContext,
+        renderable: IRenderable,
+        texture?: WebGLTexture
+    ): void => {
         const gl = context.gl;
         const program = context.program;
 
@@ -81,11 +79,7 @@ class DefaultPrimitiveVertexShader extends GLSLShader {
 
         gl.bufferData(gl.ARRAY_BUFFER, renderable.vertices.GetFloat32Array(), gl.DYNAMIC_DRAW);
 
-        gl.uniformMatrix4fv(
-            modelLocation,
-            false,
-            renderable.modelMatrix.GetFloat32Array()
-        );
+        gl.uniformMatrix4fv(modelLocation, false, renderable.modelMatrix.GetFloat32Array());
     };
 
     constructor() {

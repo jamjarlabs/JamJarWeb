@@ -48,10 +48,12 @@ class Camera extends Component {
      */
     public virtualScale: Vector;
 
-    constructor(backgroundColor: Color = new Color(0,0,0,1),
-        viewportPosition: Vector = Vector.New(0,0),
-        viewportScale: Vector = Vector.New(1,1),
-        virtualScale: Vector = Vector.New(160,90)) {
+    constructor(
+        backgroundColor: Color = new Color(0, 0, 0, 1),
+        viewportPosition: Vector = Vector.New(0, 0),
+        viewportScale: Vector = Vector.New(1, 1),
+        virtualScale: Vector = Vector.New(160, 90)
+    ) {
         super(Camera.KEY);
         this.backgroundColor = backgroundColor;
         this.viewportPosition = viewportPosition;
@@ -67,15 +69,7 @@ class Camera extends Component {
     GetProjectionMatrix(): Matrix4D {
         const halfWidth = this.virtualScale.x / 2;
         const halfHeight = this.virtualScale.y / 2;
-        return new Matrix4D()
-            .Ortho(
-                -halfWidth,
-                halfWidth,
-                -halfHeight,
-                halfHeight,
-                0,
-                100
-            );
+        return new Matrix4D().Ortho(-halfWidth, halfWidth, -halfHeight, halfHeight, 0, 100);
     }
 
     public Free(): void {

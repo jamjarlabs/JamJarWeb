@@ -32,20 +32,15 @@ class MotionSystem extends System {
      * Ensure has Transform and Motion.
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Motion.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return [Transform.KEY, Motion.KEY].every((type) => components.some((component) => component.key === type));
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, MotionSystem.EVALUATOR, entities, subscriberID);
     }
 
     protected Update(dt: number): void {
-        for(const entity of this.entities.values()) {
+        for (const entity of this.entities.values()) {
             const transform = entity.Get(Transform.KEY) as Transform;
             const motion = entity.Get(Motion.KEY) as Motion;
 

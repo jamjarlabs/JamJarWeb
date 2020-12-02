@@ -54,13 +54,11 @@ import AABB from "../../shape/aabb";
  * be loaded as textures by rendering systems.
  */
 class TextSystem extends System {
-
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Text.KEY].every((type) => components.some(
-            component => component.key === type
-        )) || [Transform.KEY, Camera.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return (
+            [Transform.KEY, Text.KEY].every((type) => components.some((component) => component.key === type)) ||
+            [Transform.KEY, Camera.KEY].every((type) => components.some((component) => component.key === type))
+        );
     };
 
     private static readonly DEFAULT_SDF_GENERATOR_FACTORY = (
@@ -69,27 +67,27 @@ class TextSystem extends System {
         radius?: number,
         cutoff?: number,
         fontFamily?: string,
-        fontWeight?: string): ISDFGenerator => new TinySDF(fontSize, buffer, radius, cutoff, fontFamily, fontWeight);
+        fontWeight?: string
+    ): ISDFGenerator => new TinySDF(fontSize, buffer, radius, cutoff, fontFamily, fontWeight);
 
     private mappings: Map<string, FontMapping>;
     private sdfGeneratorFactory: SDFGeneratorFactory;
     private frustumCuller: IFrustumCuller;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         frustumCuller: IFrustumCuller = new FrustumCuller(),
         mappings: Map<string, FontMapping> = new Map(),
         sdfGeneratorFactory: SDFGeneratorFactory = TextSystem.DEFAULT_SDF_GENERATOR_FACTORY,
-        subscriberID?: number) {
+        subscriberID?: number
+    ) {
         super(messageBus, scene, TextSystem.EVALUATOR, entities, subscriberID);
         this.frustumCuller = frustumCuller;
         this.mappings = mappings;
         this.sdfGeneratorFactory = sdfGeneratorFactory;
-        this.messageBus.Subscribe(this, [
-            Game.MESSAGE_PRE_RENDER,
-            FontRequest.MESSAGE_REQUEST_LOAD,
-        ]);
+        this.messageBus.Subscribe(this, [Game.MESSAGE_PRE_RENDER, FontRequest.MESSAGE_REQUEST_LOAD]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -116,8 +114,14 @@ class TextSystem extends System {
 
     private loadFont(request: FontRequest): void {
         // Set up SDF generator
-        const generator = this.sdfGeneratorFactory(request.size, request.buffer, request.radius, request.cutoff,
-            request.family, request.weight);
+        const generator = this.sdfGeneratorFactory(
+            request.size,
+            request.buffer,
+            request.radius,
+            request.cutoff,
+            request.family,
+            request.weight
+        );
 
         // Calculate size of each character glyph in pixels
         const glyphSize = request.size + request.buffer * 2;
@@ -139,7 +143,7 @@ class TextSystem extends System {
         // Set up empty bitmap array to use to store all of the combined
         // characters in a glyph atlas, contains enough entries for each
         // glyph's pixels, represented in RGBA (4 channels)
-        const glyphAtlas = new Uint8ClampedArray((glyphSize * glyphSize * 4) * (atlasSize * atlasSize));
+        const glyphAtlas = new Uint8ClampedArray(glyphSize * glyphSize * 4 * (atlasSize * atlasSize));
 
         // Build up the glyph atlas, inserting each character's glyph
         // data into the atlas
@@ -167,13 +171,13 @@ class TextSystem extends System {
         for (let i = 0; i < glyphSize * atlasSize; i++) {
             // Get the index of the character for the first column
             // of this row
-            const rowIndex = (atlasSize * atlasSize - (Math.floor(i / glyphSize) * atlasSize)) - atlasSize;
+            const rowIndex = atlasSize * atlasSize - Math.floor(i / glyphSize) * atlasSize - atlasSize;
             // Iterate across for the number of images that can fit in
             // horizontally
             for (let j = 0; j < atlasSize; j++) {
                 // Determine the index of the glyph atlas to insert
                 // data into
-                const fillStart = (i * glyphSize * atlasSize * 4) + (j * glyphSize * 4);
+                const fillStart = i * glyphSize * atlasSize * 4 + j * glyphSize * 4;
                 // If current position doesn't have any character to insert
                 if (rowIndex + j >= characterImages.length) {
                     // Insert blank (all 0)
@@ -194,30 +198,25 @@ class TextSystem extends System {
 
         // Save font mapping, allows for retrieval of font at render time,
         // alongside information for retrieving character positioning/layout
-        this.mappings.set(
-            request.name,
-            new FontMapping(
-                atlasSize,
-                new FontAsset(
-                    request.name,
-                    request
-                ),
-                mapping
-            )
-        );
+        this.mappings.set(request.name, new FontMapping(atlasSize, new FontAsset(request.name, request), mapping));
 
         // Publish the newly generated bitmap image to load as a texture
-        this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, new ImageAsset(
-            `font_${request.name}`,
-            new ImageData(glyphAtlas, glyphSize * atlasSize, glyphSize * atlasSize),
-            true,
-            request.xWrap,
-            request.yWrap,
-            request.magFilter,
-            request.minFilter,
-            request.generateMipmaps,
-            false
-        )));
+        this.messageBus.Publish(
+            new Message<ImageAsset>(
+                ImageAsset.MESSAGE_FINISH_LOAD,
+                new ImageAsset(
+                    `font_${request.name}`,
+                    new ImageData(glyphAtlas, glyphSize * atlasSize, glyphSize * atlasSize),
+                    true,
+                    request.xWrap,
+                    request.yWrap,
+                    request.magFilter,
+                    request.minFilter,
+                    request.generateMipmaps,
+                    false
+                )
+            )
+        );
     }
 
     private prepareText(alpha: number): void {
@@ -293,7 +292,7 @@ class TextSystem extends System {
                             break;
                         }
                         default: {
-                            throw (`Invalid text alignment: ${text.align}`);
+                            throw `Invalid text alignment: ${text.align}`;
                         }
                     }
 
@@ -309,20 +308,24 @@ class TextSystem extends System {
                          * determines spacing between characters
                          */
                         const translation = transform.position.Copy();
-                        translation.x += text.offset.x + (xAlign * transform.scale.x / 2) + (xAlign * text.spacing * transform.scale.x / 2);
+                        translation.x +=
+                            text.offset.x +
+                            (xAlign * transform.scale.x) / 2 +
+                            (xAlign * text.spacing * transform.scale.x) / 2;
                         translation.y += text.offset.y;
 
-                        const textTransform = new Transform(
-                            translation,
-                            transform.scale.Copy(),
-                            transform.angle
-                        );
+                        const textTransform = new Transform(translation, transform.scale.Copy(), transform.angle);
 
                         interpolatedMatrix.Translate(translation).Scale(transform.scale).Rotate(transform.angle);
 
                         translation.Free();
 
-                        if (this.frustumCuller.Cull(cameraViewShape, new AABB(characterScale.Copy()).Transform(textTransform))) {
+                        if (
+                            this.frustumCuller.Cull(
+                                cameraViewShape,
+                                new AABB(characterScale.Copy()).Transform(textTransform)
+                            )
+                        ) {
                             // Not in camera view, skip rendering
                             textTransform.Free();
                             continue;
@@ -335,13 +338,16 @@ class TextSystem extends System {
                             continue;
                         }
 
-                        if (this.frustumCuller.Cull(viewportAABB, new AABB(characterScale.Copy()).Transform(transform))) {
+                        if (
+                            this.frustumCuller.Cull(viewportAABB, new AABB(characterScale.Copy()).Transform(transform))
+                        ) {
                             // Not in camera view, skip rendering
                             continue;
                         }
 
                         // Convert the transform.position to be relative to the camera
-                        const textPosition = cameraTransform.position.Copy()
+                        const textPosition = cameraTransform.position
+                            .Copy()
                             .Add(transformVirtualPosition)
                             .Add(offsetVirtualPosition);
 
@@ -353,7 +359,7 @@ class TextSystem extends System {
                          * (xAlign * text.spacing * charScale.x/2) ->
                          * determines spacing between characters
                          */
-                        textPosition.x += (xAlign * charScale.x / 2) + (xAlign * text.spacing * charScale.x / 2);
+                        textPosition.x += (xAlign * charScale.x) / 2 + (xAlign * text.spacing * charScale.x) / 2;
                         interpolatedMatrix.Translate(textPosition).Scale(charScale).Rotate(transform.angle);
                         textPosition.Free();
                         charScale.Free();
@@ -370,12 +376,12 @@ class TextSystem extends System {
                     const charSize = 1 / mapping.width;
                     // Create renderable for the character, include extra TextRender
                     // information for shaders to use
-                    cameraRenderables.push(Renderable.New<TextRender>(
-                        text.zOrder,
-                        Polygon.QuadByDimensions(1, 1, 0, 0),
-                        interpolatedMatrix,
-                        new Material(
-                            {
+                    cameraRenderables.push(
+                        Renderable.New<TextRender>(
+                            text.zOrder,
+                            Polygon.QuadByDimensions(1, 1, 0, 0),
+                            interpolatedMatrix,
+                            new Material({
                                 texture: new Texture(
                                     `font_${text.font}`,
                                     Polygon.QuadByPoints(
@@ -384,22 +390,22 @@ class TextSystem extends System {
                                     )
                                 ),
                                 shaders: text.shaders,
-                                color: text.color
-                            }
-                        ),
-                        DrawMode.TRIANGLES,
-                        new TextRender(
-                            mapping.asset.request.family,
-                            mapping.asset.request.weight,
-                            mapping.asset.request.buffer,
-                            mapping.asset.request.radius,
-                            mapping.asset.request.cutoff,
-                            mapping.asset.request.size,
-                            text.color,
-                            text.zOrder,
-                            text.align
+                                color: text.color,
+                            }),
+                            DrawMode.TRIANGLES,
+                            new TextRender(
+                                mapping.asset.request.family,
+                                mapping.asset.request.weight,
+                                mapping.asset.request.buffer,
+                                mapping.asset.request.radius,
+                                mapping.asset.request.cutoff,
+                                mapping.asset.request.size,
+                                text.color,
+                                text.zOrder,
+                                text.align
+                            )
                         )
-                    ));
+                    );
                 }
                 transformVirtualPosition.Free();
                 offsetVirtualPosition.Free();
@@ -409,7 +415,9 @@ class TextSystem extends System {
             cameraVirtualScaleHalf.Free();
         }
         viewportAABB.Free();
-        this.messageBus.Publish(new Message<Map<number, Renderable<TextRender>[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables));
+        this.messageBus.Publish(
+            new Message<Map<number, Renderable<TextRender>[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables)
+        );
     }
 }
 

@@ -25,17 +25,17 @@ describe("AudioSource - Play", () => {
             new AudioSource(
                 "test",
                 {
-                    playing: true
+                    playing: true,
                 },
                 0
             ),
             new AudioSource(
                 "test",
                 {
-                    playing: true
+                    playing: true,
                 },
                 5
-            )
+            ),
         ],
         [
             "Stopped, changed to playing",
@@ -43,17 +43,17 @@ describe("AudioSource - Play", () => {
             new AudioSource(
                 "test",
                 {
-                    playing: true
+                    playing: true,
                 },
                 0
             ),
             new AudioSource(
                 "test",
                 {
-                    playing: false
+                    playing: false,
                 },
                 3
-            )
+            ),
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: AudioSource, source: AudioSource) => {
         if (expected instanceof Error) {
@@ -76,17 +76,17 @@ describe("AudioSource - Stop", () => {
             new AudioSource(
                 "test",
                 {
-                    playing: false
+                    playing: false,
                 },
                 5
             ),
             new AudioSource(
                 "test",
                 {
-                    playing: false
+                    playing: false,
                 },
                 5
-            )
+            ),
         ],
         [
             "Playing, changed to not playing",
@@ -94,17 +94,17 @@ describe("AudioSource - Stop", () => {
             new AudioSource(
                 "test",
                 {
-                    playing: false
+                    playing: false,
                 },
                 3
             ),
             new AudioSource(
                 "test",
                 {
-                    playing: true
+                    playing: true,
                 },
                 3
-            )
+            ),
         ],
     ])("%p", (description: string, expected: Error | undefined, expectedState: AudioSource, source: AudioSource) => {
         if (expected instanceof Error) {

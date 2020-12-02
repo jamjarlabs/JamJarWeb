@@ -18,7 +18,7 @@ import Color from "../../rendering/color";
 import TextAlignment from "./text_alignment";
 
 /**
- * TextRender is all of the information required to a character, 
+ * TextRender is all of the information required to a character,
  * alongside additional information that could be useful for
  * the rendering process/shaders.
  */
@@ -41,7 +41,7 @@ class TextRender {
      */
     public radius: number;
     /**
-     * How much of the radius (relative) is used for the 
+     * How much of the radius (relative) is used for the
      * inside part the glyph.
      */
     public cutoff: number;
@@ -54,7 +54,7 @@ class TextRender {
      */
     public color: Color;
     /**
-     * Order which the text should appear, if it should appear infront/behind other 
+     * Order which the text should appear, if it should appear infront/behind other
      * objects, the higher the value the more precedence it is given and will
      * appear in front of objects with a lower value.
      */
@@ -64,7 +64,8 @@ class TextRender {
      */
     public align: TextAlignment;
 
-    constructor(family: string,
+    constructor(
+        family: string,
         weight: string,
         buffer: number,
         radius: number,
@@ -72,7 +73,8 @@ class TextRender {
         size: number,
         color: Color,
         zOrder: number,
-        align: TextAlignment) {
+        align: TextAlignment
+    ) {
         this.family = family;
         this.weight = weight;
         this.buffer = buffer;

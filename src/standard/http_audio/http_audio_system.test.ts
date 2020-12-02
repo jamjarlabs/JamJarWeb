@@ -29,123 +29,73 @@ describe("HTTPAudioSystem - OnMessage", () => {
         [
             "Unknown message",
             undefined,
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message("unknown")
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message("unknown"),
         ],
         [
             "Flush",
             undefined,
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test"))
-                ]
-            ),
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test"))
-                ]
-            ),
-            new Message(HTTPAudioSystem.MESSAGE_REQUEST_FLUSH)
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test")),
+            ]),
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test")),
+            ]),
+            new Message(HTTPAudioSystem.MESSAGE_REQUEST_FLUSH),
         ],
         [
             "Clear",
             undefined,
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
-                    new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test"))
-                ]
-            ),
-            new Message(HTTPAudioSystem.MESSAGE_REQUEST_CLEAR)
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test1", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test2", new AudioBuffer({ length: 0, sampleRate: 0 })),
+                new AudioAsset("test3", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test")),
+            ]),
+            new Message(HTTPAudioSystem.MESSAGE_REQUEST_CLEAR),
         ],
         [
             "Request load, no payload",
             undefined,
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message(AudioRequest.MESSAGE_REQUEST_LOAD)
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message(AudioRequest.MESSAGE_REQUEST_LOAD),
         ],
         [
             "Request load, success",
             undefined,
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [],
-                undefined,
-            ),
-            new HTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [],
-                undefined,
-            ),
-            new Message<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest("test", "test"))
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [], undefined),
+            new HTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [], undefined),
+            new Message<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest("test", "test")),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: HTTPAudioSystem, system: HTTPAudioSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: HTTPAudioSystem,
+            system: HTTPAudioSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            // Workaround for comparing anonymous/bound functions
+            expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
         }
-        // Workaround for comparing anonymous/bound functions
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
-    });
+    );
 });
 
 class TestHTTPAudioSystem extends HTTPAudioSystem {
@@ -166,60 +116,45 @@ describe("HTTPAudioSystem - HandleResponse", () => {
         [
             "Handle response, error",
             new Error("test error!"),
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             ((): Response => {
                 const response = new FakeResponse();
                 response.ok = false;
                 response.statusText = "test error!";
                 return response;
-            })()
+            })(),
         ],
         [
             "Handle response, success",
             new ArrayBuffer(0),
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             ((): Response => {
-                const response = new FakeResponse([
-                    new Reactor("arrayBuffer", (): ArrayBuffer => new ArrayBuffer(0))
-                ]);
+                const response = new FakeResponse([new Reactor("arrayBuffer", (): ArrayBuffer => new ArrayBuffer(0))]);
                 response.ok = true;
                 return response;
-            })()
-        ]
-    ])("%p", (description: string, expected: Error | ArrayBuffer, expectedState: TestHTTPAudioSystem, system: TestHTTPAudioSystem, response: Response) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateHandleResponse(response);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateHandleResponse(response)).toEqual(expected);
+            })(),
+        ],
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | ArrayBuffer,
+            expectedState: TestHTTPAudioSystem,
+            system: TestHTTPAudioSystem,
+            response: Response
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateHandleResponse(response);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateHandleResponse(response)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("HTTPAudioSystem - HTTP Success", () => {
@@ -228,35 +163,33 @@ describe("HTTPAudioSystem - HTTP Success", () => {
         [
             "Success",
             undefined,
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }))
-                ]
-            ),
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 })),
+            ]),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             new AudioBuffer({ length: 0, sampleRate: 0 }),
-            new AudioRequest("test", "test")
+            new AudioRequest("test", "test"),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPAudioSystem, system: TestHTTPAudioSystem, buffer: AudioBuffer, request: AudioRequest) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateHTTPSuccess(buffer, request);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateHTTPSuccess(buffer, request)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: TestHTTPAudioSystem,
+            system: TestHTTPAudioSystem,
+            buffer: AudioBuffer,
+            request: AudioRequest
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateHTTPSuccess(buffer, request);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateHTTPSuccess(buffer, request)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("HTTPAudioSystem - HTTP Failure", () => {
@@ -265,33 +198,31 @@ describe("HTTPAudioSystem - HTTP Failure", () => {
         [
             "Failure",
             undefined,
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test error"))
-                ]
-            ),
-            new TestHTTPAudioSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test error")),
+            ]),
+            new TestHTTPAudioSystem(new FakeMessageBus(), undefined, undefined, 0, []),
             new AudioRequest("test", "test"),
-            new Error("test error")
+            new Error("test error"),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestHTTPAudioSystem, system: TestHTTPAudioSystem, request: AudioRequest, error: Error) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateHTTPError(request, error);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateHTTPError(request, error)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: TestHTTPAudioSystem,
+            system: TestHTTPAudioSystem,
+            request: AudioRequest,
+            error: Error
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateHTTPError(request, error);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateHTTPError(request, error)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

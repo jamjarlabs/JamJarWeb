@@ -18,12 +18,7 @@ import Matrix4D from "./matrix_4d";
 import Vector from "./vector";
 
 describe("Matrix4D - Translate", () => {
-    type TestTuple = [
-        string,
-        Matrix4D,
-        Matrix4D,
-        Vector
-    ];
+    type TestTuple = [string, Matrix4D, Matrix4D, Vector];
     test.each<TestTuple>([
         [
             "Translate up 3",
@@ -39,7 +34,7 @@ describe("Matrix4D - Translate", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Vector(0, 3)
+            new Vector(0, 3),
         ],
         [
             "Translate up 5 and right 3",
@@ -55,7 +50,7 @@ describe("Matrix4D - Translate", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Vector(3, 5)
+            new Vector(3, 5),
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, translation: Vector) => {
         matrix.Translate(translation);
@@ -64,12 +59,7 @@ describe("Matrix4D - Translate", () => {
 });
 
 describe("Matrix4D - Scale", () => {
-    type TestTuple = [
-        string,
-        Matrix4D,
-        Matrix4D,
-        Vector
-    ];
+    type TestTuple = [string, Matrix4D, Matrix4D, Vector];
     test.each<TestTuple>([
         [
             "Scale y by 3",
@@ -85,7 +75,7 @@ describe("Matrix4D - Scale", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Vector(1, 3)
+            new Vector(1, 3),
         ],
         [
             "Scale y by 5 and x by 3",
@@ -101,7 +91,7 @@ describe("Matrix4D - Scale", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            new Vector(3, 5)
+            new Vector(3, 5),
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, scale: Vector) => {
         matrix.Scale(scale);
@@ -110,12 +100,7 @@ describe("Matrix4D - Scale", () => {
 });
 
 describe("Matrix4D - Rotate", () => {
-    type TestTuple = [
-        string,
-        Matrix4D,
-        Matrix4D,
-        number
-    ];
+    type TestTuple = [string, Matrix4D, Matrix4D, number];
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
@@ -131,7 +116,7 @@ describe("Matrix4D - Rotate", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            Math.PI / 4
+            Math.PI / 4,
         ],
         [
             "Rotate by 180 degrees",
@@ -147,7 +132,7 @@ describe("Matrix4D - Rotate", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            Math.PI
+            Math.PI,
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, rotation: number) => {
         matrix.Rotate(rotation);
@@ -156,12 +141,7 @@ describe("Matrix4D - Rotate", () => {
 });
 
 describe("Matrix4D - RotateDeg", () => {
-    type TestTuple = [
-        string,
-        Matrix4D,
-        Matrix4D,
-        number
-    ];
+    type TestTuple = [string, Matrix4D, Matrix4D, number];
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
@@ -177,7 +157,7 @@ describe("Matrix4D - RotateDeg", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            45
+            45,
         ],
         [
             "Rotate by 180 degrees",
@@ -193,7 +173,7 @@ describe("Matrix4D - RotateDeg", () => {
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
             ]),
-            180
+            180,
         ],
     ])("%p", (description: string, expectedState: Matrix4D, matrix: Matrix4D, rotation: number) => {
         matrix.RotateDeg(rotation);
@@ -202,17 +182,7 @@ describe("Matrix4D - RotateDeg", () => {
 });
 
 describe("Matrix4D - Ortho", () => {
-    type TestTuple = [
-        string,
-        Error | Matrix4D,
-        Matrix4D,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-    ];
+    type TestTuple = [string, Error | Matrix4D, Matrix4D, number, number, number, number, number, number];
     test.each<TestTuple>([
         [
             "left -5, right -5, bottom -5, top -5, near -5, far -5",
@@ -228,7 +198,7 @@ describe("Matrix4D - Ortho", () => {
             -5,
             -5,
             -5,
-            -5
+            -5,
         ],
         [
             "left -5, right 5, bottom -5, top 5, near -5, far 5",
@@ -249,32 +219,34 @@ describe("Matrix4D - Ortho", () => {
             -5,
             5,
             -5,
-            5
+            5,
         ],
-    ])("%p", (
-        description: string,
-        expected: Error | Matrix4D,
-        matrix: Matrix4D,
-        left: number,
-        right: number,
-        bottom: number,
-        top: number,
-        near: number,
-        far: number) => {
-        if (expected instanceof Error) {
-            expect(() => { matrix.Ortho(left, right, bottom, top, near, far); }).toThrow(expected);
-        } else {
-            expect(matrix.Ortho(left, right, bottom, top, near, far)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | Matrix4D,
+            matrix: Matrix4D,
+            left: number,
+            right: number,
+            bottom: number,
+            top: number,
+            near: number,
+            far: number
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    matrix.Ortho(left, right, bottom, top, near, far);
+                }).toThrow(expected);
+            } else {
+                expect(matrix.Ortho(left, right, bottom, top, near, far)).toEqual(expected);
+            }
         }
-    });
+    );
 });
 
 describe("Matrix4D - GetFloat32Array", () => {
-    type TestTuple = [
-        string,
-        Float32Array,
-        Matrix4D
-    ];
+    type TestTuple = [string, Float32Array, Matrix4D];
     test.each<TestTuple>([
         [
             "Success",

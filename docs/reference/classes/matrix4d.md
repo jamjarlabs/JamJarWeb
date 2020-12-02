@@ -50,7 +50,7 @@ ___
 
 ### `Static` `Private` Z_AXIS
 
-▪ **Z_AXIS**: *Float32Array* = new Float32Array([0,0,1])
+▪ **Z_AXIS**: *Float32Array* = new Float32Array([0, 0, 1])
 
 ## Methods
 

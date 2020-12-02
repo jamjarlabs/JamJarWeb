@@ -181,12 +181,10 @@ export {
     Evaluator,
     System,
     SystemEntity,
-
     // Pooling
     Pooled,
     IPoolable,
     IFreeable,
-
     // Fake
     FakeAudioBufferSourceNode,
     FakeAudioContext,
@@ -200,7 +198,6 @@ export {
     FakeScene,
     FakeSubscriber,
     FakeWebGL2RenderingContext,
-
     // Standard Lib
     // Audio Source
     AudioSource,
@@ -279,5 +276,5 @@ export {
     DefaultTextFragmentShader,
     DefaultTextureFragmentShader,
     DefaultTextureVertexShader,
-    WebGLSystem
+    WebGLSystem,
 };

@@ -19,9 +19,9 @@ import IEntity from "../../entity/ientity";
 
 /**
  * UI is a component for marking an entity as part of the UI,
- * this changes how it is rendered, and how any transform 
+ * this changes how it is rendered, and how any transform
  * attached to it is interpreted. When attached will cause
- * the entity to be rendered relative to the camera, rather 
+ * the entity to be rendered relative to the camera, rather
  * than in world space.
  */
 class UI extends Component {

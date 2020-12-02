@@ -18,8 +18,8 @@ limitations under the License.
 // Requires any type as used in reflection to stub methods
 
 class Reactor {
-    public name: string
-    public logic: (...args: any[]) => any
+    public name: string;
+    public logic: (...args: any[]) => any;
 
     constructor(name: string, logic: (...args: any[]) => any) {
         this.name = name;

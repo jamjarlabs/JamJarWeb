@@ -30,7 +30,7 @@ describe("Camera - GetProjectionMatrix", () => {
                 [0, 0, -0.02, 0],
                 [-0, -0, -1, 1],
             ]),
-            new Camera()
+            new Camera(),
         ],
         [
             "Test orthographic projection, modified camera",
@@ -40,7 +40,7 @@ describe("Camera - GetProjectionMatrix", () => {
                 [0, 0, -0.02, 0],
                 [-0, -0, -1, 1],
             ]),
-            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(1, 1))
+            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(1, 1)),
         ],
     ])("%p", (description: string, expected: Matrix4D, camera: Camera) => {
         expect(camera.GetProjectionMatrix()).toEqual(expected);

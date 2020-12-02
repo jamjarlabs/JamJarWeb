@@ -71,10 +71,7 @@ class AABB implements IShape {
     }
 
     public Copy(): AABB {
-        return new AABB(
-            this.size.Copy(),
-            this.center.Copy()
-        );
+        return new AABB(this.size.Copy(), this.center.Copy());
     }
 
     public Free(): void {

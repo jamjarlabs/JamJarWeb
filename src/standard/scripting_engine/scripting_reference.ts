@@ -29,7 +29,8 @@ class ScriptingReference {
     private getEntitiesByLayer: (layer: string) => SystemEntity[];
     private sendMessage: (message: IMessage) => void;
 
-    constructor(getScriptEntity: () => SystemEntity | undefined,
+    constructor(
+        getScriptEntity: () => SystemEntity | undefined,
         getEntityByID: (id: number) => SystemEntity | undefined,
         getEntitiesByTag: (tag: string) => SystemEntity[],
         getEntitiesByLayer: (layer: string) => SystemEntity[],

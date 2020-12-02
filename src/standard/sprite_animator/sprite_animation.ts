@@ -20,7 +20,7 @@ import SpriteKeyFrame from "./sprite_key_frame";
  * SpriteAnimation is used to define an animation as a series of materials to
  * apply to a Sprite, with specifications on key frames, frame rate, and if the
  * animation should repeat.
- * 
+ *
  * SpriteAnimation uses an array of key frames to iterate through for
  * defining the materials to apply and for how long to apply them.
  */
@@ -49,7 +49,13 @@ class SpriteAnimation {
      */
     public repeatCount: number;
 
-    constructor(keyframes: SpriteKeyFrame[], frameRate: number, repeat: number, durationSinceRepeat = 0, repeatCount = 0) {
+    constructor(
+        keyframes: SpriteKeyFrame[],
+        frameRate: number,
+        repeat: number,
+        durationSinceRepeat = 0,
+        repeatCount = 0
+    ) {
         this.keyframes = keyframes;
         this.frameRate = frameRate;
         this.repeat = repeat;

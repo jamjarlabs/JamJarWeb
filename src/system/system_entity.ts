@@ -39,7 +39,7 @@ class SystemEntity {
     /**
      * Get returns any Component with the key provided if it exists;
      * otherwise it returns undefined.
-     * @param {string} key The key identifier of the component 
+     * @param {string} key The key identifier of the component
      * @returns {Component|undefined} The component if it exists, otherwise undefined
      */
     public Get(key: string): Component | undefined {

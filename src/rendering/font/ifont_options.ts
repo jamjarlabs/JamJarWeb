@@ -34,7 +34,7 @@ interface IFontOptions {
      */
     radius?: number;
     /**
-     * How much of the radius (relative) is used for the 
+     * How much of the radius (relative) is used for the
      * inside part the glyph.
      */
     cutoff?: number;

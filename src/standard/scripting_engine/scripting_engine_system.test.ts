@@ -34,198 +34,341 @@ describe("ScriptingEngineSystem - OnMessage", () => {
         [
             "Unknown message type",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new Message("unknown")
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new Message("unknown"),
         ],
         [
             "Finish load script - no payload",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new Message(ScriptAsset.MESSAGE_FINISH_LOAD)
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new Message(ScriptAsset.MESSAGE_FINISH_LOAD),
         ],
         [
             "Finish load script - failed script load",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD,
-                new ScriptAsset("test", "console.log('test');", new Error("fail to load script")))
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new Message<ScriptAsset>(
+                ScriptAsset.MESSAGE_FINISH_LOAD,
+                new ScriptAsset("test", "console.log('test');", new Error("fail to load script"))
+            ),
         ],
         [
             "Finish load script - success",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, new Map([
-                ["test", new ScriptAsset("test", "console.log('test');")]
-            ]), undefined, undefined, undefined, 0),
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD,
-                new ScriptAsset("test", "console.log('test');"))
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                new Map([["test", new ScriptAsset("test", "console.log('test');")]]),
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, new ScriptAsset("test", "console.log('test');")),
         ],
         [
             "Trigger script - no payload",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new Message(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT)
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new Message(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT),
         ],
         [
             "Trigger script - script doesn't exist",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new ScriptingEngineSystem(new FakeMessageBus(), "test", undefined, undefined, undefined, undefined, undefined, 0),
-            new Message<ScriptTriggerRequest<void>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, new ScriptTriggerRequest("test", "test"))
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
+                "test",
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                0
+            ),
+            new Message<ScriptTriggerRequest<void>>(
+                ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                new ScriptTriggerRequest("test", "test")
+            ),
         ],
         [
             "Trigger script - doesn't have an entity, no error thrown",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
-                new Map([
-                    ["test", new ScriptAsset("test", "console.log('test');")]
-                ]),
+                new Map([["test", new ScriptAsset("test", "console.log('test');")]]),
                 undefined,
-                new ScriptingReference(() => undefined, () => undefined, () => [], () => [], () => undefined),
+                new ScriptingReference(
+                    () => undefined,
+                    () => undefined,
+                    () => [],
+                    () => [],
+                    () => undefined
+                ),
                 undefined,
                 0
             ),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
-                new Map([
-                    ["test", new ScriptAsset("test", "console.log('test');")]
-                ]),
+                new Map([["test", new ScriptAsset("test", "console.log('test');")]]),
                 undefined,
-                new ScriptingReference(() => undefined, () => undefined, () => [], () => [], () => undefined),
+                new ScriptingReference(
+                    () => undefined,
+                    () => undefined,
+                    () => [],
+                    () => [],
+                    () => undefined
+                ),
                 undefined,
                 0
             ),
-            new Message<ScriptTriggerRequest<void>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-                new ScriptTriggerRequest("test", "test"))
+            new Message<ScriptTriggerRequest<void>>(
+                ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                new ScriptTriggerRequest("test", "test")
+            ),
         ],
         [
             "Trigger script - has entity, no error thrown",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
-                new Map([
-                    ["test", new ScriptAsset("test", "console.log('test');")]
-                ]),
+                new Map([["test", new ScriptAsset("test", "console.log('test');")]]),
                 new SystemEntity(new FakeEntity(0), []),
                 undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [])]
-                ]),
+                new Map([[0, new SystemEntity(new FakeEntity(0), [])]]),
                 0
             ),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
-                new Map([
-                    ["test", new ScriptAsset("test", "console.log('test');")]
-                ]),
+                new Map([["test", new ScriptAsset("test", "console.log('test');")]]),
                 undefined,
                 undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [])]
-                ]),
+                new Map([[0, new SystemEntity(new FakeEntity(0), [])]]),
                 0
             ),
-            new Message<ScriptTriggerRequest<void>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-                new ScriptTriggerRequest("test", "test", new FakeEntity(0)))
+            new Message<ScriptTriggerRequest<void>>(
+                ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                new ScriptTriggerRequest("test", "test", new FakeEntity(0))
+            ),
         ],
         [
             "Trigger script - throw error",
-            new Error('error!'),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new Error("error!"),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
-                new Map([
-                    ["test", new ScriptAsset("test", "throw('error!');")]
-                ]),
+                new Map([["test", new ScriptAsset("test", "throw('error!');")]]),
                 undefined,
                 undefined,
                 undefined,
                 0
             ),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
-                new Map([
-                    ["test", new ScriptAsset("test", "throw('error!');")]
-                ]),
+                new Map([["test", new ScriptAsset("test", "throw('error!');")]]),
                 undefined,
                 undefined,
                 undefined,
                 0
             ),
-            new Message<ScriptTriggerRequest<void>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-                new ScriptTriggerRequest("test", "test", new FakeEntity(0)))
+            new Message<ScriptTriggerRequest<void>>(
+                ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                new ScriptTriggerRequest("test", "test", new FakeEntity(0))
+            ),
         ],
         [
             "Trigger script - call references",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test_calls",
                 undefined,
                 new Map([
-                    ["test", new ScriptAsset("test", `
+                    [
+                        "test",
+                        new ScriptAsset(
+                            "test",
+                            `
                     const gameRef = window.JamJarRefs.get("test_calls");
                     console.log(gameRef.GetScriptEntity());
                     console.log(gameRef.GetEntityByID(0));
                     console.log(gameRef.GetEntitiesByTag("test"));
                     console.log(gameRef.GetEntitiesByLayer("test"));
                     gameRef.SendMessage({ type: "test"});
-                    `)]
+                    `
+                        ),
+                    ],
                 ]),
                 new SystemEntity(new FakeEntity(0, ["test"], ["test"]), []),
                 undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0, ["test"], ["test"]), [])],
                     [1, new SystemEntity(new FakeEntity(1, ["test"], ["test"]), [])],
-                    [2, new SystemEntity(new FakeEntity(2, ["test"], ["test"]), [])]
+                    [2, new SystemEntity(new FakeEntity(2, ["test"], ["test"]), [])],
                 ]),
                 0
             ),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test_calls",
                 undefined,
                 new Map([
-                    ["test", new ScriptAsset("test", `
+                    [
+                        "test",
+                        new ScriptAsset(
+                            "test",
+                            `
                     const gameRef = window.JamJarRefs.get("test_calls");
                     console.log(gameRef.GetScriptEntity());
                     console.log(gameRef.GetEntityByID(0));
                     console.log(gameRef.GetEntitiesByTag("test"));
                     console.log(gameRef.GetEntitiesByLayer("test"));
                     gameRef.SendMessage({ type: "test"});
-                    `)]
+                    `
+                        ),
+                    ],
                 ]),
                 new SystemEntity(new FakeEntity(0, ["test"], ["test"]), []),
                 undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0, ["test"], ["test"]), [])],
                     [1, new SystemEntity(new FakeEntity(1, ["test"], ["test"]), [])],
-                    [2, new SystemEntity(new FakeEntity(2, ["test"], ["test"]), [])]
+                    [2, new SystemEntity(new FakeEntity(2, ["test"], ["test"]), [])],
                 ]),
                 0
             ),
-            new Message<ScriptTriggerRequest<void>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-                new ScriptTriggerRequest("test", "test", new FakeEntity(0)))
+            new Message<ScriptTriggerRequest<void>>(
+                ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                new ScriptTriggerRequest("test", "test", new FakeEntity(0))
+            ),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: ScriptingEngineSystem, system: ScriptingEngineSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: ScriptingEngineSystem,
+            system: ScriptingEngineSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            // Workaround for comparing anonymous functions
+            expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
         }
-        // Workaround for comparing anonymous functions
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
-    });
+    );
 });
 
 describe("ScriptingEngineSystem - Register", () => {
@@ -234,20 +377,18 @@ describe("ScriptingEngineSystem - Register", () => {
         [
             "Accept, no components",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
                 undefined,
                 undefined,
                 undefined,
-                new Map([
-                    [0, new SystemEntity(
-                        new FakeEntity(0), []
-                    )]
-                ]),
+                new Map([[0, new SystemEntity(new FakeEntity(0), [])]]),
                 0
             ),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
                 undefined,
@@ -256,29 +397,23 @@ describe("ScriptingEngineSystem - Register", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), []
-            ])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Accept, transform",
             undefined,
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
                 undefined,
                 undefined,
                 undefined,
-                new Map([
-                    [0, new SystemEntity(
-                        new FakeEntity(0), [
-                        new Transform()
-                    ]
-                    )]
-                ]),
+                new Map([[0, new SystemEntity(new FakeEntity(0), [new Transform()])]]),
                 0
             ),
-            new ScriptingEngineSystem(new FakeMessageBus(),
+            new ScriptingEngineSystem(
+                new FakeMessageBus(),
                 "test",
                 undefined,
                 undefined,
@@ -287,21 +422,26 @@ describe("ScriptingEngineSystem - Register", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new Transform()
-                ]
-            ])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: ScriptingEngineSystem, system: ScriptingEngineSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: ScriptingEngineSystem,
+            system: ScriptingEngineSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            // Workaround for comparing anonymous functions
+            expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
         }
-        // Workaround for comparing anonymous functions
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
-    });
+    );
 });

@@ -33,17 +33,19 @@ class HTTPImageSystem extends System {
 
     private images: ImageAsset[];
 
-    constructor(messageBus: IMessageBus, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
+    constructor(
+        messageBus: IMessageBus,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        images: ImageAsset[] = []) {
+        images: ImageAsset[] = []
+    ) {
         super(messageBus, scene, undefined, entities, subscriberID);
         this.images = images;
         this.messageBus.Subscribe(this, [
             ImageRequest.MESSAGE_REQUEST_LOAD,
             HTTPImageSystem.MESSAGE_REQUEST_FLUSH,
-            HTTPImageSystem.MESSAGE_REQUEST_CLEAR
+            HTTPImageSystem.MESSAGE_REQUEST_CLEAR,
         ]);
     }
 
@@ -71,15 +73,15 @@ class HTTPImageSystem extends System {
 
     protected onLoad(event: Event | undefined, image: HTMLImageElement, request: ImageRequest): void {
         const asset = new ImageAsset(
-            request.name, 
-            image, 
+            request.name,
+            image,
             true,
             request.xWrap,
             request.yWrap,
             request.magFilter,
             request.minFilter,
             request.generateMipmaps,
-            request.mirror,
+            request.mirror
         );
         this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
@@ -87,9 +89,9 @@ class HTTPImageSystem extends System {
 
     protected onError(event: Event | undefined, image: HTMLImageElement, request: ImageRequest): void {
         const asset = new ImageAsset(
-            request.name, 
-            image, 
-            false, 
+            request.name,
+            image,
+            false,
             request.xWrap,
             request.yWrap,
             request.magFilter,
@@ -118,7 +120,6 @@ class HTTPImageSystem extends System {
     private clear(): void {
         this.images = [];
     }
-
 }
 
 export default HTTPImageSystem;

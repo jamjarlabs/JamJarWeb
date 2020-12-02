@@ -40,7 +40,7 @@ how the texture should be drawn and represented.
 Name | Type | Default |
 ------ | ------ | ------ |
 `image` | string | - |
-`points` | [Polygon](polygon.md) | Polygon.QuadByPoints(Vector.New(0,0), Vector.New(1,1)) |
+`points` | [Polygon](polygon.md) | Polygon.QuadByPoints(Vector.New(0, 0), Vector.New(1, 1)) |
 
 **Returns:** *[Texture](texture.md)*
 

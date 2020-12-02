@@ -17,7 +17,7 @@ limitations under the License.
 /**
  * AudioRequest specifies all information required to load a audio data. This
  * includes the source of the audio data (e.g. a URL), and the name to assign
- * the audio data, which should be unique. 
+ * the audio data, which should be unique.
  */
 class AudioRequest {
     /**
@@ -25,7 +25,7 @@ class AudioRequest {
      */
     public static readonly MESSAGE_REQUEST_LOAD = "request_audio_load";
     /**
-     * Name of the audio asset, how it is referred to throughout the system, 
+     * Name of the audio asset, how it is referred to throughout the system,
      * should be unique.
      */
     public name: string;

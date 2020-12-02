@@ -29,47 +29,59 @@ describe("KeyboardSystem - OnMessage", () => {
             undefined,
             new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0),
             new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update - One queued event, fail to publish",
             new Error("fail to publish"),
             new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0, [["test", "test"]]),
-            new KeyboardSystem(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), 
-                document, 
-                undefined, 
-                undefined, 
-                0, 
+            new KeyboardSystem(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                document,
+                undefined,
+                undefined,
+                0,
                 [["test", "test"]]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update - Three queued events, success, clear queue",
             undefined,
             new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0),
-            new KeyboardSystem(new FakeMessageBus(),  
-                document, 
-                undefined, 
-                undefined, 
-                0, 
-                [["test", "test1"], ["test", "test2"], ["test", "test3"]]
-            ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0, [
+                ["test", "test1"],
+                ["test", "test2"],
+                ["test", "test3"],
+            ]),
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: KeyboardSystem, system: KeyboardSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: KeyboardSystem,
+            system: KeyboardSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
+            // Destroy required to remove event listeners
+            system.Destroy();
+            expectedState.Destroy();
         }
-        expect(system).toEqual(expectedState);
-        // Destroy required to remove event listeners
-        system.Destroy();
-        expectedState.Destroy();
-    });
+    );
 });
 
 /**
@@ -87,32 +99,16 @@ describe("KeyboardSystem - key presses", () => {
     test.each<TestTuple>([
         [
             "Key down",
-            new TestKeyboardSystem(new FakeMessageBus(), 
-                document, 
-                undefined, 
-                undefined, 
-                0, 
-                [
-                    ["keydown", "w"]
-                ]
-            ),
+            new TestKeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0, [["keydown", "w"]]),
             new TestKeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0),
-            new window.KeyboardEvent("keydown", { "code": "w", bubbles: true })
+            new window.KeyboardEvent("keydown", { code: "w", bubbles: true }),
         ],
         [
             "Key up",
-            new KeyboardSystem(new FakeMessageBus(), 
-                document, 
-                undefined, 
-                undefined, 
-                0, 
-                [
-                    ["keyup", "w"]
-                ]
-            ),
+            new KeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0, [["keyup", "w"]]),
             new TestKeyboardSystem(new FakeMessageBus(), document, undefined, undefined, 0),
-            new window.KeyboardEvent("keyup", { "code": "w", bubbles: true })
-        ]
+            new window.KeyboardEvent("keyup", { code: "w", bubbles: true }),
+        ],
     ])("%p", (description: string, expectedState: KeyboardSystem, system: TestKeyboardSystem, event: KeyboardEvent) => {
         system.SimulateKeyEvent(event);
         expect(system).toEqual(expectedState);
