@@ -26,6 +26,7 @@ Ellipse is the representation of a 2D Ellipse shape. Can be used for collision d
 ### Methods
 
 * [Center](ellipse.md#center)
+* [Copy](ellipse.md#copy)
 * [FarthestPointInDirection](ellipse.md#farthestpointindirection)
 * [Free](ellipse.md#free)
 * [PointInside](ellipse.md#pointinside)
@@ -75,6 +76,16 @@ ___
 *Implementation of [IShape](../interfaces/ishape.md)*
 
 **Returns:** *[Vector](vector.md)*
+
+___
+
+###  Copy
+
+▸ **Copy**(): *[Ellipse](ellipse.md)*
+
+*Implementation of [IShape](../interfaces/ishape.md)*
+
+**Returns:** *[Ellipse](ellipse.md)*
 
 ___
 

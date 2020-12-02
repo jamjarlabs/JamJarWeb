@@ -1579,8 +1579,7 @@ describe("WebGLSystem - Render", () => {
                             shaders: ["test_vert", "test_frag"]
                         }),
                         DrawMode.TRIANGLE_STRIP,
-                        undefined,
-                        new FakeEntity(0)
+                        undefined
                     ),
                     new Renderable(0,
                         Polygon.RectangleByDimensions(1, 1, 1, 0),
@@ -1590,8 +1589,7 @@ describe("WebGLSystem - Render", () => {
                             shaders: ["test_vert", "test_frag"]
                         }),
                         DrawMode.TRIANGLE_STRIP,
-                        undefined,
-                        new FakeEntity(0)
+                        undefined
                     ),
                     new Renderable(0,
                         Polygon.RectangleByDimensions(1, 1, 2, 0),
@@ -1600,8 +1598,7 @@ describe("WebGLSystem - Render", () => {
                             shaders: ["test_vert", "test_frag"]
                         }),
                         DrawMode.TRIANGLE_STRIP,
-                        undefined,
-                        new FakeEntity(0)
+                        undefined
                     ),
                 ]]]),
                 undefined,

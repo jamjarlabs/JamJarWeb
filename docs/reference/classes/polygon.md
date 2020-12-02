@@ -89,6 +89,8 @@ ___
 
 ▸ **Copy**(): *[Polygon](polygon.md)*
 
+*Implementation of [IShape](../interfaces/ishape.md)*
+
 Make a value copy of the Polygon.
 
 **Returns:** *[Polygon](polygon.md)*

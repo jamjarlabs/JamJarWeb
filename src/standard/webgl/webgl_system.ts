@@ -436,10 +436,6 @@ class WebGLSystem extends RenderSystem {
                         }
 
                         for (const renderable of textureGroup) {
-                            if (renderable.camera !== undefined && renderable.camera.id !== cameraEntity.entity.id) {
-                                continue;
-                            }
-
                             const drawMode = WebGLSystem.DRAW_MODES.get(renderable.drawMode);
                             if (drawMode === undefined) {
                                 console.warn(`Unsupported draw mode ${renderable.drawMode}`);
@@ -458,14 +454,8 @@ class WebGLSystem extends RenderSystem {
                 }
 
             }
-
-            for (const renderable of cameraRenderables) {
-                renderable.Free();
-            }
         }
-
-
-        this.renderables = new Map();
+        this.renderables.clear();
     }
 }
 

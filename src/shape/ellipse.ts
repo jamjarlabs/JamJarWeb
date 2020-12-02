@@ -38,11 +38,10 @@ class Ellipse implements IShape {
 
     public Transform(transform: Transform): IShape {
         const matrix = transform.Matrix3D();
-        return new Ellipse(
-            this.dimensions.Copy().Multiply(transform.scale),
-            this.orientation + transform.angle,
-            this.center.Copy().Apply3D(matrix)
-        );
+        this.dimensions.Multiply(transform.scale),
+        this.orientation += transform.angle,
+        this.center.Apply3D(matrix);
+        return this;
     }
 
     public PointInside(point: Vector): boolean {
@@ -62,6 +61,14 @@ class Ellipse implements IShape {
     public Free(): void {
         this.center.Free();
         this.dimensions.Free();
+    }
+
+    public Copy(): Ellipse {
+        return new Ellipse(
+            this.dimensions.Copy(),
+            this.orientation,
+            this.center.Copy()
+        );
     }
 
     /**

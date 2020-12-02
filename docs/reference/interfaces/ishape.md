@@ -21,6 +21,7 @@ for the shape to be used with collision detection.
 ### Methods
 
 * [Center](ishape.md#center)
+* [Copy](ishape.md#copy)
 * [FarthestPointInDirection](ishape.md#farthestpointindirection)
 * [Free](ishape.md#free)
 * [PointInside](ishape.md#pointinside)
@@ -37,6 +38,18 @@ Center calculates/retrieves the center of a shape.
 **Returns:** *[Vector](../classes/vector.md)*
 
 The center point of the shape
+
+___
+
+###  Copy
+
+▸ **Copy**(): *[IShape](ishape.md)*
+
+Creates a copy of the shape and its values, rather than pointing to the same Shape.
+
+**Returns:** *[IShape](ishape.md)*
+
+The value copy of the Shape
 
 ___
 

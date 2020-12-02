@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import IEntity from "../entity/ientity";
 import Material from "./material/material";
 import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../shape/polygon";
@@ -49,11 +48,6 @@ interface IRenderable extends IPoolable {
      * The draw mode of the renderable, specifying how it will be rendered.
      */
     drawMode: DrawMode;
-    /**
-     * Any camera to associate with the renderable, will only render on
-     * the camera supplied.
-     */
-    camera?: IEntity;
 }
 
 export default IRenderable;

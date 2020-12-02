@@ -47,6 +47,13 @@ interface IShape extends IFreeable {
      * @returns {boolean} If the point is inside the shape, true = inside, false = outside
      */
     PointInside(point: Vector): boolean;
+
+    /**
+     * Creates a copy of the shape and its values, rather than pointing to the same Shape.
+     *
+     * @returns {IShape} The value copy of the Shape
+     */
+    Copy(): IShape;
 }
 
 export default IShape;

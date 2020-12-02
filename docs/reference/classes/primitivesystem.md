@@ -25,6 +25,7 @@ primitives and generating renderables from them.
 * [entities](primitivesystem.md#protected-entities)
 * [frustumCuller](primitivesystem.md#private-frustumculler)
 * [messageBus](primitivesystem.md#protected-messagebus)
+* [renderables](primitivesystem.md#private-renderables)
 * [scene](primitivesystem.md#protected-optional-scene)
 * [subscriberID](primitivesystem.md#subscriberid)
 * [MESSAGE_DEREGISTER](primitivesystem.md#static-message_deregister)
@@ -37,6 +38,7 @@ primitives and generating renderables from them.
 * [OnDestroy](primitivesystem.md#protected-ondestroy)
 * [OnMessage](primitivesystem.md#onmessage)
 * [Update](primitivesystem.md#protected-update)
+* [freeRenderables](primitivesystem.md#private-freerenderables)
 * [preparePrimitives](primitivesystem.md#private-prepareprimitives)
 * [EVALUATOR](primitivesystem.md#static-private-evaluator)
 
@@ -44,7 +46,7 @@ primitives and generating renderables from them.
 
 ###  constructor
 
-\+ **new PrimitiveSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[PrimitiveSystem](primitivesystem.md)*
+\+ **new PrimitiveSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `renderables`: Map‹number, [IRenderable](../interfaces/irenderable.md)[]›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[PrimitiveSystem](primitivesystem.md)*
 
 *Overrides [System](system.md).[constructor](system.md#constructor)*
 
@@ -55,6 +57,7 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
+`renderables` | Map‹number, [IRenderable](../interfaces/irenderable.md)[]› | new Map() |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `subscriberID?` | undefined &#124; number | - |
 
@@ -90,6 +93,12 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
+
+___
+
+### `Private` renderables
+
+• **renderables**: *Map‹number, [IRenderable](../interfaces/irenderable.md)[]›*
 
 ___
 
@@ -197,6 +206,14 @@ General update method, default empty. Override with custom logic.
 Name | Type | Description |
 ------ | ------ | ------ |
 `dt` | number | DeltaTime  |
+
+**Returns:** *void*
+
+___
+
+### `Private` freeRenderables
+
+▸ **freeRenderables**(): *void*
 
 **Returns:** *void*
 

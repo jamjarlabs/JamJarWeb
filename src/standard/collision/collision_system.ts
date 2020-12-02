@@ -91,7 +91,7 @@ class CollisionSystem extends System {
         for (const entity of this.entities.values()) {
             const transform = entity.Get(Transform.KEY) as Transform;
             const collider = entity.Get(Collider.KEY) as Collider;
-            const shape = collider.shape.Transform(transform);
+            const shape = collider.shape.Copy().Transform(transform);
             shapes.set(shape, entity);
         }
 
