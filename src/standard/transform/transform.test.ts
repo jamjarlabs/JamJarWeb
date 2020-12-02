@@ -22,101 +22,112 @@ import Matrix4D from "../../geometry/matrix_4d";
 describe("Transform - Matrix3D", () => {
     type TestTuple = [string, Matrix3D, Vector, Vector, number];
     test.each<TestTuple>([
-            [
-                "Unchanged",
-                new Matrix3D().Set([
-                    [1,0,0],
-                    [0,1,0],
-                    [0,0,1]
-                ]),
-                new Vector(0, 0),
-                new Vector(1, 1),
-                0,
-            ],
-            [
-                "Up 3, 180 degrees rotated, scale by 2",
-                new Matrix3D().Set([
-                    [-2,-2.4492935982947064e-16,-0],
-                    [2.4492935982947064e-16,-2,0],
-                    [0,3,1]
-                ]),
-                new Vector(0, 3),
-                new Vector(2, 2),
-                Math.PI,
-            ]
-        ])("%p", (description: string, expected: Matrix3D, position: Vector, scale: Vector, angle: number) => {
-            const transform = new Transform(position, scale, angle);
-            expect(transform.Matrix3D()).toEqual(expected);
-        });
+        [
+            "Unchanged",
+            new Matrix3D().Set([
+                [1, 0, 0],
+                [0, 1, 0],
+                [0, 0, 1],
+            ]),
+            new Vector(0, 0),
+            new Vector(1, 1),
+            0,
+        ],
+        [
+            "Up 3, 180 degrees rotated, scale by 2",
+            new Matrix3D().Set([
+                [-2, -2.4492935982947064e-16, -0],
+                [2.4492935982947064e-16, -2, 0],
+                [0, 3, 1],
+            ]),
+            new Vector(0, 3),
+            new Vector(2, 2),
+            Math.PI,
+        ],
+    ])("%p", (description: string, expected: Matrix3D, position: Vector, scale: Vector, angle: number) => {
+        const transform = new Transform(position, scale, angle);
+        expect(transform.Matrix3D()).toEqual(expected);
+    });
 });
 
 describe("Transform - Matrix4D", () => {
     type TestTuple = [string, Matrix4D, Vector, Vector, number];
     test.each<TestTuple>([
-            [
-                "Unchanged",
-                new Matrix4D().Set([
-                    [1,0,0,0],
-                    [0,1,0,0],
-                    [0,0,0,0],
-                    [0,0,0,1]
-                ]),
-                new Vector(0, 0),
-                new Vector(1, 1),
-                0,
-            ],
-            [
-                "Up 3, 180 degrees rotated, scale by 2",
-                new Matrix4D().Set([
-                    [-2,-2.4492935982947064e-16,0,0],
-                    [2.4492935982947064e-16,-2,0,0],
-                    [0,0,0,0],
-                    [0,3,0,1]
-                ]),
-                new Vector(0, 3),
-                new Vector(2, 2),
-                Math.PI,
-            ]
-        ])("%p", (description: string, expected: Matrix4D, position: Vector, scale: Vector, angle: number) => {
-            const transform = new Transform(position, scale, angle);
-            expect(transform.Matrix4D()).toEqual(expected);
-        });
+        [
+            "Unchanged",
+            new Matrix4D().Set([
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 1],
+            ]),
+            new Vector(0, 0),
+            new Vector(1, 1),
+            0,
+        ],
+        [
+            "Up 3, 180 degrees rotated, scale by 2",
+            new Matrix4D().Set([
+                [-2, -2.4492935982947064e-16, 0, 0],
+                [2.4492935982947064e-16, -2, 0, 0],
+                [0, 0, 0, 0],
+                [0, 3, 0, 1],
+            ]),
+            new Vector(0, 3),
+            new Vector(2, 2),
+            Math.PI,
+        ],
+    ])("%p", (description: string, expected: Matrix4D, position: Vector, scale: Vector, angle: number) => {
+        const transform = new Transform(position, scale, angle);
+        expect(transform.Matrix4D()).toEqual(expected);
+    });
 });
 
 describe("Transform - InterpolatedMatrix4D", () => {
     type TestTuple = [string, Matrix4D, Vector, Vector, number, Vector, number];
     test.each<TestTuple>([
-            [
-                "Unchanged",
-                new Matrix4D().Set([
-                    [1,0,0,0],
-                    [0,1,0,0],
-                    [0,0,0,0],
-                    [0,0,0,1]
-                ]),
-                new Vector(0, 0),
-                new Vector(1, 1),
-                0,
-                new Vector(0, 0),
-                0.5,
-            ],
-            [
-                "Up 3, 180 degrees rotated, scale by 2",
-                new Matrix4D().Set([
-                    [-2,-2.4492935982947064e-16,0,0],
-                    [2.4492935982947064e-16,-2,0,0],
-                    [0,0,0,0],
-                    [0,1.5,0,1]
-                ]),
-                new Vector(0, 3),
-                new Vector(2, 2),
-                Math.PI,
-                new Vector(0, 0),
-                0.5,
-            ]
-        ])("%p", (description: string, expected: Matrix4D, position: Vector, scale: Vector, angle: number, previous: Vector, alpha: number) => {
+        [
+            "Unchanged",
+            new Matrix4D().Set([
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 1],
+            ]),
+            new Vector(0, 0),
+            new Vector(1, 1),
+            0,
+            new Vector(0, 0),
+            0.5,
+        ],
+        [
+            "Up 3, 180 degrees rotated, scale by 2",
+            new Matrix4D().Set([
+                [-2, -2.4492935982947064e-16, 0, 0],
+                [2.4492935982947064e-16, -2, 0, 0],
+                [0, 0, 0, 0],
+                [0, 1.5, 0, 1],
+            ]),
+            new Vector(0, 3),
+            new Vector(2, 2),
+            Math.PI,
+            new Vector(0, 0),
+            0.5,
+        ],
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Matrix4D,
+            position: Vector,
+            scale: Vector,
+            angle: number,
+            previous: Vector,
+            alpha: number
+        ) => {
             const transform = new Transform(position, scale, angle);
             transform.previous = previous;
             expect(transform.InterpolatedMatrix4D(alpha)).toEqual(expected);
-        });
+        }
+    );
 });

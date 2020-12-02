@@ -30,7 +30,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             for (let j = i + 1; j < shapes.length; j++) {
                 const a = shapes[i];
                 const b = shapes[j];
-                const collision = this.gjk(a,b);
+                const collision = this.gjk(a, b);
                 if (collision !== undefined) {
                     collisions.push(collision);
                 }
@@ -58,7 +58,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         // Keep iterating until the direction is undefined, this will occur when
         // 'CalculateDirection' doesn't return a direction, indicating that an
         // intersection has been detected
-        while(direction) {
+        while (direction) {
             const supportPoint = this.support(a, b, direction.Copy());
 
             // If the support point did not reach as far as the origin,

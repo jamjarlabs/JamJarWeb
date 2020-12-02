@@ -27,149 +27,225 @@ import FakeComponent from "../fake/component";
 import Component from "../component/component";
 
 describe("EntityManager - OnMessage", () => {
-    type TestTuple = [
-        string,
-        Error | undefined,
-        EntityManager | undefined,
-        EntityManager,
-        IMessage
-    ];
+    type TestTuple = [string, Error | undefined, EntityManager | undefined, EntityManager, IMessage];
     test.each<TestTuple>([
         [
             "Unknown message type",
             undefined,
             new EntityManager(new FakeMessageBus(), [], 0),
             new EntityManager(new FakeMessageBus()),
-            new Message("unknown")
+            new Message("unknown"),
         ],
         [
             "Destroy no payload",
             undefined,
             new EntityManager(new FakeMessageBus(), [], 0),
             new EntityManager(new FakeMessageBus(), [], 0),
-            new Message(Entity.MESSAGE_DESTROY)
+            new Message(Entity.MESSAGE_DESTROY),
         ],
         [
             "Destroy publish fail",
             new Error("fail to publish"),
             undefined,
-            new EntityManager(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), [], 0),
-            new Message<IEntity>(Entity.MESSAGE_DESTROY, new FakeEntity(0))
+            new EntityManager(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                [],
+                0
+            ),
+            new Message<IEntity>(Entity.MESSAGE_DESTROY, new FakeEntity(0)),
         ],
         [
             "Destroy success, remove from three component managers",
             undefined,
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", new Map([[1, new FakeComponent("test1")]])),
-                new ComponentManager("test2", new Map()),
-                new ComponentManager("test3", new Map())
-            ], 0),
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", new Map([[0, new FakeComponent("test1")], [1, new FakeComponent("test1")]])),
-                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
-                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
-            ], 0),
-            new Message<IEntity>(Entity.MESSAGE_DESTROY, new FakeEntity(0))
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager("test1", new Map([[1, new FakeComponent("test1")]])),
+                    new ComponentManager("test2", new Map()),
+                    new ComponentManager("test3", new Map()),
+                ],
+                0
+            ),
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager(
+                        "test1",
+                        new Map([
+                            [0, new FakeComponent("test1")],
+                            [1, new FakeComponent("test1")],
+                        ])
+                    ),
+                    new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                    new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]])),
+                ],
+                0
+            ),
+            new Message<IEntity>(Entity.MESSAGE_DESTROY, new FakeEntity(0)),
         ],
         [
             "Add no payload",
             undefined,
             new EntityManager(new FakeMessageBus(), [], 0),
             new EntityManager(new FakeMessageBus(), [], 0),
-            new Message(Component.MESSAGE_ADD)
+            new Message(Component.MESSAGE_ADD),
         ],
         [
             "Add, fail to publish",
             new Error("fail to publish"),
             undefined,
-            new EntityManager(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), [], 0),
-            new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")])
+            new EntityManager(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                [],
+                0
+            ),
+            new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")]),
         ],
         [
             "Add, success new component manager",
             undefined,
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test", new Map([[0, new FakeComponent("test")]]))
-            ], 0),
+            new EntityManager(
+                new FakeMessageBus(),
+                [new ComponentManager("test", new Map([[0, new FakeComponent("test")]]))],
+                0
+            ),
             new EntityManager(new FakeMessageBus(), [], 0),
-            new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")])
+            new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")]),
         ],
         [
             "Add, success existing component manager",
             undefined,
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test", new Map([[0, new FakeComponent("test")],[1, new FakeComponent("test")],[2, new FakeComponent("test") ]]))
-            ], 0),
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test", new Map([[1, new FakeComponent("test")],[2, new FakeComponent("test") ]]))
-            ], 0),
-            new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")])
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager(
+                        "test",
+                        new Map([
+                            [0, new FakeComponent("test")],
+                            [1, new FakeComponent("test")],
+                            [2, new FakeComponent("test")],
+                        ])
+                    ),
+                ],
+                0
+            ),
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager(
+                        "test",
+                        new Map([
+                            [1, new FakeComponent("test")],
+                            [2, new FakeComponent("test")],
+                        ])
+                    ),
+                ],
+                0
+            ),
+            new Message<[IEntity, Component]>(Component.MESSAGE_ADD, [new FakeEntity(0), new FakeComponent("test")]),
         ],
         [
             "Remove no payload",
             undefined,
             new EntityManager(new FakeMessageBus(), [], 0),
             new EntityManager(new FakeMessageBus(), [], 0),
-            new Message(Component.MESSAGE_REMOVE)
+            new Message(Component.MESSAGE_REMOVE),
         ],
         [
             "Remove, fail to publish",
             new Error("fail to publish"),
             undefined,
-            new EntityManager(new FakeMessageBus([new Reactor("Publish", () => { throw ("fail to publish"); })]), [
-                new ComponentManager("test")
-            ], 0),
-            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test"])
+            new EntityManager(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "fail to publish";
+                    }),
+                ]),
+                [new ComponentManager("test")],
+                0
+            ),
+            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test"]),
         ],
         [
             "Remove, no matching component manager",
             undefined,
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1")
-            ], 0),
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1")
-            ], 0),
-            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test2"])
+            new EntityManager(new FakeMessageBus(), [new ComponentManager("test1")], 0),
+            new EntityManager(new FakeMessageBus(), [new ComponentManager("test1")], 0),
+            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test2"]),
         ],
         [
             "Remove, found matching",
             undefined,
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", new Map()),
-                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
-                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
-            ], 0),
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", new Map([[0, new FakeComponent("test1")]])),
-                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
-                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
-            ], 0),
-            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test1"])
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager("test1", new Map()),
+                    new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                    new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]])),
+                ],
+                0
+            ),
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager("test1", new Map([[0, new FakeComponent("test1")]])),
+                    new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                    new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]])),
+                ],
+                0
+            ),
+            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test1"]),
         ],
         [
             "Remove, found matching",
             undefined,
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", new Map()),
-                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
-                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
-            ], 0),
-            new EntityManager(new FakeMessageBus(), [
-                new ComponentManager("test1", new Map([[0, new FakeComponent("test1")]])),
-                new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
-                new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]]))
-            ], 0),
-            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test1"])
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager("test1", new Map()),
+                    new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                    new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]])),
+                ],
+                0
+            ),
+            new EntityManager(
+                new FakeMessageBus(),
+                [
+                    new ComponentManager("test1", new Map([[0, new FakeComponent("test1")]])),
+                    new ComponentManager("test2", new Map([[0, new FakeComponent("test2")]])),
+                    new ComponentManager("test3", new Map([[0, new FakeComponent("test3")]])),
+                ],
+                0
+            ),
+            new Message<[IEntity, string]>(Component.MESSAGE_REMOVE, [new FakeEntity(0), "test1"]),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: EntityManager | undefined, entityManager: EntityManager, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => { entityManager.OnMessage(message); }).toThrow(expected);
-        } else {
-            expect(entityManager.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: EntityManager | undefined,
+            entityManager: EntityManager,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    entityManager.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(entityManager.OnMessage(message)).toEqual(expected);
+            }
+            if (expectedState instanceof EntityManager) {
+                expect(entityManager).toEqual(expectedState);
+            }
         }
-        if (expectedState instanceof EntityManager) {
-            expect(entityManager).toEqual(expectedState);
-        }
-    });
+    );
 });

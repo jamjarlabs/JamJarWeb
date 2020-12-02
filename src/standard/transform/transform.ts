@@ -59,10 +59,7 @@ class Transform extends Component {
      * @returns {Matrix3D} Matrix of transforms
      */
     public Matrix3D(): Matrix3D {
-        return new Matrix3D()
-            .Translate(this.position)
-            .Rotate(this.angle)
-            .Scale(this.scale);
+        return new Matrix3D().Translate(this.position).Rotate(this.angle).Scale(this.scale);
     }
 
     /**
@@ -70,10 +67,7 @@ class Transform extends Component {
      * @returns {Matrix4D} Matrix of transforms
      */
     public Matrix4D(): Matrix4D {
-        return new Matrix4D()
-            .Translate(this.position)
-            .Rotate(this.angle)
-            .Scale(this.scale);
+        return new Matrix4D().Translate(this.position).Rotate(this.angle).Scale(this.scale);
     }
 
     /**
@@ -87,11 +81,15 @@ class Transform extends Component {
      * @returns {Matrix4D} Matrix of the interpolated transform.
      */
     public InterpolatedMatrix4D(alpha: number): Matrix4D {
-        return new Matrix4D().Translate(
-            Vector.New(
-                this.previous.x * alpha + this.position.x * (1 - alpha),
-                this.previous.y * alpha + this.position.y * (1 - alpha)
-            )).Rotate(this.angle).Scale(this.scale);
+        return new Matrix4D()
+            .Translate(
+                Vector.New(
+                    this.previous.x * alpha + this.position.x * (1 - alpha),
+                    this.previous.y * alpha + this.position.y * (1 - alpha)
+                )
+            )
+            .Rotate(this.angle)
+            .Scale(this.scale);
     }
 
     public Free(): void {

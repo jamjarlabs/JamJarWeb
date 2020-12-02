@@ -43,7 +43,7 @@ class GLSLShader implements IShader {
     /**
      * Hook for injecting variables for the GLSL shader at the
      * per texture stage of the rendering process, runs once
-     * per texture used, should inject variables for texture specific, 
+     * per texture used, should inject variables for texture specific,
      * but not renderable specific variables.
      */
     public perTexture?: (context: GLSLContext, texture: WebGLTexture) => void;
@@ -53,13 +53,15 @@ class GLSLShader implements IShader {
      * per renderable used, should inject variables for renderable
      * specific variables.
      */
-    public perRenderable?: (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture, ) => void;
-    
-    constructor(type: string, 
-        source: string, 
-        perShader?: (context: GLSLContext) => void, 
-        perTexture?: (context: GLSLContext, texture: WebGLTexture) => void, 
-        perRenderable?: (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture) => void) {
+    public perRenderable?: (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture) => void;
+
+    constructor(
+        type: string,
+        source: string,
+        perShader?: (context: GLSLContext) => void,
+        perTexture?: (context: GLSLContext, texture: WebGLTexture) => void,
+        perRenderable?: (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture) => void
+    ) {
         this.type = type;
         this.source = source;
         this.perShader = perShader;

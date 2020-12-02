@@ -21,9 +21,7 @@ class ScriptAsset {
     public code: string;
     public error?: Error;
 
-    constructor(name: string,
-        code: string,
-        error?: Error) {
+    constructor(name: string, code: string, error?: Error) {
         this.name = name;
         this.code = code;
         this.error = error;

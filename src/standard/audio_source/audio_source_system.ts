@@ -30,12 +30,11 @@ import IMessage from "../../message/imessage";
  * associated with them with the Audio Web API.
  */
 class AudioSourceSystem extends System {
-
     /**
      * Only entities with an audio source.
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return components.some(component => component.key === AudioSource.KEY);
+        return components.some((component) => component.key === AudioSource.KEY);
     };
 
     /**
@@ -51,13 +50,15 @@ class AudioSourceSystem extends System {
      */
     private context: AudioContext;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
         instances: Map<number, AudioBufferSourceNode> = new Map(),
         assets: Map<string, AudioBuffer> = new Map(),
-        context: AudioContext = new AudioContext()) {
+        context: AudioContext = new AudioContext()
+    ) {
         super(messageBus, scene, AudioSourceSystem.EVALUATOR, entities, subscriberID);
 
         this.instances = instances;

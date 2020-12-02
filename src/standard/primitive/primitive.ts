@@ -52,10 +52,12 @@ class Primitive extends Component {
      */
     public drawMode: DrawMode;
 
-    constructor(material: Material,
+    constructor(
+        material: Material,
         zOrder: number,
         points: Polygon = Polygon.RectangleByDimensions(1, 1),
-        drawMode: DrawMode = DrawMode.LINE_STRIP) {
+        drawMode: DrawMode = DrawMode.LINE_STRIP
+    ) {
         super(Primitive.KEY);
         this.material = material;
         this.zOrder = zOrder;

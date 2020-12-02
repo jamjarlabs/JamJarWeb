@@ -29,259 +29,228 @@ describe("HTTPImageSystem - OnMessage", () => {
         [
             "Unknown message",
             undefined,
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new Message("unknown")
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new Message("unknown"),
         ],
         [
             "Flush, 3 images, publish fail",
             new Error("publish fail"),
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ImageAsset(
-                        "test", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test1", 
-                        new window.Image(), 
-                        false, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT,
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test2", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE,
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    )
-                ]
-            ),
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ImageAsset(
+                    "test",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+                new ImageAsset(
+                    "test1",
+                    new window.Image(),
+                    false,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+                new ImageAsset(
+                    "test2",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+            ]),
             new HTTPImageSystem(
                 new FakeMessageBus([
-                    new Reactor("Publish", () => { throw ("publish fail"); })
+                    new Reactor("Publish", () => {
+                        throw "publish fail";
+                    }),
                 ]),
                 undefined,
                 undefined,
                 0,
                 [
                     new ImageAsset(
-                        "test", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test1", 
-                        new window.Image(), 
-                        false, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT,
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test2", 
-                        new window.Image(), 
-                        true, 
+                        "test",
+                        new window.Image(),
+                        true,
                         TextureWrapping.CLAMP_TO_EDGE,
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST,
+                        TextureFiltering.BILINEAR,
                         false,
                         false
-                    )
+                    ),
+                    new ImageAsset(
+                        "test1",
+                        new window.Image(),
+                        false,
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST,
+                        TextureFiltering.BILINEAR,
+                        false,
+                        false
+                    ),
+                    new ImageAsset(
+                        "test2",
+                        new window.Image(),
+                        true,
+                        TextureWrapping.CLAMP_TO_EDGE,
+                        TextureWrapping.MIRRORED_REPEAT,
+                        TextureFiltering.NEAREST,
+                        TextureFiltering.BILINEAR,
+                        false,
+                        false
+                    ),
                 ]
             ),
-            new Message(HTTPImageSystem.MESSAGE_REQUEST_FLUSH)
+            new Message(HTTPImageSystem.MESSAGE_REQUEST_FLUSH),
         ],
         [
             "Flush, 3 images, publish fail",
             undefined,
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ImageAsset(
-                        "test", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        true
-                    ),
-                    new ImageAsset(
-                        "test1", 
-                        new window.Image(), 
-                        false, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT,
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test2", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE,
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    )
-                ]
-            ),
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ImageAsset(
-                        "test", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        true
-                    ),
-                    new ImageAsset(
-                        "test1", 
-                        new window.Image(), 
-                        false, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT,
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test2", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE,
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    )
-                ]
-            ),
-            new Message(HTTPImageSystem.MESSAGE_REQUEST_FLUSH)
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ImageAsset(
+                    "test",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    true
+                ),
+                new ImageAsset(
+                    "test1",
+                    new window.Image(),
+                    false,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+                new ImageAsset(
+                    "test2",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+            ]),
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ImageAsset(
+                    "test",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    true
+                ),
+                new ImageAsset(
+                    "test1",
+                    new window.Image(),
+                    false,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+                new ImageAsset(
+                    "test2",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+            ]),
+            new Message(HTTPImageSystem.MESSAGE_REQUEST_FLUSH),
         ],
         [
             "Clear, remove 3 images",
             undefined,
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                []
-            ),
-            new HTTPImageSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0,
-                [
-                    new ImageAsset(
-                        "test", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        true
-                    ),
-                    new ImageAsset(
-                        "test1", 
-                        new window.Image(), 
-                        false, 
-                        TextureWrapping.CLAMP_TO_EDGE, 
-                        TextureWrapping.MIRRORED_REPEAT,
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    ),
-                    new ImageAsset(
-                        "test2", 
-                        new window.Image(), 
-                        true, 
-                        TextureWrapping.CLAMP_TO_EDGE,
-                        TextureWrapping.MIRRORED_REPEAT, 
-                        TextureFiltering.NEAREST, 
-                        TextureFiltering.BILINEAR, 
-                        false,
-                        false
-                    )
-                ]
-            ),
-            new Message(HTTPImageSystem.MESSAGE_REQUEST_CLEAR)
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, []),
+            new HTTPImageSystem(new FakeMessageBus(), undefined, undefined, 0, [
+                new ImageAsset(
+                    "test",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    true
+                ),
+                new ImageAsset(
+                    "test1",
+                    new window.Image(),
+                    false,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+                new ImageAsset(
+                    "test2",
+                    new window.Image(),
+                    true,
+                    TextureWrapping.CLAMP_TO_EDGE,
+                    TextureWrapping.MIRRORED_REPEAT,
+                    TextureFiltering.NEAREST,
+                    TextureFiltering.BILINEAR,
+                    false,
+                    false
+                ),
+            ]),
+            new Message(HTTPImageSystem.MESSAGE_REQUEST_CLEAR),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: HTTPImageSystem, system: HTTPImageSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: HTTPImageSystem,
+            system: HTTPImageSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

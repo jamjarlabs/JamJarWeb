@@ -37,9 +37,7 @@ class PointerSystem extends System {
      * Ensure has Camera and Transform
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Camera.KEY, Transform.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return [Camera.KEY, Transform.KEY].every((type) => components.some((component) => component.key === type));
     };
 
     /**
@@ -75,7 +73,9 @@ class PointerSystem extends System {
      */
     private pointerEventsToPublish: PointerEvent[];
 
-    constructor(messageBus: IMessageBus, inputElement: HTMLElement,
+    constructor(
+        messageBus: IMessageBus,
+        inputElement: HTMLElement,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
@@ -84,9 +84,13 @@ class PointerSystem extends System {
         lastWheelEvent?: WheelEvent,
         lastMoveEvent?: PointerEvent,
         pointersToPublish: PointerEvent[] = [],
-        lastPublishedPointers: Pointer[] = []) {
+        lastPublishedPointers: Pointer[] = []
+    ) {
         super(messageBus, scene, PointerSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, [FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, FullscreenSystem.MESSAGE_EXIT_FULLSCREEN]);
+        this.messageBus.Subscribe(this, [
+            FullscreenSystem.MESSAGE_ENTER_FULLSCREEN,
+            FullscreenSystem.MESSAGE_EXIT_FULLSCREEN,
+        ]);
         this.inputElement = inputElement;
         this.pointerEventsToPublish = pointersToPublish;
         this.isFullscreen = isFullscreen;
@@ -190,8 +194,8 @@ class PointerSystem extends System {
         }
 
         const elementPosition = Vector.New(
-            ((pointerX - rect.left) - (rect.width / 2)) / (rect.width / 2),
-            -((pointerY - rect.top) - (rect.height / 2)) / (rect.height / 2)
+            (pointerX - rect.left - rect.width / 2) / (rect.width / 2),
+            -(pointerY - rect.top - rect.height / 2) / (rect.height / 2)
         );
 
         const pointerCameraInfos: PointerCameraInfo[] = [];
@@ -207,7 +211,8 @@ class PointerSystem extends System {
 
             const cameraWorldPosition = transform.position;
 
-            const withinBounds = elementPosition.x < viewportPosition.x + viewportScale.x &&
+            const withinBounds =
+                elementPosition.x < viewportPosition.x + viewportScale.x &&
                 elementPosition.x > viewportPosition.x - viewportScale.x &&
                 elementPosition.y < viewportPosition.y + viewportScale.y &&
                 elementPosition.y > viewportPosition.y - viewportScale.y;
@@ -224,12 +229,7 @@ class PointerSystem extends System {
                 cameraWorldPosition.y + virtualScale.y * (cameraPosition.y / 2)
             );
 
-            pointerCameraInfos.push(new PointerCameraInfo(
-                entity.entity,
-                cameraPosition,
-                worldPosition,
-                withinBounds
-            ));
+            pointerCameraInfos.push(new PointerCameraInfo(entity.entity, cameraPosition, worldPosition, withinBounds));
         }
         return new Pointer(event, elementPosition, pointerCameraInfos);
     }

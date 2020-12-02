@@ -34,7 +34,7 @@ class FakeEntity extends Fake implements IEntity {
     Add(component: Component): void {
         return;
     }
-    
+
     Remove(key: string): void {
         return;
     }

@@ -24,8 +24,8 @@ type Matrix4DValues = [
     [number, number, number, number],
     [number, number, number, number],
     [number, number, number, number],
-    [number, number, number, number],
-]
+    [number, number, number, number]
+];
 
 /**
  * Matrix4D is the representation of a 4x4 matrix.
@@ -35,8 +35,8 @@ type Matrix4DValues = [
  * https://github.com/toji/gl-matrix
  */
 class Matrix4D {
-    private static readonly Z_AXIS: Float32Array = new Float32Array([0,0,1]);
-    public data: Float32Array
+    private static readonly Z_AXIS: Float32Array = new Float32Array([0, 0, 1]);
+    public data: Float32Array;
 
     constructor() {
         this.data = new Float32Array(16);
@@ -59,7 +59,6 @@ class Matrix4D {
         this.data[13] = 0;
         this.data[14] = 0;
         this.data[15] = 1;
-
     }
 
     public Set(values: Matrix4DValues): Matrix4D {
@@ -131,7 +130,7 @@ class Matrix4D {
      * @param {number} angle The angle in degrees to rotate the matrix by
      */
     public RotateDeg(angle: number): Matrix4D {
-        return this.Rotate(angle * (Math.PI/180));
+        return this.Rotate(angle * (Math.PI / 180));
     }
 
     /**
@@ -146,7 +145,7 @@ class Matrix4D {
      */
     public Ortho(left: number, right: number, bottom: number, top: number, near: number, far: number): Matrix4D {
         if (left === right || bottom === top || near === far) {
-            throw("Invalid parameters for Orthograhic projection, will result in division by zero.");
+            throw "Invalid parameters for Orthograhic projection, will result in division by zero.";
         }
 
         mat4.ortho(this.data, left, right, bottom, top, near, far);

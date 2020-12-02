@@ -32,7 +32,7 @@ enum TextAlignment {
      * Right Align text, farthest right point of the text is set to the
      * transform position.
      */
-    Right = 2
+    Right = 2,
 }
 
 export default TextAlignment;

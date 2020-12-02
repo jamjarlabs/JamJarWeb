@@ -24,7 +24,6 @@ import AABBAlgorithm from "../collision/algorithm/aabb_algorithm";
  * colliding) - used in rendering to avoid unneccesary rendering.
  */
 class FrustumCuller implements IFrustumCuller {
-
     private collisionAlgorithm: ICollisionAlgorithm;
 
     constructor(collisionAlgorithm: ICollisionAlgorithm = new AABBAlgorithm()) {

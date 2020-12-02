@@ -55,7 +55,7 @@ describe("AudioSourceSystem - Update", () => {
                 undefined,
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "No entities, clear instances",
@@ -74,13 +74,11 @@ describe("AudioSourceSystem - Update", () => {
                 undefined,
                 new Map<number, SystemEntity>(),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new AudioBufferSourceNode(new AudioContext())]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new AudioBufferSourceNode(new AudioContext())]]),
                 undefined,
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "1 entity, 2 instances, clear unused",
@@ -88,35 +86,25 @@ describe("AudioSourceSystem - Update", () => {
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test")
-                    ])]
-                ]),
+                new Map<number, SystemEntity>([[0, new SystemEntity(new FakeEntity(0), [new AudioSource("test")])]]),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new AudioBufferSourceNode(new AudioContext())]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new AudioBufferSourceNode(new AudioContext())]]),
                 undefined,
                 undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test")
-                    ])]
-                ]),
+                new Map<number, SystemEntity>([[0, new SystemEntity(new FakeEntity(0), [new AudioSource("test")])]]),
                 0,
                 new Map<number, AudioBufferSourceNode>([
                     [0, new AudioBufferSourceNode(new AudioContext())],
-                    [1, new AudioBufferSourceNode(new AudioContext())]
+                    [1, new AudioBufferSourceNode(new AudioContext())],
                 ]),
                 undefined,
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "No loaded asset",
@@ -124,11 +112,7 @@ describe("AudioSourceSystem - Update", () => {
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test")
-                    ])]
-                ]),
+                new Map<number, SystemEntity>([[0, new SystemEntity(new FakeEntity(0), [new AudioSource("test")])]]),
                 0,
                 undefined,
                 undefined,
@@ -137,17 +121,13 @@ describe("AudioSourceSystem - Update", () => {
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test")
-                    ])]
-                ]),
+                new Map<number, SystemEntity>([[0, new SystemEntity(new FakeEntity(0), [new AudioSource("test")])]]),
                 0,
                 undefined,
                 undefined,
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Not playing, no instance",
@@ -156,37 +136,39 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false
-                        })
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource("test", {
+                                playing: false,
+                            }),
+                        ]),
+                    ],
                 ]),
                 0,
                 undefined,
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false
-                        })
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource("test", {
+                                playing: false,
+                            }),
+                        ]),
+                    ],
                 ]),
                 0,
                 undefined,
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Not playing, stop instance",
@@ -195,39 +177,39 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false
-                        })
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource("test", {
+                                playing: false,
+                            }),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>(),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false
-                        })
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource("test", {
+                                playing: false,
+                            }),
+                        ]),
+                    ],
                 ]),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new FakeAudioBufferSourceNode()]
-                ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new FakeAudioBufferSourceNode()]]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Playing, played more times than loop max",
@@ -236,43 +218,49 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false,
-                            loop: 3
-                        }, 0)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: false,
+                                    loop: 3,
+                                },
+                                0
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new FakeAudioBufferSourceNode()]
-                ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new FakeAudioBufferSourceNode()]]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3
-                        }, 5)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                },
+                                5
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new FakeAudioBufferSourceNode()]
-                ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new FakeAudioBufferSourceNode()]]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Playing, below max loops, instance already exists",
@@ -281,43 +269,49 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3
-                        }, 1)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                },
+                                1
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new FakeAudioBufferSourceNode()]
-                ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new FakeAudioBufferSourceNode()]]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3
-                        }, 1)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                },
+                                1
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
-                new Map<number, AudioBufferSourceNode>([
-                    [0, new FakeAudioBufferSourceNode()]
-                ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<number, AudioBufferSourceNode>([[0, new FakeAudioBufferSourceNode()]]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Playing, below max loops, new instance, no audio processor",
@@ -326,59 +320,80 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3
-                        }, 2)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                },
+                                2
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>([
-                    [0, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 1;
-                        source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
-                        source.onended = function (): void { return; }.bind(null);
-                        return source;
-                    })()]
+                    [
+                        0,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 1;
+                            source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
+                            source.onended = function (): void {
+                                return;
+                            }.bind(null);
+                            return source;
+                        })(),
+                    ],
                 ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 new FakeAudioContext()
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3
-                        }, 1)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                },
+                                1
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>(),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 new FakeAudioContext([
-                    new Reactor("createBufferSource", (): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        return source;
-                    }),
-                    new Reactor("createGain", (): GainNode => {
-                        const gain = new FakeGainNode();
-                        gain.gain = new AudioParam();
-                        return gain;
-                    }),
+                    new Reactor(
+                        "createBufferSource",
+                        (): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            return source;
+                        }
+                    ),
+                    new Reactor(
+                        "createGain",
+                        (): GainNode => {
+                            const gain = new FakeGainNode();
+                            gain.gain = new AudioParam();
+                            return gain;
+                        }
+                    ),
                 ])
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Playing, below max loops, new instance, audio processor provided",
@@ -387,61 +402,82 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3,
-                            audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode()
-                        }, 2)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                    audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode(),
+                                },
+                                2
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>([
-                    [0, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 1;
-                        source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
-                        source.onended = function (): void { return; }.bind(null);
-                        return source;
-                    })()]
+                    [
+                        0,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 1;
+                            source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
+                            source.onended = function (): void {
+                                return;
+                            }.bind(null);
+                            return source;
+                        })(),
+                    ],
                 ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 new FakeAudioContext()
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: 3,
-                            audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode()
-                        }, 1)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: 3,
+                                    audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode(),
+                                },
+                                1
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>(),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 new FakeAudioContext([
-                    new Reactor("createBufferSource", (): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        return source;
-                    }),
-                    new Reactor("createGain", (): GainNode => {
-                        const gain = new FakeGainNode();
-                        gain.gain = new AudioParam();
-                        return gain;
-                    }),
+                    new Reactor(
+                        "createBufferSource",
+                        (): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            return source;
+                        }
+                    ),
+                    new Reactor(
+                        "createGain",
+                        (): GainNode => {
+                            const gain = new FakeGainNode();
+                            gain.gain = new AudioParam();
+                            return gain;
+                        }
+                    ),
                 ])
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Playing, infinite, new instance, no audio processor",
@@ -450,59 +486,80 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: -1
-                        }, 16)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: -1,
+                                },
+                                16
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>([
-                    [0, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 1;
-                        source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
-                        source.onended = function (): void { return; }.bind(null);
-                        return source;
-                    })()]
+                    [
+                        0,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 1;
+                            source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
+                            source.onended = function (): void {
+                                return;
+                            }.bind(null);
+                            return source;
+                        })(),
+                    ],
                 ]),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 new FakeAudioContext()
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: true,
-                            loop: -1
-                        }, 15)
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: true,
+                                    loop: -1,
+                                },
+                                15
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>(),
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 1 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 1 })]]),
                 new FakeAudioContext([
-                    new Reactor("createBufferSource", (): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        return source;
-                    }),
-                    new Reactor("createGain", (): GainNode => {
-                        const gain = new FakeGainNode();
-                        gain.gain = new AudioParam();
-                        return gain;
-                    }),
+                    new Reactor(
+                        "createBufferSource",
+                        (): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            return source;
+                        }
+                    ),
+                    new Reactor(
+                        "createGain",
+                        (): GainNode => {
+                            const gain = new FakeGainNode();
+                            gain.gain = new AudioParam();
+                            return gain;
+                        }
+                    ),
                 ])
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "5 entities, 1 not playing, 1 looped more than max, 1 already playing, 1 audio processor, 1 no audio processor",
@@ -511,72 +568,120 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false,
-                            loop: -1
-                        }, 0)
-                    ])],
-                    [1, new SystemEntity(new FakeEntity(1), [
-                        new AudioSource("test1", {
-                            playing: false,
-                            loop: 5
-                        }, 0)
-                    ])],
-                    [2, new SystemEntity(new FakeEntity(2), [
-                        new AudioSource("test2", {
-                            playing: true,
-                            loop: 5,
-                            playbackRate: 0.2,
-                        }, 2)
-                    ])],
-                    [3, new SystemEntity(new FakeEntity(3), [
-                        new AudioSource("test3", {
-                            playing: true,
-                            loop: -1,
-                            playbackRate: 0.3,
-                        }, 3)
-                    ])],
-                    [4, new SystemEntity(new FakeEntity(4), [
-                        new AudioSource("test3", {
-                            playing: true,
-                            loop: -1,
-                            playbackRate: 0.4,
-                            audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode()
-                        }, 3)
-                    ])],
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: false,
+                                    loop: -1,
+                                },
+                                0
+                            ),
+                        ]),
+                    ],
+                    [
+                        1,
+                        new SystemEntity(new FakeEntity(1), [
+                            new AudioSource(
+                                "test1",
+                                {
+                                    playing: false,
+                                    loop: 5,
+                                },
+                                0
+                            ),
+                        ]),
+                    ],
+                    [
+                        2,
+                        new SystemEntity(new FakeEntity(2), [
+                            new AudioSource(
+                                "test2",
+                                {
+                                    playing: true,
+                                    loop: 5,
+                                    playbackRate: 0.2,
+                                },
+                                2
+                            ),
+                        ]),
+                    ],
+                    [
+                        3,
+                        new SystemEntity(new FakeEntity(3), [
+                            new AudioSource(
+                                "test3",
+                                {
+                                    playing: true,
+                                    loop: -1,
+                                    playbackRate: 0.3,
+                                },
+                                3
+                            ),
+                        ]),
+                    ],
+                    [
+                        4,
+                        new SystemEntity(new FakeEntity(4), [
+                            new AudioSource(
+                                "test3",
+                                {
+                                    playing: true,
+                                    loop: -1,
+                                    playbackRate: 0.4,
+                                    audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode(),
+                                },
+                                3
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>([
-                    [2, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 0.2;
-                        return source;
-                    })()],
-                    [3, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 0.3;
-                        source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
-                        source.onended = function (): void { return; }.bind(null);
-                        return source;
-                    })()],
-                    [4, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 0.4;
-                        source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
-                        source.onended = function (): void { return; }.bind(null);
-                        return source;
-                    })()]
+                    [
+                        2,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 0.2;
+                            return source;
+                        })(),
+                    ],
+                    [
+                        3,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 0.3;
+                            source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
+                            source.onended = function (): void {
+                                return;
+                            }.bind(null);
+                            return source;
+                        })(),
+                    ],
+                    [
+                        4,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 0.4;
+                            source.buffer = new AudioBuffer({ length: 0, sampleRate: 0 });
+                            source.onended = function (): void {
+                                return;
+                            }.bind(null);
+                            return source;
+                        })(),
+                    ],
                 ]),
                 new Map<string, AudioBuffer>([
                     ["test", new AudioBuffer({ length: 0, sampleRate: 1 })],
                     ["test1", new AudioBuffer({ length: 0, sampleRate: 1 })],
                     ["test2", new AudioBuffer({ length: 0, sampleRate: 1 })],
                     ["test3", new AudioBuffer({ length: 0, sampleRate: 1 })],
-                    ["test4", new AudioBuffer({ length: 0, sampleRate: 1 })]
+                    ["test4", new AudioBuffer({ length: 0, sampleRate: 1 })],
                 ]),
                 new FakeAudioContext()
             ),
@@ -584,83 +689,136 @@ describe("AudioSourceSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test", {
-                            playing: false,
-                            loop: -1
-                        }, 0)
-                    ])],
-                    [1, new SystemEntity(new FakeEntity(1), [
-                        new AudioSource("test1", {
-                            playing: true,
-                            loop: 5
-                        }, 7)
-                    ])],
-                    [2, new SystemEntity(new FakeEntity(2), [
-                        new AudioSource("test2", {
-                            playing: true,
-                            loop: 5,
-                            playbackRate: 0.2,
-                        }, 2)
-                    ])],
-                    [3, new SystemEntity(new FakeEntity(3), [
-                        new AudioSource("test3", {
-                            playing: true,
-                            loop: -1,
-                            playbackRate: 0.3,
-                        }, 2)
-                    ])],
-                    [4, new SystemEntity(new FakeEntity(4), [
-                        new AudioSource("test3", {
-                            playing: true,
-                            loop: -1,
-                            playbackRate: 0.4,
-                            audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode()
-                        }, 2)
-                    ])],
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new AudioSource(
+                                "test",
+                                {
+                                    playing: false,
+                                    loop: -1,
+                                },
+                                0
+                            ),
+                        ]),
+                    ],
+                    [
+                        1,
+                        new SystemEntity(new FakeEntity(1), [
+                            new AudioSource(
+                                "test1",
+                                {
+                                    playing: true,
+                                    loop: 5,
+                                },
+                                7
+                            ),
+                        ]),
+                    ],
+                    [
+                        2,
+                        new SystemEntity(new FakeEntity(2), [
+                            new AudioSource(
+                                "test2",
+                                {
+                                    playing: true,
+                                    loop: 5,
+                                    playbackRate: 0.2,
+                                },
+                                2
+                            ),
+                        ]),
+                    ],
+                    [
+                        3,
+                        new SystemEntity(new FakeEntity(3), [
+                            new AudioSource(
+                                "test3",
+                                {
+                                    playing: true,
+                                    loop: -1,
+                                    playbackRate: 0.3,
+                                },
+                                2
+                            ),
+                        ]),
+                    ],
+                    [
+                        4,
+                        new SystemEntity(new FakeEntity(4), [
+                            new AudioSource(
+                                "test3",
+                                {
+                                    playing: true,
+                                    loop: -1,
+                                    playbackRate: 0.4,
+                                    audioProcessor: (): AudioNode => new FakeAudioBufferSourceNode(),
+                                },
+                                2
+                            ),
+                        ]),
+                    ],
                 ]),
                 0,
                 new Map<number, AudioBufferSourceNode>([
-                    [2, ((): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        source.playbackRate.value = 0.2;
-                        return source;
-                    })()]
+                    [
+                        2,
+                        ((): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            source.playbackRate.value = 0.2;
+                            return source;
+                        })(),
+                    ],
                 ]),
                 new Map<string, AudioBuffer>([
                     ["test", new AudioBuffer({ length: 0, sampleRate: 1 })],
                     ["test1", new AudioBuffer({ length: 0, sampleRate: 1 })],
                     ["test2", new AudioBuffer({ length: 0, sampleRate: 1 })],
                     ["test3", new AudioBuffer({ length: 0, sampleRate: 1 })],
-                    ["test4", new AudioBuffer({ length: 0, sampleRate: 1 })]
+                    ["test4", new AudioBuffer({ length: 0, sampleRate: 1 })],
                 ]),
                 new FakeAudioContext([
-                    new Reactor("createBufferSource", (): AudioBufferSourceNode => {
-                        const source = new FakeAudioBufferSourceNode();
-                        source.playbackRate = new AudioParam();
-                        return source;
-                    }),
-                    new Reactor("createGain", (): GainNode => {
-                        const gain = new FakeGainNode();
-                        gain.gain = new AudioParam();
-                        return gain;
-                    }),
+                    new Reactor(
+                        "createBufferSource",
+                        (): AudioBufferSourceNode => {
+                            const source = new FakeAudioBufferSourceNode();
+                            source.playbackRate = new AudioParam();
+                            return source;
+                        }
+                    ),
+                    new Reactor(
+                        "createGain",
+                        (): GainNode => {
+                            const gain = new FakeGainNode();
+                            gain.gain = new AudioParam();
+                            return gain;
+                        }
+                    ),
                 ])
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 0)
-        ]
-    ])("%p", (description: string, expected: Error | undefined, expectedState: AudioSourceSystem, system: AudioSourceSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+            new Message<number>(System.MESSAGE_UPDATE, 0),
+        ],
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: AudioSourceSystem,
+            system: AudioSourceSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            // Workaround for comparing anonymous/bound functions
+            expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
         }
-        // Workaround for comparing anonymous/bound functions
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
-    });
+    );
 });
 
 describe("AudioSourceSystem - Load", () => {
@@ -687,7 +845,7 @@ describe("AudioSourceSystem - Load", () => {
                 undefined,
                 undefined
             ),
-            new Message(AudioAsset.MESSAGE_FINISH_LOAD)
+            new Message(AudioAsset.MESSAGE_FINISH_LOAD),
         ],
         [
             "Asset has error",
@@ -710,13 +868,10 @@ describe("AudioSourceSystem - Load", () => {
                 undefined,
                 undefined
             ),
-            new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD,
-                new AudioAsset(
-                    "test",
-                    new AudioBuffer({ length: 0, sampleRate: 0 }),
-                    new Error("test error message")
-                )
-            )
+            new Message<AudioAsset>(
+                AudioAsset.MESSAGE_FINISH_LOAD,
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }), new Error("test error message"))
+            ),
         ],
         [
             "Success",
@@ -727,9 +882,7 @@ describe("AudioSourceSystem - Load", () => {
                 new Map<number, SystemEntity>(),
                 0,
                 undefined,
-                new Map<string, AudioBuffer>([
-                    ["test", new AudioBuffer({ length: 0, sampleRate: 0 })]
-                ]),
+                new Map<string, AudioBuffer>([["test", new AudioBuffer({ length: 0, sampleRate: 0 })]]),
                 undefined
             ),
             new AudioSourceSystem(
@@ -741,24 +894,31 @@ describe("AudioSourceSystem - Load", () => {
                 undefined,
                 undefined
             ),
-            new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD,
-                new AudioAsset(
-                    "test",
-                    new AudioBuffer({ length: 0, sampleRate: 0 }),
-                )
-            )
-        ]
-    ])("%p", (description: string, expected: Error | undefined, expectedState: AudioSourceSystem, system: AudioSourceSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+            new Message<AudioAsset>(
+                AudioAsset.MESSAGE_FINISH_LOAD,
+                new AudioAsset("test", new AudioBuffer({ length: 0, sampleRate: 0 }))
+            ),
+        ],
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: AudioSourceSystem,
+            system: AudioSourceSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            // Workaround for comparing anonymous/bound functions
+            expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
         }
-        // Workaround for comparing anonymous/bound functions
-        expect(JSON.stringify(system)).toEqual(JSON.stringify(expectedState));
-    });
+    );
 });
 
 class TestAudioSourceSystem extends AudioSourceSystem {
@@ -780,10 +940,10 @@ describe("AudioSourceSystem - Audio finished playing", () => {
                 0,
                 new Map<number, AudioBufferSourceNode>([
                     [3, new FakeAudioBufferSourceNode()],
-                    [2, new FakeAudioBufferSourceNode()]
+                    [2, new FakeAudioBufferSourceNode()],
                 ]),
                 undefined,
-                undefined,
+                undefined
             ),
             new TestAudioSourceSystem(
                 new FakeMessageBus(),
@@ -793,26 +953,33 @@ describe("AudioSourceSystem - Audio finished playing", () => {
                 new Map<number, AudioBufferSourceNode>([
                     [0, new FakeAudioBufferSourceNode()],
                     [3, new FakeAudioBufferSourceNode()],
-                    [2, new FakeAudioBufferSourceNode()]
+                    [2, new FakeAudioBufferSourceNode()],
                 ]),
                 undefined,
-                undefined,
+                undefined
             ),
-            0
+            0,
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: TestAudioSourceSystem, system: TestAudioSourceSystem, entityID: number) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.SimulateAudioEnd(entityID);
-            }).toThrow(expected);
-        } else {
-            expect(system.SimulateAudioEnd(entityID)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: TestAudioSourceSystem,
+            system: TestAudioSourceSystem,
+            entityID: number
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateAudioEnd(entityID);
+                }).toThrow(expected);
+            } else {
+                expect(system.SimulateAudioEnd(entityID)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
-
-
 
 describe("AudioSourceSystem - Register", () => {
     type TestTuple = [string, Error | undefined, AudioSourceSystem, AudioSourceSystem, IMessage];
@@ -827,7 +994,7 @@ describe("AudioSourceSystem - Register", () => {
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
@@ -836,12 +1003,9 @@ describe("AudioSourceSystem - Register", () => {
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                ]
-            ])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Reject, missing AudioSource",
@@ -853,7 +1017,7 @@ describe("AudioSourceSystem - Register", () => {
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
@@ -862,13 +1026,9 @@ describe("AudioSourceSystem - Register", () => {
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new Transform()
-                ]
-            ])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
         ],
         [
             "Accept",
@@ -876,15 +1036,11 @@ describe("AudioSourceSystem - Register", () => {
             new AudioSourceSystem(
                 new FakeMessageBus(),
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new AudioSource("test")
-                    ])]
-                ]),
+                new Map<number, SystemEntity>([[0, new SystemEntity(new FakeEntity(0), [new AudioSource("test")])]]),
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
             new AudioSourceSystem(
                 new FakeMessageBus(),
@@ -893,22 +1049,30 @@ describe("AudioSourceSystem - Register", () => {
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new AudioSource("test")
-                ]
-            ])
+                new FakeEntity(0),
+                [new AudioSource("test")],
+            ]),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: AudioSourceSystem, system: AudioSourceSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: AudioSourceSystem,
+            system: AudioSourceSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

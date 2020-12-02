@@ -31,17 +31,33 @@ class FakeAudioBufferSourceNode extends Fake implements AudioBufferSourceNode {
     numberOfInputs!: number;
     numberOfOutputs!: number;
     onended!: ((this: AudioScheduledSourceNode, ev: Event) => any) | null;
-    
+
     start(when?: number | undefined, offset?: number | undefined, duration?: number | undefined): void {
         return;
     }
-    addEventListener<K extends "ended">(type: K, listener: (this: AudioBufferSourceNode, ev: AudioScheduledSourceNodeEventMap[K]) => any, options?: boolean | AddEventListenerOptions | undefined): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
+    addEventListener<K extends "ended">(
+        type: K,
+        listener: (this: AudioBufferSourceNode, ev: AudioScheduledSourceNodeEventMap[K]) => any,
+        options?: boolean | AddEventListenerOptions | undefined
+    ): void;
+    addEventListener(
+        type: string,
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | AddEventListenerOptions | undefined
+    ): void;
     addEventListener(type: any, listener: any, options?: any) {
         return;
     }
-    removeEventListener<K extends "ended">(type: K, listener: (this: AudioBufferSourceNode, ev: AudioScheduledSourceNodeEventMap[K]) => any, options?: boolean | EventListenerOptions | undefined): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void;
+    removeEventListener<K extends "ended">(
+        type: K,
+        listener: (this: AudioBufferSourceNode, ev: AudioScheduledSourceNodeEventMap[K]) => any,
+        options?: boolean | EventListenerOptions | undefined
+    ): void;
+    removeEventListener(
+        type: string,
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | EventListenerOptions | undefined
+    ): void;
     removeEventListener(type: any, listener: any, options?: any) {
         return;
     }
@@ -66,7 +82,6 @@ class FakeAudioBufferSourceNode extends Fake implements AudioBufferSourceNode {
     dispatchEvent(event: Event): boolean {
         return false;
     }
-
 }
 
 export default FakeAudioBufferSourceNode;

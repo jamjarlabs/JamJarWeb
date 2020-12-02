@@ -38,23 +38,24 @@ class Ellipse implements IShape {
 
     public Transform(transform: Transform): IShape {
         const matrix = transform.Matrix3D();
-        this.dimensions.Multiply(transform.scale),
-        this.orientation += transform.angle,
-        this.center.Apply3D(matrix);
+        this.dimensions.Multiply(transform.scale), (this.orientation += transform.angle), this.center.Apply3D(matrix);
         return this;
     }
 
     public PointInside(point: Vector): boolean {
-        return Math.pow(point.x - this.center.x, 2) / Math.pow(this.dimensions.x, 2) +
-            Math.pow(point.y - this.center.y, 2) / Math.pow(this.dimensions.y, 2) <= 1;
+        return (
+            Math.pow(point.x - this.center.x, 2) / Math.pow(this.dimensions.x, 2) +
+                Math.pow(point.y - this.center.y, 2) / Math.pow(this.dimensions.y, 2) <=
+            1
+        );
     }
 
     public FarthestPointInDirection(direction: Vector): Vector {
         const angle = Math.atan2(direction.y, direction.x);
         const angledDimensions = this.dimensions.Rotate(Vector.New(0, 0), this.orientation);
         return Vector.New(
-            this.center.x + (angledDimensions.x * Math.cos(angle)),
-            this.center.y + (angledDimensions.y * Math.sin(angle))
+            this.center.x + angledDimensions.x * Math.cos(angle),
+            this.center.y + angledDimensions.y * Math.sin(angle)
         );
     }
 
@@ -64,11 +65,7 @@ class Ellipse implements IShape {
     }
 
     public Copy(): Ellipse {
-        return new Ellipse(
-            this.dimensions.Copy(),
-            this.orientation,
-            this.center.Copy()
-        );
+        return new Ellipse(this.dimensions.Copy(), this.orientation, this.center.Copy());
     }
 
     /**
@@ -79,7 +76,6 @@ class Ellipse implements IShape {
     public static Circle(radius: number, centerX = 0, centerY = 0): Ellipse {
         return new Ellipse(Vector.New(radius, radius), 0, Vector.New(centerX, centerY));
     }
-
 }
 
 export default Ellipse;

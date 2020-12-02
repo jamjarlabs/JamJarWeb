@@ -17,6 +17,6 @@ limitations under the License.
 import IEntity from "../entity/ientity";
 import Component from "../component/component";
 
-type Evaluator = (entity: IEntity, components: Component[]) => boolean
+type Evaluator = (entity: IEntity, components: Component[]) => boolean;
 
 export default Evaluator;

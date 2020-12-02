@@ -18,12 +18,7 @@ import Vector from "./vector";
 import Matrix3D from "./matrix_3d";
 
 describe("Matrix3D - Translate", () => {
-    type TestTuple = [
-        string,
-        Matrix3D,
-        Matrix3D,
-        Vector
-    ];
+    type TestTuple = [string, Matrix3D, Matrix3D, Vector];
     test.each<TestTuple>([
         [
             "Translate up 3",
@@ -37,7 +32,7 @@ describe("Matrix3D - Translate", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            new Vector(0, 3)
+            new Vector(0, 3),
         ],
         [
             "Translate up 5 and right 3",
@@ -51,7 +46,7 @@ describe("Matrix3D - Translate", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            new Vector(3, 5)
+            new Vector(3, 5),
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, translation: Vector) => {
         matrix.Translate(translation);
@@ -60,12 +55,7 @@ describe("Matrix3D - Translate", () => {
 });
 
 describe("Matrix3D - Scale", () => {
-    type TestTuple = [
-        string,
-        Matrix3D,
-        Matrix3D,
-        Vector
-    ];
+    type TestTuple = [string, Matrix3D, Matrix3D, Vector];
     test.each<TestTuple>([
         [
             "Scale y by 3",
@@ -79,7 +69,7 @@ describe("Matrix3D - Scale", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            new Vector(1, 3)
+            new Vector(1, 3),
         ],
         [
             "Scale y by 5 and x by 3",
@@ -93,7 +83,7 @@ describe("Matrix3D - Scale", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            new Vector(3, 5)
+            new Vector(3, 5),
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, scale: Vector) => {
         matrix.Scale(scale);
@@ -102,12 +92,7 @@ describe("Matrix3D - Scale", () => {
 });
 
 describe("Matrix3D - Rotate", () => {
-    type TestTuple = [
-        string,
-        Matrix3D,
-        Matrix3D,
-        number
-    ];
+    type TestTuple = [string, Matrix3D, Matrix3D, number];
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
@@ -121,7 +106,7 @@ describe("Matrix3D - Rotate", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            Math.PI / 4
+            Math.PI / 4,
         ],
         [
             "Rotate by 180 degrees",
@@ -135,7 +120,7 @@ describe("Matrix3D - Rotate", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            Math.PI
+            Math.PI,
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, rotation: number) => {
         matrix.Rotate(rotation);
@@ -144,12 +129,7 @@ describe("Matrix3D - Rotate", () => {
 });
 
 describe("Matrix3D - RotateDeg", () => {
-    type TestTuple = [
-        string,
-        Matrix3D,
-        Matrix3D,
-        number
-    ];
+    type TestTuple = [string, Matrix3D, Matrix3D, number];
     test.each<TestTuple>([
         [
             "Rotate by 45 degrees",
@@ -163,7 +143,7 @@ describe("Matrix3D - RotateDeg", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            45
+            45,
         ],
         [
             "Rotate by 180 degrees",
@@ -177,7 +157,7 @@ describe("Matrix3D - RotateDeg", () => {
                 [0, 1, 0],
                 [0, 0, 1],
             ]),
-            180
+            180,
         ],
     ])("%p", (description: string, expectedState: Matrix3D, matrix: Matrix3D, rotation: number) => {
         matrix.RotateDeg(rotation);
@@ -186,11 +166,7 @@ describe("Matrix3D - RotateDeg", () => {
 });
 
 describe("Matrix3D - GetFloat32Array", () => {
-    type TestTuple = [
-        string,
-        Float32Array,
-        Matrix3D
-    ];
+    type TestTuple = [string, Float32Array, Matrix3D];
     test.each<TestTuple>([
         [
             "Success",

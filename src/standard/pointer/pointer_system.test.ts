@@ -38,37 +38,36 @@ describe("PointerSystem - OnMessage", () => {
         [
             "Register - Correctly register new entity, none existing",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 document.createElement("canvas"),
                 undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])]
-                ]),
+                new Map([[0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])]]),
                 0
             ),
-            new PointerSystem(new FakeMessageBus(),
-                document.createElement("canvas"),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera(), new Transform()]])
+            new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Camera(), new Transform()],
+            ]),
         ],
         [
             "Register - Correctly register new entity, three existing",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 document.createElement("canvas"),
                 undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])],
                     [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
                     [2, new SystemEntity(new FakeEntity(2), [new Camera(), new Transform()])],
-                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])]
+                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])],
                 ]),
                 0
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 document.createElement("canvas"),
                 undefined,
                 new Map([
@@ -78,60 +77,54 @@ describe("PointerSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(3), [new Camera(), new Transform()]])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+                new FakeEntity(3),
+                [new Camera(), new Transform()],
+            ]),
         ],
         [
             "Register - Correctly reject new entity, missing transform",
             undefined,
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
         ],
         [
             "Register - Correctly reject new entity, missing camera",
             undefined,
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]])
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
         ],
         [
             "Enter Fullscreen - Mark as fullscreen",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
-                document.createElement("canvas"),
-                undefined,
-                undefined,
-                0,
-                true
-            ),
-            new PointerSystem(new FakeMessageBus(),
-                document.createElement("canvas"),
-                undefined,
-                undefined,
-                0,
-                false
-            ),
-            new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, [new FakeEntity(0), [new Transform()]])
+            new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0, true),
+            new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0, false),
+            new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_ENTER_FULLSCREEN, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Exit Fullscreen - Mark as not fullscreen and clear locked pointer position",
             undefined,
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
-            new PointerSystem(new FakeMessageBus(),
-                document.createElement("canvas"),
-                undefined,
-                undefined,
-                0,
-                true
-            ),
-            new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN, [new FakeEntity(0), [new Transform()]])
+            new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0, true),
+            new Message<[IEntity, Component[]]>(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Update, no wheel message",
             undefined,
-            new PointerSystem(new FakeMessageBus([
-                new Reactor("Publish", () => { throw("unexpected wheel event publish"); })
-            ]),
+            new PointerSystem(
+                new FakeMessageBus([
+                    new Reactor("Publish", () => {
+                        throw "unexpected wheel event publish";
+                    }),
+                ]),
                 document.createElement("canvas"),
                 undefined,
                 undefined,
@@ -140,7 +133,8 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 undefined
             ),
-             new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 document.createElement("canvas"),
                 undefined,
                 undefined,
@@ -149,12 +143,13 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 undefined
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, wheel message",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 document.createElement("canvas"),
                 undefined,
                 undefined,
@@ -163,7 +158,8 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 undefined
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 document.createElement("canvas"),
                 undefined,
                 undefined,
@@ -172,12 +168,13 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 new WheelEvent("test")
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, move message, not fullscreen, no cameras",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -198,10 +195,11 @@ describe("PointerSystem - OnMessage", () => {
                         new PointerEvent("pointermove", { clientX: 3, clientY: 2 }),
                         new Vector(0.6000000238418579, 1.600000023841858),
                         []
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -217,12 +215,13 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 new PointerEvent("pointermove", { clientX: 3, clientY: 2 })
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, move message, not fullscreen, one camera",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -232,10 +231,13 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
@@ -253,12 +255,13 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(0.6000000238418579, 1.600000023841858),
                                 new Vector(3, 8),
                                 false
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -268,10 +271,13 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
@@ -279,12 +285,13 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 new PointerEvent("pointermove", { clientX: 3, clientY: 2 })
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, pointer message, not fullscreen, no cameras",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -305,10 +312,11 @@ describe("PointerSystem - OnMessage", () => {
                         new PointerEvent("pointerup", { clientX: 3, clientY: 2 }),
                         new Vector(0.6000000238418579, 1.600000023841858),
                         []
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -323,16 +331,15 @@ describe("PointerSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
-                [
-                    new PointerEvent("pointerup", { clientX: 3, clientY: 2 })
-                ]
+                [new PointerEvent("pointerup", { clientX: 3, clientY: 2 })]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, pointer message (pointerdown), not fullscreen, two cameras",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -342,14 +349,20 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])],
-                    [1, new SystemEntity(new FakeEntity(1), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
+                    [
+                        1,
+                        new SystemEntity(new FakeEntity(1), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
@@ -373,12 +386,13 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(0.6000000238418579, 1.600000023841858),
                                 new Vector(30.000001907348633, 80),
                                 false
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -388,30 +402,35 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])],
-                    [1, new SystemEntity(new FakeEntity(1), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
+                    [
+                        1,
+                        new SystemEntity(new FakeEntity(1), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
                 undefined,
                 undefined,
                 undefined,
-                [
-                    new PointerEvent("pointerup", { clientX: 3, clientY: 2 })
-                ]
+                [new PointerEvent("pointerup", { clientX: 3, clientY: 2 })]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, pointer message (pointerdown), not fullscreen, two cameras",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -421,14 +440,20 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])],
-                    [1, new SystemEntity(new FakeEntity(1), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
+                    [
+                        1,
+                        new SystemEntity(new FakeEntity(1), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
@@ -452,12 +477,13 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(0.6000000238418579, 1.600000023841858),
                                 new Vector(30.000001907348633, 80),
                                 false
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -467,30 +493,35 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])],
-                    [1, new SystemEntity(new FakeEntity(1), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
+                    [
+                        1,
+                        new SystemEntity(new FakeEntity(1), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(100, 100)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
                 undefined,
                 undefined,
                 undefined,
-                [
-                    new PointerEvent("pointerdown", { clientX: 3, clientY: 2 })
-                ]
+                [new PointerEvent("pointerdown", { clientX: 3, clientY: 2 })]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, pointer event, fullscreen, no locked pointer position set, one camera",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -500,10 +531,13 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 true,
@@ -521,12 +555,13 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(0.6000000238418579, 1.600000023841858),
                                 new Vector(3, 8),
                                 false
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -536,26 +571,28 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 true,
                 undefined,
                 undefined,
                 undefined,
-                [
-                    new PointerEvent("pointerup", { clientX: 3, clientY: 2 })
-                ]
+                [new PointerEvent("pointerup", { clientX: 3, clientY: 2 })]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, pointer event, fullscreen, locked pointer position set, one camera",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -565,10 +602,13 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 true,
@@ -586,12 +626,13 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(2.4000000953674316, 1),
                                 new Vector(12, 5),
                                 false
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -601,26 +642,28 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 true,
                 new Vector(2, 2),
                 undefined,
                 undefined,
-                [
-                    new PointerEvent("pointerup", { clientX: 3, clientY: 2, movementX: 10, movementY: 3 })
-                ]
+                [new PointerEvent("pointerup", { clientX: 3, clientY: 2, movementX: 10, movementY: 3 })]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
         [
             "Update, pointer message, not fullscreen, one camera, 3 stored pointer events, clear 2 previously published",
             undefined,
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -630,10 +673,13 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])],
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
@@ -651,7 +697,7 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(0.6000000238418579, 1.600000023841858),
                                 new Vector(3, 8),
                                 false
-                            )
+                            ),
                         ]
                     ),
                     new Pointer(
@@ -663,7 +709,7 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(1.2000000476837158, 1.2000000476837158),
                                 new Vector(6, 6),
                                 false
-                            )
+                            ),
                         ]
                     ),
                     new Pointer(
@@ -675,12 +721,13 @@ describe("PointerSystem - OnMessage", () => {
                                 new Vector(3, 1.399999976158142),
                                 new Vector(15, 7),
                                 false
-                            )
+                            ),
                         ]
-                    )
-                ],
+                    ),
+                ]
             ),
-            new PointerSystem(new FakeMessageBus(),
+            new PointerSystem(
+                new FakeMessageBus(),
                 ((): HTMLElement => {
                     const element = document.createElement("canvas");
                     element.getBoundingClientRect = (): DOMRect => {
@@ -690,10 +737,13 @@ describe("PointerSystem - OnMessage", () => {
                 })(),
                 undefined,
                 new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Transform(),
-                        new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10))
-                    ])],
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Transform(),
+                            new Camera(new Color(1, 0, 0), new Vector(0, 0), new Vector(1, 1), new Vector(10, 10)),
+                        ]),
+                    ],
                 ]),
                 0,
                 false,
@@ -703,28 +753,36 @@ describe("PointerSystem - OnMessage", () => {
                 [
                     new PointerEvent("pointerup", { clientX: 3, clientY: 2 }),
                     new PointerEvent("pointerdown", { clientX: 6, clientY: 4 }),
-                    new PointerEvent("pointerup", { clientX: 15, clientY: 3 })
+                    new PointerEvent("pointerup", { clientX: 15, clientY: 3 }),
                 ],
                 [
-                    new Pointer(new PointerEvent("pointermove"), new Vector(0,0), []),
-                    new Pointer(new PointerEvent("pointerdown"), new Vector(3,2), []),
+                    new Pointer(new PointerEvent("pointermove"), new Vector(0, 0), []),
+                    new Pointer(new PointerEvent("pointerdown"), new Vector(3, 2), []),
                 ]
             ),
-            new Message<number>(System.MESSAGE_UPDATE, 1.0)
+            new Message<number>(System.MESSAGE_UPDATE, 1.0),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: PointerSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: PointerSystem,
+            system: PointerSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
+            window.close();
         }
-        expect(system).toEqual(expectedState);
-        window.close();
-    });
+    );
 });
-
 
 /**
  * TestPointerSystem is an extension of the PointerSystem that exposes the pointer event functions,
@@ -750,13 +808,15 @@ describe("PointerSystem - pointer event", () => {
         [
             "Pointer up, add to events to be published",
             undefined,
-            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = document.createElement("canvas");
-                element.getBoundingClientRect = (): DOMRect => {
-                    return new DOMRect(0, 0, 10, 10);
-                };
-                return element;
-            })(),
+            new TestPointerSystem(
+                new FakeMessageBus(),
+                ((): HTMLElement => {
+                    const element = document.createElement("canvas");
+                    element.getBoundingClientRect = (): DOMRect => {
+                        return new DOMRect(0, 0, 10, 10);
+                    };
+                    return element;
+                })(),
                 undefined,
                 undefined,
                 0,
@@ -764,20 +824,22 @@ describe("PointerSystem - pointer event", () => {
                 undefined,
                 undefined,
                 undefined,
-                [
-                    new PointerEvent("pointerup", { clientX: 3, clientY: 2 })
-                ],
+                [new PointerEvent("pointerup", { clientX: 3, clientY: 2 })],
                 undefined
             ),
-            new TestPointerSystem(new FakeMessageBus([new Reactor("Publish", (message: Message<Pointer>) => {
-                throw("publish fail");
-            })]), ((): HTMLElement => {
-                const element = document.createElement("canvas");
-                element.getBoundingClientRect = (): DOMRect => {
-                    return new DOMRect(0, 0, 10, 10);
-                };
-                return element;
-            })(),
+            new TestPointerSystem(
+                new FakeMessageBus([
+                    new Reactor("Publish", (message: Message<Pointer>) => {
+                        throw "publish fail";
+                    }),
+                ]),
+                ((): HTMLElement => {
+                    const element = document.createElement("canvas");
+                    element.getBoundingClientRect = (): DOMRect => {
+                        return new DOMRect(0, 0, 10, 10);
+                    };
+                    return element;
+                })(),
                 undefined,
                 undefined,
                 0,
@@ -788,17 +850,27 @@ describe("PointerSystem - pointer event", () => {
                 [],
                 undefined
             ),
-            new PointerEvent("pointerup", { clientX: 3, clientY: 2 })
+            new PointerEvent("pointerup", { clientX: 3, clientY: 2 }),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: TestPointerSystem,
-        event: PointerEvent) => {
-        if (expected instanceof Error) {
-            expect(() => { system.SimulatePointerEvent(event); }).toThrow(expected);
-        } else {
-            system.SimulatePointerEvent(event);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: PointerSystem,
+            system: TestPointerSystem,
+            event: PointerEvent
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulatePointerEvent(event);
+                }).toThrow(expected);
+            } else {
+                system.SimulatePointerEvent(event);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("PointerSystem - pointer move", () => {
@@ -807,13 +879,15 @@ describe("PointerSystem - pointer move", () => {
         [
             "Pointer move, add to events to be published",
             undefined,
-            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = document.createElement("canvas");
-                element.getBoundingClientRect = (): DOMRect => {
-                    return new DOMRect(0, 0, 10, 10);
-                };
-                return element;
-            })(),
+            new TestPointerSystem(
+                new FakeMessageBus(),
+                ((): HTMLElement => {
+                    const element = document.createElement("canvas");
+                    element.getBoundingClientRect = (): DOMRect => {
+                        return new DOMRect(0, 0, 10, 10);
+                    };
+                    return element;
+                })(),
                 undefined,
                 undefined,
                 0,
@@ -822,35 +896,49 @@ describe("PointerSystem - pointer move", () => {
                 undefined,
                 new PointerEvent("pointermove", { clientX: 3, clientY: 2 })
             ),
-            new TestPointerSystem(new FakeMessageBus([new Reactor("Publish", (message: Message<Pointer>) => {
-                throw("publish fail");
-            })]), ((): HTMLElement => {
-                const element = document.createElement("canvas");
-                element.getBoundingClientRect = (): DOMRect => {
-                    return new DOMRect(0, 0, 10, 10);
-                };
-                return element;
-            })(),
+            new TestPointerSystem(
+                new FakeMessageBus([
+                    new Reactor("Publish", (message: Message<Pointer>) => {
+                        throw "publish fail";
+                    }),
+                ]),
+                ((): HTMLElement => {
+                    const element = document.createElement("canvas");
+                    element.getBoundingClientRect = (): DOMRect => {
+                        return new DOMRect(0, 0, 10, 10);
+                    };
+                    return element;
+                })(),
                 undefined,
                 undefined,
                 0,
                 undefined,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
-            new PointerEvent("pointermove", { clientX: 3, clientY: 2 })
+            new PointerEvent("pointermove", { clientX: 3, clientY: 2 }),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: TestPointerSystem, event: PointerEvent) => {
-        if (expected instanceof Error) {
-            expect(() => { system.SimulatePointerEvent(event); }).toThrow(expected);
-        } else {
-            system.SimulateMoveEvent(event);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: PointerSystem,
+            system: TestPointerSystem,
+            event: PointerEvent
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulatePointerEvent(event);
+                }).toThrow(expected);
+            } else {
+                system.SimulateMoveEvent(event);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
-
 
 describe("PointerSystem - pointer input", () => {
     type TestTuple = [string, Error | undefined, PointerSystem, TestPointerSystem, WheelEvent];
@@ -858,45 +946,61 @@ describe("PointerSystem - pointer input", () => {
         [
             "Wheel event triggered",
             undefined,
-            new TestPointerSystem(new FakeMessageBus(), ((): HTMLElement => {
-                const element = document.createElement("canvas");
-                element.getBoundingClientRect = (): DOMRect => {
-                    return new DOMRect(0, 0, 10, 10);
-                };
-                return element;
-            })(),
+            new TestPointerSystem(
+                new FakeMessageBus(),
+                ((): HTMLElement => {
+                    const element = document.createElement("canvas");
+                    element.getBoundingClientRect = (): DOMRect => {
+                        return new DOMRect(0, 0, 10, 10);
+                    };
+                    return element;
+                })(),
                 undefined,
                 undefined,
                 0,
                 undefined,
                 undefined,
-                new WheelEvent("test"),
+                new WheelEvent("test")
             ),
-            new TestPointerSystem(new FakeMessageBus([new Reactor("Publish", (message: Message<Pointer>) => {
-                throw("publish fail");
-            })]), ((): HTMLElement => {
-                const element = document.createElement("canvas");
-                element.getBoundingClientRect = (): DOMRect => {
-                    return new DOMRect(0, 0, 10, 10);
-                };
-                return element;
-            })(),
+            new TestPointerSystem(
+                new FakeMessageBus([
+                    new Reactor("Publish", (message: Message<Pointer>) => {
+                        throw "publish fail";
+                    }),
+                ]),
+                ((): HTMLElement => {
+                    const element = document.createElement("canvas");
+                    element.getBoundingClientRect = (): DOMRect => {
+                        return new DOMRect(0, 0, 10, 10);
+                    };
+                    return element;
+                })(),
                 undefined,
                 undefined,
                 0,
                 undefined,
                 undefined,
-                undefined,
+                undefined
             ),
-            new WheelEvent("test")
+            new WheelEvent("test"),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: PointerSystem, system: TestPointerSystem,
-        event: WheelEvent) => {
-        if (expected instanceof Error) {
-            expect(() => { system.SimulateWheelEvent(event); }).toThrow(expected);
-        } else {
-            system.SimulateWheelEvent(event);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: PointerSystem,
+            system: TestPointerSystem,
+            event: WheelEvent
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.SimulateWheelEvent(event);
+                }).toThrow(expected);
+            } else {
+                system.SimulateWheelEvent(event);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

@@ -31,7 +31,11 @@ class DefaultPrimitiveFragmentShader extends GLSLShader {
         }
     `;
 
-    private static readonly PER_RENDERABLE = (context: GLSLContext, renderable: IRenderable, texture?: WebGLTexture): void => {
+    private static readonly PER_RENDERABLE = (
+        context: GLSLContext,
+        renderable: IRenderable,
+        texture?: WebGLTexture
+    ): void => {
         const gl = context.gl;
         const program = context.program;
         // Add in color information
@@ -39,11 +43,10 @@ class DefaultPrimitiveFragmentShader extends GLSLShader {
         gl.uniform4f(colorLocation, ...renderable.material.color.GetTuple());
     };
 
-
     constructor() {
         super(
-            ShaderAsset.FRAGMENT_TYPE, 
-            DefaultPrimitiveFragmentShader.SOURCE, 
+            ShaderAsset.FRAGMENT_TYPE,
+            DefaultPrimitiveFragmentShader.SOURCE,
             undefined,
             undefined,
             DefaultPrimitiveFragmentShader.PER_RENDERABLE

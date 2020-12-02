@@ -22,11 +22,10 @@ import IScene from "../../scene/iscene";
 import Message from "../../message/message";
 
 /**
- * FullscreenSystem handles JS fullscreen change events, and provides a method for requesting 
+ * FullscreenSystem handles JS fullscreen change events, and provides a method for requesting
  * entering/existing fullscreen/pointer lock.
  */
 class FullscreenSystem extends System {
-
     public static readonly MESSAGE_REQUEST_ENTER_FULLSCREEN = "message_request_enter_fullscreen";
     public static readonly MESSAGE_REQUEST_EXIT_FULLSCREEN = "message_request_exit_fullscreen";
 
@@ -36,12 +35,14 @@ class FullscreenSystem extends System {
     private canvas: HTMLCanvasElement;
     private document: HTMLDocument;
 
-    constructor(messageBus: IMessageBus, 
-        canvas: HTMLCanvasElement, 
-        document: HTMLDocument, 
-        scene?: IScene, 
-        entities?: Map<number, SystemEntity>, 
-        subscriberID?: number) {
+    constructor(
+        messageBus: IMessageBus,
+        canvas: HTMLCanvasElement,
+        document: HTMLDocument,
+        scene?: IScene,
+        entities?: Map<number, SystemEntity>,
+        subscriberID?: number
+    ) {
         super(messageBus, scene, undefined, entities, subscriberID);
         this.messageBus.Subscribe(this, [
             FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN,

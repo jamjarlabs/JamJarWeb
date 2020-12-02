@@ -1,43 +1,48 @@
 name: JamJar
 
-on: 
-  push:
-  pull_request:
-  release:
-    types: [created]
+on:
+    push:
+    pull_request:
+    release:
+        types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Install, lint, test and build
-        run: |
-          yarn install
-          
-          # Generate docs, if there is a difference from the version in the Git repo, fail
-          yarn generate-reference
-          git diff --exit-code
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+            - name: Install, lint, test and build
+              run: |
+                  yarn install
 
-          yarn lint
-          yarn test
-          yarn build
-        env:
-          CI: true
-      - uses: codecov/codecov-action@v1.0.3
-        if: github.repository == 'jamjarlabs/jamjar'
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage/clover.xml
-          flags: unittests
-          name: jamjar-unittests
-      - name: Publish to NPM
-        if: github.event_name == 'release' && github.repository == 'jamjarlabs/jamjar'
-        run: |
-          VERSION=$(echo "${{ github.ref }}" | grep -P '([^\/]+$)' -o) 
-          yarn version --no-git-tag-version --new-version ${VERSION}
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.YARN_TOKEN }}" >> ~/.npmrc
-          yarn publish --not-interactive --no-git-tag-version
+                  yarn lint
+
+                  # Beautify the code, if there is a difference from the version in the Git repo, fail
+                  yarn beautify
+                  git diff --exit-code
+
+                  # Generate docs, if there is a difference from the version in the Git repo, fail
+                  yarn generate-reference
+                  git diff --exit-code
+
+                  yarn test
+                  yarn build
+              env:
+                  CI: true
+            - uses: codecov/codecov-action@v1.0.3
+              if: github.repository == 'jamjarlabs/jamjar'
+              with:
+                  token: ${{secrets.CODECOV_TOKEN}}
+                  file: ./coverage/clover.xml
+                  flags: unittests
+                  name: jamjar-unittests
+            - name: Publish to NPM
+              if: github.event_name == 'release' && github.repository == 'jamjarlabs/jamjar'
+              run: |
+                  VERSION=$(echo "${{ github.ref }}" | grep -P '([^\/]+$)' -o)
+                  yarn version --no-git-tag-version --new-version ${VERSION}
+                  echo "//registry.npmjs.org/:_authToken=${{ secrets.YARN_TOKEN }}" >> ~/.npmrc
+                  yarn publish --not-interactive --no-git-tag-version

@@ -18,7 +18,7 @@ import Game from "./game";
 import FakeMessageBus from "./fake/message_bus";
 import Reactor from "./fake/reactor";
 
-class TestGame extends Game { }
+class TestGame extends Game {}
 
 describe("Game - Start", () => {
     type TestTuple = [string, Error | undefined, Game];
@@ -28,22 +28,30 @@ describe("Game - Start", () => {
             Error("fail to dispatch"),
             new TestGame(
                 new FakeMessageBus([
-                    new Reactor("Dispatch", () => { throw (Error("fail to dispatch")); })
+                    new Reactor("Dispatch", () => {
+                        throw Error("fail to dispatch");
+                    }),
                 ]),
                 "test",
-                (): number => { return 0; }
-            )
+                (): number => {
+                    return 0;
+                }
+            ),
         ],
         [
             "Fail to publish",
             Error("fail to publish"),
             new TestGame(
                 new FakeMessageBus([
-                    new Reactor("Publish", () => { throw (Error("fail to publish")); })
+                    new Reactor("Publish", () => {
+                        throw Error("fail to publish");
+                    }),
                 ]),
                 "test",
-                (): number => { return 0; }
-            )
+                (): number => {
+                    return 0;
+                }
+            ),
         ],
         [
             "Success, loop 1000 times",
@@ -51,7 +59,7 @@ describe("Game - Start", () => {
             new TestGame(
                 new FakeMessageBus(),
                 "test",
-                ((): (callback: FrameRequestCallback) => number => {
+                ((): ((callback: FrameRequestCallback) => number) => {
                     let count = 0;
                     return (callback: FrameRequestCallback): number => {
                         if (count < 999) {
@@ -63,12 +71,14 @@ describe("Game - Start", () => {
                         }
                     };
                 })()
-            )
-        ]
+            ),
+        ],
     ])("%p", (description: string, expected: Error | undefined, game: Game) => {
         jest.useFakeTimers();
         if (expected instanceof Error) {
-            expect(() => { game.Start(); }).toThrow(expected);
+            expect(() => {
+                game.Start();
+            }).toThrow(expected);
         } else {
             expect(game.Start()).toEqual(expected);
         }

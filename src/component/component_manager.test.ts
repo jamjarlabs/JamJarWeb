@@ -21,147 +21,164 @@ import FakeEntity from "../fake/entity";
 import FakeComponent from "../fake/component";
 
 describe("ComponentManager - Get", () => {
-    type TestTuple = [
-        string,
-        Component | undefined,
-        ComponentManager,
-        IEntity
-    ];
+    type TestTuple = [string, Component | undefined, ComponentManager, IEntity];
     test.each<TestTuple>([
-        [
-            "No components",
-            undefined,
-            new ComponentManager("test"),
-            new FakeEntity(0)
-        ],
+        ["No components", undefined, new ComponentManager("test"), new FakeEntity(0)],
         [
             "3 components, not found",
             undefined,
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
-            new FakeEntity(3)
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
+            new FakeEntity(3),
         ],
         [
             "3 components, found",
             new FakeComponent("test"),
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
-            new FakeEntity(0)
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
+            new FakeEntity(0),
         ],
-    ])("%p", (description: string, expected: Component | undefined, componentManager: ComponentManager, entity: IEntity) => {
-        expect(componentManager.Get(entity)).toEqual(expected);
-    });
+    ])(
+        "%p",
+        (description: string, expected: Component | undefined, componentManager: ComponentManager, entity: IEntity) => {
+            expect(componentManager.Get(entity)).toEqual(expected);
+        }
+    );
 });
 
-
 describe("ComponentManager - Add", () => {
-    type TestTuple = [
-        string,
-        ComponentManager,
-        ComponentManager,
-        IEntity,
-        Component
-    ];
+    type TestTuple = [string, ComponentManager, ComponentManager, IEntity, Component];
     test.each<TestTuple>([
         [
             "No components",
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-            ])),
+            new ComponentManager("test", new Map([[0, new FakeComponent("test")]])),
             new ComponentManager("test"),
             new FakeEntity(0),
-            new FakeComponent("test")
+            new FakeComponent("test"),
         ],
         [
             "3 components, add new",
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-                [3, new FakeComponent("test")],
-            ])),
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                    [3, new FakeComponent("test")],
+                ])
+            ),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
             new FakeEntity(3),
-            new FakeComponent("test")
+            new FakeComponent("test"),
         ],
         [
             "3 components, update existing",
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("REPLACE_ME")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("REPLACE_ME")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
             new FakeEntity(0),
-            new FakeComponent("test")
+            new FakeComponent("test"),
         ],
-    ])("%p", (description: string, expectedState: ComponentManager, componentManager: ComponentManager, entity: IEntity, component: Component) => {
-        componentManager.Add(entity, component);
-        expect(componentManager).toEqual(expectedState);
-    });
+    ])(
+        "%p",
+        (
+            description: string,
+            expectedState: ComponentManager,
+            componentManager: ComponentManager,
+            entity: IEntity,
+            component: Component
+        ) => {
+            componentManager.Add(entity, component);
+            expect(componentManager).toEqual(expectedState);
+        }
+    );
 });
 
-
-
 describe("ComponentManager - Remove", () => {
-    type TestTuple = [
-        string,
-        ComponentManager,
-        ComponentManager,
-        IEntity,
-    ];
+    type TestTuple = [string, ComponentManager, ComponentManager, IEntity];
     test.each<TestTuple>([
         [
             "No components",
             new ComponentManager("test"),
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-            ])),
+            new ComponentManager("test", new Map([[0, new FakeComponent("test")]])),
             new FakeEntity(0),
         ],
         [
             "3 components, not found",
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
             new FakeEntity(3),
         ],
         [
             "3 components, found",
-            new ComponentManager("test", new Map([
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
-            new ComponentManager("test", new Map([
-                [0, new FakeComponent("test")],
-                [1, new FakeComponent("test")],
-                [2, new FakeComponent("test")],
-            ])),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
+            new ComponentManager(
+                "test",
+                new Map([
+                    [0, new FakeComponent("test")],
+                    [1, new FakeComponent("test")],
+                    [2, new FakeComponent("test")],
+                ])
+            ),
             new FakeEntity(0),
         ],
-    ])("%p", (description: string, expectedState: ComponentManager, componentManager: ComponentManager, entity: IEntity) => {
-        componentManager.Remove(entity);
-        expect(componentManager).toEqual(expectedState);
-    });
+    ])(
+        "%p",
+        (description: string, expectedState: ComponentManager, componentManager: ComponentManager, entity: IEntity) => {
+            componentManager.Remove(entity);
+            expect(componentManager).toEqual(expectedState);
+        }
+    );
 });

@@ -24,7 +24,7 @@ class FontAsset {
      * Message when a font asset is finished loading.
      */
     public static readonly MESSAGE_FINISH_LOAD = "finish_font_load";
-    
+
     /**
      * Name of the asset
      */

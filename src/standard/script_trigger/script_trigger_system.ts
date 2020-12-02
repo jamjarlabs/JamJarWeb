@@ -31,22 +31,16 @@ import ScriptTriggerRequest from "./script_trigger_request";
  * expected times.
  */
 class ScriptTriggerSystem extends System {
-
     /**
      * Descriptor for a script triggered as part of an update event.
      */
     public static readonly DESCRIPTOR_UPDATE = "update";
 
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Script.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return [Script.KEY].every((type) => components.some((component) => component.key === type));
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, ScriptTriggerSystem.EVALUATOR, entities, subscriberID);
     }
 
@@ -58,15 +52,12 @@ class ScriptTriggerSystem extends System {
             }
 
             // Trigger script if update trigger, provide deltatime as the data
-            this.messageBus.Publish(new Message<ScriptTriggerRequest<number>>(
-                ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
-                new ScriptTriggerRequest(
-                    script.script,
-                    ScriptTriggerSystem.DESCRIPTOR_UPDATE,
-                    entity.entity,
-                    dt
+            this.messageBus.Publish(
+                new Message<ScriptTriggerRequest<number>>(
+                    ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
+                    new ScriptTriggerRequest(script.script, ScriptTriggerSystem.DESCRIPTOR_UPDATE, entity.entity, dt)
                 )
-            ));
+            );
         }
     }
 }

@@ -36,22 +36,9 @@ describe("SpriteAnimatorSystem - Update", () => {
         [
             "No entities",
             undefined,
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                undefined,
-                0
-            ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, undefined, 0),
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Animation disabled",
@@ -60,15 +47,16 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([], 10, 0)]
-                            ]), 
-                            undefined
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([["test", new SpriteAnimation([], 10, 0)]]),
+                                undefined
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -76,22 +64,20 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([], 10, 0)]
-                            ]), 
-                            undefined
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([["test", new SpriteAnimation([], 10, 0)]]),
+                                undefined
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "Unknown animation",
@@ -100,15 +86,16 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([], 10, 0)]
-                            ]), 
-                            "unknown"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([["test", new SpriteAnimation([], 10, 0)]]),
+                                "unknown"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -116,22 +103,20 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([], 10, 0)]
-                            ]), 
-                            "unknown"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([["test", new SpriteAnimation([], 10, 0)]]),
+                                "unknown"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "No key frames",
@@ -140,15 +125,16 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([], 10, 0)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([["test", new SpriteAnimation([], 10, 0)]]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -156,22 +142,20 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([], 10, 0)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([["test", new SpriteAnimation([], 10, 0)]]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "10 key frames, key frame target 5",
@@ -180,30 +164,46 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material({
-                            color: new Color(1,0,0)
-                        })),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, 0, 0.45)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(
+                                new Material({
+                                    color: new Color(1, 0, 0),
+                                })
+                            ),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            0,
+                                            0.45
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -211,35 +211,46 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, 0, 0.45)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            0,
+                                            0.45
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "10 key frames, key frame target 2, repeat infinite",
@@ -248,30 +259,47 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material({
-                            color: new Color(1,0,0)
-                        })),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, -1, 0, 1)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(
+                                new Material({
+                                    color: new Color(1, 0, 0),
+                                })
+                            ),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            -1,
+                                            0,
+                                            1
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -279,35 +307,46 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, -1, 1.2)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            -1,
+                                            1.2
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "10 key frames, key frame target 2, repeat infinite, 5 current repeats",
@@ -316,30 +355,47 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material({
-                            color: new Color(1,0,0)
-                        })),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, -1, 0, 6)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(
+                                new Material({
+                                    color: new Color(1, 0, 0),
+                                })
+                            ),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            -1,
+                                            0,
+                                            6
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -347,35 +403,47 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, -1, 1.2, 5)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            -1,
+                                            1.2,
+                                            5
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "10 key frames, key frame target 2, repeat under maximum",
@@ -384,30 +452,47 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material({
-                            color: new Color(1,0,0)
-                        })),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, 1, 0, 1)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(
+                                new Material({
+                                    color: new Color(1, 0, 0),
+                                })
+                            ),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            1,
+                                            0,
+                                            1
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -415,35 +500,46 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, 1, 1.2)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            1,
+                                            1.2
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
         [
             "10 key frames, key frame target 2, don't repeat over maximum",
@@ -452,28 +548,43 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, 1, 1.2, 3)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            1,
+                                            1.2,
+                                            3
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
@@ -481,46 +592,67 @@ describe("SpriteAnimatorSystem - Update", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(
-                            new Map<string, SpriteAnimation>([
-                                ["test", new SpriteAnimation([
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material({
-                                        color: new Color(1,0,0)
-                                    }), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                    new SpriteKeyFrame(new Material(), 1),
-                                ], 10, 1, 1.2, 3)]
-                            ]), 
-                            "test"
-                        )
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(
+                                new Map<string, SpriteAnimation>([
+                                    [
+                                        "test",
+                                        new SpriteAnimation(
+                                            [
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(
+                                                    new Material({
+                                                        color: new Color(1, 0, 0),
+                                                    }),
+                                                    1
+                                                ),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                                new SpriteKeyFrame(new Material(), 1),
+                                            ],
+                                            10,
+                                            1,
+                                            1.2,
+                                            3
+                                        ),
+                                    ],
+                                ]),
+                                "test"
+                            ),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new Message<number>(
-                System.MESSAGE_UPDATE,
-                0
-            )
+            new Message<number>(System.MESSAGE_UPDATE, 0),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: SpriteAnimatorSystem, system: SpriteAnimatorSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: SpriteAnimatorSystem,
+            system: SpriteAnimatorSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });
 
 describe("SpriteAnimatorSystem - Register", () => {
@@ -529,64 +661,29 @@ describe("SpriteAnimatorSystem - Register", () => {
         [
             "Reject, no components",
             undefined,
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                ]
-            ])
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Reject, missing Sprite",
             undefined,
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new SpriteAnimator(new Map<string, SpriteAnimation>())
-                ]
-            ])
+                new FakeEntity(0),
+                [new SpriteAnimator(new Map<string, SpriteAnimation>())],
+            ]),
         ],
         [
             "Reject, missing SpriteAnimator",
             undefined,
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new Sprite(new Material())
-                ]
-            ])
+                new FakeEntity(0),
+                [new Sprite(new Material())],
+            ]),
         ],
         [
             "Accept",
@@ -595,34 +692,39 @@ describe("SpriteAnimatorSystem - Register", () => {
                 new FakeMessageBus(),
                 undefined,
                 new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [
-                        new Sprite(new Material()),
-                        new SpriteAnimator(new Map<string, SpriteAnimation>())
-                    ])]
+                    [
+                        0,
+                        new SystemEntity(new FakeEntity(0), [
+                            new Sprite(new Material()),
+                            new SpriteAnimator(new Map<string, SpriteAnimation>()),
+                        ]),
+                    ],
                 ]),
                 0
             ),
-            new SpriteAnimatorSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map<number, SystemEntity>(),
-                0
-            ),
+            new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
-                new FakeEntity(0), [
-                    new Sprite(new Material()),
-                    new SpriteAnimator(new Map<string, SpriteAnimation>())
-                ]
-            ])
+                new FakeEntity(0),
+                [new Sprite(new Material()), new SpriteAnimator(new Map<string, SpriteAnimation>())],
+            ]),
         ],
-    ])("%p", (description: string, expected: Error | undefined, expectedState: SpriteAnimatorSystem, system: SpriteAnimatorSystem, message: IMessage) => {
-        if (expected instanceof Error) {
-            expect(() => {
-                system.OnMessage(message);
-            }).toThrow(expected);
-        } else {
-            expect(system.OnMessage(message)).toEqual(expected);
+    ])(
+        "%p",
+        (
+            description: string,
+            expected: Error | undefined,
+            expectedState: SpriteAnimatorSystem,
+            system: SpriteAnimatorSystem,
+            message: IMessage
+        ) => {
+            if (expected instanceof Error) {
+                expect(() => {
+                    system.OnMessage(message);
+                }).toThrow(expected);
+            } else {
+                expect(system.OnMessage(message)).toEqual(expected);
+            }
+            expect(system).toEqual(expectedState);
         }
-        expect(system).toEqual(expectedState);
-    });
+    );
 });

@@ -26,7 +26,6 @@ import IEntity from "../entity/ientity";
  * together.
  */
 abstract class Scene extends Subscriber implements IScene {
-
     public static readonly MESSAGE_DESTROY = "scene_destroy";
     public static readonly MESSAGE_ON_START = "scene_on_start";
 
@@ -40,9 +39,7 @@ abstract class Scene extends Subscriber implements IScene {
         super();
         this.id = Scene.ID++;
         this.entities = entities;
-        this.messageBus.Subscribe(this, [
-            Scene.MESSAGE_ON_START
-        ]);
+        this.messageBus.Subscribe(this, [Scene.MESSAGE_ON_START]);
     }
 
     /**
@@ -53,7 +50,7 @@ abstract class Scene extends Subscriber implements IScene {
     }
 
     public OnMessage(message: IMessage): void {
-        switch(message.type) {
+        switch (message.type) {
             case Scene.MESSAGE_ON_START: {
                 const sceneStartMessage = message as Message<Scene>;
                 if (!sceneStartMessage.payload) {

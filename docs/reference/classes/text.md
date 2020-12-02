@@ -57,11 +57,11 @@ Name | Type | Default |
 `font` | string | - |
 `align` | [TextAlignment](../enums/textalignment.md) | TextAlignment.Left |
 `spacing` | number | Text.DEFAULT_SPACING |
-`offset` | [Vector](vector.md) | Vector.New(0,0) |
+`offset` | [Vector](vector.md) | Vector.New(0, 0) |
 `color` | [Color](color.md) | new Color(0, 0, 0, 1) |
 `shaders` | string[] | [
             ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
-            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME
+            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME,
         ] |
 
 **Returns:** *[Text](text.md)*

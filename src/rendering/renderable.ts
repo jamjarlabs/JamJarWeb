@@ -27,11 +27,24 @@ import Pooled from "../pooling/pooled";
  * Contains information for rendering.
  */
 class Renderable<T> extends Pooled implements IRenderable {
-
-    public static New<T>(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode,
-        payload?: T, camera?: IEntity): Renderable<T> {
-        return this.new<Renderable<T>>(Renderable.POOL_KEY, Renderable, [ zOrder, vertices, modelMatrix, material,
-            drawMode, payload, camera ]);
+    public static New<T>(
+        zOrder: number,
+        vertices: Polygon,
+        modelMatrix: Matrix4D,
+        material: Material,
+        drawMode: DrawMode,
+        payload?: T,
+        camera?: IEntity
+    ): Renderable<T> {
+        return this.new<Renderable<T>>(Renderable.POOL_KEY, Renderable, [
+            zOrder,
+            vertices,
+            modelMatrix,
+            material,
+            drawMode,
+            payload,
+            camera,
+        ]);
     }
 
     public static Free<T>(obj: Renderable<T>): void {
@@ -39,9 +52,13 @@ class Renderable<T> extends Pooled implements IRenderable {
     }
 
     public static Init(size: number): void {
-        this.init(Renderable.POOL_KEY, () => {
-            return new Renderable(0, new Polygon([]), new Matrix4D(), new Material(), DrawMode.POINTS);
-        }, size);
+        this.init(
+            Renderable.POOL_KEY,
+            () => {
+                return new Renderable(0, new Polygon([]), new Matrix4D(), new Material(), DrawMode.POINTS);
+            },
+            size
+        );
     }
 
     private static POOL_KEY = "jamjar_renderable";
@@ -74,7 +91,14 @@ class Renderable<T> extends Pooled implements IRenderable {
      */
     public payload?: T;
 
-    constructor(zOrder: number, vertices: Polygon, modelMatrix: Matrix4D, material: Material, drawMode: DrawMode, payload?: T) {
+    constructor(
+        zOrder: number,
+        vertices: Polygon,
+        modelMatrix: Matrix4D,
+        material: Material,
+        drawMode: DrawMode,
+        payload?: T
+    ) {
         super();
         this.zOrder = zOrder;
         this.vertices = vertices;

@@ -46,39 +46,43 @@ import DefaultPrimitiveVertexShader from "./default_primitive_vertex_shader";
  * renders them onto a canvas.
  */
 class WebGLSystem extends RenderSystem {
-
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Camera.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return [Transform.KEY, Camera.KEY].every((type) => components.some((component) => component.key === type));
     };
 
-    private static readonly FILTER_MODES = new Map<TextureFiltering, number>(new Map([
-        [TextureFiltering.NEAREST, WebGL2RenderingContext.NEAREST],
-        [TextureFiltering.BILINEAR, WebGL2RenderingContext.LINEAR],
-        [TextureFiltering.TRILINEAR, WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR],
-    ]));
+    private static readonly FILTER_MODES = new Map<TextureFiltering, number>(
+        new Map([
+            [TextureFiltering.NEAREST, WebGL2RenderingContext.NEAREST],
+            [TextureFiltering.BILINEAR, WebGL2RenderingContext.LINEAR],
+            [TextureFiltering.TRILINEAR, WebGL2RenderingContext.LINEAR_MIPMAP_LINEAR],
+        ])
+    );
 
-    private static readonly WRAP_MODES = new Map<TextureWrapping, number>(new Map([
-        [TextureWrapping.REPEAT, WebGL2RenderingContext.REPEAT],
-        [TextureWrapping.MIRRORED_REPEAT, WebGL2RenderingContext.MIRRORED_REPEAT],
-        [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
-    ]));
+    private static readonly WRAP_MODES = new Map<TextureWrapping, number>(
+        new Map([
+            [TextureWrapping.REPEAT, WebGL2RenderingContext.REPEAT],
+            [TextureWrapping.MIRRORED_REPEAT, WebGL2RenderingContext.MIRRORED_REPEAT],
+            [TextureWrapping.CLAMP_TO_EDGE, WebGL2RenderingContext.CLAMP_TO_EDGE],
+        ])
+    );
 
-    private static readonly DRAW_MODES = new Map<DrawMode, number>(new Map([
-        [DrawMode.POINTS, WebGL2RenderingContext.POINTS],
-        [DrawMode.LINES, WebGL2RenderingContext.LINES],
-        [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
-        [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
-        [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
-    ]));
+    private static readonly DRAW_MODES = new Map<DrawMode, number>(
+        new Map([
+            [DrawMode.POINTS, WebGL2RenderingContext.POINTS],
+            [DrawMode.LINES, WebGL2RenderingContext.LINES],
+            [DrawMode.LINE_STRIP, WebGL2RenderingContext.LINE_STRIP],
+            [DrawMode.TRIANGLES, WebGL2RenderingContext.TRIANGLES],
+            [DrawMode.TRIANGLE_STRIP, WebGL2RenderingContext.TRIANGLE_STRIP],
+        ])
+    );
 
     private gl: WebGL2RenderingContext;
     private textures: Map<string, WebGLTexture>;
     private shaders: Map<string, [WebGLShader, GLSLShader]>;
     private programs: Map<string, WebGLProgram>;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         gl: WebGL2RenderingContext,
         scene?: IScene,
         renderables: Map<number, IRenderable[]> = new Map(),
@@ -87,13 +91,14 @@ class WebGLSystem extends RenderSystem {
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME, new DefaultTextFragmentShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME, new DefaultPrimitiveFragmentShader()),
-            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, new DefaultPrimitiveVertexShader())
+            new ShaderAsset(ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME, new DefaultPrimitiveVertexShader()),
         ],
         shaders: Map<string, [WebGLShader, GLSLShader]> = new Map(),
         textures: Map<string, WebGLTexture> = new Map(),
         programs: Map<string, WebGLProgram> = new Map(),
         entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+        subscriberID?: number
+    ) {
         super(messageBus, scene, WebGLSystem.EVALUATOR, renderables, entities, subscriberID);
 
         this.gl = gl;
@@ -106,15 +111,12 @@ class WebGLSystem extends RenderSystem {
             Game.MESSAGE_RENDER,
             RenderSystem.MESSAGE_LOAD_RENDERABLES,
             ImageAsset.MESSAGE_FINISH_LOAD,
-            ShaderAsset.MESSAGE_REQUEST_LOAD
+            ShaderAsset.MESSAGE_REQUEST_LOAD,
         ]);
 
         // Load default shaders
         for (const asset of defaultShaderAssets) {
-            this.messageBus.Publish(new Message<ShaderAsset>(
-                ShaderAsset.MESSAGE_REQUEST_LOAD,
-                asset
-            ));
+            this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, asset));
         }
     }
 
@@ -173,14 +175,14 @@ class WebGLSystem extends RenderSystem {
 
         const shader = gl.createShader(type);
         if (shader === null) {
-            throw (`Error creating shader for asset '${asset.name}'`);
+            throw `Error creating shader for asset '${asset.name}'`;
         }
         gl.shaderSource(shader, asset.shader.source);
         gl.compileShader(shader);
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
             const err = gl.getShaderInfoLog(shader);
             gl.deleteShader(shader);
-            throw (`Error compiling shader for asset '${asset.name}', error: ${err}`);
+            throw `Error compiling shader for asset '${asset.name}', error: ${err}`;
         }
         this.shaders.set(asset.name, [shader, asset.shader]);
         this.messageBus.Publish(new Message(ShaderAsset.MESSAGE_FINISH_LOAD));
@@ -225,7 +227,7 @@ class WebGLSystem extends RenderSystem {
         if (!asset.mirror) {
             gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         }
-        if (asset.image instanceof(HTMLImageElement)) {
+        if (asset.image instanceof HTMLImageElement) {
             gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, srcFormat, srcType, asset.image);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, xWrap);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, yWrap);
@@ -235,7 +237,17 @@ class WebGLSystem extends RenderSystem {
                 gl.generateMipmap(gl.TEXTURE_2D);
             }
         } else {
-            gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, asset.image.width, asset.image.height, border, srcFormat, srcType, asset.image);
+            gl.texImage2D(
+                gl.TEXTURE_2D,
+                level,
+                internalFormat,
+                asset.image.width,
+                asset.image.height,
+                border,
+                srcFormat,
+                srcType,
+                asset.image
+            );
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, xWrap);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, yWrap);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, minFilter);
@@ -245,7 +257,7 @@ class WebGLSystem extends RenderSystem {
             }
         }
         if (glTexture === null) {
-            throw (`Failed to create texture for image asset '${asset.name}'`);
+            throw `Failed to create texture for image asset '${asset.name}'`;
         }
         this.textures.set(asset.name, glTexture);
     }
@@ -271,26 +283,16 @@ class WebGLSystem extends RenderSystem {
             // combined with the real width and height to make sure it is in the center
             // of the viewport.
             const realPosition = Vector.New(
-                (canvasWidth / 2 + (camera.viewportPosition.x / 2) * canvasWidth) - realWidth / 2,
-                (canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight) - realHeight / 2
+                canvasWidth / 2 + (camera.viewportPosition.x / 2) * canvasWidth - realWidth / 2,
+                canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight - realHeight / 2
             );
 
             // Define the viewport position of the camera
-            gl.viewport(
-                realPosition.x,
-                realPosition.y,
-                realWidth,
-                realHeight
-            );
+            gl.viewport(realPosition.x, realPosition.y, realWidth, realHeight);
 
             // Define scissor around camera viewport, ensures that nothing is rendered outside
             // of the viewport defined for this camera
-            gl.scissor(
-                realPosition.x,
-                realPosition.y,
-                realWidth,
-                realHeight
-            );
+            gl.scissor(realPosition.x, realPosition.y, realWidth, realHeight);
 
             gl.enable(gl.SCISSOR_TEST);
 
@@ -378,7 +380,7 @@ class WebGLSystem extends RenderSystem {
                     if (program === undefined) {
                         const loadProgram = gl.createProgram();
                         if (loadProgram === null) {
-                            throw (`Error creating program '${programKey}'`);
+                            throw `Error creating program '${programKey}'`;
                         }
                         for (const shader of shaders) {
                             gl.attachShader(loadProgram, shader[0]);
@@ -387,7 +389,7 @@ class WebGLSystem extends RenderSystem {
                         if (!gl.getProgramParameter(loadProgram, gl.LINK_STATUS)) {
                             const linkErr = gl.getProgramInfoLog(loadProgram);
                             gl.deleteProgram(loadProgram);
-                            throw (`Error linking program '${programKey}', error: ${linkErr}`);
+                            throw `Error linking program '${programKey}', error: ${linkErr}`;
                         }
                         this.programs.set(programKey, loadProgram);
                         program = loadProgram;
@@ -452,7 +454,6 @@ class WebGLSystem extends RenderSystem {
                         }
                     }
                 }
-
             }
         }
         this.renderables.clear();

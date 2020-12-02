@@ -44,21 +44,21 @@ class Material implements IFreeable {
         // Default shaders if a texture is present
         let defaultShaders = [
             ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
-            ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME
+            ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME,
         ];
-        let defaultColor = new Color(1,1,1,1);
+        let defaultColor = new Color(1, 1, 1, 1);
         if (options.texture === undefined) {
             // Default shaders for no texture
             defaultShaders = [
                 ShaderAsset.DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME,
-                ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME
+                ShaderAsset.DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME,
             ];
             defaultColor = Material.NO_TEXTURE_COLOR;
         }
         const matOptions = {
             color: defaultColor,
             shaders: defaultShaders,
-            ...options
+            ...options,
         };
         this.shaders = matOptions.shaders;
         this.texture = matOptions.texture;
@@ -84,7 +84,7 @@ class Material implements IFreeable {
         return new Material({
             shaders: shaders,
             texture: texture,
-            color: color
+            color: color,
         });
     }
 

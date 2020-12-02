@@ -29,9 +29,9 @@ class ImageRequest {
      * Message to request an image asset to be loaded.
      */
     public static readonly MESSAGE_REQUEST_LOAD = "request_image_load";
-    
+
     /**
-     * Name of the image asset, how it is referred to throughout the system, 
+     * Name of the image asset, how it is referred to throughout the system,
      * should be unique.
      */
     public name: string;
@@ -78,7 +78,7 @@ class ImageRequest {
             yWrap: TextureWrapping.CLAMP_TO_EDGE,
             generateMipmaps: true,
             mirror: false,
-            ...textureOptions
+            ...textureOptions,
         };
         this.minFilter = optionalTextureOptions.minFilter;
         this.magFilter = optionalTextureOptions.magFilter;

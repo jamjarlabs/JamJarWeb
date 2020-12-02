@@ -41,7 +41,7 @@ interface IEntity {
     Add: (component: Component) => void;
     /**
      * Remove removes a component from the entity.
-     * @param {string} key The component to remove 
+     * @param {string} key The component to remove
      */
     Remove: (key: string) => void;
     /**

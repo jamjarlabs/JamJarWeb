@@ -32,7 +32,7 @@ class Texture implements IFreeable {
      */
     public points: Polygon;
 
-    constructor(image: string, points: Polygon = Polygon.QuadByPoints(Vector.New(0,0), Vector.New(1,1))) {
+    constructor(image: string, points: Polygon = Polygon.QuadByPoints(Vector.New(0, 0), Vector.New(1, 1))) {
         this.image = image;
         this.points = points;
     }
@@ -41,10 +41,7 @@ class Texture implements IFreeable {
      * Make a value copy of the texture.
      */
     public Copy(): Texture {
-        const tex = new Texture(
-            this.image,
-            this.points.Copy()
-        );
+        const tex = new Texture(this.image, this.points.Copy());
 
         return tex;
     }
@@ -81,10 +78,12 @@ class Texture implements IFreeable {
                 // sheet
                 const xStart = j * spriteWidth;
                 const yStart = i * spriteHeight;
-                spriteSheetIndex.push(Polygon.QuadByPoints(
-                    Vector.New(xStart, yStart),
-                    Vector.New(xStart + spriteWidth, yStart + spriteHeight)
-                ));
+                spriteSheetIndex.push(
+                    Polygon.QuadByPoints(
+                        Vector.New(xStart, yStart),
+                        Vector.New(xStart + spriteWidth, yStart + spriteHeight)
+                    )
+                );
             }
         }
         return spriteSheetIndex;

@@ -19,7 +19,7 @@ import IAudioOptions from "../../audio/iaudio_options";
 
 /**
  * AudioSource is a component for storing information around audio and how it
- * should be played. 
+ * should be played.
  */
 class AudioSource extends Component {
     /**
@@ -73,7 +73,7 @@ class AudioSource extends Component {
             volume: 1.0,
             loop: 0,
             playbackRate: 1,
-            ...options
+            ...options,
         };
         this.audio = audio;
         this.playing = audioOptions.playing;

@@ -29,7 +29,7 @@ enum TextureWrapping {
     /**
      * Clamps the coordinates between 0 and 1.
      */
-    CLAMP_TO_EDGE = 3
+    CLAMP_TO_EDGE = 3,
 }
 
 export default TextureWrapping;

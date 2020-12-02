@@ -26,7 +26,6 @@ import Vector from "../../../geometry/vector";
  */
 class AABBAlgorithm implements ICollisionAlgorithm {
     public CalculateCollisions(shapes: IShape[]): CollisionInfo[] {
-
         const horizontalOverlap: [IShape, IShape][] = [];
 
         const leftDir = Vector.New(-1, 0);
@@ -40,8 +39,7 @@ class AABBAlgorithm implements ICollisionAlgorithm {
                 const b = shapes[j];
                 const bLeft = b.FarthestPointInDirection(leftDir);
                 const bRight = b.FarthestPointInDirection(rightDir);
-                if (aLeft.x < bRight.x &&
-                    aRight.x > bLeft.x) {
+                if (aLeft.x < bRight.x && aRight.x > bLeft.x) {
                     horizontalOverlap.push([a, b]);
                 }
                 bLeft.Free();
@@ -66,8 +64,7 @@ class AABBAlgorithm implements ICollisionAlgorithm {
             const aDown = a.FarthestPointInDirection(downDir);
             const bUp = b.FarthestPointInDirection(upDir);
             const bDown = b.FarthestPointInDirection(downDir);
-            if (aDown.y < bUp.y &&
-                aUp.y > bDown.y) {
+            if (aDown.y < bUp.y && aUp.y > bDown.y) {
                 collisions.push(new CollisionInfo(a, b));
             }
             aUp.Free();

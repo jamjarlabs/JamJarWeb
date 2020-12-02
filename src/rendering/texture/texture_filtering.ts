@@ -29,7 +29,7 @@ enum TextureFiltering {
     /**
      * Trilinear filtering.
      */
-    TRILINEAR = 3
+    TRILINEAR = 3,
 }
 
 export default TextureFiltering;

@@ -28,65 +28,43 @@ describe("AABBAlgorithm - CalculateCollision", () => {
         [
             "Squares (one AABB, one Polygon), no collision",
             [],
-            [
-                new AABB(new Vector(1, 1)),
-                Polygon.RectangleByDimensions(1, 1, 3, 3)
-            ],
-            new AABBAlgorithm()
+            [new AABB(new Vector(1, 1)), Polygon.RectangleByDimensions(1, 1, 3, 3)],
+            new AABBAlgorithm(),
         ],
         [
             "Squares, collision",
-            [new CollisionInfo(
-                Polygon.RectangleByDimensions(3, 3, 0, 0),
-                Polygon.RectangleByDimensions(3, 3, 1, 1)
-            )],
-            [
-                Polygon.RectangleByDimensions(3, 3, 0, 0),
-                Polygon.RectangleByDimensions(3, 3, 1, 1)
-            ],
-            new AABBAlgorithm()
+            [new CollisionInfo(Polygon.RectangleByDimensions(3, 3, 0, 0), Polygon.RectangleByDimensions(3, 3, 1, 1))],
+            [Polygon.RectangleByDimensions(3, 3, 0, 0), Polygon.RectangleByDimensions(3, 3, 1, 1)],
+            new AABBAlgorithm(),
         ],
         [
             "Squares, edge no collision",
             [],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 1, 1)
-            ],
-            new AABBAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Polygon.RectangleByDimensions(1, 1, 1, 1)],
+            new AABBAlgorithm(),
         ],
         [
             "Squares, edge collision",
-            [new CollisionInfo(
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
-            )],
             [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
+                new CollisionInfo(
+                    Polygon.RectangleByDimensions(1, 1, 0, 0),
+                    Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)
+                ),
             ],
-            new AABBAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Polygon.RectangleByDimensions(1, 1, 0.999, 0.999)],
+            new AABBAlgorithm(),
         ],
         [
             "Ellipse and rectangle, no collision",
             [],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Ellipse.Circle(2, 5, 5)
-            ],
-            new AABBAlgorithm()
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Ellipse.Circle(2, 5, 5)],
+            new AABBAlgorithm(),
         ],
         [
             "Ellipse and rectangle, collision",
-            [new CollisionInfo(
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Ellipse.Circle(2, -1, 0),
-            )],
-            [
-                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                Ellipse.Circle(2, -1, 0)
-            ],
-            new AABBAlgorithm()
+            [new CollisionInfo(Polygon.RectangleByDimensions(1, 1, 0, 0), Ellipse.Circle(2, -1, 0))],
+            [Polygon.RectangleByDimensions(1, 1, 0, 0), Ellipse.Circle(2, -1, 0)],
+            new AABBAlgorithm(),
         ],
     ])("%p", (description: string, expected: CollisionInfo[], shapes: IShape[], algorithm: AABBAlgorithm) => {
         expect(algorithm.CalculateCollisions(shapes)).toEqual(expected);

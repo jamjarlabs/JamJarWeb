@@ -22,14 +22,13 @@ limitations under the License.
  * Also stores the audio data itself.
  */
 class AudioAsset {
-
     /**
      * Message when an audio asset is finished loading.
      */
     public static readonly MESSAGE_FINISH_LOAD = "finish_audio_load";
 
     /**
-     * Name of the audio asset, how it is referred to throughout the system, 
+     * Name of the audio asset, how it is referred to throughout the system,
      * should be unique.
      */
     public name: string;
@@ -43,9 +42,7 @@ class AudioAsset {
      */
     public error?: Error;
 
-    constructor(name: string, 
-        buffer: AudioBuffer,
-        error?: Error) {
+    constructor(name: string, buffer: AudioBuffer, error?: Error) {
         this.name = name;
         this.buffer = buffer;
         this.error = error;

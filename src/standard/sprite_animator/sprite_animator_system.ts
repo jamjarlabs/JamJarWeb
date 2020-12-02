@@ -32,15 +32,10 @@ class SpriteAnimatorSystem extends System {
      * Only components with Sprite and SpriteAnimator components
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Sprite.KEY, SpriteAnimator.KEY].every((type) => components.some(
-            component => component.key === type
-        ));
+        return [Sprite.KEY, SpriteAnimator.KEY].every((type) => components.some((component) => component.key === type));
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, SpriteAnimatorSystem.EVALUATOR, entities, subscriberID);
     }
 

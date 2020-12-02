@@ -40,16 +40,23 @@ class FakeGainNode extends Fake implements GainNode {
     disconnect(destinationNode?: any, output?: any, input?: any) {
         return {};
     }
-    addEventListener(type: string, listener: EventListener | EventListenerObject | null, options?: boolean | AddEventListenerOptions | undefined): void {
+    addEventListener(
+        type: string,
+        listener: EventListener | EventListenerObject | null,
+        options?: boolean | AddEventListenerOptions | undefined
+    ): void {
         return;
     }
     dispatchEvent(event: Event): boolean {
         return false;
     }
-    removeEventListener(type: string, callback: EventListener | EventListenerObject | null, options?: boolean | EventListenerOptions | undefined): void {
+    removeEventListener(
+        type: string,
+        callback: EventListener | EventListenerObject | null,
+        options?: boolean | EventListenerOptions | undefined
+    ): void {
         return;
     }
-
 }
 
 export default FakeGainNode;

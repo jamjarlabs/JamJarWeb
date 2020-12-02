@@ -28,7 +28,6 @@ import ScriptRequest from "../../scripting/script_request";
  * available to the engine for execution.
  */
 class HTTPScriptSystem extends System {
-
     /**
      * Message to send out all loaded script messages that are currently loaded.
      */
@@ -40,17 +39,19 @@ class HTTPScriptSystem extends System {
 
     private assets: ScriptAsset[];
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        assets: ScriptAsset[] = []) {
+        assets: ScriptAsset[] = []
+    ) {
         super(messageBus, scene, undefined, entities, subscriberID);
         this.assets = assets;
         this.messageBus.Subscribe(this, [
             ScriptRequest.MESSAGE_REQUEST_LOAD,
             HTTPScriptSystem.MESSAGE_REQUEST_FLUSH,
-            HTTPScriptSystem.MESSAGE_REQUEST_CLEAR
+            HTTPScriptSystem.MESSAGE_REQUEST_CLEAR,
         ]);
     }
 
@@ -77,20 +78,13 @@ class HTTPScriptSystem extends System {
     }
 
     protected httpSuccess(code: string, request: ScriptRequest): void {
-        const asset = new ScriptAsset(
-            request.name,
-            code,
-        );
+        const asset = new ScriptAsset(request.name, code);
         this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
     protected httpError(request: ScriptRequest, error: Error): void {
-        const asset = new ScriptAsset(
-            request.name,
-            "",
-            error
-        );
+        const asset = new ScriptAsset(request.name, "", error);
         this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
@@ -120,7 +114,6 @@ class HTTPScriptSystem extends System {
     private clear(): void {
         this.assets = [];
     }
-
 }
 
 export default HTTPScriptSystem;

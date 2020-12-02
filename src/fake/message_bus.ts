@@ -32,7 +32,7 @@ class FakeMessageBus extends Fake implements IMessageBus {
         return;
     }
 
-    public Subscribe(subscriber: Subscriber, types: string | string[]): void{
+    public Subscribe(subscriber: Subscriber, types: string | string[]): void {
         return;
     }
 
@@ -43,7 +43,6 @@ class FakeMessageBus extends Fake implements IMessageBus {
     public Unsubscribe(subscriber: Subscriber, types: string | string[]): void {
         return;
     }
-
 }
 
 export default FakeMessageBus;
