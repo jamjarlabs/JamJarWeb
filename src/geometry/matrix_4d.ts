@@ -15,6 +15,8 @@ limitations under the License.
 */
 
 import { mat4 } from "gl-matrix";
+import IPoolable from "../pooling/ipoolable";
+import Pooled from "../pooling/pooled";
 import Vector from "./vector";
 
 /**
@@ -34,31 +36,45 @@ type Matrix4DValues = [
  * Inspired by the glMatrix library:
  * https://github.com/toji/gl-matrix
  */
-class Matrix4D {
+class Matrix4D extends Pooled implements IPoolable {
+    /**
+     * Value of the Matrix4D object pool.
+     */
+    private static POOL_KEY = "jamjar_matrix4d";
+
+    private static INIT_MATRIX4D = () => {
+        return new Matrix4D();
+    };
+
+    /**
+     * Create a new Matrix4D, using pooling if available.
+     */
+    public static New(): Matrix4D {
+        return this.new<Matrix4D>(Matrix4D.POOL_KEY, Matrix4D);
+    }
+
+    /**
+     * Free the provided Matrix4D.
+     */
+    public static Free(obj: Matrix4D): void {
+        this.free(Matrix4D.POOL_KEY, obj);
+    }
+
+    /**
+     * Initialize the Matrix4D pool to the size provided.
+     */
+    public static Init(size: number): void {
+        this.init(Matrix4D.POOL_KEY, Matrix4D.INIT_MATRIX4D, size);
+    }
+
     private static readonly Z_AXIS: Float32Array = new Float32Array([0, 0, 1]);
+    private static vec3Tmp = new Float32Array(3);
     public data: Float32Array;
 
     constructor() {
+        super();
         this.data = new Float32Array(16);
-        this.data[0] = 1;
-        this.data[1] = 0;
-        this.data[2] = 0;
-        this.data[3] = 0;
-
-        this.data[4] = 0;
-        this.data[5] = 1;
-        this.data[6] = 0;
-        this.data[7] = 0;
-
-        this.data[8] = 0;
-        this.data[9] = 0;
-        this.data[10] = 1;
-        this.data[11] = 0;
-
-        this.data[12] = 0;
-        this.data[13] = 0;
-        this.data[14] = 0;
-        this.data[15] = 1;
+        this.Blank();
     }
 
     public Set(values: Matrix4DValues): Matrix4D {
@@ -90,11 +106,10 @@ class Matrix4D {
      * @param {Vector} translation The vector transformation to apply to the matrix
      */
     public Translate(translation: Vector): Matrix4D {
-        const vec3 = new Float32Array(3);
-        vec3[0] = translation.x;
-        vec3[1] = translation.y;
-        vec3[2] = 0;
-        mat4.translate(this.data, this.data, vec3);
+        Matrix4D.vec3Tmp[0] = translation.x;
+        Matrix4D.vec3Tmp[1] = translation.y;
+        Matrix4D.vec3Tmp[2] = 0;
+        mat4.translate(this.data, this.data, Matrix4D.vec3Tmp);
         return this;
     }
 
@@ -104,11 +119,10 @@ class Matrix4D {
      * @param {Vector} scale The vector scaling to apply to the matrix
      */
     public Scale(scale: Vector): Matrix4D {
-        const vec3 = new Float32Array(3);
-        vec3[0] = scale.x;
-        vec3[1] = scale.y;
-        vec3[2] = 0;
-        mat4.scale(this.data, this.data, vec3);
+        Matrix4D.vec3Tmp[0] = scale.x;
+        Matrix4D.vec3Tmp[1] = scale.y;
+        Matrix4D.vec3Tmp[2] = 0;
+        mat4.scale(this.data, this.data, Matrix4D.vec3Tmp);
         return this;
     }
 
@@ -159,6 +173,38 @@ class Matrix4D {
      */
     public GetFloat32Array(): Float32Array {
         return this.data;
+    }
+
+    public Blank(): Matrix4D {
+        this.data[0] = 1;
+        this.data[1] = 0;
+        this.data[2] = 0;
+        this.data[3] = 0;
+
+        this.data[4] = 0;
+        this.data[5] = 1;
+        this.data[6] = 0;
+        this.data[7] = 0;
+
+        this.data[8] = 0;
+        this.data[9] = 0;
+        this.data[10] = 1;
+        this.data[11] = 0;
+
+        this.data[12] = 0;
+        this.data[13] = 0;
+        this.data[14] = 0;
+        this.data[15] = 1;
+        return this;
+    }
+
+    public Recycle(): IPoolable {
+        this.Blank();
+        return this;
+    }
+
+    public Free(): void {
+        Matrix4D.Free(this);
     }
 }
 

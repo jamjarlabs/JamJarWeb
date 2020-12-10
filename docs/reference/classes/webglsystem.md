@@ -23,15 +23,19 @@ renders them onto a canvas.
 
 ### Properties
 
+* [cameraRenderables](webglsystem.md#private-camerarenderables)
 * [entities](webglsystem.md#protected-entities)
 * [gl](webglsystem.md#private-gl)
 * [messageBus](webglsystem.md#protected-messagebus)
+* [programGroups](webglsystem.md#private-programgroups)
 * [programs](webglsystem.md#private-programs)
 * [renderables](webglsystem.md#protected-renderables)
 * [scene](webglsystem.md#protected-optional-scene)
 * [shaders](webglsystem.md#private-shaders)
 * [subscriberID](webglsystem.md#subscriberid)
+* [textureGroups](webglsystem.md#private-texturegroups)
 * [textures](webglsystem.md#private-textures)
+* [zOrderGroups](webglsystem.md#private-zordergroups)
 * [DRAW_MODES](webglsystem.md#static-private-draw_modes)
 * [FILTER_MODES](webglsystem.md#static-private-filter_modes)
 * [MESSAGE_DEREGISTER](webglsystem.md#static-message_deregister)
@@ -48,6 +52,8 @@ renders them onto a canvas.
 * [Update](webglsystem.md#protected-update)
 * [loadShader](webglsystem.md#private-loadshader)
 * [loadTexture](webglsystem.md#private-loadtexture)
+* [register](webglsystem.md#protected-register)
+* [remove](webglsystem.md#protected-remove)
 * [render](webglsystem.md#private-render)
 * [EVALUATOR](webglsystem.md#static-private-evaluator)
 
@@ -55,7 +61,7 @@ renders them onto a canvas.
 
 ###  constructor
 
-\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables`: Map‹number, [IRenderable](../interfaces/irenderable.md)[]›, `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
+\+ **new WebGLSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `gl`: WebGL2RenderingContext, `scene?`: [IScene](../interfaces/iscene.md), `renderables?`: [IRenderable](../interfaces/irenderable.md)[], `defaultShaderAssets`: [ShaderAsset](shaderasset.md)[], `shaders`: Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]›, `textures`: Map‹string, WebGLTexture›, `programs`: Map‹string, WebGLProgram›, `entities?`: [SystemEntity](systementity.md)[], `subscriberID?`: undefined | number): *[WebGLSystem](webglsystem.md)*
 
 *Overrides [RenderSystem](rendersystem.md).[constructor](rendersystem.md#constructor)*
 
@@ -66,7 +72,7 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `gl` | WebGL2RenderingContext | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
-`renderables` | Map‹number, [IRenderable](../interfaces/irenderable.md)[]› | new Map() |
+`renderables?` | [IRenderable](../interfaces/irenderable.md)[] | - |
 `defaultShaderAssets` | [ShaderAsset](shaderasset.md)[] | [
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME, new DefaultTextureFragmentShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
@@ -77,24 +83,26 @@ Name | Type | Default |
 `shaders` | Map‹string, [WebGLShader, [GLSLShader](glslshader.md)]› | new Map() |
 `textures` | Map‹string, WebGLTexture› | new Map() |
 `programs` | Map‹string, WebGLProgram› | new Map() |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`entities?` | [SystemEntity](systementity.md)[] | - |
 `subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[WebGLSystem](webglsystem.md)*
 
 ## Properties
 
+### `Private` cameraRenderables
+
+• **cameraRenderables**: *[IRenderable](../interfaces/irenderable.md)[]*
+
+___
+
 ### `Protected` entities
 
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
+• **entities**: *[SystemEntity](systementity.md)[]*
 
-*Inherited from [System](system.md).[entities](system.md#protected-entities)*
+*Inherited from [ArraySystem](arraysystem.md).[entities](arraysystem.md#protected-entities)*
 
-A map of entities, mapped by their entity ID.
-ID: Entity
-0: PlayerEntity
-1: ObstacleEntity
-etc.
+The list of entities the system is tracking.
 
 ___
 
@@ -115,6 +123,12 @@ for communicating with other parts of the engine.
 
 ___
 
+### `Private` programGroups
+
+• **programGroups**: *Map‹string, [IRenderable](../interfaces/irenderable.md)[]›*
+
+___
+
 ### `Private` programs
 
 • **programs**: *Map‹string, WebGLProgram›*
@@ -123,7 +137,7 @@ ___
 
 ### `Protected` renderables
 
-• **renderables**: *Map‹number, [IRenderable](../interfaces/irenderable.md)[]›*
+• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
 
 *Inherited from [RenderSystem](rendersystem.md).[renderables](rendersystem.md#protected-renderables)*
 
@@ -159,9 +173,21 @@ ___
 
 ___
 
+### `Private` textureGroups
+
+• **textureGroups**: *Map‹string, [IRenderable](../interfaces/irenderable.md)[]›*
+
+___
+
 ### `Private` textures
 
 • **textures**: *Map‹string, WebGLTexture›*
+
+___
+
+### `Private` zOrderGroups
+
+• **zOrderGroups**: *Map‹number, [IRenderable](../interfaces/irenderable.md)[]›*
 
 ___
 
@@ -193,9 +219,11 @@ ___
 
 ### `Static` MESSAGE_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
+▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
 
-*Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
@@ -211,9 +239,11 @@ ___
 
 ### `Static` MESSAGE_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
+▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
 
-*Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+Message to register an entity + components with a system so it can be tracked.
 
 ___
 
@@ -323,6 +353,43 @@ ___
 Name | Type |
 ------ | ------ |
 `asset` | [ImageAsset](imageasset.md) |
+
+**Returns:** *void*
+
+___
+
+### `Protected` register
+
+▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[register](arraysystem.md#protected-register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+### `Protected` remove
+
+▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[remove](arraysystem.md#protected-remove)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *void*
 

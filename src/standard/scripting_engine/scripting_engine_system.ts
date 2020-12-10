@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Component from "../../component/component";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
@@ -25,6 +24,7 @@ import Message from "../../message/message";
 import ScriptAsset from "../../scripting/script_asset";
 import ScriptingReference from "./scripting_reference";
 import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
+import MapSystem from "../../system/map_system";
 
 /**
  * ScriptingEngineSystem handles executing scripts, listening out for trigger
@@ -32,7 +32,7 @@ import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
  * communicating between the game engine and the scripts
  * (entities/messages/components) through the global window namespace.
  */
-class ScriptingEngineSystem extends System {
+class ScriptingEngineSystem extends MapSystem {
     /**
      * Track all entities
      */

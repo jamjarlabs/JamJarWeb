@@ -72,17 +72,18 @@ class Polygon implements IShape {
     public FarthestPointInDirection(direction: Vector): Vector {
         let farthestDistance = -Infinity;
         // If there are no points, just return point 0,0
-        let farthestPoint: [number, number] = [0, 0];
+        const farthestPoint = Vector.New(0, 0);
         for (let i = 0; i < this.points.length; i += 2) {
             const x = this.points[i];
             const y = this.points[i + 1];
             const distanceInDirection = x * direction.x + y * direction.y;
             if (distanceInDirection > farthestDistance) {
-                farthestPoint = [x, y];
+                farthestPoint.x = x;
+                farthestPoint.y = y;
                 farthestDistance = distanceInDirection;
             }
         }
-        return Vector.New(farthestPoint[0], farthestPoint[1]);
+        return farthestPoint;
     }
 
     public Center(): Vector {
@@ -101,6 +102,7 @@ class Polygon implements IShape {
             const position = this.points.subarray(i, i + 2);
             vec2.transformMat3(position, position, matrix.data);
         }
+        matrix.Free();
         return this;
     }
 

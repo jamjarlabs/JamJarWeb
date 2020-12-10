@@ -26,7 +26,6 @@ import Sprite from "./sprite";
 import Polygon from "../../shape/polygon";
 import Reactor from "../../fake/reactor";
 import Component from "../../component/component";
-import System from "../../system/system";
 import IEntity from "../../entity/ientity";
 import Material from "../../rendering/material/material";
 import Texture from "../../rendering/texture/texture";
@@ -40,6 +39,7 @@ import Matrix4D from "../../geometry/matrix_4d";
 import Vector from "../../geometry/vector";
 import Color from "../../rendering/color";
 import DrawMode from "../../rendering/draw_mode";
+import StatefulSystem from "../../system/stateful_system";
 
 describe("SpriteSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, SpriteSystem, SpriteSystem, IMessage];
@@ -70,18 +70,15 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(
@@ -93,18 +90,15 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -117,38 +111,29 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(
@@ -156,38 +141,29 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -199,80 +175,62 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                new Map([[3, []]]),
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])],
-                ]),
+                [],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()]),
+                ],
                 0
             ),
             new SpriteSystem(
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                new Map(),
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])],
-                ]),
+                [],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -284,119 +242,99 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        3,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D().Scale(new Vector(1, 1)),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D().Scale(new Vector(1, 1)),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D().Scale(new Vector(1, 1)),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                        ],
-                    ],
-                ]),
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])],
-                ]),
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D().Scale(new Vector(1, 1)),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(3)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D().Scale(new Vector(1, 1)),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(3)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D().Scale(new Vector(1, 1)),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(3)
+                    ),
+                ],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()]),
+                ],
                 0
             ),
             new SpriteSystem(
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                new Map(),
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [3, new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()])],
-                ]),
+                [],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [new Camera(), new Transform()]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -408,77 +346,65 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        2,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D()
-                                    .Translate(new Vector(0, 0))
-                                    .Rotate(0)
-                                    .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D()
-                                    .Translate(new Vector(0, 0))
-                                    .Rotate(0)
-                                    .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                        ],
-                    ],
-                ]),
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [2, new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()])],
-                    [
-                        3,
-                        new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(4)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D()
+                            .Translate(new Vector(0, 0))
+                            .Rotate(0)
+                            .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(2)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D()
+                            .Translate(new Vector(0, 0))
+                            .Rotate(0)
+                            .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(2)
+                    ),
+                ],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()]),
+                    new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(4)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(
@@ -486,42 +412,33 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [2, new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()])],
-                    [
-                        3,
-                        new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(4)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()]),
+                    new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(4)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -533,86 +450,68 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                new Map([[3, []]]),
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(3)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(3)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new UI(new FakeEntity(3)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [3, new SystemEntity(new FakeEntity(3), [new Transform(), new Camera()])],
-                ]),
+                [],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [new Transform(), new Camera()]),
+                ],
                 0
             ),
             new SpriteSystem(
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                new Map(),
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(3)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(3)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new UI(new FakeEntity(3)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [3, new SystemEntity(new FakeEntity(3), [new Transform(), new Camera()])],
-                ]),
+                [],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new UI(new FakeEntity(3)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [new Transform(), new Camera()]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -624,120 +523,99 @@ describe("SpriteSystem - OnMessage", () => {
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        2,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D()
-                                    .Translate(new Vector(0, 0))
-                                    .Rotate(0)
-                                    .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.QuadByDimensions(1, 1, 0, 0),
-                                new Matrix4D()
-                                    .Translate(new Vector(0, 0))
-                                    .Rotate(0)
-                                    .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
-                                new Material({
-                                    color: new Color(1, 1, 1, 1),
-                                    shaders: ["default_texture_vertex", "default_texture_fragment"],
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLES
-                            ),
-                        ],
-                    ],
-                ]),
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [2, new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()])],
-                    [
-                        3,
-                        new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(1)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D()
+                            .Translate(new Vector(0, 0))
+                            .Rotate(0)
+                            .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(2)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.QuadByDimensions(1, 1, 0, 0),
+                        new Matrix4D()
+                            .Translate(new Vector(0, 0))
+                            .Rotate(0)
+                            .Scale(new Vector(1, 1).Multiply(new Vector(160, 90))),
+                        new Material({
+                            color: new Color(1, 1, 1, 1),
+                            shaders: ["default_texture_vertex", "default_texture_fragment"],
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(2)
+                    ),
+                ],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()]),
+                    new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(1)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(
                 new FakeMessageBus(),
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
-                new Map(),
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new UI(new FakeEntity(2)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [2, new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()])],
-                    [
-                        3,
-                        new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new UI(new FakeEntity(1)),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [],
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new UI(new FakeEntity(2)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [new Transform(), new Camera()]),
+                    new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new UI(new FakeEntity(1)),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
@@ -750,22 +628,19 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [
                     new Transform(),
@@ -781,23 +656,20 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                            new UI(new FakeEntity(0)),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                        new UI(new FakeEntity(0)),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [
                     new Transform(),
@@ -814,11 +686,11 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([[0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])]]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Transform(), new Camera()],
             ]),
@@ -831,48 +703,36 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        3,
-                        new SystemEntity(new FakeEntity(3), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(3), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
             new SpriteSystem(
@@ -880,41 +740,32 @@ describe("SpriteSystem - OnMessage", () => {
                 undefined,
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                    [
-                        2,
-                        new SystemEntity(new FakeEntity(2), [
-                            new Transform(),
-                            new Sprite(
-                                new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
-                                0
-                            ),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                    new SystemEntity(new FakeEntity(2), [
+                        new Transform(),
+                        new Sprite(
+                            new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }),
+                            0
+                        ),
+                    ]),
+                ],
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(3),
                 [
                     new Transform(),
@@ -927,7 +778,7 @@ describe("SpriteSystem - OnMessage", () => {
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Sprite(new Material({ texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)) }), 0)],
             ]),
@@ -937,21 +788,66 @@ describe("SpriteSystem - OnMessage", () => {
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Correctly reject camera new entity, missing transform",
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
         ],
         [
             "Correctly reject camera new entity, missing camera",
             undefined,
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
             new SpriteSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
+        ],
+        [
+            "Clear previously set renderables",
+            undefined,
+            new SpriteSystem(new FakeMessageBus(), undefined, undefined, [], undefined, 0),
+            new SpriteSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                [
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({}),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({}),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(1)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({}),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(2)
+                    ),
+                ],
+                undefined,
+                0
+            ),
+            new Message(Game.MESSAGE_POST_RENDER),
         ],
     ])(
         "%p",

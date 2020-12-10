@@ -23,6 +23,7 @@ This is a mutable data structure, operations on Vector objects will affect the o
 ### Properties
 
 * [data](vector.md#data)
+* [debug](vector.md#debug)
 * [objectInPool](vector.md#objectinpool)
 * [POOL_KEY](vector.md#static-private-pool_key)
 * [pools](vector.md#static-protected-pools)
@@ -51,6 +52,7 @@ This is a mutable data structure, operations on Vector objects will affect the o
 * [Scale](vector.md#scale)
 * [Sub](vector.md#sub)
 * [Free](vector.md#static-free)
+* [INIT_VECTOR](vector.md#static-private-init_vector)
 * [Init](vector.md#static-init)
 * [New](vector.md#static-new)
 * [free](vector.md#static-protected-free)
@@ -77,6 +79,12 @@ Name | Type |
 ###  data
 
 • **data**: *Float32Array*
+
+___
+
+###  debug
+
+• **debug**: *string* = ""
 
 ___
 
@@ -318,13 +326,14 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(`args`: [number, number]): *[Vector](vector.md)*
+▸ **Recycle**(`x`: number, `y`: number): *[Vector](vector.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`args` | [number, number] |
+`x` | number |
+`y` | number |
 
 **Returns:** *[Vector](vector.md)*
 
@@ -422,6 +431,14 @@ Name | Type |
 
 ___
 
+### `Static` `Private` INIT_VECTOR
+
+▸ **INIT_VECTOR**(): *[Vector](vector.md)‹›*
+
+**Returns:** *[Vector](vector.md)‹›*
+
+___
+
 ### `Static` Init
 
 ▸ **Init**(`size`: number): *void*
@@ -442,7 +459,7 @@ ___
 
 ▸ **New**(`x`: number, `y`: number): *[Vector](vector.md)*
 
-Create a Vector.New, using pooling if available.
+Create a new Vector, using pooling if available.
 
 **Parameters:**
 
@@ -502,7 +519,7 @@ ___
 
 ### `Static` `Protected` new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, `args`: any[]): *T*
+▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
 
 *Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
 
@@ -529,7 +546,7 @@ Name | Type |
 ------ | ------ |
 `constructor` |  |
 
-▪ **args**: *any[]*
+▪... **args**: *any*
 
 The args to use when creating/recycling the object.
 

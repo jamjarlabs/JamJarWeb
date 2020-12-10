@@ -16,7 +16,6 @@ limitations under the License.
 
 import { ISDFGenerator, SDFGeneratorFactory } from "tiny-sdf";
 import TinySDF from "tiny-sdf";
-import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
 import IMessage from "../../message/imessage";
@@ -46,6 +45,7 @@ import Matrix4D from "../../geometry/matrix_4d";
 import IFrustumCuller from "../frustum_culler/ifrustum_culler";
 import FrustumCuller from "../frustum_culler/frustum_culler";
 import AABB from "../../shape/aabb";
+import MapSystem from "../../system/map_system";
 
 /**
  * TextSystem is a pre-rendering system, taking in text components and
@@ -53,7 +53,7 @@ import AABB from "../../shape/aabb";
  * This system will also handle preparing fonts and generating font atlases to
  * be loaded as textures by rendering systems.
  */
-class TextSystem extends System {
+class TextSystem extends MapSystem {
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return (
             [Transform.KEY, Text.KEY].every((type) => components.some((component) => component.key === type)) ||
@@ -73,21 +73,28 @@ class TextSystem extends System {
     private mappings: Map<string, FontMapping>;
     private sdfGeneratorFactory: SDFGeneratorFactory;
     private frustumCuller: IFrustumCuller;
+    private renderables: Renderable<TextRender>[];
 
     constructor(
         messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         frustumCuller: IFrustumCuller = new FrustumCuller(),
+        renderables: Renderable<TextRender>[] = [],
         mappings: Map<string, FontMapping> = new Map(),
         sdfGeneratorFactory: SDFGeneratorFactory = TextSystem.DEFAULT_SDF_GENERATOR_FACTORY,
         subscriberID?: number
     ) {
         super(messageBus, scene, TextSystem.EVALUATOR, entities, subscriberID);
+        this.renderables = renderables;
         this.frustumCuller = frustumCuller;
         this.mappings = mappings;
         this.sdfGeneratorFactory = sdfGeneratorFactory;
-        this.messageBus.Subscribe(this, [Game.MESSAGE_PRE_RENDER, FontRequest.MESSAGE_REQUEST_LOAD]);
+        this.messageBus.Subscribe(this, [
+            Game.MESSAGE_PRE_RENDER,
+            FontRequest.MESSAGE_REQUEST_LOAD,
+            Game.MESSAGE_POST_RENDER,
+        ]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -107,6 +114,10 @@ class TextSystem extends System {
                     return;
                 }
                 this.loadFont(fontMessage.payload);
+                break;
+            }
+            case Game.MESSAGE_POST_RENDER: {
+                this.freeRenderables();
                 break;
             }
         }
@@ -202,7 +213,7 @@ class TextSystem extends System {
 
         // Publish the newly generated bitmap image to load as a texture
         this.messageBus.Publish(
-            new Message<ImageAsset>(
+            Message.New<ImageAsset>(
                 ImageAsset.MESSAGE_FINISH_LOAD,
                 new ImageAsset(
                     `font_${request.name}`,
@@ -220,8 +231,6 @@ class TextSystem extends System {
     }
 
     private prepareText(alpha: number): void {
-        const renderables: Map<number, Renderable<TextRender>[]> = new Map();
-
         const cameraEntities = [...this.entities.values()].filter((entity) => {
             return entity.Get(Camera.KEY);
         });
@@ -242,7 +251,6 @@ class TextSystem extends System {
 
             const cameraVirtualScaleHalf = camera.virtualScale.Copy().Scale(0.5);
 
-            const cameraRenderables: Renderable<TextRender>[] = [];
             for (const entity of textEntities) {
                 const text = entity.Get(Text.KEY) as Text;
                 const transform = entity.Get(Transform.KEY) as Transform;
@@ -297,7 +305,7 @@ class TextSystem extends System {
                     }
 
                     // Transform for character
-                    const interpolatedMatrix = new Matrix4D();
+                    const interpolatedMatrix = Matrix4D.New();
                     if (ui === undefined) {
                         // Not part of the UI
 
@@ -320,16 +328,15 @@ class TextSystem extends System {
 
                         translation.Free();
 
-                        if (
-                            this.frustumCuller.Cull(
-                                cameraViewShape,
-                                new AABB(characterScale.Copy()).Transform(textTransform)
-                            )
-                        ) {
+                        const characterRect = new AABB(characterScale.Copy()).Transform(textTransform);
+
+                        if (this.frustumCuller.Cull(cameraViewShape, characterRect)) {
                             // Not in camera view, skip rendering
+                            characterRect.Free();
                             textTransform.Free();
                             continue;
                         }
+                        characterRect.Free();
                         textTransform.Free();
                     } else {
                         // Part of the UI
@@ -338,12 +345,15 @@ class TextSystem extends System {
                             continue;
                         }
 
-                        if (
-                            this.frustumCuller.Cull(viewportAABB, new AABB(characterScale.Copy()).Transform(transform))
-                        ) {
+                        const characterRect = new AABB(characterScale.Copy()).Transform(transform);
+
+                        if (this.frustumCuller.Cull(viewportAABB, characterRect)) {
                             // Not in camera view, skip rendering
+                            characterRect.Free();
                             continue;
                         }
+
+                        characterRect.Free();
 
                         // Convert the transform.position to be relative to the camera
                         const textPosition = cameraTransform.position
@@ -376,23 +386,20 @@ class TextSystem extends System {
                     const charSize = 1 / mapping.width;
                     // Create renderable for the character, include extra TextRender
                     // information for shaders to use
-                    cameraRenderables.push(
+                    const bottomLeft = Vector.New(x * charSize, y * charSize);
+                    const topRight = Vector.New(x * charSize + charSize, y * charSize + charSize);
+                    this.renderables.push(
                         Renderable.New<TextRender>(
                             text.zOrder,
                             Polygon.QuadByDimensions(1, 1, 0, 0),
                             interpolatedMatrix,
                             new Material({
-                                texture: new Texture(
-                                    `font_${text.font}`,
-                                    Polygon.QuadByPoints(
-                                        Vector.New(x * charSize, y * charSize),
-                                        Vector.New(x * charSize + charSize, y * charSize + charSize)
-                                    )
-                                ),
+                                texture: new Texture(`font_${text.font}`, Polygon.QuadByPoints(bottomLeft, topRight)),
                                 shaders: text.shaders,
                                 color: text.color,
                             }),
                             DrawMode.TRIANGLES,
+                            cameraEntity.entity,
                             new TextRender(
                                 mapping.asset.request.family,
                                 mapping.asset.request.weight,
@@ -406,18 +413,31 @@ class TextSystem extends System {
                             )
                         )
                     );
+                    bottomLeft.Free();
+                    topRight.Free();
                 }
                 transformVirtualPosition.Free();
                 offsetVirtualPosition.Free();
             }
-            renderables.set(cameraEntity.entity.id, cameraRenderables);
             cameraViewShape.Free();
             cameraVirtualScaleHalf.Free();
         }
+        characterScale.Free();
         viewportAABB.Free();
         this.messageBus.Publish(
-            new Message<Map<number, Renderable<TextRender>[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, renderables)
+            Message.New<Renderable<TextRender>[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables)
         );
+    }
+
+    private freeRenderables(): void {
+        for (let i = 0; i < this.renderables.length; i++) {
+            const renderable = this.renderables[i];
+            renderable.material.Free();
+            renderable.modelMatrix.Free();
+            renderable.vertices.Free();
+            renderable.Free();
+        }
+        this.renderables.length = 0;
     }
 }
 

@@ -72,18 +72,18 @@ abstract class Scene extends Subscriber implements IScene {
      * Destroy destroys the scene, alongside all linked entities, components and systems.
      */
     public Destroy(): void {
-        this.messageBus.Publish(new Message<Scene>(Scene.MESSAGE_DESTROY, this));
+        this.messageBus.Publish(Message.New<Scene>(Scene.MESSAGE_DESTROY, this));
         for (const entity of this.entities) {
             entity.Destroy();
         }
-        this.entities = [];
+        this.entities.length = 0;
     }
 
     /**
      * Start starts this scene
      */
     public Start(): void {
-        this.messageBus.Publish(new Message<Scene>(Scene.MESSAGE_ON_START, this));
+        this.messageBus.Publish(Message.New<Scene>(Scene.MESSAGE_ON_START, this));
     }
 }
 

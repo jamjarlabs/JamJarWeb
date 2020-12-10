@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
 import IMessage from "../../message/imessage";
@@ -35,12 +34,13 @@ import FrustumCuller from "../frustum_culler/frustum_culler";
 import Vector from "../../geometry/vector";
 import AABB from "../../shape/aabb";
 import Matrix4D from "../../geometry/matrix_4d";
+import MapSystem from "../../system/map_system";
 
 /**
  * PrimitiveSystem handles processing primitives for render systems, tracking
  * primitives and generating renderables from them.
  */
-class PrimitiveSystem extends System {
+class PrimitiveSystem extends MapSystem {
     /**
      * Track primitives and cameras.
      */
@@ -52,13 +52,13 @@ class PrimitiveSystem extends System {
     };
 
     private frustumCuller: IFrustumCuller;
-    private renderables: Map<number, IRenderable[]>;
+    private renderables: IRenderable[];
 
     constructor(
         messageBus: IMessageBus,
         scene?: IScene,
         frustumCuller: IFrustumCuller = new FrustumCuller(),
-        renderables: Map<number, IRenderable[]> = new Map(),
+        renderables: IRenderable[] = [],
         entities?: Map<number, SystemEntity>,
         subscriberID?: number
     ) {
@@ -102,8 +102,6 @@ class PrimitiveSystem extends System {
 
             const cameraVirtualScaleHalf = camera.virtualScale.Copy().Scale(0.5);
 
-            const cameraRenderables: IRenderable[] = [];
-
             for (const primitiveEntity of this.entities.values()) {
                 if (primitiveEntity.Get(Primitive.KEY) === undefined) {
                     // Not a camera
@@ -121,13 +119,14 @@ class PrimitiveSystem extends System {
                         continue;
                     }
 
-                    cameraRenderables.push(
+                    this.renderables.push(
                         Renderable.New(
                             primitive.zOrder,
                             primitive.points,
                             transform.InterpolatedMatrix4D(alpha),
                             primitive.material,
-                            primitive.drawMode
+                            primitive.drawMode,
+                            cameraEntity.entity
                         )
                     );
                 } else {
@@ -147,38 +146,44 @@ class PrimitiveSystem extends System {
                     cameraRelativePosition.x += transform.position.x * cameraVirtualScaleHalf.x;
                     cameraRelativePosition.y += transform.position.y * cameraVirtualScaleHalf.y;
 
-                    const matrix = new Matrix4D()
+                    const primitiveVirtualScale = transform.scale.Copy().Multiply(camera.virtualScale);
+
+                    const matrix = Matrix4D.New()
                         .Translate(cameraRelativePosition)
                         .Rotate(transform.angle)
-                        .Scale(transform.scale.Copy().Multiply(camera.virtualScale));
+                        .Scale(primitiveVirtualScale);
+
+                    cameraRelativePosition.Free();
+                    primitiveVirtualScale.Free();
 
                     // Create the renderable for use by rendering systems
-                    cameraRenderables.push(
+                    this.renderables.push(
                         Renderable.New(
                             primitive.zOrder,
                             primitive.points,
                             matrix,
                             primitive.material,
-                            primitive.drawMode
+                            primitive.drawMode,
+                            cameraEntity.entity
                         )
                     );
                 }
             }
-            this.renderables.set(cameraEntity.entity.id, cameraRenderables);
+            cameraViewShape.Free();
+            cameraVirtualScaleHalf.Free();
         }
         viewportAABB.Free();
-        this.messageBus.Publish(
-            new Message<Map<number, IRenderable[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables)
-        );
+        this.messageBus.Publish(Message.New<IRenderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables));
     }
 
     private freeRenderables(): void {
-        for (const cameraRenderables of this.renderables.values()) {
-            for (const renderable of cameraRenderables) {
-                renderable.Free();
-            }
+        for (let i = 0; i < this.renderables.length; i++) {
+            const renderable = this.renderables[i];
+            renderable.modelMatrix.Free();
+            renderable.vertices.Free();
+            renderable.Free();
         }
-        this.renderables.clear();
+        this.renderables.length = 0;
     }
 }
 

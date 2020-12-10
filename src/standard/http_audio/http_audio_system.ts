@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
@@ -22,12 +21,13 @@ import IMessage from "../../message/imessage";
 import Message from "../../message/message";
 import AudioRequest from "../../audio/audio_request";
 import AudioAsset from "../../audio/audio_asset";
+import MapSystem from "../../system/map_system";
 
 /**
  * HTTPAudioSystem handles loading audio assets over HTTP and making them
  * available to the engine for playing.
  */
-class HTTPAudioSystem extends System {
+class HTTPAudioSystem extends MapSystem {
     /**
      * Message to send out all loaded asset messages that are currently loaded.
      */
@@ -84,13 +84,13 @@ class HTTPAudioSystem extends System {
 
     protected httpSuccess(buffer: AudioBuffer, request: AudioRequest): void {
         const asset = new AudioAsset(request.name, buffer);
-        this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(Message.New<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
     protected httpError(request: AudioRequest, error: Error): void {
         const asset = new AudioAsset(request.name, new AudioBuffer({ length: 1, sampleRate: 3000 }), error);
-        this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(Message.New<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
@@ -113,12 +113,12 @@ class HTTPAudioSystem extends System {
 
     private flush(): void {
         for (let i = 0; i < this.assets.length; i++) {
-            this.messageBus.Publish(new Message<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, this.assets[i]));
+            this.messageBus.Publish(Message.New<AudioAsset>(AudioAsset.MESSAGE_FINISH_LOAD, this.assets[i]));
         }
     }
 
     private clear(): void {
-        this.assets = [];
+        this.assets.length = 0;
     }
 }
 

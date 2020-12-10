@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
 import SystemEntity from "../../system/system_entity";
@@ -23,13 +22,14 @@ import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import Game from "../../game";
 import IScene from "../../scene/iscene";
+import ArraySystem from "../../system/array_system";
 
 /**
  * InterpolationSystem is responsible for updating each entities transform value after a render, so
  * its previous value is always 1 frame before.
  * This is part of the rendering process.
  */
-class InterpolationSystem extends System {
+class InterpolationSystem extends ArraySystem {
     /**
      * Ensure has Transform
      */
@@ -37,7 +37,7 @@ class InterpolationSystem extends System {
         return components.some((component) => component.key === Transform.KEY);
     };
 
-    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: SystemEntity[], subscriberID?: number) {
         super(messageBus, scene, InterpolationSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, Game.MESSAGE_POST_RENDER);
     }
@@ -59,7 +59,8 @@ class InterpolationSystem extends System {
      * @param {SystemEntity[]} entities The entities to update the interpolation positions of
      */
     private interpolateTransforms(): void {
-        for (const entity of this.entities.values()) {
+        for (let i = 0; i < this.entities.length; i++) {
+            const entity = this.entities[i];
             const transform = entity.Get(Transform.KEY) as Transform;
             transform.previous.x = transform.position.x;
             transform.previous.y = transform.position.y;

@@ -19,6 +19,7 @@ import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../shape/polygon";
 import DrawMode from "./draw_mode";
 import IPoolable from "../pooling/ipoolable";
+import IEntity from "../entity/ientity";
 
 /**
  * Renderable represents something that can be rendered.
@@ -48,6 +49,10 @@ interface IRenderable extends IPoolable {
      * The draw mode of the renderable, specifying how it will be rendered.
      */
     drawMode: DrawMode;
+    /**
+     * The camera to draw the renderable to.
+     */
+    camera: IEntity;
 }
 
 export default IRenderable;

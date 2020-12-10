@@ -20,11 +20,9 @@ import {
     Transform,
     Vector,
     WebGLSystem,
-    SpriteSystem,
     PrimitiveSystem,
     MotionSystem,
     FullscreenSystem,
-    KeyboardSystem,
     Collider,
     CollisionSystem,
     PointerSystem,
@@ -32,7 +30,6 @@ import {
     EntityManager,
     MessageBus,
     Camera,
-    Sprite,
     Primitive,
     Color,
     IMessageBus,
@@ -40,9 +37,7 @@ import {
     Scene,
     Polygon,
     Message,
-    Texture,
     Component,
-    System,
     IEntity,
     SystemEntity,
     IScene,
@@ -57,7 +52,8 @@ import {
     TextureFiltering,
     FontRequest,
     DrawMode,
-    Renderable
+    Renderable,
+    MapSystem
 } from "jamjar"
 
 class ScoreCounter extends Component {
@@ -71,7 +67,7 @@ class ScoreCounter extends Component {
     }
 }
 
-class ScoreSystem extends System {
+class ScoreSystem extends MapSystem {
     public static readonly MESSAGE_SCORE_INCREMENT = "message_score_increment";
     // Only entities with transform and bullet components.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -105,7 +101,7 @@ class ScoreSystem extends System {
 
 }
 
-class AsteroidSystem extends System {
+class AsteroidSystem extends MapSystem {
     public static readonly ASTEROID_TAG = "asteroid";
     public static readonly ASTEROID_LAYER = "asteroid";
     public static readonly BASE_SPAWN_INTERVAL: number = 3000;
@@ -115,6 +111,8 @@ class AsteroidSystem extends System {
     private static readonly MIN_SPAWN_INTERVAL: number = 250;
     private static readonly SPAWN_MULTIPLIER: number = 0.95;
     private static readonly SPAWN_DISTANCE: number = 90;
+
+    private static readonly ORIGIN: Vector = Vector.New(0,0);
 
     // Entities with transform and tagged as either asteroid, bullet, or player.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -153,7 +151,7 @@ class AsteroidSystem extends System {
             this.lastSpawnTime = time;
 
             const startPosition = Vector.New(0, 1)
-                .RotateDeg(Vector.New(0, 0), randomBetweenInts(0, 359))
+                .RotateDeg(AsteroidSystem.ORIGIN, randomBetweenInts(0, 359))
                 .Normalize()
                 .Scale(AsteroidSystem.SPAWN_DISTANCE);
 
@@ -212,7 +210,7 @@ class AsteroidSystem extends System {
                             continue;
                         }
                         entity.Destroy();
-                        this.messageBus.Publish(new Message(ScoreSystem.MESSAGE_SCORE_INCREMENT));
+                        this.messageBus.Publish(Message.New(ScoreSystem.MESSAGE_SCORE_INCREMENT));
                         return;
                     }
                 }
@@ -233,7 +231,7 @@ class AsteroidSystem extends System {
                         if (player === undefined || player.entity.id !== collisionEntity.id) {
                             continue;
                         }
-                        this.messageBus.Publish(new Message(MainScene.MESSAGE_GAME_OVER));
+                        this.messageBus.Publish(Message.New(MainScene.MESSAGE_GAME_OVER));
                         return;
                     }
                 }
@@ -276,7 +274,7 @@ class AsteroidSystem extends System {
     }
 }
 
-class BulletSystem extends System {
+class BulletSystem extends MapSystem {
     public static readonly BULLET_TAG = "bullet";
     public static readonly BULLET_LAYER = "bullet";
     public static readonly SPEED = 40;
@@ -308,7 +306,7 @@ class BulletSystem extends System {
 
 }
 
-class CrosshairSystem extends System {
+class CrosshairSystem extends MapSystem {
     public static readonly CROSSHAIR_TAG = "crosshair";
     // Only entities with transform, UI component and crosshair tag
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
@@ -340,7 +338,8 @@ class CrosshairSystem extends System {
                         if (cameraInfo.camera.id != ui.camera.id) {
                             continue;
                         }
-                        transform.position = cameraInfo.cameraPosition.Copy();
+                        transform.position.x = cameraInfo.cameraPosition.x;
+                        transform.position.y = cameraInfo.cameraPosition.y;
                     }
                 }
                 break;
@@ -351,7 +350,7 @@ class CrosshairSystem extends System {
                     return;
                 }
                 if (keyMessage.payload == "KeyF") {
-                    this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN));
+                    this.messageBus.Publish(Message.New(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN));
                 }
                 break;
             }
@@ -360,7 +359,7 @@ class CrosshairSystem extends System {
 
 }
 
-class PlayerSystem extends System {
+class PlayerSystem extends MapSystem {
     public static readonly PLAYER_TAG = "player";
     public static readonly PLAYER_LAYER = "player";
 
@@ -394,7 +393,8 @@ class PlayerSystem extends System {
                     if (!cameraInfo.withinBounds) {
                         continue;
                     }
-                    this.targetedPosition = cameraInfo.worldPosition.Copy();
+                    this.targetedPosition.x = cameraInfo.worldPosition.x;
+                    this.targetedPosition.y = cameraInfo.worldPosition.y;
                 }
                 break;
             }
@@ -408,7 +408,8 @@ class PlayerSystem extends System {
                         if (!cameraInfo.withinBounds) {
                             continue;
                         }
-                        this.targetedPosition = cameraInfo.worldPosition.Copy();
+                        this.targetedPosition.x = cameraInfo.worldPosition.x;
+                        this.targetedPosition.y = cameraInfo.worldPosition.y;
                     }
 
                     const transform = player.Get(Transform.KEY) as Transform;
@@ -428,14 +429,10 @@ class PlayerSystem extends System {
                         ]),
                         DrawMode.LINES
                     ))
-                    bullet.Add(new Sprite(new Material({
-                        texture: new Texture(
-                            "bullet",
-                            Polygon.RectangleByPoints(Vector.New(0, 0), Vector.New(1, 1))
-                        )
-                    }), 1));
                     bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)))
                     bullet.Add(new Motion(towardsVector.Copy().Scale(BulletSystem.SPEED)));
+
+                    towardsVector.Free();
 
                     if (this.scene !== undefined) {
                         this.scene.AddEntity(bullet);
@@ -538,7 +535,10 @@ class MainScene extends Scene {
     }
 
     OnStart(): void {
-        new SpriteSystem(this.messageBus, this);
+        new PointerSystem(messageBus, canvas);
+        new FullscreenSystem(messageBus, canvas, document);
+        new TextSystem(messageBus);
+        new CrosshairSystem(messageBus);
         new PrimitiveSystem(this.messageBus, this);
         new MotionSystem(this.messageBus, this);
         new InterpolationSystem(this.messageBus, this);
@@ -551,7 +551,7 @@ class MainScene extends Scene {
         new ScoreSystem(this.messageBus, this);
         new AsteroidSystem(this.messageBus, this);
 
-        this.messageBus.Publish(new Message<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, new FontRequest(
+        this.messageBus.Publish(Message.New<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, new FontRequest(
             "test",
             "VT323",
             "normal",
@@ -656,11 +656,6 @@ const messageBus = new MessageBus();
 
 new EntityManager(messageBus);
 new WebGLSystem(messageBus, gl);
-new PointerSystem(messageBus, canvas);
-new KeyboardSystem(messageBus, document);
-new FullscreenSystem(messageBus, canvas, document);
-new TextSystem(messageBus);
-new CrosshairSystem(messageBus);
 
 const shooter = new Shooter(messageBus);
 

@@ -14,18 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import SystemEntity from "../../system/system_entity";
 import IMessage from "../../message/imessage";
 import IScene from "../../scene/iscene";
 import Message from "../../message/message";
+import MapSystem from "../../system/map_system";
 
 /**
  * FullscreenSystem handles JS fullscreen change events, and provides a method for requesting
  * entering/existing fullscreen/pointer lock.
  */
-class FullscreenSystem extends System {
+class FullscreenSystem extends MapSystem {
     public static readonly MESSAGE_REQUEST_ENTER_FULLSCREEN = "message_request_enter_fullscreen";
     public static readonly MESSAGE_REQUEST_EXIT_FULLSCREEN = "message_request_exit_fullscreen";
 
@@ -60,9 +60,9 @@ class FullscreenSystem extends System {
      */
     protected onFullscreenChange(event: Event): void {
         if (this.document.fullscreenElement === null) {
-            this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN));
+            this.messageBus.Publish(Message.New(FullscreenSystem.MESSAGE_EXIT_FULLSCREEN));
         } else {
-            this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_ENTER_FULLSCREEN));
+            this.messageBus.Publish(Message.New(FullscreenSystem.MESSAGE_ENTER_FULLSCREEN));
         }
     }
 

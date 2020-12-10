@@ -49,8 +49,8 @@ abstract class Pooled {
      * @param type The fallback constructor to use if the pool is not initialized/empty.
      * @param args The args to use when creating/recycling the object.
      */
-    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-    protected static new<T extends IPoolable>(poolKey: string, type: { new (...args: any): T }, args: any[]): T {
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types  */
+    protected static new<T extends IPoolable>(poolKey: string, type: { new (...args: any): T }, ...args: any): T {
         // Get any object pool with matching key, if no pool just create unpooled object
         const pool = Pooled.pools.get(poolKey);
 
@@ -63,7 +63,7 @@ abstract class Pooled {
         if (pool[1].length > 0) {
             // Will always be non-undefined as the length is > 0
             /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-            const recycled = pool[1].shift()!.Recycle(args) as T;
+            const recycled = pool[1].shift()!.Recycle(...args) as T;
             recycled.objectInPool = false;
             return recycled;
         }

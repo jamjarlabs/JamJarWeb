@@ -9,7 +9,7 @@ Once it has determined all collisions, it broadcasts them as messages.
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [ArraySystem](arraysystem.md)
 
   ↳ **CollisionSystem**
 
@@ -47,15 +47,17 @@ Once it has determined all collisions, it broadcasts them as messages.
 * [OnDestroy](collisionsystem.md#protected-ondestroy)
 * [OnMessage](collisionsystem.md#onmessage)
 * [Update](collisionsystem.md#update)
+* [register](collisionsystem.md#protected-register)
+* [remove](collisionsystem.md#protected-remove)
 * [EVALUATOR](collisionsystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `layerPairs`: [string, string][], `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `colliding`: [Collision](collision.md)[], `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
+\+ **new CollisionSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `layerPairs`: [string, string][], `scene?`: [IScene](../interfaces/iscene.md), `narrowAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `broadAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md), `colliding`: [Collision](collision.md)[], `entities?`: [SystemEntity](systementity.md)[], `subscriberID?`: undefined | number): *[CollisionSystem](collisionsystem.md)*
 
-*Overrides [System](system.md).[constructor](system.md#constructor)*
+*Overrides [ArraySystem](arraysystem.md).[constructor](arraysystem.md#constructor)*
 
 **Parameters:**
 
@@ -67,7 +69,7 @@ Name | Type | Default |
 `narrowAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new GJKAlgorithm() |
 `broadAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AllCollideAlgorithm() |
 `colliding` | [Collision](collision.md)[] | [] |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`entities?` | [SystemEntity](systementity.md)[] | - |
 `subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[CollisionSystem](collisionsystem.md)*
@@ -88,15 +90,11 @@ ___
 
 ### `Protected` entities
 
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
+• **entities**: *[SystemEntity](systementity.md)[]*
 
-*Inherited from [System](system.md).[entities](system.md#protected-entities)*
+*Inherited from [ArraySystem](arraysystem.md).[entities](arraysystem.md#protected-entities)*
 
-A map of entities, mapped by their entity ID.
-ID: Entity
-0: PlayerEntity
-1: ObstacleEntity
-etc.
+The list of entities the system is tracking.
 
 ___
 
@@ -179,17 +177,21 @@ ___
 
 ### `Static` MESSAGE_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
+▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
 
-*Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
 ### `Static` MESSAGE_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
+▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
 
-*Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+Message to register an entity + components with a system so it can be tracked.
 
 ___
 
@@ -234,9 +236,9 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Inherited from [System](system.md).[OnMessage](system.md#onmessage)*
+*Inherited from [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
 
-*Overrides [Subscriber](subscriber.md).[OnMessage](subscriber.md#abstract-onmessage)*
+*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
 
@@ -253,6 +255,43 @@ ___
 ▸ **Update**(): *void*
 
 *Overrides [System](system.md).[Update](system.md#protected-update)*
+
+**Returns:** *void*
+
+___
+
+### `Protected` register
+
+▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[register](arraysystem.md#protected-register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+### `Protected` remove
+
+▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[remove](arraysystem.md#protected-remove)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *void*
 

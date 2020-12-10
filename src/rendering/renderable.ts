@@ -21,30 +21,37 @@ import Matrix4D from "../geometry/matrix_4d";
 import Polygon from "../shape/polygon";
 import DrawMode from "./draw_mode";
 import Pooled from "../pooling/pooled";
+import FakeEntity from "../fake/entity";
 
 /**
  * Renderable represents something that can be rendered.
  * Contains information for rendering.
  */
 class Renderable<T> extends Pooled implements IRenderable {
+    private static readonly INIT_RENDERABLE = () => {
+        return new Renderable(0, new Polygon([]), new Matrix4D(), new Material(), DrawMode.POINTS, new FakeEntity(0));
+    };
+
     public static New<T>(
         zOrder: number,
         vertices: Polygon,
         modelMatrix: Matrix4D,
         material: Material,
         drawMode: DrawMode,
-        payload?: T,
-        camera?: IEntity
+        camera: IEntity,
+        payload?: T
     ): Renderable<T> {
-        return this.new<Renderable<T>>(Renderable.POOL_KEY, Renderable, [
+        return this.new<Renderable<T>>(
+            Renderable.POOL_KEY,
+            Renderable,
             zOrder,
             vertices,
             modelMatrix,
             material,
             drawMode,
-            payload,
             camera,
-        ]);
+            payload
+        );
     }
 
     public static Free<T>(obj: Renderable<T>): void {
@@ -52,40 +59,18 @@ class Renderable<T> extends Pooled implements IRenderable {
     }
 
     public static Init(size: number): void {
-        this.init(
-            Renderable.POOL_KEY,
-            () => {
-                return new Renderable(0, new Polygon([]), new Matrix4D(), new Material(), DrawMode.POINTS);
-            },
-            size
-        );
+        this.init(Renderable.POOL_KEY, Renderable.INIT_RENDERABLE, size);
     }
 
     private static POOL_KEY = "jamjar_renderable";
 
-    /**
-     * The Z-Order of the object, the order at which the object will appear
-     * infront or behind other objects. A higher Z-Order means in front, a
-     * lower Z-Order means behind.
-     */
     public zOrder: number;
-    /**
-     * The vertices of the object to render.
-     */
     public vertices: Polygon;
-    /**
-     * The model matrix (position, scale, rotation) of the object to render.
-     */
     public modelMatrix: Matrix4D;
-    /**
-     * The material of the object to render, containing render information
-     * about texture and shaders.
-     */
     public material: Material;
-    /**
-     * The draw mode of the renderable, specifying how it will be rendered.
-     */
     public drawMode: DrawMode;
+    public camera: IEntity;
+
     /**
      * An optional payload of additional data.
      */
@@ -97,6 +82,7 @@ class Renderable<T> extends Pooled implements IRenderable {
         modelMatrix: Matrix4D,
         material: Material,
         drawMode: DrawMode,
+        camera: IEntity,
         payload?: T
     ) {
         super();
@@ -105,16 +91,26 @@ class Renderable<T> extends Pooled implements IRenderable {
         this.modelMatrix = modelMatrix;
         this.material = material;
         this.drawMode = drawMode;
+        this.camera = camera;
         this.payload = payload;
     }
 
-    public Recycle(args: [number, Polygon, Matrix4D, Material, DrawMode, T, IEntity]): Renderable<T> {
-        this.zOrder = args[0];
-        this.vertices = args[1];
-        this.modelMatrix = args[2];
-        this.material = args[3];
-        this.drawMode = args[4];
-        this.payload = args[5];
+    public Recycle(
+        zOrder: number,
+        vertices: Polygon,
+        modelMatrix: Matrix4D,
+        material: Material,
+        drawMode: DrawMode,
+        camera: IEntity,
+        payload: T
+    ): Renderable<T> {
+        this.zOrder = zOrder;
+        this.vertices = vertices;
+        this.modelMatrix = modelMatrix;
+        this.material = material;
+        this.drawMode = drawMode;
+        this.camera = camera;
+        this.payload = payload;
         return this;
     }
 

@@ -26,6 +26,7 @@ Contains information for rendering.
 
 ### Properties
 
+* [camera](renderable.md#camera)
 * [drawMode](renderable.md#drawmode)
 * [material](renderable.md#material)
 * [modelMatrix](renderable.md#modelmatrix)
@@ -41,6 +42,7 @@ Contains information for rendering.
 * [Free](renderable.md#free)
 * [Recycle](renderable.md#recycle)
 * [Free](renderable.md#static-free)
+* [INIT_RENDERABLE](renderable.md#static-private-init_renderable)
 * [Init](renderable.md#static-init)
 * [New](renderable.md#static-new)
 * [free](renderable.md#static-protected-free)
@@ -51,7 +53,7 @@ Contains information for rendering.
 
 ###  constructor
 
-\+ **new Renderable**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `payload?`: T): *[Renderable](renderable.md)*
+\+ **new Renderable**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `camera`: [IEntity](../interfaces/ientity.md), `payload?`: T): *[Renderable](renderable.md)*
 
 **Parameters:**
 
@@ -62,19 +64,26 @@ Name | Type |
 `modelMatrix` | [Matrix4D](matrix4d.md) |
 `material` | [Material](material.md) |
 `drawMode` | [DrawMode](../enums/drawmode.md) |
+`camera` | [IEntity](../interfaces/ientity.md) |
 `payload?` | T |
 
 **Returns:** *[Renderable](renderable.md)*
 
 ## Properties
 
+###  camera
+
+• **camera**: *[IEntity](../interfaces/ientity.md)*
+
+*Implementation of [IRenderable](../interfaces/irenderable.md).[camera](../interfaces/irenderable.md#camera)*
+
+___
+
 ###  drawMode
 
 • **drawMode**: *[DrawMode](../enums/drawmode.md)*
 
 *Implementation of [IRenderable](../interfaces/irenderable.md).[drawMode](../interfaces/irenderable.md#drawmode)*
-
-The draw mode of the renderable, specifying how it will be rendered.
 
 ___
 
@@ -84,9 +93,6 @@ ___
 
 *Implementation of [IRenderable](../interfaces/irenderable.md).[material](../interfaces/irenderable.md#material)*
 
-The material of the object to render, containing render information
-about texture and shaders.
-
 ___
 
 ###  modelMatrix
@@ -94,8 +100,6 @@ ___
 • **modelMatrix**: *[Matrix4D](matrix4d.md)*
 
 *Implementation of [IRenderable](../interfaces/irenderable.md).[modelMatrix](../interfaces/irenderable.md#modelmatrix)*
-
-The model matrix (position, scale, rotation) of the object to render.
 
 ___
 
@@ -128,8 +132,6 @@ ___
 
 *Implementation of [IRenderable](../interfaces/irenderable.md).[vertices](../interfaces/irenderable.md#vertices)*
 
-The vertices of the object to render.
-
 ___
 
 ###  zOrder
@@ -137,10 +139,6 @@ ___
 • **zOrder**: *number*
 
 *Implementation of [IRenderable](../interfaces/irenderable.md).[zOrder](../interfaces/irenderable.md#zorder)*
-
-The Z-Order of the object, the order at which the object will appear
-infront or behind other objects. A higher Z-Order means in front, a
-lower Z-Order means behind.
 
 ___
 
@@ -174,13 +172,19 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(`args`: [number, [Polygon](polygon.md), [Matrix4D](matrix4d.md), [Material](material.md), [DrawMode](../enums/drawmode.md), T, [IEntity](../interfaces/ientity.md)]): *[Renderable](renderable.md)‹T›*
+▸ **Recycle**(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `camera`: [IEntity](../interfaces/ientity.md), `payload`: T): *[Renderable](renderable.md)‹T›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`args` | [number, [Polygon](polygon.md), [Matrix4D](matrix4d.md), [Material](material.md), [DrawMode](../enums/drawmode.md), T, [IEntity](../interfaces/ientity.md)] |
+`zOrder` | number |
+`vertices` | [Polygon](polygon.md) |
+`modelMatrix` | [Matrix4D](matrix4d.md) |
+`material` | [Material](material.md) |
+`drawMode` | [DrawMode](../enums/drawmode.md) |
+`camera` | [IEntity](../interfaces/ientity.md) |
+`payload` | T |
 
 **Returns:** *[Renderable](renderable.md)‹T›*
 
@@ -204,6 +208,14 @@ Name | Type |
 
 ___
 
+### `Static` `Private` INIT_RENDERABLE
+
+▸ **INIT_RENDERABLE**(): *[Renderable](renderable.md)‹unknown›*
+
+**Returns:** *[Renderable](renderable.md)‹unknown›*
+
+___
+
 ### `Static` Init
 
 ▸ **Init**(`size`: number): *void*
@@ -220,7 +232,7 @@ ___
 
 ### `Static` New
 
-▸ **New**<**T**>(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `payload?`: T, `camera?`: [IEntity](../interfaces/ientity.md)): *[Renderable](renderable.md)‹T›*
+▸ **New**<**T**>(`zOrder`: number, `vertices`: [Polygon](polygon.md), `modelMatrix`: [Matrix4D](matrix4d.md), `material`: [Material](material.md), `drawMode`: [DrawMode](../enums/drawmode.md), `camera`: [IEntity](../interfaces/ientity.md), `payload?`: T): *[Renderable](renderable.md)‹T›*
 
 **Type parameters:**
 
@@ -235,8 +247,8 @@ Name | Type |
 `modelMatrix` | [Matrix4D](matrix4d.md) |
 `material` | [Material](material.md) |
 `drawMode` | [DrawMode](../enums/drawmode.md) |
+`camera` | [IEntity](../interfaces/ientity.md) |
 `payload?` | T |
-`camera?` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *[Renderable](renderable.md)‹T›*
 
@@ -289,7 +301,7 @@ ___
 
 ### `Static` `Protected` new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, `args`: any[]): *T*
+▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
 
 *Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
 
@@ -316,7 +328,7 @@ Name | Type |
 ------ | ------ |
 `constructor` |  |
 
-▪ **args**: *any[]*
+▪... **args**: *any*
 
 The args to use when creating/recycling the object.
 

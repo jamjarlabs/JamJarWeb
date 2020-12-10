@@ -21,6 +21,7 @@ colliding) - used in rendering to avoid unneccesary rendering.
 ### Properties
 
 * [collisionAlgorithm](frustumculler.md#private-collisionalgorithm)
+* [collisionArray](frustumculler.md#private-collisionarray)
 
 ### Methods
 
@@ -45,6 +46,12 @@ Name | Type | Default |
 ### `Private` collisionAlgorithm
 
 • **collisionAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
+
+___
+
+### `Private` collisionArray
+
+• **collisionArray**: *[IShape](../interfaces/ishape.md)[]*
 
 ## Methods
 

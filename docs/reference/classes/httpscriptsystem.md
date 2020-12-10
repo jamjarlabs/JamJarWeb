@@ -6,7 +6,7 @@ available to the engine for execution.
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [MapSystem](mapsystem.md)
 
   ↳ **HTTPScriptSystem**
 
@@ -47,6 +47,8 @@ available to the engine for execution.
 * [httpError](httpscriptsystem.md#protected-httperror)
 * [httpSuccess](httpscriptsystem.md#protected-httpsuccess)
 * [load](httpscriptsystem.md#private-load)
+* [register](httpscriptsystem.md#protected-register)
+* [remove](httpscriptsystem.md#protected-remove)
 
 ## Constructors
 
@@ -54,7 +56,7 @@ available to the engine for execution.
 
 \+ **new HTTPScriptSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `assets`: [ScriptAsset](scriptasset.md)[]): *[HTTPScriptSystem](httpscriptsystem.md)*
 
-*Overrides [System](system.md).[constructor](system.md#constructor)*
+*Overrides [MapSystem](mapsystem.md).[constructor](mapsystem.md#constructor)*
 
 **Parameters:**
 
@@ -80,7 +82,7 @@ ___
 
 • **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
-*Inherited from [System](system.md).[entities](system.md#protected-entities)*
+*Inherited from [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
 
 A map of entities, mapped by their entity ID.
 ID: Entity
@@ -125,17 +127,21 @@ ___
 
 ### `Static` MESSAGE_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
+▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
 
-*Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
 ### `Static` MESSAGE_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
+▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
 
-*Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+Message to register an entity + components with a system so it can be tracked.
 
 ___
 
@@ -196,7 +202,7 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
+*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
 
 **Parameters:**
 
@@ -295,5 +301,42 @@ ___
 Name | Type |
 ------ | ------ |
 `request` | [ScriptRequest](scriptrequest.md) |
+
+**Returns:** *void*
+
+___
+
+### `Protected` register
+
+▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+*Inherited from [MapSystem](mapsystem.md).[register](mapsystem.md#protected-register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+### `Protected` remove
+
+▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+*Inherited from [MapSystem](mapsystem.md).[remove](mapsystem.md#protected-remove)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *void*

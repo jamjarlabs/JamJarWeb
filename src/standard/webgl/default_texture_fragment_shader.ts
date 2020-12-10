@@ -46,6 +46,7 @@ class DefaultTextureFragmentShader extends GLSLShader {
         const program = context.program;
         const textureLocation = gl.getUniformLocation(program, "uTexture");
         gl.activeTexture(gl.TEXTURE0);
+        // This bind is causing lots of memory use for some reason!
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.uniform1i(textureLocation, 0);
     };
@@ -59,7 +60,7 @@ class DefaultTextureFragmentShader extends GLSLShader {
         const program = context.program;
         // Add in color information
         const colorLocation = gl.getUniformLocation(program, "uColor");
-        gl.uniform4f(colorLocation, ...renderable.material.color.GetTuple());
+        gl.uniform4fv(colorLocation, renderable.material.color.GetFloat32Array());
     };
 
     constructor() {

@@ -83,7 +83,7 @@ class ShaderGame extends Game {
             }
             `
         );
-        this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
+        this.messageBus.Publish(Message.New<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "example-shader",
             shader
         )));
@@ -121,13 +121,13 @@ class ShaderGame extends Game {
             }
             `
         );
-        this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
+        this.messageBus.Publish(Message.New<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, new ShaderAsset(
             "example-shader",
             shader
         )));
 
         // Load texture, will be overridden by custom shader
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "example",
             "assets/example.png"
         )));

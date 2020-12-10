@@ -16,6 +16,10 @@ Values from 0 to 1.
 
 ### Properties
 
+* [data](color.md#data)
+
+### Accessors
+
 * [alpha](color.md#alpha)
 * [blue](color.md#blue)
 * [green](color.md#green)
@@ -24,7 +28,7 @@ Values from 0 to 1.
 ### Methods
 
 * [Copy](color.md#copy)
-* [GetTuple](color.md#gettuple)
+* [GetFloat32Array](color.md#getfloat32array)
 * [Mix](color.md#mix)
 
 ## Constructors
@@ -46,27 +50,81 @@ Name | Type | Default |
 
 ## Properties
 
+###  data
+
+• **data**: *Float32Array*
+
+## Accessors
+
 ###  alpha
 
-• **alpha**: *number*
+• **get alpha**(): *number*
+
+**Returns:** *number*
+
+• **set alpha**(`value`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | number |
+
+**Returns:** *void*
 
 ___
 
 ###  blue
 
-• **blue**: *number*
+• **get blue**(): *number*
+
+**Returns:** *number*
+
+• **set blue**(`value`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | number |
+
+**Returns:** *void*
 
 ___
 
 ###  green
 
-• **green**: *number*
+• **get green**(): *number*
+
+**Returns:** *number*
+
+• **set green**(`value`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | number |
+
+**Returns:** *void*
 
 ___
 
 ###  red
 
-• **red**: *number*
+• **get red**(): *number*
+
+**Returns:** *number*
+
+• **set red**(`value`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | number |
+
+**Returns:** *void*
 
 ## Methods
 
@@ -80,15 +138,11 @@ Make a value copy of the color.
 
 ___
 
-###  GetTuple
+###  GetFloat32Array
 
-▸ **GetTuple**(): *[number, number, number, number]*
+▸ **GetFloat32Array**(): *Float32Array*
 
-Returns the color in the form of a tuple `[red, green, blue, alpha]`.
-
-**Returns:** *[number, number, number, number]*
-
-The tuple representation of the color
+**Returns:** *Float32Array*
 
 ___
 

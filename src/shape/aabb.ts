@@ -48,16 +48,16 @@ class AABB implements IShape {
         if (direction.x >= 0) {
             const right = this.center.x + this.size.x / 2;
             if (direction.y >= 0) {
-                return new Vector(right, this.center.y + this.size.y / 2); // top right
+                return Vector.New(right, this.center.y + this.size.y / 2); // top right
             } else {
-                return new Vector(right, this.center.y - this.size.y / 2); // bottom right
+                return Vector.New(right, this.center.y - this.size.y / 2); // bottom right
             }
         } else {
             const left = this.center.x - this.size.x / 2;
             if (direction.y >= 0) {
-                return new Vector(left, this.center.y + this.size.y / 2); // top left
+                return Vector.New(left, this.center.y + this.size.y / 2); // top left
             } else {
-                return new Vector(left, this.center.y - this.size.y / 2); // bottom left
+                return Vector.New(left, this.center.y - this.size.y / 2); // bottom left
             }
         }
     }

@@ -33,7 +33,7 @@ Once this system has been set up, scripts can be loaded in by sending a message
 with a [ScriptRequest] as the payload.
 
 ```typescript
-this.messageBus.Publish(new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD,
+this.messageBus.Publish(Message.New<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD,
     new ScriptRequest(
         "test-script",
         "assets/script.js"
@@ -108,7 +108,7 @@ Scripts can be manually executed by sending a message with a
 [ScriptTriggerRequest].
 
 ```typescript
-this.messageBus.Publish(new Message<ScriptTriggerRequest<string>>(ScriptRequest.MESSAGE_REQUEST_LOAD,
+this.messageBus.Publish(Message.New<ScriptTriggerRequest<string>>(ScriptRequest.MESSAGE_REQUEST_LOAD,
     new ScriptTriggerRequest(
         "test-script",
         "custom-execution",

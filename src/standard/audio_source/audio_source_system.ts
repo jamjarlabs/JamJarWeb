@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import AudioAsset from "../../audio/audio_asset";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
@@ -24,12 +23,13 @@ import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 import Message from "../../message/message";
 import IMessage from "../../message/imessage";
+import MapSystem from "../../system/map_system";
 
 /**
  * AudioSourceSystem handles interpreting AudioSources and playing the audio
  * associated with them with the Audio Web API.
  */
-class AudioSourceSystem extends System {
+class AudioSourceSystem extends MapSystem {
     /**
      * Only entities with an audio source.
      */

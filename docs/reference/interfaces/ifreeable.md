@@ -10,6 +10,8 @@ object to be freed/it's constituent parts freed back to object pools.
 
   ↳ [IPoolable](ipoolable.md)
 
+  ↳ [IMessage](imessage.md)
+
   ↳ [IShape](ishape.md)
 
 ## Implemented by

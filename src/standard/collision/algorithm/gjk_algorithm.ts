@@ -43,8 +43,13 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         // Build a new Simplex for determining if a collision has occurred
         const simplex: Vector[] = [];
 
+        const aCenter = a.Center();
+        const bCenter = b.Center();
+
         // Choose the starting direction as from A center to B center
-        let direction: Vector | undefined = b.Center().Sub(a.Center());
+        let direction: Vector | undefined = bCenter.Sub(aCenter);
+
+        aCenter.Free();
 
         // Get the first support point and add it to the simplex
         const initSupportPoint = this.support(a, b, direction);
@@ -66,6 +71,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
             // intersection
             if (supportPoint.Dot(direction) <= 0) {
                 // No intersection
+                supportPoint.Free();
                 direction.Free();
                 this.freeSimplex(simplex);
                 return;
@@ -92,6 +98,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         const bFar = b.FarthestPointInDirection(direction.Invert());
         const support = aFar.Sub(bFar);
         bFar.Free();
+        direction.Free();
         return support;
     }
 
@@ -114,6 +121,8 @@ class GJKAlgorithm implements ICollisionAlgorithm {
 
             // Determine perpendicular of the a->b line
             let abPerp = Vector.New(ab.y, -ab.x);
+
+            ab.Free();
 
             // Check the handedness of the perpendicular, it should
             // face AWAY from the simplex
@@ -174,6 +183,7 @@ class GJKAlgorithm implements ICollisionAlgorithm {
         if (abPerp.Dot(ao) <= 0) {
             abPerp = abPerp.Invert();
         }
+        ao.Free();
         return abPerp;
     }
 }

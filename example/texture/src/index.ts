@@ -35,7 +35,9 @@ import {
     Vector,
     Color,
     TextureWrapping,
-    Renderable
+    Renderable,
+    Matrix4D,
+    Matrix3D
 } from "jamjar";
 
 class TextureGame extends Game {
@@ -44,7 +46,7 @@ class TextureGame extends Game {
     }
 
     OnStart(): void {
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "nearest",
             "assets/example.png",
             {
@@ -52,7 +54,7 @@ class TextureGame extends Game {
                 magFilter: TextureFiltering.NEAREST,
             }
         )));
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "bilinear",
             "assets/example.png",
             {
@@ -60,7 +62,7 @@ class TextureGame extends Game {
                 magFilter: TextureFiltering.BILINEAR,
             }
         )));
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "trilinear",
             "assets/example.png",
             {
@@ -68,7 +70,7 @@ class TextureGame extends Game {
                 magFilter: TextureFiltering.TRILINEAR,
             }
         )));
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "trilinear_repeat",
             "assets/example.png",
             {
@@ -78,7 +80,7 @@ class TextureGame extends Game {
                 yWrap: TextureWrapping.REPEAT,
             }
         )));
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "bilinear_mirror_repeat",
             "assets/example.png",
             {
@@ -161,6 +163,9 @@ if (!gl) {
 // Set up vector and renderable pooling
 Vector.Init(200);
 Renderable.Init(100);
+Message.Init(500);
+Matrix4D.Init(30);
+Matrix3D.Init(30);
 
 // Create message bus and entity manager
 const messageBus = new MessageBus();

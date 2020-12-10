@@ -15,7 +15,7 @@ new HTTPAudioSystem(messageBus);
 ## Loading an Audio Asset
 
 ```typescript
-this.messageBus.Publish(new Message<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest(
+this.messageBus.Publish(Message.New<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest(
     "example",
     "assets/example.mp3"
 )));

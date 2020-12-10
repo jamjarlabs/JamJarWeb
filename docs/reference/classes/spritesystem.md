@@ -6,7 +6,7 @@ a rendering system.
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [ArraySystem](arraysystem.md)
 
   ↳ **SpriteSystem**
 
@@ -31,6 +31,7 @@ a rendering system.
 * [MESSAGE_DEREGISTER](spritesystem.md#static-message_deregister)
 * [MESSAGE_REGISTER](spritesystem.md#static-message_register)
 * [MESSAGE_UPDATE](spritesystem.md#static-message_update)
+* [SPRITE_RENDERABLE_QUAD](spritesystem.md#static-private-sprite_renderable_quad)
 
 ### Methods
 
@@ -40,15 +41,17 @@ a rendering system.
 * [Update](spritesystem.md#protected-update)
 * [freeRenderables](spritesystem.md#private-freerenderables)
 * [prepareSprites](spritesystem.md#private-preparesprites)
+* [register](spritesystem.md#protected-register)
+* [remove](spritesystem.md#protected-remove)
 * [EVALUATOR](spritesystem.md#static-private-evaluator)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new SpriteSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `renderables`: Map‹number, [IRenderable](../interfaces/irenderable.md)[]›, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[SpriteSystem](spritesystem.md)*
+\+ **new SpriteSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `entities?`: [SystemEntity](systementity.md)[], `subscriberID?`: undefined | number): *[SpriteSystem](spritesystem.md)*
 
-*Overrides [System](system.md).[constructor](system.md#constructor)*
+*Overrides [ArraySystem](arraysystem.md).[constructor](arraysystem.md#constructor)*
 
 **Parameters:**
 
@@ -57,8 +60,8 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
-`renderables` | Map‹number, [IRenderable](../interfaces/irenderable.md)[]› | new Map() |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
+`renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
+`entities?` | [SystemEntity](systementity.md)[] | - |
 `subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[SpriteSystem](spritesystem.md)*
@@ -67,15 +70,11 @@ Name | Type | Default |
 
 ### `Protected` entities
 
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
+• **entities**: *[SystemEntity](systementity.md)[]*
 
-*Inherited from [System](system.md).[entities](system.md#protected-entities)*
+*Inherited from [ArraySystem](arraysystem.md).[entities](arraysystem.md#protected-entities)*
 
-A map of entities, mapped by their entity ID.
-ID: Entity
-0: PlayerEntity
-1: ObstacleEntity
-etc.
+The list of entities the system is tracking.
 
 ___
 
@@ -98,7 +97,7 @@ ___
 
 ### `Private` renderables
 
-• **renderables**: *Map‹number, [IRenderable](../interfaces/irenderable.md)[]›*
+• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
 
 ___
 
@@ -126,17 +125,21 @@ ___
 
 ### `Static` MESSAGE_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
+▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
 
-*Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
 ### `Static` MESSAGE_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
+▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
 
-*Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+Message to register an entity + components with a system so it can be tracked.
 
 ___
 
@@ -145,6 +148,12 @@ ___
 ▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
 
 *Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+
+___
+
+### `Static` `Private` SPRITE_RENDERABLE_QUAD
+
+▪ **SPRITE_RENDERABLE_QUAD**: *[Polygon](polygon.md)‹›* = Polygon.QuadByDimensions(1, 1, 0, 0)
 
 ## Methods
 
@@ -181,7 +190,7 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
+*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
 
 **Parameters:**
 
@@ -228,6 +237,43 @@ ___
 Name | Type |
 ------ | ------ |
 `alpha` | number |
+
+**Returns:** *void*
+
+___
+
+### `Protected` register
+
+▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[register](arraysystem.md#protected-register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+### `Protected` remove
+
+▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[remove](arraysystem.md#protected-remove)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *void*
 

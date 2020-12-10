@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Component from "../../component/component";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
@@ -22,12 +21,13 @@ import SystemEntity from "../../system/system_entity";
 import IScene from "../../scene/iscene";
 import SpriteAnimator from "./sprite_animator";
 import Sprite from "../sprite/sprite";
+import MapSystem from "../../system/map_system";
 
 /**
  * SpriteAnimatorSystem handles interpreting SpriteAnimator components and
  * updating Sprite components based on animation state and progress.
  */
-class SpriteAnimatorSystem extends System {
+class SpriteAnimatorSystem extends MapSystem {
     /**
      * Only components with Sprite and SpriteAnimator components
      */

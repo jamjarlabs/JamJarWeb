@@ -25,9 +25,11 @@ import AABBAlgorithm from "../collision/algorithm/aabb_algorithm";
  */
 class FrustumCuller implements IFrustumCuller {
     private collisionAlgorithm: ICollisionAlgorithm;
+    private collisionArray: IShape[];
 
     constructor(collisionAlgorithm: ICollisionAlgorithm = new AABBAlgorithm()) {
         this.collisionAlgorithm = collisionAlgorithm;
+        this.collisionArray = [];
     }
 
     /**
@@ -39,7 +41,10 @@ class FrustumCuller implements IFrustumCuller {
      * @param shape Shape to check if it is within the frustum
      */
     public Cull(frustumPlaneShape: IShape, shape: IShape): boolean {
-        const narrow = this.collisionAlgorithm.CalculateCollisions([frustumPlaneShape, shape]);
+        this.collisionArray.push(frustumPlaneShape);
+        this.collisionArray.push(shape);
+        const narrow = this.collisionAlgorithm.CalculateCollisions(this.collisionArray);
+        this.collisionArray.length = 0;
         if (narrow.length === 0) {
             return true;
         }

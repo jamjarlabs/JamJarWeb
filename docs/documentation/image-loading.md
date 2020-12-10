@@ -15,7 +15,7 @@ Images are loaded by sending a message to an image loading system with an
 attached [ImageRequest] to specify the image.
 
 ```typescript
-this.messageBus.Publish(new Message<ImageRequest>(
+this.messageBus.Publish(Message.New<ImageRequest>(
     ImageRequest.MESSAGE_REQUEST_LOAD,
     new ImageRequest("bullet", "assets/bullet.png")
 ));
@@ -48,7 +48,7 @@ Textures generated from a loaded image can be customised further with additional
 options provided to the [ImageRequest] in the form of [ITextureOptions].
 
 ```typescript
-this.messageBus.Publish(new Message<ImageRequest>(
+this.messageBus.Publish(Message.New<ImageRequest>(
     ImageRequest.MESSAGE_REQUEST_LOAD,
     new ImageRequest(
         "bullet",

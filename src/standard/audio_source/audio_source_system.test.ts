@@ -30,6 +30,7 @@ import FakeAudioContext from "../../fake/audio_context";
 import Reactor from "../../fake/reactor";
 import FakeGainNode from "../../fake/gain_node";
 import AudioAsset from "../../audio/audio_asset";
+import StatefulSystem from "../../system/stateful_system";
 
 describe("AudioSourceSystem - Update", () => {
     type TestTuple = [string, Error | undefined, AudioSourceSystem, AudioSourceSystem, IMessage];
@@ -1005,7 +1006,7 @@ describe("AudioSourceSystem - Register", () => {
                 undefined,
                 undefined
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Reject, missing AudioSource",
@@ -1028,7 +1029,10 @@ describe("AudioSourceSystem - Register", () => {
                 undefined,
                 undefined
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Accept",
@@ -1051,7 +1055,7 @@ describe("AudioSourceSystem - Register", () => {
                 undefined,
                 undefined
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new AudioSource("test")],
             ]),
