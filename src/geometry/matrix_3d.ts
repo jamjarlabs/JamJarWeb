@@ -15,6 +15,8 @@ limitations under the License.
 */
 
 import { mat3 } from "gl-matrix";
+import IPoolable from "../pooling/ipoolable";
+import Pooled from "../pooling/pooled";
 import Vector from "./vector";
 
 /**
@@ -29,22 +31,43 @@ type Matrix3DValues = [[number, number, number], [number, number, number], [numb
  * Inspired by the glMatrix library:
  * https://github.com/toji/gl-matrix
  */
-class Matrix3D {
+class Matrix3D extends Pooled implements IPoolable {
+    /**
+     * Value of the Matrix4D object pool.
+     */
+    private static POOL_KEY = "jamjar_matrix3d";
+
+    private static INIT_MATRIX3D = () => {
+        return new Matrix3D();
+    };
+
+    /**
+     * Create a new Matrix4D, using pooling if available.
+     */
+    public static New(): Matrix3D {
+        return this.new<Matrix3D>(Matrix3D.POOL_KEY, Matrix3D);
+    }
+
+    /**
+     * Free the provided Matrix4D.
+     */
+    public static Free(obj: Matrix3D): void {
+        this.free(Matrix3D.POOL_KEY, obj);
+    }
+
+    /**
+     * Initialize the Matrix4D pool to the size provided.
+     */
+    public static Init(size: number): void {
+        this.init(Matrix3D.POOL_KEY, Matrix3D.INIT_MATRIX3D, size);
+    }
+
     public data: Float32Array;
 
     constructor() {
+        super();
         this.data = new Float32Array(9);
-        this.data[0] = 1;
-        this.data[1] = 0;
-        this.data[2] = 0;
-
-        this.data[3] = 0;
-        this.data[4] = 1;
-        this.data[5] = 0;
-
-        this.data[6] = 0;
-        this.data[7] = 0;
-        this.data[8] = 1;
+        this.Blank();
     }
 
     public Set(values: Matrix3DValues): Matrix3D {
@@ -109,6 +132,30 @@ class Matrix3D {
      */
     public GetFloat32Array(): Float32Array {
         return this.data;
+    }
+
+    public Blank(): Matrix3D {
+        this.data[0] = 1;
+        this.data[1] = 0;
+        this.data[2] = 0;
+
+        this.data[3] = 0;
+        this.data[4] = 1;
+        this.data[5] = 0;
+
+        this.data[6] = 0;
+        this.data[7] = 0;
+        this.data[8] = 1;
+        return this;
+    }
+
+    public Recycle(): IPoolable {
+        this.Blank();
+        return this;
+    }
+
+    public Free(): void {
+        Matrix3D.Free(this);
     }
 }
 

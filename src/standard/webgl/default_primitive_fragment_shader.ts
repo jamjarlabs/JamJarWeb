@@ -40,7 +40,7 @@ class DefaultPrimitiveFragmentShader extends GLSLShader {
         const program = context.program;
         // Add in color information
         const colorLocation = gl.getUniformLocation(program, "uColor");
-        gl.uniform4f(colorLocation, ...renderable.material.color.GetTuple());
+        gl.uniform4fv(colorLocation, renderable.material.color.GetFloat32Array());
     };
 
     constructor() {

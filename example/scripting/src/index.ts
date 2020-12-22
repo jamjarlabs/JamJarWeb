@@ -47,12 +47,12 @@ class ScriptingGame extends Game {
     }
 
     OnStart(): void {
-        this.messageBus.Publish(new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest(
+        this.messageBus.Publish(Message.New<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest(
             "enter-script",
             "assets/collision_enter.js"
         )));
 
-        this.messageBus.Publish(new Message<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest(
+        this.messageBus.Publish(Message.New<ScriptRequest>(ScriptRequest.MESSAGE_REQUEST_LOAD, new ScriptRequest(
             "exit-script",
             "assets/collision_exit.js"
         )));

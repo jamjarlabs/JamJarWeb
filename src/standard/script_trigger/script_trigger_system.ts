@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Component from "../../component/component";
 import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
@@ -24,13 +23,14 @@ import Message from "../../message/message";
 import Script from "./script";
 import ScriptTrigger from "./script_trigger";
 import ScriptTriggerRequest from "./script_trigger_request";
+import MapSystem from "../../system/map_system";
 
 /**
  * ScriptTriggerSystem handles triggering scripts to be executed based on the
  * Script component. Interprets Script components to trigger events at the
  * expected times.
  */
-class ScriptTriggerSystem extends System {
+class ScriptTriggerSystem extends MapSystem {
     /**
      * Descriptor for a script triggered as part of an update event.
      */
@@ -53,7 +53,7 @@ class ScriptTriggerSystem extends System {
 
             // Trigger script if update trigger, provide deltatime as the data
             this.messageBus.Publish(
-                new Message<ScriptTriggerRequest<number>>(
+                Message.New<ScriptTriggerRequest<number>>(
                     ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT,
                     new ScriptTriggerRequest(script.script, ScriptTriggerSystem.DESCRIPTOR_UPDATE, entity.entity, dt)
                 )

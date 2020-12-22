@@ -32,7 +32,7 @@ HTML, for example:
 This loads the `VT323` font into the browser using HTML.
 
 ```typescript
-messageBus.Publish(new Message<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
+messageBus.Publish(Message.New<FontAsset>(FontAsset.MESSAGE_REQUEST_LOAD, new FontAsset(
     "example_font",
     "VT323",
     "normal",

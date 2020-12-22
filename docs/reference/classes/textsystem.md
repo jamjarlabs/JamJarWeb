@@ -8,7 +8,7 @@ be loaded as textures by rendering systems.
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+  ↳ [MapSystem](mapsystem.md)
 
   ↳ **TextSystem**
 
@@ -28,6 +28,7 @@ be loaded as textures by rendering systems.
 * [frustumCuller](textsystem.md#private-frustumculler)
 * [mappings](textsystem.md#private-mappings)
 * [messageBus](textsystem.md#protected-messagebus)
+* [renderables](textsystem.md#private-renderables)
 * [scene](textsystem.md#protected-optional-scene)
 * [sdfGeneratorFactory](textsystem.md#private-sdfgeneratorfactory)
 * [subscriberID](textsystem.md#subscriberid)
@@ -41,8 +42,11 @@ be loaded as textures by rendering systems.
 * [OnDestroy](textsystem.md#protected-ondestroy)
 * [OnMessage](textsystem.md#onmessage)
 * [Update](textsystem.md#protected-update)
+* [freeRenderables](textsystem.md#private-freerenderables)
 * [loadFont](textsystem.md#private-loadfont)
 * [prepareText](textsystem.md#private-preparetext)
+* [register](textsystem.md#protected-register)
+* [remove](textsystem.md#protected-remove)
 * [DEFAULT_SDF_GENERATOR_FACTORY](textsystem.md#static-private-default_sdf_generator_factory)
 * [EVALUATOR](textsystem.md#static-private-evaluator)
 
@@ -50,9 +54,9 @@ be loaded as textures by rendering systems.
 
 ###  constructor
 
-\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `sdfGeneratorFactory`: SDFGeneratorFactory, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
+\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `renderables`: [Renderable](renderable.md)‹[TextRender](textrender.md)›[], `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `sdfGeneratorFactory`: SDFGeneratorFactory, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
 
-*Overrides [System](system.md).[constructor](system.md#constructor)*
+*Overrides [MapSystem](mapsystem.md).[constructor](mapsystem.md#constructor)*
 
 **Parameters:**
 
@@ -62,6 +66,7 @@ Name | Type | Default |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
 `frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
+`renderables` | [Renderable](renderable.md)‹[TextRender](textrender.md)›[] | [] |
 `mappings` | Map‹string, [FontMapping](fontmapping.md)› | new Map() |
 `sdfGeneratorFactory` | SDFGeneratorFactory | TextSystem.DEFAULT_SDF_GENERATOR_FACTORY |
 `subscriberID?` | undefined &#124; number | - |
@@ -74,7 +79,7 @@ Name | Type | Default |
 
 • **entities**: *Map‹number, [SystemEntity](systementity.md)›*
 
-*Inherited from [System](system.md).[entities](system.md#protected-entities)*
+*Inherited from [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
 
 A map of entities, mapped by their entity ID.
 ID: Entity
@@ -104,6 +109,12 @@ ___
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
+
+___
+
+### `Private` renderables
+
+• **renderables**: *[Renderable](renderable.md)‹[TextRender](textrender.md)›[]*
 
 ___
 
@@ -137,17 +148,21 @@ ___
 
 ### `Static` MESSAGE_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
+▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
 
-*Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
 ### `Static` MESSAGE_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
+▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
 
-*Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+Message to register an entity + components with a system so it can be tracked.
 
 ___
 
@@ -192,7 +207,7 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
+*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
 
 **Parameters:**
 
@@ -222,6 +237,14 @@ Name | Type | Description |
 
 ___
 
+### `Private` freeRenderables
+
+▸ **freeRenderables**(): *void*
+
+**Returns:** *void*
+
+___
+
 ### `Private` loadFont
 
 ▸ **loadFont**(`request`: [FontRequest](fontrequest.md)): *void*
@@ -245,6 +268,43 @@ ___
 Name | Type |
 ------ | ------ |
 `alpha` | number |
+
+**Returns:** *void*
+
+___
+
+### `Protected` register
+
+▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+*Inherited from [MapSystem](mapsystem.md).[register](mapsystem.md#protected-register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+### `Protected` remove
+
+▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+*Inherited from [MapSystem](mapsystem.md).[remove](mapsystem.md#protected-remove)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *void*
 

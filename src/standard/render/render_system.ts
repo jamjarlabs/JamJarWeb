@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
@@ -22,13 +21,14 @@ import Evaluator from "../../system/evaluator";
 import IMessage from "../../message/imessage";
 import Message from "../../message/message";
 import IRenderable from "../../rendering/irenderable";
+import ArraySystem from "../../system/array_system";
 
 /**
  * RenderSystem is an abstract class representing a generic rendering system,
  * has logic for handling loading renderables.
  * Contains the message constant for loading renderables.
  */
-abstract class RenderSystem extends System {
+abstract class RenderSystem extends ArraySystem {
     /**
      * Message used to add new renderables into the render system's render list.
      */
@@ -37,14 +37,14 @@ abstract class RenderSystem extends System {
     /**
      * A list of things to be rendered.
      */
-    protected renderables: Map<number, IRenderable[]>;
+    protected renderables: IRenderable[];
 
     constructor(
         messageBus: IMessageBus,
         scene?: IScene,
         evaluator?: Evaluator,
-        renderables: Map<number, IRenderable[]> = new Map(),
-        entities?: Map<number, SystemEntity>,
+        renderables: IRenderable[] = [],
+        entities?: SystemEntity[],
         subscriberID?: number
     ) {
         super(messageBus, scene, evaluator, entities, subscriberID);
@@ -55,20 +55,11 @@ abstract class RenderSystem extends System {
         super.OnMessage(message);
         switch (message.type) {
             case RenderSystem.MESSAGE_LOAD_RENDERABLES: {
-                const renderMessage = message as Message<[number, IRenderable[]][]>;
+                const renderMessage = message as Message<IRenderable[]>;
                 if (renderMessage.payload === undefined) {
                     return;
                 }
-                for (const cameraRenderGroup of renderMessage.payload) {
-                    const existing = this.renderables.get(cameraRenderGroup[0]);
-                    if (existing === undefined) {
-                        this.renderables.set(cameraRenderGroup[0], cameraRenderGroup[1]);
-                        continue;
-                    }
-
-                    existing.push(...cameraRenderGroup[1]);
-                    this.renderables.set(cameraRenderGroup[0], existing);
-                }
+                this.renderables.push(...renderMessage.payload);
                 break;
             }
         }

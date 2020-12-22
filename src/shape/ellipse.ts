@@ -22,6 +22,8 @@ import Transform from "../standard/transform/transform";
  * Ellipse is the representation of a 2D Ellipse shape. Can be used for collision detection.
  */
 class Ellipse implements IShape {
+    private static readonly ORIGIN = new Vector(0, 0);
+
     public center: Vector;
     public dimensions: Vector;
     public orientation: number;
@@ -39,6 +41,7 @@ class Ellipse implements IShape {
     public Transform(transform: Transform): IShape {
         const matrix = transform.Matrix3D();
         this.dimensions.Multiply(transform.scale), (this.orientation += transform.angle), this.center.Apply3D(matrix);
+        matrix.Free();
         return this;
     }
 
@@ -52,7 +55,7 @@ class Ellipse implements IShape {
 
     public FarthestPointInDirection(direction: Vector): Vector {
         const angle = Math.atan2(direction.y, direction.x);
-        const angledDimensions = this.dimensions.Rotate(Vector.New(0, 0), this.orientation);
+        const angledDimensions = this.dimensions.Rotate(Ellipse.ORIGIN, this.orientation);
         return Vector.New(
             this.center.x + angledDimensions.x * Math.cos(angle),
             this.center.y + angledDimensions.y * Math.sin(angle)

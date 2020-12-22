@@ -19,16 +19,46 @@ limitations under the License.
  * Values from 0 to 1.
  */
 class Color {
-    public red: number;
-    public green: number;
-    public blue: number;
-    public alpha: number;
+    public data: Float32Array;
 
     constructor(red: number, green: number, blue: number, alpha = 1) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-        this.alpha = alpha;
+        this.data = new Float32Array(4);
+        this.data[0] = red;
+        this.data[1] = green;
+        this.data[2] = blue;
+        this.data[3] = alpha;
+    }
+
+    get red(): number {
+        return this.data[0];
+    }
+
+    set red(value: number) {
+        this.data[0] = value;
+    }
+
+    get green(): number {
+        return this.data[1];
+    }
+
+    set green(value: number) {
+        this.data[1] = value;
+    }
+
+    get blue(): number {
+        return this.data[2];
+    }
+
+    set blue(value: number) {
+        this.data[2] = value;
+    }
+
+    get alpha(): number {
+        return this.data[3];
+    }
+
+    set alpha(value: number) {
+        this.data[3] = value;
     }
 
     /**
@@ -38,12 +68,8 @@ class Color {
         return new Color(this.red, this.green, this.blue, this.alpha);
     }
 
-    /**
-     * Returns the color in the form of a tuple `[red, green, blue, alpha]`.
-     * @returns {[number, number, number, number]} The tuple representation of the color
-     */
-    public GetTuple(): [number, number, number, number] {
-        return [this.red, this.green, this.blue, this.alpha];
+    public GetFloat32Array(): Float32Array {
+        return this.data;
     }
 
     /**

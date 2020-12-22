@@ -19,10 +19,10 @@ import ComponentManager from "../component/component_manager";
 import Entity from "./entity";
 import Component from "../component/component";
 import Message from "../message/message";
-import System from "../system/system";
 import IMessage from "../message/imessage";
 import IMessageBus from "../message/imessage_bus";
 import IEntity from "./ientity";
+import StatefulSystem from "../system/stateful_system";
 
 /**
  * EntityManager keeps tracks of all entities and their components/changes in their components.
@@ -88,7 +88,7 @@ class EntityManager extends Subscriber {
     private registerEntity(entity: IEntity): void {
         const components = this.getComponents(entity);
         this.messageBus.Publish(
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [entity, components])
+            Message.New<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [entity, components])
         );
     }
 
@@ -100,7 +100,7 @@ class EntityManager extends Subscriber {
         for (let i = 0; i < this.componentManagers.length; i++) {
             this.componentManagers[i].Remove(entity);
         }
-        this.messageBus.Publish(new Message<IEntity>(System.MESSAGE_DEREGISTER, entity));
+        this.messageBus.Publish(Message.New<IEntity>(StatefulSystem.MESSAGE_DEREGISTER, entity));
     }
 
     /**

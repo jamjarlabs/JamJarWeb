@@ -18,7 +18,6 @@ import Transform from "../transform/transform";
 import IMessage from "../../message/imessage";
 import Camera from "../camera/camera";
 import Message from "../../message/message";
-import Vector from "../../geometry/vector";
 import IMessageBus from "../../message/imessage_bus";
 import Game from "../../game";
 import IEntity from "../../entity/ientity";
@@ -80,12 +79,16 @@ class WebGLSystem extends RenderSystem {
     private textures: Map<string, WebGLTexture>;
     private shaders: Map<string, [WebGLShader, GLSLShader]>;
     private programs: Map<string, WebGLProgram>;
+    private zOrderGroups: Map<number, IRenderable[]>;
+    private programGroups: Map<string, IRenderable[]>;
+    private textureGroups: Map<string, IRenderable[]>;
+    private cameraRenderables: IRenderable[];
 
     constructor(
         messageBus: IMessageBus,
         gl: WebGL2RenderingContext,
         scene?: IScene,
-        renderables: Map<number, IRenderable[]> = new Map(),
+        renderables?: IRenderable[],
         defaultShaderAssets: ShaderAsset[] = [
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME, new DefaultTextureFragmentShader()),
             new ShaderAsset(ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME, new DefaultTextureVertexShader()),
@@ -96,7 +99,7 @@ class WebGLSystem extends RenderSystem {
         shaders: Map<string, [WebGLShader, GLSLShader]> = new Map(),
         textures: Map<string, WebGLTexture> = new Map(),
         programs: Map<string, WebGLProgram> = new Map(),
-        entities?: Map<number, SystemEntity>,
+        entities?: SystemEntity[],
         subscriberID?: number
     ) {
         super(messageBus, scene, WebGLSystem.EVALUATOR, renderables, entities, subscriberID);
@@ -105,6 +108,10 @@ class WebGLSystem extends RenderSystem {
         this.textures = textures;
         this.shaders = shaders;
         this.programs = programs;
+        this.zOrderGroups = new Map();
+        this.programGroups = new Map();
+        this.textureGroups = new Map();
+        this.cameraRenderables = [];
 
         // Subscribe to messages
         this.messageBus.Subscribe(this, [
@@ -116,7 +123,7 @@ class WebGLSystem extends RenderSystem {
 
         // Load default shaders
         for (const asset of defaultShaderAssets) {
-            this.messageBus.Publish(new Message<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, asset));
+            this.messageBus.Publish(Message.New<ShaderAsset>(ShaderAsset.MESSAGE_REQUEST_LOAD, asset));
         }
     }
 
@@ -185,7 +192,7 @@ class WebGLSystem extends RenderSystem {
             throw `Error compiling shader for asset '${asset.name}', error: ${err}`;
         }
         this.shaders.set(asset.name, [shader, asset.shader]);
-        this.messageBus.Publish(new Message(ShaderAsset.MESSAGE_FINISH_LOAD));
+        this.messageBus.Publish(Message.New(ShaderAsset.MESSAGE_FINISH_LOAD));
     }
 
     private loadTexture(asset: ImageAsset): void {
@@ -256,6 +263,7 @@ class WebGLSystem extends RenderSystem {
                 gl.generateMipmap(gl.TEXTURE_2D);
             }
         }
+        gl.bindTexture(gl.TEXTURE_2D, null);
         if (glTexture === null) {
             throw `Failed to create texture for image asset '${asset.name}'`;
         }
@@ -263,200 +271,217 @@ class WebGLSystem extends RenderSystem {
     }
 
     private render(alpha: number): void {
-        const gl = this.gl;
+        try {
+            const gl = this.gl;
 
-        const canvasWidth = gl.canvas.width;
-        const canvasHeight = gl.canvas.height;
+            const canvasWidth = gl.canvas.width;
+            const canvasHeight = gl.canvas.height;
 
-        for (const cameraEntity of this.entities.values()) {
-            const camera = cameraEntity.Get(Camera.KEY) as Camera;
-            const transform = cameraEntity.Get(Transform.KEY) as Transform;
+            for (let i = 0; i < this.entities.length; i++) {
+                const cameraEntity = this.entities[i];
 
-            // realWidth and realHeight are the width and height of the viewport
-            // relative to the canvas with and height, rather than the normalised
-            // scale of viewportScale
-            const realWidth = canvasWidth * camera.viewportScale.x;
-            const realHeight = canvasHeight * camera.viewportScale.y;
+                const camera = cameraEntity.Get(Camera.KEY) as Camera;
+                const transform = cameraEntity.Get(Transform.KEY) as Transform;
 
-            // realPosition is the center position of the camera viewport in relation to
-            // the canvas converted from the -1 to +1 coordinates of the viewportPosition
-            // combined with the real width and height to make sure it is in the center
-            // of the viewport.
-            const realPosition = Vector.New(
-                canvasWidth / 2 + (camera.viewportPosition.x / 2) * canvasWidth - realWidth / 2,
-                canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight - realHeight / 2
-            );
+                // realWidth and realHeight are the width and height of the viewport
+                // relative to the canvas with and height, rather than the normalised
+                // scale of viewportScale
+                const realWidth = canvasWidth * camera.viewportScale.x;
+                const realHeight = canvasHeight * camera.viewportScale.y;
 
-            // Define the viewport position of the camera
-            gl.viewport(realPosition.x, realPosition.y, realWidth, realHeight);
+                // realPosition is the center position of the camera viewport in relation to
+                // the canvas converted from the -1 to +1 coordinates of the viewportPosition
+                // combined with the real width and height to make sure it is in the center
+                // of the viewport.
+                const realPositionX = canvasWidth / 2 + (camera.viewportPosition.x / 2) * canvasWidth - realWidth / 2;
+                const realPositionY =
+                    canvasHeight / 2 + (camera.viewportPosition.y / 2) * canvasHeight - realHeight / 2;
 
-            // Define scissor around camera viewport, ensures that nothing is rendered outside
-            // of the viewport defined for this camera
-            gl.scissor(realPosition.x, realPosition.y, realWidth, realHeight);
+                // Define the viewport position of the camera
+                gl.viewport(realPositionX, realPositionY, realWidth, realHeight);
 
-            gl.enable(gl.SCISSOR_TEST);
+                // Define scissor around camera viewport, ensures that nothing is rendered outside
+                // of the viewport defined for this camera
+                gl.scissor(realPositionX, realPositionY, realWidth, realHeight);
 
-            // Clear the screen
-            gl.clearDepth(1.0);
-            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+                gl.enable(gl.SCISSOR_TEST);
 
-            // Set the background color
-            gl.clearColor(
-                camera.backgroundColor.red,
-                camera.backgroundColor.green,
-                camera.backgroundColor.blue,
-                camera.backgroundColor.alpha
-            );
+                // Clear the screen
+                gl.clearDepth(1.0);
+                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-            // Enable depth testing (objects can appear behind/infront of eachother)
-            gl.enable(gl.DEPTH_TEST);
-            gl.depthFunc(gl.LEQUAL);
+                // Set the background color
+                gl.clearColor(
+                    camera.backgroundColor.red,
+                    camera.backgroundColor.green,
+                    camera.backgroundColor.blue,
+                    camera.backgroundColor.alpha
+                );
 
-            // Enable alpha blending
-            gl.enable(gl.BLEND);
-            gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+                // Enable depth testing (objects can appear behind/infront of eachother)
+                gl.enable(gl.DEPTH_TEST);
+                gl.depthFunc(gl.LEQUAL);
 
-            const cameraRenderables = this.renderables.get(cameraEntity.entity.id);
+                // Enable alpha blending
+                gl.enable(gl.BLEND);
+                gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-            if (cameraRenderables === undefined) {
-                // No renderables prepared for camera
-                continue;
-            }
-
-            // Group by z order
-            const zOrderGroups: Map<number, IRenderable[]> = new Map();
-            for (const renderable of cameraRenderables) {
-                const zOrderGroup = zOrderGroups.get(renderable.zOrder);
-                if (zOrderGroup === undefined) {
-                    zOrderGroups.set(renderable.zOrder, [renderable]);
-                } else {
-                    zOrderGroup.push(renderable);
-                }
-            }
-            for (const zOrderGroupKeyValue of [...zOrderGroups].sort()) {
-                const zOrderGroup = zOrderGroupKeyValue[1];
-                // Group by program
-                const programGroups: Map<string, IRenderable[]> = new Map();
-                for (const renderable of zOrderGroup) {
-                    let key = "";
-                    for (const shaderName of renderable.material.shaders) {
-                        key = `${key}_${shaderName}`;
+                for (let j = 0; j < this.renderables.length; j++) {
+                    const renderable = this.renderables[j];
+                    if (renderable.camera.id === cameraEntity.entity.id) {
+                        this.cameraRenderables.push(this.renderables[j]);
                     }
-                    const programRenderables = programGroups.get(key);
-                    if (programRenderables === undefined) {
-                        programGroups.set(key, [renderable]);
+                }
+
+                if (this.cameraRenderables.length === 0) {
+                    // No renderables prepared for camera
+                    continue;
+                }
+
+                // Group by z order
+                for (let j = 0; j < this.cameraRenderables.length; j++) {
+                    const renderable = this.cameraRenderables[j];
+                    const zOrderGroup = this.zOrderGroups.get(renderable.zOrder);
+                    if (zOrderGroup === undefined) {
+                        this.zOrderGroups.set(renderable.zOrder, [renderable]);
                     } else {
-                        programRenderables.push(renderable);
-                        programGroups.set(key, programRenderables);
+                        zOrderGroup.push(renderable);
                     }
                 }
-
-                for (const programGroup of programGroups.values()) {
-                    const programCanary = programGroup[0];
-                    const shaders = [];
-                    let programKey = "";
-                    let loaded = true;
-
-                    for (const shaderName of programCanary.material.shaders) {
-                        const shader = this.shaders.get(shaderName);
-                        if (shader === undefined) {
-                            // Shader not loaded
-                            loaded = false;
-                            break;
+                for (const zOrderGroupKeyValue of [...this.zOrderGroups].sort()) {
+                    const zOrderGroup = zOrderGroupKeyValue[1];
+                    // Group by program
+                    for (let j = 0; j < zOrderGroup.length; j++) {
+                        const renderable = zOrderGroup[j];
+                        let key = "";
+                        for (const shaderName of renderable.material.shaders) {
+                            key = `${key}_${shaderName}`;
                         }
-                        shaders.push(shader);
-                        programKey = `${programKey}_${shaderName}`;
-                    }
-
-                    if (!loaded) {
-                        // Shader not loaded skip renderables for
-                        // this program
-                        continue;
-                    }
-
-                    // Set program variables
-                    let program = this.programs.get(programKey);
-                    // Program not created yet
-                    if (program === undefined) {
-                        const loadProgram = gl.createProgram();
-                        if (loadProgram === null) {
-                            throw `Error creating program '${programKey}'`;
-                        }
-                        for (const shader of shaders) {
-                            gl.attachShader(loadProgram, shader[0]);
-                        }
-                        gl.linkProgram(loadProgram);
-                        if (!gl.getProgramParameter(loadProgram, gl.LINK_STATUS)) {
-                            const linkErr = gl.getProgramInfoLog(loadProgram);
-                            gl.deleteProgram(loadProgram);
-                            throw `Error linking program '${programKey}', error: ${linkErr}`;
-                        }
-                        this.programs.set(programKey, loadProgram);
-                        program = loadProgram;
-                    }
-
-                    gl.useProgram(program);
-                    // Per shader
-                    const glslContext = new GLSLContext(gl, program, camera, transform);
-                    for (const shader of shaders) {
-                        if (shader[1].perShader !== undefined) {
-                            shader[1].perShader(glslContext);
-                        }
-                    }
-
-                    // Group by texture
-                    const textureGroups: Map<string, IRenderable[]> = new Map();
-                    for (const renderable of programGroup) {
-                        let textureName = `no_texture`;
-                        if (renderable.material.texture !== undefined) {
-                            textureName = `texture_${renderable.material.texture.image}`;
-                        }
-                        const textureRenderables = textureGroups.get(textureName);
-                        if (textureRenderables === undefined) {
-                            textureGroups.set(textureName, [renderable]);
+                        const programRenderables = this.programGroups.get(key);
+                        if (programRenderables === undefined) {
+                            this.programGroups.set(key, [renderable]);
                         } else {
-                            textureRenderables.push(renderable);
-                            textureGroups.set(textureName, textureRenderables);
+                            programRenderables.push(renderable);
+                            this.programGroups.set(key, programRenderables);
                         }
                     }
 
-                    for (const textureGroup of textureGroups.values()) {
-                        const textureCanary = textureGroup[0];
-                        let texture: WebGLTexture | undefined = undefined;
-                        if (textureCanary.material.texture !== undefined) {
-                            texture = this.textures.get(textureCanary.material.texture.image);
-                            if (texture === undefined) {
-                                // Texture not loaded, skip rendering for this texture
-                                continue;
-                            }
+                    for (const programGroup of this.programGroups.values()) {
+                        const programCanary = programGroup[0];
+                        const shaders: [WebGLShader, GLSLShader][] = [];
+                        let programKey = "";
+                        let loaded = true;
 
+                        for (const shaderName of programCanary.material.shaders) {
+                            const shader = this.shaders.get(shaderName);
+                            if (shader === undefined) {
+                                // Shader not loaded
+                                loaded = false;
+                                break;
+                            }
+                            shaders.push(shader);
+                            programKey = `${programKey}_${shaderName}`;
+                        }
+
+                        if (!loaded) {
+                            // Shader not loaded skip renderables for
+                            // this program
+                            continue;
+                        }
+
+                        // Set program variables
+                        let program = this.programs.get(programKey);
+                        // Program not created yet
+                        if (program === undefined) {
+                            const loadProgram = gl.createProgram();
+                            if (loadProgram === null) {
+                                throw `Error creating program '${programKey}'`;
+                            }
                             for (const shader of shaders) {
-                                if (shader[1].perTexture !== undefined) {
-                                    shader[1].perTexture(glslContext, texture);
-                                }
+                                gl.attachShader(loadProgram, shader[0]);
+                            }
+                            gl.linkProgram(loadProgram);
+                            if (!gl.getProgramParameter(loadProgram, gl.LINK_STATUS)) {
+                                const linkErr = gl.getProgramInfoLog(loadProgram);
+                                gl.deleteProgram(loadProgram);
+                                throw `Error linking program '${programKey}', error: ${linkErr}`;
+                            }
+                            this.programs.set(programKey, loadProgram);
+                            program = loadProgram;
+                        }
+
+                        gl.useProgram(program);
+                        // Per shader
+                        const glslContext = new GLSLContext(gl, program, camera, transform);
+                        for (const shader of shaders) {
+                            if (shader[1].perShader !== undefined) {
+                                shader[1].perShader(glslContext);
                             }
                         }
 
-                        for (const renderable of textureGroup) {
-                            const drawMode = WebGLSystem.DRAW_MODES.get(renderable.drawMode);
-                            if (drawMode === undefined) {
-                                console.warn(`Unsupported draw mode ${renderable.drawMode}`);
-                                continue;
+                        // Group by texture
+                        for (let k = 0; k < programGroup.length; k++) {
+                            const renderable = programGroup[k];
+                            let textureName = `no_texture`;
+                            if (renderable.material.texture !== undefined) {
+                                textureName = `texture_${renderable.material.texture.image}`;
                             }
+                            const textureRenderables = this.textureGroups.get(textureName);
+                            if (textureRenderables === undefined) {
+                                this.textureGroups.set(textureName, [renderable]);
+                            } else {
+                                textureRenderables.push(renderable);
+                                this.textureGroups.set(textureName, textureRenderables);
+                            }
+                        }
 
-                            for (const shader of shaders) {
-                                if (shader[1].perRenderable !== undefined) {
-                                    shader[1].perRenderable(glslContext, renderable, texture);
+                        for (const textureGroup of this.textureGroups.values()) {
+                            const textureCanary = textureGroup[0];
+                            let texture: WebGLTexture | undefined = undefined;
+                            if (textureCanary.material.texture !== undefined) {
+                                texture = this.textures.get(textureCanary.material.texture.image);
+                                if (texture === undefined) {
+                                    // Texture not loaded, skip rendering for this texture
+                                    continue;
+                                }
+
+                                for (const shader of shaders) {
+                                    if (shader[1].perTexture !== undefined) {
+                                        shader[1].perTexture(glslContext, texture);
+                                    }
                                 }
                             }
 
-                            gl.drawArrays(drawMode, 0, renderable.vertices.GetFloat32Array().length / 2);
+                            for (const renderable of textureGroup) {
+                                const drawMode = WebGLSystem.DRAW_MODES.get(renderable.drawMode);
+                                if (drawMode === undefined) {
+                                    console.warn(`Unsupported draw mode ${renderable.drawMode}`);
+                                    continue;
+                                }
+
+                                for (const shader of shaders) {
+                                    if (shader[1].perRenderable !== undefined) {
+                                        shader[1].perRenderable(glslContext, renderable, texture);
+                                    }
+                                }
+
+                                gl.drawArrays(drawMode, 0, renderable.vertices.GetFloat32Array().length / 2);
+                            }
                         }
+                        this.textureGroups.clear();
                     }
+                    this.programGroups.clear();
                 }
+                this.zOrderGroups.clear();
+                this.cameraRenderables.length = 0;
             }
+        } finally {
+            this.textureGroups.clear();
+            this.programGroups.clear();
+            this.zOrderGroups.clear();
+            this.cameraRenderables.length = 0;
+            this.renderables.length = 0;
         }
-        this.renderables.clear();
     }
 }
 

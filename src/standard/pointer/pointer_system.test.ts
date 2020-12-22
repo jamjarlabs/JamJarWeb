@@ -31,6 +31,7 @@ import Pointer from "./pointer";
 import Vector from "../../geometry/vector";
 import Color from "../../rendering/color";
 import PointerCameraInfo from "./pointer_camera_info";
+import StatefulSystem from "../../system/stateful_system";
 
 describe("PointerSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, PointerSystem, PointerSystem, IMessage];
@@ -46,7 +47,7 @@ describe("PointerSystem - OnMessage", () => {
                 0
             ),
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Camera(), new Transform()],
             ]),
@@ -77,7 +78,7 @@ describe("PointerSystem - OnMessage", () => {
                 ]),
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(3),
                 [new Camera(), new Transform()],
             ]),
@@ -87,14 +88,17 @@ describe("PointerSystem - OnMessage", () => {
             undefined,
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
         ],
         [
             "Register - Correctly reject new entity, missing camera",
             undefined,
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
             new PointerSystem(new FakeMessageBus(), document.createElement("canvas"), undefined, undefined, 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Enter Fullscreen - Mark as fullscreen",

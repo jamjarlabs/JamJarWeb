@@ -25,8 +25,8 @@ import SystemEntity from "../../system/system_entity";
 import ScriptingReference from "./scripting_reference";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
-import System from "../../system/system";
 import Transform from "../transform/transform";
+import StatefulSystem from "../../system/stateful_system";
 
 describe("ScriptingEngineSystem - OnMessage", () => {
     type TestTuple = [string, Error | undefined, ScriptingEngineSystem, ScriptingEngineSystem, IMessage];
@@ -397,7 +397,7 @@ describe("ScriptingEngineSystem - Register", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Accept, transform",
@@ -422,7 +422,10 @@ describe("ScriptingEngineSystem - Register", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
     ])(
         "%p",

@@ -47,7 +47,8 @@ import {
     Motion,
     MotionSystem,
     InterpolationSystem,
-    Renderable
+    Renderable,
+    MapSystem
 } from "jamjar";
 
 class TextureGame extends Game {
@@ -56,7 +57,7 @@ class TextureGame extends Game {
     }
 
     OnStart(): void {
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "animation_sheet",
             "assets/example.png",
             {
@@ -198,7 +199,7 @@ class TextureGame extends Game {
     }
 }
 
-class PlayerSystem extends System {
+class PlayerSystem extends MapSystem {
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Motion.KEY, SpriteAnimator.KEY, Player.KEY].every((type) => components.some(
             component => component.key == type

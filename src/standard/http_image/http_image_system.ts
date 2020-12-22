@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
@@ -22,12 +21,13 @@ import IMessage from "../../message/imessage";
 import Message from "../../message/message";
 import ImageAsset from "../../rendering/image/image_asset";
 import ImageRequest from "../../rendering/image/image_request";
+import MapSystem from "../../system/map_system";
 
 /**
  * HTTPImageSystem handles loading image assets over HTTP and making them
  * available to the engine for rendering.
  */
-class HTTPImageSystem extends System {
+class HTTPImageSystem extends MapSystem {
     public static readonly MESSAGE_REQUEST_FLUSH = "request_image_flush";
     public static readonly MESSAGE_REQUEST_CLEAR = "request_image_clear";
 
@@ -83,7 +83,7 @@ class HTTPImageSystem extends System {
             request.generateMipmaps,
             request.mirror
         );
-        this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(Message.New<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
     }
 
@@ -100,7 +100,7 @@ class HTTPImageSystem extends System {
             request.mirror,
             new Error(`Failed to load image ${request.name} from source ${request.source}`)
         );
-        this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(Message.New<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, asset));
         this.images.push(asset);
     }
 
@@ -113,12 +113,12 @@ class HTTPImageSystem extends System {
 
     private flush(): void {
         for (let i = 0; i < this.images.length; i++) {
-            this.messageBus.Publish(new Message<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, this.images[i]));
+            this.messageBus.Publish(Message.New<ImageAsset>(ImageAsset.MESSAGE_FINISH_LOAD, this.images[i]));
         }
     }
 
     private clear(): void {
-        this.images = [];
+        this.images.length = 0;
     }
 }
 

@@ -14,12 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import IFreeable from "../pooling/ifreeable";
+
 /**
  * IMessage is the interface for passing messages between systems/engine parts.
  * Each message is guaranteed to have a message type, used for filtering/determining
  * meaning for each message.
  */
-interface IMessage {
+interface IMessage extends IFreeable {
     type: string;
 }
 

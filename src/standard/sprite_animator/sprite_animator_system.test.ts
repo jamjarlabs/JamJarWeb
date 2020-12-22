@@ -29,6 +29,7 @@ import SpriteKeyFrame from "./sprite_key_frame";
 import Color from "../../rendering/color";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
+import StatefulSystem from "../../system/stateful_system";
 
 describe("SpriteAnimatorSystem - Update", () => {
     type TestTuple = [string, Error | undefined, SpriteAnimatorSystem, SpriteAnimatorSystem, IMessage];
@@ -663,14 +664,14 @@ describe("SpriteAnimatorSystem - Register", () => {
             undefined,
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Reject, missing Sprite",
             undefined,
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new SpriteAnimator(new Map<string, SpriteAnimation>())],
             ]),
@@ -680,7 +681,7 @@ describe("SpriteAnimatorSystem - Register", () => {
             undefined,
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Sprite(new Material())],
             ]),
@@ -703,7 +704,7 @@ describe("SpriteAnimatorSystem - Register", () => {
                 0
             ),
             new SpriteAnimatorSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Sprite(new Material()), new SpriteAnimator(new Map<string, SpriteAnimation>())],
             ]),

@@ -17,13 +17,9 @@ limitations under the License.
 import Message from "../message/message";
 import IMessage from "../message/imessage";
 import Subscriber from "../message/subscriber";
-import Component from "../component/component";
-import SystemEntity from "./system_entity";
 import IMessageBus from "../message/imessage_bus";
-import IEntity from "../entity/ientity";
 import IScene from "../scene/iscene";
 import Scene from "../scene/scene";
-import Evaluator from "./evaluator";
 
 /**
  * System is one of the key elements of the Entity-Component-System architecture.
@@ -31,8 +27,6 @@ import Evaluator from "./evaluator";
  */
 abstract class System extends Subscriber {
     public static readonly MESSAGE_UPDATE = "system_update";
-    public static readonly MESSAGE_REGISTER = "system_register";
-    public static readonly MESSAGE_DEREGISTER = "system_deregister";
 
     /**
      * Reference to the message bus, the fundamental piece of JamJar
@@ -40,44 +34,17 @@ abstract class System extends Subscriber {
      */
     protected messageBus: IMessageBus;
     /**
-     * A map of entities, mapped by their entity ID.
-     * ID: Entity
-     * 0: PlayerEntity
-     * 1: ObstacleEntity
-     * etc.
-     */
-    protected entities: Map<number, SystemEntity>;
-    /**
      * Any scene this system is part of, will change the lifecycle of the
      * system to be part of the scene's lifecycle - it will be destroyed
      * when the scene is destroyed.
      */
     protected scene?: IScene;
 
-    /**
-     * The evaluator is used to evaluate if an entity with its components should be
-     * tracked by the system
-     */
-    private evaluator?: Evaluator;
-
-    constructor(
-        messageBus: IMessageBus,
-        scene?: IScene,
-        evaluator?: Evaluator,
-        entities: Map<number, SystemEntity> = new Map(),
-        subscriberID?: number
-    ) {
+    constructor(messageBus: IMessageBus, scene?: IScene, subscriberID?: number) {
         super(subscriberID);
         this.messageBus = messageBus;
-        this.entities = entities;
-        this.evaluator = evaluator;
         this.scene = scene;
-        this.messageBus.Subscribe(this, [
-            System.MESSAGE_UPDATE,
-            System.MESSAGE_REGISTER,
-            System.MESSAGE_DEREGISTER,
-            Scene.MESSAGE_DESTROY,
-        ]);
+        this.messageBus.Subscribe(this, [System.MESSAGE_UPDATE, Scene.MESSAGE_DESTROY]);
     }
 
     /**
@@ -94,22 +61,6 @@ abstract class System extends Subscriber {
                 // Will always be non null
                 /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
                 this.Update((message as Message<number>).payload!);
-                break;
-            }
-            case System.MESSAGE_REGISTER: {
-                const registerMessage = message as Message<[IEntity, Component[]]>;
-                if (!registerMessage.payload) {
-                    return;
-                }
-                this.register(registerMessage.payload[0], registerMessage.payload[1]);
-                break;
-            }
-            case System.MESSAGE_DEREGISTER: {
-                const deregisterMessage = message as Message<IEntity>;
-                if (!deregisterMessage.payload) {
-                    return;
-                }
-                this.remove(deregisterMessage.payload);
                 break;
             }
             case Scene.MESSAGE_DESTROY: {
@@ -146,38 +97,6 @@ abstract class System extends Subscriber {
     public Destroy(): void {
         this.OnDestroy();
         this.messageBus.UnsubscribeAll(this);
-    }
-
-    /**
-     * register is used when a new entity is created with components, or an existing
-     * entity's components are changed; register calls the evaluator to check if the
-     * system should track this entity. If the evaluator returns true, the entity
-     * is added to the System's internal entity array.
-     * @param {IEntity} entity The entity to register
-     * @param {Component[]} components The components of the registering entity.
-     */
-    private register(entity: IEntity, components: Component[]): void {
-        if (!this.evaluator) {
-            return;
-        }
-
-        this.remove(entity);
-
-        // Evaluation check
-        if (!this.evaluator(entity, components)) {
-            return;
-        }
-
-        // Add component to system
-        this.entities.set(entity.id, new SystemEntity(entity, components));
-    }
-
-    /**
-     * remove removes an entity from being tracked by the system
-     * @param {IEntity} entity The entity to remove
-     */
-    private remove(entity: IEntity): void {
-        this.entities.delete(entity.id);
     }
 }
 

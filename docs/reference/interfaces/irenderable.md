@@ -18,6 +18,7 @@ Contains information for rendering.
 
 ### Properties
 
+* [camera](irenderable.md#camera)
 * [drawMode](irenderable.md#drawmode)
 * [material](irenderable.md#material)
 * [modelMatrix](irenderable.md#modelmatrix)
@@ -31,6 +32,14 @@ Contains information for rendering.
 * [Recycle](irenderable.md#recycle)
 
 ## Properties
+
+###  camera
+
+• **camera**: *[IEntity](ientity.md)*
+
+The camera to draw the renderable to.
+
+___
 
 ###  drawMode
 
@@ -99,7 +108,7 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(`args`: any[]): *[IPoolable](ipoolable.md)*
+▸ **Recycle**(...`args`: any): *[IPoolable](ipoolable.md)*
 
 *Inherited from [IPoolable](ipoolable.md).[Recycle](ipoolable.md#recycle)*
 
@@ -110,6 +119,6 @@ but must be repeatable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`args` | any[] | The arguments to use when recycling the object instance  |
+`...args` | any | The arguments to use when recycling the object instance  |
 
 **Returns:** *[IPoolable](ipoolable.md)*

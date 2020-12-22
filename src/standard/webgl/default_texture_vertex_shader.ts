@@ -48,9 +48,13 @@ class DefaultTextureVertexShader extends GLSLShader {
         const transform = context.transform;
         const program = context.program;
 
-        const viewMatrix = new Matrix4D();
+        const viewMatrix = Matrix4D.New();
 
-        viewMatrix.Translate(transform.position.Copy().Invert());
+        const invertedPosition = transform.position.Copy().Invert();
+
+        viewMatrix.Translate(invertedPosition);
+
+        invertedPosition.Free();
 
         const projectionMatrix = camera.GetProjectionMatrix();
 
@@ -61,6 +65,8 @@ class DefaultTextureVertexShader extends GLSLShader {
         gl.uniformMatrix4fv(viewLocation, false, viewMatrix.GetFloat32Array());
 
         gl.uniformMatrix4fv(projectionLocation, false, projectionMatrix.GetFloat32Array());
+        viewMatrix.Free();
+        projectionMatrix.Free();
     };
 
     private static readonly PER_RENDERABLE = (

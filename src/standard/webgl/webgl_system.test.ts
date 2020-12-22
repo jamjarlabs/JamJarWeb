@@ -18,7 +18,6 @@ import IMessage from "../../message/imessage";
 import FakeMessageBus from "../../fake/message_bus";
 import Message from "../../message/message";
 import WebGLSystem from "./webgl_system";
-import System from "../../system/system";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 import FakeEntity from "../../fake/entity";
@@ -41,6 +40,7 @@ import Vector from "../../geometry/vector";
 import TextureFiltering from "../../rendering/texture/texture_filtering";
 import TextureWrapping from "../../rendering/texture/texture_wrapping";
 import DrawMode from "../../rendering/draw_mode";
+import StatefulSystem from "../../system/stateful_system";
 
 class TestShader implements IShader {
     public source: string;
@@ -111,7 +111,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
         ],
         [
             "Register, fail, no camera",
@@ -140,7 +140,10 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Register, success",
@@ -154,7 +157,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map([[0, new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])]]),
+                [new SystemEntity(new FakeEntity(0), [new Camera(), new Transform()])],
                 0
             ),
             new WebGLSystem(
@@ -169,7 +172,7 @@ describe("WebGLSystem - OnMessage", () => {
                 undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Camera(), new Transform()],
             ]),
@@ -1052,7 +1055,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>(),
+                [],
                 0
             ),
             new WebGLSystem(
@@ -1064,7 +1067,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>(),
+                [],
                 0
             ),
             new Message(Game.MESSAGE_RENDER),
@@ -1095,7 +1098,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>(),
+                [],
                 0
             ),
             new WebGLSystem(
@@ -1120,7 +1123,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>(),
+                [],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1151,9 +1154,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1178,9 +1179,7 @@ describe("WebGLSystem - Render", () => {
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1206,14 +1205,12 @@ describe("WebGLSystem - Render", () => {
                     ),
                 ]),
                 undefined,
-                new Map(),
+                [],
                 undefined,
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1233,29 +1230,23 @@ describe("WebGLSystem - Render", () => {
                     ),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 undefined,
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1282,23 +1273,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("createProgram", (): WebGLProgram | null => null),
                 ]),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1306,9 +1281,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1329,23 +1302,19 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("createProgram", (): WebGLProgram | null => null),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1353,9 +1322,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1383,23 +1350,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): boolean => false),
                 ]),
                 undefined,
-                new Map([
-                    [
-                        0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1407,9 +1358,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1431,23 +1380,19 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): boolean => false),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1455,9 +1400,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1485,7 +1428,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map(),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1493,9 +1436,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1517,23 +1458,19 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1541,9 +1478,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 undefined,
                 undefined,
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1571,7 +1506,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map(),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1579,9 +1514,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1603,23 +1536,19 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1627,9 +1556,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1657,7 +1584,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map(),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     [
@@ -1701,23 +1628,16 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(new Vector(1, 1)),
-                            new Camera(undefined, undefined, undefined, new Vector(1, 1)),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(new Vector(2, 2)),
-                            new Camera(undefined, undefined, undefined, new Vector(1, 1)),
-                        ]),
-                    ],
-                ]),
-                0
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1)),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(new Vector(2, 2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1)),
+                    ]),
+                ]
             ),
             new WebGLSystem(
                 new FakeMessageBus(),
@@ -1738,45 +1658,40 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP,
-                                undefined
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1, 1, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP,
-                                undefined
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1, 2, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP,
-                                undefined
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1, 0, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1, 1, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1, 2, 0),
+                        new Matrix4D(),
+                        new Material({
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     [
@@ -1820,22 +1735,16 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(new Vector(1, 1)),
-                            new Camera(undefined, undefined, undefined, new Vector(1, 1)),
-                        ]),
-                    ],
-                    [
-                        1,
-                        new SystemEntity(new FakeEntity(1), [
-                            new Transform(new Vector(2, 2)),
-                            new Camera(undefined, undefined, undefined, new Vector(1, 1)),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1)),
+                    ]),
+                    new SystemEntity(new FakeEntity(1), [
+                        new Transform(new Vector(2, 2)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1)),
+                    ]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1863,7 +1772,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map(),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1871,9 +1780,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new WebGLSystem(
@@ -1895,23 +1802,19 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                23
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        23,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     ["test_vert", [new WebGLShader(), new GLSLShader(ShaderAsset.VERTEX_TYPE, "")]],
@@ -1919,9 +1822,7 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
-                ]),
+                [new SystemEntity(new FakeEntity(0), [new Transform(), new Camera()])],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),
@@ -1949,7 +1850,7 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map(),
+                [],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     [
@@ -1993,15 +1894,12 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(new Vector(1, 1)),
-                            new Camera(undefined, undefined, undefined, new Vector(1, 1)),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1)),
+                    ]),
+                ],
                 0
             ),
             new WebGLSystem(
@@ -2023,63 +1921,63 @@ describe("WebGLSystem - Render", () => {
                     new Reactor("getProgramParameter", (): number => 1),
                 ]),
                 undefined,
-                new Map([
-                    [
+                [
+                    new Renderable(
                         0,
-                        [
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1, 0, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                            new Renderable(
-                                1,
-                                Polygon.RectangleByDimensions(1, 1, 1, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                            new Renderable(
-                                0,
-                                Polygon.RectangleByDimensions(1, 1, 2, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                            new Renderable(
-                                3,
-                                Polygon.RectangleByDimensions(1, 1, 3, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                            new Renderable(
-                                5,
-                                Polygon.RectangleByDimensions(1, 1, 4, 0),
-                                new Matrix4D(),
-                                new Material({
-                                    texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
-                                    shaders: ["test_vert", "test_frag"],
-                                }),
-                                DrawMode.TRIANGLE_STRIP
-                            ),
-                        ],
-                    ],
-                ]),
+                        Polygon.RectangleByDimensions(1, 1, 0, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        1,
+                        Polygon.RectangleByDimensions(1, 1, 1, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1, 2, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        3,
+                        Polygon.RectangleByDimensions(1, 1, 3, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        5,
+                        Polygon.RectangleByDimensions(1, 1, 4, 0),
+                        new Matrix4D(),
+                        new Material({
+                            texture: new Texture("test", Polygon.RectangleByDimensions(1, 1)),
+                            shaders: ["test_vert", "test_frag"],
+                        }),
+                        DrawMode.TRIANGLE_STRIP,
+                        new FakeEntity(0)
+                    ),
+                ],
                 undefined,
                 new Map<string, [WebGLShader, GLSLShader]>([
                     [
@@ -2123,15 +2021,12 @@ describe("WebGLSystem - Render", () => {
                 ]),
                 new Map<string, WebGLTexture>([["test", new WebGLTexture()]]),
                 new Map<string, WebGLProgram>([["_test_vert_test_frag", new WebGLProgram()]]),
-                new Map<number, SystemEntity>([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(new Vector(1, 1)),
-                            new Camera(undefined, undefined, undefined, new Vector(1, 1)),
-                        ]),
-                    ],
-                ]),
+                [
+                    new SystemEntity(new FakeEntity(0), [
+                        new Transform(new Vector(1, 1)),
+                        new Camera(undefined, undefined, undefined, new Vector(1, 1)),
+                    ]),
+                ],
                 0
             ),
             new Message<number>(Game.MESSAGE_RENDER, 1.0),

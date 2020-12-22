@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
 import Sprite from "./sprite";
@@ -37,32 +36,54 @@ import FrustumCuller from "../frustum_culler/frustum_culler";
 import AABB from "../../shape/aabb";
 import Vector from "../../geometry/vector";
 import Matrix4D from "../../geometry/matrix_4d";
+import ArraySystem from "../../system/array_system";
 
 /**
  * SpriteSystem handles converting sprites into renderable objects that are fed into
  * a rendering system.
  */
-class SpriteSystem extends System {
+class SpriteSystem extends ArraySystem {
     /**
      * Ensure is Sprite entity with Transform and Sprite, or Camera entity with
      * Transform and Camera
      */
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return (
-            [Transform.KEY, Sprite.KEY].every((type) => components.some((component) => component.key === type)) ||
-            [Transform.KEY, Camera.KEY].every((type) => components.some((component) => component.key === type))
-        );
+        let hasTransform = false;
+        let hasCamera = false;
+        let hasSprite = false;
+        for (let i = 0; i < components.length; i++) {
+            switch (components[i].key) {
+                case Transform.KEY: {
+                    hasTransform = true;
+                    break;
+                }
+                case Sprite.KEY: {
+                    hasSprite = true;
+                    break;
+                }
+                case Camera.KEY: {
+                    hasCamera = true;
+                    break;
+                }
+            }
+            if (hasTransform && (hasCamera || hasSprite)) {
+                return true;
+            }
+        }
+        return hasTransform && (hasCamera || hasSprite);
     };
 
+    private static readonly SPRITE_RENDERABLE_QUAD = Polygon.QuadByDimensions(1, 1, 0, 0);
+
     private frustumCuller: IFrustumCuller;
-    private renderables: Map<number, IRenderable[]>;
+    private renderables: IRenderable[];
 
     constructor(
         messageBus: IMessageBus,
         scene?: IScene,
         frustumCuller: IFrustumCuller = new FrustumCuller(),
-        renderables: Map<number, IRenderable[]> = new Map(),
-        entities?: Map<number, SystemEntity>,
+        renderables: IRenderable[] = [],
+        entities?: SystemEntity[],
         subscriberID?: number
     ) {
         super(messageBus, scene, SpriteSystem.EVALUATOR, entities, subscriberID);
@@ -92,9 +113,8 @@ class SpriteSystem extends System {
     private prepareSprites(alpha: number): void {
         const viewportAABB = new AABB(Vector.New(2, 2));
 
-        const spriteRenderableQuad = Polygon.QuadByDimensions(1, 1, 0, 0);
-
-        for (const cameraEntity of this.entities.values()) {
+        for (let i = 0; i < this.entities.length; i++) {
+            const cameraEntity = this.entities[i];
             if (cameraEntity.Get(Camera.KEY) === undefined) {
                 // Not a camera
                 continue;
@@ -105,11 +125,10 @@ class SpriteSystem extends System {
 
             const cameraViewShape = new AABB(camera.virtualScale.Copy()).Transform(cameraTransform);
 
-            const cameraRenderables: IRenderable[] = [];
-
             const cameraVirtualScaleHalf = camera.virtualScale.Copy().Scale(0.5);
 
-            for (const spriteEntity of this.entities.values()) {
+            for (let j = 0; j < this.entities.length; j++) {
+                const spriteEntity = this.entities[j];
                 if (spriteEntity.Get(Sprite.KEY) === undefined) {
                     // Not a camera
                     continue;
@@ -134,13 +153,14 @@ class SpriteSystem extends System {
                         continue;
                     }
 
-                    cameraRenderables.push(
+                    this.renderables.push(
                         Renderable.New(
                             sprite.zOrder,
-                            spriteRenderableQuad,
+                            SpriteSystem.SPRITE_RENDERABLE_QUAD,
                             transform.InterpolatedMatrix4D(alpha),
                             sprite.material,
-                            DrawMode.TRIANGLES
+                            DrawMode.TRIANGLES,
+                            cameraEntity.entity
                         )
                     );
                 } else {
@@ -154,43 +174,50 @@ class SpriteSystem extends System {
                         // Not in camera view, skip rendering
                         continue;
                     }
-
                     // camera position + UI element position * camera virtual scale
                     const cameraRelativePosition = cameraTransform.position.Copy();
                     cameraRelativePosition.x += transform.position.x * cameraVirtualScaleHalf.x;
                     cameraRelativePosition.y += transform.position.y * cameraVirtualScaleHalf.y;
 
-                    const matrix = new Matrix4D()
+                    const cameraRelativeScale = transform.scale.Copy().Multiply(camera.virtualScale);
+
+                    const matrix = Matrix4D.New()
                         .Translate(cameraRelativePosition)
                         .Rotate(transform.angle)
-                        .Scale(transform.scale.Copy().Multiply(camera.virtualScale));
+                        .Scale(cameraRelativeScale);
+
+                    cameraRelativePosition.Free();
+                    cameraRelativeScale.Free();
 
                     // Create the renderable for use by rendering systems
-                    cameraRenderables.push(
-                        Renderable.New(sprite.zOrder, spriteRenderableQuad, matrix, sprite.material, DrawMode.TRIANGLES)
+                    this.renderables.push(
+                        Renderable.New(
+                            sprite.zOrder,
+                            SpriteSystem.SPRITE_RENDERABLE_QUAD,
+                            matrix,
+                            sprite.material,
+                            DrawMode.TRIANGLES,
+                            cameraEntity.entity
+                        )
                     );
                 }
             }
-            this.renderables.set(cameraEntity.entity.id, cameraRenderables);
             cameraViewShape.Free();
             cameraVirtualScaleHalf.Free();
         }
 
         viewportAABB.Free();
-        spriteRenderableQuad.Free();
-        this.messageBus.Publish(
-            new Message<Map<number, IRenderable[]>>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables)
-        );
+        this.messageBus.Publish(Message.New<IRenderable[]>(RenderSystem.MESSAGE_LOAD_RENDERABLES, this.renderables));
     }
 
     private freeRenderables(): void {
-        for (const cameraRenderables of this.renderables.values()) {
-            for (const renderable of cameraRenderables) {
-                renderable.vertices.Free();
-                renderable.Free();
-            }
+        for (let i = 0; i < this.renderables.length; i++) {
+            const renderable = this.renderables[i];
+            renderable.modelMatrix.Free();
+            renderable.vertices.Free();
+            renderable.Free();
         }
-        this.renderables.clear;
+        this.renderables.length = 0;
     }
 }
 

@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
@@ -22,12 +21,13 @@ import IMessage from "../../message/imessage";
 import Message from "../../message/message";
 import ScriptAsset from "../../scripting/script_asset";
 import ScriptRequest from "../../scripting/script_request";
+import MapSystem from "../../system/map_system";
 
 /**
  * HTTPScriptSystem handles loading script assets over HTTP and making them
  * available to the engine for execution.
  */
-class HTTPScriptSystem extends System {
+class HTTPScriptSystem extends MapSystem {
     /**
      * Message to send out all loaded script messages that are currently loaded.
      */
@@ -79,13 +79,13 @@ class HTTPScriptSystem extends System {
 
     protected httpSuccess(code: string, request: ScriptRequest): void {
         const asset = new ScriptAsset(request.name, code);
-        this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(Message.New<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
     protected httpError(request: ScriptRequest, error: Error): void {
         const asset = new ScriptAsset(request.name, "", error);
-        this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
+        this.messageBus.Publish(Message.New<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, asset));
         this.assets.push(asset);
     }
 
@@ -107,7 +107,7 @@ class HTTPScriptSystem extends System {
 
     private flush(): void {
         for (let i = 0; i < this.assets.length; i++) {
-            this.messageBus.Publish(new Message<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, this.assets[i]));
+            this.messageBus.Publish(Message.New<ScriptAsset>(ScriptAsset.MESSAGE_FINISH_LOAD, this.assets[i]));
         }
     }
 

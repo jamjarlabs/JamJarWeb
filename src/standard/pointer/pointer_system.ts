@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
@@ -28,11 +27,12 @@ import PointerCameraInfo from "./pointer_camera_info";
 import Transform from "../transform/transform";
 import FullscreenSystem from "../fullscreen/fullscreen_system";
 import IMessage from "../../message/imessage";
+import MapSystem from "../../system/map_system";
 
 /**
  * PointerSystem handles Pointer (mouse, touch etc.) input events, converting them into JamJar ECS messages.
  */
-class PointerSystem extends System {
+class PointerSystem extends MapSystem {
     /**
      * Ensure has Camera and Transform
      */
@@ -128,21 +128,21 @@ class PointerSystem extends System {
         }
         // If wheel event waiting, publish it - in a throttled way
         if (this.lastWheelEvent !== undefined) {
-            this.messageBus.Publish(new Message<WheelEvent>("wheel", this.lastWheelEvent));
+            this.messageBus.Publish(Message.New<WheelEvent>("wheel", this.lastWheelEvent));
             this.lastWheelEvent = undefined;
         }
         // Free any previously published pointers
         for (const freePointer of this.lastPublishedPointers) {
             freePointer.Free();
         }
-        this.lastPublishedPointers = [];
+        this.lastPublishedPointers.length = 0;
         // Publish any stored pointer events
         for (const pointerEvent of this.pointerEventsToPublish) {
             const pointer = this.processPointerEvent(pointerEvent);
-            this.messageBus.Publish(new Message<Pointer>(pointer.event.type, pointer));
+            this.messageBus.Publish(Message.New<Pointer>(pointer.event.type, pointer));
             this.lastPublishedPointers.push(pointer);
         }
-        this.pointerEventsToPublish = [];
+        this.pointerEventsToPublish.length = 0;
     }
 
     /**

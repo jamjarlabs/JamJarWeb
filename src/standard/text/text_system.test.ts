@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { ISDFGenerator } from "tiny-sdf";
 import IMessage from "../../message/imessage";
 import FakeMessageBus from "../../fake/message_bus";
 import Message from "../../message/message";
 import TextSystem from "./text_system";
 import FontAsset from "../../rendering/font/font_asset";
 import Reactor from "../../fake/reactor";
-import { ISDFGenerator } from "tiny-sdf";
 import Fake from "../../fake/fake";
 import FontMapping from "./font_mapping";
 import Game from "../../game";
@@ -28,18 +28,21 @@ import SystemEntity from "../../system/system_entity";
 import FakeEntity from "../../fake/entity";
 import Transform from "../transform/transform";
 import Text from "./text";
-import Renderable from "../../rendering/renderable";
-import TextRender from "./text_render";
 import TextAlignment from "./text_alignment";
 import UI from "../ui/ui";
 import Camera from "../camera/camera";
-import System from "../../system/system";
+import StatefulSystem from "../../system/stateful_system";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 import FontRequest from "../../rendering/font/font_request";
 import AllCollideAlgorithm from "../collision/algorithm/all_collide_algorithm";
 import FrustumCuller from "../frustum_culler/frustum_culler";
 import NoneCollideAlgorithm from "../collision/algorithm/none_collide_algorithm";
+import Renderable from "../../rendering/renderable";
+import Polygon from "../../shape/polygon";
+import Matrix4D from "../../geometry/matrix_4d";
+import Material from "../../rendering/material/material";
+import DrawMode from "../../rendering/draw_mode";
 
 /**
  * FakeSDFGenerator is used to stub SDFGenerators.
@@ -56,15 +59,15 @@ describe("TextSystem - OnMessage", () => {
         [
             "Unknown message type",
             undefined,
-            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, 0),
+            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, undefined, 0),
             new TextSystem(new FakeMessageBus()),
             new Message("unknown"),
         ],
         [
             "Load font no payload",
             undefined,
-            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, 0),
-            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, 0),
+            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, undefined, 0),
+            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, undefined, 0),
             new Message<number>(FontRequest.MESSAGE_REQUEST_LOAD),
         ],
         [
@@ -76,6 +79,7 @@ describe("TextSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 () => {
                     throw "sdf factory error";
                 },
@@ -83,6 +87,7 @@ describe("TextSystem - OnMessage", () => {
             ),
             new TextSystem(
                 new FakeMessageBus(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -106,6 +111,7 @@ describe("TextSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 new Map<string, FontMapping>([
                     [
                         "test",
@@ -140,6 +146,7 @@ describe("TextSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 () => new FakeSDFGenerator(),
                 0
             ),
@@ -155,6 +162,7 @@ describe("TextSystem - OnMessage", () => {
             undefined,
             new TextSystem(
                 new FakeMessageBus(),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -188,6 +196,7 @@ describe("TextSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 () => new FakeSDFGenerator(),
                 0
             ),
@@ -201,8 +210,8 @@ describe("TextSystem - OnMessage", () => {
         [
             "Pre render, no payload",
             undefined,
-            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, 0),
-            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, 0),
+            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, undefined, 0),
+            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, undefined, undefined, undefined, 0),
             new Message<number>(Game.MESSAGE_PRE_RENDER),
         ],
         [
@@ -215,12 +224,14 @@ describe("TextSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map([[0, new SystemEntity(new FakeEntity(0), [new Transform(), new Text(0, "test", "test")])]]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -238,12 +249,14 @@ describe("TextSystem - OnMessage", () => {
                 undefined,
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
                 new FakeMessageBus(),
                 undefined,
                 new Map([[1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])]]),
+                undefined,
                 undefined,
                 undefined,
                 undefined,
@@ -264,6 +277,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -274,6 +288,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 undefined,
                 undefined,
                 0
@@ -291,6 +306,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -312,6 +328,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -319,133 +336,6 @@ describe("TextSystem - OnMessage", () => {
                             10,
                             new FontAsset("test", new FontRequest("test", "test", "test", 3)),
                             new Map([["p", 0]])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, fail to publish",
-            new Error("fail to publish"),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", () => {
-                        throw "fail to publish";
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Text(0, "abcde", "test")])],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", () => {
-                        throw "fail to publish";
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Text(0, "abcde", "test")])],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, 2 no mapping",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Text(0, "abcde", "test")])],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(3);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Text(0, "abcde", "test")])],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
                         ),
                     ],
                 ]),
@@ -465,6 +355,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -485,18 +376,14 @@ describe("TextSystem - OnMessage", () => {
                 0
             ),
             new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 new Map([
                     [0, new SystemEntity(new FakeEntity(0), [new Transform(), new Text(0, "abcde", "test", 3)])],
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -535,6 +422,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -555,12 +443,7 @@ describe("TextSystem - OnMessage", () => {
                 0
             ),
             new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(0);
-                    }),
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 new Map([
                     [
@@ -573,234 +456,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
                 ]),
                 new FrustumCuller(new NoneCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
                 undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, left align, not UI",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Left),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Left),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, center align, not UI",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Center),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Center),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, right align, not UI",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Right),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Right),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Transform(), new Camera()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [
                         "test",
@@ -839,6 +495,7 @@ describe("TextSystem - OnMessage", () => {
                     ],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -859,11 +516,7 @@ describe("TextSystem - OnMessage", () => {
                 0
             ),
             new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(0);
-                    }),
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 new Map([
                     [
@@ -876,6 +529,7 @@ describe("TextSystem - OnMessage", () => {
                     ],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -915,6 +569,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
                 ]),
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -935,12 +590,7 @@ describe("TextSystem - OnMessage", () => {
                 0
             ),
             new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(0);
-                    }),
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 new Map([
                     [
@@ -954,6 +604,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
                 ]),
                 new FrustumCuller(new NoneCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -993,6 +644,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
+                undefined,
                 new Map([
                     [
                         "test",
@@ -1013,12 +665,7 @@ describe("TextSystem - OnMessage", () => {
                 0
             ),
             new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(0);
-                    }),
-                ]),
+                new FakeMessageBus(),
                 undefined,
                 new Map([
                     [
@@ -1032,240 +679,7 @@ describe("TextSystem - OnMessage", () => {
                     [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
                 ]),
                 new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
                 undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, left align, UI",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Left),
-                            new UI(new FakeEntity(1)),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Left),
-                            new UI(new FakeEntity(1)),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, center align, UI",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Center),
-                            new UI(new FakeEntity(1)),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Center),
-                            new UI(new FakeEntity(1)),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new Message<number>(Game.MESSAGE_PRE_RENDER, 1.0),
-        ],
-        [
-            "Pre render, one camera, 5 characters, center align, UI",
-            undefined,
-            new TextSystem(
-                new FakeMessageBus(),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Right),
-                            new UI(new FakeEntity(1)),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
-                new Map([
-                    [
-                        "test",
-                        new FontMapping(
-                            10,
-                            new FontAsset("test", new FontRequest("test", "test", "test", 3)),
-                            new Map([
-                                ["a", 0],
-                                ["b", 1],
-                                ["c", 2],
-                                ["d", 3],
-                                ["e", 4],
-                            ])
-                        ),
-                    ],
-                ]),
-                undefined,
-                0
-            ),
-            new TextSystem(
-                new FakeMessageBus([
-                    new Reactor("Publish", (message: Message<Map<number, Renderable<TextRender>[]>>) => {
-                        expect(message.payload?.size).toEqual(1);
-                        expect(message.payload?.get(1)?.length).toEqual(5);
-                    }),
-                ]),
-                undefined,
-                new Map([
-                    [
-                        0,
-                        new SystemEntity(new FakeEntity(0), [
-                            new Transform(),
-                            new Text(0, "abcde", "test", TextAlignment.Right),
-                            new UI(new FakeEntity(1)),
-                        ]),
-                    ],
-                    [1, new SystemEntity(new FakeEntity(1), [new Camera(), new Transform()])],
-                ]),
-                new FrustumCuller(new AllCollideAlgorithm()),
                 new Map([
                     [
                         "test",
@@ -1297,6 +711,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1306,9 +721,10 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Transform(), new Text(0, "test", "test")],
             ]),
@@ -1328,6 +744,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1341,9 +758,10 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(3),
                 [new Transform(), new Text(0, "test", "test")],
             ]),
@@ -1358,6 +776,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1367,9 +786,10 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Transform(), new Camera()],
             ]),
@@ -1389,6 +809,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1402,9 +823,10 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(3),
                 [new Transform(), new Camera()],
             ]),
@@ -1419,6 +841,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1428,9 +851,10 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Text(0, "test", "test")],
             ]),
@@ -1445,6 +869,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1454,9 +879,13 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Correctly reject camera entity, no transform",
@@ -1468,6 +897,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1477,9 +907,10 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), [new Camera()]]),
         ],
         [
             "Correctly reject camera entity, no camera",
@@ -1491,6 +922,7 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
             new TextSystem(
@@ -1500,9 +932,54 @@ describe("TextSystem - OnMessage", () => {
                 new FrustumCuller(new AllCollideAlgorithm()),
                 undefined,
                 undefined,
+                undefined,
                 0
             ),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
+        ],
+        [
+            "Clear previously set renderables",
+            undefined,
+            new TextSystem(new FakeMessageBus(), undefined, undefined, undefined, [], undefined, undefined, 0),
+            new TextSystem(
+                new FakeMessageBus(),
+                undefined,
+                undefined,
+                undefined,
+                [
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({}),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(0)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({}),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(1)
+                    ),
+                    new Renderable(
+                        0,
+                        Polygon.RectangleByDimensions(1, 1),
+                        new Matrix4D(),
+                        new Material({}),
+                        DrawMode.TRIANGLES,
+                        new FakeEntity(2)
+                    ),
+                ],
+                undefined,
+                undefined,
+                0
+            ),
+            new Message(Game.MESSAGE_POST_RENDER),
         ],
     ])(
         "%p",

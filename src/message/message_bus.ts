@@ -40,7 +40,7 @@ class MessageBus implements IMessageBus {
 
     public Dispatch(): void {
         const messageQueue = [...this.messageQueue];
-        this.messageQueue = [];
+        this.messageQueue.length = 0;
         const queueLength = messageQueue.length;
         for (let i = 0; i < queueLength; i++) {
             // Will always be non null
@@ -48,6 +48,7 @@ class MessageBus implements IMessageBus {
             const message = messageQueue.shift()!;
             const messageSubs = this.subscribers[message.type];
             if (!messageSubs) {
+                message.Free();
                 continue;
             }
 
@@ -58,6 +59,7 @@ class MessageBus implements IMessageBus {
             for (let j = 0; j < clonedQueue.length; j++) {
                 clonedQueue[j].OnMessage(message);
             }
+            message.Free();
         }
     }
 

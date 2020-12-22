@@ -38,7 +38,7 @@ class Collider extends Component {
     }
 
     public Free(): void {
-        this.currentlyCollidingWith = [];
+        this.currentlyCollidingWith.length = 0;
         this.shape.Free();
     }
 }

@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Transform from "../transform/transform";
 import Motion from "./motion";
 import Component from "../../component/component";
@@ -22,12 +21,13 @@ import IMessageBus from "../../message/imessage_bus";
 import IEntity from "../../entity/ientity";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
+import MapSystem from "../../system/map_system";
 
 /**
  * MotionSystem handles basic physics calculations for entities with a motion component.
  * This system handles velocity, acceleration, angular velocity and angular acceleration.
  */
-class MotionSystem extends System {
+class MotionSystem extends MapSystem {
     /**
      * Ensure has Transform and Motion.
      */

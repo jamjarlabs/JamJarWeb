@@ -26,6 +26,7 @@ import ScriptTrigger from "./script_trigger";
 import IEntity from "../../entity/ientity";
 import Component from "../../component/component";
 import Transform from "../transform/transform";
+import StatefulSystem from "../../system/stateful_system";
 
 describe("ScriptTriggerSystem - Update", () => {
     type TestTuple = [string, Error | undefined, ScriptTriggerSystem, ScriptTriggerSystem, IMessage];
@@ -95,14 +96,17 @@ describe("ScriptTriggerSystem - Register", () => {
             undefined,
             new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), []]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [new FakeEntity(0), []]),
         ],
         [
             "Reject, missing Script",
             undefined,
             new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
             new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [new FakeEntity(0), [new Transform()]]),
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
+                new FakeEntity(0),
+                [new Transform()],
+            ]),
         ],
         [
             "Accept",
@@ -122,7 +126,7 @@ describe("ScriptTriggerSystem - Register", () => {
                 0
             ),
             new ScriptTriggerSystem(new FakeMessageBus(), undefined, new Map<number, SystemEntity>(), 0),
-            new Message<[IEntity, Component[]]>(System.MESSAGE_REGISTER, [
+            new Message<[IEntity, Component[]]>(StatefulSystem.MESSAGE_REGISTER, [
                 new FakeEntity(0),
                 [new Transform(), new Script("test", ScriptTrigger.UPDATE)],
             ]),

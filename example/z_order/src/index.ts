@@ -41,7 +41,7 @@ class ZOrderGame extends Game {
 
     OnStart(): void {
         // Load sprite sheet
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "example_sheet",
             "assets/example.png",
             {

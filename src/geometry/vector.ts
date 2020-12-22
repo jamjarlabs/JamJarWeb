@@ -30,11 +30,15 @@ class Vector extends Pooled implements IPoolable {
      */
     private static POOL_KEY = "jamjar_vector";
 
+    private static INIT_VECTOR = () => {
+        return new Vector(0, 0);
+    };
+
     /**
-     * Create a Vector.New, using pooling if available.
+     * Create a new Vector, using pooling if available.
      */
     public static New(x: number, y: number): Vector {
-        return this.new<Vector>(Vector.POOL_KEY, Vector, [x, y]);
+        return this.new<Vector>(Vector.POOL_KEY, Vector, x, y);
     }
 
     /**
@@ -48,16 +52,11 @@ class Vector extends Pooled implements IPoolable {
      * Initialize the Vector pool to the size provided.
      */
     public static Init(size: number): void {
-        this.init(
-            Vector.POOL_KEY,
-            () => {
-                return Vector.New(0, 0);
-            },
-            size
-        );
+        this.init(Vector.POOL_KEY, Vector.INIT_VECTOR, size);
     }
 
     public data: Float32Array;
+    public debug = "";
 
     constructor(x: number, y: number) {
         super();
@@ -218,9 +217,9 @@ class Vector extends Pooled implements IPoolable {
         return Vector.New(this.x, this.y);
     }
 
-    public Recycle(args: [number, number]): Vector {
-        this.x = args[0];
-        this.y = args[1];
+    public Recycle(x: number, y: number): Vector {
+        this.x = x;
+        this.y = y;
         return this;
     }
 

@@ -22,6 +22,7 @@ Ellipse is the representation of a 2D Ellipse shape. Can be used for collision d
 * [center](ellipse.md#center)
 * [dimensions](ellipse.md#dimensions)
 * [orientation](ellipse.md#orientation)
+* [ORIGIN](ellipse.md#static-private-origin)
 
 ### Methods
 
@@ -66,6 +67,12 @@ ___
 ###  orientation
 
 • **orientation**: *number*
+
+___
+
+### `Static` `Private` ORIGIN
+
+▪ **ORIGIN**: *[Vector](vector.md)‹›* = new Vector(0, 0)
 
 ## Methods
 

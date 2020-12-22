@@ -14,16 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import IMessageBus from "../../message/imessage_bus";
 import IScene from "../../scene/iscene";
 import SystemEntity from "../../system/system_entity";
 import Message from "../../message/message";
+import MapSystem from "../../system/map_system";
 
 /**
  * KeyboardSystem handles Keyboard input events, converting them into JamJar ECS messages.
  */
-class KeyboardSystem extends System {
+class KeyboardSystem extends MapSystem {
     private inputElement: HTMLDocument;
 
     private keyEvents: [string, string][];
@@ -46,7 +46,7 @@ class KeyboardSystem extends System {
     protected Update(): void {
         for (let i = 0; i < this.keyEvents.length; i++) {
             const keyEvent = this.keyEvents[i];
-            this.messageBus.Publish(new Message<string>(keyEvent[0], keyEvent[1]));
+            this.messageBus.Publish(Message.New<string>(keyEvent[0], keyEvent[1]));
         }
         this.keyEvents = [];
     }

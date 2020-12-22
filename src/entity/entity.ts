@@ -50,18 +50,18 @@ class Entity implements IEntity {
 
     public Add(component: Component): void {
         this.messageBus.Publish(
-            new Message<[Entity, Component]>(Component.MESSAGE_ADD, [this, component])
+            Message.New<[Entity, Component]>(Component.MESSAGE_ADD, [this, component])
         );
     }
 
     public Remove(key: string): void {
         this.messageBus.Publish(
-            new Message<[Entity, string]>(Component.MESSAGE_REMOVE, [this, key])
+            Message.New<[Entity, string]>(Component.MESSAGE_REMOVE, [this, key])
         );
     }
 
     public Destroy(): void {
-        this.messageBus.Publish(new Message<Entity>(Entity.MESSAGE_DESTROY, this));
+        this.messageBus.Publish(Message.New<Entity>(Entity.MESSAGE_DESTROY, this));
     }
 }
 

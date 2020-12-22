@@ -72,6 +72,7 @@ import IShape from "./shape/ishape";
 import Polygon from "./shape/polygon";
 import Evaluator from "./system/evaluator";
 import System from "./system/system";
+import MapSystem from "./system/map_system";
 import SystemEntity from "./system/system_entity";
 import AudioSource from "./standard/audio_source/audio_source";
 import AudioSourceSystem from "./standard/audio_source/audio_source_system";
@@ -131,6 +132,8 @@ import WebGLSystem from "./standard/webgl/webgl_system";
 import Pooled from "./pooling/pooled";
 import IPoolable from "./pooling/ipoolable";
 import IFreeable from "./pooling/ifreeable";
+import ArraySystem from "./system/array_system";
+import StatefulSystem from "./system/stateful_system";
 
 export {
     // Core
@@ -180,6 +183,9 @@ export {
     Polygon,
     Evaluator,
     System,
+    MapSystem,
+    ArraySystem,
+    StatefulSystem,
     SystemEntity,
     // Pooling
     Pooled,

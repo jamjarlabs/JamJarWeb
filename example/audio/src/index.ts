@@ -39,16 +39,17 @@ import {
     Polygon,
     IEntity,
     Component,
-    System,
+    MapSystem,
     SystemEntity,
     IScene,
     IMessage,
     Collider,
     Pointer,
-    PointerSystem,, Renderable
+    PointerSystem,
+    Renderable
 } from "jamjar";
 
-class AudioButtonSystem extends System {
+class AudioButtonSystem extends MapSystem {
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return [Transform.KEY, Collider.KEY].every((type) => components.some(
             component => component.key == type
@@ -114,7 +115,7 @@ class AudioGame extends Game {
 
     OnStart(): void {
         // Load sprite sheet
-        this.messageBus.Publish(new Message<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
+        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
             "button",
             "assets/button.png",
             {
@@ -123,7 +124,7 @@ class AudioGame extends Game {
             }
         )));
 
-        this.messageBus.Publish(new Message<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest(
+        this.messageBus.Publish(Message.New<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest(
             "example",
             "assets/example.mp3"
         )));

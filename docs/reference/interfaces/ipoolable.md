@@ -13,6 +13,9 @@ IPoolable defines the required properties of an object that is able to be pooled
 
 ## Implemented by
 
+* [Matrix3D](../classes/matrix3d.md)
+* [Matrix4D](../classes/matrix4d.md)
+* [Message](../classes/message.md)
 * [Vector](../classes/vector.md)
 
 ## Index
@@ -50,7 +53,7 @@ ___
 
 ###  Recycle
 
-▸ **Recycle**(`args`: any[]): *[IPoolable](ipoolable.md)*
+▸ **Recycle**(...`args`: any): *[IPoolable](ipoolable.md)*
 
 Recycle is used to reuse an existing object instance, using the arguments provided - similar to a constructor,
 but must be repeatable.
@@ -59,6 +62,6 @@ but must be repeatable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`args` | any[] | The arguments to use when recycling the object instance  |
+`...args` | any | The arguments to use when recycling the object instance  |
 
 **Returns:** *[IPoolable](ipoolable.md)*

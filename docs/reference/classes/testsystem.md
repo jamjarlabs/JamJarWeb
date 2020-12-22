@@ -3,12 +3,21 @@
 
 ## Hierarchy
 
+  ↳ [ArraySystem](arraysystem.md)
+
+  ↳ [MapSystem](mapsystem.md)
+
+  ↳ [StatefulSystem](statefulsystem.md)
+
   ↳ [System](system.md)
 
   ↳ **TestSystem**
 
 ## Implements
 
+* [ISubscriber](../interfaces/isubscriber.md)
+* [ISubscriber](../interfaces/isubscriber.md)
+* [ISubscriber](../interfaces/isubscriber.md)
 * [ISubscriber](../interfaces/isubscriber.md)
 
 ## Index
@@ -32,17 +41,21 @@
 * [Destroy](testsystem.md#destroy)
 * [OnDestroy](testsystem.md#protected-ondestroy)
 * [OnMessage](testsystem.md#onmessage)
+* [SimulateRegister](testsystem.md#simulateregister)
+* [SimulateRemove](testsystem.md#simulateremove)
 * [Update](testsystem.md#protected-update)
+* [register](testsystem.md#protected-register)
+* [remove](testsystem.md#protected-remove)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new TestSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `entities`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[TestSystem](testsystem.md)*
+\+ **new TestSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `entities`: [SystemEntity](systementity.md)[], `subscriberID?`: undefined | number): *[TestSystem](testsystem.md)*
 
-*Inherited from [System](system.md).[constructor](system.md#constructor)*
+*Inherited from [ArraySystem](arraysystem.md).[constructor](arraysystem.md#constructor)*
 
-*Overrides [Subscriber](subscriber.md).[constructor](subscriber.md#constructor)*
+*Overrides [StatefulSystem](statefulsystem.md).[constructor](statefulsystem.md#constructor)*
 
 **Parameters:**
 
@@ -51,7 +64,7 @@ Name | Type | Default |
 `messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
 `scene?` | [IScene](../interfaces/iscene.md) | - |
 `evaluator?` | [Evaluator](../README.md#evaluator) | - |
-`entities` | Map‹number, [SystemEntity](systementity.md)› | new Map() |
+`entities` | [SystemEntity](systementity.md)[] | [] |
 `subscriberID?` | undefined &#124; number | - |
 
 **Returns:** *[TestSystem](testsystem.md)*
@@ -60,15 +73,13 @@ Name | Type | Default |
 
 ### `Protected` entities
 
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
+• **entities**: *[SystemEntity](systementity.md)[]*
 
-*Inherited from [System](system.md).[entities](system.md#protected-entities)*
+*Inherited from [ArraySystem](arraysystem.md).[entities](arraysystem.md#protected-entities)*
 
-A map of entities, mapped by their entity ID.
-ID: Entity
-0: PlayerEntity
-1: ObstacleEntity
-etc.
+*Overrides [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
+
+The list of entities the system is tracking.
 
 ___
 
@@ -77,6 +88,8 @@ ___
 • **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
 
 *Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+
+*Overrides [System](system.md).[messageBus](system.md#protected-messagebus)*
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
@@ -88,6 +101,8 @@ ___
 • **scene**? : *[IScene](../interfaces/iscene.md)*
 
 *Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+
+*Overrides [System](system.md).[scene](system.md#protected-optional-scene)*
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
@@ -103,21 +118,31 @@ ___
 
 *Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
 
+*Overrides [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+
 ___
 
 ### `Static` MESSAGE_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"system_deregister"* = "system_deregister"
+▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
 
-*Inherited from [System](system.md).[MESSAGE_DEREGISTER](system.md#static-message_deregister)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+
+Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
 ### `Static` MESSAGE_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"system_register"* = "system_register"
+▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
 
-*Inherited from [System](system.md).[MESSAGE_REGISTER](system.md#static-message_register)*
+*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+
+Message to register an entity + components with a system so it can be tracked.
 
 ___
 
@@ -127,6 +152,8 @@ ___
 
 *Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
 
+*Overrides [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+
 ## Methods
 
 ###  Destroy
@@ -134,6 +161,8 @@ ___
 ▸ **Destroy**(): *void*
 
 *Inherited from [System](system.md).[Destroy](system.md#destroy)*
+
+*Overrides [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -151,6 +180,8 @@ ___
 
 *Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
 
+*Overrides [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
@@ -162,9 +193,9 @@ ___
 
 ▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
 
-*Inherited from [System](system.md).[OnMessage](system.md#onmessage)*
+*Inherited from [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
 
-*Overrides [Subscriber](subscriber.md).[OnMessage](subscriber.md#abstract-onmessage)*
+*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
 
 **Parameters:**
 
@@ -176,11 +207,42 @@ Name | Type |
 
 ___
 
+###  SimulateRegister
+
+▸ **SimulateRegister**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+###  SimulateRemove
+
+▸ **SimulateRemove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+
+**Returns:** *void*
+
+___
+
 ### `Protected` Update
 
 ▸ **Update**(`dt`: number): *void*
 
 *Inherited from [System](system.md).[Update](system.md#protected-update)*
+
+*Overrides [System](system.md).[Update](system.md#protected-update)*
 
 General update method, default empty. Override with custom logic.
 
@@ -189,5 +251,42 @@ General update method, default empty. Override with custom logic.
 Name | Type | Description |
 ------ | ------ | ------ |
 `dt` | number | DeltaTime  |
+
+**Returns:** *void*
+
+___
+
+### `Protected` register
+
+▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[register](arraysystem.md#protected-register)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
+`components` | [Component](component.md)[] |
+
+**Returns:** *void*
+
+___
+
+### `Protected` remove
+
+▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+
+*Inherited from [ArraySystem](arraysystem.md).[remove](arraysystem.md#protected-remove)*
+
+*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`entity` | [IEntity](../interfaces/ientity.md) |
 
 **Returns:** *void*

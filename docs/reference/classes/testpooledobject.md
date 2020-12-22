@@ -215,7 +215,7 @@ ___
 
 ### `Static` `Protected` new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, `args`: any[]): *T*
+▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
 
 *Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
 
@@ -242,7 +242,7 @@ Name | Type |
 ------ | ------ |
 `constructor` |  |
 
-▪ **args**: *any[]*
+▪... **args**: *any*
 
 The args to use when creating/recycling the object.
 

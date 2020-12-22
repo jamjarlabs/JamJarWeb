@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import System from "../../system/system";
 import Transform from "../transform/transform";
 import Component from "../../component/component";
 import Collider from "./collider";
@@ -29,6 +28,7 @@ import GJKAlgorithm from "./algorithm/gjk_algorithm";
 import AllCollideAlgorithm from "./algorithm/all_collide_algorithm";
 import IShape from "../../shape/ishape";
 import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
+import ArraySystem from "../../system/array_system";
 
 /**
  * CollisionSystem watches for collisions between entities with Colliders and Transforms.
@@ -37,7 +37,7 @@ import ScriptTriggerRequest from "../script_trigger/script_trigger_request";
  * info around them.
  * Once it has determined all collisions, it broadcasts them as messages.
  */
-class CollisionSystem extends System {
+class CollisionSystem extends ArraySystem {
     /**
      * Descriptor of a script triggered when a collision enter occurs.
      */
@@ -72,7 +72,7 @@ class CollisionSystem extends System {
         narrowAlgorithm: ICollisionAlgorithm = new GJKAlgorithm(),
         broadAlgorithm: ICollisionAlgorithm = new AllCollideAlgorithm(),
         colliding: Collision[] = [],
-        entities?: Map<number, SystemEntity>,
+        entities?: SystemEntity[],
         subscriberID?: number
     ) {
         super(messageBus, scene, CollisionSystem.EVALUATOR, entities, subscriberID);
@@ -87,7 +87,8 @@ class CollisionSystem extends System {
         // shapes in a mapping of shape -> entity so the entity information can
         // be retrieved later using the shape reference
         const shapes: Map<IShape, SystemEntity> = new Map();
-        for (const entity of this.entities.values()) {
+        for (let i = 0; i < this.entities.length; i++) {
+            const entity = this.entities[i];
             const transform = entity.Get(Transform.KEY) as Transform;
             const collider = entity.Get(Collider.KEY) as Collider;
             const shape = collider.shape.Copy().Transform(transform);
@@ -104,7 +105,8 @@ class CollisionSystem extends System {
         const collisions: Collision[] = [];
 
         const broadCollisions = this.broadAlgorithm.CalculateCollisions([...shapes.keys()]);
-        for (const broadCollision of broadCollisions) {
+        for (let i = 0; i < broadCollisions.length; i++) {
+            const broadCollision = broadCollisions[i];
             // These null assertions can be made as the shapes returned by the
             // collision detection must retain references
             /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
@@ -116,7 +118,8 @@ class CollisionSystem extends System {
             // colliding by the collision pairs provided
             if (this.layerPairs.length !== 0) {
                 let shouldCheck = false;
-                for (const collisionPair of this.layerPairs) {
+                for (let i = 0; i < this.layerPairs.length; i++) {
+                    const collisionPair = this.layerPairs[i];
                     if (
                         (a.entity.layers.includes(collisionPair[0]) && b.entity.layers.includes(collisionPair[1])) ||
                         (b.entity.layers.includes(collisionPair[0]) && a.entity.layers.includes(collisionPair[1]))
@@ -140,14 +143,14 @@ class CollisionSystem extends System {
 
             // Determine if new collision
             let newCollision = true;
-            for (let i = expiredCollisions.length - 1; i >= 0; i--) {
-                const existing = this.colliding[i];
+            for (let j = expiredCollisions.length - 1; j >= 0; j--) {
+                const existing = this.colliding[j];
                 if (
                     (existing.a.id === a.entity.id && existing.b.id === b.entity.id) ||
                     (existing.a.id === b.entity.id && existing.b.id === a.entity.id)
                 ) {
                     newCollision = false;
-                    expiredCollisions.splice(i, 1);
+                    expiredCollisions.splice(j, 1);
                     break;
                 }
             }
@@ -155,7 +158,7 @@ class CollisionSystem extends System {
             if (newCollision) {
                 // New collision, counts as collision enter, send message and
                 // trigger scripts
-                this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_ENTER, collision));
+                this.messageBus.Publish(Message.New<Collision>(CollisionSystem.MESSAGE_COLLISION_ENTER, collision));
 
                 const aCollider = a.Get(Collider.KEY) as Collider;
                 if (aCollider.enterScript !== undefined) {
@@ -189,10 +192,10 @@ class CollisionSystem extends System {
         shapes.clear();
 
         // Clear out expired (exited) collisions
-        for (const expired of expiredCollisions) {
-            this.messageBus.Publish(new Message<Collision>(CollisionSystem.MESSAGE_COLLISION_EXIT, expired));
-
-            const aSystemEntity = this.entities.get(expired.a.id);
+        for (let i = 0; i < expiredCollisions.length; i++) {
+            const expired = expiredCollisions[i];
+            this.messageBus.Publish(Message.New<Collision>(CollisionSystem.MESSAGE_COLLISION_EXIT, expired));
+            const aSystemEntity = this.entities.find((value) => value.entity.id === expired.a.id);
             if (aSystemEntity !== undefined) {
                 const aCollider = aSystemEntity.Get(Collider.KEY) as Collider;
                 if (aCollider.exitScript !== undefined) {
@@ -206,7 +209,7 @@ class CollisionSystem extends System {
                     );
                 }
             }
-            const bSystemEntity = this.entities.get(expired.b.id);
+            const bSystemEntity = this.entities.find((value) => value.entity.id === expired.b.id);
             if (bSystemEntity !== undefined) {
                 const bCollider = bSystemEntity.Get(Collider.KEY) as Collider;
                 if (bCollider.exitScript !== undefined) {
@@ -222,16 +225,16 @@ class CollisionSystem extends System {
             }
         }
 
-        this.colliding = [];
+        this.colliding.length = 0;
 
-        for (const collision of collisions) {
-            this.colliding.push(collision);
+        for (let i = 0; i < collisions.length; i++) {
+            this.colliding.push(collisions[i]);
         }
 
         // Publish collision triggers
-        for (const trigger of triggers) {
+        for (let i = 0; i < triggers.length; i++) {
             this.messageBus.Publish(
-                new Message<ScriptTriggerRequest<Collision>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, trigger)
+                Message.New<ScriptTriggerRequest<Collision>>(ScriptTriggerRequest.MESSAGE_TRIGGER_SCRIPT, triggers[i])
             );
         }
     }
