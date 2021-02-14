@@ -17,6 +17,8 @@ limitations under the License.
 import { vec2 } from "gl-matrix";
 import IPoolable from "../pooling/ipoolable";
 import Pooled from "../pooling/pooled";
+import ISerializable from "../serialization/iserializable";
+import Serialize from "../serialization/serialize";
 import Matrix3D from "./matrix_3d";
 import Matrix4D from "./matrix_4d";
 
@@ -24,7 +26,14 @@ import Matrix4D from "./matrix_4d";
  * Vector is the 2 dimensional representation of a vector, with two values (x,y).
  * This is a mutable data structure, operations on Vector objects will affect the original object.
  */
-class Vector extends Pooled implements IPoolable {
+@Serialize(Vector.CLASS_SERIALIZATION_KEY, Vector.Deserialize)
+class Vector extends Pooled implements IPoolable, ISerializable {
+
+    public static readonly CLASS_SERIALIZATION_KEY = "com.jamjarlabs.Vector";
+
+    public static Deserialize(json: any): Vector {
+        return Vector.New(json.x, json.y);
+    }
     /**
      * Value of the Vector object pool.
      */
@@ -56,7 +65,6 @@ class Vector extends Pooled implements IPoolable {
     }
 
     public data: Float32Array;
-    public debug = "";
 
     constructor(x: number, y: number) {
         super();
@@ -225,6 +233,14 @@ class Vector extends Pooled implements IPoolable {
 
     public Free(): void {
         Vector.Free(this);
+    }
+
+    public Serialize(): string {
+        return `{
+            "className": "${Vector.CLASS_SERIALIZATION_KEY}",
+            "x": ${this.x},
+            "y": ${this.y}
+        }`;
     }
 }
 

@@ -28,5 +28,7 @@ declare global {
          * scripting will continue to work.
          */
         JamJarRefs: Map<string, ScriptingReference> | undefined;
+        GameRootPath: string;
+        GameCanvasID: string;
     }
 }

@@ -106,6 +106,7 @@ class HTTPImageSystem extends MapSystem {
 
     private load(request: ImageRequest): void {
         const img = new Image();
+        img.crossOrigin = "anonymous";
         img.addEventListener("error", this.onError.bind(this, event, img, request));
         img.addEventListener("load", this.onLoad.bind(this, event, img, request));
         img.src = request.source;

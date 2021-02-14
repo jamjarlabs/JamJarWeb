@@ -16,13 +16,28 @@ limitations under the License.
 
 import IPoolable from "../pooling/ipoolable";
 import Pooled from "../pooling/pooled";
+import ISerializable from "../serialization/iserializable";
+import Serialization from "../serialization/serialization";
+import Serializeable from "../serialization/serialization";
+import Serialize from "../serialization/serialize";
 import IMessage from "./imessage";
 
 /**
  * Message is a message that can be sent along the event bus to subscribers.
  * Message has a generic type payload for passing more data than just the message type.
  */
-class Message<T> extends Pooled implements IMessage, IPoolable {
+@Serialize(Message.CLASS_SERIALIZATION_KEY, Message.Deserialize)
+class Message<T> extends Pooled implements IMessage, IPoolable, ISerializable {
+
+    public static readonly CLASS_SERIALIZATION_KEY = "com.jamjarlabs.Message";
+
+    public static Deserialize(json: any): Message<unknown> {
+        if (json.payload !== undefined) {
+            return Message.New(json.type, Serializeable.Deserialize(json.payload))
+        }
+        return Message.New(json.type);
+    }
+
     /**
      * Value of the Message object pool.
      */
@@ -60,6 +75,20 @@ class Message<T> extends Pooled implements IMessage, IPoolable {
         super();
         this.type = type;
         this.payload = payload;
+    }
+
+    public Serialize(): string {
+        if (this.payload !== undefined) {
+            return `{
+                "className": "${Message.CLASS_SERIALIZATION_KEY}",
+                "type": "${this.type}",
+                "payload": ${Serialization.Serialize(this.payload as unknown as ISerializable | ISerializable[])}
+            }`;
+        }
+        return `{
+            "className": "${Message.CLASS_SERIALIZATION_KEY}",
+            "type": "${this.type}"
+        }`
     }
 
     public Recycle(type: string, payload?: T): IPoolable {

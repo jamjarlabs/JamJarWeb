@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "declaration": true,
     "outDir": "lib",
     "rootDir": "src",

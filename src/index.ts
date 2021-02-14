@@ -134,6 +134,11 @@ import IPoolable from "./pooling/ipoolable";
 import IFreeable from "./pooling/ifreeable";
 import ArraySystem from "./system/array_system";
 import StatefulSystem from "./system/stateful_system";
+import WebSocketNetworkSystem from "./standard/web_socket_network/v1/web_socket_network_system";
+import Serialization from "./serialization/serialization";
+import Serialize from "./serialization/serialize";
+import ISerializable from "./serialization/iserializable";
+import NetworkMessage from "./network/v1/network_message";
 
 export {
     // Core
@@ -283,4 +288,11 @@ export {
     DefaultTextureFragmentShader,
     DefaultTextureVertexShader,
     WebGLSystem,
+    // Networking
+    WebSocketNetworkSystem,
+    NetworkMessage,
+    // Serialization
+    Serialization,
+    Serialize,
+    ISerializable
 };
