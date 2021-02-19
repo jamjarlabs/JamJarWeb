@@ -105,7 +105,9 @@ describe("Game - Ensure window variables set after constructor and start", () =>
 
 describe("Game - Ensure window variables set after constructor and start, stop games function already set and already 1 message bus", () => {
     const browserWindow = new JSDOM().window;
-    browserWindow.JamJarStopGames = () => { return; };
+    browserWindow.JamJarStopGames = () => {
+        return;
+    };
     browserWindow.__jamJarRunningGameBuses = [new FakeMessageBus()];
 
     const game = new TestGame(new FakeMessageBus(), "test", (): number => 0, undefined, browserWindow, 0);
