@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import IMessageBus from "./message/imessage_bus";
 import ScriptingReference from "./standard/scripting_engine/scripting_reference";
 
 export {};
@@ -28,5 +29,14 @@ declare global {
          * scripting will continue to work.
          */
         JamJarRefs: Map<string, ScriptingReference> | undefined;
+        /**
+         * JamJarStopGames is a function that will stop any running JamJar game.
+         */
+        JamJarStopGames: (browserWindow?: Window) => void;
+        /**
+         * __jamJarRunningGameBuses is a list of all running JamJar game message buses, when games start they register
+         * with this. This is a private and 'internal' variable, it should not be manually modified.
+         */
+        __jamJarRunningGameBuses: IMessageBus[];
     }
 }

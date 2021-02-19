@@ -9,6 +9,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- New ability to stop games, using the `window.JamJarStopGames()` global function, allows host sites to stop a running
+game.
 - Object pooling, allows reusing objects in memory to avoid the garbage collection churn of create -> delete -> create.
     This can help prevent stuttering due to minor and major garbage collection occurring between frames by reducing the
     volume of objects that need garbage collected.
