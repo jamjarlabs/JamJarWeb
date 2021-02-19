@@ -1,61 +1,51 @@
-
 # Class: Reactor
 
-## Hierarchy
-
-* **Reactor**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](reactor.md#constructor)
+- [constructor](reactor.md#constructor)
 
 ### Properties
 
-* [logic](reactor.md#logic)
-* [name](reactor.md#name)
+- [logic](reactor.md#logic)
+- [name](reactor.md#name)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Reactor**(`name`: string, `logic`: function): *[Reactor](reactor.md)*
+\+ **new Reactor**(`name`: *string*, `logic`: (...`args`: *any*[]) => *any*): [*Reactor*](reactor.md)
 
-**Parameters:**
-
-▪ **name**: *string*
-
-▪ **logic**: *function*
-
-▸ (...`args`: any[]): *any*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`...args` | any[] |
+:------ | :------ |
+`name` | *string* |
+`logic` | (...`args`: *any*[]) => *any* |
 
-**Returns:** *[Reactor](reactor.md)*
+**Returns:** [*Reactor*](reactor.md)
 
 ## Properties
 
-###  logic
+### logic
 
-• **logic**: *function*
+• **logic**: (...`args`: *any*[]) => *any*
 
 #### Type declaration:
 
-▸ (...`args`: any[]): *any*
+▸ (...`args`: *any*[]): *any*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`...args` | any[] |
+:------ | :------ |
+`...args` | *any*[] |
+
+**Returns:** *any*
 
 ___
 
-###  name
+### name
 
 • **name**: *string*

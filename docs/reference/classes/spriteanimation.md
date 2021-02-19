@@ -1,4 +1,3 @@
-
 # Class: SpriteAnimation
 
 SpriteAnimation is used to define an animation as a series of materials to
@@ -8,45 +7,41 @@ animation should repeat.
 SpriteAnimation uses an array of key frames to iterate through for
 defining the materials to apply and for how long to apply them.
 
-## Hierarchy
-
-* **SpriteAnimation**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](spriteanimation.md#constructor)
+- [constructor](spriteanimation.md#constructor)
 
 ### Properties
 
-* [durationSinceRepeat](spriteanimation.md#durationsincerepeat)
-* [frameRate](spriteanimation.md#framerate)
-* [keyframes](spriteanimation.md#keyframes)
-* [repeat](spriteanimation.md#repeat)
-* [repeatCount](spriteanimation.md#repeatcount)
+- [durationSinceRepeat](spriteanimation.md#durationsincerepeat)
+- [frameRate](spriteanimation.md#framerate)
+- [keyframes](spriteanimation.md#keyframes)
+- [repeat](spriteanimation.md#repeat)
+- [repeatCount](spriteanimation.md#repeatcount)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new SpriteAnimation**(`keyframes`: [SpriteKeyFrame](spritekeyframe.md)[], `frameRate`: number, `repeat`: number, `durationSinceRepeat`: number, `repeatCount`: number): *[SpriteAnimation](spriteanimation.md)*
+\+ **new SpriteAnimation**(`keyframes`: [*SpriteKeyFrame*](spritekeyframe.md)[], `frameRate`: *number*, `repeat`: *number*, `durationSinceRepeat?`: *number*, `repeatCount?`: *number*): [*SpriteAnimation*](spriteanimation.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`keyframes` | [SpriteKeyFrame](spritekeyframe.md)[] | - |
-`frameRate` | number | - |
-`repeat` | number | - |
-`durationSinceRepeat` | number | 0 |
-`repeatCount` | number | 0 |
+Name | Type | Default value |
+:------ | :------ | :------ |
+`keyframes` | [*SpriteKeyFrame*](spritekeyframe.md)[] | - |
+`frameRate` | *number* | - |
+`repeat` | *number* | - |
+`durationSinceRepeat` | *number* | 0 |
+`repeatCount` | *number* | 0 |
 
-**Returns:** *[SpriteAnimation](spriteanimation.md)*
+**Returns:** [*SpriteAnimation*](spriteanimation.md)
 
 ## Properties
 
-###  durationSinceRepeat
+### durationSinceRepeat
 
 • **durationSinceRepeat**: *number*
 
@@ -54,7 +49,7 @@ State tracker, keeping track of the time since the animation has repeated.
 
 ___
 
-###  frameRate
+### frameRate
 
 • **frameRate**: *number*
 
@@ -62,16 +57,16 @@ The frame rate of the animation in frames per second
 
 ___
 
-###  keyframes
+### keyframes
 
-• **keyframes**: *[SpriteKeyFrame](spritekeyframe.md)[]*
+• **keyframes**: [*SpriteKeyFrame*](spritekeyframe.md)[]
 
 Key frames to apply, each one specifies a material and duration of
 keyframe in frames.
 
 ___
 
-###  repeat
+### repeat
 
 • **repeat**: *number*
 
@@ -81,7 +76,7 @@ infinite repetitions.
 
 ___
 
-###  repeatCount
+### repeatCount
 
 • **repeatCount**: *number*
 

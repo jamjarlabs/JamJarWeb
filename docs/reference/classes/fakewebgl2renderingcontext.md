@@ -1,4 +1,3 @@
-
 # Class: FakeWebGL2RenderingContext
 
 FakeWebGL2RenderingContext provides stubs for using a WebGL2RenderingContext
@@ -6,4224 +5,4224 @@ in tests, allows overriding behaviour with the use of reactors.
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeWebGL2RenderingContext**
 
 ## Implements
 
-* WebGL2RenderingContext
+* *WebGL2RenderingContext*
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakewebgl2renderingcontext.md#constructor)
+- [constructor](fakewebgl2renderingcontext.md#constructor)
 
 ### Properties
 
-* [ACTIVE_ATTRIBUTES](fakewebgl2renderingcontext.md#active_attributes)
-* [ACTIVE_TEXTURE](fakewebgl2renderingcontext.md#active_texture)
-* [ACTIVE_UNIFORMS](fakewebgl2renderingcontext.md#active_uniforms)
-* [ACTIVE_UNIFORM_BLOCKS](fakewebgl2renderingcontext.md#active_uniform_blocks)
-* [ALIASED_LINE_WIDTH_RANGE](fakewebgl2renderingcontext.md#aliased_line_width_range)
-* [ALIASED_POINT_SIZE_RANGE](fakewebgl2renderingcontext.md#aliased_point_size_range)
-* [ALPHA](fakewebgl2renderingcontext.md#alpha)
-* [ALPHA_BITS](fakewebgl2renderingcontext.md#alpha_bits)
-* [ALREADY_SIGNALED](fakewebgl2renderingcontext.md#already_signaled)
-* [ALWAYS](fakewebgl2renderingcontext.md#always)
-* [ANY_SAMPLES_PASSED](fakewebgl2renderingcontext.md#any_samples_passed)
-* [ANY_SAMPLES_PASSED_CONSERVATIVE](fakewebgl2renderingcontext.md#any_samples_passed_conservative)
-* [ARRAY_BUFFER](fakewebgl2renderingcontext.md#array_buffer)
-* [ARRAY_BUFFER_BINDING](fakewebgl2renderingcontext.md#array_buffer_binding)
-* [ATTACHED_SHADERS](fakewebgl2renderingcontext.md#attached_shaders)
-* [BACK](fakewebgl2renderingcontext.md#back)
-* [BLEND](fakewebgl2renderingcontext.md#blend)
-* [BLEND_COLOR](fakewebgl2renderingcontext.md#blend_color)
-* [BLEND_DST_ALPHA](fakewebgl2renderingcontext.md#blend_dst_alpha)
-* [BLEND_DST_RGB](fakewebgl2renderingcontext.md#blend_dst_rgb)
-* [BLEND_EQUATION](fakewebgl2renderingcontext.md#blend_equation)
-* [BLEND_EQUATION_ALPHA](fakewebgl2renderingcontext.md#blend_equation_alpha)
-* [BLEND_EQUATION_RGB](fakewebgl2renderingcontext.md#blend_equation_rgb)
-* [BLEND_SRC_ALPHA](fakewebgl2renderingcontext.md#blend_src_alpha)
-* [BLEND_SRC_RGB](fakewebgl2renderingcontext.md#blend_src_rgb)
-* [BLUE_BITS](fakewebgl2renderingcontext.md#blue_bits)
-* [BOOL](fakewebgl2renderingcontext.md#bool)
-* [BOOL_VEC2](fakewebgl2renderingcontext.md#bool_vec2)
-* [BOOL_VEC3](fakewebgl2renderingcontext.md#bool_vec3)
-* [BOOL_VEC4](fakewebgl2renderingcontext.md#bool_vec4)
-* [BROWSER_DEFAULT_WEBGL](fakewebgl2renderingcontext.md#browser_default_webgl)
-* [BUFFER_SIZE](fakewebgl2renderingcontext.md#buffer_size)
-* [BUFFER_USAGE](fakewebgl2renderingcontext.md#buffer_usage)
-* [BYTE](fakewebgl2renderingcontext.md#byte)
-* [CCW](fakewebgl2renderingcontext.md#ccw)
-* [CLAMP_TO_EDGE](fakewebgl2renderingcontext.md#clamp_to_edge)
-* [COLOR](fakewebgl2renderingcontext.md#color)
-* [COLOR_ATTACHMENT0](fakewebgl2renderingcontext.md#color_attachment0)
-* [COLOR_ATTACHMENT1](fakewebgl2renderingcontext.md#color_attachment1)
-* [COLOR_ATTACHMENT10](fakewebgl2renderingcontext.md#color_attachment10)
-* [COLOR_ATTACHMENT11](fakewebgl2renderingcontext.md#color_attachment11)
-* [COLOR_ATTACHMENT12](fakewebgl2renderingcontext.md#color_attachment12)
-* [COLOR_ATTACHMENT13](fakewebgl2renderingcontext.md#color_attachment13)
-* [COLOR_ATTACHMENT14](fakewebgl2renderingcontext.md#color_attachment14)
-* [COLOR_ATTACHMENT15](fakewebgl2renderingcontext.md#color_attachment15)
-* [COLOR_ATTACHMENT2](fakewebgl2renderingcontext.md#color_attachment2)
-* [COLOR_ATTACHMENT3](fakewebgl2renderingcontext.md#color_attachment3)
-* [COLOR_ATTACHMENT4](fakewebgl2renderingcontext.md#color_attachment4)
-* [COLOR_ATTACHMENT5](fakewebgl2renderingcontext.md#color_attachment5)
-* [COLOR_ATTACHMENT6](fakewebgl2renderingcontext.md#color_attachment6)
-* [COLOR_ATTACHMENT7](fakewebgl2renderingcontext.md#color_attachment7)
-* [COLOR_ATTACHMENT8](fakewebgl2renderingcontext.md#color_attachment8)
-* [COLOR_ATTACHMENT9](fakewebgl2renderingcontext.md#color_attachment9)
-* [COLOR_BUFFER_BIT](fakewebgl2renderingcontext.md#color_buffer_bit)
-* [COLOR_CLEAR_VALUE](fakewebgl2renderingcontext.md#color_clear_value)
-* [COLOR_WRITEMASK](fakewebgl2renderingcontext.md#color_writemask)
-* [COMPARE_REF_TO_TEXTURE](fakewebgl2renderingcontext.md#compare_ref_to_texture)
-* [COMPILE_STATUS](fakewebgl2renderingcontext.md#compile_status)
-* [COMPRESSED_TEXTURE_FORMATS](fakewebgl2renderingcontext.md#compressed_texture_formats)
-* [CONDITION_SATISFIED](fakewebgl2renderingcontext.md#condition_satisfied)
-* [CONSTANT_ALPHA](fakewebgl2renderingcontext.md#constant_alpha)
-* [CONSTANT_COLOR](fakewebgl2renderingcontext.md#constant_color)
-* [CONTEXT_LOST_WEBGL](fakewebgl2renderingcontext.md#context_lost_webgl)
-* [COPY_READ_BUFFER](fakewebgl2renderingcontext.md#copy_read_buffer)
-* [COPY_READ_BUFFER_BINDING](fakewebgl2renderingcontext.md#copy_read_buffer_binding)
-* [COPY_WRITE_BUFFER](fakewebgl2renderingcontext.md#copy_write_buffer)
-* [COPY_WRITE_BUFFER_BINDING](fakewebgl2renderingcontext.md#copy_write_buffer_binding)
-* [CULL_FACE](fakewebgl2renderingcontext.md#cull_face)
-* [CULL_FACE_MODE](fakewebgl2renderingcontext.md#cull_face_mode)
-* [CURRENT_PROGRAM](fakewebgl2renderingcontext.md#current_program)
-* [CURRENT_QUERY](fakewebgl2renderingcontext.md#current_query)
-* [CURRENT_VERTEX_ATTRIB](fakewebgl2renderingcontext.md#current_vertex_attrib)
-* [CW](fakewebgl2renderingcontext.md#cw)
-* [DECR](fakewebgl2renderingcontext.md#decr)
-* [DECR_WRAP](fakewebgl2renderingcontext.md#decr_wrap)
-* [DELETE_STATUS](fakewebgl2renderingcontext.md#delete_status)
-* [DEPTH](fakewebgl2renderingcontext.md#depth)
-* [DEPTH24_STENCIL8](fakewebgl2renderingcontext.md#depth24_stencil8)
-* [DEPTH32F_STENCIL8](fakewebgl2renderingcontext.md#depth32f_stencil8)
-* [DEPTH_ATTACHMENT](fakewebgl2renderingcontext.md#depth_attachment)
-* [DEPTH_BITS](fakewebgl2renderingcontext.md#depth_bits)
-* [DEPTH_BUFFER_BIT](fakewebgl2renderingcontext.md#depth_buffer_bit)
-* [DEPTH_CLEAR_VALUE](fakewebgl2renderingcontext.md#depth_clear_value)
-* [DEPTH_COMPONENT](fakewebgl2renderingcontext.md#depth_component)
-* [DEPTH_COMPONENT16](fakewebgl2renderingcontext.md#depth_component16)
-* [DEPTH_COMPONENT24](fakewebgl2renderingcontext.md#depth_component24)
-* [DEPTH_COMPONENT32F](fakewebgl2renderingcontext.md#depth_component32f)
-* [DEPTH_FUNC](fakewebgl2renderingcontext.md#depth_func)
-* [DEPTH_RANGE](fakewebgl2renderingcontext.md#depth_range)
-* [DEPTH_STENCIL](fakewebgl2renderingcontext.md#depth_stencil)
-* [DEPTH_STENCIL_ATTACHMENT](fakewebgl2renderingcontext.md#depth_stencil_attachment)
-* [DEPTH_TEST](fakewebgl2renderingcontext.md#depth_test)
-* [DEPTH_WRITEMASK](fakewebgl2renderingcontext.md#depth_writemask)
-* [DITHER](fakewebgl2renderingcontext.md#dither)
-* [DONT_CARE](fakewebgl2renderingcontext.md#dont_care)
-* [DRAW_BUFFER0](fakewebgl2renderingcontext.md#draw_buffer0)
-* [DRAW_BUFFER1](fakewebgl2renderingcontext.md#draw_buffer1)
-* [DRAW_BUFFER10](fakewebgl2renderingcontext.md#draw_buffer10)
-* [DRAW_BUFFER11](fakewebgl2renderingcontext.md#draw_buffer11)
-* [DRAW_BUFFER12](fakewebgl2renderingcontext.md#draw_buffer12)
-* [DRAW_BUFFER13](fakewebgl2renderingcontext.md#draw_buffer13)
-* [DRAW_BUFFER14](fakewebgl2renderingcontext.md#draw_buffer14)
-* [DRAW_BUFFER15](fakewebgl2renderingcontext.md#draw_buffer15)
-* [DRAW_BUFFER2](fakewebgl2renderingcontext.md#draw_buffer2)
-* [DRAW_BUFFER3](fakewebgl2renderingcontext.md#draw_buffer3)
-* [DRAW_BUFFER4](fakewebgl2renderingcontext.md#draw_buffer4)
-* [DRAW_BUFFER5](fakewebgl2renderingcontext.md#draw_buffer5)
-* [DRAW_BUFFER6](fakewebgl2renderingcontext.md#draw_buffer6)
-* [DRAW_BUFFER7](fakewebgl2renderingcontext.md#draw_buffer7)
-* [DRAW_BUFFER8](fakewebgl2renderingcontext.md#draw_buffer8)
-* [DRAW_BUFFER9](fakewebgl2renderingcontext.md#draw_buffer9)
-* [DRAW_FRAMEBUFFER](fakewebgl2renderingcontext.md#draw_framebuffer)
-* [DRAW_FRAMEBUFFER_BINDING](fakewebgl2renderingcontext.md#draw_framebuffer_binding)
-* [DST_ALPHA](fakewebgl2renderingcontext.md#dst_alpha)
-* [DST_COLOR](fakewebgl2renderingcontext.md#dst_color)
-* [DYNAMIC_COPY](fakewebgl2renderingcontext.md#dynamic_copy)
-* [DYNAMIC_DRAW](fakewebgl2renderingcontext.md#dynamic_draw)
-* [DYNAMIC_READ](fakewebgl2renderingcontext.md#dynamic_read)
-* [ELEMENT_ARRAY_BUFFER](fakewebgl2renderingcontext.md#element_array_buffer)
-* [ELEMENT_ARRAY_BUFFER_BINDING](fakewebgl2renderingcontext.md#element_array_buffer_binding)
-* [EQUAL](fakewebgl2renderingcontext.md#equal)
-* [FASTEST](fakewebgl2renderingcontext.md#fastest)
-* [FLOAT](fakewebgl2renderingcontext.md#float)
-* [FLOAT_32_UNSIGNED_INT_24_8_REV](fakewebgl2renderingcontext.md#float_32_unsigned_int_24_8_rev)
-* [FLOAT_MAT2](fakewebgl2renderingcontext.md#float_mat2)
-* [FLOAT_MAT2x3](fakewebgl2renderingcontext.md#float_mat2x3)
-* [FLOAT_MAT2x4](fakewebgl2renderingcontext.md#float_mat2x4)
-* [FLOAT_MAT3](fakewebgl2renderingcontext.md#float_mat3)
-* [FLOAT_MAT3x2](fakewebgl2renderingcontext.md#float_mat3x2)
-* [FLOAT_MAT3x4](fakewebgl2renderingcontext.md#float_mat3x4)
-* [FLOAT_MAT4](fakewebgl2renderingcontext.md#float_mat4)
-* [FLOAT_MAT4x2](fakewebgl2renderingcontext.md#float_mat4x2)
-* [FLOAT_MAT4x3](fakewebgl2renderingcontext.md#float_mat4x3)
-* [FLOAT_VEC2](fakewebgl2renderingcontext.md#float_vec2)
-* [FLOAT_VEC3](fakewebgl2renderingcontext.md#float_vec3)
-* [FLOAT_VEC4](fakewebgl2renderingcontext.md#float_vec4)
-* [FRAGMENT_SHADER](fakewebgl2renderingcontext.md#fragment_shader)
-* [FRAGMENT_SHADER_DERIVATIVE_HINT](fakewebgl2renderingcontext.md#fragment_shader_derivative_hint)
-* [FRAMEBUFFER](fakewebgl2renderingcontext.md#framebuffer)
-* [FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_alpha_size)
-* [FRAMEBUFFER_ATTACHMENT_BLUE_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_blue_size)
-* [FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING](fakewebgl2renderingcontext.md#framebuffer_attachment_color_encoding)
-* [FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE](fakewebgl2renderingcontext.md#framebuffer_attachment_component_type)
-* [FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_depth_size)
-* [FRAMEBUFFER_ATTACHMENT_GREEN_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_green_size)
-* [FRAMEBUFFER_ATTACHMENT_OBJECT_NAME](fakewebgl2renderingcontext.md#framebuffer_attachment_object_name)
-* [FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE](fakewebgl2renderingcontext.md#framebuffer_attachment_object_type)
-* [FRAMEBUFFER_ATTACHMENT_RED_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_red_size)
-* [FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_stencil_size)
-* [FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE](fakewebgl2renderingcontext.md#framebuffer_attachment_texture_cube_map_face)
-* [FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER](fakewebgl2renderingcontext.md#framebuffer_attachment_texture_layer)
-* [FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL](fakewebgl2renderingcontext.md#framebuffer_attachment_texture_level)
-* [FRAMEBUFFER_BINDING](fakewebgl2renderingcontext.md#framebuffer_binding)
-* [FRAMEBUFFER_COMPLETE](fakewebgl2renderingcontext.md#framebuffer_complete)
-* [FRAMEBUFFER_DEFAULT](fakewebgl2renderingcontext.md#framebuffer_default)
-* [FRAMEBUFFER_INCOMPLETE_ATTACHMENT](fakewebgl2renderingcontext.md#framebuffer_incomplete_attachment)
-* [FRAMEBUFFER_INCOMPLETE_DIMENSIONS](fakewebgl2renderingcontext.md#framebuffer_incomplete_dimensions)
-* [FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT](fakewebgl2renderingcontext.md#framebuffer_incomplete_missing_attachment)
-* [FRAMEBUFFER_INCOMPLETE_MULTISAMPLE](fakewebgl2renderingcontext.md#framebuffer_incomplete_multisample)
-* [FRAMEBUFFER_UNSUPPORTED](fakewebgl2renderingcontext.md#framebuffer_unsupported)
-* [FRONT](fakewebgl2renderingcontext.md#front)
-* [FRONT_AND_BACK](fakewebgl2renderingcontext.md#front_and_back)
-* [FRONT_FACE](fakewebgl2renderingcontext.md#front_face)
-* [FUNC_ADD](fakewebgl2renderingcontext.md#func_add)
-* [FUNC_REVERSE_SUBTRACT](fakewebgl2renderingcontext.md#func_reverse_subtract)
-* [FUNC_SUBTRACT](fakewebgl2renderingcontext.md#func_subtract)
-* [GENERATE_MIPMAP_HINT](fakewebgl2renderingcontext.md#generate_mipmap_hint)
-* [GEQUAL](fakewebgl2renderingcontext.md#gequal)
-* [GREATER](fakewebgl2renderingcontext.md#greater)
-* [GREEN_BITS](fakewebgl2renderingcontext.md#green_bits)
-* [HALF_FLOAT](fakewebgl2renderingcontext.md#half_float)
-* [HIGH_FLOAT](fakewebgl2renderingcontext.md#high_float)
-* [HIGH_INT](fakewebgl2renderingcontext.md#high_int)
-* [IMPLEMENTATION_COLOR_READ_FORMAT](fakewebgl2renderingcontext.md#implementation_color_read_format)
-* [IMPLEMENTATION_COLOR_READ_TYPE](fakewebgl2renderingcontext.md#implementation_color_read_type)
-* [INCR](fakewebgl2renderingcontext.md#incr)
-* [INCR_WRAP](fakewebgl2renderingcontext.md#incr_wrap)
-* [INT](fakewebgl2renderingcontext.md#int)
-* [INTERLEAVED_ATTRIBS](fakewebgl2renderingcontext.md#interleaved_attribs)
-* [INT_2_10_10_10_REV](fakewebgl2renderingcontext.md#int_2_10_10_10_rev)
-* [INT_SAMPLER_2D](fakewebgl2renderingcontext.md#int_sampler_2d)
-* [INT_SAMPLER_2D_ARRAY](fakewebgl2renderingcontext.md#int_sampler_2d_array)
-* [INT_SAMPLER_3D](fakewebgl2renderingcontext.md#int_sampler_3d)
-* [INT_SAMPLER_CUBE](fakewebgl2renderingcontext.md#int_sampler_cube)
-* [INT_VEC2](fakewebgl2renderingcontext.md#int_vec2)
-* [INT_VEC3](fakewebgl2renderingcontext.md#int_vec3)
-* [INT_VEC4](fakewebgl2renderingcontext.md#int_vec4)
-* [INVALID_ENUM](fakewebgl2renderingcontext.md#invalid_enum)
-* [INVALID_FRAMEBUFFER_OPERATION](fakewebgl2renderingcontext.md#invalid_framebuffer_operation)
-* [INVALID_INDEX](fakewebgl2renderingcontext.md#invalid_index)
-* [INVALID_OPERATION](fakewebgl2renderingcontext.md#invalid_operation)
-* [INVALID_VALUE](fakewebgl2renderingcontext.md#invalid_value)
-* [INVERT](fakewebgl2renderingcontext.md#invert)
-* [KEEP](fakewebgl2renderingcontext.md#keep)
-* [LEQUAL](fakewebgl2renderingcontext.md#lequal)
-* [LESS](fakewebgl2renderingcontext.md#less)
-* [LINEAR](fakewebgl2renderingcontext.md#linear)
-* [LINEAR_MIPMAP_LINEAR](fakewebgl2renderingcontext.md#linear_mipmap_linear)
-* [LINEAR_MIPMAP_NEAREST](fakewebgl2renderingcontext.md#linear_mipmap_nearest)
-* [LINES](fakewebgl2renderingcontext.md#lines)
-* [LINE_LOOP](fakewebgl2renderingcontext.md#line_loop)
-* [LINE_STRIP](fakewebgl2renderingcontext.md#line_strip)
-* [LINE_WIDTH](fakewebgl2renderingcontext.md#line_width)
-* [LINK_STATUS](fakewebgl2renderingcontext.md#link_status)
-* [LOW_FLOAT](fakewebgl2renderingcontext.md#low_float)
-* [LOW_INT](fakewebgl2renderingcontext.md#low_int)
-* [LUMINANCE](fakewebgl2renderingcontext.md#luminance)
-* [LUMINANCE_ALPHA](fakewebgl2renderingcontext.md#luminance_alpha)
-* [MAX](fakewebgl2renderingcontext.md#max)
-* [MAX_3D_TEXTURE_SIZE](fakewebgl2renderingcontext.md#max_3d_texture_size)
-* [MAX_ARRAY_TEXTURE_LAYERS](fakewebgl2renderingcontext.md#max_array_texture_layers)
-* [MAX_CLIENT_WAIT_TIMEOUT_WEBGL](fakewebgl2renderingcontext.md#max_client_wait_timeout_webgl)
-* [MAX_COLOR_ATTACHMENTS](fakewebgl2renderingcontext.md#max_color_attachments)
-* [MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS](fakewebgl2renderingcontext.md#max_combined_fragment_uniform_components)
-* [MAX_COMBINED_TEXTURE_IMAGE_UNITS](fakewebgl2renderingcontext.md#max_combined_texture_image_units)
-* [MAX_COMBINED_UNIFORM_BLOCKS](fakewebgl2renderingcontext.md#max_combined_uniform_blocks)
-* [MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS](fakewebgl2renderingcontext.md#max_combined_vertex_uniform_components)
-* [MAX_CUBE_MAP_TEXTURE_SIZE](fakewebgl2renderingcontext.md#max_cube_map_texture_size)
-* [MAX_DRAW_BUFFERS](fakewebgl2renderingcontext.md#max_draw_buffers)
-* [MAX_ELEMENTS_INDICES](fakewebgl2renderingcontext.md#max_elements_indices)
-* [MAX_ELEMENTS_VERTICES](fakewebgl2renderingcontext.md#max_elements_vertices)
-* [MAX_ELEMENT_INDEX](fakewebgl2renderingcontext.md#max_element_index)
-* [MAX_FRAGMENT_INPUT_COMPONENTS](fakewebgl2renderingcontext.md#max_fragment_input_components)
-* [MAX_FRAGMENT_UNIFORM_BLOCKS](fakewebgl2renderingcontext.md#max_fragment_uniform_blocks)
-* [MAX_FRAGMENT_UNIFORM_COMPONENTS](fakewebgl2renderingcontext.md#max_fragment_uniform_components)
-* [MAX_FRAGMENT_UNIFORM_VECTORS](fakewebgl2renderingcontext.md#max_fragment_uniform_vectors)
-* [MAX_PROGRAM_TEXEL_OFFSET](fakewebgl2renderingcontext.md#max_program_texel_offset)
-* [MAX_RENDERBUFFER_SIZE](fakewebgl2renderingcontext.md#max_renderbuffer_size)
-* [MAX_SAMPLES](fakewebgl2renderingcontext.md#max_samples)
-* [MAX_SERVER_WAIT_TIMEOUT](fakewebgl2renderingcontext.md#max_server_wait_timeout)
-* [MAX_TEXTURE_IMAGE_UNITS](fakewebgl2renderingcontext.md#max_texture_image_units)
-* [MAX_TEXTURE_LOD_BIAS](fakewebgl2renderingcontext.md#max_texture_lod_bias)
-* [MAX_TEXTURE_SIZE](fakewebgl2renderingcontext.md#max_texture_size)
-* [MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS](fakewebgl2renderingcontext.md#max_transform_feedback_interleaved_components)
-* [MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS](fakewebgl2renderingcontext.md#max_transform_feedback_separate_attribs)
-* [MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS](fakewebgl2renderingcontext.md#max_transform_feedback_separate_components)
-* [MAX_UNIFORM_BLOCK_SIZE](fakewebgl2renderingcontext.md#max_uniform_block_size)
-* [MAX_UNIFORM_BUFFER_BINDINGS](fakewebgl2renderingcontext.md#max_uniform_buffer_bindings)
-* [MAX_VARYING_COMPONENTS](fakewebgl2renderingcontext.md#max_varying_components)
-* [MAX_VARYING_VECTORS](fakewebgl2renderingcontext.md#max_varying_vectors)
-* [MAX_VERTEX_ATTRIBS](fakewebgl2renderingcontext.md#max_vertex_attribs)
-* [MAX_VERTEX_OUTPUT_COMPONENTS](fakewebgl2renderingcontext.md#max_vertex_output_components)
-* [MAX_VERTEX_TEXTURE_IMAGE_UNITS](fakewebgl2renderingcontext.md#max_vertex_texture_image_units)
-* [MAX_VERTEX_UNIFORM_BLOCKS](fakewebgl2renderingcontext.md#max_vertex_uniform_blocks)
-* [MAX_VERTEX_UNIFORM_COMPONENTS](fakewebgl2renderingcontext.md#max_vertex_uniform_components)
-* [MAX_VERTEX_UNIFORM_VECTORS](fakewebgl2renderingcontext.md#max_vertex_uniform_vectors)
-* [MAX_VIEWPORT_DIMS](fakewebgl2renderingcontext.md#max_viewport_dims)
-* [MEDIUM_FLOAT](fakewebgl2renderingcontext.md#medium_float)
-* [MEDIUM_INT](fakewebgl2renderingcontext.md#medium_int)
-* [MIN](fakewebgl2renderingcontext.md#min)
-* [MIN_PROGRAM_TEXEL_OFFSET](fakewebgl2renderingcontext.md#min_program_texel_offset)
-* [MIRRORED_REPEAT](fakewebgl2renderingcontext.md#mirrored_repeat)
-* [NEAREST](fakewebgl2renderingcontext.md#nearest)
-* [NEAREST_MIPMAP_LINEAR](fakewebgl2renderingcontext.md#nearest_mipmap_linear)
-* [NEAREST_MIPMAP_NEAREST](fakewebgl2renderingcontext.md#nearest_mipmap_nearest)
-* [NEVER](fakewebgl2renderingcontext.md#never)
-* [NICEST](fakewebgl2renderingcontext.md#nicest)
-* [NONE](fakewebgl2renderingcontext.md#none)
-* [NOTEQUAL](fakewebgl2renderingcontext.md#notequal)
-* [NO_ERROR](fakewebgl2renderingcontext.md#no_error)
-* [OBJECT_TYPE](fakewebgl2renderingcontext.md#object_type)
-* [ONE](fakewebgl2renderingcontext.md#one)
-* [ONE_MINUS_CONSTANT_ALPHA](fakewebgl2renderingcontext.md#one_minus_constant_alpha)
-* [ONE_MINUS_CONSTANT_COLOR](fakewebgl2renderingcontext.md#one_minus_constant_color)
-* [ONE_MINUS_DST_ALPHA](fakewebgl2renderingcontext.md#one_minus_dst_alpha)
-* [ONE_MINUS_DST_COLOR](fakewebgl2renderingcontext.md#one_minus_dst_color)
-* [ONE_MINUS_SRC_ALPHA](fakewebgl2renderingcontext.md#one_minus_src_alpha)
-* [ONE_MINUS_SRC_COLOR](fakewebgl2renderingcontext.md#one_minus_src_color)
-* [OUT_OF_MEMORY](fakewebgl2renderingcontext.md#out_of_memory)
-* [PACK_ALIGNMENT](fakewebgl2renderingcontext.md#pack_alignment)
-* [PACK_ROW_LENGTH](fakewebgl2renderingcontext.md#pack_row_length)
-* [PACK_SKIP_PIXELS](fakewebgl2renderingcontext.md#pack_skip_pixels)
-* [PACK_SKIP_ROWS](fakewebgl2renderingcontext.md#pack_skip_rows)
-* [PIXEL_PACK_BUFFER](fakewebgl2renderingcontext.md#pixel_pack_buffer)
-* [PIXEL_PACK_BUFFER_BINDING](fakewebgl2renderingcontext.md#pixel_pack_buffer_binding)
-* [PIXEL_UNPACK_BUFFER](fakewebgl2renderingcontext.md#pixel_unpack_buffer)
-* [PIXEL_UNPACK_BUFFER_BINDING](fakewebgl2renderingcontext.md#pixel_unpack_buffer_binding)
-* [POINTS](fakewebgl2renderingcontext.md#points)
-* [POLYGON_OFFSET_FACTOR](fakewebgl2renderingcontext.md#polygon_offset_factor)
-* [POLYGON_OFFSET_FILL](fakewebgl2renderingcontext.md#polygon_offset_fill)
-* [POLYGON_OFFSET_UNITS](fakewebgl2renderingcontext.md#polygon_offset_units)
-* [QUERY_RESULT](fakewebgl2renderingcontext.md#query_result)
-* [QUERY_RESULT_AVAILABLE](fakewebgl2renderingcontext.md#query_result_available)
-* [R11F_G11F_B10F](fakewebgl2renderingcontext.md#r11f_g11f_b10f)
-* [R16F](fakewebgl2renderingcontext.md#r16f)
-* [R16I](fakewebgl2renderingcontext.md#r16i)
-* [R16UI](fakewebgl2renderingcontext.md#r16ui)
-* [R32F](fakewebgl2renderingcontext.md#r32f)
-* [R32I](fakewebgl2renderingcontext.md#r32i)
-* [R32UI](fakewebgl2renderingcontext.md#r32ui)
-* [R8](fakewebgl2renderingcontext.md#r8)
-* [R8I](fakewebgl2renderingcontext.md#r8i)
-* [R8UI](fakewebgl2renderingcontext.md#r8ui)
-* [R8_SNORM](fakewebgl2renderingcontext.md#r8_snorm)
-* [RASTERIZER_DISCARD](fakewebgl2renderingcontext.md#rasterizer_discard)
-* [READ_BUFFER](fakewebgl2renderingcontext.md#read_buffer)
-* [READ_FRAMEBUFFER](fakewebgl2renderingcontext.md#read_framebuffer)
-* [READ_FRAMEBUFFER_BINDING](fakewebgl2renderingcontext.md#read_framebuffer_binding)
-* [RED](fakewebgl2renderingcontext.md#red)
-* [RED_BITS](fakewebgl2renderingcontext.md#red_bits)
-* [RED_INTEGER](fakewebgl2renderingcontext.md#red_integer)
-* [RENDERBUFFER](fakewebgl2renderingcontext.md#renderbuffer)
-* [RENDERBUFFER_ALPHA_SIZE](fakewebgl2renderingcontext.md#renderbuffer_alpha_size)
-* [RENDERBUFFER_BINDING](fakewebgl2renderingcontext.md#renderbuffer_binding)
-* [RENDERBUFFER_BLUE_SIZE](fakewebgl2renderingcontext.md#renderbuffer_blue_size)
-* [RENDERBUFFER_DEPTH_SIZE](fakewebgl2renderingcontext.md#renderbuffer_depth_size)
-* [RENDERBUFFER_GREEN_SIZE](fakewebgl2renderingcontext.md#renderbuffer_green_size)
-* [RENDERBUFFER_HEIGHT](fakewebgl2renderingcontext.md#renderbuffer_height)
-* [RENDERBUFFER_INTERNAL_FORMAT](fakewebgl2renderingcontext.md#renderbuffer_internal_format)
-* [RENDERBUFFER_RED_SIZE](fakewebgl2renderingcontext.md#renderbuffer_red_size)
-* [RENDERBUFFER_SAMPLES](fakewebgl2renderingcontext.md#renderbuffer_samples)
-* [RENDERBUFFER_STENCIL_SIZE](fakewebgl2renderingcontext.md#renderbuffer_stencil_size)
-* [RENDERBUFFER_WIDTH](fakewebgl2renderingcontext.md#renderbuffer_width)
-* [RENDERER](fakewebgl2renderingcontext.md#renderer)
-* [REPEAT](fakewebgl2renderingcontext.md#repeat)
-* [REPLACE](fakewebgl2renderingcontext.md#replace)
-* [RG](fakewebgl2renderingcontext.md#rg)
-* [RG16F](fakewebgl2renderingcontext.md#rg16f)
-* [RG16I](fakewebgl2renderingcontext.md#rg16i)
-* [RG16UI](fakewebgl2renderingcontext.md#rg16ui)
-* [RG32F](fakewebgl2renderingcontext.md#rg32f)
-* [RG32I](fakewebgl2renderingcontext.md#rg32i)
-* [RG32UI](fakewebgl2renderingcontext.md#rg32ui)
-* [RG8](fakewebgl2renderingcontext.md#rg8)
-* [RG8I](fakewebgl2renderingcontext.md#rg8i)
-* [RG8UI](fakewebgl2renderingcontext.md#rg8ui)
-* [RG8_SNORM](fakewebgl2renderingcontext.md#rg8_snorm)
-* [RGB](fakewebgl2renderingcontext.md#rgb)
-* [RGB10_A2](fakewebgl2renderingcontext.md#rgb10_a2)
-* [RGB10_A2UI](fakewebgl2renderingcontext.md#rgb10_a2ui)
-* [RGB16F](fakewebgl2renderingcontext.md#rgb16f)
-* [RGB16I](fakewebgl2renderingcontext.md#rgb16i)
-* [RGB16UI](fakewebgl2renderingcontext.md#rgb16ui)
-* [RGB32F](fakewebgl2renderingcontext.md#rgb32f)
-* [RGB32I](fakewebgl2renderingcontext.md#rgb32i)
-* [RGB32UI](fakewebgl2renderingcontext.md#rgb32ui)
-* [RGB565](fakewebgl2renderingcontext.md#rgb565)
-* [RGB5_A1](fakewebgl2renderingcontext.md#rgb5_a1)
-* [RGB8](fakewebgl2renderingcontext.md#rgb8)
-* [RGB8I](fakewebgl2renderingcontext.md#rgb8i)
-* [RGB8UI](fakewebgl2renderingcontext.md#rgb8ui)
-* [RGB8_SNORM](fakewebgl2renderingcontext.md#rgb8_snorm)
-* [RGB9_E5](fakewebgl2renderingcontext.md#rgb9_e5)
-* [RGBA](fakewebgl2renderingcontext.md#rgba)
-* [RGBA16F](fakewebgl2renderingcontext.md#rgba16f)
-* [RGBA16I](fakewebgl2renderingcontext.md#rgba16i)
-* [RGBA16UI](fakewebgl2renderingcontext.md#rgba16ui)
-* [RGBA32F](fakewebgl2renderingcontext.md#rgba32f)
-* [RGBA32I](fakewebgl2renderingcontext.md#rgba32i)
-* [RGBA32UI](fakewebgl2renderingcontext.md#rgba32ui)
-* [RGBA4](fakewebgl2renderingcontext.md#rgba4)
-* [RGBA8](fakewebgl2renderingcontext.md#rgba8)
-* [RGBA8I](fakewebgl2renderingcontext.md#rgba8i)
-* [RGBA8UI](fakewebgl2renderingcontext.md#rgba8ui)
-* [RGBA8_SNORM](fakewebgl2renderingcontext.md#rgba8_snorm)
-* [RGBA_INTEGER](fakewebgl2renderingcontext.md#rgba_integer)
-* [RGB_INTEGER](fakewebgl2renderingcontext.md#rgb_integer)
-* [RG_INTEGER](fakewebgl2renderingcontext.md#rg_integer)
-* [SAMPLER_2D](fakewebgl2renderingcontext.md#sampler_2d)
-* [SAMPLER_2D_ARRAY](fakewebgl2renderingcontext.md#sampler_2d_array)
-* [SAMPLER_2D_ARRAY_SHADOW](fakewebgl2renderingcontext.md#sampler_2d_array_shadow)
-* [SAMPLER_2D_SHADOW](fakewebgl2renderingcontext.md#sampler_2d_shadow)
-* [SAMPLER_3D](fakewebgl2renderingcontext.md#sampler_3d)
-* [SAMPLER_BINDING](fakewebgl2renderingcontext.md#sampler_binding)
-* [SAMPLER_CUBE](fakewebgl2renderingcontext.md#sampler_cube)
-* [SAMPLER_CUBE_SHADOW](fakewebgl2renderingcontext.md#sampler_cube_shadow)
-* [SAMPLES](fakewebgl2renderingcontext.md#samples)
-* [SAMPLE_ALPHA_TO_COVERAGE](fakewebgl2renderingcontext.md#sample_alpha_to_coverage)
-* [SAMPLE_BUFFERS](fakewebgl2renderingcontext.md#sample_buffers)
-* [SAMPLE_COVERAGE](fakewebgl2renderingcontext.md#sample_coverage)
-* [SAMPLE_COVERAGE_INVERT](fakewebgl2renderingcontext.md#sample_coverage_invert)
-* [SAMPLE_COVERAGE_VALUE](fakewebgl2renderingcontext.md#sample_coverage_value)
-* [SCISSOR_BOX](fakewebgl2renderingcontext.md#scissor_box)
-* [SCISSOR_TEST](fakewebgl2renderingcontext.md#scissor_test)
-* [SEPARATE_ATTRIBS](fakewebgl2renderingcontext.md#separate_attribs)
-* [SHADER_TYPE](fakewebgl2renderingcontext.md#shader_type)
-* [SHADING_LANGUAGE_VERSION](fakewebgl2renderingcontext.md#shading_language_version)
-* [SHORT](fakewebgl2renderingcontext.md#short)
-* [SIGNALED](fakewebgl2renderingcontext.md#signaled)
-* [SIGNED_NORMALIZED](fakewebgl2renderingcontext.md#signed_normalized)
-* [SRC_ALPHA](fakewebgl2renderingcontext.md#src_alpha)
-* [SRC_ALPHA_SATURATE](fakewebgl2renderingcontext.md#src_alpha_saturate)
-* [SRC_COLOR](fakewebgl2renderingcontext.md#src_color)
-* [SRGB](fakewebgl2renderingcontext.md#srgb)
-* [SRGB8](fakewebgl2renderingcontext.md#srgb8)
-* [SRGB8_ALPHA8](fakewebgl2renderingcontext.md#srgb8_alpha8)
-* [STATIC_COPY](fakewebgl2renderingcontext.md#static_copy)
-* [STATIC_DRAW](fakewebgl2renderingcontext.md#static_draw)
-* [STATIC_READ](fakewebgl2renderingcontext.md#static_read)
-* [STENCIL](fakewebgl2renderingcontext.md#stencil)
-* [STENCIL_ATTACHMENT](fakewebgl2renderingcontext.md#stencil_attachment)
-* [STENCIL_BACK_FAIL](fakewebgl2renderingcontext.md#stencil_back_fail)
-* [STENCIL_BACK_FUNC](fakewebgl2renderingcontext.md#stencil_back_func)
-* [STENCIL_BACK_PASS_DEPTH_FAIL](fakewebgl2renderingcontext.md#stencil_back_pass_depth_fail)
-* [STENCIL_BACK_PASS_DEPTH_PASS](fakewebgl2renderingcontext.md#stencil_back_pass_depth_pass)
-* [STENCIL_BACK_REF](fakewebgl2renderingcontext.md#stencil_back_ref)
-* [STENCIL_BACK_VALUE_MASK](fakewebgl2renderingcontext.md#stencil_back_value_mask)
-* [STENCIL_BACK_WRITEMASK](fakewebgl2renderingcontext.md#stencil_back_writemask)
-* [STENCIL_BITS](fakewebgl2renderingcontext.md#stencil_bits)
-* [STENCIL_BUFFER_BIT](fakewebgl2renderingcontext.md#stencil_buffer_bit)
-* [STENCIL_CLEAR_VALUE](fakewebgl2renderingcontext.md#stencil_clear_value)
-* [STENCIL_FAIL](fakewebgl2renderingcontext.md#stencil_fail)
-* [STENCIL_FUNC](fakewebgl2renderingcontext.md#stencil_func)
-* [STENCIL_INDEX8](fakewebgl2renderingcontext.md#stencil_index8)
-* [STENCIL_PASS_DEPTH_FAIL](fakewebgl2renderingcontext.md#stencil_pass_depth_fail)
-* [STENCIL_PASS_DEPTH_PASS](fakewebgl2renderingcontext.md#stencil_pass_depth_pass)
-* [STENCIL_REF](fakewebgl2renderingcontext.md#stencil_ref)
-* [STENCIL_TEST](fakewebgl2renderingcontext.md#stencil_test)
-* [STENCIL_VALUE_MASK](fakewebgl2renderingcontext.md#stencil_value_mask)
-* [STENCIL_WRITEMASK](fakewebgl2renderingcontext.md#stencil_writemask)
-* [STREAM_COPY](fakewebgl2renderingcontext.md#stream_copy)
-* [STREAM_DRAW](fakewebgl2renderingcontext.md#stream_draw)
-* [STREAM_READ](fakewebgl2renderingcontext.md#stream_read)
-* [SUBPIXEL_BITS](fakewebgl2renderingcontext.md#subpixel_bits)
-* [SYNC_CONDITION](fakewebgl2renderingcontext.md#sync_condition)
-* [SYNC_FENCE](fakewebgl2renderingcontext.md#sync_fence)
-* [SYNC_FLAGS](fakewebgl2renderingcontext.md#sync_flags)
-* [SYNC_FLUSH_COMMANDS_BIT](fakewebgl2renderingcontext.md#sync_flush_commands_bit)
-* [SYNC_GPU_COMMANDS_COMPLETE](fakewebgl2renderingcontext.md#sync_gpu_commands_complete)
-* [SYNC_STATUS](fakewebgl2renderingcontext.md#sync_status)
-* [TEXTURE](fakewebgl2renderingcontext.md#texture)
-* [TEXTURE0](fakewebgl2renderingcontext.md#texture0)
-* [TEXTURE1](fakewebgl2renderingcontext.md#texture1)
-* [TEXTURE10](fakewebgl2renderingcontext.md#texture10)
-* [TEXTURE11](fakewebgl2renderingcontext.md#texture11)
-* [TEXTURE12](fakewebgl2renderingcontext.md#texture12)
-* [TEXTURE13](fakewebgl2renderingcontext.md#texture13)
-* [TEXTURE14](fakewebgl2renderingcontext.md#texture14)
-* [TEXTURE15](fakewebgl2renderingcontext.md#texture15)
-* [TEXTURE16](fakewebgl2renderingcontext.md#texture16)
-* [TEXTURE17](fakewebgl2renderingcontext.md#texture17)
-* [TEXTURE18](fakewebgl2renderingcontext.md#texture18)
-* [TEXTURE19](fakewebgl2renderingcontext.md#texture19)
-* [TEXTURE2](fakewebgl2renderingcontext.md#texture2)
-* [TEXTURE20](fakewebgl2renderingcontext.md#texture20)
-* [TEXTURE21](fakewebgl2renderingcontext.md#texture21)
-* [TEXTURE22](fakewebgl2renderingcontext.md#texture22)
-* [TEXTURE23](fakewebgl2renderingcontext.md#texture23)
-* [TEXTURE24](fakewebgl2renderingcontext.md#texture24)
-* [TEXTURE25](fakewebgl2renderingcontext.md#texture25)
-* [TEXTURE26](fakewebgl2renderingcontext.md#texture26)
-* [TEXTURE27](fakewebgl2renderingcontext.md#texture27)
-* [TEXTURE28](fakewebgl2renderingcontext.md#texture28)
-* [TEXTURE29](fakewebgl2renderingcontext.md#texture29)
-* [TEXTURE3](fakewebgl2renderingcontext.md#texture3)
-* [TEXTURE30](fakewebgl2renderingcontext.md#texture30)
-* [TEXTURE31](fakewebgl2renderingcontext.md#texture31)
-* [TEXTURE4](fakewebgl2renderingcontext.md#texture4)
-* [TEXTURE5](fakewebgl2renderingcontext.md#texture5)
-* [TEXTURE6](fakewebgl2renderingcontext.md#texture6)
-* [TEXTURE7](fakewebgl2renderingcontext.md#texture7)
-* [TEXTURE8](fakewebgl2renderingcontext.md#texture8)
-* [TEXTURE9](fakewebgl2renderingcontext.md#texture9)
-* [TEXTURE_2D](fakewebgl2renderingcontext.md#texture_2d)
-* [TEXTURE_2D_ARRAY](fakewebgl2renderingcontext.md#texture_2d_array)
-* [TEXTURE_3D](fakewebgl2renderingcontext.md#texture_3d)
-* [TEXTURE_BASE_LEVEL](fakewebgl2renderingcontext.md#texture_base_level)
-* [TEXTURE_BINDING_2D](fakewebgl2renderingcontext.md#texture_binding_2d)
-* [TEXTURE_BINDING_2D_ARRAY](fakewebgl2renderingcontext.md#texture_binding_2d_array)
-* [TEXTURE_BINDING_3D](fakewebgl2renderingcontext.md#texture_binding_3d)
-* [TEXTURE_BINDING_CUBE_MAP](fakewebgl2renderingcontext.md#texture_binding_cube_map)
-* [TEXTURE_COMPARE_FUNC](fakewebgl2renderingcontext.md#texture_compare_func)
-* [TEXTURE_COMPARE_MODE](fakewebgl2renderingcontext.md#texture_compare_mode)
-* [TEXTURE_CUBE_MAP](fakewebgl2renderingcontext.md#texture_cube_map)
-* [TEXTURE_CUBE_MAP_NEGATIVE_X](fakewebgl2renderingcontext.md#texture_cube_map_negative_x)
-* [TEXTURE_CUBE_MAP_NEGATIVE_Y](fakewebgl2renderingcontext.md#texture_cube_map_negative_y)
-* [TEXTURE_CUBE_MAP_NEGATIVE_Z](fakewebgl2renderingcontext.md#texture_cube_map_negative_z)
-* [TEXTURE_CUBE_MAP_POSITIVE_X](fakewebgl2renderingcontext.md#texture_cube_map_positive_x)
-* [TEXTURE_CUBE_MAP_POSITIVE_Y](fakewebgl2renderingcontext.md#texture_cube_map_positive_y)
-* [TEXTURE_CUBE_MAP_POSITIVE_Z](fakewebgl2renderingcontext.md#texture_cube_map_positive_z)
-* [TEXTURE_IMMUTABLE_FORMAT](fakewebgl2renderingcontext.md#texture_immutable_format)
-* [TEXTURE_IMMUTABLE_LEVELS](fakewebgl2renderingcontext.md#texture_immutable_levels)
-* [TEXTURE_MAG_FILTER](fakewebgl2renderingcontext.md#texture_mag_filter)
-* [TEXTURE_MAX_LEVEL](fakewebgl2renderingcontext.md#texture_max_level)
-* [TEXTURE_MAX_LOD](fakewebgl2renderingcontext.md#texture_max_lod)
-* [TEXTURE_MIN_FILTER](fakewebgl2renderingcontext.md#texture_min_filter)
-* [TEXTURE_MIN_LOD](fakewebgl2renderingcontext.md#texture_min_lod)
-* [TEXTURE_WRAP_R](fakewebgl2renderingcontext.md#texture_wrap_r)
-* [TEXTURE_WRAP_S](fakewebgl2renderingcontext.md#texture_wrap_s)
-* [TEXTURE_WRAP_T](fakewebgl2renderingcontext.md#texture_wrap_t)
-* [TIMEOUT_EXPIRED](fakewebgl2renderingcontext.md#timeout_expired)
-* [TIMEOUT_IGNORED](fakewebgl2renderingcontext.md#timeout_ignored)
-* [TRANSFORM_FEEDBACK](fakewebgl2renderingcontext.md#transform_feedback)
-* [TRANSFORM_FEEDBACK_ACTIVE](fakewebgl2renderingcontext.md#transform_feedback_active)
-* [TRANSFORM_FEEDBACK_BINDING](fakewebgl2renderingcontext.md#transform_feedback_binding)
-* [TRANSFORM_FEEDBACK_BUFFER](fakewebgl2renderingcontext.md#transform_feedback_buffer)
-* [TRANSFORM_FEEDBACK_BUFFER_BINDING](fakewebgl2renderingcontext.md#transform_feedback_buffer_binding)
-* [TRANSFORM_FEEDBACK_BUFFER_MODE](fakewebgl2renderingcontext.md#transform_feedback_buffer_mode)
-* [TRANSFORM_FEEDBACK_BUFFER_SIZE](fakewebgl2renderingcontext.md#transform_feedback_buffer_size)
-* [TRANSFORM_FEEDBACK_BUFFER_START](fakewebgl2renderingcontext.md#transform_feedback_buffer_start)
-* [TRANSFORM_FEEDBACK_PAUSED](fakewebgl2renderingcontext.md#transform_feedback_paused)
-* [TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN](fakewebgl2renderingcontext.md#transform_feedback_primitives_written)
-* [TRANSFORM_FEEDBACK_VARYINGS](fakewebgl2renderingcontext.md#transform_feedback_varyings)
-* [TRIANGLES](fakewebgl2renderingcontext.md#triangles)
-* [TRIANGLE_FAN](fakewebgl2renderingcontext.md#triangle_fan)
-* [TRIANGLE_STRIP](fakewebgl2renderingcontext.md#triangle_strip)
-* [UNIFORM_ARRAY_STRIDE](fakewebgl2renderingcontext.md#uniform_array_stride)
-* [UNIFORM_BLOCK_ACTIVE_UNIFORMS](fakewebgl2renderingcontext.md#uniform_block_active_uniforms)
-* [UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES](fakewebgl2renderingcontext.md#uniform_block_active_uniform_indices)
-* [UNIFORM_BLOCK_BINDING](fakewebgl2renderingcontext.md#uniform_block_binding)
-* [UNIFORM_BLOCK_DATA_SIZE](fakewebgl2renderingcontext.md#uniform_block_data_size)
-* [UNIFORM_BLOCK_INDEX](fakewebgl2renderingcontext.md#uniform_block_index)
-* [UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER](fakewebgl2renderingcontext.md#uniform_block_referenced_by_fragment_shader)
-* [UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER](fakewebgl2renderingcontext.md#uniform_block_referenced_by_vertex_shader)
-* [UNIFORM_BUFFER](fakewebgl2renderingcontext.md#uniform_buffer)
-* [UNIFORM_BUFFER_BINDING](fakewebgl2renderingcontext.md#uniform_buffer_binding)
-* [UNIFORM_BUFFER_OFFSET_ALIGNMENT](fakewebgl2renderingcontext.md#uniform_buffer_offset_alignment)
-* [UNIFORM_BUFFER_SIZE](fakewebgl2renderingcontext.md#uniform_buffer_size)
-* [UNIFORM_BUFFER_START](fakewebgl2renderingcontext.md#uniform_buffer_start)
-* [UNIFORM_IS_ROW_MAJOR](fakewebgl2renderingcontext.md#uniform_is_row_major)
-* [UNIFORM_MATRIX_STRIDE](fakewebgl2renderingcontext.md#uniform_matrix_stride)
-* [UNIFORM_OFFSET](fakewebgl2renderingcontext.md#uniform_offset)
-* [UNIFORM_SIZE](fakewebgl2renderingcontext.md#uniform_size)
-* [UNIFORM_TYPE](fakewebgl2renderingcontext.md#uniform_type)
-* [UNPACK_ALIGNMENT](fakewebgl2renderingcontext.md#unpack_alignment)
-* [UNPACK_COLORSPACE_CONVERSION_WEBGL](fakewebgl2renderingcontext.md#unpack_colorspace_conversion_webgl)
-* [UNPACK_FLIP_Y_WEBGL](fakewebgl2renderingcontext.md#unpack_flip_y_webgl)
-* [UNPACK_IMAGE_HEIGHT](fakewebgl2renderingcontext.md#unpack_image_height)
-* [UNPACK_PREMULTIPLY_ALPHA_WEBGL](fakewebgl2renderingcontext.md#unpack_premultiply_alpha_webgl)
-* [UNPACK_ROW_LENGTH](fakewebgl2renderingcontext.md#unpack_row_length)
-* [UNPACK_SKIP_IMAGES](fakewebgl2renderingcontext.md#unpack_skip_images)
-* [UNPACK_SKIP_PIXELS](fakewebgl2renderingcontext.md#unpack_skip_pixels)
-* [UNPACK_SKIP_ROWS](fakewebgl2renderingcontext.md#unpack_skip_rows)
-* [UNSIGNALED](fakewebgl2renderingcontext.md#unsignaled)
-* [UNSIGNED_BYTE](fakewebgl2renderingcontext.md#unsigned_byte)
-* [UNSIGNED_INT](fakewebgl2renderingcontext.md#unsigned_int)
-* [UNSIGNED_INT_10F_11F_11F_REV](fakewebgl2renderingcontext.md#unsigned_int_10f_11f_11f_rev)
-* [UNSIGNED_INT_24_8](fakewebgl2renderingcontext.md#unsigned_int_24_8)
-* [UNSIGNED_INT_2_10_10_10_REV](fakewebgl2renderingcontext.md#unsigned_int_2_10_10_10_rev)
-* [UNSIGNED_INT_5_9_9_9_REV](fakewebgl2renderingcontext.md#unsigned_int_5_9_9_9_rev)
-* [UNSIGNED_INT_SAMPLER_2D](fakewebgl2renderingcontext.md#unsigned_int_sampler_2d)
-* [UNSIGNED_INT_SAMPLER_2D_ARRAY](fakewebgl2renderingcontext.md#unsigned_int_sampler_2d_array)
-* [UNSIGNED_INT_SAMPLER_3D](fakewebgl2renderingcontext.md#unsigned_int_sampler_3d)
-* [UNSIGNED_INT_SAMPLER_CUBE](fakewebgl2renderingcontext.md#unsigned_int_sampler_cube)
-* [UNSIGNED_INT_VEC2](fakewebgl2renderingcontext.md#unsigned_int_vec2)
-* [UNSIGNED_INT_VEC3](fakewebgl2renderingcontext.md#unsigned_int_vec3)
-* [UNSIGNED_INT_VEC4](fakewebgl2renderingcontext.md#unsigned_int_vec4)
-* [UNSIGNED_NORMALIZED](fakewebgl2renderingcontext.md#unsigned_normalized)
-* [UNSIGNED_SHORT](fakewebgl2renderingcontext.md#unsigned_short)
-* [UNSIGNED_SHORT_4_4_4_4](fakewebgl2renderingcontext.md#unsigned_short_4_4_4_4)
-* [UNSIGNED_SHORT_5_5_5_1](fakewebgl2renderingcontext.md#unsigned_short_5_5_5_1)
-* [UNSIGNED_SHORT_5_6_5](fakewebgl2renderingcontext.md#unsigned_short_5_6_5)
-* [VALIDATE_STATUS](fakewebgl2renderingcontext.md#validate_status)
-* [VENDOR](fakewebgl2renderingcontext.md#vendor)
-* [VERSION](fakewebgl2renderingcontext.md#version)
-* [VERTEX_ARRAY_BINDING](fakewebgl2renderingcontext.md#vertex_array_binding)
-* [VERTEX_ATTRIB_ARRAY_BUFFER_BINDING](fakewebgl2renderingcontext.md#vertex_attrib_array_buffer_binding)
-* [VERTEX_ATTRIB_ARRAY_DIVISOR](fakewebgl2renderingcontext.md#vertex_attrib_array_divisor)
-* [VERTEX_ATTRIB_ARRAY_ENABLED](fakewebgl2renderingcontext.md#vertex_attrib_array_enabled)
-* [VERTEX_ATTRIB_ARRAY_INTEGER](fakewebgl2renderingcontext.md#vertex_attrib_array_integer)
-* [VERTEX_ATTRIB_ARRAY_NORMALIZED](fakewebgl2renderingcontext.md#vertex_attrib_array_normalized)
-* [VERTEX_ATTRIB_ARRAY_POINTER](fakewebgl2renderingcontext.md#vertex_attrib_array_pointer)
-* [VERTEX_ATTRIB_ARRAY_SIZE](fakewebgl2renderingcontext.md#vertex_attrib_array_size)
-* [VERTEX_ATTRIB_ARRAY_STRIDE](fakewebgl2renderingcontext.md#vertex_attrib_array_stride)
-* [VERTEX_ATTRIB_ARRAY_TYPE](fakewebgl2renderingcontext.md#vertex_attrib_array_type)
-* [VERTEX_SHADER](fakewebgl2renderingcontext.md#vertex_shader)
-* [VIEWPORT](fakewebgl2renderingcontext.md#viewport)
-* [WAIT_FAILED](fakewebgl2renderingcontext.md#wait_failed)
-* [ZERO](fakewebgl2renderingcontext.md#zero)
-* [canvas](fakewebgl2renderingcontext.md#canvas)
-* [drawingBufferHeight](fakewebgl2renderingcontext.md#drawingbufferheight)
-* [drawingBufferWidth](fakewebgl2renderingcontext.md#drawingbufferwidth)
+- [ACTIVE\_ATTRIBUTES](fakewebgl2renderingcontext.md#active_attributes)
+- [ACTIVE\_TEXTURE](fakewebgl2renderingcontext.md#active_texture)
+- [ACTIVE\_UNIFORMS](fakewebgl2renderingcontext.md#active_uniforms)
+- [ACTIVE\_UNIFORM\_BLOCKS](fakewebgl2renderingcontext.md#active_uniform_blocks)
+- [ALIASED\_LINE\_WIDTH\_RANGE](fakewebgl2renderingcontext.md#aliased_line_width_range)
+- [ALIASED\_POINT\_SIZE\_RANGE](fakewebgl2renderingcontext.md#aliased_point_size_range)
+- [ALPHA](fakewebgl2renderingcontext.md#alpha)
+- [ALPHA\_BITS](fakewebgl2renderingcontext.md#alpha_bits)
+- [ALREADY\_SIGNALED](fakewebgl2renderingcontext.md#already_signaled)
+- [ALWAYS](fakewebgl2renderingcontext.md#always)
+- [ANY\_SAMPLES\_PASSED](fakewebgl2renderingcontext.md#any_samples_passed)
+- [ANY\_SAMPLES\_PASSED\_CONSERVATIVE](fakewebgl2renderingcontext.md#any_samples_passed_conservative)
+- [ARRAY\_BUFFER](fakewebgl2renderingcontext.md#array_buffer)
+- [ARRAY\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#array_buffer_binding)
+- [ATTACHED\_SHADERS](fakewebgl2renderingcontext.md#attached_shaders)
+- [BACK](fakewebgl2renderingcontext.md#back)
+- [BLEND](fakewebgl2renderingcontext.md#blend)
+- [BLEND\_COLOR](fakewebgl2renderingcontext.md#blend_color)
+- [BLEND\_DST\_ALPHA](fakewebgl2renderingcontext.md#blend_dst_alpha)
+- [BLEND\_DST\_RGB](fakewebgl2renderingcontext.md#blend_dst_rgb)
+- [BLEND\_EQUATION](fakewebgl2renderingcontext.md#blend_equation)
+- [BLEND\_EQUATION\_ALPHA](fakewebgl2renderingcontext.md#blend_equation_alpha)
+- [BLEND\_EQUATION\_RGB](fakewebgl2renderingcontext.md#blend_equation_rgb)
+- [BLEND\_SRC\_ALPHA](fakewebgl2renderingcontext.md#blend_src_alpha)
+- [BLEND\_SRC\_RGB](fakewebgl2renderingcontext.md#blend_src_rgb)
+- [BLUE\_BITS](fakewebgl2renderingcontext.md#blue_bits)
+- [BOOL](fakewebgl2renderingcontext.md#bool)
+- [BOOL\_VEC2](fakewebgl2renderingcontext.md#bool_vec2)
+- [BOOL\_VEC3](fakewebgl2renderingcontext.md#bool_vec3)
+- [BOOL\_VEC4](fakewebgl2renderingcontext.md#bool_vec4)
+- [BROWSER\_DEFAULT\_WEBGL](fakewebgl2renderingcontext.md#browser_default_webgl)
+- [BUFFER\_SIZE](fakewebgl2renderingcontext.md#buffer_size)
+- [BUFFER\_USAGE](fakewebgl2renderingcontext.md#buffer_usage)
+- [BYTE](fakewebgl2renderingcontext.md#byte)
+- [CCW](fakewebgl2renderingcontext.md#ccw)
+- [CLAMP\_TO\_EDGE](fakewebgl2renderingcontext.md#clamp_to_edge)
+- [COLOR](fakewebgl2renderingcontext.md#color)
+- [COLOR\_ATTACHMENT0](fakewebgl2renderingcontext.md#color_attachment0)
+- [COLOR\_ATTACHMENT1](fakewebgl2renderingcontext.md#color_attachment1)
+- [COLOR\_ATTACHMENT10](fakewebgl2renderingcontext.md#color_attachment10)
+- [COLOR\_ATTACHMENT11](fakewebgl2renderingcontext.md#color_attachment11)
+- [COLOR\_ATTACHMENT12](fakewebgl2renderingcontext.md#color_attachment12)
+- [COLOR\_ATTACHMENT13](fakewebgl2renderingcontext.md#color_attachment13)
+- [COLOR\_ATTACHMENT14](fakewebgl2renderingcontext.md#color_attachment14)
+- [COLOR\_ATTACHMENT15](fakewebgl2renderingcontext.md#color_attachment15)
+- [COLOR\_ATTACHMENT2](fakewebgl2renderingcontext.md#color_attachment2)
+- [COLOR\_ATTACHMENT3](fakewebgl2renderingcontext.md#color_attachment3)
+- [COLOR\_ATTACHMENT4](fakewebgl2renderingcontext.md#color_attachment4)
+- [COLOR\_ATTACHMENT5](fakewebgl2renderingcontext.md#color_attachment5)
+- [COLOR\_ATTACHMENT6](fakewebgl2renderingcontext.md#color_attachment6)
+- [COLOR\_ATTACHMENT7](fakewebgl2renderingcontext.md#color_attachment7)
+- [COLOR\_ATTACHMENT8](fakewebgl2renderingcontext.md#color_attachment8)
+- [COLOR\_ATTACHMENT9](fakewebgl2renderingcontext.md#color_attachment9)
+- [COLOR\_BUFFER\_BIT](fakewebgl2renderingcontext.md#color_buffer_bit)
+- [COLOR\_CLEAR\_VALUE](fakewebgl2renderingcontext.md#color_clear_value)
+- [COLOR\_WRITEMASK](fakewebgl2renderingcontext.md#color_writemask)
+- [COMPARE\_REF\_TO\_TEXTURE](fakewebgl2renderingcontext.md#compare_ref_to_texture)
+- [COMPILE\_STATUS](fakewebgl2renderingcontext.md#compile_status)
+- [COMPRESSED\_TEXTURE\_FORMATS](fakewebgl2renderingcontext.md#compressed_texture_formats)
+- [CONDITION\_SATISFIED](fakewebgl2renderingcontext.md#condition_satisfied)
+- [CONSTANT\_ALPHA](fakewebgl2renderingcontext.md#constant_alpha)
+- [CONSTANT\_COLOR](fakewebgl2renderingcontext.md#constant_color)
+- [CONTEXT\_LOST\_WEBGL](fakewebgl2renderingcontext.md#context_lost_webgl)
+- [COPY\_READ\_BUFFER](fakewebgl2renderingcontext.md#copy_read_buffer)
+- [COPY\_READ\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#copy_read_buffer_binding)
+- [COPY\_WRITE\_BUFFER](fakewebgl2renderingcontext.md#copy_write_buffer)
+- [COPY\_WRITE\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#copy_write_buffer_binding)
+- [CULL\_FACE](fakewebgl2renderingcontext.md#cull_face)
+- [CULL\_FACE\_MODE](fakewebgl2renderingcontext.md#cull_face_mode)
+- [CURRENT\_PROGRAM](fakewebgl2renderingcontext.md#current_program)
+- [CURRENT\_QUERY](fakewebgl2renderingcontext.md#current_query)
+- [CURRENT\_VERTEX\_ATTRIB](fakewebgl2renderingcontext.md#current_vertex_attrib)
+- [CW](fakewebgl2renderingcontext.md#cw)
+- [DECR](fakewebgl2renderingcontext.md#decr)
+- [DECR\_WRAP](fakewebgl2renderingcontext.md#decr_wrap)
+- [DELETE\_STATUS](fakewebgl2renderingcontext.md#delete_status)
+- [DEPTH](fakewebgl2renderingcontext.md#depth)
+- [DEPTH24\_STENCIL8](fakewebgl2renderingcontext.md#depth24_stencil8)
+- [DEPTH32F\_STENCIL8](fakewebgl2renderingcontext.md#depth32f_stencil8)
+- [DEPTH\_ATTACHMENT](fakewebgl2renderingcontext.md#depth_attachment)
+- [DEPTH\_BITS](fakewebgl2renderingcontext.md#depth_bits)
+- [DEPTH\_BUFFER\_BIT](fakewebgl2renderingcontext.md#depth_buffer_bit)
+- [DEPTH\_CLEAR\_VALUE](fakewebgl2renderingcontext.md#depth_clear_value)
+- [DEPTH\_COMPONENT](fakewebgl2renderingcontext.md#depth_component)
+- [DEPTH\_COMPONENT16](fakewebgl2renderingcontext.md#depth_component16)
+- [DEPTH\_COMPONENT24](fakewebgl2renderingcontext.md#depth_component24)
+- [DEPTH\_COMPONENT32F](fakewebgl2renderingcontext.md#depth_component32f)
+- [DEPTH\_FUNC](fakewebgl2renderingcontext.md#depth_func)
+- [DEPTH\_RANGE](fakewebgl2renderingcontext.md#depth_range)
+- [DEPTH\_STENCIL](fakewebgl2renderingcontext.md#depth_stencil)
+- [DEPTH\_STENCIL\_ATTACHMENT](fakewebgl2renderingcontext.md#depth_stencil_attachment)
+- [DEPTH\_TEST](fakewebgl2renderingcontext.md#depth_test)
+- [DEPTH\_WRITEMASK](fakewebgl2renderingcontext.md#depth_writemask)
+- [DITHER](fakewebgl2renderingcontext.md#dither)
+- [DONT\_CARE](fakewebgl2renderingcontext.md#dont_care)
+- [DRAW\_BUFFER0](fakewebgl2renderingcontext.md#draw_buffer0)
+- [DRAW\_BUFFER1](fakewebgl2renderingcontext.md#draw_buffer1)
+- [DRAW\_BUFFER10](fakewebgl2renderingcontext.md#draw_buffer10)
+- [DRAW\_BUFFER11](fakewebgl2renderingcontext.md#draw_buffer11)
+- [DRAW\_BUFFER12](fakewebgl2renderingcontext.md#draw_buffer12)
+- [DRAW\_BUFFER13](fakewebgl2renderingcontext.md#draw_buffer13)
+- [DRAW\_BUFFER14](fakewebgl2renderingcontext.md#draw_buffer14)
+- [DRAW\_BUFFER15](fakewebgl2renderingcontext.md#draw_buffer15)
+- [DRAW\_BUFFER2](fakewebgl2renderingcontext.md#draw_buffer2)
+- [DRAW\_BUFFER3](fakewebgl2renderingcontext.md#draw_buffer3)
+- [DRAW\_BUFFER4](fakewebgl2renderingcontext.md#draw_buffer4)
+- [DRAW\_BUFFER5](fakewebgl2renderingcontext.md#draw_buffer5)
+- [DRAW\_BUFFER6](fakewebgl2renderingcontext.md#draw_buffer6)
+- [DRAW\_BUFFER7](fakewebgl2renderingcontext.md#draw_buffer7)
+- [DRAW\_BUFFER8](fakewebgl2renderingcontext.md#draw_buffer8)
+- [DRAW\_BUFFER9](fakewebgl2renderingcontext.md#draw_buffer9)
+- [DRAW\_FRAMEBUFFER](fakewebgl2renderingcontext.md#draw_framebuffer)
+- [DRAW\_FRAMEBUFFER\_BINDING](fakewebgl2renderingcontext.md#draw_framebuffer_binding)
+- [DST\_ALPHA](fakewebgl2renderingcontext.md#dst_alpha)
+- [DST\_COLOR](fakewebgl2renderingcontext.md#dst_color)
+- [DYNAMIC\_COPY](fakewebgl2renderingcontext.md#dynamic_copy)
+- [DYNAMIC\_DRAW](fakewebgl2renderingcontext.md#dynamic_draw)
+- [DYNAMIC\_READ](fakewebgl2renderingcontext.md#dynamic_read)
+- [ELEMENT\_ARRAY\_BUFFER](fakewebgl2renderingcontext.md#element_array_buffer)
+- [ELEMENT\_ARRAY\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#element_array_buffer_binding)
+- [EQUAL](fakewebgl2renderingcontext.md#equal)
+- [FASTEST](fakewebgl2renderingcontext.md#fastest)
+- [FLOAT](fakewebgl2renderingcontext.md#float)
+- [FLOAT\_32\_UNSIGNED\_INT\_24\_8\_REV](fakewebgl2renderingcontext.md#float_32_unsigned_int_24_8_rev)
+- [FLOAT\_MAT2](fakewebgl2renderingcontext.md#float_mat2)
+- [FLOAT\_MAT2x3](fakewebgl2renderingcontext.md#float_mat2x3)
+- [FLOAT\_MAT2x4](fakewebgl2renderingcontext.md#float_mat2x4)
+- [FLOAT\_MAT3](fakewebgl2renderingcontext.md#float_mat3)
+- [FLOAT\_MAT3x2](fakewebgl2renderingcontext.md#float_mat3x2)
+- [FLOAT\_MAT3x4](fakewebgl2renderingcontext.md#float_mat3x4)
+- [FLOAT\_MAT4](fakewebgl2renderingcontext.md#float_mat4)
+- [FLOAT\_MAT4x2](fakewebgl2renderingcontext.md#float_mat4x2)
+- [FLOAT\_MAT4x3](fakewebgl2renderingcontext.md#float_mat4x3)
+- [FLOAT\_VEC2](fakewebgl2renderingcontext.md#float_vec2)
+- [FLOAT\_VEC3](fakewebgl2renderingcontext.md#float_vec3)
+- [FLOAT\_VEC4](fakewebgl2renderingcontext.md#float_vec4)
+- [FRAGMENT\_SHADER](fakewebgl2renderingcontext.md#fragment_shader)
+- [FRAGMENT\_SHADER\_DERIVATIVE\_HINT](fakewebgl2renderingcontext.md#fragment_shader_derivative_hint)
+- [FRAMEBUFFER](fakewebgl2renderingcontext.md#framebuffer)
+- [FRAMEBUFFER\_ATTACHMENT\_ALPHA\_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_alpha_size)
+- [FRAMEBUFFER\_ATTACHMENT\_BLUE\_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_blue_size)
+- [FRAMEBUFFER\_ATTACHMENT\_COLOR\_ENCODING](fakewebgl2renderingcontext.md#framebuffer_attachment_color_encoding)
+- [FRAMEBUFFER\_ATTACHMENT\_COMPONENT\_TYPE](fakewebgl2renderingcontext.md#framebuffer_attachment_component_type)
+- [FRAMEBUFFER\_ATTACHMENT\_DEPTH\_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_depth_size)
+- [FRAMEBUFFER\_ATTACHMENT\_GREEN\_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_green_size)
+- [FRAMEBUFFER\_ATTACHMENT\_OBJECT\_NAME](fakewebgl2renderingcontext.md#framebuffer_attachment_object_name)
+- [FRAMEBUFFER\_ATTACHMENT\_OBJECT\_TYPE](fakewebgl2renderingcontext.md#framebuffer_attachment_object_type)
+- [FRAMEBUFFER\_ATTACHMENT\_RED\_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_red_size)
+- [FRAMEBUFFER\_ATTACHMENT\_STENCIL\_SIZE](fakewebgl2renderingcontext.md#framebuffer_attachment_stencil_size)
+- [FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_CUBE\_MAP\_FACE](fakewebgl2renderingcontext.md#framebuffer_attachment_texture_cube_map_face)
+- [FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_LAYER](fakewebgl2renderingcontext.md#framebuffer_attachment_texture_layer)
+- [FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_LEVEL](fakewebgl2renderingcontext.md#framebuffer_attachment_texture_level)
+- [FRAMEBUFFER\_BINDING](fakewebgl2renderingcontext.md#framebuffer_binding)
+- [FRAMEBUFFER\_COMPLETE](fakewebgl2renderingcontext.md#framebuffer_complete)
+- [FRAMEBUFFER\_DEFAULT](fakewebgl2renderingcontext.md#framebuffer_default)
+- [FRAMEBUFFER\_INCOMPLETE\_ATTACHMENT](fakewebgl2renderingcontext.md#framebuffer_incomplete_attachment)
+- [FRAMEBUFFER\_INCOMPLETE\_DIMENSIONS](fakewebgl2renderingcontext.md#framebuffer_incomplete_dimensions)
+- [FRAMEBUFFER\_INCOMPLETE\_MISSING\_ATTACHMENT](fakewebgl2renderingcontext.md#framebuffer_incomplete_missing_attachment)
+- [FRAMEBUFFER\_INCOMPLETE\_MULTISAMPLE](fakewebgl2renderingcontext.md#framebuffer_incomplete_multisample)
+- [FRAMEBUFFER\_UNSUPPORTED](fakewebgl2renderingcontext.md#framebuffer_unsupported)
+- [FRONT](fakewebgl2renderingcontext.md#front)
+- [FRONT\_AND\_BACK](fakewebgl2renderingcontext.md#front_and_back)
+- [FRONT\_FACE](fakewebgl2renderingcontext.md#front_face)
+- [FUNC\_ADD](fakewebgl2renderingcontext.md#func_add)
+- [FUNC\_REVERSE\_SUBTRACT](fakewebgl2renderingcontext.md#func_reverse_subtract)
+- [FUNC\_SUBTRACT](fakewebgl2renderingcontext.md#func_subtract)
+- [GENERATE\_MIPMAP\_HINT](fakewebgl2renderingcontext.md#generate_mipmap_hint)
+- [GEQUAL](fakewebgl2renderingcontext.md#gequal)
+- [GREATER](fakewebgl2renderingcontext.md#greater)
+- [GREEN\_BITS](fakewebgl2renderingcontext.md#green_bits)
+- [HALF\_FLOAT](fakewebgl2renderingcontext.md#half_float)
+- [HIGH\_FLOAT](fakewebgl2renderingcontext.md#high_float)
+- [HIGH\_INT](fakewebgl2renderingcontext.md#high_int)
+- [IMPLEMENTATION\_COLOR\_READ\_FORMAT](fakewebgl2renderingcontext.md#implementation_color_read_format)
+- [IMPLEMENTATION\_COLOR\_READ\_TYPE](fakewebgl2renderingcontext.md#implementation_color_read_type)
+- [INCR](fakewebgl2renderingcontext.md#incr)
+- [INCR\_WRAP](fakewebgl2renderingcontext.md#incr_wrap)
+- [INT](fakewebgl2renderingcontext.md#int)
+- [INTERLEAVED\_ATTRIBS](fakewebgl2renderingcontext.md#interleaved_attribs)
+- [INT\_2\_10\_10\_10\_REV](fakewebgl2renderingcontext.md#int_2_10_10_10_rev)
+- [INT\_SAMPLER\_2D](fakewebgl2renderingcontext.md#int_sampler_2d)
+- [INT\_SAMPLER\_2D\_ARRAY](fakewebgl2renderingcontext.md#int_sampler_2d_array)
+- [INT\_SAMPLER\_3D](fakewebgl2renderingcontext.md#int_sampler_3d)
+- [INT\_SAMPLER\_CUBE](fakewebgl2renderingcontext.md#int_sampler_cube)
+- [INT\_VEC2](fakewebgl2renderingcontext.md#int_vec2)
+- [INT\_VEC3](fakewebgl2renderingcontext.md#int_vec3)
+- [INT\_VEC4](fakewebgl2renderingcontext.md#int_vec4)
+- [INVALID\_ENUM](fakewebgl2renderingcontext.md#invalid_enum)
+- [INVALID\_FRAMEBUFFER\_OPERATION](fakewebgl2renderingcontext.md#invalid_framebuffer_operation)
+- [INVALID\_INDEX](fakewebgl2renderingcontext.md#invalid_index)
+- [INVALID\_OPERATION](fakewebgl2renderingcontext.md#invalid_operation)
+- [INVALID\_VALUE](fakewebgl2renderingcontext.md#invalid_value)
+- [INVERT](fakewebgl2renderingcontext.md#invert)
+- [KEEP](fakewebgl2renderingcontext.md#keep)
+- [LEQUAL](fakewebgl2renderingcontext.md#lequal)
+- [LESS](fakewebgl2renderingcontext.md#less)
+- [LINEAR](fakewebgl2renderingcontext.md#linear)
+- [LINEAR\_MIPMAP\_LINEAR](fakewebgl2renderingcontext.md#linear_mipmap_linear)
+- [LINEAR\_MIPMAP\_NEAREST](fakewebgl2renderingcontext.md#linear_mipmap_nearest)
+- [LINES](fakewebgl2renderingcontext.md#lines)
+- [LINE\_LOOP](fakewebgl2renderingcontext.md#line_loop)
+- [LINE\_STRIP](fakewebgl2renderingcontext.md#line_strip)
+- [LINE\_WIDTH](fakewebgl2renderingcontext.md#line_width)
+- [LINK\_STATUS](fakewebgl2renderingcontext.md#link_status)
+- [LOW\_FLOAT](fakewebgl2renderingcontext.md#low_float)
+- [LOW\_INT](fakewebgl2renderingcontext.md#low_int)
+- [LUMINANCE](fakewebgl2renderingcontext.md#luminance)
+- [LUMINANCE\_ALPHA](fakewebgl2renderingcontext.md#luminance_alpha)
+- [MAX](fakewebgl2renderingcontext.md#max)
+- [MAX\_3D\_TEXTURE\_SIZE](fakewebgl2renderingcontext.md#max_3d_texture_size)
+- [MAX\_ARRAY\_TEXTURE\_LAYERS](fakewebgl2renderingcontext.md#max_array_texture_layers)
+- [MAX\_CLIENT\_WAIT\_TIMEOUT\_WEBGL](fakewebgl2renderingcontext.md#max_client_wait_timeout_webgl)
+- [MAX\_COLOR\_ATTACHMENTS](fakewebgl2renderingcontext.md#max_color_attachments)
+- [MAX\_COMBINED\_FRAGMENT\_UNIFORM\_COMPONENTS](fakewebgl2renderingcontext.md#max_combined_fragment_uniform_components)
+- [MAX\_COMBINED\_TEXTURE\_IMAGE\_UNITS](fakewebgl2renderingcontext.md#max_combined_texture_image_units)
+- [MAX\_COMBINED\_UNIFORM\_BLOCKS](fakewebgl2renderingcontext.md#max_combined_uniform_blocks)
+- [MAX\_COMBINED\_VERTEX\_UNIFORM\_COMPONENTS](fakewebgl2renderingcontext.md#max_combined_vertex_uniform_components)
+- [MAX\_CUBE\_MAP\_TEXTURE\_SIZE](fakewebgl2renderingcontext.md#max_cube_map_texture_size)
+- [MAX\_DRAW\_BUFFERS](fakewebgl2renderingcontext.md#max_draw_buffers)
+- [MAX\_ELEMENTS\_INDICES](fakewebgl2renderingcontext.md#max_elements_indices)
+- [MAX\_ELEMENTS\_VERTICES](fakewebgl2renderingcontext.md#max_elements_vertices)
+- [MAX\_ELEMENT\_INDEX](fakewebgl2renderingcontext.md#max_element_index)
+- [MAX\_FRAGMENT\_INPUT\_COMPONENTS](fakewebgl2renderingcontext.md#max_fragment_input_components)
+- [MAX\_FRAGMENT\_UNIFORM\_BLOCKS](fakewebgl2renderingcontext.md#max_fragment_uniform_blocks)
+- [MAX\_FRAGMENT\_UNIFORM\_COMPONENTS](fakewebgl2renderingcontext.md#max_fragment_uniform_components)
+- [MAX\_FRAGMENT\_UNIFORM\_VECTORS](fakewebgl2renderingcontext.md#max_fragment_uniform_vectors)
+- [MAX\_PROGRAM\_TEXEL\_OFFSET](fakewebgl2renderingcontext.md#max_program_texel_offset)
+- [MAX\_RENDERBUFFER\_SIZE](fakewebgl2renderingcontext.md#max_renderbuffer_size)
+- [MAX\_SAMPLES](fakewebgl2renderingcontext.md#max_samples)
+- [MAX\_SERVER\_WAIT\_TIMEOUT](fakewebgl2renderingcontext.md#max_server_wait_timeout)
+- [MAX\_TEXTURE\_IMAGE\_UNITS](fakewebgl2renderingcontext.md#max_texture_image_units)
+- [MAX\_TEXTURE\_LOD\_BIAS](fakewebgl2renderingcontext.md#max_texture_lod_bias)
+- [MAX\_TEXTURE\_SIZE](fakewebgl2renderingcontext.md#max_texture_size)
+- [MAX\_TRANSFORM\_FEEDBACK\_INTERLEAVED\_COMPONENTS](fakewebgl2renderingcontext.md#max_transform_feedback_interleaved_components)
+- [MAX\_TRANSFORM\_FEEDBACK\_SEPARATE\_ATTRIBS](fakewebgl2renderingcontext.md#max_transform_feedback_separate_attribs)
+- [MAX\_TRANSFORM\_FEEDBACK\_SEPARATE\_COMPONENTS](fakewebgl2renderingcontext.md#max_transform_feedback_separate_components)
+- [MAX\_UNIFORM\_BLOCK\_SIZE](fakewebgl2renderingcontext.md#max_uniform_block_size)
+- [MAX\_UNIFORM\_BUFFER\_BINDINGS](fakewebgl2renderingcontext.md#max_uniform_buffer_bindings)
+- [MAX\_VARYING\_COMPONENTS](fakewebgl2renderingcontext.md#max_varying_components)
+- [MAX\_VARYING\_VECTORS](fakewebgl2renderingcontext.md#max_varying_vectors)
+- [MAX\_VERTEX\_ATTRIBS](fakewebgl2renderingcontext.md#max_vertex_attribs)
+- [MAX\_VERTEX\_OUTPUT\_COMPONENTS](fakewebgl2renderingcontext.md#max_vertex_output_components)
+- [MAX\_VERTEX\_TEXTURE\_IMAGE\_UNITS](fakewebgl2renderingcontext.md#max_vertex_texture_image_units)
+- [MAX\_VERTEX\_UNIFORM\_BLOCKS](fakewebgl2renderingcontext.md#max_vertex_uniform_blocks)
+- [MAX\_VERTEX\_UNIFORM\_COMPONENTS](fakewebgl2renderingcontext.md#max_vertex_uniform_components)
+- [MAX\_VERTEX\_UNIFORM\_VECTORS](fakewebgl2renderingcontext.md#max_vertex_uniform_vectors)
+- [MAX\_VIEWPORT\_DIMS](fakewebgl2renderingcontext.md#max_viewport_dims)
+- [MEDIUM\_FLOAT](fakewebgl2renderingcontext.md#medium_float)
+- [MEDIUM\_INT](fakewebgl2renderingcontext.md#medium_int)
+- [MIN](fakewebgl2renderingcontext.md#min)
+- [MIN\_PROGRAM\_TEXEL\_OFFSET](fakewebgl2renderingcontext.md#min_program_texel_offset)
+- [MIRRORED\_REPEAT](fakewebgl2renderingcontext.md#mirrored_repeat)
+- [NEAREST](fakewebgl2renderingcontext.md#nearest)
+- [NEAREST\_MIPMAP\_LINEAR](fakewebgl2renderingcontext.md#nearest_mipmap_linear)
+- [NEAREST\_MIPMAP\_NEAREST](fakewebgl2renderingcontext.md#nearest_mipmap_nearest)
+- [NEVER](fakewebgl2renderingcontext.md#never)
+- [NICEST](fakewebgl2renderingcontext.md#nicest)
+- [NONE](fakewebgl2renderingcontext.md#none)
+- [NOTEQUAL](fakewebgl2renderingcontext.md#notequal)
+- [NO\_ERROR](fakewebgl2renderingcontext.md#no_error)
+- [OBJECT\_TYPE](fakewebgl2renderingcontext.md#object_type)
+- [ONE](fakewebgl2renderingcontext.md#one)
+- [ONE\_MINUS\_CONSTANT\_ALPHA](fakewebgl2renderingcontext.md#one_minus_constant_alpha)
+- [ONE\_MINUS\_CONSTANT\_COLOR](fakewebgl2renderingcontext.md#one_minus_constant_color)
+- [ONE\_MINUS\_DST\_ALPHA](fakewebgl2renderingcontext.md#one_minus_dst_alpha)
+- [ONE\_MINUS\_DST\_COLOR](fakewebgl2renderingcontext.md#one_minus_dst_color)
+- [ONE\_MINUS\_SRC\_ALPHA](fakewebgl2renderingcontext.md#one_minus_src_alpha)
+- [ONE\_MINUS\_SRC\_COLOR](fakewebgl2renderingcontext.md#one_minus_src_color)
+- [OUT\_OF\_MEMORY](fakewebgl2renderingcontext.md#out_of_memory)
+- [PACK\_ALIGNMENT](fakewebgl2renderingcontext.md#pack_alignment)
+- [PACK\_ROW\_LENGTH](fakewebgl2renderingcontext.md#pack_row_length)
+- [PACK\_SKIP\_PIXELS](fakewebgl2renderingcontext.md#pack_skip_pixels)
+- [PACK\_SKIP\_ROWS](fakewebgl2renderingcontext.md#pack_skip_rows)
+- [PIXEL\_PACK\_BUFFER](fakewebgl2renderingcontext.md#pixel_pack_buffer)
+- [PIXEL\_PACK\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#pixel_pack_buffer_binding)
+- [PIXEL\_UNPACK\_BUFFER](fakewebgl2renderingcontext.md#pixel_unpack_buffer)
+- [PIXEL\_UNPACK\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#pixel_unpack_buffer_binding)
+- [POINTS](fakewebgl2renderingcontext.md#points)
+- [POLYGON\_OFFSET\_FACTOR](fakewebgl2renderingcontext.md#polygon_offset_factor)
+- [POLYGON\_OFFSET\_FILL](fakewebgl2renderingcontext.md#polygon_offset_fill)
+- [POLYGON\_OFFSET\_UNITS](fakewebgl2renderingcontext.md#polygon_offset_units)
+- [QUERY\_RESULT](fakewebgl2renderingcontext.md#query_result)
+- [QUERY\_RESULT\_AVAILABLE](fakewebgl2renderingcontext.md#query_result_available)
+- [R11F\_G11F\_B10F](fakewebgl2renderingcontext.md#r11f_g11f_b10f)
+- [R16F](fakewebgl2renderingcontext.md#r16f)
+- [R16I](fakewebgl2renderingcontext.md#r16i)
+- [R16UI](fakewebgl2renderingcontext.md#r16ui)
+- [R32F](fakewebgl2renderingcontext.md#r32f)
+- [R32I](fakewebgl2renderingcontext.md#r32i)
+- [R32UI](fakewebgl2renderingcontext.md#r32ui)
+- [R8](fakewebgl2renderingcontext.md#r8)
+- [R8I](fakewebgl2renderingcontext.md#r8i)
+- [R8UI](fakewebgl2renderingcontext.md#r8ui)
+- [R8\_SNORM](fakewebgl2renderingcontext.md#r8_snorm)
+- [RASTERIZER\_DISCARD](fakewebgl2renderingcontext.md#rasterizer_discard)
+- [READ\_BUFFER](fakewebgl2renderingcontext.md#read_buffer)
+- [READ\_FRAMEBUFFER](fakewebgl2renderingcontext.md#read_framebuffer)
+- [READ\_FRAMEBUFFER\_BINDING](fakewebgl2renderingcontext.md#read_framebuffer_binding)
+- [RED](fakewebgl2renderingcontext.md#red)
+- [RED\_BITS](fakewebgl2renderingcontext.md#red_bits)
+- [RED\_INTEGER](fakewebgl2renderingcontext.md#red_integer)
+- [RENDERBUFFER](fakewebgl2renderingcontext.md#renderbuffer)
+- [RENDERBUFFER\_ALPHA\_SIZE](fakewebgl2renderingcontext.md#renderbuffer_alpha_size)
+- [RENDERBUFFER\_BINDING](fakewebgl2renderingcontext.md#renderbuffer_binding)
+- [RENDERBUFFER\_BLUE\_SIZE](fakewebgl2renderingcontext.md#renderbuffer_blue_size)
+- [RENDERBUFFER\_DEPTH\_SIZE](fakewebgl2renderingcontext.md#renderbuffer_depth_size)
+- [RENDERBUFFER\_GREEN\_SIZE](fakewebgl2renderingcontext.md#renderbuffer_green_size)
+- [RENDERBUFFER\_HEIGHT](fakewebgl2renderingcontext.md#renderbuffer_height)
+- [RENDERBUFFER\_INTERNAL\_FORMAT](fakewebgl2renderingcontext.md#renderbuffer_internal_format)
+- [RENDERBUFFER\_RED\_SIZE](fakewebgl2renderingcontext.md#renderbuffer_red_size)
+- [RENDERBUFFER\_SAMPLES](fakewebgl2renderingcontext.md#renderbuffer_samples)
+- [RENDERBUFFER\_STENCIL\_SIZE](fakewebgl2renderingcontext.md#renderbuffer_stencil_size)
+- [RENDERBUFFER\_WIDTH](fakewebgl2renderingcontext.md#renderbuffer_width)
+- [RENDERER](fakewebgl2renderingcontext.md#renderer)
+- [REPEAT](fakewebgl2renderingcontext.md#repeat)
+- [REPLACE](fakewebgl2renderingcontext.md#replace)
+- [RG](fakewebgl2renderingcontext.md#rg)
+- [RG16F](fakewebgl2renderingcontext.md#rg16f)
+- [RG16I](fakewebgl2renderingcontext.md#rg16i)
+- [RG16UI](fakewebgl2renderingcontext.md#rg16ui)
+- [RG32F](fakewebgl2renderingcontext.md#rg32f)
+- [RG32I](fakewebgl2renderingcontext.md#rg32i)
+- [RG32UI](fakewebgl2renderingcontext.md#rg32ui)
+- [RG8](fakewebgl2renderingcontext.md#rg8)
+- [RG8I](fakewebgl2renderingcontext.md#rg8i)
+- [RG8UI](fakewebgl2renderingcontext.md#rg8ui)
+- [RG8\_SNORM](fakewebgl2renderingcontext.md#rg8_snorm)
+- [RGB](fakewebgl2renderingcontext.md#rgb)
+- [RGB10\_A2](fakewebgl2renderingcontext.md#rgb10_a2)
+- [RGB10\_A2UI](fakewebgl2renderingcontext.md#rgb10_a2ui)
+- [RGB16F](fakewebgl2renderingcontext.md#rgb16f)
+- [RGB16I](fakewebgl2renderingcontext.md#rgb16i)
+- [RGB16UI](fakewebgl2renderingcontext.md#rgb16ui)
+- [RGB32F](fakewebgl2renderingcontext.md#rgb32f)
+- [RGB32I](fakewebgl2renderingcontext.md#rgb32i)
+- [RGB32UI](fakewebgl2renderingcontext.md#rgb32ui)
+- [RGB565](fakewebgl2renderingcontext.md#rgb565)
+- [RGB5\_A1](fakewebgl2renderingcontext.md#rgb5_a1)
+- [RGB8](fakewebgl2renderingcontext.md#rgb8)
+- [RGB8I](fakewebgl2renderingcontext.md#rgb8i)
+- [RGB8UI](fakewebgl2renderingcontext.md#rgb8ui)
+- [RGB8\_SNORM](fakewebgl2renderingcontext.md#rgb8_snorm)
+- [RGB9\_E5](fakewebgl2renderingcontext.md#rgb9_e5)
+- [RGBA](fakewebgl2renderingcontext.md#rgba)
+- [RGBA16F](fakewebgl2renderingcontext.md#rgba16f)
+- [RGBA16I](fakewebgl2renderingcontext.md#rgba16i)
+- [RGBA16UI](fakewebgl2renderingcontext.md#rgba16ui)
+- [RGBA32F](fakewebgl2renderingcontext.md#rgba32f)
+- [RGBA32I](fakewebgl2renderingcontext.md#rgba32i)
+- [RGBA32UI](fakewebgl2renderingcontext.md#rgba32ui)
+- [RGBA4](fakewebgl2renderingcontext.md#rgba4)
+- [RGBA8](fakewebgl2renderingcontext.md#rgba8)
+- [RGBA8I](fakewebgl2renderingcontext.md#rgba8i)
+- [RGBA8UI](fakewebgl2renderingcontext.md#rgba8ui)
+- [RGBA8\_SNORM](fakewebgl2renderingcontext.md#rgba8_snorm)
+- [RGBA\_INTEGER](fakewebgl2renderingcontext.md#rgba_integer)
+- [RGB\_INTEGER](fakewebgl2renderingcontext.md#rgb_integer)
+- [RG\_INTEGER](fakewebgl2renderingcontext.md#rg_integer)
+- [SAMPLER\_2D](fakewebgl2renderingcontext.md#sampler_2d)
+- [SAMPLER\_2D\_ARRAY](fakewebgl2renderingcontext.md#sampler_2d_array)
+- [SAMPLER\_2D\_ARRAY\_SHADOW](fakewebgl2renderingcontext.md#sampler_2d_array_shadow)
+- [SAMPLER\_2D\_SHADOW](fakewebgl2renderingcontext.md#sampler_2d_shadow)
+- [SAMPLER\_3D](fakewebgl2renderingcontext.md#sampler_3d)
+- [SAMPLER\_BINDING](fakewebgl2renderingcontext.md#sampler_binding)
+- [SAMPLER\_CUBE](fakewebgl2renderingcontext.md#sampler_cube)
+- [SAMPLER\_CUBE\_SHADOW](fakewebgl2renderingcontext.md#sampler_cube_shadow)
+- [SAMPLES](fakewebgl2renderingcontext.md#samples)
+- [SAMPLE\_ALPHA\_TO\_COVERAGE](fakewebgl2renderingcontext.md#sample_alpha_to_coverage)
+- [SAMPLE\_BUFFERS](fakewebgl2renderingcontext.md#sample_buffers)
+- [SAMPLE\_COVERAGE](fakewebgl2renderingcontext.md#sample_coverage)
+- [SAMPLE\_COVERAGE\_INVERT](fakewebgl2renderingcontext.md#sample_coverage_invert)
+- [SAMPLE\_COVERAGE\_VALUE](fakewebgl2renderingcontext.md#sample_coverage_value)
+- [SCISSOR\_BOX](fakewebgl2renderingcontext.md#scissor_box)
+- [SCISSOR\_TEST](fakewebgl2renderingcontext.md#scissor_test)
+- [SEPARATE\_ATTRIBS](fakewebgl2renderingcontext.md#separate_attribs)
+- [SHADER\_TYPE](fakewebgl2renderingcontext.md#shader_type)
+- [SHADING\_LANGUAGE\_VERSION](fakewebgl2renderingcontext.md#shading_language_version)
+- [SHORT](fakewebgl2renderingcontext.md#short)
+- [SIGNALED](fakewebgl2renderingcontext.md#signaled)
+- [SIGNED\_NORMALIZED](fakewebgl2renderingcontext.md#signed_normalized)
+- [SRC\_ALPHA](fakewebgl2renderingcontext.md#src_alpha)
+- [SRC\_ALPHA\_SATURATE](fakewebgl2renderingcontext.md#src_alpha_saturate)
+- [SRC\_COLOR](fakewebgl2renderingcontext.md#src_color)
+- [SRGB](fakewebgl2renderingcontext.md#srgb)
+- [SRGB8](fakewebgl2renderingcontext.md#srgb8)
+- [SRGB8\_ALPHA8](fakewebgl2renderingcontext.md#srgb8_alpha8)
+- [STATIC\_COPY](fakewebgl2renderingcontext.md#static_copy)
+- [STATIC\_DRAW](fakewebgl2renderingcontext.md#static_draw)
+- [STATIC\_READ](fakewebgl2renderingcontext.md#static_read)
+- [STENCIL](fakewebgl2renderingcontext.md#stencil)
+- [STENCIL\_ATTACHMENT](fakewebgl2renderingcontext.md#stencil_attachment)
+- [STENCIL\_BACK\_FAIL](fakewebgl2renderingcontext.md#stencil_back_fail)
+- [STENCIL\_BACK\_FUNC](fakewebgl2renderingcontext.md#stencil_back_func)
+- [STENCIL\_BACK\_PASS\_DEPTH\_FAIL](fakewebgl2renderingcontext.md#stencil_back_pass_depth_fail)
+- [STENCIL\_BACK\_PASS\_DEPTH\_PASS](fakewebgl2renderingcontext.md#stencil_back_pass_depth_pass)
+- [STENCIL\_BACK\_REF](fakewebgl2renderingcontext.md#stencil_back_ref)
+- [STENCIL\_BACK\_VALUE\_MASK](fakewebgl2renderingcontext.md#stencil_back_value_mask)
+- [STENCIL\_BACK\_WRITEMASK](fakewebgl2renderingcontext.md#stencil_back_writemask)
+- [STENCIL\_BITS](fakewebgl2renderingcontext.md#stencil_bits)
+- [STENCIL\_BUFFER\_BIT](fakewebgl2renderingcontext.md#stencil_buffer_bit)
+- [STENCIL\_CLEAR\_VALUE](fakewebgl2renderingcontext.md#stencil_clear_value)
+- [STENCIL\_FAIL](fakewebgl2renderingcontext.md#stencil_fail)
+- [STENCIL\_FUNC](fakewebgl2renderingcontext.md#stencil_func)
+- [STENCIL\_INDEX8](fakewebgl2renderingcontext.md#stencil_index8)
+- [STENCIL\_PASS\_DEPTH\_FAIL](fakewebgl2renderingcontext.md#stencil_pass_depth_fail)
+- [STENCIL\_PASS\_DEPTH\_PASS](fakewebgl2renderingcontext.md#stencil_pass_depth_pass)
+- [STENCIL\_REF](fakewebgl2renderingcontext.md#stencil_ref)
+- [STENCIL\_TEST](fakewebgl2renderingcontext.md#stencil_test)
+- [STENCIL\_VALUE\_MASK](fakewebgl2renderingcontext.md#stencil_value_mask)
+- [STENCIL\_WRITEMASK](fakewebgl2renderingcontext.md#stencil_writemask)
+- [STREAM\_COPY](fakewebgl2renderingcontext.md#stream_copy)
+- [STREAM\_DRAW](fakewebgl2renderingcontext.md#stream_draw)
+- [STREAM\_READ](fakewebgl2renderingcontext.md#stream_read)
+- [SUBPIXEL\_BITS](fakewebgl2renderingcontext.md#subpixel_bits)
+- [SYNC\_CONDITION](fakewebgl2renderingcontext.md#sync_condition)
+- [SYNC\_FENCE](fakewebgl2renderingcontext.md#sync_fence)
+- [SYNC\_FLAGS](fakewebgl2renderingcontext.md#sync_flags)
+- [SYNC\_FLUSH\_COMMANDS\_BIT](fakewebgl2renderingcontext.md#sync_flush_commands_bit)
+- [SYNC\_GPU\_COMMANDS\_COMPLETE](fakewebgl2renderingcontext.md#sync_gpu_commands_complete)
+- [SYNC\_STATUS](fakewebgl2renderingcontext.md#sync_status)
+- [TEXTURE](fakewebgl2renderingcontext.md#texture)
+- [TEXTURE0](fakewebgl2renderingcontext.md#texture0)
+- [TEXTURE1](fakewebgl2renderingcontext.md#texture1)
+- [TEXTURE10](fakewebgl2renderingcontext.md#texture10)
+- [TEXTURE11](fakewebgl2renderingcontext.md#texture11)
+- [TEXTURE12](fakewebgl2renderingcontext.md#texture12)
+- [TEXTURE13](fakewebgl2renderingcontext.md#texture13)
+- [TEXTURE14](fakewebgl2renderingcontext.md#texture14)
+- [TEXTURE15](fakewebgl2renderingcontext.md#texture15)
+- [TEXTURE16](fakewebgl2renderingcontext.md#texture16)
+- [TEXTURE17](fakewebgl2renderingcontext.md#texture17)
+- [TEXTURE18](fakewebgl2renderingcontext.md#texture18)
+- [TEXTURE19](fakewebgl2renderingcontext.md#texture19)
+- [TEXTURE2](fakewebgl2renderingcontext.md#texture2)
+- [TEXTURE20](fakewebgl2renderingcontext.md#texture20)
+- [TEXTURE21](fakewebgl2renderingcontext.md#texture21)
+- [TEXTURE22](fakewebgl2renderingcontext.md#texture22)
+- [TEXTURE23](fakewebgl2renderingcontext.md#texture23)
+- [TEXTURE24](fakewebgl2renderingcontext.md#texture24)
+- [TEXTURE25](fakewebgl2renderingcontext.md#texture25)
+- [TEXTURE26](fakewebgl2renderingcontext.md#texture26)
+- [TEXTURE27](fakewebgl2renderingcontext.md#texture27)
+- [TEXTURE28](fakewebgl2renderingcontext.md#texture28)
+- [TEXTURE29](fakewebgl2renderingcontext.md#texture29)
+- [TEXTURE3](fakewebgl2renderingcontext.md#texture3)
+- [TEXTURE30](fakewebgl2renderingcontext.md#texture30)
+- [TEXTURE31](fakewebgl2renderingcontext.md#texture31)
+- [TEXTURE4](fakewebgl2renderingcontext.md#texture4)
+- [TEXTURE5](fakewebgl2renderingcontext.md#texture5)
+- [TEXTURE6](fakewebgl2renderingcontext.md#texture6)
+- [TEXTURE7](fakewebgl2renderingcontext.md#texture7)
+- [TEXTURE8](fakewebgl2renderingcontext.md#texture8)
+- [TEXTURE9](fakewebgl2renderingcontext.md#texture9)
+- [TEXTURE\_2D](fakewebgl2renderingcontext.md#texture_2d)
+- [TEXTURE\_2D\_ARRAY](fakewebgl2renderingcontext.md#texture_2d_array)
+- [TEXTURE\_3D](fakewebgl2renderingcontext.md#texture_3d)
+- [TEXTURE\_BASE\_LEVEL](fakewebgl2renderingcontext.md#texture_base_level)
+- [TEXTURE\_BINDING\_2D](fakewebgl2renderingcontext.md#texture_binding_2d)
+- [TEXTURE\_BINDING\_2D\_ARRAY](fakewebgl2renderingcontext.md#texture_binding_2d_array)
+- [TEXTURE\_BINDING\_3D](fakewebgl2renderingcontext.md#texture_binding_3d)
+- [TEXTURE\_BINDING\_CUBE\_MAP](fakewebgl2renderingcontext.md#texture_binding_cube_map)
+- [TEXTURE\_COMPARE\_FUNC](fakewebgl2renderingcontext.md#texture_compare_func)
+- [TEXTURE\_COMPARE\_MODE](fakewebgl2renderingcontext.md#texture_compare_mode)
+- [TEXTURE\_CUBE\_MAP](fakewebgl2renderingcontext.md#texture_cube_map)
+- [TEXTURE\_CUBE\_MAP\_NEGATIVE\_X](fakewebgl2renderingcontext.md#texture_cube_map_negative_x)
+- [TEXTURE\_CUBE\_MAP\_NEGATIVE\_Y](fakewebgl2renderingcontext.md#texture_cube_map_negative_y)
+- [TEXTURE\_CUBE\_MAP\_NEGATIVE\_Z](fakewebgl2renderingcontext.md#texture_cube_map_negative_z)
+- [TEXTURE\_CUBE\_MAP\_POSITIVE\_X](fakewebgl2renderingcontext.md#texture_cube_map_positive_x)
+- [TEXTURE\_CUBE\_MAP\_POSITIVE\_Y](fakewebgl2renderingcontext.md#texture_cube_map_positive_y)
+- [TEXTURE\_CUBE\_MAP\_POSITIVE\_Z](fakewebgl2renderingcontext.md#texture_cube_map_positive_z)
+- [TEXTURE\_IMMUTABLE\_FORMAT](fakewebgl2renderingcontext.md#texture_immutable_format)
+- [TEXTURE\_IMMUTABLE\_LEVELS](fakewebgl2renderingcontext.md#texture_immutable_levels)
+- [TEXTURE\_MAG\_FILTER](fakewebgl2renderingcontext.md#texture_mag_filter)
+- [TEXTURE\_MAX\_LEVEL](fakewebgl2renderingcontext.md#texture_max_level)
+- [TEXTURE\_MAX\_LOD](fakewebgl2renderingcontext.md#texture_max_lod)
+- [TEXTURE\_MIN\_FILTER](fakewebgl2renderingcontext.md#texture_min_filter)
+- [TEXTURE\_MIN\_LOD](fakewebgl2renderingcontext.md#texture_min_lod)
+- [TEXTURE\_WRAP\_R](fakewebgl2renderingcontext.md#texture_wrap_r)
+- [TEXTURE\_WRAP\_S](fakewebgl2renderingcontext.md#texture_wrap_s)
+- [TEXTURE\_WRAP\_T](fakewebgl2renderingcontext.md#texture_wrap_t)
+- [TIMEOUT\_EXPIRED](fakewebgl2renderingcontext.md#timeout_expired)
+- [TIMEOUT\_IGNORED](fakewebgl2renderingcontext.md#timeout_ignored)
+- [TRANSFORM\_FEEDBACK](fakewebgl2renderingcontext.md#transform_feedback)
+- [TRANSFORM\_FEEDBACK\_ACTIVE](fakewebgl2renderingcontext.md#transform_feedback_active)
+- [TRANSFORM\_FEEDBACK\_BINDING](fakewebgl2renderingcontext.md#transform_feedback_binding)
+- [TRANSFORM\_FEEDBACK\_BUFFER](fakewebgl2renderingcontext.md#transform_feedback_buffer)
+- [TRANSFORM\_FEEDBACK\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#transform_feedback_buffer_binding)
+- [TRANSFORM\_FEEDBACK\_BUFFER\_MODE](fakewebgl2renderingcontext.md#transform_feedback_buffer_mode)
+- [TRANSFORM\_FEEDBACK\_BUFFER\_SIZE](fakewebgl2renderingcontext.md#transform_feedback_buffer_size)
+- [TRANSFORM\_FEEDBACK\_BUFFER\_START](fakewebgl2renderingcontext.md#transform_feedback_buffer_start)
+- [TRANSFORM\_FEEDBACK\_PAUSED](fakewebgl2renderingcontext.md#transform_feedback_paused)
+- [TRANSFORM\_FEEDBACK\_PRIMITIVES\_WRITTEN](fakewebgl2renderingcontext.md#transform_feedback_primitives_written)
+- [TRANSFORM\_FEEDBACK\_VARYINGS](fakewebgl2renderingcontext.md#transform_feedback_varyings)
+- [TRIANGLES](fakewebgl2renderingcontext.md#triangles)
+- [TRIANGLE\_FAN](fakewebgl2renderingcontext.md#triangle_fan)
+- [TRIANGLE\_STRIP](fakewebgl2renderingcontext.md#triangle_strip)
+- [UNIFORM\_ARRAY\_STRIDE](fakewebgl2renderingcontext.md#uniform_array_stride)
+- [UNIFORM\_BLOCK\_ACTIVE\_UNIFORMS](fakewebgl2renderingcontext.md#uniform_block_active_uniforms)
+- [UNIFORM\_BLOCK\_ACTIVE\_UNIFORM\_INDICES](fakewebgl2renderingcontext.md#uniform_block_active_uniform_indices)
+- [UNIFORM\_BLOCK\_BINDING](fakewebgl2renderingcontext.md#uniform_block_binding)
+- [UNIFORM\_BLOCK\_DATA\_SIZE](fakewebgl2renderingcontext.md#uniform_block_data_size)
+- [UNIFORM\_BLOCK\_INDEX](fakewebgl2renderingcontext.md#uniform_block_index)
+- [UNIFORM\_BLOCK\_REFERENCED\_BY\_FRAGMENT\_SHADER](fakewebgl2renderingcontext.md#uniform_block_referenced_by_fragment_shader)
+- [UNIFORM\_BLOCK\_REFERENCED\_BY\_VERTEX\_SHADER](fakewebgl2renderingcontext.md#uniform_block_referenced_by_vertex_shader)
+- [UNIFORM\_BUFFER](fakewebgl2renderingcontext.md#uniform_buffer)
+- [UNIFORM\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#uniform_buffer_binding)
+- [UNIFORM\_BUFFER\_OFFSET\_ALIGNMENT](fakewebgl2renderingcontext.md#uniform_buffer_offset_alignment)
+- [UNIFORM\_BUFFER\_SIZE](fakewebgl2renderingcontext.md#uniform_buffer_size)
+- [UNIFORM\_BUFFER\_START](fakewebgl2renderingcontext.md#uniform_buffer_start)
+- [UNIFORM\_IS\_ROW\_MAJOR](fakewebgl2renderingcontext.md#uniform_is_row_major)
+- [UNIFORM\_MATRIX\_STRIDE](fakewebgl2renderingcontext.md#uniform_matrix_stride)
+- [UNIFORM\_OFFSET](fakewebgl2renderingcontext.md#uniform_offset)
+- [UNIFORM\_SIZE](fakewebgl2renderingcontext.md#uniform_size)
+- [UNIFORM\_TYPE](fakewebgl2renderingcontext.md#uniform_type)
+- [UNPACK\_ALIGNMENT](fakewebgl2renderingcontext.md#unpack_alignment)
+- [UNPACK\_COLORSPACE\_CONVERSION\_WEBGL](fakewebgl2renderingcontext.md#unpack_colorspace_conversion_webgl)
+- [UNPACK\_FLIP\_Y\_WEBGL](fakewebgl2renderingcontext.md#unpack_flip_y_webgl)
+- [UNPACK\_IMAGE\_HEIGHT](fakewebgl2renderingcontext.md#unpack_image_height)
+- [UNPACK\_PREMULTIPLY\_ALPHA\_WEBGL](fakewebgl2renderingcontext.md#unpack_premultiply_alpha_webgl)
+- [UNPACK\_ROW\_LENGTH](fakewebgl2renderingcontext.md#unpack_row_length)
+- [UNPACK\_SKIP\_IMAGES](fakewebgl2renderingcontext.md#unpack_skip_images)
+- [UNPACK\_SKIP\_PIXELS](fakewebgl2renderingcontext.md#unpack_skip_pixels)
+- [UNPACK\_SKIP\_ROWS](fakewebgl2renderingcontext.md#unpack_skip_rows)
+- [UNSIGNALED](fakewebgl2renderingcontext.md#unsignaled)
+- [UNSIGNED\_BYTE](fakewebgl2renderingcontext.md#unsigned_byte)
+- [UNSIGNED\_INT](fakewebgl2renderingcontext.md#unsigned_int)
+- [UNSIGNED\_INT\_10F\_11F\_11F\_REV](fakewebgl2renderingcontext.md#unsigned_int_10f_11f_11f_rev)
+- [UNSIGNED\_INT\_24\_8](fakewebgl2renderingcontext.md#unsigned_int_24_8)
+- [UNSIGNED\_INT\_2\_10\_10\_10\_REV](fakewebgl2renderingcontext.md#unsigned_int_2_10_10_10_rev)
+- [UNSIGNED\_INT\_5\_9\_9\_9\_REV](fakewebgl2renderingcontext.md#unsigned_int_5_9_9_9_rev)
+- [UNSIGNED\_INT\_SAMPLER\_2D](fakewebgl2renderingcontext.md#unsigned_int_sampler_2d)
+- [UNSIGNED\_INT\_SAMPLER\_2D\_ARRAY](fakewebgl2renderingcontext.md#unsigned_int_sampler_2d_array)
+- [UNSIGNED\_INT\_SAMPLER\_3D](fakewebgl2renderingcontext.md#unsigned_int_sampler_3d)
+- [UNSIGNED\_INT\_SAMPLER\_CUBE](fakewebgl2renderingcontext.md#unsigned_int_sampler_cube)
+- [UNSIGNED\_INT\_VEC2](fakewebgl2renderingcontext.md#unsigned_int_vec2)
+- [UNSIGNED\_INT\_VEC3](fakewebgl2renderingcontext.md#unsigned_int_vec3)
+- [UNSIGNED\_INT\_VEC4](fakewebgl2renderingcontext.md#unsigned_int_vec4)
+- [UNSIGNED\_NORMALIZED](fakewebgl2renderingcontext.md#unsigned_normalized)
+- [UNSIGNED\_SHORT](fakewebgl2renderingcontext.md#unsigned_short)
+- [UNSIGNED\_SHORT\_4\_4\_4\_4](fakewebgl2renderingcontext.md#unsigned_short_4_4_4_4)
+- [UNSIGNED\_SHORT\_5\_5\_5\_1](fakewebgl2renderingcontext.md#unsigned_short_5_5_5_1)
+- [UNSIGNED\_SHORT\_5\_6\_5](fakewebgl2renderingcontext.md#unsigned_short_5_6_5)
+- [VALIDATE\_STATUS](fakewebgl2renderingcontext.md#validate_status)
+- [VENDOR](fakewebgl2renderingcontext.md#vendor)
+- [VERSION](fakewebgl2renderingcontext.md#version)
+- [VERTEX\_ARRAY\_BINDING](fakewebgl2renderingcontext.md#vertex_array_binding)
+- [VERTEX\_ATTRIB\_ARRAY\_BUFFER\_BINDING](fakewebgl2renderingcontext.md#vertex_attrib_array_buffer_binding)
+- [VERTEX\_ATTRIB\_ARRAY\_DIVISOR](fakewebgl2renderingcontext.md#vertex_attrib_array_divisor)
+- [VERTEX\_ATTRIB\_ARRAY\_ENABLED](fakewebgl2renderingcontext.md#vertex_attrib_array_enabled)
+- [VERTEX\_ATTRIB\_ARRAY\_INTEGER](fakewebgl2renderingcontext.md#vertex_attrib_array_integer)
+- [VERTEX\_ATTRIB\_ARRAY\_NORMALIZED](fakewebgl2renderingcontext.md#vertex_attrib_array_normalized)
+- [VERTEX\_ATTRIB\_ARRAY\_POINTER](fakewebgl2renderingcontext.md#vertex_attrib_array_pointer)
+- [VERTEX\_ATTRIB\_ARRAY\_SIZE](fakewebgl2renderingcontext.md#vertex_attrib_array_size)
+- [VERTEX\_ATTRIB\_ARRAY\_STRIDE](fakewebgl2renderingcontext.md#vertex_attrib_array_stride)
+- [VERTEX\_ATTRIB\_ARRAY\_TYPE](fakewebgl2renderingcontext.md#vertex_attrib_array_type)
+- [VERTEX\_SHADER](fakewebgl2renderingcontext.md#vertex_shader)
+- [VIEWPORT](fakewebgl2renderingcontext.md#viewport)
+- [WAIT\_FAILED](fakewebgl2renderingcontext.md#wait_failed)
+- [ZERO](fakewebgl2renderingcontext.md#zero)
+- [canvas](fakewebgl2renderingcontext.md#canvas)
+- [drawingBufferHeight](fakewebgl2renderingcontext.md#drawingbufferheight)
+- [drawingBufferWidth](fakewebgl2renderingcontext.md#drawingbufferwidth)
 
 ### Methods
 
-* [activeTexture](fakewebgl2renderingcontext.md#activetexture)
-* [attachShader](fakewebgl2renderingcontext.md#attachshader)
-* [beginQuery](fakewebgl2renderingcontext.md#beginquery)
-* [beginTransformFeedback](fakewebgl2renderingcontext.md#begintransformfeedback)
-* [bindAttribLocation](fakewebgl2renderingcontext.md#bindattriblocation)
-* [bindBuffer](fakewebgl2renderingcontext.md#bindbuffer)
-* [bindBufferBase](fakewebgl2renderingcontext.md#bindbufferbase)
-* [bindBufferRange](fakewebgl2renderingcontext.md#bindbufferrange)
-* [bindFramebuffer](fakewebgl2renderingcontext.md#bindframebuffer)
-* [bindRenderbuffer](fakewebgl2renderingcontext.md#bindrenderbuffer)
-* [bindSampler](fakewebgl2renderingcontext.md#bindsampler)
-* [bindTexture](fakewebgl2renderingcontext.md#bindtexture)
-* [bindTransformFeedback](fakewebgl2renderingcontext.md#bindtransformfeedback)
-* [bindVertexArray](fakewebgl2renderingcontext.md#bindvertexarray)
-* [blendColor](fakewebgl2renderingcontext.md#blendcolor)
-* [blendEquation](fakewebgl2renderingcontext.md#blendequation)
-* [blendEquationSeparate](fakewebgl2renderingcontext.md#blendequationseparate)
-* [blendFunc](fakewebgl2renderingcontext.md#blendfunc)
-* [blendFuncSeparate](fakewebgl2renderingcontext.md#blendfuncseparate)
-* [blitFramebuffer](fakewebgl2renderingcontext.md#blitframebuffer)
-* [bufferData](fakewebgl2renderingcontext.md#bufferdata)
-* [bufferSubData](fakewebgl2renderingcontext.md#buffersubdata)
-* [checkFramebufferStatus](fakewebgl2renderingcontext.md#checkframebufferstatus)
-* [clear](fakewebgl2renderingcontext.md#clear)
-* [clearBufferfi](fakewebgl2renderingcontext.md#clearbufferfi)
-* [clearBufferfv](fakewebgl2renderingcontext.md#clearbufferfv)
-* [clearBufferiv](fakewebgl2renderingcontext.md#clearbufferiv)
-* [clearBufferuiv](fakewebgl2renderingcontext.md#clearbufferuiv)
-* [clearColor](fakewebgl2renderingcontext.md#clearcolor)
-* [clearDepth](fakewebgl2renderingcontext.md#cleardepth)
-* [clearStencil](fakewebgl2renderingcontext.md#clearstencil)
-* [clientWaitSync](fakewebgl2renderingcontext.md#clientwaitsync)
-* [colorMask](fakewebgl2renderingcontext.md#colormask)
-* [compileShader](fakewebgl2renderingcontext.md#compileshader)
-* [compressedTexImage2D](fakewebgl2renderingcontext.md#compressedteximage2d)
-* [compressedTexImage3D](fakewebgl2renderingcontext.md#compressedteximage3d)
-* [compressedTexSubImage2D](fakewebgl2renderingcontext.md#compressedtexsubimage2d)
-* [compressedTexSubImage3D](fakewebgl2renderingcontext.md#compressedtexsubimage3d)
-* [copyBufferSubData](fakewebgl2renderingcontext.md#copybuffersubdata)
-* [copyTexImage2D](fakewebgl2renderingcontext.md#copyteximage2d)
-* [copyTexSubImage2D](fakewebgl2renderingcontext.md#copytexsubimage2d)
-* [copyTexSubImage3D](fakewebgl2renderingcontext.md#copytexsubimage3d)
-* [createBuffer](fakewebgl2renderingcontext.md#createbuffer)
-* [createFramebuffer](fakewebgl2renderingcontext.md#createframebuffer)
-* [createProgram](fakewebgl2renderingcontext.md#createprogram)
-* [createQuery](fakewebgl2renderingcontext.md#createquery)
-* [createRenderbuffer](fakewebgl2renderingcontext.md#createrenderbuffer)
-* [createSampler](fakewebgl2renderingcontext.md#createsampler)
-* [createShader](fakewebgl2renderingcontext.md#createshader)
-* [createTexture](fakewebgl2renderingcontext.md#createtexture)
-* [createTransformFeedback](fakewebgl2renderingcontext.md#createtransformfeedback)
-* [createVertexArray](fakewebgl2renderingcontext.md#createvertexarray)
-* [cullFace](fakewebgl2renderingcontext.md#cullface)
-* [deleteBuffer](fakewebgl2renderingcontext.md#deletebuffer)
-* [deleteFramebuffer](fakewebgl2renderingcontext.md#deleteframebuffer)
-* [deleteProgram](fakewebgl2renderingcontext.md#deleteprogram)
-* [deleteQuery](fakewebgl2renderingcontext.md#deletequery)
-* [deleteRenderbuffer](fakewebgl2renderingcontext.md#deleterenderbuffer)
-* [deleteSampler](fakewebgl2renderingcontext.md#deletesampler)
-* [deleteShader](fakewebgl2renderingcontext.md#deleteshader)
-* [deleteSync](fakewebgl2renderingcontext.md#deletesync)
-* [deleteTexture](fakewebgl2renderingcontext.md#deletetexture)
-* [deleteTransformFeedback](fakewebgl2renderingcontext.md#deletetransformfeedback)
-* [deleteVertexArray](fakewebgl2renderingcontext.md#deletevertexarray)
-* [depthFunc](fakewebgl2renderingcontext.md#depthfunc)
-* [depthMask](fakewebgl2renderingcontext.md#depthmask)
-* [depthRange](fakewebgl2renderingcontext.md#depthrange)
-* [detachShader](fakewebgl2renderingcontext.md#detachshader)
-* [disable](fakewebgl2renderingcontext.md#disable)
-* [disableVertexAttribArray](fakewebgl2renderingcontext.md#disablevertexattribarray)
-* [drawArrays](fakewebgl2renderingcontext.md#drawarrays)
-* [drawArraysInstanced](fakewebgl2renderingcontext.md#drawarraysinstanced)
-* [drawBuffers](fakewebgl2renderingcontext.md#drawbuffers)
-* [drawElements](fakewebgl2renderingcontext.md#drawelements)
-* [drawElementsInstanced](fakewebgl2renderingcontext.md#drawelementsinstanced)
-* [drawRangeElements](fakewebgl2renderingcontext.md#drawrangeelements)
-* [enable](fakewebgl2renderingcontext.md#enable)
-* [enableVertexAttribArray](fakewebgl2renderingcontext.md#enablevertexattribarray)
-* [endQuery](fakewebgl2renderingcontext.md#endquery)
-* [endTransformFeedback](fakewebgl2renderingcontext.md#endtransformfeedback)
-* [fenceSync](fakewebgl2renderingcontext.md#fencesync)
-* [finish](fakewebgl2renderingcontext.md#finish)
-* [flush](fakewebgl2renderingcontext.md#flush)
-* [framebufferRenderbuffer](fakewebgl2renderingcontext.md#framebufferrenderbuffer)
-* [framebufferTexture2D](fakewebgl2renderingcontext.md#framebuffertexture2d)
-* [framebufferTextureLayer](fakewebgl2renderingcontext.md#framebuffertexturelayer)
-* [frontFace](fakewebgl2renderingcontext.md#frontface)
-* [generateMipmap](fakewebgl2renderingcontext.md#generatemipmap)
-* [getActiveAttrib](fakewebgl2renderingcontext.md#getactiveattrib)
-* [getActiveUniform](fakewebgl2renderingcontext.md#getactiveuniform)
-* [getActiveUniformBlockName](fakewebgl2renderingcontext.md#getactiveuniformblockname)
-* [getActiveUniformBlockParameter](fakewebgl2renderingcontext.md#getactiveuniformblockparameter)
-* [getActiveUniforms](fakewebgl2renderingcontext.md#getactiveuniforms)
-* [getAttachedShaders](fakewebgl2renderingcontext.md#getattachedshaders)
-* [getAttribLocation](fakewebgl2renderingcontext.md#getattriblocation)
-* [getBufferParameter](fakewebgl2renderingcontext.md#getbufferparameter)
-* [getBufferSubData](fakewebgl2renderingcontext.md#getbuffersubdata)
-* [getContextAttributes](fakewebgl2renderingcontext.md#getcontextattributes)
-* [getError](fakewebgl2renderingcontext.md#geterror)
-* [getExtension](fakewebgl2renderingcontext.md#getextension)
-* [getFragDataLocation](fakewebgl2renderingcontext.md#getfragdatalocation)
-* [getFramebufferAttachmentParameter](fakewebgl2renderingcontext.md#getframebufferattachmentparameter)
-* [getIndexedParameter](fakewebgl2renderingcontext.md#getindexedparameter)
-* [getInternalformatParameter](fakewebgl2renderingcontext.md#getinternalformatparameter)
-* [getParameter](fakewebgl2renderingcontext.md#getparameter)
-* [getProgramInfoLog](fakewebgl2renderingcontext.md#getprograminfolog)
-* [getProgramParameter](fakewebgl2renderingcontext.md#getprogramparameter)
-* [getQuery](fakewebgl2renderingcontext.md#getquery)
-* [getQueryParameter](fakewebgl2renderingcontext.md#getqueryparameter)
-* [getRenderbufferParameter](fakewebgl2renderingcontext.md#getrenderbufferparameter)
-* [getSamplerParameter](fakewebgl2renderingcontext.md#getsamplerparameter)
-* [getShaderInfoLog](fakewebgl2renderingcontext.md#getshaderinfolog)
-* [getShaderParameter](fakewebgl2renderingcontext.md#getshaderparameter)
-* [getShaderPrecisionFormat](fakewebgl2renderingcontext.md#getshaderprecisionformat)
-* [getShaderSource](fakewebgl2renderingcontext.md#getshadersource)
-* [getSupportedExtensions](fakewebgl2renderingcontext.md#getsupportedextensions)
-* [getSyncParameter](fakewebgl2renderingcontext.md#getsyncparameter)
-* [getTexParameter](fakewebgl2renderingcontext.md#gettexparameter)
-* [getTransformFeedbackVarying](fakewebgl2renderingcontext.md#gettransformfeedbackvarying)
-* [getUniform](fakewebgl2renderingcontext.md#getuniform)
-* [getUniformBlockIndex](fakewebgl2renderingcontext.md#getuniformblockindex)
-* [getUniformIndices](fakewebgl2renderingcontext.md#getuniformindices)
-* [getUniformLocation](fakewebgl2renderingcontext.md#getuniformlocation)
-* [getVertexAttrib](fakewebgl2renderingcontext.md#getvertexattrib)
-* [getVertexAttribOffset](fakewebgl2renderingcontext.md#getvertexattriboffset)
-* [hint](fakewebgl2renderingcontext.md#hint)
-* [invalidateFramebuffer](fakewebgl2renderingcontext.md#invalidateframebuffer)
-* [invalidateSubFramebuffer](fakewebgl2renderingcontext.md#invalidatesubframebuffer)
-* [isBuffer](fakewebgl2renderingcontext.md#isbuffer)
-* [isContextLost](fakewebgl2renderingcontext.md#iscontextlost)
-* [isEnabled](fakewebgl2renderingcontext.md#isenabled)
-* [isFramebuffer](fakewebgl2renderingcontext.md#isframebuffer)
-* [isProgram](fakewebgl2renderingcontext.md#isprogram)
-* [isQuery](fakewebgl2renderingcontext.md#isquery)
-* [isRenderbuffer](fakewebgl2renderingcontext.md#isrenderbuffer)
-* [isSampler](fakewebgl2renderingcontext.md#issampler)
-* [isShader](fakewebgl2renderingcontext.md#isshader)
-* [isSync](fakewebgl2renderingcontext.md#issync)
-* [isTexture](fakewebgl2renderingcontext.md#istexture)
-* [isTransformFeedback](fakewebgl2renderingcontext.md#istransformfeedback)
-* [isVertexArray](fakewebgl2renderingcontext.md#isvertexarray)
-* [lineWidth](fakewebgl2renderingcontext.md#linewidth)
-* [linkProgram](fakewebgl2renderingcontext.md#linkprogram)
-* [pauseTransformFeedback](fakewebgl2renderingcontext.md#pausetransformfeedback)
-* [pixelStorei](fakewebgl2renderingcontext.md#pixelstorei)
-* [polygonOffset](fakewebgl2renderingcontext.md#polygonoffset)
-* [readBuffer](fakewebgl2renderingcontext.md#readbuffer)
-* [readPixels](fakewebgl2renderingcontext.md#readpixels)
-* [renderbufferStorage](fakewebgl2renderingcontext.md#renderbufferstorage)
-* [renderbufferStorageMultisample](fakewebgl2renderingcontext.md#renderbufferstoragemultisample)
-* [resumeTransformFeedback](fakewebgl2renderingcontext.md#resumetransformfeedback)
-* [sampleCoverage](fakewebgl2renderingcontext.md#samplecoverage)
-* [samplerParameterf](fakewebgl2renderingcontext.md#samplerparameterf)
-* [samplerParameteri](fakewebgl2renderingcontext.md#samplerparameteri)
-* [scissor](fakewebgl2renderingcontext.md#scissor)
-* [shaderSource](fakewebgl2renderingcontext.md#shadersource)
-* [stencilFunc](fakewebgl2renderingcontext.md#stencilfunc)
-* [stencilFuncSeparate](fakewebgl2renderingcontext.md#stencilfuncseparate)
-* [stencilMask](fakewebgl2renderingcontext.md#stencilmask)
-* [stencilMaskSeparate](fakewebgl2renderingcontext.md#stencilmaskseparate)
-* [stencilOp](fakewebgl2renderingcontext.md#stencilop)
-* [stencilOpSeparate](fakewebgl2renderingcontext.md#stencilopseparate)
-* [texImage2D](fakewebgl2renderingcontext.md#teximage2d)
-* [texImage3D](fakewebgl2renderingcontext.md#teximage3d)
-* [texParameterf](fakewebgl2renderingcontext.md#texparameterf)
-* [texParameteri](fakewebgl2renderingcontext.md#texparameteri)
-* [texStorage2D](fakewebgl2renderingcontext.md#texstorage2d)
-* [texStorage3D](fakewebgl2renderingcontext.md#texstorage3d)
-* [texSubImage2D](fakewebgl2renderingcontext.md#texsubimage2d)
-* [texSubImage3D](fakewebgl2renderingcontext.md#texsubimage3d)
-* [transformFeedbackVaryings](fakewebgl2renderingcontext.md#transformfeedbackvaryings)
-* [uniform1f](fakewebgl2renderingcontext.md#uniform1f)
-* [uniform1fv](fakewebgl2renderingcontext.md#uniform1fv)
-* [uniform1i](fakewebgl2renderingcontext.md#uniform1i)
-* [uniform1iv](fakewebgl2renderingcontext.md#uniform1iv)
-* [uniform1ui](fakewebgl2renderingcontext.md#uniform1ui)
-* [uniform1uiv](fakewebgl2renderingcontext.md#uniform1uiv)
-* [uniform2f](fakewebgl2renderingcontext.md#uniform2f)
-* [uniform2fv](fakewebgl2renderingcontext.md#uniform2fv)
-* [uniform2i](fakewebgl2renderingcontext.md#uniform2i)
-* [uniform2iv](fakewebgl2renderingcontext.md#uniform2iv)
-* [uniform2ui](fakewebgl2renderingcontext.md#uniform2ui)
-* [uniform2uiv](fakewebgl2renderingcontext.md#uniform2uiv)
-* [uniform3f](fakewebgl2renderingcontext.md#uniform3f)
-* [uniform3fv](fakewebgl2renderingcontext.md#uniform3fv)
-* [uniform3i](fakewebgl2renderingcontext.md#uniform3i)
-* [uniform3iv](fakewebgl2renderingcontext.md#uniform3iv)
-* [uniform3ui](fakewebgl2renderingcontext.md#uniform3ui)
-* [uniform3uiv](fakewebgl2renderingcontext.md#uniform3uiv)
-* [uniform4f](fakewebgl2renderingcontext.md#uniform4f)
-* [uniform4fv](fakewebgl2renderingcontext.md#uniform4fv)
-* [uniform4i](fakewebgl2renderingcontext.md#uniform4i)
-* [uniform4iv](fakewebgl2renderingcontext.md#uniform4iv)
-* [uniform4ui](fakewebgl2renderingcontext.md#uniform4ui)
-* [uniform4uiv](fakewebgl2renderingcontext.md#uniform4uiv)
-* [uniformBlockBinding](fakewebgl2renderingcontext.md#uniformblockbinding)
-* [uniformMatrix2fv](fakewebgl2renderingcontext.md#uniformmatrix2fv)
-* [uniformMatrix2x3fv](fakewebgl2renderingcontext.md#uniformmatrix2x3fv)
-* [uniformMatrix2x4fv](fakewebgl2renderingcontext.md#uniformmatrix2x4fv)
-* [uniformMatrix3fv](fakewebgl2renderingcontext.md#uniformmatrix3fv)
-* [uniformMatrix3x2fv](fakewebgl2renderingcontext.md#uniformmatrix3x2fv)
-* [uniformMatrix3x4fv](fakewebgl2renderingcontext.md#uniformmatrix3x4fv)
-* [uniformMatrix4fv](fakewebgl2renderingcontext.md#uniformmatrix4fv)
-* [uniformMatrix4x2fv](fakewebgl2renderingcontext.md#uniformmatrix4x2fv)
-* [uniformMatrix4x3fv](fakewebgl2renderingcontext.md#uniformmatrix4x3fv)
-* [useProgram](fakewebgl2renderingcontext.md#useprogram)
-* [validateProgram](fakewebgl2renderingcontext.md#validateprogram)
-* [vertexAttrib1f](fakewebgl2renderingcontext.md#vertexattrib1f)
-* [vertexAttrib1fv](fakewebgl2renderingcontext.md#vertexattrib1fv)
-* [vertexAttrib2f](fakewebgl2renderingcontext.md#vertexattrib2f)
-* [vertexAttrib2fv](fakewebgl2renderingcontext.md#vertexattrib2fv)
-* [vertexAttrib3f](fakewebgl2renderingcontext.md#vertexattrib3f)
-* [vertexAttrib3fv](fakewebgl2renderingcontext.md#vertexattrib3fv)
-* [vertexAttrib4f](fakewebgl2renderingcontext.md#vertexattrib4f)
-* [vertexAttrib4fv](fakewebgl2renderingcontext.md#vertexattrib4fv)
-* [vertexAttribDivisor](fakewebgl2renderingcontext.md#vertexattribdivisor)
-* [vertexAttribI4i](fakewebgl2renderingcontext.md#vertexattribi4i)
-* [vertexAttribI4iv](fakewebgl2renderingcontext.md#vertexattribi4iv)
-* [vertexAttribI4ui](fakewebgl2renderingcontext.md#vertexattribi4ui)
-* [vertexAttribI4uiv](fakewebgl2renderingcontext.md#vertexattribi4uiv)
-* [vertexAttribIPointer](fakewebgl2renderingcontext.md#vertexattribipointer)
-* [vertexAttribPointer](fakewebgl2renderingcontext.md#vertexattribpointer)
-* [viewport](fakewebgl2renderingcontext.md#viewport)
-* [waitSync](fakewebgl2renderingcontext.md#waitsync)
+- [activeTexture](fakewebgl2renderingcontext.md#activetexture)
+- [attachShader](fakewebgl2renderingcontext.md#attachshader)
+- [beginQuery](fakewebgl2renderingcontext.md#beginquery)
+- [beginTransformFeedback](fakewebgl2renderingcontext.md#begintransformfeedback)
+- [bindAttribLocation](fakewebgl2renderingcontext.md#bindattriblocation)
+- [bindBuffer](fakewebgl2renderingcontext.md#bindbuffer)
+- [bindBufferBase](fakewebgl2renderingcontext.md#bindbufferbase)
+- [bindBufferRange](fakewebgl2renderingcontext.md#bindbufferrange)
+- [bindFramebuffer](fakewebgl2renderingcontext.md#bindframebuffer)
+- [bindRenderbuffer](fakewebgl2renderingcontext.md#bindrenderbuffer)
+- [bindSampler](fakewebgl2renderingcontext.md#bindsampler)
+- [bindTexture](fakewebgl2renderingcontext.md#bindtexture)
+- [bindTransformFeedback](fakewebgl2renderingcontext.md#bindtransformfeedback)
+- [bindVertexArray](fakewebgl2renderingcontext.md#bindvertexarray)
+- [blendColor](fakewebgl2renderingcontext.md#blendcolor)
+- [blendEquation](fakewebgl2renderingcontext.md#blendequation)
+- [blendEquationSeparate](fakewebgl2renderingcontext.md#blendequationseparate)
+- [blendFunc](fakewebgl2renderingcontext.md#blendfunc)
+- [blendFuncSeparate](fakewebgl2renderingcontext.md#blendfuncseparate)
+- [blitFramebuffer](fakewebgl2renderingcontext.md#blitframebuffer)
+- [bufferData](fakewebgl2renderingcontext.md#bufferdata)
+- [bufferSubData](fakewebgl2renderingcontext.md#buffersubdata)
+- [checkFramebufferStatus](fakewebgl2renderingcontext.md#checkframebufferstatus)
+- [clear](fakewebgl2renderingcontext.md#clear)
+- [clearBufferfi](fakewebgl2renderingcontext.md#clearbufferfi)
+- [clearBufferfv](fakewebgl2renderingcontext.md#clearbufferfv)
+- [clearBufferiv](fakewebgl2renderingcontext.md#clearbufferiv)
+- [clearBufferuiv](fakewebgl2renderingcontext.md#clearbufferuiv)
+- [clearColor](fakewebgl2renderingcontext.md#clearcolor)
+- [clearDepth](fakewebgl2renderingcontext.md#cleardepth)
+- [clearStencil](fakewebgl2renderingcontext.md#clearstencil)
+- [clientWaitSync](fakewebgl2renderingcontext.md#clientwaitsync)
+- [colorMask](fakewebgl2renderingcontext.md#colormask)
+- [compileShader](fakewebgl2renderingcontext.md#compileshader)
+- [compressedTexImage2D](fakewebgl2renderingcontext.md#compressedteximage2d)
+- [compressedTexImage3D](fakewebgl2renderingcontext.md#compressedteximage3d)
+- [compressedTexSubImage2D](fakewebgl2renderingcontext.md#compressedtexsubimage2d)
+- [compressedTexSubImage3D](fakewebgl2renderingcontext.md#compressedtexsubimage3d)
+- [copyBufferSubData](fakewebgl2renderingcontext.md#copybuffersubdata)
+- [copyTexImage2D](fakewebgl2renderingcontext.md#copyteximage2d)
+- [copyTexSubImage2D](fakewebgl2renderingcontext.md#copytexsubimage2d)
+- [copyTexSubImage3D](fakewebgl2renderingcontext.md#copytexsubimage3d)
+- [createBuffer](fakewebgl2renderingcontext.md#createbuffer)
+- [createFramebuffer](fakewebgl2renderingcontext.md#createframebuffer)
+- [createProgram](fakewebgl2renderingcontext.md#createprogram)
+- [createQuery](fakewebgl2renderingcontext.md#createquery)
+- [createRenderbuffer](fakewebgl2renderingcontext.md#createrenderbuffer)
+- [createSampler](fakewebgl2renderingcontext.md#createsampler)
+- [createShader](fakewebgl2renderingcontext.md#createshader)
+- [createTexture](fakewebgl2renderingcontext.md#createtexture)
+- [createTransformFeedback](fakewebgl2renderingcontext.md#createtransformfeedback)
+- [createVertexArray](fakewebgl2renderingcontext.md#createvertexarray)
+- [cullFace](fakewebgl2renderingcontext.md#cullface)
+- [deleteBuffer](fakewebgl2renderingcontext.md#deletebuffer)
+- [deleteFramebuffer](fakewebgl2renderingcontext.md#deleteframebuffer)
+- [deleteProgram](fakewebgl2renderingcontext.md#deleteprogram)
+- [deleteQuery](fakewebgl2renderingcontext.md#deletequery)
+- [deleteRenderbuffer](fakewebgl2renderingcontext.md#deleterenderbuffer)
+- [deleteSampler](fakewebgl2renderingcontext.md#deletesampler)
+- [deleteShader](fakewebgl2renderingcontext.md#deleteshader)
+- [deleteSync](fakewebgl2renderingcontext.md#deletesync)
+- [deleteTexture](fakewebgl2renderingcontext.md#deletetexture)
+- [deleteTransformFeedback](fakewebgl2renderingcontext.md#deletetransformfeedback)
+- [deleteVertexArray](fakewebgl2renderingcontext.md#deletevertexarray)
+- [depthFunc](fakewebgl2renderingcontext.md#depthfunc)
+- [depthMask](fakewebgl2renderingcontext.md#depthmask)
+- [depthRange](fakewebgl2renderingcontext.md#depthrange)
+- [detachShader](fakewebgl2renderingcontext.md#detachshader)
+- [disable](fakewebgl2renderingcontext.md#disable)
+- [disableVertexAttribArray](fakewebgl2renderingcontext.md#disablevertexattribarray)
+- [drawArrays](fakewebgl2renderingcontext.md#drawarrays)
+- [drawArraysInstanced](fakewebgl2renderingcontext.md#drawarraysinstanced)
+- [drawBuffers](fakewebgl2renderingcontext.md#drawbuffers)
+- [drawElements](fakewebgl2renderingcontext.md#drawelements)
+- [drawElementsInstanced](fakewebgl2renderingcontext.md#drawelementsinstanced)
+- [drawRangeElements](fakewebgl2renderingcontext.md#drawrangeelements)
+- [enable](fakewebgl2renderingcontext.md#enable)
+- [enableVertexAttribArray](fakewebgl2renderingcontext.md#enablevertexattribarray)
+- [endQuery](fakewebgl2renderingcontext.md#endquery)
+- [endTransformFeedback](fakewebgl2renderingcontext.md#endtransformfeedback)
+- [fenceSync](fakewebgl2renderingcontext.md#fencesync)
+- [finish](fakewebgl2renderingcontext.md#finish)
+- [flush](fakewebgl2renderingcontext.md#flush)
+- [framebufferRenderbuffer](fakewebgl2renderingcontext.md#framebufferrenderbuffer)
+- [framebufferTexture2D](fakewebgl2renderingcontext.md#framebuffertexture2d)
+- [framebufferTextureLayer](fakewebgl2renderingcontext.md#framebuffertexturelayer)
+- [frontFace](fakewebgl2renderingcontext.md#frontface)
+- [generateMipmap](fakewebgl2renderingcontext.md#generatemipmap)
+- [getActiveAttrib](fakewebgl2renderingcontext.md#getactiveattrib)
+- [getActiveUniform](fakewebgl2renderingcontext.md#getactiveuniform)
+- [getActiveUniformBlockName](fakewebgl2renderingcontext.md#getactiveuniformblockname)
+- [getActiveUniformBlockParameter](fakewebgl2renderingcontext.md#getactiveuniformblockparameter)
+- [getActiveUniforms](fakewebgl2renderingcontext.md#getactiveuniforms)
+- [getAttachedShaders](fakewebgl2renderingcontext.md#getattachedshaders)
+- [getAttribLocation](fakewebgl2renderingcontext.md#getattriblocation)
+- [getBufferParameter](fakewebgl2renderingcontext.md#getbufferparameter)
+- [getBufferSubData](fakewebgl2renderingcontext.md#getbuffersubdata)
+- [getContextAttributes](fakewebgl2renderingcontext.md#getcontextattributes)
+- [getError](fakewebgl2renderingcontext.md#geterror)
+- [getExtension](fakewebgl2renderingcontext.md#getextension)
+- [getFragDataLocation](fakewebgl2renderingcontext.md#getfragdatalocation)
+- [getFramebufferAttachmentParameter](fakewebgl2renderingcontext.md#getframebufferattachmentparameter)
+- [getIndexedParameter](fakewebgl2renderingcontext.md#getindexedparameter)
+- [getInternalformatParameter](fakewebgl2renderingcontext.md#getinternalformatparameter)
+- [getParameter](fakewebgl2renderingcontext.md#getparameter)
+- [getProgramInfoLog](fakewebgl2renderingcontext.md#getprograminfolog)
+- [getProgramParameter](fakewebgl2renderingcontext.md#getprogramparameter)
+- [getQuery](fakewebgl2renderingcontext.md#getquery)
+- [getQueryParameter](fakewebgl2renderingcontext.md#getqueryparameter)
+- [getRenderbufferParameter](fakewebgl2renderingcontext.md#getrenderbufferparameter)
+- [getSamplerParameter](fakewebgl2renderingcontext.md#getsamplerparameter)
+- [getShaderInfoLog](fakewebgl2renderingcontext.md#getshaderinfolog)
+- [getShaderParameter](fakewebgl2renderingcontext.md#getshaderparameter)
+- [getShaderPrecisionFormat](fakewebgl2renderingcontext.md#getshaderprecisionformat)
+- [getShaderSource](fakewebgl2renderingcontext.md#getshadersource)
+- [getSupportedExtensions](fakewebgl2renderingcontext.md#getsupportedextensions)
+- [getSyncParameter](fakewebgl2renderingcontext.md#getsyncparameter)
+- [getTexParameter](fakewebgl2renderingcontext.md#gettexparameter)
+- [getTransformFeedbackVarying](fakewebgl2renderingcontext.md#gettransformfeedbackvarying)
+- [getUniform](fakewebgl2renderingcontext.md#getuniform)
+- [getUniformBlockIndex](fakewebgl2renderingcontext.md#getuniformblockindex)
+- [getUniformIndices](fakewebgl2renderingcontext.md#getuniformindices)
+- [getUniformLocation](fakewebgl2renderingcontext.md#getuniformlocation)
+- [getVertexAttrib](fakewebgl2renderingcontext.md#getvertexattrib)
+- [getVertexAttribOffset](fakewebgl2renderingcontext.md#getvertexattriboffset)
+- [hint](fakewebgl2renderingcontext.md#hint)
+- [invalidateFramebuffer](fakewebgl2renderingcontext.md#invalidateframebuffer)
+- [invalidateSubFramebuffer](fakewebgl2renderingcontext.md#invalidatesubframebuffer)
+- [isBuffer](fakewebgl2renderingcontext.md#isbuffer)
+- [isContextLost](fakewebgl2renderingcontext.md#iscontextlost)
+- [isEnabled](fakewebgl2renderingcontext.md#isenabled)
+- [isFramebuffer](fakewebgl2renderingcontext.md#isframebuffer)
+- [isProgram](fakewebgl2renderingcontext.md#isprogram)
+- [isQuery](fakewebgl2renderingcontext.md#isquery)
+- [isRenderbuffer](fakewebgl2renderingcontext.md#isrenderbuffer)
+- [isSampler](fakewebgl2renderingcontext.md#issampler)
+- [isShader](fakewebgl2renderingcontext.md#isshader)
+- [isSync](fakewebgl2renderingcontext.md#issync)
+- [isTexture](fakewebgl2renderingcontext.md#istexture)
+- [isTransformFeedback](fakewebgl2renderingcontext.md#istransformfeedback)
+- [isVertexArray](fakewebgl2renderingcontext.md#isvertexarray)
+- [lineWidth](fakewebgl2renderingcontext.md#linewidth)
+- [linkProgram](fakewebgl2renderingcontext.md#linkprogram)
+- [pauseTransformFeedback](fakewebgl2renderingcontext.md#pausetransformfeedback)
+- [pixelStorei](fakewebgl2renderingcontext.md#pixelstorei)
+- [polygonOffset](fakewebgl2renderingcontext.md#polygonoffset)
+- [readBuffer](fakewebgl2renderingcontext.md#readbuffer)
+- [readPixels](fakewebgl2renderingcontext.md#readpixels)
+- [renderbufferStorage](fakewebgl2renderingcontext.md#renderbufferstorage)
+- [renderbufferStorageMultisample](fakewebgl2renderingcontext.md#renderbufferstoragemultisample)
+- [resumeTransformFeedback](fakewebgl2renderingcontext.md#resumetransformfeedback)
+- [sampleCoverage](fakewebgl2renderingcontext.md#samplecoverage)
+- [samplerParameterf](fakewebgl2renderingcontext.md#samplerparameterf)
+- [samplerParameteri](fakewebgl2renderingcontext.md#samplerparameteri)
+- [scissor](fakewebgl2renderingcontext.md#scissor)
+- [shaderSource](fakewebgl2renderingcontext.md#shadersource)
+- [stencilFunc](fakewebgl2renderingcontext.md#stencilfunc)
+- [stencilFuncSeparate](fakewebgl2renderingcontext.md#stencilfuncseparate)
+- [stencilMask](fakewebgl2renderingcontext.md#stencilmask)
+- [stencilMaskSeparate](fakewebgl2renderingcontext.md#stencilmaskseparate)
+- [stencilOp](fakewebgl2renderingcontext.md#stencilop)
+- [stencilOpSeparate](fakewebgl2renderingcontext.md#stencilopseparate)
+- [texImage2D](fakewebgl2renderingcontext.md#teximage2d)
+- [texImage3D](fakewebgl2renderingcontext.md#teximage3d)
+- [texParameterf](fakewebgl2renderingcontext.md#texparameterf)
+- [texParameteri](fakewebgl2renderingcontext.md#texparameteri)
+- [texStorage2D](fakewebgl2renderingcontext.md#texstorage2d)
+- [texStorage3D](fakewebgl2renderingcontext.md#texstorage3d)
+- [texSubImage2D](fakewebgl2renderingcontext.md#texsubimage2d)
+- [texSubImage3D](fakewebgl2renderingcontext.md#texsubimage3d)
+- [transformFeedbackVaryings](fakewebgl2renderingcontext.md#transformfeedbackvaryings)
+- [uniform1f](fakewebgl2renderingcontext.md#uniform1f)
+- [uniform1fv](fakewebgl2renderingcontext.md#uniform1fv)
+- [uniform1i](fakewebgl2renderingcontext.md#uniform1i)
+- [uniform1iv](fakewebgl2renderingcontext.md#uniform1iv)
+- [uniform1ui](fakewebgl2renderingcontext.md#uniform1ui)
+- [uniform1uiv](fakewebgl2renderingcontext.md#uniform1uiv)
+- [uniform2f](fakewebgl2renderingcontext.md#uniform2f)
+- [uniform2fv](fakewebgl2renderingcontext.md#uniform2fv)
+- [uniform2i](fakewebgl2renderingcontext.md#uniform2i)
+- [uniform2iv](fakewebgl2renderingcontext.md#uniform2iv)
+- [uniform2ui](fakewebgl2renderingcontext.md#uniform2ui)
+- [uniform2uiv](fakewebgl2renderingcontext.md#uniform2uiv)
+- [uniform3f](fakewebgl2renderingcontext.md#uniform3f)
+- [uniform3fv](fakewebgl2renderingcontext.md#uniform3fv)
+- [uniform3i](fakewebgl2renderingcontext.md#uniform3i)
+- [uniform3iv](fakewebgl2renderingcontext.md#uniform3iv)
+- [uniform3ui](fakewebgl2renderingcontext.md#uniform3ui)
+- [uniform3uiv](fakewebgl2renderingcontext.md#uniform3uiv)
+- [uniform4f](fakewebgl2renderingcontext.md#uniform4f)
+- [uniform4fv](fakewebgl2renderingcontext.md#uniform4fv)
+- [uniform4i](fakewebgl2renderingcontext.md#uniform4i)
+- [uniform4iv](fakewebgl2renderingcontext.md#uniform4iv)
+- [uniform4ui](fakewebgl2renderingcontext.md#uniform4ui)
+- [uniform4uiv](fakewebgl2renderingcontext.md#uniform4uiv)
+- [uniformBlockBinding](fakewebgl2renderingcontext.md#uniformblockbinding)
+- [uniformMatrix2fv](fakewebgl2renderingcontext.md#uniformmatrix2fv)
+- [uniformMatrix2x3fv](fakewebgl2renderingcontext.md#uniformmatrix2x3fv)
+- [uniformMatrix2x4fv](fakewebgl2renderingcontext.md#uniformmatrix2x4fv)
+- [uniformMatrix3fv](fakewebgl2renderingcontext.md#uniformmatrix3fv)
+- [uniformMatrix3x2fv](fakewebgl2renderingcontext.md#uniformmatrix3x2fv)
+- [uniformMatrix3x4fv](fakewebgl2renderingcontext.md#uniformmatrix3x4fv)
+- [uniformMatrix4fv](fakewebgl2renderingcontext.md#uniformmatrix4fv)
+- [uniformMatrix4x2fv](fakewebgl2renderingcontext.md#uniformmatrix4x2fv)
+- [uniformMatrix4x3fv](fakewebgl2renderingcontext.md#uniformmatrix4x3fv)
+- [useProgram](fakewebgl2renderingcontext.md#useprogram)
+- [validateProgram](fakewebgl2renderingcontext.md#validateprogram)
+- [vertexAttrib1f](fakewebgl2renderingcontext.md#vertexattrib1f)
+- [vertexAttrib1fv](fakewebgl2renderingcontext.md#vertexattrib1fv)
+- [vertexAttrib2f](fakewebgl2renderingcontext.md#vertexattrib2f)
+- [vertexAttrib2fv](fakewebgl2renderingcontext.md#vertexattrib2fv)
+- [vertexAttrib3f](fakewebgl2renderingcontext.md#vertexattrib3f)
+- [vertexAttrib3fv](fakewebgl2renderingcontext.md#vertexattrib3fv)
+- [vertexAttrib4f](fakewebgl2renderingcontext.md#vertexattrib4f)
+- [vertexAttrib4fv](fakewebgl2renderingcontext.md#vertexattrib4fv)
+- [vertexAttribDivisor](fakewebgl2renderingcontext.md#vertexattribdivisor)
+- [vertexAttribI4i](fakewebgl2renderingcontext.md#vertexattribi4i)
+- [vertexAttribI4iv](fakewebgl2renderingcontext.md#vertexattribi4iv)
+- [vertexAttribI4ui](fakewebgl2renderingcontext.md#vertexattribi4ui)
+- [vertexAttribI4uiv](fakewebgl2renderingcontext.md#vertexattribi4uiv)
+- [vertexAttribIPointer](fakewebgl2renderingcontext.md#vertexattribipointer)
+- [vertexAttribPointer](fakewebgl2renderingcontext.md#vertexattribpointer)
+- [viewport](fakewebgl2renderingcontext.md#viewport)
+- [waitSync](fakewebgl2renderingcontext.md#waitsync)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeWebGL2RenderingContext**(`reactors`: [Reactor](reactor.md)[]): *[FakeWebGL2RenderingContext](fakewebgl2renderingcontext.md)*
+\+ **new FakeWebGL2RenderingContext**(`reactors?`: [*Reactor*](reactor.md)[]): [*FakeWebGL2RenderingContext*](fakewebgl2renderingcontext.md)
 
-*Inherited from [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeWebGL2RenderingContext*](fakewebgl2renderingcontext.md)
 
-**Returns:** *[FakeWebGL2RenderingContext](fakewebgl2renderingcontext.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  ACTIVE_ATTRIBUTES
+### ACTIVE\_ATTRIBUTES
 
-• **ACTIVE_ATTRIBUTES**: *number*
-
-___
-
-###  ACTIVE_TEXTURE
-
-• **ACTIVE_TEXTURE**: *number*
+• **ACTIVE\_ATTRIBUTES**: *number*
 
 ___
 
-###  ACTIVE_UNIFORMS
+### ACTIVE\_TEXTURE
 
-• **ACTIVE_UNIFORMS**: *number*
-
-___
-
-###  ACTIVE_UNIFORM_BLOCKS
-
-• **ACTIVE_UNIFORM_BLOCKS**: *number*
+• **ACTIVE\_TEXTURE**: *number*
 
 ___
 
-###  ALIASED_LINE_WIDTH_RANGE
+### ACTIVE\_UNIFORMS
 
-• **ALIASED_LINE_WIDTH_RANGE**: *number*
-
-___
-
-###  ALIASED_POINT_SIZE_RANGE
-
-• **ALIASED_POINT_SIZE_RANGE**: *number*
+• **ACTIVE\_UNIFORMS**: *number*
 
 ___
 
-###  ALPHA
+### ACTIVE\_UNIFORM\_BLOCKS
+
+• **ACTIVE\_UNIFORM\_BLOCKS**: *number*
+
+___
+
+### ALIASED\_LINE\_WIDTH\_RANGE
+
+• **ALIASED\_LINE\_WIDTH\_RANGE**: *number*
+
+___
+
+### ALIASED\_POINT\_SIZE\_RANGE
+
+• **ALIASED\_POINT\_SIZE\_RANGE**: *number*
+
+___
+
+### ALPHA
 
 • **ALPHA**: *number*
 
 ___
 
-###  ALPHA_BITS
+### ALPHA\_BITS
 
-• **ALPHA_BITS**: *number*
-
-___
-
-###  ALREADY_SIGNALED
-
-• **ALREADY_SIGNALED**: *number*
+• **ALPHA\_BITS**: *number*
 
 ___
 
-###  ALWAYS
+### ALREADY\_SIGNALED
+
+• **ALREADY\_SIGNALED**: *number*
+
+___
+
+### ALWAYS
 
 • **ALWAYS**: *number*
 
 ___
 
-###  ANY_SAMPLES_PASSED
+### ANY\_SAMPLES\_PASSED
 
-• **ANY_SAMPLES_PASSED**: *number*
-
-___
-
-###  ANY_SAMPLES_PASSED_CONSERVATIVE
-
-• **ANY_SAMPLES_PASSED_CONSERVATIVE**: *number*
+• **ANY\_SAMPLES\_PASSED**: *number*
 
 ___
 
-###  ARRAY_BUFFER
+### ANY\_SAMPLES\_PASSED\_CONSERVATIVE
 
-• **ARRAY_BUFFER**: *number*
-
-___
-
-###  ARRAY_BUFFER_BINDING
-
-• **ARRAY_BUFFER_BINDING**: *number*
+• **ANY\_SAMPLES\_PASSED\_CONSERVATIVE**: *number*
 
 ___
 
-###  ATTACHED_SHADERS
+### ARRAY\_BUFFER
 
-• **ATTACHED_SHADERS**: *number*
+• **ARRAY\_BUFFER**: *number*
 
 ___
 
-###  BACK
+### ARRAY\_BUFFER\_BINDING
+
+• **ARRAY\_BUFFER\_BINDING**: *number*
+
+___
+
+### ATTACHED\_SHADERS
+
+• **ATTACHED\_SHADERS**: *number*
+
+___
+
+### BACK
 
 • **BACK**: *number*
 
 ___
 
-###  BLEND
+### BLEND
 
 • **BLEND**: *number*
 
 ___
 
-###  BLEND_COLOR
+### BLEND\_COLOR
 
-• **BLEND_COLOR**: *number*
-
-___
-
-###  BLEND_DST_ALPHA
-
-• **BLEND_DST_ALPHA**: *number*
+• **BLEND\_COLOR**: *number*
 
 ___
 
-###  BLEND_DST_RGB
+### BLEND\_DST\_ALPHA
 
-• **BLEND_DST_RGB**: *number*
-
-___
-
-###  BLEND_EQUATION
-
-• **BLEND_EQUATION**: *number*
+• **BLEND\_DST\_ALPHA**: *number*
 
 ___
 
-###  BLEND_EQUATION_ALPHA
+### BLEND\_DST\_RGB
 
-• **BLEND_EQUATION_ALPHA**: *number*
-
-___
-
-###  BLEND_EQUATION_RGB
-
-• **BLEND_EQUATION_RGB**: *number*
+• **BLEND\_DST\_RGB**: *number*
 
 ___
 
-###  BLEND_SRC_ALPHA
+### BLEND\_EQUATION
 
-• **BLEND_SRC_ALPHA**: *number*
-
-___
-
-###  BLEND_SRC_RGB
-
-• **BLEND_SRC_RGB**: *number*
+• **BLEND\_EQUATION**: *number*
 
 ___
 
-###  BLUE_BITS
+### BLEND\_EQUATION\_ALPHA
 
-• **BLUE_BITS**: *number*
+• **BLEND\_EQUATION\_ALPHA**: *number*
 
 ___
 
-###  BOOL
+### BLEND\_EQUATION\_RGB
+
+• **BLEND\_EQUATION\_RGB**: *number*
+
+___
+
+### BLEND\_SRC\_ALPHA
+
+• **BLEND\_SRC\_ALPHA**: *number*
+
+___
+
+### BLEND\_SRC\_RGB
+
+• **BLEND\_SRC\_RGB**: *number*
+
+___
+
+### BLUE\_BITS
+
+• **BLUE\_BITS**: *number*
+
+___
+
+### BOOL
 
 • **BOOL**: *number*
 
 ___
 
-###  BOOL_VEC2
+### BOOL\_VEC2
 
-• **BOOL_VEC2**: *number*
-
-___
-
-###  BOOL_VEC3
-
-• **BOOL_VEC3**: *number*
+• **BOOL\_VEC2**: *number*
 
 ___
 
-###  BOOL_VEC4
+### BOOL\_VEC3
 
-• **BOOL_VEC4**: *number*
-
-___
-
-###  BROWSER_DEFAULT_WEBGL
-
-• **BROWSER_DEFAULT_WEBGL**: *number*
+• **BOOL\_VEC3**: *number*
 
 ___
 
-###  BUFFER_SIZE
+### BOOL\_VEC4
 
-• **BUFFER_SIZE**: *number*
-
-___
-
-###  BUFFER_USAGE
-
-• **BUFFER_USAGE**: *number*
+• **BOOL\_VEC4**: *number*
 
 ___
 
-###  BYTE
+### BROWSER\_DEFAULT\_WEBGL
+
+• **BROWSER\_DEFAULT\_WEBGL**: *number*
+
+___
+
+### BUFFER\_SIZE
+
+• **BUFFER\_SIZE**: *number*
+
+___
+
+### BUFFER\_USAGE
+
+• **BUFFER\_USAGE**: *number*
+
+___
+
+### BYTE
 
 • **BYTE**: *number*
 
 ___
 
-###  CCW
+### CCW
 
 • **CCW**: *number*
 
 ___
 
-###  CLAMP_TO_EDGE
+### CLAMP\_TO\_EDGE
 
-• **CLAMP_TO_EDGE**: *number*
+• **CLAMP\_TO\_EDGE**: *number*
 
 ___
 
-###  COLOR
+### COLOR
 
 • **COLOR**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT0
+### COLOR\_ATTACHMENT0
 
-• **COLOR_ATTACHMENT0**: *number*
-
-___
-
-###  COLOR_ATTACHMENT1
-
-• **COLOR_ATTACHMENT1**: *number*
+• **COLOR\_ATTACHMENT0**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT10
+### COLOR\_ATTACHMENT1
 
-• **COLOR_ATTACHMENT10**: *number*
-
-___
-
-###  COLOR_ATTACHMENT11
-
-• **COLOR_ATTACHMENT11**: *number*
+• **COLOR\_ATTACHMENT1**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT12
+### COLOR\_ATTACHMENT10
 
-• **COLOR_ATTACHMENT12**: *number*
-
-___
-
-###  COLOR_ATTACHMENT13
-
-• **COLOR_ATTACHMENT13**: *number*
+• **COLOR\_ATTACHMENT10**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT14
+### COLOR\_ATTACHMENT11
 
-• **COLOR_ATTACHMENT14**: *number*
-
-___
-
-###  COLOR_ATTACHMENT15
-
-• **COLOR_ATTACHMENT15**: *number*
+• **COLOR\_ATTACHMENT11**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT2
+### COLOR\_ATTACHMENT12
 
-• **COLOR_ATTACHMENT2**: *number*
-
-___
-
-###  COLOR_ATTACHMENT3
-
-• **COLOR_ATTACHMENT3**: *number*
+• **COLOR\_ATTACHMENT12**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT4
+### COLOR\_ATTACHMENT13
 
-• **COLOR_ATTACHMENT4**: *number*
-
-___
-
-###  COLOR_ATTACHMENT5
-
-• **COLOR_ATTACHMENT5**: *number*
+• **COLOR\_ATTACHMENT13**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT6
+### COLOR\_ATTACHMENT14
 
-• **COLOR_ATTACHMENT6**: *number*
-
-___
-
-###  COLOR_ATTACHMENT7
-
-• **COLOR_ATTACHMENT7**: *number*
+• **COLOR\_ATTACHMENT14**: *number*
 
 ___
 
-###  COLOR_ATTACHMENT8
+### COLOR\_ATTACHMENT15
 
-• **COLOR_ATTACHMENT8**: *number*
-
-___
-
-###  COLOR_ATTACHMENT9
-
-• **COLOR_ATTACHMENT9**: *number*
+• **COLOR\_ATTACHMENT15**: *number*
 
 ___
 
-###  COLOR_BUFFER_BIT
+### COLOR\_ATTACHMENT2
 
-• **COLOR_BUFFER_BIT**: *number*
-
-___
-
-###  COLOR_CLEAR_VALUE
-
-• **COLOR_CLEAR_VALUE**: *number*
+• **COLOR\_ATTACHMENT2**: *number*
 
 ___
 
-###  COLOR_WRITEMASK
+### COLOR\_ATTACHMENT3
 
-• **COLOR_WRITEMASK**: *number*
-
-___
-
-###  COMPARE_REF_TO_TEXTURE
-
-• **COMPARE_REF_TO_TEXTURE**: *number*
+• **COLOR\_ATTACHMENT3**: *number*
 
 ___
 
-###  COMPILE_STATUS
+### COLOR\_ATTACHMENT4
 
-• **COMPILE_STATUS**: *number*
-
-___
-
-###  COMPRESSED_TEXTURE_FORMATS
-
-• **COMPRESSED_TEXTURE_FORMATS**: *number*
+• **COLOR\_ATTACHMENT4**: *number*
 
 ___
 
-###  CONDITION_SATISFIED
+### COLOR\_ATTACHMENT5
 
-• **CONDITION_SATISFIED**: *number*
-
-___
-
-###  CONSTANT_ALPHA
-
-• **CONSTANT_ALPHA**: *number*
+• **COLOR\_ATTACHMENT5**: *number*
 
 ___
 
-###  CONSTANT_COLOR
+### COLOR\_ATTACHMENT6
 
-• **CONSTANT_COLOR**: *number*
-
-___
-
-###  CONTEXT_LOST_WEBGL
-
-• **CONTEXT_LOST_WEBGL**: *number*
+• **COLOR\_ATTACHMENT6**: *number*
 
 ___
 
-###  COPY_READ_BUFFER
+### COLOR\_ATTACHMENT7
 
-• **COPY_READ_BUFFER**: *number*
-
-___
-
-###  COPY_READ_BUFFER_BINDING
-
-• **COPY_READ_BUFFER_BINDING**: *number*
+• **COLOR\_ATTACHMENT7**: *number*
 
 ___
 
-###  COPY_WRITE_BUFFER
+### COLOR\_ATTACHMENT8
 
-• **COPY_WRITE_BUFFER**: *number*
-
-___
-
-###  COPY_WRITE_BUFFER_BINDING
-
-• **COPY_WRITE_BUFFER_BINDING**: *number*
+• **COLOR\_ATTACHMENT8**: *number*
 
 ___
 
-###  CULL_FACE
+### COLOR\_ATTACHMENT9
 
-• **CULL_FACE**: *number*
-
-___
-
-###  CULL_FACE_MODE
-
-• **CULL_FACE_MODE**: *number*
+• **COLOR\_ATTACHMENT9**: *number*
 
 ___
 
-###  CURRENT_PROGRAM
+### COLOR\_BUFFER\_BIT
 
-• **CURRENT_PROGRAM**: *number*
-
-___
-
-###  CURRENT_QUERY
-
-• **CURRENT_QUERY**: *number*
+• **COLOR\_BUFFER\_BIT**: *number*
 
 ___
 
-###  CURRENT_VERTEX_ATTRIB
+### COLOR\_CLEAR\_VALUE
 
-• **CURRENT_VERTEX_ATTRIB**: *number*
+• **COLOR\_CLEAR\_VALUE**: *number*
 
 ___
 
-###  CW
+### COLOR\_WRITEMASK
+
+• **COLOR\_WRITEMASK**: *number*
+
+___
+
+### COMPARE\_REF\_TO\_TEXTURE
+
+• **COMPARE\_REF\_TO\_TEXTURE**: *number*
+
+___
+
+### COMPILE\_STATUS
+
+• **COMPILE\_STATUS**: *number*
+
+___
+
+### COMPRESSED\_TEXTURE\_FORMATS
+
+• **COMPRESSED\_TEXTURE\_FORMATS**: *number*
+
+___
+
+### CONDITION\_SATISFIED
+
+• **CONDITION\_SATISFIED**: *number*
+
+___
+
+### CONSTANT\_ALPHA
+
+• **CONSTANT\_ALPHA**: *number*
+
+___
+
+### CONSTANT\_COLOR
+
+• **CONSTANT\_COLOR**: *number*
+
+___
+
+### CONTEXT\_LOST\_WEBGL
+
+• **CONTEXT\_LOST\_WEBGL**: *number*
+
+___
+
+### COPY\_READ\_BUFFER
+
+• **COPY\_READ\_BUFFER**: *number*
+
+___
+
+### COPY\_READ\_BUFFER\_BINDING
+
+• **COPY\_READ\_BUFFER\_BINDING**: *number*
+
+___
+
+### COPY\_WRITE\_BUFFER
+
+• **COPY\_WRITE\_BUFFER**: *number*
+
+___
+
+### COPY\_WRITE\_BUFFER\_BINDING
+
+• **COPY\_WRITE\_BUFFER\_BINDING**: *number*
+
+___
+
+### CULL\_FACE
+
+• **CULL\_FACE**: *number*
+
+___
+
+### CULL\_FACE\_MODE
+
+• **CULL\_FACE\_MODE**: *number*
+
+___
+
+### CURRENT\_PROGRAM
+
+• **CURRENT\_PROGRAM**: *number*
+
+___
+
+### CURRENT\_QUERY
+
+• **CURRENT\_QUERY**: *number*
+
+___
+
+### CURRENT\_VERTEX\_ATTRIB
+
+• **CURRENT\_VERTEX\_ATTRIB**: *number*
+
+___
+
+### CW
 
 • **CW**: *number*
 
 ___
 
-###  DECR
+### DECR
 
 • **DECR**: *number*
 
 ___
 
-###  DECR_WRAP
+### DECR\_WRAP
 
-• **DECR_WRAP**: *number*
-
-___
-
-###  DELETE_STATUS
-
-• **DELETE_STATUS**: *number*
+• **DECR\_WRAP**: *number*
 
 ___
 
-###  DEPTH
+### DELETE\_STATUS
+
+• **DELETE\_STATUS**: *number*
+
+___
+
+### DEPTH
 
 • **DEPTH**: *number*
 
 ___
 
-###  DEPTH24_STENCIL8
+### DEPTH24\_STENCIL8
 
-• **DEPTH24_STENCIL8**: *number*
-
-___
-
-###  DEPTH32F_STENCIL8
-
-• **DEPTH32F_STENCIL8**: *number*
+• **DEPTH24\_STENCIL8**: *number*
 
 ___
 
-###  DEPTH_ATTACHMENT
+### DEPTH32F\_STENCIL8
 
-• **DEPTH_ATTACHMENT**: *number*
-
-___
-
-###  DEPTH_BITS
-
-• **DEPTH_BITS**: *number*
+• **DEPTH32F\_STENCIL8**: *number*
 
 ___
 
-###  DEPTH_BUFFER_BIT
+### DEPTH\_ATTACHMENT
 
-• **DEPTH_BUFFER_BIT**: *number*
-
-___
-
-###  DEPTH_CLEAR_VALUE
-
-• **DEPTH_CLEAR_VALUE**: *number*
+• **DEPTH\_ATTACHMENT**: *number*
 
 ___
 
-###  DEPTH_COMPONENT
+### DEPTH\_BITS
 
-• **DEPTH_COMPONENT**: *number*
-
-___
-
-###  DEPTH_COMPONENT16
-
-• **DEPTH_COMPONENT16**: *number*
+• **DEPTH\_BITS**: *number*
 
 ___
 
-###  DEPTH_COMPONENT24
+### DEPTH\_BUFFER\_BIT
 
-• **DEPTH_COMPONENT24**: *number*
-
-___
-
-###  DEPTH_COMPONENT32F
-
-• **DEPTH_COMPONENT32F**: *number*
+• **DEPTH\_BUFFER\_BIT**: *number*
 
 ___
 
-###  DEPTH_FUNC
+### DEPTH\_CLEAR\_VALUE
 
-• **DEPTH_FUNC**: *number*
-
-___
-
-###  DEPTH_RANGE
-
-• **DEPTH_RANGE**: *number*
+• **DEPTH\_CLEAR\_VALUE**: *number*
 
 ___
 
-###  DEPTH_STENCIL
+### DEPTH\_COMPONENT
 
-• **DEPTH_STENCIL**: *number*
-
-___
-
-###  DEPTH_STENCIL_ATTACHMENT
-
-• **DEPTH_STENCIL_ATTACHMENT**: *number*
+• **DEPTH\_COMPONENT**: *number*
 
 ___
 
-###  DEPTH_TEST
+### DEPTH\_COMPONENT16
 
-• **DEPTH_TEST**: *number*
-
-___
-
-###  DEPTH_WRITEMASK
-
-• **DEPTH_WRITEMASK**: *number*
+• **DEPTH\_COMPONENT16**: *number*
 
 ___
 
-###  DITHER
+### DEPTH\_COMPONENT24
+
+• **DEPTH\_COMPONENT24**: *number*
+
+___
+
+### DEPTH\_COMPONENT32F
+
+• **DEPTH\_COMPONENT32F**: *number*
+
+___
+
+### DEPTH\_FUNC
+
+• **DEPTH\_FUNC**: *number*
+
+___
+
+### DEPTH\_RANGE
+
+• **DEPTH\_RANGE**: *number*
+
+___
+
+### DEPTH\_STENCIL
+
+• **DEPTH\_STENCIL**: *number*
+
+___
+
+### DEPTH\_STENCIL\_ATTACHMENT
+
+• **DEPTH\_STENCIL\_ATTACHMENT**: *number*
+
+___
+
+### DEPTH\_TEST
+
+• **DEPTH\_TEST**: *number*
+
+___
+
+### DEPTH\_WRITEMASK
+
+• **DEPTH\_WRITEMASK**: *number*
+
+___
+
+### DITHER
 
 • **DITHER**: *number*
 
 ___
 
-###  DONT_CARE
+### DONT\_CARE
 
-• **DONT_CARE**: *number*
-
-___
-
-###  DRAW_BUFFER0
-
-• **DRAW_BUFFER0**: *number*
+• **DONT\_CARE**: *number*
 
 ___
 
-###  DRAW_BUFFER1
+### DRAW\_BUFFER0
 
-• **DRAW_BUFFER1**: *number*
-
-___
-
-###  DRAW_BUFFER10
-
-• **DRAW_BUFFER10**: *number*
+• **DRAW\_BUFFER0**: *number*
 
 ___
 
-###  DRAW_BUFFER11
+### DRAW\_BUFFER1
 
-• **DRAW_BUFFER11**: *number*
-
-___
-
-###  DRAW_BUFFER12
-
-• **DRAW_BUFFER12**: *number*
+• **DRAW\_BUFFER1**: *number*
 
 ___
 
-###  DRAW_BUFFER13
+### DRAW\_BUFFER10
 
-• **DRAW_BUFFER13**: *number*
-
-___
-
-###  DRAW_BUFFER14
-
-• **DRAW_BUFFER14**: *number*
+• **DRAW\_BUFFER10**: *number*
 
 ___
 
-###  DRAW_BUFFER15
+### DRAW\_BUFFER11
 
-• **DRAW_BUFFER15**: *number*
-
-___
-
-###  DRAW_BUFFER2
-
-• **DRAW_BUFFER2**: *number*
+• **DRAW\_BUFFER11**: *number*
 
 ___
 
-###  DRAW_BUFFER3
+### DRAW\_BUFFER12
 
-• **DRAW_BUFFER3**: *number*
-
-___
-
-###  DRAW_BUFFER4
-
-• **DRAW_BUFFER4**: *number*
+• **DRAW\_BUFFER12**: *number*
 
 ___
 
-###  DRAW_BUFFER5
+### DRAW\_BUFFER13
 
-• **DRAW_BUFFER5**: *number*
-
-___
-
-###  DRAW_BUFFER6
-
-• **DRAW_BUFFER6**: *number*
+• **DRAW\_BUFFER13**: *number*
 
 ___
 
-###  DRAW_BUFFER7
+### DRAW\_BUFFER14
 
-• **DRAW_BUFFER7**: *number*
-
-___
-
-###  DRAW_BUFFER8
-
-• **DRAW_BUFFER8**: *number*
+• **DRAW\_BUFFER14**: *number*
 
 ___
 
-###  DRAW_BUFFER9
+### DRAW\_BUFFER15
 
-• **DRAW_BUFFER9**: *number*
-
-___
-
-###  DRAW_FRAMEBUFFER
-
-• **DRAW_FRAMEBUFFER**: *number*
+• **DRAW\_BUFFER15**: *number*
 
 ___
 
-###  DRAW_FRAMEBUFFER_BINDING
+### DRAW\_BUFFER2
 
-• **DRAW_FRAMEBUFFER_BINDING**: *number*
-
-___
-
-###  DST_ALPHA
-
-• **DST_ALPHA**: *number*
+• **DRAW\_BUFFER2**: *number*
 
 ___
 
-###  DST_COLOR
+### DRAW\_BUFFER3
 
-• **DST_COLOR**: *number*
-
-___
-
-###  DYNAMIC_COPY
-
-• **DYNAMIC_COPY**: *number*
+• **DRAW\_BUFFER3**: *number*
 
 ___
 
-###  DYNAMIC_DRAW
+### DRAW\_BUFFER4
 
-• **DYNAMIC_DRAW**: *number*
-
-___
-
-###  DYNAMIC_READ
-
-• **DYNAMIC_READ**: *number*
+• **DRAW\_BUFFER4**: *number*
 
 ___
 
-###  ELEMENT_ARRAY_BUFFER
+### DRAW\_BUFFER5
 
-• **ELEMENT_ARRAY_BUFFER**: *number*
-
-___
-
-###  ELEMENT_ARRAY_BUFFER_BINDING
-
-• **ELEMENT_ARRAY_BUFFER_BINDING**: *number*
+• **DRAW\_BUFFER5**: *number*
 
 ___
 
-###  EQUAL
+### DRAW\_BUFFER6
+
+• **DRAW\_BUFFER6**: *number*
+
+___
+
+### DRAW\_BUFFER7
+
+• **DRAW\_BUFFER7**: *number*
+
+___
+
+### DRAW\_BUFFER8
+
+• **DRAW\_BUFFER8**: *number*
+
+___
+
+### DRAW\_BUFFER9
+
+• **DRAW\_BUFFER9**: *number*
+
+___
+
+### DRAW\_FRAMEBUFFER
+
+• **DRAW\_FRAMEBUFFER**: *number*
+
+___
+
+### DRAW\_FRAMEBUFFER\_BINDING
+
+• **DRAW\_FRAMEBUFFER\_BINDING**: *number*
+
+___
+
+### DST\_ALPHA
+
+• **DST\_ALPHA**: *number*
+
+___
+
+### DST\_COLOR
+
+• **DST\_COLOR**: *number*
+
+___
+
+### DYNAMIC\_COPY
+
+• **DYNAMIC\_COPY**: *number*
+
+___
+
+### DYNAMIC\_DRAW
+
+• **DYNAMIC\_DRAW**: *number*
+
+___
+
+### DYNAMIC\_READ
+
+• **DYNAMIC\_READ**: *number*
+
+___
+
+### ELEMENT\_ARRAY\_BUFFER
+
+• **ELEMENT\_ARRAY\_BUFFER**: *number*
+
+___
+
+### ELEMENT\_ARRAY\_BUFFER\_BINDING
+
+• **ELEMENT\_ARRAY\_BUFFER\_BINDING**: *number*
+
+___
+
+### EQUAL
 
 • **EQUAL**: *number*
 
 ___
 
-###  FASTEST
+### FASTEST
 
 • **FASTEST**: *number*
 
 ___
 
-###  FLOAT
+### FLOAT
 
 • **FLOAT**: *number*
 
 ___
 
-###  FLOAT_32_UNSIGNED_INT_24_8_REV
+### FLOAT\_32\_UNSIGNED\_INT\_24\_8\_REV
 
-• **FLOAT_32_UNSIGNED_INT_24_8_REV**: *number*
-
-___
-
-###  FLOAT_MAT2
-
-• **FLOAT_MAT2**: *number*
+• **FLOAT\_32\_UNSIGNED\_INT\_24\_8\_REV**: *number*
 
 ___
 
-###  FLOAT_MAT2x3
+### FLOAT\_MAT2
 
-• **FLOAT_MAT2x3**: *number*
-
-___
-
-###  FLOAT_MAT2x4
-
-• **FLOAT_MAT2x4**: *number*
+• **FLOAT\_MAT2**: *number*
 
 ___
 
-###  FLOAT_MAT3
+### FLOAT\_MAT2x3
 
-• **FLOAT_MAT3**: *number*
-
-___
-
-###  FLOAT_MAT3x2
-
-• **FLOAT_MAT3x2**: *number*
+• **FLOAT\_MAT2x3**: *number*
 
 ___
 
-###  FLOAT_MAT3x4
+### FLOAT\_MAT2x4
 
-• **FLOAT_MAT3x4**: *number*
-
-___
-
-###  FLOAT_MAT4
-
-• **FLOAT_MAT4**: *number*
+• **FLOAT\_MAT2x4**: *number*
 
 ___
 
-###  FLOAT_MAT4x2
+### FLOAT\_MAT3
 
-• **FLOAT_MAT4x2**: *number*
-
-___
-
-###  FLOAT_MAT4x3
-
-• **FLOAT_MAT4x3**: *number*
+• **FLOAT\_MAT3**: *number*
 
 ___
 
-###  FLOAT_VEC2
+### FLOAT\_MAT3x2
 
-• **FLOAT_VEC2**: *number*
-
-___
-
-###  FLOAT_VEC3
-
-• **FLOAT_VEC3**: *number*
+• **FLOAT\_MAT3x2**: *number*
 
 ___
 
-###  FLOAT_VEC4
+### FLOAT\_MAT3x4
 
-• **FLOAT_VEC4**: *number*
-
-___
-
-###  FRAGMENT_SHADER
-
-• **FRAGMENT_SHADER**: *number*
+• **FLOAT\_MAT3x4**: *number*
 
 ___
 
-###  FRAGMENT_SHADER_DERIVATIVE_HINT
+### FLOAT\_MAT4
 
-• **FRAGMENT_SHADER_DERIVATIVE_HINT**: *number*
+• **FLOAT\_MAT4**: *number*
 
 ___
 
-###  FRAMEBUFFER
+### FLOAT\_MAT4x2
+
+• **FLOAT\_MAT4x2**: *number*
+
+___
+
+### FLOAT\_MAT4x3
+
+• **FLOAT\_MAT4x3**: *number*
+
+___
+
+### FLOAT\_VEC2
+
+• **FLOAT\_VEC2**: *number*
+
+___
+
+### FLOAT\_VEC3
+
+• **FLOAT\_VEC3**: *number*
+
+___
+
+### FLOAT\_VEC4
+
+• **FLOAT\_VEC4**: *number*
+
+___
+
+### FRAGMENT\_SHADER
+
+• **FRAGMENT\_SHADER**: *number*
+
+___
+
+### FRAGMENT\_SHADER\_DERIVATIVE\_HINT
+
+• **FRAGMENT\_SHADER\_DERIVATIVE\_HINT**: *number*
+
+___
+
+### FRAMEBUFFER
 
 • **FRAMEBUFFER**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE
+### FRAMEBUFFER\_ATTACHMENT\_ALPHA\_SIZE
 
-• **FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE**: *number*
-
-___
-
-###  FRAMEBUFFER_ATTACHMENT_BLUE_SIZE
-
-• **FRAMEBUFFER_ATTACHMENT_BLUE_SIZE**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_ALPHA\_SIZE**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING
+### FRAMEBUFFER\_ATTACHMENT\_BLUE\_SIZE
 
-• **FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING**: *number*
-
-___
-
-###  FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE
-
-• **FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_BLUE\_SIZE**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE
+### FRAMEBUFFER\_ATTACHMENT\_COLOR\_ENCODING
 
-• **FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE**: *number*
-
-___
-
-###  FRAMEBUFFER_ATTACHMENT_GREEN_SIZE
-
-• **FRAMEBUFFER_ATTACHMENT_GREEN_SIZE**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_COLOR\_ENCODING**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_OBJECT_NAME
+### FRAMEBUFFER\_ATTACHMENT\_COMPONENT\_TYPE
 
-• **FRAMEBUFFER_ATTACHMENT_OBJECT_NAME**: *number*
-
-___
-
-###  FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE
-
-• **FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_COMPONENT\_TYPE**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_RED_SIZE
+### FRAMEBUFFER\_ATTACHMENT\_DEPTH\_SIZE
 
-• **FRAMEBUFFER_ATTACHMENT_RED_SIZE**: *number*
-
-___
-
-###  FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE
-
-• **FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_DEPTH\_SIZE**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE
+### FRAMEBUFFER\_ATTACHMENT\_GREEN\_SIZE
 
-• **FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE**: *number*
-
-___
-
-###  FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER
-
-• **FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_GREEN\_SIZE**: *number*
 
 ___
 
-###  FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL
+### FRAMEBUFFER\_ATTACHMENT\_OBJECT\_NAME
 
-• **FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL**: *number*
-
-___
-
-###  FRAMEBUFFER_BINDING
-
-• **FRAMEBUFFER_BINDING**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_OBJECT\_NAME**: *number*
 
 ___
 
-###  FRAMEBUFFER_COMPLETE
+### FRAMEBUFFER\_ATTACHMENT\_OBJECT\_TYPE
 
-• **FRAMEBUFFER_COMPLETE**: *number*
-
-___
-
-###  FRAMEBUFFER_DEFAULT
-
-• **FRAMEBUFFER_DEFAULT**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_OBJECT\_TYPE**: *number*
 
 ___
 
-###  FRAMEBUFFER_INCOMPLETE_ATTACHMENT
+### FRAMEBUFFER\_ATTACHMENT\_RED\_SIZE
 
-• **FRAMEBUFFER_INCOMPLETE_ATTACHMENT**: *number*
-
-___
-
-###  FRAMEBUFFER_INCOMPLETE_DIMENSIONS
-
-• **FRAMEBUFFER_INCOMPLETE_DIMENSIONS**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_RED\_SIZE**: *number*
 
 ___
 
-###  FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
+### FRAMEBUFFER\_ATTACHMENT\_STENCIL\_SIZE
 
-• **FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT**: *number*
-
-___
-
-###  FRAMEBUFFER_INCOMPLETE_MULTISAMPLE
-
-• **FRAMEBUFFER_INCOMPLETE_MULTISAMPLE**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_STENCIL\_SIZE**: *number*
 
 ___
 
-###  FRAMEBUFFER_UNSUPPORTED
+### FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_CUBE\_MAP\_FACE
 
-• **FRAMEBUFFER_UNSUPPORTED**: *number*
+• **FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_CUBE\_MAP\_FACE**: *number*
 
 ___
 
-###  FRONT
+### FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_LAYER
+
+• **FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_LAYER**: *number*
+
+___
+
+### FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_LEVEL
+
+• **FRAMEBUFFER\_ATTACHMENT\_TEXTURE\_LEVEL**: *number*
+
+___
+
+### FRAMEBUFFER\_BINDING
+
+• **FRAMEBUFFER\_BINDING**: *number*
+
+___
+
+### FRAMEBUFFER\_COMPLETE
+
+• **FRAMEBUFFER\_COMPLETE**: *number*
+
+___
+
+### FRAMEBUFFER\_DEFAULT
+
+• **FRAMEBUFFER\_DEFAULT**: *number*
+
+___
+
+### FRAMEBUFFER\_INCOMPLETE\_ATTACHMENT
+
+• **FRAMEBUFFER\_INCOMPLETE\_ATTACHMENT**: *number*
+
+___
+
+### FRAMEBUFFER\_INCOMPLETE\_DIMENSIONS
+
+• **FRAMEBUFFER\_INCOMPLETE\_DIMENSIONS**: *number*
+
+___
+
+### FRAMEBUFFER\_INCOMPLETE\_MISSING\_ATTACHMENT
+
+• **FRAMEBUFFER\_INCOMPLETE\_MISSING\_ATTACHMENT**: *number*
+
+___
+
+### FRAMEBUFFER\_INCOMPLETE\_MULTISAMPLE
+
+• **FRAMEBUFFER\_INCOMPLETE\_MULTISAMPLE**: *number*
+
+___
+
+### FRAMEBUFFER\_UNSUPPORTED
+
+• **FRAMEBUFFER\_UNSUPPORTED**: *number*
+
+___
+
+### FRONT
 
 • **FRONT**: *number*
 
 ___
 
-###  FRONT_AND_BACK
+### FRONT\_AND\_BACK
 
-• **FRONT_AND_BACK**: *number*
-
-___
-
-###  FRONT_FACE
-
-• **FRONT_FACE**: *number*
+• **FRONT\_AND\_BACK**: *number*
 
 ___
 
-###  FUNC_ADD
+### FRONT\_FACE
 
-• **FUNC_ADD**: *number*
-
-___
-
-###  FUNC_REVERSE_SUBTRACT
-
-• **FUNC_REVERSE_SUBTRACT**: *number*
+• **FRONT\_FACE**: *number*
 
 ___
 
-###  FUNC_SUBTRACT
+### FUNC\_ADD
 
-• **FUNC_SUBTRACT**: *number*
-
-___
-
-###  GENERATE_MIPMAP_HINT
-
-• **GENERATE_MIPMAP_HINT**: *number*
+• **FUNC\_ADD**: *number*
 
 ___
 
-###  GEQUAL
+### FUNC\_REVERSE\_SUBTRACT
+
+• **FUNC\_REVERSE\_SUBTRACT**: *number*
+
+___
+
+### FUNC\_SUBTRACT
+
+• **FUNC\_SUBTRACT**: *number*
+
+___
+
+### GENERATE\_MIPMAP\_HINT
+
+• **GENERATE\_MIPMAP\_HINT**: *number*
+
+___
+
+### GEQUAL
 
 • **GEQUAL**: *number*
 
 ___
 
-###  GREATER
+### GREATER
 
 • **GREATER**: *number*
 
 ___
 
-###  GREEN_BITS
+### GREEN\_BITS
 
-• **GREEN_BITS**: *number*
-
-___
-
-###  HALF_FLOAT
-
-• **HALF_FLOAT**: *number*
+• **GREEN\_BITS**: *number*
 
 ___
 
-###  HIGH_FLOAT
+### HALF\_FLOAT
 
-• **HIGH_FLOAT**: *number*
-
-___
-
-###  HIGH_INT
-
-• **HIGH_INT**: *number*
+• **HALF\_FLOAT**: *number*
 
 ___
 
-###  IMPLEMENTATION_COLOR_READ_FORMAT
+### HIGH\_FLOAT
 
-• **IMPLEMENTATION_COLOR_READ_FORMAT**: *number*
-
-___
-
-###  IMPLEMENTATION_COLOR_READ_TYPE
-
-• **IMPLEMENTATION_COLOR_READ_TYPE**: *number*
+• **HIGH\_FLOAT**: *number*
 
 ___
 
-###  INCR
+### HIGH\_INT
+
+• **HIGH\_INT**: *number*
+
+___
+
+### IMPLEMENTATION\_COLOR\_READ\_FORMAT
+
+• **IMPLEMENTATION\_COLOR\_READ\_FORMAT**: *number*
+
+___
+
+### IMPLEMENTATION\_COLOR\_READ\_TYPE
+
+• **IMPLEMENTATION\_COLOR\_READ\_TYPE**: *number*
+
+___
+
+### INCR
 
 • **INCR**: *number*
 
 ___
 
-###  INCR_WRAP
+### INCR\_WRAP
 
-• **INCR_WRAP**: *number*
+• **INCR\_WRAP**: *number*
 
 ___
 
-###  INT
+### INT
 
 • **INT**: *number*
 
 ___
 
-###  INTERLEAVED_ATTRIBS
+### INTERLEAVED\_ATTRIBS
 
-• **INTERLEAVED_ATTRIBS**: *number*
-
-___
-
-###  INT_2_10_10_10_REV
-
-• **INT_2_10_10_10_REV**: *number*
+• **INTERLEAVED\_ATTRIBS**: *number*
 
 ___
 
-###  INT_SAMPLER_2D
+### INT\_2\_10\_10\_10\_REV
 
-• **INT_SAMPLER_2D**: *number*
-
-___
-
-###  INT_SAMPLER_2D_ARRAY
-
-• **INT_SAMPLER_2D_ARRAY**: *number*
+• **INT\_2\_10\_10\_10\_REV**: *number*
 
 ___
 
-###  INT_SAMPLER_3D
+### INT\_SAMPLER\_2D
 
-• **INT_SAMPLER_3D**: *number*
-
-___
-
-###  INT_SAMPLER_CUBE
-
-• **INT_SAMPLER_CUBE**: *number*
+• **INT\_SAMPLER\_2D**: *number*
 
 ___
 
-###  INT_VEC2
+### INT\_SAMPLER\_2D\_ARRAY
 
-• **INT_VEC2**: *number*
-
-___
-
-###  INT_VEC3
-
-• **INT_VEC3**: *number*
+• **INT\_SAMPLER\_2D\_ARRAY**: *number*
 
 ___
 
-###  INT_VEC4
+### INT\_SAMPLER\_3D
 
-• **INT_VEC4**: *number*
-
-___
-
-###  INVALID_ENUM
-
-• **INVALID_ENUM**: *number*
+• **INT\_SAMPLER\_3D**: *number*
 
 ___
 
-###  INVALID_FRAMEBUFFER_OPERATION
+### INT\_SAMPLER\_CUBE
 
-• **INVALID_FRAMEBUFFER_OPERATION**: *number*
-
-___
-
-###  INVALID_INDEX
-
-• **INVALID_INDEX**: *number*
+• **INT\_SAMPLER\_CUBE**: *number*
 
 ___
 
-###  INVALID_OPERATION
+### INT\_VEC2
 
-• **INVALID_OPERATION**: *number*
-
-___
-
-###  INVALID_VALUE
-
-• **INVALID_VALUE**: *number*
+• **INT\_VEC2**: *number*
 
 ___
 
-###  INVERT
+### INT\_VEC3
+
+• **INT\_VEC3**: *number*
+
+___
+
+### INT\_VEC4
+
+• **INT\_VEC4**: *number*
+
+___
+
+### INVALID\_ENUM
+
+• **INVALID\_ENUM**: *number*
+
+___
+
+### INVALID\_FRAMEBUFFER\_OPERATION
+
+• **INVALID\_FRAMEBUFFER\_OPERATION**: *number*
+
+___
+
+### INVALID\_INDEX
+
+• **INVALID\_INDEX**: *number*
+
+___
+
+### INVALID\_OPERATION
+
+• **INVALID\_OPERATION**: *number*
+
+___
+
+### INVALID\_VALUE
+
+• **INVALID\_VALUE**: *number*
+
+___
+
+### INVERT
 
 • **INVERT**: *number*
 
 ___
 
-###  KEEP
+### KEEP
 
 • **KEEP**: *number*
 
 ___
 
-###  LEQUAL
+### LEQUAL
 
 • **LEQUAL**: *number*
 
 ___
 
-###  LESS
+### LESS
 
 • **LESS**: *number*
 
 ___
 
-###  LINEAR
+### LINEAR
 
 • **LINEAR**: *number*
 
 ___
 
-###  LINEAR_MIPMAP_LINEAR
+### LINEAR\_MIPMAP\_LINEAR
 
-• **LINEAR_MIPMAP_LINEAR**: *number*
-
-___
-
-###  LINEAR_MIPMAP_NEAREST
-
-• **LINEAR_MIPMAP_NEAREST**: *number*
+• **LINEAR\_MIPMAP\_LINEAR**: *number*
 
 ___
 
-###  LINES
+### LINEAR\_MIPMAP\_NEAREST
+
+• **LINEAR\_MIPMAP\_NEAREST**: *number*
+
+___
+
+### LINES
 
 • **LINES**: *number*
 
 ___
 
-###  LINE_LOOP
+### LINE\_LOOP
 
-• **LINE_LOOP**: *number*
-
-___
-
-###  LINE_STRIP
-
-• **LINE_STRIP**: *number*
+• **LINE\_LOOP**: *number*
 
 ___
 
-###  LINE_WIDTH
+### LINE\_STRIP
 
-• **LINE_WIDTH**: *number*
-
-___
-
-###  LINK_STATUS
-
-• **LINK_STATUS**: *number*
+• **LINE\_STRIP**: *number*
 
 ___
 
-###  LOW_FLOAT
+### LINE\_WIDTH
 
-• **LOW_FLOAT**: *number*
-
-___
-
-###  LOW_INT
-
-• **LOW_INT**: *number*
+• **LINE\_WIDTH**: *number*
 
 ___
 
-###  LUMINANCE
+### LINK\_STATUS
+
+• **LINK\_STATUS**: *number*
+
+___
+
+### LOW\_FLOAT
+
+• **LOW\_FLOAT**: *number*
+
+___
+
+### LOW\_INT
+
+• **LOW\_INT**: *number*
+
+___
+
+### LUMINANCE
 
 • **LUMINANCE**: *number*
 
 ___
 
-###  LUMINANCE_ALPHA
+### LUMINANCE\_ALPHA
 
-• **LUMINANCE_ALPHA**: *number*
+• **LUMINANCE\_ALPHA**: *number*
 
 ___
 
-###  MAX
+### MAX
 
 • **MAX**: *number*
 
 ___
 
-###  MAX_3D_TEXTURE_SIZE
+### MAX\_3D\_TEXTURE\_SIZE
 
-• **MAX_3D_TEXTURE_SIZE**: *number*
-
-___
-
-###  MAX_ARRAY_TEXTURE_LAYERS
-
-• **MAX_ARRAY_TEXTURE_LAYERS**: *number*
+• **MAX\_3D\_TEXTURE\_SIZE**: *number*
 
 ___
 
-###  MAX_CLIENT_WAIT_TIMEOUT_WEBGL
+### MAX\_ARRAY\_TEXTURE\_LAYERS
 
-• **MAX_CLIENT_WAIT_TIMEOUT_WEBGL**: *number*
-
-___
-
-###  MAX_COLOR_ATTACHMENTS
-
-• **MAX_COLOR_ATTACHMENTS**: *number*
+• **MAX\_ARRAY\_TEXTURE\_LAYERS**: *number*
 
 ___
 
-###  MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS
+### MAX\_CLIENT\_WAIT\_TIMEOUT\_WEBGL
 
-• **MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS**: *number*
-
-___
-
-###  MAX_COMBINED_TEXTURE_IMAGE_UNITS
-
-• **MAX_COMBINED_TEXTURE_IMAGE_UNITS**: *number*
+• **MAX\_CLIENT\_WAIT\_TIMEOUT\_WEBGL**: *number*
 
 ___
 
-###  MAX_COMBINED_UNIFORM_BLOCKS
+### MAX\_COLOR\_ATTACHMENTS
 
-• **MAX_COMBINED_UNIFORM_BLOCKS**: *number*
-
-___
-
-###  MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS
-
-• **MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS**: *number*
+• **MAX\_COLOR\_ATTACHMENTS**: *number*
 
 ___
 
-###  MAX_CUBE_MAP_TEXTURE_SIZE
+### MAX\_COMBINED\_FRAGMENT\_UNIFORM\_COMPONENTS
 
-• **MAX_CUBE_MAP_TEXTURE_SIZE**: *number*
-
-___
-
-###  MAX_DRAW_BUFFERS
-
-• **MAX_DRAW_BUFFERS**: *number*
+• **MAX\_COMBINED\_FRAGMENT\_UNIFORM\_COMPONENTS**: *number*
 
 ___
 
-###  MAX_ELEMENTS_INDICES
+### MAX\_COMBINED\_TEXTURE\_IMAGE\_UNITS
 
-• **MAX_ELEMENTS_INDICES**: *number*
-
-___
-
-###  MAX_ELEMENTS_VERTICES
-
-• **MAX_ELEMENTS_VERTICES**: *number*
+• **MAX\_COMBINED\_TEXTURE\_IMAGE\_UNITS**: *number*
 
 ___
 
-###  MAX_ELEMENT_INDEX
+### MAX\_COMBINED\_UNIFORM\_BLOCKS
 
-• **MAX_ELEMENT_INDEX**: *number*
-
-___
-
-###  MAX_FRAGMENT_INPUT_COMPONENTS
-
-• **MAX_FRAGMENT_INPUT_COMPONENTS**: *number*
+• **MAX\_COMBINED\_UNIFORM\_BLOCKS**: *number*
 
 ___
 
-###  MAX_FRAGMENT_UNIFORM_BLOCKS
+### MAX\_COMBINED\_VERTEX\_UNIFORM\_COMPONENTS
 
-• **MAX_FRAGMENT_UNIFORM_BLOCKS**: *number*
-
-___
-
-###  MAX_FRAGMENT_UNIFORM_COMPONENTS
-
-• **MAX_FRAGMENT_UNIFORM_COMPONENTS**: *number*
+• **MAX\_COMBINED\_VERTEX\_UNIFORM\_COMPONENTS**: *number*
 
 ___
 
-###  MAX_FRAGMENT_UNIFORM_VECTORS
+### MAX\_CUBE\_MAP\_TEXTURE\_SIZE
 
-• **MAX_FRAGMENT_UNIFORM_VECTORS**: *number*
-
-___
-
-###  MAX_PROGRAM_TEXEL_OFFSET
-
-• **MAX_PROGRAM_TEXEL_OFFSET**: *number*
+• **MAX\_CUBE\_MAP\_TEXTURE\_SIZE**: *number*
 
 ___
 
-###  MAX_RENDERBUFFER_SIZE
+### MAX\_DRAW\_BUFFERS
 
-• **MAX_RENDERBUFFER_SIZE**: *number*
-
-___
-
-###  MAX_SAMPLES
-
-• **MAX_SAMPLES**: *number*
+• **MAX\_DRAW\_BUFFERS**: *number*
 
 ___
 
-###  MAX_SERVER_WAIT_TIMEOUT
+### MAX\_ELEMENTS\_INDICES
 
-• **MAX_SERVER_WAIT_TIMEOUT**: *number*
-
-___
-
-###  MAX_TEXTURE_IMAGE_UNITS
-
-• **MAX_TEXTURE_IMAGE_UNITS**: *number*
+• **MAX\_ELEMENTS\_INDICES**: *number*
 
 ___
 
-###  MAX_TEXTURE_LOD_BIAS
+### MAX\_ELEMENTS\_VERTICES
 
-• **MAX_TEXTURE_LOD_BIAS**: *number*
-
-___
-
-###  MAX_TEXTURE_SIZE
-
-• **MAX_TEXTURE_SIZE**: *number*
+• **MAX\_ELEMENTS\_VERTICES**: *number*
 
 ___
 
-###  MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS
+### MAX\_ELEMENT\_INDEX
 
-• **MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS**: *number*
-
-___
-
-###  MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS
-
-• **MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS**: *number*
+• **MAX\_ELEMENT\_INDEX**: *number*
 
 ___
 
-###  MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS
+### MAX\_FRAGMENT\_INPUT\_COMPONENTS
 
-• **MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS**: *number*
-
-___
-
-###  MAX_UNIFORM_BLOCK_SIZE
-
-• **MAX_UNIFORM_BLOCK_SIZE**: *number*
+• **MAX\_FRAGMENT\_INPUT\_COMPONENTS**: *number*
 
 ___
 
-###  MAX_UNIFORM_BUFFER_BINDINGS
+### MAX\_FRAGMENT\_UNIFORM\_BLOCKS
 
-• **MAX_UNIFORM_BUFFER_BINDINGS**: *number*
-
-___
-
-###  MAX_VARYING_COMPONENTS
-
-• **MAX_VARYING_COMPONENTS**: *number*
+• **MAX\_FRAGMENT\_UNIFORM\_BLOCKS**: *number*
 
 ___
 
-###  MAX_VARYING_VECTORS
+### MAX\_FRAGMENT\_UNIFORM\_COMPONENTS
 
-• **MAX_VARYING_VECTORS**: *number*
-
-___
-
-###  MAX_VERTEX_ATTRIBS
-
-• **MAX_VERTEX_ATTRIBS**: *number*
+• **MAX\_FRAGMENT\_UNIFORM\_COMPONENTS**: *number*
 
 ___
 
-###  MAX_VERTEX_OUTPUT_COMPONENTS
+### MAX\_FRAGMENT\_UNIFORM\_VECTORS
 
-• **MAX_VERTEX_OUTPUT_COMPONENTS**: *number*
-
-___
-
-###  MAX_VERTEX_TEXTURE_IMAGE_UNITS
-
-• **MAX_VERTEX_TEXTURE_IMAGE_UNITS**: *number*
+• **MAX\_FRAGMENT\_UNIFORM\_VECTORS**: *number*
 
 ___
 
-###  MAX_VERTEX_UNIFORM_BLOCKS
+### MAX\_PROGRAM\_TEXEL\_OFFSET
 
-• **MAX_VERTEX_UNIFORM_BLOCKS**: *number*
-
-___
-
-###  MAX_VERTEX_UNIFORM_COMPONENTS
-
-• **MAX_VERTEX_UNIFORM_COMPONENTS**: *number*
+• **MAX\_PROGRAM\_TEXEL\_OFFSET**: *number*
 
 ___
 
-###  MAX_VERTEX_UNIFORM_VECTORS
+### MAX\_RENDERBUFFER\_SIZE
 
-• **MAX_VERTEX_UNIFORM_VECTORS**: *number*
-
-___
-
-###  MAX_VIEWPORT_DIMS
-
-• **MAX_VIEWPORT_DIMS**: *number*
+• **MAX\_RENDERBUFFER\_SIZE**: *number*
 
 ___
 
-###  MEDIUM_FLOAT
+### MAX\_SAMPLES
 
-• **MEDIUM_FLOAT**: *number*
-
-___
-
-###  MEDIUM_INT
-
-• **MEDIUM_INT**: *number*
+• **MAX\_SAMPLES**: *number*
 
 ___
 
-###  MIN
+### MAX\_SERVER\_WAIT\_TIMEOUT
+
+• **MAX\_SERVER\_WAIT\_TIMEOUT**: *number*
+
+___
+
+### MAX\_TEXTURE\_IMAGE\_UNITS
+
+• **MAX\_TEXTURE\_IMAGE\_UNITS**: *number*
+
+___
+
+### MAX\_TEXTURE\_LOD\_BIAS
+
+• **MAX\_TEXTURE\_LOD\_BIAS**: *number*
+
+___
+
+### MAX\_TEXTURE\_SIZE
+
+• **MAX\_TEXTURE\_SIZE**: *number*
+
+___
+
+### MAX\_TRANSFORM\_FEEDBACK\_INTERLEAVED\_COMPONENTS
+
+• **MAX\_TRANSFORM\_FEEDBACK\_INTERLEAVED\_COMPONENTS**: *number*
+
+___
+
+### MAX\_TRANSFORM\_FEEDBACK\_SEPARATE\_ATTRIBS
+
+• **MAX\_TRANSFORM\_FEEDBACK\_SEPARATE\_ATTRIBS**: *number*
+
+___
+
+### MAX\_TRANSFORM\_FEEDBACK\_SEPARATE\_COMPONENTS
+
+• **MAX\_TRANSFORM\_FEEDBACK\_SEPARATE\_COMPONENTS**: *number*
+
+___
+
+### MAX\_UNIFORM\_BLOCK\_SIZE
+
+• **MAX\_UNIFORM\_BLOCK\_SIZE**: *number*
+
+___
+
+### MAX\_UNIFORM\_BUFFER\_BINDINGS
+
+• **MAX\_UNIFORM\_BUFFER\_BINDINGS**: *number*
+
+___
+
+### MAX\_VARYING\_COMPONENTS
+
+• **MAX\_VARYING\_COMPONENTS**: *number*
+
+___
+
+### MAX\_VARYING\_VECTORS
+
+• **MAX\_VARYING\_VECTORS**: *number*
+
+___
+
+### MAX\_VERTEX\_ATTRIBS
+
+• **MAX\_VERTEX\_ATTRIBS**: *number*
+
+___
+
+### MAX\_VERTEX\_OUTPUT\_COMPONENTS
+
+• **MAX\_VERTEX\_OUTPUT\_COMPONENTS**: *number*
+
+___
+
+### MAX\_VERTEX\_TEXTURE\_IMAGE\_UNITS
+
+• **MAX\_VERTEX\_TEXTURE\_IMAGE\_UNITS**: *number*
+
+___
+
+### MAX\_VERTEX\_UNIFORM\_BLOCKS
+
+• **MAX\_VERTEX\_UNIFORM\_BLOCKS**: *number*
+
+___
+
+### MAX\_VERTEX\_UNIFORM\_COMPONENTS
+
+• **MAX\_VERTEX\_UNIFORM\_COMPONENTS**: *number*
+
+___
+
+### MAX\_VERTEX\_UNIFORM\_VECTORS
+
+• **MAX\_VERTEX\_UNIFORM\_VECTORS**: *number*
+
+___
+
+### MAX\_VIEWPORT\_DIMS
+
+• **MAX\_VIEWPORT\_DIMS**: *number*
+
+___
+
+### MEDIUM\_FLOAT
+
+• **MEDIUM\_FLOAT**: *number*
+
+___
+
+### MEDIUM\_INT
+
+• **MEDIUM\_INT**: *number*
+
+___
+
+### MIN
 
 • **MIN**: *number*
 
 ___
 
-###  MIN_PROGRAM_TEXEL_OFFSET
+### MIN\_PROGRAM\_TEXEL\_OFFSET
 
-• **MIN_PROGRAM_TEXEL_OFFSET**: *number*
-
-___
-
-###  MIRRORED_REPEAT
-
-• **MIRRORED_REPEAT**: *number*
+• **MIN\_PROGRAM\_TEXEL\_OFFSET**: *number*
 
 ___
 
-###  NEAREST
+### MIRRORED\_REPEAT
+
+• **MIRRORED\_REPEAT**: *number*
+
+___
+
+### NEAREST
 
 • **NEAREST**: *number*
 
 ___
 
-###  NEAREST_MIPMAP_LINEAR
+### NEAREST\_MIPMAP\_LINEAR
 
-• **NEAREST_MIPMAP_LINEAR**: *number*
-
-___
-
-###  NEAREST_MIPMAP_NEAREST
-
-• **NEAREST_MIPMAP_NEAREST**: *number*
+• **NEAREST\_MIPMAP\_LINEAR**: *number*
 
 ___
 
-###  NEVER
+### NEAREST\_MIPMAP\_NEAREST
+
+• **NEAREST\_MIPMAP\_NEAREST**: *number*
+
+___
+
+### NEVER
 
 • **NEVER**: *number*
 
 ___
 
-###  NICEST
+### NICEST
 
 • **NICEST**: *number*
 
 ___
 
-###  NONE
+### NONE
 
 • **NONE**: *number*
 
 ___
 
-###  NOTEQUAL
+### NOTEQUAL
 
 • **NOTEQUAL**: *number*
 
 ___
 
-###  NO_ERROR
+### NO\_ERROR
 
-• **NO_ERROR**: *number*
-
-___
-
-###  OBJECT_TYPE
-
-• **OBJECT_TYPE**: *number*
+• **NO\_ERROR**: *number*
 
 ___
 
-###  ONE
+### OBJECT\_TYPE
+
+• **OBJECT\_TYPE**: *number*
+
+___
+
+### ONE
 
 • **ONE**: *number*
 
 ___
 
-###  ONE_MINUS_CONSTANT_ALPHA
+### ONE\_MINUS\_CONSTANT\_ALPHA
 
-• **ONE_MINUS_CONSTANT_ALPHA**: *number*
-
-___
-
-###  ONE_MINUS_CONSTANT_COLOR
-
-• **ONE_MINUS_CONSTANT_COLOR**: *number*
+• **ONE\_MINUS\_CONSTANT\_ALPHA**: *number*
 
 ___
 
-###  ONE_MINUS_DST_ALPHA
+### ONE\_MINUS\_CONSTANT\_COLOR
 
-• **ONE_MINUS_DST_ALPHA**: *number*
-
-___
-
-###  ONE_MINUS_DST_COLOR
-
-• **ONE_MINUS_DST_COLOR**: *number*
+• **ONE\_MINUS\_CONSTANT\_COLOR**: *number*
 
 ___
 
-###  ONE_MINUS_SRC_ALPHA
+### ONE\_MINUS\_DST\_ALPHA
 
-• **ONE_MINUS_SRC_ALPHA**: *number*
-
-___
-
-###  ONE_MINUS_SRC_COLOR
-
-• **ONE_MINUS_SRC_COLOR**: *number*
+• **ONE\_MINUS\_DST\_ALPHA**: *number*
 
 ___
 
-###  OUT_OF_MEMORY
+### ONE\_MINUS\_DST\_COLOR
 
-• **OUT_OF_MEMORY**: *number*
-
-___
-
-###  PACK_ALIGNMENT
-
-• **PACK_ALIGNMENT**: *number*
+• **ONE\_MINUS\_DST\_COLOR**: *number*
 
 ___
 
-###  PACK_ROW_LENGTH
+### ONE\_MINUS\_SRC\_ALPHA
 
-• **PACK_ROW_LENGTH**: *number*
-
-___
-
-###  PACK_SKIP_PIXELS
-
-• **PACK_SKIP_PIXELS**: *number*
+• **ONE\_MINUS\_SRC\_ALPHA**: *number*
 
 ___
 
-###  PACK_SKIP_ROWS
+### ONE\_MINUS\_SRC\_COLOR
 
-• **PACK_SKIP_ROWS**: *number*
-
-___
-
-###  PIXEL_PACK_BUFFER
-
-• **PIXEL_PACK_BUFFER**: *number*
+• **ONE\_MINUS\_SRC\_COLOR**: *number*
 
 ___
 
-###  PIXEL_PACK_BUFFER_BINDING
+### OUT\_OF\_MEMORY
 
-• **PIXEL_PACK_BUFFER_BINDING**: *number*
-
-___
-
-###  PIXEL_UNPACK_BUFFER
-
-• **PIXEL_UNPACK_BUFFER**: *number*
+• **OUT\_OF\_MEMORY**: *number*
 
 ___
 
-###  PIXEL_UNPACK_BUFFER_BINDING
+### PACK\_ALIGNMENT
 
-• **PIXEL_UNPACK_BUFFER_BINDING**: *number*
+• **PACK\_ALIGNMENT**: *number*
 
 ___
 
-###  POINTS
+### PACK\_ROW\_LENGTH
+
+• **PACK\_ROW\_LENGTH**: *number*
+
+___
+
+### PACK\_SKIP\_PIXELS
+
+• **PACK\_SKIP\_PIXELS**: *number*
+
+___
+
+### PACK\_SKIP\_ROWS
+
+• **PACK\_SKIP\_ROWS**: *number*
+
+___
+
+### PIXEL\_PACK\_BUFFER
+
+• **PIXEL\_PACK\_BUFFER**: *number*
+
+___
+
+### PIXEL\_PACK\_BUFFER\_BINDING
+
+• **PIXEL\_PACK\_BUFFER\_BINDING**: *number*
+
+___
+
+### PIXEL\_UNPACK\_BUFFER
+
+• **PIXEL\_UNPACK\_BUFFER**: *number*
+
+___
+
+### PIXEL\_UNPACK\_BUFFER\_BINDING
+
+• **PIXEL\_UNPACK\_BUFFER\_BINDING**: *number*
+
+___
+
+### POINTS
 
 • **POINTS**: *number*
 
 ___
 
-###  POLYGON_OFFSET_FACTOR
+### POLYGON\_OFFSET\_FACTOR
 
-• **POLYGON_OFFSET_FACTOR**: *number*
-
-___
-
-###  POLYGON_OFFSET_FILL
-
-• **POLYGON_OFFSET_FILL**: *number*
+• **POLYGON\_OFFSET\_FACTOR**: *number*
 
 ___
 
-###  POLYGON_OFFSET_UNITS
+### POLYGON\_OFFSET\_FILL
 
-• **POLYGON_OFFSET_UNITS**: *number*
-
-___
-
-###  QUERY_RESULT
-
-• **QUERY_RESULT**: *number*
+• **POLYGON\_OFFSET\_FILL**: *number*
 
 ___
 
-###  QUERY_RESULT_AVAILABLE
+### POLYGON\_OFFSET\_UNITS
 
-• **QUERY_RESULT_AVAILABLE**: *number*
-
-___
-
-###  R11F_G11F_B10F
-
-• **R11F_G11F_B10F**: *number*
+• **POLYGON\_OFFSET\_UNITS**: *number*
 
 ___
 
-###  R16F
+### QUERY\_RESULT
+
+• **QUERY\_RESULT**: *number*
+
+___
+
+### QUERY\_RESULT\_AVAILABLE
+
+• **QUERY\_RESULT\_AVAILABLE**: *number*
+
+___
+
+### R11F\_G11F\_B10F
+
+• **R11F\_G11F\_B10F**: *number*
+
+___
+
+### R16F
 
 • **R16F**: *number*
 
 ___
 
-###  R16I
+### R16I
 
 • **R16I**: *number*
 
 ___
 
-###  R16UI
+### R16UI
 
 • **R16UI**: *number*
 
 ___
 
-###  R32F
+### R32F
 
 • **R32F**: *number*
 
 ___
 
-###  R32I
+### R32I
 
 • **R32I**: *number*
 
 ___
 
-###  R32UI
+### R32UI
 
 • **R32UI**: *number*
 
 ___
 
-###  R8
+### R8
 
 • **R8**: *number*
 
 ___
 
-###  R8I
+### R8I
 
 • **R8I**: *number*
 
 ___
 
-###  R8UI
+### R8UI
 
 • **R8UI**: *number*
 
 ___
 
-###  R8_SNORM
+### R8\_SNORM
 
-• **R8_SNORM**: *number*
-
-___
-
-###  RASTERIZER_DISCARD
-
-• **RASTERIZER_DISCARD**: *number*
+• **R8\_SNORM**: *number*
 
 ___
 
-###  READ_BUFFER
+### RASTERIZER\_DISCARD
 
-• **READ_BUFFER**: *number*
-
-___
-
-###  READ_FRAMEBUFFER
-
-• **READ_FRAMEBUFFER**: *number*
+• **RASTERIZER\_DISCARD**: *number*
 
 ___
 
-###  READ_FRAMEBUFFER_BINDING
+### READ\_BUFFER
 
-• **READ_FRAMEBUFFER_BINDING**: *number*
+• **READ\_BUFFER**: *number*
 
 ___
 
-###  RED
+### READ\_FRAMEBUFFER
+
+• **READ\_FRAMEBUFFER**: *number*
+
+___
+
+### READ\_FRAMEBUFFER\_BINDING
+
+• **READ\_FRAMEBUFFER\_BINDING**: *number*
+
+___
+
+### RED
 
 • **RED**: *number*
 
 ___
 
-###  RED_BITS
+### RED\_BITS
 
-• **RED_BITS**: *number*
-
-___
-
-###  RED_INTEGER
-
-• **RED_INTEGER**: *number*
+• **RED\_BITS**: *number*
 
 ___
 
-###  RENDERBUFFER
+### RED\_INTEGER
+
+• **RED\_INTEGER**: *number*
+
+___
+
+### RENDERBUFFER
 
 • **RENDERBUFFER**: *number*
 
 ___
 
-###  RENDERBUFFER_ALPHA_SIZE
+### RENDERBUFFER\_ALPHA\_SIZE
 
-• **RENDERBUFFER_ALPHA_SIZE**: *number*
-
-___
-
-###  RENDERBUFFER_BINDING
-
-• **RENDERBUFFER_BINDING**: *number*
+• **RENDERBUFFER\_ALPHA\_SIZE**: *number*
 
 ___
 
-###  RENDERBUFFER_BLUE_SIZE
+### RENDERBUFFER\_BINDING
 
-• **RENDERBUFFER_BLUE_SIZE**: *number*
-
-___
-
-###  RENDERBUFFER_DEPTH_SIZE
-
-• **RENDERBUFFER_DEPTH_SIZE**: *number*
+• **RENDERBUFFER\_BINDING**: *number*
 
 ___
 
-###  RENDERBUFFER_GREEN_SIZE
+### RENDERBUFFER\_BLUE\_SIZE
 
-• **RENDERBUFFER_GREEN_SIZE**: *number*
-
-___
-
-###  RENDERBUFFER_HEIGHT
-
-• **RENDERBUFFER_HEIGHT**: *number*
+• **RENDERBUFFER\_BLUE\_SIZE**: *number*
 
 ___
 
-###  RENDERBUFFER_INTERNAL_FORMAT
+### RENDERBUFFER\_DEPTH\_SIZE
 
-• **RENDERBUFFER_INTERNAL_FORMAT**: *number*
-
-___
-
-###  RENDERBUFFER_RED_SIZE
-
-• **RENDERBUFFER_RED_SIZE**: *number*
+• **RENDERBUFFER\_DEPTH\_SIZE**: *number*
 
 ___
 
-###  RENDERBUFFER_SAMPLES
+### RENDERBUFFER\_GREEN\_SIZE
 
-• **RENDERBUFFER_SAMPLES**: *number*
-
-___
-
-###  RENDERBUFFER_STENCIL_SIZE
-
-• **RENDERBUFFER_STENCIL_SIZE**: *number*
+• **RENDERBUFFER\_GREEN\_SIZE**: *number*
 
 ___
 
-###  RENDERBUFFER_WIDTH
+### RENDERBUFFER\_HEIGHT
 
-• **RENDERBUFFER_WIDTH**: *number*
+• **RENDERBUFFER\_HEIGHT**: *number*
 
 ___
 
-###  RENDERER
+### RENDERBUFFER\_INTERNAL\_FORMAT
+
+• **RENDERBUFFER\_INTERNAL\_FORMAT**: *number*
+
+___
+
+### RENDERBUFFER\_RED\_SIZE
+
+• **RENDERBUFFER\_RED\_SIZE**: *number*
+
+___
+
+### RENDERBUFFER\_SAMPLES
+
+• **RENDERBUFFER\_SAMPLES**: *number*
+
+___
+
+### RENDERBUFFER\_STENCIL\_SIZE
+
+• **RENDERBUFFER\_STENCIL\_SIZE**: *number*
+
+___
+
+### RENDERBUFFER\_WIDTH
+
+• **RENDERBUFFER\_WIDTH**: *number*
+
+___
+
+### RENDERER
 
 • **RENDERER**: *number*
 
 ___
 
-###  REPEAT
+### REPEAT
 
 • **REPEAT**: *number*
 
 ___
 
-###  REPLACE
+### REPLACE
 
 • **REPLACE**: *number*
 
 ___
 
-###  RG
+### RG
 
 • **RG**: *number*
 
 ___
 
-###  RG16F
+### RG16F
 
 • **RG16F**: *number*
 
 ___
 
-###  RG16I
+### RG16I
 
 • **RG16I**: *number*
 
 ___
 
-###  RG16UI
+### RG16UI
 
 • **RG16UI**: *number*
 
 ___
 
-###  RG32F
+### RG32F
 
 • **RG32F**: *number*
 
 ___
 
-###  RG32I
+### RG32I
 
 • **RG32I**: *number*
 
 ___
 
-###  RG32UI
+### RG32UI
 
 • **RG32UI**: *number*
 
 ___
 
-###  RG8
+### RG8
 
 • **RG8**: *number*
 
 ___
 
-###  RG8I
+### RG8I
 
 • **RG8I**: *number*
 
 ___
 
-###  RG8UI
+### RG8UI
 
 • **RG8UI**: *number*
 
 ___
 
-###  RG8_SNORM
+### RG8\_SNORM
 
-• **RG8_SNORM**: *number*
+• **RG8\_SNORM**: *number*
 
 ___
 
-###  RGB
+### RGB
 
 • **RGB**: *number*
 
 ___
 
-###  RGB10_A2
+### RGB10\_A2
 
-• **RGB10_A2**: *number*
-
-___
-
-###  RGB10_A2UI
-
-• **RGB10_A2UI**: *number*
+• **RGB10\_A2**: *number*
 
 ___
 
-###  RGB16F
+### RGB10\_A2UI
+
+• **RGB10\_A2UI**: *number*
+
+___
+
+### RGB16F
 
 • **RGB16F**: *number*
 
 ___
 
-###  RGB16I
+### RGB16I
 
 • **RGB16I**: *number*
 
 ___
 
-###  RGB16UI
+### RGB16UI
 
 • **RGB16UI**: *number*
 
 ___
 
-###  RGB32F
+### RGB32F
 
 • **RGB32F**: *number*
 
 ___
 
-###  RGB32I
+### RGB32I
 
 • **RGB32I**: *number*
 
 ___
 
-###  RGB32UI
+### RGB32UI
 
 • **RGB32UI**: *number*
 
 ___
 
-###  RGB565
+### RGB565
 
 • **RGB565**: *number*
 
 ___
 
-###  RGB5_A1
+### RGB5\_A1
 
-• **RGB5_A1**: *number*
+• **RGB5\_A1**: *number*
 
 ___
 
-###  RGB8
+### RGB8
 
 • **RGB8**: *number*
 
 ___
 
-###  RGB8I
+### RGB8I
 
 • **RGB8I**: *number*
 
 ___
 
-###  RGB8UI
+### RGB8UI
 
 • **RGB8UI**: *number*
 
 ___
 
-###  RGB8_SNORM
+### RGB8\_SNORM
 
-• **RGB8_SNORM**: *number*
-
-___
-
-###  RGB9_E5
-
-• **RGB9_E5**: *number*
+• **RGB8\_SNORM**: *number*
 
 ___
 
-###  RGBA
+### RGB9\_E5
+
+• **RGB9\_E5**: *number*
+
+___
+
+### RGBA
 
 • **RGBA**: *number*
 
 ___
 
-###  RGBA16F
+### RGBA16F
 
 • **RGBA16F**: *number*
 
 ___
 
-###  RGBA16I
+### RGBA16I
 
 • **RGBA16I**: *number*
 
 ___
 
-###  RGBA16UI
+### RGBA16UI
 
 • **RGBA16UI**: *number*
 
 ___
 
-###  RGBA32F
+### RGBA32F
 
 • **RGBA32F**: *number*
 
 ___
 
-###  RGBA32I
+### RGBA32I
 
 • **RGBA32I**: *number*
 
 ___
 
-###  RGBA32UI
+### RGBA32UI
 
 • **RGBA32UI**: *number*
 
 ___
 
-###  RGBA4
+### RGBA4
 
 • **RGBA4**: *number*
 
 ___
 
-###  RGBA8
+### RGBA8
 
 • **RGBA8**: *number*
 
 ___
 
-###  RGBA8I
+### RGBA8I
 
 • **RGBA8I**: *number*
 
 ___
 
-###  RGBA8UI
+### RGBA8UI
 
 • **RGBA8UI**: *number*
 
 ___
 
-###  RGBA8_SNORM
+### RGBA8\_SNORM
 
-• **RGBA8_SNORM**: *number*
-
-___
-
-###  RGBA_INTEGER
-
-• **RGBA_INTEGER**: *number*
+• **RGBA8\_SNORM**: *number*
 
 ___
 
-###  RGB_INTEGER
+### RGBA\_INTEGER
 
-• **RGB_INTEGER**: *number*
-
-___
-
-###  RG_INTEGER
-
-• **RG_INTEGER**: *number*
+• **RGBA\_INTEGER**: *number*
 
 ___
 
-###  SAMPLER_2D
+### RGB\_INTEGER
 
-• **SAMPLER_2D**: *number*
-
-___
-
-###  SAMPLER_2D_ARRAY
-
-• **SAMPLER_2D_ARRAY**: *number*
+• **RGB\_INTEGER**: *number*
 
 ___
 
-###  SAMPLER_2D_ARRAY_SHADOW
+### RG\_INTEGER
 
-• **SAMPLER_2D_ARRAY_SHADOW**: *number*
-
-___
-
-###  SAMPLER_2D_SHADOW
-
-• **SAMPLER_2D_SHADOW**: *number*
+• **RG\_INTEGER**: *number*
 
 ___
 
-###  SAMPLER_3D
+### SAMPLER\_2D
 
-• **SAMPLER_3D**: *number*
-
-___
-
-###  SAMPLER_BINDING
-
-• **SAMPLER_BINDING**: *number*
+• **SAMPLER\_2D**: *number*
 
 ___
 
-###  SAMPLER_CUBE
+### SAMPLER\_2D\_ARRAY
 
-• **SAMPLER_CUBE**: *number*
-
-___
-
-###  SAMPLER_CUBE_SHADOW
-
-• **SAMPLER_CUBE_SHADOW**: *number*
+• **SAMPLER\_2D\_ARRAY**: *number*
 
 ___
 
-###  SAMPLES
+### SAMPLER\_2D\_ARRAY\_SHADOW
+
+• **SAMPLER\_2D\_ARRAY\_SHADOW**: *number*
+
+___
+
+### SAMPLER\_2D\_SHADOW
+
+• **SAMPLER\_2D\_SHADOW**: *number*
+
+___
+
+### SAMPLER\_3D
+
+• **SAMPLER\_3D**: *number*
+
+___
+
+### SAMPLER\_BINDING
+
+• **SAMPLER\_BINDING**: *number*
+
+___
+
+### SAMPLER\_CUBE
+
+• **SAMPLER\_CUBE**: *number*
+
+___
+
+### SAMPLER\_CUBE\_SHADOW
+
+• **SAMPLER\_CUBE\_SHADOW**: *number*
+
+___
+
+### SAMPLES
 
 • **SAMPLES**: *number*
 
 ___
 
-###  SAMPLE_ALPHA_TO_COVERAGE
+### SAMPLE\_ALPHA\_TO\_COVERAGE
 
-• **SAMPLE_ALPHA_TO_COVERAGE**: *number*
-
-___
-
-###  SAMPLE_BUFFERS
-
-• **SAMPLE_BUFFERS**: *number*
+• **SAMPLE\_ALPHA\_TO\_COVERAGE**: *number*
 
 ___
 
-###  SAMPLE_COVERAGE
+### SAMPLE\_BUFFERS
 
-• **SAMPLE_COVERAGE**: *number*
-
-___
-
-###  SAMPLE_COVERAGE_INVERT
-
-• **SAMPLE_COVERAGE_INVERT**: *number*
+• **SAMPLE\_BUFFERS**: *number*
 
 ___
 
-###  SAMPLE_COVERAGE_VALUE
+### SAMPLE\_COVERAGE
 
-• **SAMPLE_COVERAGE_VALUE**: *number*
-
-___
-
-###  SCISSOR_BOX
-
-• **SCISSOR_BOX**: *number*
+• **SAMPLE\_COVERAGE**: *number*
 
 ___
 
-###  SCISSOR_TEST
+### SAMPLE\_COVERAGE\_INVERT
 
-• **SCISSOR_TEST**: *number*
-
-___
-
-###  SEPARATE_ATTRIBS
-
-• **SEPARATE_ATTRIBS**: *number*
+• **SAMPLE\_COVERAGE\_INVERT**: *number*
 
 ___
 
-###  SHADER_TYPE
+### SAMPLE\_COVERAGE\_VALUE
 
-• **SHADER_TYPE**: *number*
-
-___
-
-###  SHADING_LANGUAGE_VERSION
-
-• **SHADING_LANGUAGE_VERSION**: *number*
+• **SAMPLE\_COVERAGE\_VALUE**: *number*
 
 ___
 
-###  SHORT
+### SCISSOR\_BOX
+
+• **SCISSOR\_BOX**: *number*
+
+___
+
+### SCISSOR\_TEST
+
+• **SCISSOR\_TEST**: *number*
+
+___
+
+### SEPARATE\_ATTRIBS
+
+• **SEPARATE\_ATTRIBS**: *number*
+
+___
+
+### SHADER\_TYPE
+
+• **SHADER\_TYPE**: *number*
+
+___
+
+### SHADING\_LANGUAGE\_VERSION
+
+• **SHADING\_LANGUAGE\_VERSION**: *number*
+
+___
+
+### SHORT
 
 • **SHORT**: *number*
 
 ___
 
-###  SIGNALED
+### SIGNALED
 
 • **SIGNALED**: *number*
 
 ___
 
-###  SIGNED_NORMALIZED
+### SIGNED\_NORMALIZED
 
-• **SIGNED_NORMALIZED**: *number*
-
-___
-
-###  SRC_ALPHA
-
-• **SRC_ALPHA**: *number*
+• **SIGNED\_NORMALIZED**: *number*
 
 ___
 
-###  SRC_ALPHA_SATURATE
+### SRC\_ALPHA
 
-• **SRC_ALPHA_SATURATE**: *number*
-
-___
-
-###  SRC_COLOR
-
-• **SRC_COLOR**: *number*
+• **SRC\_ALPHA**: *number*
 
 ___
 
-###  SRGB
+### SRC\_ALPHA\_SATURATE
+
+• **SRC\_ALPHA\_SATURATE**: *number*
+
+___
+
+### SRC\_COLOR
+
+• **SRC\_COLOR**: *number*
+
+___
+
+### SRGB
 
 • **SRGB**: *number*
 
 ___
 
-###  SRGB8
+### SRGB8
 
 • **SRGB8**: *number*
 
 ___
 
-###  SRGB8_ALPHA8
+### SRGB8\_ALPHA8
 
-• **SRGB8_ALPHA8**: *number*
-
-___
-
-###  STATIC_COPY
-
-• **STATIC_COPY**: *number*
+• **SRGB8\_ALPHA8**: *number*
 
 ___
 
-###  STATIC_DRAW
+### STATIC\_COPY
 
-• **STATIC_DRAW**: *number*
-
-___
-
-###  STATIC_READ
-
-• **STATIC_READ**: *number*
+• **STATIC\_COPY**: *number*
 
 ___
 
-###  STENCIL
+### STATIC\_DRAW
+
+• **STATIC\_DRAW**: *number*
+
+___
+
+### STATIC\_READ
+
+• **STATIC\_READ**: *number*
+
+___
+
+### STENCIL
 
 • **STENCIL**: *number*
 
 ___
 
-###  STENCIL_ATTACHMENT
+### STENCIL\_ATTACHMENT
 
-• **STENCIL_ATTACHMENT**: *number*
-
-___
-
-###  STENCIL_BACK_FAIL
-
-• **STENCIL_BACK_FAIL**: *number*
+• **STENCIL\_ATTACHMENT**: *number*
 
 ___
 
-###  STENCIL_BACK_FUNC
+### STENCIL\_BACK\_FAIL
 
-• **STENCIL_BACK_FUNC**: *number*
-
-___
-
-###  STENCIL_BACK_PASS_DEPTH_FAIL
-
-• **STENCIL_BACK_PASS_DEPTH_FAIL**: *number*
+• **STENCIL\_BACK\_FAIL**: *number*
 
 ___
 
-###  STENCIL_BACK_PASS_DEPTH_PASS
+### STENCIL\_BACK\_FUNC
 
-• **STENCIL_BACK_PASS_DEPTH_PASS**: *number*
-
-___
-
-###  STENCIL_BACK_REF
-
-• **STENCIL_BACK_REF**: *number*
+• **STENCIL\_BACK\_FUNC**: *number*
 
 ___
 
-###  STENCIL_BACK_VALUE_MASK
+### STENCIL\_BACK\_PASS\_DEPTH\_FAIL
 
-• **STENCIL_BACK_VALUE_MASK**: *number*
-
-___
-
-###  STENCIL_BACK_WRITEMASK
-
-• **STENCIL_BACK_WRITEMASK**: *number*
+• **STENCIL\_BACK\_PASS\_DEPTH\_FAIL**: *number*
 
 ___
 
-###  STENCIL_BITS
+### STENCIL\_BACK\_PASS\_DEPTH\_PASS
 
-• **STENCIL_BITS**: *number*
-
-___
-
-###  STENCIL_BUFFER_BIT
-
-• **STENCIL_BUFFER_BIT**: *number*
+• **STENCIL\_BACK\_PASS\_DEPTH\_PASS**: *number*
 
 ___
 
-###  STENCIL_CLEAR_VALUE
+### STENCIL\_BACK\_REF
 
-• **STENCIL_CLEAR_VALUE**: *number*
-
-___
-
-###  STENCIL_FAIL
-
-• **STENCIL_FAIL**: *number*
+• **STENCIL\_BACK\_REF**: *number*
 
 ___
 
-###  STENCIL_FUNC
+### STENCIL\_BACK\_VALUE\_MASK
 
-• **STENCIL_FUNC**: *number*
-
-___
-
-###  STENCIL_INDEX8
-
-• **STENCIL_INDEX8**: *number*
+• **STENCIL\_BACK\_VALUE\_MASK**: *number*
 
 ___
 
-###  STENCIL_PASS_DEPTH_FAIL
+### STENCIL\_BACK\_WRITEMASK
 
-• **STENCIL_PASS_DEPTH_FAIL**: *number*
-
-___
-
-###  STENCIL_PASS_DEPTH_PASS
-
-• **STENCIL_PASS_DEPTH_PASS**: *number*
+• **STENCIL\_BACK\_WRITEMASK**: *number*
 
 ___
 
-###  STENCIL_REF
+### STENCIL\_BITS
 
-• **STENCIL_REF**: *number*
-
-___
-
-###  STENCIL_TEST
-
-• **STENCIL_TEST**: *number*
+• **STENCIL\_BITS**: *number*
 
 ___
 
-###  STENCIL_VALUE_MASK
+### STENCIL\_BUFFER\_BIT
 
-• **STENCIL_VALUE_MASK**: *number*
-
-___
-
-###  STENCIL_WRITEMASK
-
-• **STENCIL_WRITEMASK**: *number*
+• **STENCIL\_BUFFER\_BIT**: *number*
 
 ___
 
-###  STREAM_COPY
+### STENCIL\_CLEAR\_VALUE
 
-• **STREAM_COPY**: *number*
-
-___
-
-###  STREAM_DRAW
-
-• **STREAM_DRAW**: *number*
+• **STENCIL\_CLEAR\_VALUE**: *number*
 
 ___
 
-###  STREAM_READ
+### STENCIL\_FAIL
 
-• **STREAM_READ**: *number*
-
-___
-
-###  SUBPIXEL_BITS
-
-• **SUBPIXEL_BITS**: *number*
+• **STENCIL\_FAIL**: *number*
 
 ___
 
-###  SYNC_CONDITION
+### STENCIL\_FUNC
 
-• **SYNC_CONDITION**: *number*
-
-___
-
-###  SYNC_FENCE
-
-• **SYNC_FENCE**: *number*
+• **STENCIL\_FUNC**: *number*
 
 ___
 
-###  SYNC_FLAGS
+### STENCIL\_INDEX8
 
-• **SYNC_FLAGS**: *number*
-
-___
-
-###  SYNC_FLUSH_COMMANDS_BIT
-
-• **SYNC_FLUSH_COMMANDS_BIT**: *number*
+• **STENCIL\_INDEX8**: *number*
 
 ___
 
-###  SYNC_GPU_COMMANDS_COMPLETE
+### STENCIL\_PASS\_DEPTH\_FAIL
 
-• **SYNC_GPU_COMMANDS_COMPLETE**: *number*
-
-___
-
-###  SYNC_STATUS
-
-• **SYNC_STATUS**: *number*
+• **STENCIL\_PASS\_DEPTH\_FAIL**: *number*
 
 ___
 
-###  TEXTURE
+### STENCIL\_PASS\_DEPTH\_PASS
+
+• **STENCIL\_PASS\_DEPTH\_PASS**: *number*
+
+___
+
+### STENCIL\_REF
+
+• **STENCIL\_REF**: *number*
+
+___
+
+### STENCIL\_TEST
+
+• **STENCIL\_TEST**: *number*
+
+___
+
+### STENCIL\_VALUE\_MASK
+
+• **STENCIL\_VALUE\_MASK**: *number*
+
+___
+
+### STENCIL\_WRITEMASK
+
+• **STENCIL\_WRITEMASK**: *number*
+
+___
+
+### STREAM\_COPY
+
+• **STREAM\_COPY**: *number*
+
+___
+
+### STREAM\_DRAW
+
+• **STREAM\_DRAW**: *number*
+
+___
+
+### STREAM\_READ
+
+• **STREAM\_READ**: *number*
+
+___
+
+### SUBPIXEL\_BITS
+
+• **SUBPIXEL\_BITS**: *number*
+
+___
+
+### SYNC\_CONDITION
+
+• **SYNC\_CONDITION**: *number*
+
+___
+
+### SYNC\_FENCE
+
+• **SYNC\_FENCE**: *number*
+
+___
+
+### SYNC\_FLAGS
+
+• **SYNC\_FLAGS**: *number*
+
+___
+
+### SYNC\_FLUSH\_COMMANDS\_BIT
+
+• **SYNC\_FLUSH\_COMMANDS\_BIT**: *number*
+
+___
+
+### SYNC\_GPU\_COMMANDS\_COMPLETE
+
+• **SYNC\_GPU\_COMMANDS\_COMPLETE**: *number*
+
+___
+
+### SYNC\_STATUS
+
+• **SYNC\_STATUS**: *number*
+
+___
+
+### TEXTURE
 
 • **TEXTURE**: *number*
 
 ___
 
-###  TEXTURE0
+### TEXTURE0
 
 • **TEXTURE0**: *number*
 
 ___
 
-###  TEXTURE1
+### TEXTURE1
 
 • **TEXTURE1**: *number*
 
 ___
 
-###  TEXTURE10
+### TEXTURE10
 
 • **TEXTURE10**: *number*
 
 ___
 
-###  TEXTURE11
+### TEXTURE11
 
 • **TEXTURE11**: *number*
 
 ___
 
-###  TEXTURE12
+### TEXTURE12
 
 • **TEXTURE12**: *number*
 
 ___
 
-###  TEXTURE13
+### TEXTURE13
 
 • **TEXTURE13**: *number*
 
 ___
 
-###  TEXTURE14
+### TEXTURE14
 
 • **TEXTURE14**: *number*
 
 ___
 
-###  TEXTURE15
+### TEXTURE15
 
 • **TEXTURE15**: *number*
 
 ___
 
-###  TEXTURE16
+### TEXTURE16
 
 • **TEXTURE16**: *number*
 
 ___
 
-###  TEXTURE17
+### TEXTURE17
 
 • **TEXTURE17**: *number*
 
 ___
 
-###  TEXTURE18
+### TEXTURE18
 
 • **TEXTURE18**: *number*
 
 ___
 
-###  TEXTURE19
+### TEXTURE19
 
 • **TEXTURE19**: *number*
 
 ___
 
-###  TEXTURE2
+### TEXTURE2
 
 • **TEXTURE2**: *number*
 
 ___
 
-###  TEXTURE20
+### TEXTURE20
 
 • **TEXTURE20**: *number*
 
 ___
 
-###  TEXTURE21
+### TEXTURE21
 
 • **TEXTURE21**: *number*
 
 ___
 
-###  TEXTURE22
+### TEXTURE22
 
 • **TEXTURE22**: *number*
 
 ___
 
-###  TEXTURE23
+### TEXTURE23
 
 • **TEXTURE23**: *number*
 
 ___
 
-###  TEXTURE24
+### TEXTURE24
 
 • **TEXTURE24**: *number*
 
 ___
 
-###  TEXTURE25
+### TEXTURE25
 
 • **TEXTURE25**: *number*
 
 ___
 
-###  TEXTURE26
+### TEXTURE26
 
 • **TEXTURE26**: *number*
 
 ___
 
-###  TEXTURE27
+### TEXTURE27
 
 • **TEXTURE27**: *number*
 
 ___
 
-###  TEXTURE28
+### TEXTURE28
 
 • **TEXTURE28**: *number*
 
 ___
 
-###  TEXTURE29
+### TEXTURE29
 
 • **TEXTURE29**: *number*
 
 ___
 
-###  TEXTURE3
+### TEXTURE3
 
 • **TEXTURE3**: *number*
 
 ___
 
-###  TEXTURE30
+### TEXTURE30
 
 • **TEXTURE30**: *number*
 
 ___
 
-###  TEXTURE31
+### TEXTURE31
 
 • **TEXTURE31**: *number*
 
 ___
 
-###  TEXTURE4
+### TEXTURE4
 
 • **TEXTURE4**: *number*
 
 ___
 
-###  TEXTURE5
+### TEXTURE5
 
 • **TEXTURE5**: *number*
 
 ___
 
-###  TEXTURE6
+### TEXTURE6
 
 • **TEXTURE6**: *number*
 
 ___
 
-###  TEXTURE7
+### TEXTURE7
 
 • **TEXTURE7**: *number*
 
 ___
 
-###  TEXTURE8
+### TEXTURE8
 
 • **TEXTURE8**: *number*
 
 ___
 
-###  TEXTURE9
+### TEXTURE9
 
 • **TEXTURE9**: *number*
 
 ___
 
-###  TEXTURE_2D
+### TEXTURE\_2D
 
-• **TEXTURE_2D**: *number*
-
-___
-
-###  TEXTURE_2D_ARRAY
-
-• **TEXTURE_2D_ARRAY**: *number*
+• **TEXTURE\_2D**: *number*
 
 ___
 
-###  TEXTURE_3D
+### TEXTURE\_2D\_ARRAY
 
-• **TEXTURE_3D**: *number*
-
-___
-
-###  TEXTURE_BASE_LEVEL
-
-• **TEXTURE_BASE_LEVEL**: *number*
+• **TEXTURE\_2D\_ARRAY**: *number*
 
 ___
 
-###  TEXTURE_BINDING_2D
+### TEXTURE\_3D
 
-• **TEXTURE_BINDING_2D**: *number*
-
-___
-
-###  TEXTURE_BINDING_2D_ARRAY
-
-• **TEXTURE_BINDING_2D_ARRAY**: *number*
+• **TEXTURE\_3D**: *number*
 
 ___
 
-###  TEXTURE_BINDING_3D
+### TEXTURE\_BASE\_LEVEL
 
-• **TEXTURE_BINDING_3D**: *number*
-
-___
-
-###  TEXTURE_BINDING_CUBE_MAP
-
-• **TEXTURE_BINDING_CUBE_MAP**: *number*
+• **TEXTURE\_BASE\_LEVEL**: *number*
 
 ___
 
-###  TEXTURE_COMPARE_FUNC
+### TEXTURE\_BINDING\_2D
 
-• **TEXTURE_COMPARE_FUNC**: *number*
-
-___
-
-###  TEXTURE_COMPARE_MODE
-
-• **TEXTURE_COMPARE_MODE**: *number*
+• **TEXTURE\_BINDING\_2D**: *number*
 
 ___
 
-###  TEXTURE_CUBE_MAP
+### TEXTURE\_BINDING\_2D\_ARRAY
 
-• **TEXTURE_CUBE_MAP**: *number*
-
-___
-
-###  TEXTURE_CUBE_MAP_NEGATIVE_X
-
-• **TEXTURE_CUBE_MAP_NEGATIVE_X**: *number*
+• **TEXTURE\_BINDING\_2D\_ARRAY**: *number*
 
 ___
 
-###  TEXTURE_CUBE_MAP_NEGATIVE_Y
+### TEXTURE\_BINDING\_3D
 
-• **TEXTURE_CUBE_MAP_NEGATIVE_Y**: *number*
-
-___
-
-###  TEXTURE_CUBE_MAP_NEGATIVE_Z
-
-• **TEXTURE_CUBE_MAP_NEGATIVE_Z**: *number*
+• **TEXTURE\_BINDING\_3D**: *number*
 
 ___
 
-###  TEXTURE_CUBE_MAP_POSITIVE_X
+### TEXTURE\_BINDING\_CUBE\_MAP
 
-• **TEXTURE_CUBE_MAP_POSITIVE_X**: *number*
-
-___
-
-###  TEXTURE_CUBE_MAP_POSITIVE_Y
-
-• **TEXTURE_CUBE_MAP_POSITIVE_Y**: *number*
+• **TEXTURE\_BINDING\_CUBE\_MAP**: *number*
 
 ___
 
-###  TEXTURE_CUBE_MAP_POSITIVE_Z
+### TEXTURE\_COMPARE\_FUNC
 
-• **TEXTURE_CUBE_MAP_POSITIVE_Z**: *number*
-
-___
-
-###  TEXTURE_IMMUTABLE_FORMAT
-
-• **TEXTURE_IMMUTABLE_FORMAT**: *number*
+• **TEXTURE\_COMPARE\_FUNC**: *number*
 
 ___
 
-###  TEXTURE_IMMUTABLE_LEVELS
+### TEXTURE\_COMPARE\_MODE
 
-• **TEXTURE_IMMUTABLE_LEVELS**: *number*
-
-___
-
-###  TEXTURE_MAG_FILTER
-
-• **TEXTURE_MAG_FILTER**: *number*
+• **TEXTURE\_COMPARE\_MODE**: *number*
 
 ___
 
-###  TEXTURE_MAX_LEVEL
+### TEXTURE\_CUBE\_MAP
 
-• **TEXTURE_MAX_LEVEL**: *number*
-
-___
-
-###  TEXTURE_MAX_LOD
-
-• **TEXTURE_MAX_LOD**: *number*
+• **TEXTURE\_CUBE\_MAP**: *number*
 
 ___
 
-###  TEXTURE_MIN_FILTER
+### TEXTURE\_CUBE\_MAP\_NEGATIVE\_X
 
-• **TEXTURE_MIN_FILTER**: *number*
-
-___
-
-###  TEXTURE_MIN_LOD
-
-• **TEXTURE_MIN_LOD**: *number*
+• **TEXTURE\_CUBE\_MAP\_NEGATIVE\_X**: *number*
 
 ___
 
-###  TEXTURE_WRAP_R
+### TEXTURE\_CUBE\_MAP\_NEGATIVE\_Y
 
-• **TEXTURE_WRAP_R**: *number*
-
-___
-
-###  TEXTURE_WRAP_S
-
-• **TEXTURE_WRAP_S**: *number*
+• **TEXTURE\_CUBE\_MAP\_NEGATIVE\_Y**: *number*
 
 ___
 
-###  TEXTURE_WRAP_T
+### TEXTURE\_CUBE\_MAP\_NEGATIVE\_Z
 
-• **TEXTURE_WRAP_T**: *number*
-
-___
-
-###  TIMEOUT_EXPIRED
-
-• **TIMEOUT_EXPIRED**: *number*
+• **TEXTURE\_CUBE\_MAP\_NEGATIVE\_Z**: *number*
 
 ___
 
-###  TIMEOUT_IGNORED
+### TEXTURE\_CUBE\_MAP\_POSITIVE\_X
 
-• **TIMEOUT_IGNORED**: *number*
-
-___
-
-###  TRANSFORM_FEEDBACK
-
-• **TRANSFORM_FEEDBACK**: *number*
+• **TEXTURE\_CUBE\_MAP\_POSITIVE\_X**: *number*
 
 ___
 
-###  TRANSFORM_FEEDBACK_ACTIVE
+### TEXTURE\_CUBE\_MAP\_POSITIVE\_Y
 
-• **TRANSFORM_FEEDBACK_ACTIVE**: *number*
-
-___
-
-###  TRANSFORM_FEEDBACK_BINDING
-
-• **TRANSFORM_FEEDBACK_BINDING**: *number*
+• **TEXTURE\_CUBE\_MAP\_POSITIVE\_Y**: *number*
 
 ___
 
-###  TRANSFORM_FEEDBACK_BUFFER
+### TEXTURE\_CUBE\_MAP\_POSITIVE\_Z
 
-• **TRANSFORM_FEEDBACK_BUFFER**: *number*
-
-___
-
-###  TRANSFORM_FEEDBACK_BUFFER_BINDING
-
-• **TRANSFORM_FEEDBACK_BUFFER_BINDING**: *number*
+• **TEXTURE\_CUBE\_MAP\_POSITIVE\_Z**: *number*
 
 ___
 
-###  TRANSFORM_FEEDBACK_BUFFER_MODE
+### TEXTURE\_IMMUTABLE\_FORMAT
 
-• **TRANSFORM_FEEDBACK_BUFFER_MODE**: *number*
-
-___
-
-###  TRANSFORM_FEEDBACK_BUFFER_SIZE
-
-• **TRANSFORM_FEEDBACK_BUFFER_SIZE**: *number*
+• **TEXTURE\_IMMUTABLE\_FORMAT**: *number*
 
 ___
 
-###  TRANSFORM_FEEDBACK_BUFFER_START
+### TEXTURE\_IMMUTABLE\_LEVELS
 
-• **TRANSFORM_FEEDBACK_BUFFER_START**: *number*
-
-___
-
-###  TRANSFORM_FEEDBACK_PAUSED
-
-• **TRANSFORM_FEEDBACK_PAUSED**: *number*
+• **TEXTURE\_IMMUTABLE\_LEVELS**: *number*
 
 ___
 
-###  TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN
+### TEXTURE\_MAG\_FILTER
 
-• **TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN**: *number*
-
-___
-
-###  TRANSFORM_FEEDBACK_VARYINGS
-
-• **TRANSFORM_FEEDBACK_VARYINGS**: *number*
+• **TEXTURE\_MAG\_FILTER**: *number*
 
 ___
 
-###  TRIANGLES
+### TEXTURE\_MAX\_LEVEL
+
+• **TEXTURE\_MAX\_LEVEL**: *number*
+
+___
+
+### TEXTURE\_MAX\_LOD
+
+• **TEXTURE\_MAX\_LOD**: *number*
+
+___
+
+### TEXTURE\_MIN\_FILTER
+
+• **TEXTURE\_MIN\_FILTER**: *number*
+
+___
+
+### TEXTURE\_MIN\_LOD
+
+• **TEXTURE\_MIN\_LOD**: *number*
+
+___
+
+### TEXTURE\_WRAP\_R
+
+• **TEXTURE\_WRAP\_R**: *number*
+
+___
+
+### TEXTURE\_WRAP\_S
+
+• **TEXTURE\_WRAP\_S**: *number*
+
+___
+
+### TEXTURE\_WRAP\_T
+
+• **TEXTURE\_WRAP\_T**: *number*
+
+___
+
+### TIMEOUT\_EXPIRED
+
+• **TIMEOUT\_EXPIRED**: *number*
+
+___
+
+### TIMEOUT\_IGNORED
+
+• **TIMEOUT\_IGNORED**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK
+
+• **TRANSFORM\_FEEDBACK**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_ACTIVE
+
+• **TRANSFORM\_FEEDBACK\_ACTIVE**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_BINDING
+
+• **TRANSFORM\_FEEDBACK\_BINDING**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_BUFFER
+
+• **TRANSFORM\_FEEDBACK\_BUFFER**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_BUFFER\_BINDING
+
+• **TRANSFORM\_FEEDBACK\_BUFFER\_BINDING**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_BUFFER\_MODE
+
+• **TRANSFORM\_FEEDBACK\_BUFFER\_MODE**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_BUFFER\_SIZE
+
+• **TRANSFORM\_FEEDBACK\_BUFFER\_SIZE**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_BUFFER\_START
+
+• **TRANSFORM\_FEEDBACK\_BUFFER\_START**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_PAUSED
+
+• **TRANSFORM\_FEEDBACK\_PAUSED**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_PRIMITIVES\_WRITTEN
+
+• **TRANSFORM\_FEEDBACK\_PRIMITIVES\_WRITTEN**: *number*
+
+___
+
+### TRANSFORM\_FEEDBACK\_VARYINGS
+
+• **TRANSFORM\_FEEDBACK\_VARYINGS**: *number*
+
+___
+
+### TRIANGLES
 
 • **TRIANGLES**: *number*
 
 ___
 
-###  TRIANGLE_FAN
+### TRIANGLE\_FAN
 
-• **TRIANGLE_FAN**: *number*
-
-___
-
-###  TRIANGLE_STRIP
-
-• **TRIANGLE_STRIP**: *number*
+• **TRIANGLE\_FAN**: *number*
 
 ___
 
-###  UNIFORM_ARRAY_STRIDE
+### TRIANGLE\_STRIP
 
-• **UNIFORM_ARRAY_STRIDE**: *number*
-
-___
-
-###  UNIFORM_BLOCK_ACTIVE_UNIFORMS
-
-• **UNIFORM_BLOCK_ACTIVE_UNIFORMS**: *number*
+• **TRIANGLE\_STRIP**: *number*
 
 ___
 
-###  UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES
+### UNIFORM\_ARRAY\_STRIDE
 
-• **UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES**: *number*
-
-___
-
-###  UNIFORM_BLOCK_BINDING
-
-• **UNIFORM_BLOCK_BINDING**: *number*
+• **UNIFORM\_ARRAY\_STRIDE**: *number*
 
 ___
 
-###  UNIFORM_BLOCK_DATA_SIZE
+### UNIFORM\_BLOCK\_ACTIVE\_UNIFORMS
 
-• **UNIFORM_BLOCK_DATA_SIZE**: *number*
-
-___
-
-###  UNIFORM_BLOCK_INDEX
-
-• **UNIFORM_BLOCK_INDEX**: *number*
+• **UNIFORM\_BLOCK\_ACTIVE\_UNIFORMS**: *number*
 
 ___
 
-###  UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER
+### UNIFORM\_BLOCK\_ACTIVE\_UNIFORM\_INDICES
 
-• **UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER**: *number*
-
-___
-
-###  UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER
-
-• **UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER**: *number*
+• **UNIFORM\_BLOCK\_ACTIVE\_UNIFORM\_INDICES**: *number*
 
 ___
 
-###  UNIFORM_BUFFER
+### UNIFORM\_BLOCK\_BINDING
 
-• **UNIFORM_BUFFER**: *number*
-
-___
-
-###  UNIFORM_BUFFER_BINDING
-
-• **UNIFORM_BUFFER_BINDING**: *number*
+• **UNIFORM\_BLOCK\_BINDING**: *number*
 
 ___
 
-###  UNIFORM_BUFFER_OFFSET_ALIGNMENT
+### UNIFORM\_BLOCK\_DATA\_SIZE
 
-• **UNIFORM_BUFFER_OFFSET_ALIGNMENT**: *number*
-
-___
-
-###  UNIFORM_BUFFER_SIZE
-
-• **UNIFORM_BUFFER_SIZE**: *number*
+• **UNIFORM\_BLOCK\_DATA\_SIZE**: *number*
 
 ___
 
-###  UNIFORM_BUFFER_START
+### UNIFORM\_BLOCK\_INDEX
 
-• **UNIFORM_BUFFER_START**: *number*
-
-___
-
-###  UNIFORM_IS_ROW_MAJOR
-
-• **UNIFORM_IS_ROW_MAJOR**: *number*
+• **UNIFORM\_BLOCK\_INDEX**: *number*
 
 ___
 
-###  UNIFORM_MATRIX_STRIDE
+### UNIFORM\_BLOCK\_REFERENCED\_BY\_FRAGMENT\_SHADER
 
-• **UNIFORM_MATRIX_STRIDE**: *number*
-
-___
-
-###  UNIFORM_OFFSET
-
-• **UNIFORM_OFFSET**: *number*
+• **UNIFORM\_BLOCK\_REFERENCED\_BY\_FRAGMENT\_SHADER**: *number*
 
 ___
 
-###  UNIFORM_SIZE
+### UNIFORM\_BLOCK\_REFERENCED\_BY\_VERTEX\_SHADER
 
-• **UNIFORM_SIZE**: *number*
-
-___
-
-###  UNIFORM_TYPE
-
-• **UNIFORM_TYPE**: *number*
+• **UNIFORM\_BLOCK\_REFERENCED\_BY\_VERTEX\_SHADER**: *number*
 
 ___
 
-###  UNPACK_ALIGNMENT
+### UNIFORM\_BUFFER
 
-• **UNPACK_ALIGNMENT**: *number*
-
-___
-
-###  UNPACK_COLORSPACE_CONVERSION_WEBGL
-
-• **UNPACK_COLORSPACE_CONVERSION_WEBGL**: *number*
+• **UNIFORM\_BUFFER**: *number*
 
 ___
 
-###  UNPACK_FLIP_Y_WEBGL
+### UNIFORM\_BUFFER\_BINDING
 
-• **UNPACK_FLIP_Y_WEBGL**: *number*
-
-___
-
-###  UNPACK_IMAGE_HEIGHT
-
-• **UNPACK_IMAGE_HEIGHT**: *number*
+• **UNIFORM\_BUFFER\_BINDING**: *number*
 
 ___
 
-###  UNPACK_PREMULTIPLY_ALPHA_WEBGL
+### UNIFORM\_BUFFER\_OFFSET\_ALIGNMENT
 
-• **UNPACK_PREMULTIPLY_ALPHA_WEBGL**: *number*
-
-___
-
-###  UNPACK_ROW_LENGTH
-
-• **UNPACK_ROW_LENGTH**: *number*
+• **UNIFORM\_BUFFER\_OFFSET\_ALIGNMENT**: *number*
 
 ___
 
-###  UNPACK_SKIP_IMAGES
+### UNIFORM\_BUFFER\_SIZE
 
-• **UNPACK_SKIP_IMAGES**: *number*
-
-___
-
-###  UNPACK_SKIP_PIXELS
-
-• **UNPACK_SKIP_PIXELS**: *number*
+• **UNIFORM\_BUFFER\_SIZE**: *number*
 
 ___
 
-###  UNPACK_SKIP_ROWS
+### UNIFORM\_BUFFER\_START
 
-• **UNPACK_SKIP_ROWS**: *number*
+• **UNIFORM\_BUFFER\_START**: *number*
 
 ___
 
-###  UNSIGNALED
+### UNIFORM\_IS\_ROW\_MAJOR
+
+• **UNIFORM\_IS\_ROW\_MAJOR**: *number*
+
+___
+
+### UNIFORM\_MATRIX\_STRIDE
+
+• **UNIFORM\_MATRIX\_STRIDE**: *number*
+
+___
+
+### UNIFORM\_OFFSET
+
+• **UNIFORM\_OFFSET**: *number*
+
+___
+
+### UNIFORM\_SIZE
+
+• **UNIFORM\_SIZE**: *number*
+
+___
+
+### UNIFORM\_TYPE
+
+• **UNIFORM\_TYPE**: *number*
+
+___
+
+### UNPACK\_ALIGNMENT
+
+• **UNPACK\_ALIGNMENT**: *number*
+
+___
+
+### UNPACK\_COLORSPACE\_CONVERSION\_WEBGL
+
+• **UNPACK\_COLORSPACE\_CONVERSION\_WEBGL**: *number*
+
+___
+
+### UNPACK\_FLIP\_Y\_WEBGL
+
+• **UNPACK\_FLIP\_Y\_WEBGL**: *number*
+
+___
+
+### UNPACK\_IMAGE\_HEIGHT
+
+• **UNPACK\_IMAGE\_HEIGHT**: *number*
+
+___
+
+### UNPACK\_PREMULTIPLY\_ALPHA\_WEBGL
+
+• **UNPACK\_PREMULTIPLY\_ALPHA\_WEBGL**: *number*
+
+___
+
+### UNPACK\_ROW\_LENGTH
+
+• **UNPACK\_ROW\_LENGTH**: *number*
+
+___
+
+### UNPACK\_SKIP\_IMAGES
+
+• **UNPACK\_SKIP\_IMAGES**: *number*
+
+___
+
+### UNPACK\_SKIP\_PIXELS
+
+• **UNPACK\_SKIP\_PIXELS**: *number*
+
+___
+
+### UNPACK\_SKIP\_ROWS
+
+• **UNPACK\_SKIP\_ROWS**: *number*
+
+___
+
+### UNSIGNALED
 
 • **UNSIGNALED**: *number*
 
 ___
 
-###  UNSIGNED_BYTE
+### UNSIGNED\_BYTE
 
-• **UNSIGNED_BYTE**: *number*
-
-___
-
-###  UNSIGNED_INT
-
-• **UNSIGNED_INT**: *number*
+• **UNSIGNED\_BYTE**: *number*
 
 ___
 
-###  UNSIGNED_INT_10F_11F_11F_REV
+### UNSIGNED\_INT
 
-• **UNSIGNED_INT_10F_11F_11F_REV**: *number*
-
-___
-
-###  UNSIGNED_INT_24_8
-
-• **UNSIGNED_INT_24_8**: *number*
+• **UNSIGNED\_INT**: *number*
 
 ___
 
-###  UNSIGNED_INT_2_10_10_10_REV
+### UNSIGNED\_INT\_10F\_11F\_11F\_REV
 
-• **UNSIGNED_INT_2_10_10_10_REV**: *number*
-
-___
-
-###  UNSIGNED_INT_5_9_9_9_REV
-
-• **UNSIGNED_INT_5_9_9_9_REV**: *number*
+• **UNSIGNED\_INT\_10F\_11F\_11F\_REV**: *number*
 
 ___
 
-###  UNSIGNED_INT_SAMPLER_2D
+### UNSIGNED\_INT\_24\_8
 
-• **UNSIGNED_INT_SAMPLER_2D**: *number*
-
-___
-
-###  UNSIGNED_INT_SAMPLER_2D_ARRAY
-
-• **UNSIGNED_INT_SAMPLER_2D_ARRAY**: *number*
+• **UNSIGNED\_INT\_24\_8**: *number*
 
 ___
 
-###  UNSIGNED_INT_SAMPLER_3D
+### UNSIGNED\_INT\_2\_10\_10\_10\_REV
 
-• **UNSIGNED_INT_SAMPLER_3D**: *number*
-
-___
-
-###  UNSIGNED_INT_SAMPLER_CUBE
-
-• **UNSIGNED_INT_SAMPLER_CUBE**: *number*
+• **UNSIGNED\_INT\_2\_10\_10\_10\_REV**: *number*
 
 ___
 
-###  UNSIGNED_INT_VEC2
+### UNSIGNED\_INT\_5\_9\_9\_9\_REV
 
-• **UNSIGNED_INT_VEC2**: *number*
-
-___
-
-###  UNSIGNED_INT_VEC3
-
-• **UNSIGNED_INT_VEC3**: *number*
+• **UNSIGNED\_INT\_5\_9\_9\_9\_REV**: *number*
 
 ___
 
-###  UNSIGNED_INT_VEC4
+### UNSIGNED\_INT\_SAMPLER\_2D
 
-• **UNSIGNED_INT_VEC4**: *number*
-
-___
-
-###  UNSIGNED_NORMALIZED
-
-• **UNSIGNED_NORMALIZED**: *number*
+• **UNSIGNED\_INT\_SAMPLER\_2D**: *number*
 
 ___
 
-###  UNSIGNED_SHORT
+### UNSIGNED\_INT\_SAMPLER\_2D\_ARRAY
 
-• **UNSIGNED_SHORT**: *number*
-
-___
-
-###  UNSIGNED_SHORT_4_4_4_4
-
-• **UNSIGNED_SHORT_4_4_4_4**: *number*
+• **UNSIGNED\_INT\_SAMPLER\_2D\_ARRAY**: *number*
 
 ___
 
-###  UNSIGNED_SHORT_5_5_5_1
+### UNSIGNED\_INT\_SAMPLER\_3D
 
-• **UNSIGNED_SHORT_5_5_5_1**: *number*
-
-___
-
-###  UNSIGNED_SHORT_5_6_5
-
-• **UNSIGNED_SHORT_5_6_5**: *number*
+• **UNSIGNED\_INT\_SAMPLER\_3D**: *number*
 
 ___
 
-###  VALIDATE_STATUS
+### UNSIGNED\_INT\_SAMPLER\_CUBE
 
-• **VALIDATE_STATUS**: *number*
+• **UNSIGNED\_INT\_SAMPLER\_CUBE**: *number*
 
 ___
 
-###  VENDOR
+### UNSIGNED\_INT\_VEC2
+
+• **UNSIGNED\_INT\_VEC2**: *number*
+
+___
+
+### UNSIGNED\_INT\_VEC3
+
+• **UNSIGNED\_INT\_VEC3**: *number*
+
+___
+
+### UNSIGNED\_INT\_VEC4
+
+• **UNSIGNED\_INT\_VEC4**: *number*
+
+___
+
+### UNSIGNED\_NORMALIZED
+
+• **UNSIGNED\_NORMALIZED**: *number*
+
+___
+
+### UNSIGNED\_SHORT
+
+• **UNSIGNED\_SHORT**: *number*
+
+___
+
+### UNSIGNED\_SHORT\_4\_4\_4\_4
+
+• **UNSIGNED\_SHORT\_4\_4\_4\_4**: *number*
+
+___
+
+### UNSIGNED\_SHORT\_5\_5\_5\_1
+
+• **UNSIGNED\_SHORT\_5\_5\_5\_1**: *number*
+
+___
+
+### UNSIGNED\_SHORT\_5\_6\_5
+
+• **UNSIGNED\_SHORT\_5\_6\_5**: *number*
+
+___
+
+### VALIDATE\_STATUS
+
+• **VALIDATE\_STATUS**: *number*
+
+___
+
+### VENDOR
 
 • **VENDOR**: *number*
 
 ___
 
-###  VERSION
+### VERSION
 
 • **VERSION**: *number*
 
 ___
 
-###  VERTEX_ARRAY_BINDING
+### VERTEX\_ARRAY\_BINDING
 
-• **VERTEX_ARRAY_BINDING**: *number*
-
-___
-
-###  VERTEX_ATTRIB_ARRAY_BUFFER_BINDING
-
-• **VERTEX_ATTRIB_ARRAY_BUFFER_BINDING**: *number*
+• **VERTEX\_ARRAY\_BINDING**: *number*
 
 ___
 
-###  VERTEX_ATTRIB_ARRAY_DIVISOR
+### VERTEX\_ATTRIB\_ARRAY\_BUFFER\_BINDING
 
-• **VERTEX_ATTRIB_ARRAY_DIVISOR**: *number*
-
-___
-
-###  VERTEX_ATTRIB_ARRAY_ENABLED
-
-• **VERTEX_ATTRIB_ARRAY_ENABLED**: *number*
+• **VERTEX\_ATTRIB\_ARRAY\_BUFFER\_BINDING**: *number*
 
 ___
 
-###  VERTEX_ATTRIB_ARRAY_INTEGER
+### VERTEX\_ATTRIB\_ARRAY\_DIVISOR
 
-• **VERTEX_ATTRIB_ARRAY_INTEGER**: *number*
-
-___
-
-###  VERTEX_ATTRIB_ARRAY_NORMALIZED
-
-• **VERTEX_ATTRIB_ARRAY_NORMALIZED**: *number*
+• **VERTEX\_ATTRIB\_ARRAY\_DIVISOR**: *number*
 
 ___
 
-###  VERTEX_ATTRIB_ARRAY_POINTER
+### VERTEX\_ATTRIB\_ARRAY\_ENABLED
 
-• **VERTEX_ATTRIB_ARRAY_POINTER**: *number*
-
-___
-
-###  VERTEX_ATTRIB_ARRAY_SIZE
-
-• **VERTEX_ATTRIB_ARRAY_SIZE**: *number*
+• **VERTEX\_ATTRIB\_ARRAY\_ENABLED**: *number*
 
 ___
 
-###  VERTEX_ATTRIB_ARRAY_STRIDE
+### VERTEX\_ATTRIB\_ARRAY\_INTEGER
 
-• **VERTEX_ATTRIB_ARRAY_STRIDE**: *number*
-
-___
-
-###  VERTEX_ATTRIB_ARRAY_TYPE
-
-• **VERTEX_ATTRIB_ARRAY_TYPE**: *number*
+• **VERTEX\_ATTRIB\_ARRAY\_INTEGER**: *number*
 
 ___
 
-###  VERTEX_SHADER
+### VERTEX\_ATTRIB\_ARRAY\_NORMALIZED
 
-• **VERTEX_SHADER**: *number*
+• **VERTEX\_ATTRIB\_ARRAY\_NORMALIZED**: *number*
 
 ___
 
-###  VIEWPORT
+### VERTEX\_ATTRIB\_ARRAY\_POINTER
+
+• **VERTEX\_ATTRIB\_ARRAY\_POINTER**: *number*
+
+___
+
+### VERTEX\_ATTRIB\_ARRAY\_SIZE
+
+• **VERTEX\_ATTRIB\_ARRAY\_SIZE**: *number*
+
+___
+
+### VERTEX\_ATTRIB\_ARRAY\_STRIDE
+
+• **VERTEX\_ATTRIB\_ARRAY\_STRIDE**: *number*
+
+___
+
+### VERTEX\_ATTRIB\_ARRAY\_TYPE
+
+• **VERTEX\_ATTRIB\_ARRAY\_TYPE**: *number*
+
+___
+
+### VERTEX\_SHADER
+
+• **VERTEX\_SHADER**: *number*
+
+___
+
+### VIEWPORT
 
 • **VIEWPORT**: *number*
 
 ___
 
-###  WAIT_FAILED
+### WAIT\_FAILED
 
-• **WAIT_FAILED**: *number*
+• **WAIT\_FAILED**: *number*
 
 ___
 
-###  ZERO
+### ZERO
 
 • **ZERO**: *number*
 
 ___
 
-###  canvas
+### canvas
 
-• **canvas**: *HTMLCanvasElement | OffscreenCanvas*
+• **canvas**: HTMLCanvasElement \| OffscreenCanvas
 
 ___
 
-###  drawingBufferHeight
+### drawingBufferHeight
 
 • **drawingBufferHeight**: *number*
 
 ___
 
-###  drawingBufferWidth
+### drawingBufferWidth
 
 • **drawingBufferWidth**: *number*
 
 ## Methods
 
-###  activeTexture
+### activeTexture
 
-▸ **activeTexture**(`texture`: number): *void*
+▸ **activeTexture**(`texture`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`texture` | number |
+:------ | :------ |
+`texture` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  attachShader
+### attachShader
 
 ▸ **attachShader**(`program`: WebGLProgram, `shader`: WebGLShader): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 `shader` | WebGLShader |
 
@@ -4231,1103 +4230,1103 @@ Name | Type |
 
 ___
 
-###  beginQuery
+### beginQuery
 
-▸ **beginQuery**(`target`: number, `query`: WebGLQuery): *void*
+▸ **beginQuery**(`target`: *number*, `query`: WebGLQuery): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
+:------ | :------ |
+`target` | *number* |
 `query` | WebGLQuery |
 
 **Returns:** *void*
 
 ___
 
-###  beginTransformFeedback
+### beginTransformFeedback
 
-▸ **beginTransformFeedback**(`primitiveMode`: number): *void*
+▸ **beginTransformFeedback**(`primitiveMode`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`primitiveMode` | number |
+:------ | :------ |
+`primitiveMode` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  bindAttribLocation
+### bindAttribLocation
 
-▸ **bindAttribLocation**(`program`: WebGLProgram, `index`: number, `name`: string): *void*
+▸ **bindAttribLocation**(`program`: WebGLProgram, `index`: *number*, `name`: *string*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`index` | number |
-`name` | string |
+`index` | *number* |
+`name` | *string* |
 
 **Returns:** *void*
 
 ___
 
-###  bindBuffer
+### bindBuffer
 
-▸ **bindBuffer**(`target`: number, `buffer`: WebGLBuffer | null): *void*
+▸ **bindBuffer**(`target`: *number*, `buffer`: *null* \| WebGLBuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`buffer` | WebGLBuffer &#124; null |
+:------ | :------ |
+`target` | *number* |
+`buffer` | *null* \| WebGLBuffer |
 
 **Returns:** *void*
 
 ___
 
-###  bindBufferBase
+### bindBufferBase
 
-▸ **bindBufferBase**(`target`: number, `index`: number, `buffer`: WebGLBuffer | null): *void*
+▸ **bindBufferBase**(`target`: *number*, `index`: *number*, `buffer`: *null* \| WebGLBuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`index` | number |
-`buffer` | WebGLBuffer &#124; null |
+:------ | :------ |
+`target` | *number* |
+`index` | *number* |
+`buffer` | *null* \| WebGLBuffer |
 
 **Returns:** *void*
 
 ___
 
-###  bindBufferRange
+### bindBufferRange
 
-▸ **bindBufferRange**(`target`: number, `index`: number, `buffer`: WebGLBuffer | null, `offset`: number, `size`: number): *void*
+▸ **bindBufferRange**(`target`: *number*, `index`: *number*, `buffer`: *null* \| WebGLBuffer, `offset`: *number*, `size`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`index` | number |
-`buffer` | WebGLBuffer &#124; null |
-`offset` | number |
-`size` | number |
+:------ | :------ |
+`target` | *number* |
+`index` | *number* |
+`buffer` | *null* \| WebGLBuffer |
+`offset` | *number* |
+`size` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  bindFramebuffer
+### bindFramebuffer
 
-▸ **bindFramebuffer**(`target`: number, `framebuffer`: WebGLFramebuffer | null): *void*
+▸ **bindFramebuffer**(`target`: *number*, `framebuffer`: *null* \| WebGLFramebuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`framebuffer` | WebGLFramebuffer &#124; null |
+:------ | :------ |
+`target` | *number* |
+`framebuffer` | *null* \| WebGLFramebuffer |
 
 **Returns:** *void*
 
 ___
 
-###  bindRenderbuffer
+### bindRenderbuffer
 
-▸ **bindRenderbuffer**(`target`: number, `renderbuffer`: WebGLRenderbuffer | null): *void*
+▸ **bindRenderbuffer**(`target`: *number*, `renderbuffer`: *null* \| WebGLRenderbuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`renderbuffer` | WebGLRenderbuffer &#124; null |
+:------ | :------ |
+`target` | *number* |
+`renderbuffer` | *null* \| WebGLRenderbuffer |
 
 **Returns:** *void*
 
 ___
 
-###  bindSampler
+### bindSampler
 
-▸ **bindSampler**(`unit`: number, `sampler`: WebGLSampler | null): *void*
+▸ **bindSampler**(`unit`: *number*, `sampler`: *null* \| WebGLSampler): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`unit` | number |
-`sampler` | WebGLSampler &#124; null |
+:------ | :------ |
+`unit` | *number* |
+`sampler` | *null* \| WebGLSampler |
 
 **Returns:** *void*
 
 ___
 
-###  bindTexture
+### bindTexture
 
-▸ **bindTexture**(`target`: number, `texture`: WebGLTexture | null): *void*
+▸ **bindTexture**(`target`: *number*, `texture`: *null* \| WebGLTexture): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`texture` | WebGLTexture &#124; null |
+:------ | :------ |
+`target` | *number* |
+`texture` | *null* \| WebGLTexture |
 
 **Returns:** *void*
 
 ___
 
-###  bindTransformFeedback
+### bindTransformFeedback
 
-▸ **bindTransformFeedback**(`target`: number, `tf`: WebGLTransformFeedback | null): *void*
+▸ **bindTransformFeedback**(`target`: *number*, `tf`: *null* \| WebGLTransformFeedback): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`tf` | WebGLTransformFeedback &#124; null |
+:------ | :------ |
+`target` | *number* |
+`tf` | *null* \| WebGLTransformFeedback |
 
 **Returns:** *void*
 
 ___
 
-###  bindVertexArray
+### bindVertexArray
 
-▸ **bindVertexArray**(`array`: WebGLVertexArrayObject | null): *void*
+▸ **bindVertexArray**(`array`: *null* \| WebGLVertexArrayObject): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`array` | WebGLVertexArrayObject &#124; null |
+:------ | :------ |
+`array` | *null* \| WebGLVertexArrayObject |
 
 **Returns:** *void*
 
 ___
 
-###  blendColor
+### blendColor
 
-▸ **blendColor**(`red`: number, `green`: number, `blue`: number, `alpha`: number): *void*
+▸ **blendColor**(`red`: *number*, `green`: *number*, `blue`: *number*, `alpha`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`red` | number |
-`green` | number |
-`blue` | number |
-`alpha` | number |
+:------ | :------ |
+`red` | *number* |
+`green` | *number* |
+`blue` | *number* |
+`alpha` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  blendEquation
+### blendEquation
 
-▸ **blendEquation**(`mode`: number): *void*
+▸ **blendEquation**(`mode`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
+:------ | :------ |
+`mode` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  blendEquationSeparate
+### blendEquationSeparate
 
-▸ **blendEquationSeparate**(`modeRGB`: number, `modeAlpha`: number): *void*
+▸ **blendEquationSeparate**(`modeRGB`: *number*, `modeAlpha`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`modeRGB` | number |
-`modeAlpha` | number |
+:------ | :------ |
+`modeRGB` | *number* |
+`modeAlpha` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  blendFunc
+### blendFunc
 
-▸ **blendFunc**(`sfactor`: number, `dfactor`: number): *void*
+▸ **blendFunc**(`sfactor`: *number*, `dfactor`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`sfactor` | number |
-`dfactor` | number |
+:------ | :------ |
+`sfactor` | *number* |
+`dfactor` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  blendFuncSeparate
+### blendFuncSeparate
 
-▸ **blendFuncSeparate**(`srcRGB`: number, `dstRGB`: number, `srcAlpha`: number, `dstAlpha`: number): *void*
+▸ **blendFuncSeparate**(`srcRGB`: *number*, `dstRGB`: *number*, `srcAlpha`: *number*, `dstAlpha`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`srcRGB` | number |
-`dstRGB` | number |
-`srcAlpha` | number |
-`dstAlpha` | number |
+:------ | :------ |
+`srcRGB` | *number* |
+`dstRGB` | *number* |
+`srcAlpha` | *number* |
+`dstAlpha` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  blitFramebuffer
+### blitFramebuffer
 
-▸ **blitFramebuffer**(`srcX0`: number, `srcY0`: number, `srcX1`: number, `srcY1`: number, `dstX0`: number, `dstY0`: number, `dstX1`: number, `dstY1`: number, `mask`: number, `filter`: number): *void*
+▸ **blitFramebuffer**(`srcX0`: *number*, `srcY0`: *number*, `srcX1`: *number*, `srcY1`: *number*, `dstX0`: *number*, `dstY0`: *number*, `dstX1`: *number*, `dstY1`: *number*, `mask`: *number*, `filter`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`srcX0` | number |
-`srcY0` | number |
-`srcX1` | number |
-`srcY1` | number |
-`dstX0` | number |
-`dstY0` | number |
-`dstX1` | number |
-`dstY1` | number |
-`mask` | number |
-`filter` | number |
+:------ | :------ |
+`srcX0` | *number* |
+`srcY0` | *number* |
+`srcX1` | *number* |
+`srcY1` | *number* |
+`dstX0` | *number* |
+`dstY0` | *number* |
+`dstX1` | *number* |
+`dstY1` | *number* |
+`mask` | *number* |
+`filter` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  bufferData
+### bufferData
 
-▸ **bufferData**(`target`: number, `size`: number, `usage`: number): *void*
+▸ **bufferData**(`target`: *number*, `size`: *number*, `usage`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`size` | number |
-`usage` | number |
+:------ | :------ |
+`target` | *number* |
+`size` | *number* |
+`usage` | *number* |
 
 **Returns:** *void*
 
-▸ **bufferData**(`target`: number, `srcData`: ArrayBufferView | ArrayBuffer | null, `usage`: number): *void*
+▸ **bufferData**(`target`: *number*, `srcData`: *null* \| ArrayBuffer \| ArrayBufferView, `usage`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`srcData` | ArrayBufferView &#124; ArrayBuffer &#124; null |
-`usage` | number |
+:------ | :------ |
+`target` | *number* |
+`srcData` | *null* \| ArrayBuffer \| ArrayBufferView |
+`usage` | *number* |
 
 **Returns:** *void*
 
-▸ **bufferData**(`target`: number, `srcData`: ArrayBufferView, `usage`: number, `srcOffset`: number, `length?`: number | undefined): *void*
+▸ **bufferData**(`target`: *number*, `srcData`: ArrayBufferView, `usage`: *number*, `srcOffset`: *number*, `length?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
+:------ | :------ |
+`target` | *number* |
 `srcData` | ArrayBufferView |
-`usage` | number |
-`srcOffset` | number |
-`length?` | number &#124; undefined |
+`usage` | *number* |
+`srcOffset` | *number* |
+`length?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  bufferSubData
+### bufferSubData
 
-▸ **bufferSubData**(`target`: number, `dstByteOffset`: number, `srcData`: BufferSource): *void*
+▸ **bufferSubData**(`target`: *number*, `dstByteOffset`: *number*, `srcData`: BufferSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`dstByteOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`dstByteOffset` | *number* |
 `srcData` | BufferSource |
 
 **Returns:** *void*
 
-▸ **bufferSubData**(`target`: number, `dstByteOffset`: number, `srcData`: ArrayBufferView, `srcOffset`: number, `length?`: number | undefined): *void*
+▸ **bufferSubData**(`target`: *number*, `dstByteOffset`: *number*, `srcData`: ArrayBufferView, `srcOffset`: *number*, `length?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`dstByteOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`dstByteOffset` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset` | number |
-`length?` | number &#124; undefined |
+`srcOffset` | *number* |
+`length?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  checkFramebufferStatus
+### checkFramebufferStatus
 
-▸ **checkFramebufferStatus**(`target`: number): *number*
+▸ **checkFramebufferStatus**(`target`: *number*): *number*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
+:------ | :------ |
+`target` | *number* |
 
 **Returns:** *number*
 
 ___
 
-###  clear
+### clear
 
-▸ **clear**(`mask`: number): *void*
+▸ **clear**(`mask`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mask` | number |
+:------ | :------ |
+`mask` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearBufferfi
+### clearBufferfi
 
-▸ **clearBufferfi**(`buffer`: number, `drawbuffer`: number, `depth`: number, `stencil`: number): *void*
+▸ **clearBufferfi**(`buffer`: *number*, `drawbuffer`: *number*, `depth`: *number*, `stencil`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffer` | number |
-`drawbuffer` | number |
-`depth` | number |
-`stencil` | number |
+:------ | :------ |
+`buffer` | *number* |
+`drawbuffer` | *number* |
+`depth` | *number* |
+`stencil` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearBufferfv
+### clearBufferfv
 
-▸ **clearBufferfv**(`buffer`: number, `drawbuffer`: number, `values`: Float32List, `srcOffset?`: number | undefined): *void*
+▸ **clearBufferfv**(`buffer`: *number*, `drawbuffer`: *number*, `values`: Float32List, `srcOffset?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffer` | number |
-`drawbuffer` | number |
+:------ | :------ |
+`buffer` | *number* |
+`drawbuffer` | *number* |
 `values` | Float32List |
-`srcOffset?` | number &#124; undefined |
+`srcOffset?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearBufferiv
+### clearBufferiv
 
-▸ **clearBufferiv**(`buffer`: number, `drawbuffer`: number, `values`: Int32List, `srcOffset?`: number | undefined): *void*
+▸ **clearBufferiv**(`buffer`: *number*, `drawbuffer`: *number*, `values`: Int32List, `srcOffset?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffer` | number |
-`drawbuffer` | number |
+:------ | :------ |
+`buffer` | *number* |
+`drawbuffer` | *number* |
 `values` | Int32List |
-`srcOffset?` | number &#124; undefined |
+`srcOffset?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearBufferuiv
+### clearBufferuiv
 
-▸ **clearBufferuiv**(`buffer`: number, `drawbuffer`: number, `values`: Uint32List, `srcOffset?`: number | undefined): *void*
+▸ **clearBufferuiv**(`buffer`: *number*, `drawbuffer`: *number*, `values`: Uint32List, `srcOffset?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffer` | number |
-`drawbuffer` | number |
+:------ | :------ |
+`buffer` | *number* |
+`drawbuffer` | *number* |
 `values` | Uint32List |
-`srcOffset?` | number &#124; undefined |
+`srcOffset?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearColor
+### clearColor
 
-▸ **clearColor**(`red`: number, `green`: number, `blue`: number, `alpha`: number): *void*
+▸ **clearColor**(`red`: *number*, `green`: *number*, `blue`: *number*, `alpha`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`red` | number |
-`green` | number |
-`blue` | number |
-`alpha` | number |
+:------ | :------ |
+`red` | *number* |
+`green` | *number* |
+`blue` | *number* |
+`alpha` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearDepth
+### clearDepth
 
-▸ **clearDepth**(`depth`: number): *void*
+▸ **clearDepth**(`depth`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`depth` | number |
+:------ | :------ |
+`depth` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clearStencil
+### clearStencil
 
-▸ **clearStencil**(`s`: number): *void*
+▸ **clearStencil**(`s`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`s` | number |
+:------ | :------ |
+`s` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  clientWaitSync
+### clientWaitSync
 
-▸ **clientWaitSync**(`sync`: WebGLSync, `flags`: number, `timeout`: number): *number*
+▸ **clientWaitSync**(`sync`: WebGLSync, `flags`: *number*, `timeout`: *number*): *number*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `sync` | WebGLSync |
-`flags` | number |
-`timeout` | number |
+`flags` | *number* |
+`timeout` | *number* |
 
 **Returns:** *number*
 
 ___
 
-###  colorMask
+### colorMask
 
-▸ **colorMask**(`red`: boolean, `green`: boolean, `blue`: boolean, `alpha`: boolean): *void*
+▸ **colorMask**(`red`: *boolean*, `green`: *boolean*, `blue`: *boolean*, `alpha`: *boolean*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`red` | boolean |
-`green` | boolean |
-`blue` | boolean |
-`alpha` | boolean |
+:------ | :------ |
+`red` | *boolean* |
+`green` | *boolean* |
+`blue` | *boolean* |
+`alpha` | *boolean* |
 
 **Returns:** *void*
 
 ___
 
-###  compileShader
+### compileShader
 
 ▸ **compileShader**(`shader`: WebGLShader): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `shader` | WebGLShader |
 
 **Returns:** *void*
 
 ___
 
-###  compressedTexImage2D
+### compressedTexImage2D
 
-▸ **compressedTexImage2D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `border`: number, `imageSize`: number, `offset`: number): *void*
+▸ **compressedTexImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `border`: *number*, `imageSize`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`border` | number |
-`imageSize` | number |
-`offset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
+`imageSize` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
-▸ **compressedTexImage2D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `border`: number, `srcData`: ArrayBufferView, `srcOffset?`: number | undefined, `srcLengthOverride?`: number | undefined): *void*
+▸ **compressedTexImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `border`: *number*, `srcData`: ArrayBufferView, `srcOffset?`: *number*, `srcLengthOverride?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`border` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset?` | number &#124; undefined |
-`srcLengthOverride?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLengthOverride?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  compressedTexImage3D
+### compressedTexImage3D
 
-▸ **compressedTexImage3D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number, `border`: number, `imageSize`: number, `offset`: number): *void*
+▸ **compressedTexImage3D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `border`: *number*, `imageSize`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`border` | number |
-`imageSize` | number |
-`offset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`border` | *number* |
+`imageSize` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
-▸ **compressedTexImage3D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number, `border`: number, `srcData`: ArrayBufferView, `srcOffset?`: number | undefined, `srcLengthOverride?`: number | undefined): *void*
+▸ **compressedTexImage3D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `border`: *number*, `srcData`: ArrayBufferView, `srcOffset?`: *number*, `srcLengthOverride?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`border` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`border` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset?` | number &#124; undefined |
-`srcLengthOverride?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLengthOverride?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  compressedTexSubImage2D
+### compressedTexSubImage2D
 
-▸ **compressedTexSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `width`: number, `height`: number, `format`: number, `imageSize`: number, `offset`: number): *void*
+▸ **compressedTexSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `imageSize`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`imageSize` | number |
-`offset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`imageSize` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
-▸ **compressedTexSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `width`: number, `height`: number, `format`: number, `srcData`: ArrayBufferView, `srcOffset?`: number | undefined, `srcLengthOverride?`: number | undefined): *void*
+▸ **compressedTexSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `srcData`: ArrayBufferView, `srcOffset?`: *number*, `srcLengthOverride?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`width` | number |
-`height` | number |
-`format` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset?` | number &#124; undefined |
-`srcLengthOverride?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLengthOverride?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  compressedTexSubImage3D
+### compressedTexSubImage3D
 
-▸ **compressedTexSubImage3D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `zoffset`: number, `width`: number, `height`: number, `depth`: number, `format`: number, `imageSize`: number, `offset`: number): *void*
+▸ **compressedTexSubImage3D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `zoffset`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `format`: *number*, `imageSize`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`zoffset` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`format` | number |
-`imageSize` | number |
-`offset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`zoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`format` | *number* |
+`imageSize` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
-▸ **compressedTexSubImage3D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `zoffset`: number, `width`: number, `height`: number, `depth`: number, `format`: number, `srcData`: ArrayBufferView, `srcOffset?`: number | undefined, `srcLengthOverride?`: number | undefined): *void*
+▸ **compressedTexSubImage3D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `zoffset`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `format`: *number*, `srcData`: ArrayBufferView, `srcOffset?`: *number*, `srcLengthOverride?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`zoffset` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`format` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`zoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`format` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset?` | number &#124; undefined |
-`srcLengthOverride?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLengthOverride?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  copyBufferSubData
+### copyBufferSubData
 
-▸ **copyBufferSubData**(`readTarget`: number, `writeTarget`: number, `readOffset`: number, `writeOffset`: number, `size`: number): *void*
+▸ **copyBufferSubData**(`readTarget`: *number*, `writeTarget`: *number*, `readOffset`: *number*, `writeOffset`: *number*, `size`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`readTarget` | number |
-`writeTarget` | number |
-`readOffset` | number |
-`writeOffset` | number |
-`size` | number |
+:------ | :------ |
+`readTarget` | *number* |
+`writeTarget` | *number* |
+`readOffset` | *number* |
+`writeOffset` | *number* |
+`size` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  copyTexImage2D
+### copyTexImage2D
 
-▸ **copyTexImage2D**(`target`: number, `level`: number, `internalformat`: number, `x`: number, `y`: number, `width`: number, `height`: number, `border`: number): *void*
+▸ **copyTexImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*, `border`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
-`border` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  copyTexSubImage2D
+### copyTexSubImage2D
 
-▸ **copyTexSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `x`: number, `y`: number, `width`: number, `height`: number): *void*
+▸ **copyTexSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  copyTexSubImage3D
+### copyTexSubImage3D
 
-▸ **copyTexSubImage3D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `zoffset`: number, `x`: number, `y`: number, `width`: number, `height`: number): *void*
+▸ **copyTexSubImage3D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `zoffset`: *number*, `x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`zoffset` | number |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`zoffset` | *number* |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  createBuffer
+### createBuffer
 
-▸ **createBuffer**(): *WebGLBuffer | null*
+▸ **createBuffer**(): *null* \| WebGLBuffer
 
-**Returns:** *WebGLBuffer | null*
-
-___
-
-###  createFramebuffer
-
-▸ **createFramebuffer**(): *WebGLFramebuffer | null*
-
-**Returns:** *WebGLFramebuffer | null*
+**Returns:** *null* \| WebGLBuffer
 
 ___
 
-###  createProgram
+### createFramebuffer
 
-▸ **createProgram**(): *WebGLProgram | null*
+▸ **createFramebuffer**(): *null* \| WebGLFramebuffer
 
-**Returns:** *WebGLProgram | null*
-
-___
-
-###  createQuery
-
-▸ **createQuery**(): *WebGLQuery | null*
-
-**Returns:** *WebGLQuery | null*
+**Returns:** *null* \| WebGLFramebuffer
 
 ___
 
-###  createRenderbuffer
+### createProgram
 
-▸ **createRenderbuffer**(): *WebGLRenderbuffer | null*
+▸ **createProgram**(): *null* \| WebGLProgram
 
-**Returns:** *WebGLRenderbuffer | null*
-
-___
-
-###  createSampler
-
-▸ **createSampler**(): *WebGLSampler | null*
-
-**Returns:** *WebGLSampler | null*
+**Returns:** *null* \| WebGLProgram
 
 ___
 
-###  createShader
+### createQuery
 
-▸ **createShader**(`type`: number): *WebGLShader | null*
+▸ **createQuery**(): *null* \| WebGLQuery
 
-**Parameters:**
+**Returns:** *null* \| WebGLQuery
+
+___
+
+### createRenderbuffer
+
+▸ **createRenderbuffer**(): *null* \| WebGLRenderbuffer
+
+**Returns:** *null* \| WebGLRenderbuffer
+
+___
+
+### createSampler
+
+▸ **createSampler**(): *null* \| WebGLSampler
+
+**Returns:** *null* \| WebGLSampler
+
+___
+
+### createShader
+
+▸ **createShader**(`type`: *number*): *null* \| WebGLShader
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | number |
+:------ | :------ |
+`type` | *number* |
 
-**Returns:** *WebGLShader | null*
-
-___
-
-###  createTexture
-
-▸ **createTexture**(): *WebGLTexture | null*
-
-**Returns:** *WebGLTexture | null*
+**Returns:** *null* \| WebGLShader
 
 ___
 
-###  createTransformFeedback
+### createTexture
 
-▸ **createTransformFeedback**(): *WebGLTransformFeedback | null*
+▸ **createTexture**(): *null* \| WebGLTexture
 
-**Returns:** *WebGLTransformFeedback | null*
-
-___
-
-###  createVertexArray
-
-▸ **createVertexArray**(): *WebGLVertexArrayObject | null*
-
-**Returns:** *WebGLVertexArrayObject | null*
+**Returns:** *null* \| WebGLTexture
 
 ___
 
-###  cullFace
+### createTransformFeedback
 
-▸ **cullFace**(`mode`: number): *void*
+▸ **createTransformFeedback**(): *null* \| WebGLTransformFeedback
 
-**Parameters:**
+**Returns:** *null* \| WebGLTransformFeedback
+
+___
+
+### createVertexArray
+
+▸ **createVertexArray**(): *null* \| WebGLVertexArrayObject
+
+**Returns:** *null* \| WebGLVertexArrayObject
+
+___
+
+### cullFace
+
+▸ **cullFace**(`mode`: *number*): *void*
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
+:------ | :------ |
+`mode` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  deleteBuffer
+### deleteBuffer
 
-▸ **deleteBuffer**(`buffer`: WebGLBuffer | null): *void*
+▸ **deleteBuffer**(`buffer`: *null* \| WebGLBuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffer` | WebGLBuffer &#124; null |
+:------ | :------ |
+`buffer` | *null* \| WebGLBuffer |
 
 **Returns:** *void*
 
 ___
 
-###  deleteFramebuffer
+### deleteFramebuffer
 
-▸ **deleteFramebuffer**(`framebuffer`: WebGLFramebuffer | null): *void*
+▸ **deleteFramebuffer**(`framebuffer`: *null* \| WebGLFramebuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`framebuffer` | WebGLFramebuffer &#124; null |
+:------ | :------ |
+`framebuffer` | *null* \| WebGLFramebuffer |
 
 **Returns:** *void*
 
 ___
 
-###  deleteProgram
+### deleteProgram
 
-▸ **deleteProgram**(`program`: WebGLProgram | null): *void*
+▸ **deleteProgram**(`program`: *null* \| WebGLProgram): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`program` | WebGLProgram &#124; null |
+:------ | :------ |
+`program` | *null* \| WebGLProgram |
 
 **Returns:** *void*
 
 ___
 
-###  deleteQuery
+### deleteQuery
 
-▸ **deleteQuery**(`query`: WebGLQuery | null): *void*
+▸ **deleteQuery**(`query`: *null* \| WebGLQuery): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`query` | WebGLQuery &#124; null |
+:------ | :------ |
+`query` | *null* \| WebGLQuery |
 
 **Returns:** *void*
 
 ___
 
-###  deleteRenderbuffer
+### deleteRenderbuffer
 
-▸ **deleteRenderbuffer**(`renderbuffer`: WebGLRenderbuffer | null): *void*
+▸ **deleteRenderbuffer**(`renderbuffer`: *null* \| WebGLRenderbuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`renderbuffer` | WebGLRenderbuffer &#124; null |
+:------ | :------ |
+`renderbuffer` | *null* \| WebGLRenderbuffer |
 
 **Returns:** *void*
 
 ___
 
-###  deleteSampler
+### deleteSampler
 
-▸ **deleteSampler**(`sampler`: WebGLSampler | null): *void*
+▸ **deleteSampler**(`sampler`: *null* \| WebGLSampler): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`sampler` | WebGLSampler &#124; null |
+:------ | :------ |
+`sampler` | *null* \| WebGLSampler |
 
 **Returns:** *void*
 
 ___
 
-###  deleteShader
+### deleteShader
 
-▸ **deleteShader**(`shader`: WebGLShader | null): *void*
+▸ **deleteShader**(`shader`: *null* \| WebGLShader): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`shader` | WebGLShader &#124; null |
+:------ | :------ |
+`shader` | *null* \| WebGLShader |
 
 **Returns:** *void*
 
 ___
 
-###  deleteSync
+### deleteSync
 
-▸ **deleteSync**(`sync`: WebGLSync | null): *void*
+▸ **deleteSync**(`sync`: *null* \| WebGLSync): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`sync` | WebGLSync &#124; null |
+:------ | :------ |
+`sync` | *null* \| WebGLSync |
 
 **Returns:** *void*
 
 ___
 
-###  deleteTexture
+### deleteTexture
 
-▸ **deleteTexture**(`texture`: WebGLTexture | null): *void*
+▸ **deleteTexture**(`texture`: *null* \| WebGLTexture): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`texture` | WebGLTexture &#124; null |
+:------ | :------ |
+`texture` | *null* \| WebGLTexture |
 
 **Returns:** *void*
 
 ___
 
-###  deleteTransformFeedback
+### deleteTransformFeedback
 
-▸ **deleteTransformFeedback**(`tf`: WebGLTransformFeedback | null): *void*
+▸ **deleteTransformFeedback**(`tf`: *null* \| WebGLTransformFeedback): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`tf` | WebGLTransformFeedback &#124; null |
+:------ | :------ |
+`tf` | *null* \| WebGLTransformFeedback |
 
 **Returns:** *void*
 
 ___
 
-###  deleteVertexArray
+### deleteVertexArray
 
-▸ **deleteVertexArray**(`vertexArray`: WebGLVertexArrayObject | null): *void*
+▸ **deleteVertexArray**(`vertexArray`: *null* \| WebGLVertexArrayObject): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`vertexArray` | WebGLVertexArrayObject &#124; null |
+:------ | :------ |
+`vertexArray` | *null* \| WebGLVertexArrayObject |
 
 **Returns:** *void*
 
 ___
 
-###  depthFunc
+### depthFunc
 
-▸ **depthFunc**(`func`: number): *void*
+▸ **depthFunc**(`func`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`func` | number |
+:------ | :------ |
+`func` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  depthMask
+### depthMask
 
-▸ **depthMask**(`flag`: boolean): *void*
+▸ **depthMask**(`flag`: *boolean*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`flag` | boolean |
+:------ | :------ |
+`flag` | *boolean* |
 
 **Returns:** *void*
 
 ___
 
-###  depthRange
+### depthRange
 
-▸ **depthRange**(`zNear`: number, `zFar`: number): *void*
+▸ **depthRange**(`zNear`: *number*, `zFar`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`zNear` | number |
-`zFar` | number |
+:------ | :------ |
+`zNear` | *number* |
+`zFar` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  detachShader
+### detachShader
 
 ▸ **detachShader**(`program`: WebGLProgram, `shader`: WebGLShader): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 `shader` | WebGLShader |
 
@@ -5335,178 +5334,178 @@ Name | Type |
 
 ___
 
-###  disable
+### disable
 
-▸ **disable**(`cap`: number): *void*
+▸ **disable**(`cap`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`cap` | number |
+:------ | :------ |
+`cap` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  disableVertexAttribArray
+### disableVertexAttribArray
 
-▸ **disableVertexAttribArray**(`index`: number): *void*
+▸ **disableVertexAttribArray**(`index`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  drawArrays
+### drawArrays
 
-▸ **drawArrays**(`mode`: number, `first`: number, `count`: number): *void*
+▸ **drawArrays**(`mode`: *number*, `first`: *number*, `count`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
-`first` | number |
-`count` | number |
+:------ | :------ |
+`mode` | *number* |
+`first` | *number* |
+`count` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  drawArraysInstanced
+### drawArraysInstanced
 
-▸ **drawArraysInstanced**(`mode`: number, `first`: number, `count`: number, `instanceCount`: number): *void*
+▸ **drawArraysInstanced**(`mode`: *number*, `first`: *number*, `count`: *number*, `instanceCount`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
-`first` | number |
-`count` | number |
-`instanceCount` | number |
+:------ | :------ |
+`mode` | *number* |
+`first` | *number* |
+`count` | *number* |
+`instanceCount` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  drawBuffers
+### drawBuffers
 
-▸ **drawBuffers**(`buffers`: number[]): *void*
+▸ **drawBuffers**(`buffers`: *number*[]): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffers` | number[] |
+:------ | :------ |
+`buffers` | *number*[] |
 
 **Returns:** *void*
 
 ___
 
-###  drawElements
+### drawElements
 
-▸ **drawElements**(`mode`: number, `count`: number, `type`: number, `offset`: number): *void*
+▸ **drawElements**(`mode`: *number*, `count`: *number*, `type`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
-`count` | number |
-`type` | number |
-`offset` | number |
+:------ | :------ |
+`mode` | *number* |
+`count` | *number* |
+`type` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  drawElementsInstanced
+### drawElementsInstanced
 
-▸ **drawElementsInstanced**(`mode`: number, `count`: number, `type`: number, `offset`: number, `instanceCount`: number): *void*
+▸ **drawElementsInstanced**(`mode`: *number*, `count`: *number*, `type`: *number*, `offset`: *number*, `instanceCount`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
-`count` | number |
-`type` | number |
-`offset` | number |
-`instanceCount` | number |
+:------ | :------ |
+`mode` | *number* |
+`count` | *number* |
+`type` | *number* |
+`offset` | *number* |
+`instanceCount` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  drawRangeElements
+### drawRangeElements
 
-▸ **drawRangeElements**(`mode`: number, `start`: number, `end`: number, `count`: number, `type`: number, `offset`: number): *void*
+▸ **drawRangeElements**(`mode`: *number*, `start`: *number*, `end`: *number*, `count`: *number*, `type`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
-`start` | number |
-`end` | number |
-`count` | number |
-`type` | number |
-`offset` | number |
+:------ | :------ |
+`mode` | *number* |
+`start` | *number* |
+`end` | *number* |
+`count` | *number* |
+`type` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  enable
+### enable
 
-▸ **enable**(`cap`: number): *void*
+▸ **enable**(`cap`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`cap` | number |
+:------ | :------ |
+`cap` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  enableVertexAttribArray
+### enableVertexAttribArray
 
-▸ **enableVertexAttribArray**(`index`: number): *void*
+▸ **enableVertexAttribArray**(`index`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  endQuery
+### endQuery
 
-▸ **endQuery**(`target`: number): *void*
+▸ **endQuery**(`target`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
+:------ | :------ |
+`target` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  endTransformFeedback
+### endTransformFeedback
 
 ▸ **endTransformFeedback**(): *void*
 
@@ -5514,22 +5513,22 @@ ___
 
 ___
 
-###  fenceSync
+### fenceSync
 
-▸ **fenceSync**(`condition`: number, `flags`: number): *WebGLSync | null*
+▸ **fenceSync**(`condition`: *number*, `flags`: *number*): *null* \| WebGLSync
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`condition` | number |
-`flags` | number |
+:------ | :------ |
+`condition` | *number* |
+`flags` | *number* |
 
-**Returns:** *WebGLSync | null*
+**Returns:** *null* \| WebGLSync
 
 ___
 
-###  finish
+### finish
 
 ▸ **finish**(): *void*
 
@@ -5537,7 +5536,7 @@ ___
 
 ___
 
-###  flush
+### flush
 
 ▸ **flush**(): *void*
 
@@ -5545,235 +5544,235 @@ ___
 
 ___
 
-###  framebufferRenderbuffer
+### framebufferRenderbuffer
 
-▸ **framebufferRenderbuffer**(`target`: number, `attachment`: number, `renderbuffertarget`: number, `renderbuffer`: WebGLRenderbuffer | null): *void*
+▸ **framebufferRenderbuffer**(`target`: *number*, `attachment`: *number*, `renderbuffertarget`: *number*, `renderbuffer`: *null* \| WebGLRenderbuffer): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`attachment` | number |
-`renderbuffertarget` | number |
-`renderbuffer` | WebGLRenderbuffer &#124; null |
+:------ | :------ |
+`target` | *number* |
+`attachment` | *number* |
+`renderbuffertarget` | *number* |
+`renderbuffer` | *null* \| WebGLRenderbuffer |
 
 **Returns:** *void*
 
 ___
 
-###  framebufferTexture2D
+### framebufferTexture2D
 
-▸ **framebufferTexture2D**(`target`: number, `attachment`: number, `textarget`: number, `texture`: WebGLTexture | null, `level`: number): *void*
+▸ **framebufferTexture2D**(`target`: *number*, `attachment`: *number*, `textarget`: *number*, `texture`: *null* \| WebGLTexture, `level`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`attachment` | number |
-`textarget` | number |
-`texture` | WebGLTexture &#124; null |
-`level` | number |
+:------ | :------ |
+`target` | *number* |
+`attachment` | *number* |
+`textarget` | *number* |
+`texture` | *null* \| WebGLTexture |
+`level` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  framebufferTextureLayer
+### framebufferTextureLayer
 
-▸ **framebufferTextureLayer**(`target`: number, `attachment`: number, `texture`: WebGLTexture | null, `level`: number, `layer`: number): *void*
+▸ **framebufferTextureLayer**(`target`: *number*, `attachment`: *number*, `texture`: *null* \| WebGLTexture, `level`: *number*, `layer`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`attachment` | number |
-`texture` | WebGLTexture &#124; null |
-`level` | number |
-`layer` | number |
+:------ | :------ |
+`target` | *number* |
+`attachment` | *number* |
+`texture` | *null* \| WebGLTexture |
+`level` | *number* |
+`layer` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  frontFace
+### frontFace
 
-▸ **frontFace**(`mode`: number): *void*
+▸ **frontFace**(`mode`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mode` | number |
+:------ | :------ |
+`mode` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  generateMipmap
+### generateMipmap
 
-▸ **generateMipmap**(`target`: number): *void*
+▸ **generateMipmap**(`target`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
+:------ | :------ |
+`target` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getActiveAttrib
+### getActiveAttrib
 
-▸ **getActiveAttrib**(`program`: WebGLProgram, `index`: number): *WebGLActiveInfo | null*
+▸ **getActiveAttrib**(`program`: WebGLProgram, `index`: *number*): *null* \| WebGLActiveInfo
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`index` | number |
+`index` | *number* |
 
-**Returns:** *WebGLActiveInfo | null*
+**Returns:** *null* \| WebGLActiveInfo
 
 ___
 
-###  getActiveUniform
+### getActiveUniform
 
-▸ **getActiveUniform**(`program`: WebGLProgram, `index`: number): *WebGLActiveInfo | null*
+▸ **getActiveUniform**(`program`: WebGLProgram, `index`: *number*): *null* \| WebGLActiveInfo
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`index` | number |
+`index` | *number* |
 
-**Returns:** *WebGLActiveInfo | null*
+**Returns:** *null* \| WebGLActiveInfo
 
 ___
 
-###  getActiveUniformBlockName
+### getActiveUniformBlockName
 
-▸ **getActiveUniformBlockName**(`program`: WebGLProgram, `uniformBlockIndex`: number): *string | null*
+▸ **getActiveUniformBlockName**(`program`: WebGLProgram, `uniformBlockIndex`: *number*): *null* \| *string*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`uniformBlockIndex` | number |
+`uniformBlockIndex` | *number* |
 
-**Returns:** *string | null*
+**Returns:** *null* \| *string*
 
 ___
 
-###  getActiveUniformBlockParameter
+### getActiveUniformBlockParameter
 
-▸ **getActiveUniformBlockParameter**(`program`: WebGLProgram, `uniformBlockIndex`: number, `pname`: number): *void*
+▸ **getActiveUniformBlockParameter**(`program`: WebGLProgram, `uniformBlockIndex`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`uniformBlockIndex` | number |
-`pname` | number |
+`uniformBlockIndex` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getActiveUniforms
+### getActiveUniforms
 
-▸ **getActiveUniforms**(`program`: WebGLProgram, `uniformIndices`: number[], `pname`: number): *void*
+▸ **getActiveUniforms**(`program`: WebGLProgram, `uniformIndices`: *number*[], `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`uniformIndices` | number[] |
-`pname` | number |
+`uniformIndices` | *number*[] |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getAttachedShaders
+### getAttachedShaders
 
-▸ **getAttachedShaders**(`program`: WebGLProgram): *WebGLShader[] | null*
+▸ **getAttachedShaders**(`program`: WebGLProgram): *null* \| WebGLShader[]
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 
-**Returns:** *WebGLShader[] | null*
+**Returns:** *null* \| WebGLShader[]
 
 ___
 
-###  getAttribLocation
+### getAttribLocation
 
-▸ **getAttribLocation**(`program`: WebGLProgram, `name`: string): *number*
+▸ **getAttribLocation**(`program`: WebGLProgram, `name`: *string*): *number*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`name` | string |
+`name` | *string* |
 
 **Returns:** *number*
 
 ___
 
-###  getBufferParameter
+### getBufferParameter
 
-▸ **getBufferParameter**(`target`: number, `pname`: number): *void*
+▸ **getBufferParameter**(`target`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`pname` | number |
+:------ | :------ |
+`target` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getBufferSubData
+### getBufferSubData
 
-▸ **getBufferSubData**(`target`: number, `srcByteOffset`: number, `dstBuffer`: ArrayBufferView, `dstOffset?`: number | undefined, `length?`: number | undefined): *void*
+▸ **getBufferSubData**(`target`: *number*, `srcByteOffset`: *number*, `dstBuffer`: ArrayBufferView, `dstOffset?`: *number*, `length?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`srcByteOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`srcByteOffset` | *number* |
 `dstBuffer` | ArrayBufferView |
-`dstOffset?` | number &#124; undefined |
-`length?` | number &#124; undefined |
+`dstOffset?` | *number* |
+`length?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getContextAttributes
+### getContextAttributes
 
-▸ **getContextAttributes**(): *WebGLContextAttributes | null*
+▸ **getContextAttributes**(): *null* \| WebGLContextAttributes
 
-**Returns:** *WebGLContextAttributes | null*
+**Returns:** *null* \| WebGLContextAttributes
 
 ___
 
-###  getError
+### getError
 
 ▸ **getError**(): *number*
 
@@ -5781,524 +5780,524 @@ ___
 
 ___
 
-###  getExtension
+### getExtension
 
-▸ **getExtension**(`extensionName`: "EXT_blend_minmax"): *EXT_blend_minmax | null*
+▸ **getExtension**(`extensionName`: *EXT_blend_minmax*): *null* \| EXT\_blend\_minmax
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "EXT_blend_minmax" |
-
-**Returns:** *EXT_blend_minmax | null*
-
-▸ **getExtension**(`extensionName`: "EXT_texture_filter_anisotropic"): *EXT_texture_filter_anisotropic | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "EXT_texture_filter_anisotropic" |
+:------ | :------ |
+`extensionName` | *EXT_blend_minmax* |
 
-**Returns:** *EXT_texture_filter_anisotropic | null*
+**Returns:** *null* \| EXT\_blend\_minmax
 
-▸ **getExtension**(`extensionName`: "EXT_frag_depth"): *EXT_frag_depth | null*
+▸ **getExtension**(`extensionName`: *EXT_texture_filter_anisotropic*): *null* \| EXT\_texture\_filter\_anisotropic
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "EXT_frag_depth" |
-
-**Returns:** *EXT_frag_depth | null*
-
-▸ **getExtension**(`extensionName`: "EXT_shader_texture_lod"): *EXT_shader_texture_lod | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "EXT_shader_texture_lod" |
+:------ | :------ |
+`extensionName` | *EXT_texture_filter_anisotropic* |
 
-**Returns:** *EXT_shader_texture_lod | null*
+**Returns:** *null* \| EXT\_texture\_filter\_anisotropic
 
-▸ **getExtension**(`extensionName`: "EXT_sRGB"): *EXT_sRGB | null*
+▸ **getExtension**(`extensionName`: *EXT_frag_depth*): *null* \| EXT\_frag\_depth
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "EXT_sRGB" |
-
-**Returns:** *EXT_sRGB | null*
-
-▸ **getExtension**(`extensionName`: "OES_vertex_array_object"): *OES_vertex_array_object | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "OES_vertex_array_object" |
+:------ | :------ |
+`extensionName` | *EXT_frag_depth* |
 
-**Returns:** *OES_vertex_array_object | null*
+**Returns:** *null* \| EXT\_frag\_depth
 
-▸ **getExtension**(`extensionName`: "WEBGL_color_buffer_float"): *WEBGL_color_buffer_float | null*
+▸ **getExtension**(`extensionName`: *EXT_shader_texture_lod*): *null* \| EXT\_shader\_texture\_lod
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_color_buffer_float" |
-
-**Returns:** *WEBGL_color_buffer_float | null*
-
-▸ **getExtension**(`extensionName`: "WEBGL_compressed_texture_astc"): *WEBGL_compressed_texture_astc | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_compressed_texture_astc" |
+:------ | :------ |
+`extensionName` | *EXT_shader_texture_lod* |
 
-**Returns:** *WEBGL_compressed_texture_astc | null*
+**Returns:** *null* \| EXT\_shader\_texture\_lod
 
-▸ **getExtension**(`extensionName`: "WEBGL_compressed_texture_s3tc_srgb"): *WEBGL_compressed_texture_s3tc_srgb | null*
+▸ **getExtension**(`extensionName`: *EXT_sRGB*): *null* \| EXT\_sRGB
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_compressed_texture_s3tc_srgb" |
-
-**Returns:** *WEBGL_compressed_texture_s3tc_srgb | null*
-
-▸ **getExtension**(`extensionName`: "WEBGL_debug_shaders"): *WEBGL_debug_shaders | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_debug_shaders" |
+:------ | :------ |
+`extensionName` | *EXT_sRGB* |
 
-**Returns:** *WEBGL_debug_shaders | null*
+**Returns:** *null* \| EXT\_sRGB
 
-▸ **getExtension**(`extensionName`: "WEBGL_draw_buffers"): *WEBGL_draw_buffers | null*
+▸ **getExtension**(`extensionName`: *OES_vertex_array_object*): *null* \| OES\_vertex\_array\_object
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_draw_buffers" |
-
-**Returns:** *WEBGL_draw_buffers | null*
-
-▸ **getExtension**(`extensionName`: "WEBGL_lose_context"): *WEBGL_lose_context | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_lose_context" |
+:------ | :------ |
+`extensionName` | *OES_vertex_array_object* |
 
-**Returns:** *WEBGL_lose_context | null*
+**Returns:** *null* \| OES\_vertex\_array\_object
 
-▸ **getExtension**(`extensionName`: "WEBGL_depth_texture"): *WEBGL_depth_texture | null*
+▸ **getExtension**(`extensionName`: *WEBGL_color_buffer_float*): *null* \| WEBGL\_color\_buffer\_float
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_depth_texture" |
-
-**Returns:** *WEBGL_depth_texture | null*
-
-▸ **getExtension**(`extensionName`: "WEBGL_debug_renderer_info"): *WEBGL_debug_renderer_info | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_debug_renderer_info" |
+:------ | :------ |
+`extensionName` | *WEBGL_color_buffer_float* |
 
-**Returns:** *WEBGL_debug_renderer_info | null*
+**Returns:** *null* \| WEBGL\_color\_buffer\_float
 
-▸ **getExtension**(`extensionName`: "WEBGL_compressed_texture_s3tc"): *WEBGL_compressed_texture_s3tc | null*
+▸ **getExtension**(`extensionName`: *WEBGL_compressed_texture_astc*): *null* \| WEBGL\_compressed\_texture\_astc
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "WEBGL_compressed_texture_s3tc" |
-
-**Returns:** *WEBGL_compressed_texture_s3tc | null*
-
-▸ **getExtension**(`extensionName`: "OES_texture_half_float_linear"): *OES_texture_half_float_linear | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "OES_texture_half_float_linear" |
+:------ | :------ |
+`extensionName` | *WEBGL_compressed_texture_astc* |
 
-**Returns:** *OES_texture_half_float_linear | null*
+**Returns:** *null* \| WEBGL\_compressed\_texture\_astc
 
-▸ **getExtension**(`extensionName`: "OES_texture_half_float"): *OES_texture_half_float | null*
+▸ **getExtension**(`extensionName`: *WEBGL_compressed_texture_s3tc_srgb*): *null* \| WEBGL\_compressed\_texture\_s3tc\_srgb
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "OES_texture_half_float" |
-
-**Returns:** *OES_texture_half_float | null*
-
-▸ **getExtension**(`extensionName`: "OES_texture_float_linear"): *OES_texture_float_linear | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "OES_texture_float_linear" |
+:------ | :------ |
+`extensionName` | *WEBGL_compressed_texture_s3tc_srgb* |
 
-**Returns:** *OES_texture_float_linear | null*
+**Returns:** *null* \| WEBGL\_compressed\_texture\_s3tc\_srgb
 
-▸ **getExtension**(`extensionName`: "OES_texture_float"): *OES_texture_float | null*
+▸ **getExtension**(`extensionName`: *WEBGL_debug_shaders*): *null* \| WEBGL\_debug\_shaders
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "OES_texture_float" |
-
-**Returns:** *OES_texture_float | null*
-
-▸ **getExtension**(`extensionName`: "OES_standard_derivatives"): *OES_standard_derivatives | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "OES_standard_derivatives" |
+:------ | :------ |
+`extensionName` | *WEBGL_debug_shaders* |
 
-**Returns:** *OES_standard_derivatives | null*
+**Returns:** *null* \| WEBGL\_debug\_shaders
 
-▸ **getExtension**(`extensionName`: "OES_element_index_uint"): *OES_element_index_uint | null*
+▸ **getExtension**(`extensionName`: *WEBGL_draw_buffers*): *null* \| WEBGL\_draw\_buffers
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`extensionName` | "OES_element_index_uint" |
-
-**Returns:** *OES_element_index_uint | null*
-
-▸ **getExtension**(`extensionName`: "ANGLE_instanced_arrays"): *ANGLE_instanced_arrays | null*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | "ANGLE_instanced_arrays" |
+:------ | :------ |
+`extensionName` | *WEBGL_draw_buffers* |
 
-**Returns:** *ANGLE_instanced_arrays | null*
+**Returns:** *null* \| WEBGL\_draw\_buffers
 
-▸ **getExtension**(`extensionName`: string): *any*
+▸ **getExtension**(`extensionName`: *WEBGL_lose_context*): *null* \| WEBGL\_lose\_context
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`extensionName` | string |
+:------ | :------ |
+`extensionName` | *WEBGL_lose_context* |
+
+**Returns:** *null* \| WEBGL\_lose\_context
+
+▸ **getExtension**(`extensionName`: *WEBGL_depth_texture*): *null* \| WEBGL\_depth\_texture
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *WEBGL_depth_texture* |
+
+**Returns:** *null* \| WEBGL\_depth\_texture
+
+▸ **getExtension**(`extensionName`: *WEBGL_debug_renderer_info*): *null* \| WEBGL\_debug\_renderer\_info
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *WEBGL_debug_renderer_info* |
+
+**Returns:** *null* \| WEBGL\_debug\_renderer\_info
+
+▸ **getExtension**(`extensionName`: *WEBGL_compressed_texture_s3tc*): *null* \| WEBGL\_compressed\_texture\_s3tc
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *WEBGL_compressed_texture_s3tc* |
+
+**Returns:** *null* \| WEBGL\_compressed\_texture\_s3tc
+
+▸ **getExtension**(`extensionName`: *OES_texture_half_float_linear*): *null* \| OES\_texture\_half\_float\_linear
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *OES_texture_half_float_linear* |
+
+**Returns:** *null* \| OES\_texture\_half\_float\_linear
+
+▸ **getExtension**(`extensionName`: *OES_texture_half_float*): *null* \| OES\_texture\_half\_float
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *OES_texture_half_float* |
+
+**Returns:** *null* \| OES\_texture\_half\_float
+
+▸ **getExtension**(`extensionName`: *OES_texture_float_linear*): *null* \| OES\_texture\_float\_linear
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *OES_texture_float_linear* |
+
+**Returns:** *null* \| OES\_texture\_float\_linear
+
+▸ **getExtension**(`extensionName`: *OES_texture_float*): *null* \| OES\_texture\_float
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *OES_texture_float* |
+
+**Returns:** *null* \| OES\_texture\_float
+
+▸ **getExtension**(`extensionName`: *OES_standard_derivatives*): *null* \| OES\_standard\_derivatives
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *OES_standard_derivatives* |
+
+**Returns:** *null* \| OES\_standard\_derivatives
+
+▸ **getExtension**(`extensionName`: *OES_element_index_uint*): *null* \| OES\_element\_index\_uint
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *OES_element_index_uint* |
+
+**Returns:** *null* \| OES\_element\_index\_uint
+
+▸ **getExtension**(`extensionName`: *ANGLE_instanced_arrays*): *null* \| ANGLE\_instanced\_arrays
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *ANGLE_instanced_arrays* |
+
+**Returns:** *null* \| ANGLE\_instanced\_arrays
+
+▸ **getExtension**(`extensionName`: *string*): *any*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`extensionName` | *string* |
 
 **Returns:** *any*
 
 ___
 
-###  getFragDataLocation
+### getFragDataLocation
 
-▸ **getFragDataLocation**(`program`: WebGLProgram, `name`: string): *number*
+▸ **getFragDataLocation**(`program`: WebGLProgram, `name`: *string*): *number*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`name` | string |
+`name` | *string* |
 
 **Returns:** *number*
 
 ___
 
-###  getFramebufferAttachmentParameter
+### getFramebufferAttachmentParameter
 
-▸ **getFramebufferAttachmentParameter**(`target`: number, `attachment`: number, `pname`: number): *void*
+▸ **getFramebufferAttachmentParameter**(`target`: *number*, `attachment`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`attachment` | number |
-`pname` | number |
+:------ | :------ |
+`target` | *number* |
+`attachment` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getIndexedParameter
+### getIndexedParameter
 
-▸ **getIndexedParameter**(`target`: number, `index`: number): *void*
+▸ **getIndexedParameter**(`target`: *number*, `index`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`index` | number |
+:------ | :------ |
+`target` | *number* |
+`index` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getInternalformatParameter
+### getInternalformatParameter
 
-▸ **getInternalformatParameter**(`target`: number, `internalformat`: number, `pname`: number): *void*
+▸ **getInternalformatParameter**(`target`: *number*, `internalformat`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`internalformat` | number |
-`pname` | number |
+:------ | :------ |
+`target` | *number* |
+`internalformat` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getParameter
+### getParameter
 
-▸ **getParameter**(`pname`: number): *void*
+▸ **getParameter**(`pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`pname` | number |
+:------ | :------ |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getProgramInfoLog
+### getProgramInfoLog
 
-▸ **getProgramInfoLog**(`program`: WebGLProgram): *string | null*
+▸ **getProgramInfoLog**(`program`: WebGLProgram): *null* \| *string*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 
-**Returns:** *string | null*
+**Returns:** *null* \| *string*
 
 ___
 
-###  getProgramParameter
+### getProgramParameter
 
-▸ **getProgramParameter**(`program`: WebGLProgram, `pname`: number): *void*
+▸ **getProgramParameter**(`program`: WebGLProgram, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`pname` | number |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getQuery
+### getQuery
 
-▸ **getQuery**(`target`: number, `pname`: number): *WebGLQuery | null*
+▸ **getQuery**(`target`: *number*, `pname`: *number*): *null* \| WebGLQuery
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`pname` | number |
+:------ | :------ |
+`target` | *number* |
+`pname` | *number* |
 
-**Returns:** *WebGLQuery | null*
+**Returns:** *null* \| WebGLQuery
 
 ___
 
-###  getQueryParameter
+### getQueryParameter
 
-▸ **getQueryParameter**(`query`: WebGLQuery, `pname`: number): *void*
+▸ **getQueryParameter**(`query`: WebGLQuery, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `query` | WebGLQuery |
-`pname` | number |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getRenderbufferParameter
+### getRenderbufferParameter
 
-▸ **getRenderbufferParameter**(`target`: number, `pname`: number): *void*
+▸ **getRenderbufferParameter**(`target`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`pname` | number |
+:------ | :------ |
+`target` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getSamplerParameter
+### getSamplerParameter
 
-▸ **getSamplerParameter**(`sampler`: WebGLSampler, `pname`: number): *void*
+▸ **getSamplerParameter**(`sampler`: WebGLSampler, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `sampler` | WebGLSampler |
-`pname` | number |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getShaderInfoLog
+### getShaderInfoLog
 
-▸ **getShaderInfoLog**(`shader`: WebGLShader): *string | null*
+▸ **getShaderInfoLog**(`shader`: WebGLShader): *null* \| *string*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `shader` | WebGLShader |
 
-**Returns:** *string | null*
+**Returns:** *null* \| *string*
 
 ___
 
-###  getShaderParameter
+### getShaderParameter
 
-▸ **getShaderParameter**(`shader`: WebGLShader, `pname`: number): *void*
+▸ **getShaderParameter**(`shader`: WebGLShader, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `shader` | WebGLShader |
-`pname` | number |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getShaderPrecisionFormat
+### getShaderPrecisionFormat
 
-▸ **getShaderPrecisionFormat**(`shadertype`: number, `precisiontype`: number): *WebGLShaderPrecisionFormat | null*
+▸ **getShaderPrecisionFormat**(`shadertype`: *number*, `precisiontype`: *number*): *null* \| WebGLShaderPrecisionFormat
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`shadertype` | number |
-`precisiontype` | number |
+:------ | :------ |
+`shadertype` | *number* |
+`precisiontype` | *number* |
 
-**Returns:** *WebGLShaderPrecisionFormat | null*
+**Returns:** *null* \| WebGLShaderPrecisionFormat
 
 ___
 
-###  getShaderSource
+### getShaderSource
 
-▸ **getShaderSource**(`shader`: WebGLShader): *string | null*
+▸ **getShaderSource**(`shader`: WebGLShader): *null* \| *string*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `shader` | WebGLShader |
 
-**Returns:** *string | null*
+**Returns:** *null* \| *string*
 
 ___
 
-###  getSupportedExtensions
+### getSupportedExtensions
 
-▸ **getSupportedExtensions**(): *string[] | null*
+▸ **getSupportedExtensions**(): *null* \| *string*[]
 
-**Returns:** *string[] | null*
+**Returns:** *null* \| *string*[]
 
 ___
 
-###  getSyncParameter
+### getSyncParameter
 
-▸ **getSyncParameter**(`sync`: WebGLSync, `pname`: number): *void*
+▸ **getSyncParameter**(`sync`: WebGLSync, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `sync` | WebGLSync |
-`pname` | number |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getTexParameter
+### getTexParameter
 
-▸ **getTexParameter**(`target`: number, `pname`: number): *void*
+▸ **getTexParameter**(`target`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`pname` | number |
+:------ | :------ |
+`target` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getTransformFeedbackVarying
+### getTransformFeedbackVarying
 
-▸ **getTransformFeedbackVarying**(`program`: WebGLProgram, `index`: number): *WebGLActiveInfo | null*
+▸ **getTransformFeedbackVarying**(`program`: WebGLProgram, `index`: *number*): *null* \| WebGLActiveInfo
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`index` | number |
+`index` | *number* |
 
-**Returns:** *WebGLActiveInfo | null*
+**Returns:** *null* \| WebGLActiveInfo
 
 ___
 
-###  getUniform
+### getUniform
 
 ▸ **getUniform**(`program`: WebGLProgram, `location`: WebGLUniformLocation): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 `location` | WebGLUniformLocation |
 
@@ -6306,145 +6305,145 @@ Name | Type |
 
 ___
 
-###  getUniformBlockIndex
+### getUniformBlockIndex
 
-▸ **getUniformBlockIndex**(`program`: WebGLProgram, `uniformBlockName`: string): *number*
+▸ **getUniformBlockIndex**(`program`: WebGLProgram, `uniformBlockName`: *string*): *number*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`uniformBlockName` | string |
+`uniformBlockName` | *string* |
 
 **Returns:** *number*
 
 ___
 
-###  getUniformIndices
+### getUniformIndices
 
-▸ **getUniformIndices**(`program`: WebGLProgram, `uniformNames`: string[]): *number[] | null*
+▸ **getUniformIndices**(`program`: WebGLProgram, `uniformNames`: *string*[]): *null* \| *number*[]
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`uniformNames` | string[] |
+`uniformNames` | *string*[] |
 
-**Returns:** *number[] | null*
+**Returns:** *null* \| *number*[]
 
 ___
 
-###  getUniformLocation
+### getUniformLocation
 
-▸ **getUniformLocation**(`program`: WebGLProgram, `name`: string): *WebGLUniformLocation | null*
+▸ **getUniformLocation**(`program`: WebGLProgram, `name`: *string*): *null* \| WebGLUniformLocation
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`name` | string |
+`name` | *string* |
 
-**Returns:** *WebGLUniformLocation | null*
+**Returns:** *null* \| WebGLUniformLocation
 
 ___
 
-###  getVertexAttrib
+### getVertexAttrib
 
-▸ **getVertexAttrib**(`index`: number, `pname`: number): *void*
+▸ **getVertexAttrib**(`index`: *number*, `pname`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`pname` | number |
+:------ | :------ |
+`index` | *number* |
+`pname` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  getVertexAttribOffset
+### getVertexAttribOffset
 
-▸ **getVertexAttribOffset**(`index`: number, `pname`: number): *number*
+▸ **getVertexAttribOffset**(`index`: *number*, `pname`: *number*): *number*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`pname` | number |
+:------ | :------ |
+`index` | *number* |
+`pname` | *number* |
 
 **Returns:** *number*
 
 ___
 
-###  hint
+### hint
 
-▸ **hint**(`target`: number, `mode`: number): *void*
+▸ **hint**(`target`: *number*, `mode`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`mode` | number |
+:------ | :------ |
+`target` | *number* |
+`mode` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  invalidateFramebuffer
+### invalidateFramebuffer
 
-▸ **invalidateFramebuffer**(`target`: number, `attachments`: number[]): *void*
+▸ **invalidateFramebuffer**(`target`: *number*, `attachments`: *number*[]): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`attachments` | number[] |
+:------ | :------ |
+`target` | *number* |
+`attachments` | *number*[] |
 
 **Returns:** *void*
 
 ___
 
-###  invalidateSubFramebuffer
+### invalidateSubFramebuffer
 
-▸ **invalidateSubFramebuffer**(`target`: number, `attachments`: number[], `x`: number, `y`: number, `width`: number, `height`: number): *void*
+▸ **invalidateSubFramebuffer**(`target`: *number*, `attachments`: *number*[], `x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`attachments` | number[] |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`target` | *number* |
+`attachments` | *number*[] |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  isBuffer
+### isBuffer
 
-▸ **isBuffer**(`buffer`: WebGLBuffer | null): *boolean*
+▸ **isBuffer**(`buffer`: *null* \| WebGLBuffer): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`buffer` | WebGLBuffer &#124; null |
+:------ | :------ |
+`buffer` | *null* \| WebGLBuffer |
 
 **Returns:** *boolean*
 
 ___
 
-###  isContextLost
+### isContextLost
 
 ▸ **isContextLost**(): *boolean*
 
@@ -6452,189 +6451,189 @@ ___
 
 ___
 
-###  isEnabled
+### isEnabled
 
-▸ **isEnabled**(`cap`: number): *boolean*
+▸ **isEnabled**(`cap`: *number*): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`cap` | number |
+:------ | :------ |
+`cap` | *number* |
 
 **Returns:** *boolean*
 
 ___
 
-###  isFramebuffer
+### isFramebuffer
 
-▸ **isFramebuffer**(`framebuffer`: WebGLFramebuffer | null): *boolean*
+▸ **isFramebuffer**(`framebuffer`: *null* \| WebGLFramebuffer): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`framebuffer` | WebGLFramebuffer &#124; null |
+:------ | :------ |
+`framebuffer` | *null* \| WebGLFramebuffer |
 
 **Returns:** *boolean*
 
 ___
 
-###  isProgram
+### isProgram
 
-▸ **isProgram**(`program`: WebGLProgram | null): *boolean*
+▸ **isProgram**(`program`: *null* \| WebGLProgram): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`program` | WebGLProgram &#124; null |
+:------ | :------ |
+`program` | *null* \| WebGLProgram |
 
 **Returns:** *boolean*
 
 ___
 
-###  isQuery
+### isQuery
 
-▸ **isQuery**(`query`: WebGLQuery | null): *boolean*
+▸ **isQuery**(`query`: *null* \| WebGLQuery): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`query` | WebGLQuery &#124; null |
+:------ | :------ |
+`query` | *null* \| WebGLQuery |
 
 **Returns:** *boolean*
 
 ___
 
-###  isRenderbuffer
+### isRenderbuffer
 
-▸ **isRenderbuffer**(`renderbuffer`: WebGLRenderbuffer | null): *boolean*
+▸ **isRenderbuffer**(`renderbuffer`: *null* \| WebGLRenderbuffer): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`renderbuffer` | WebGLRenderbuffer &#124; null |
+:------ | :------ |
+`renderbuffer` | *null* \| WebGLRenderbuffer |
 
 **Returns:** *boolean*
 
 ___
 
-###  isSampler
+### isSampler
 
-▸ **isSampler**(`sampler`: WebGLSampler | null): *boolean*
+▸ **isSampler**(`sampler`: *null* \| WebGLSampler): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`sampler` | WebGLSampler &#124; null |
+:------ | :------ |
+`sampler` | *null* \| WebGLSampler |
 
 **Returns:** *boolean*
 
 ___
 
-###  isShader
+### isShader
 
-▸ **isShader**(`shader`: WebGLShader | null): *boolean*
+▸ **isShader**(`shader`: *null* \| WebGLShader): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`shader` | WebGLShader &#124; null |
+:------ | :------ |
+`shader` | *null* \| WebGLShader |
 
 **Returns:** *boolean*
 
 ___
 
-###  isSync
+### isSync
 
-▸ **isSync**(`sync`: WebGLSync | null): *boolean*
+▸ **isSync**(`sync`: *null* \| WebGLSync): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`sync` | WebGLSync &#124; null |
+:------ | :------ |
+`sync` | *null* \| WebGLSync |
 
 **Returns:** *boolean*
 
 ___
 
-###  isTexture
+### isTexture
 
-▸ **isTexture**(`texture`: WebGLTexture | null): *boolean*
+▸ **isTexture**(`texture`: *null* \| WebGLTexture): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`texture` | WebGLTexture &#124; null |
+:------ | :------ |
+`texture` | *null* \| WebGLTexture |
 
 **Returns:** *boolean*
 
 ___
 
-###  isTransformFeedback
+### isTransformFeedback
 
-▸ **isTransformFeedback**(`tf`: WebGLTransformFeedback | null): *boolean*
+▸ **isTransformFeedback**(`tf`: *null* \| WebGLTransformFeedback): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`tf` | WebGLTransformFeedback &#124; null |
+:------ | :------ |
+`tf` | *null* \| WebGLTransformFeedback |
 
 **Returns:** *boolean*
 
 ___
 
-###  isVertexArray
+### isVertexArray
 
-▸ **isVertexArray**(`vertexArray`: WebGLVertexArrayObject | null): *boolean*
+▸ **isVertexArray**(`vertexArray`: *null* \| WebGLVertexArrayObject): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`vertexArray` | WebGLVertexArrayObject &#124; null |
+:------ | :------ |
+`vertexArray` | *null* \| WebGLVertexArrayObject |
 
 **Returns:** *boolean*
 
 ___
 
-###  lineWidth
+### lineWidth
 
-▸ **lineWidth**(`width`: number): *void*
+▸ **lineWidth**(`width`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`width` | number |
+:------ | :------ |
+`width` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  linkProgram
+### linkProgram
 
 ▸ **linkProgram**(`program`: WebGLProgram): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 
 **Returns:** *void*
 
 ___
 
-###  pauseTransformFeedback
+### pauseTransformFeedback
 
 ▸ **pauseTransformFeedback**(): *void*
 
@@ -6642,139 +6641,139 @@ ___
 
 ___
 
-###  pixelStorei
+### pixelStorei
 
-▸ **pixelStorei**(`pname`: number, `param`: number | boolean): *void*
+▸ **pixelStorei**(`pname`: *number*, `param`: *number* \| *boolean*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`pname` | number |
-`param` | number &#124; boolean |
+:------ | :------ |
+`pname` | *number* |
+`param` | *number* \| *boolean* |
 
 **Returns:** *void*
 
 ___
 
-###  polygonOffset
+### polygonOffset
 
-▸ **polygonOffset**(`factor`: number, `units`: number): *void*
+▸ **polygonOffset**(`factor`: *number*, `units`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`factor` | number |
-`units` | number |
+:------ | :------ |
+`factor` | *number* |
+`units` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  readBuffer
+### readBuffer
 
-▸ **readBuffer**(`src`: number): *void*
+▸ **readBuffer**(`src`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`src` | number |
+:------ | :------ |
+`src` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  readPixels
+### readPixels
 
-▸ **readPixels**(`x`: number, `y`: number, `width`: number, `height`: number, `format`: number, `type`: number, `dstData`: ArrayBufferView | null): *void*
+▸ **readPixels**(`x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `dstData`: *null* \| ArrayBufferView): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
-`dstData` | ArrayBufferView &#124; null |
+:------ | :------ |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
+`dstData` | *null* \| ArrayBufferView |
 
 **Returns:** *void*
 
-▸ **readPixels**(`x`: number, `y`: number, `width`: number, `height`: number, `format`: number, `type`: number, `offset`: number): *void*
+▸ **readPixels**(`x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
-`offset` | number |
+:------ | :------ |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
-▸ **readPixels**(`x`: number, `y`: number, `width`: number, `height`: number, `format`: number, `type`: number, `dstData`: ArrayBufferView, `dstOffset`: number): *void*
+▸ **readPixels**(`x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `dstData`: ArrayBufferView, `dstOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
 `dstData` | ArrayBufferView |
-`dstOffset` | number |
+`dstOffset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  renderbufferStorage
+### renderbufferStorage
 
-▸ **renderbufferStorage**(`target`: number, `internalformat`: number, `width`: number, `height`: number): *void*
+▸ **renderbufferStorage**(`target`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`target` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  renderbufferStorageMultisample
+### renderbufferStorageMultisample
 
-▸ **renderbufferStorageMultisample**(`target`: number, `samples`: number, `internalformat`: number, `width`: number, `height`: number): *void*
+▸ **renderbufferStorageMultisample**(`target`: *number*, `samples`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`samples` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`target` | *number* |
+`samples` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  resumeTransformFeedback
+### resumeTransformFeedback
 
 ▸ **resumeTransformFeedback**(): *void*
 
@@ -6782,1475 +6781,1475 @@ ___
 
 ___
 
-###  sampleCoverage
+### sampleCoverage
 
-▸ **sampleCoverage**(`value`: number, `invert`: boolean): *void*
+▸ **sampleCoverage**(`value`: *number*, `invert`: *boolean*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`value` | number |
-`invert` | boolean |
+:------ | :------ |
+`value` | *number* |
+`invert` | *boolean* |
 
 **Returns:** *void*
 
 ___
 
-###  samplerParameterf
+### samplerParameterf
 
-▸ **samplerParameterf**(`sampler`: WebGLSampler, `pname`: number, `param`: number): *void*
+▸ **samplerParameterf**(`sampler`: WebGLSampler, `pname`: *number*, `param`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `sampler` | WebGLSampler |
-`pname` | number |
-`param` | number |
+`pname` | *number* |
+`param` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  samplerParameteri
+### samplerParameteri
 
-▸ **samplerParameteri**(`sampler`: WebGLSampler, `pname`: number, `param`: number): *void*
+▸ **samplerParameteri**(`sampler`: WebGLSampler, `pname`: *number*, `param`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `sampler` | WebGLSampler |
-`pname` | number |
-`param` | number |
+`pname` | *number* |
+`param` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  scissor
+### scissor
 
-▸ **scissor**(`x`: number, `y`: number, `width`: number, `height`: number): *void*
+▸ **scissor**(`x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  shaderSource
+### shaderSource
 
-▸ **shaderSource**(`shader`: WebGLShader, `source`: string): *void*
+▸ **shaderSource**(`shader`: WebGLShader, `source`: *string*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `shader` | WebGLShader |
-`source` | string |
+`source` | *string* |
 
 **Returns:** *void*
 
 ___
 
-###  stencilFunc
+### stencilFunc
 
-▸ **stencilFunc**(`func`: number, `ref`: number, `mask`: number): *void*
+▸ **stencilFunc**(`func`: *number*, `ref`: *number*, `mask`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`func` | number |
-`ref` | number |
-`mask` | number |
+:------ | :------ |
+`func` | *number* |
+`ref` | *number* |
+`mask` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  stencilFuncSeparate
+### stencilFuncSeparate
 
-▸ **stencilFuncSeparate**(`face`: number, `func`: number, `ref`: number, `mask`: number): *void*
+▸ **stencilFuncSeparate**(`face`: *number*, `func`: *number*, `ref`: *number*, `mask`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`face` | number |
-`func` | number |
-`ref` | number |
-`mask` | number |
+:------ | :------ |
+`face` | *number* |
+`func` | *number* |
+`ref` | *number* |
+`mask` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  stencilMask
+### stencilMask
 
-▸ **stencilMask**(`mask`: number): *void*
+▸ **stencilMask**(`mask`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`mask` | number |
+:------ | :------ |
+`mask` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  stencilMaskSeparate
+### stencilMaskSeparate
 
-▸ **stencilMaskSeparate**(`face`: number, `mask`: number): *void*
+▸ **stencilMaskSeparate**(`face`: *number*, `mask`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`face` | number |
-`mask` | number |
+:------ | :------ |
+`face` | *number* |
+`mask` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  stencilOp
+### stencilOp
 
-▸ **stencilOp**(`fail`: number, `zfail`: number, `zpass`: number): *void*
+▸ **stencilOp**(`fail`: *number*, `zfail`: *number*, `zpass`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`fail` | number |
-`zfail` | number |
-`zpass` | number |
+:------ | :------ |
+`fail` | *number* |
+`zfail` | *number* |
+`zpass` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  stencilOpSeparate
+### stencilOpSeparate
 
-▸ **stencilOpSeparate**(`face`: number, `fail`: number, `zfail`: number, `zpass`: number): *void*
+▸ **stencilOpSeparate**(`face`: *number*, `fail`: *number*, `zfail`: *number*, `zpass`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`face` | number |
-`fail` | number |
-`zfail` | number |
-`zpass` | number |
+:------ | :------ |
+`face` | *number* |
+`fail` | *number* |
+`zfail` | *number* |
+`zpass` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texImage2D
+### texImage2D
 
-▸ **texImage2D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `border`: number, `format`: number, `type`: number, `pixels`: ArrayBufferView | null): *void*
+▸ **texImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `pixels`: *null* \| ArrayBufferView): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`border` | number |
-`format` | number |
-`type` | number |
-`pixels` | ArrayBufferView &#124; null |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
+`pixels` | *null* \| ArrayBufferView |
 
 **Returns:** *void*
 
-▸ **texImage2D**(`target`: number, `level`: number, `internalformat`: number, `format`: number, `type`: number, `source`: TexImageSource): *void*
+▸ **texImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `format`: *number*, `type`: *number*, `source`: TexImageSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`format` | *number* |
+`type` | *number* |
 `source` | TexImageSource |
 
 **Returns:** *void*
 
-▸ **texImage2D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `border`: number, `format`: number, `type`: number, `pboOffset`: number): *void*
+▸ **texImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `pboOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`border` | number |
-`format` | number |
-`type` | number |
-`pboOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
+`pboOffset` | *number* |
 
 **Returns:** *void*
 
-▸ **texImage2D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `border`: number, `format`: number, `type`: number, `source`: TexImageSource): *void*
+▸ **texImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `source`: TexImageSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`border` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
 `source` | TexImageSource |
 
 **Returns:** *void*
 
-▸ **texImage2D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `border`: number, `format`: number, `type`: number, `srcData`: ArrayBufferView, `srcOffset`: number): *void*
+▸ **texImage2D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `srcData`: ArrayBufferView, `srcOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`border` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset` | number |
+`srcOffset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texImage3D
+### texImage3D
 
-▸ **texImage3D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number, `border`: number, `format`: number, `type`: number, `pboOffset`: number): *void*
+▸ **texImage3D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `pboOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`border` | number |
-`format` | number |
-`type` | number |
-`pboOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
+`pboOffset` | *number* |
 
 **Returns:** *void*
 
-▸ **texImage3D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number, `border`: number, `format`: number, `type`: number, `source`: TexImageSource): *void*
+▸ **texImage3D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `source`: TexImageSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`border` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
 `source` | TexImageSource |
 
 **Returns:** *void*
 
-▸ **texImage3D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number, `border`: number, `format`: number, `type`: number, `srcData`: ArrayBufferView | null): *void*
+▸ **texImage3D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `srcData`: *null* \| ArrayBufferView): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`border` | number |
-`format` | number |
-`type` | number |
-`srcData` | ArrayBufferView &#124; null |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
+`srcData` | *null* \| ArrayBufferView |
 
 **Returns:** *void*
 
-▸ **texImage3D**(`target`: number, `level`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number, `border`: number, `format`: number, `type`: number, `srcData`: ArrayBufferView, `srcOffset`: number): *void*
+▸ **texImage3D**(`target`: *number*, `level`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `border`: *number*, `format`: *number*, `type`: *number*, `srcData`: ArrayBufferView, `srcOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`border` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`border` | *number* |
+`format` | *number* |
+`type` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset` | number |
+`srcOffset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texParameterf
+### texParameterf
 
-▸ **texParameterf**(`target`: number, `pname`: number, `param`: number): *void*
+▸ **texParameterf**(`target`: *number*, `pname`: *number*, `param`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`pname` | number |
-`param` | number |
+:------ | :------ |
+`target` | *number* |
+`pname` | *number* |
+`param` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texParameteri
+### texParameteri
 
-▸ **texParameteri**(`target`: number, `pname`: number, `param`: number): *void*
+▸ **texParameteri**(`target`: *number*, `pname`: *number*, `param`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`pname` | number |
-`param` | number |
+:------ | :------ |
+`target` | *number* |
+`pname` | *number* |
+`param` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texStorage2D
+### texStorage2D
 
-▸ **texStorage2D**(`target`: number, `levels`: number, `internalformat`: number, `width`: number, `height`: number): *void*
+▸ **texStorage2D**(`target`: *number*, `levels`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`levels` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`target` | *number* |
+`levels` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texStorage3D
+### texStorage3D
 
-▸ **texStorage3D**(`target`: number, `levels`: number, `internalformat`: number, `width`: number, `height`: number, `depth`: number): *void*
+▸ **texStorage3D**(`target`: *number*, `levels`: *number*, `internalformat`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`levels` | number |
-`internalformat` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
+:------ | :------ |
+`target` | *number* |
+`levels` | *number* |
+`internalformat` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texSubImage2D
+### texSubImage2D
 
-▸ **texSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `width`: number, `height`: number, `format`: number, `type`: number, `pixels`: ArrayBufferView | null): *void*
+▸ **texSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `pixels`: *null* \| ArrayBufferView): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
-`pixels` | ArrayBufferView &#124; null |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
+`pixels` | *null* \| ArrayBufferView |
 
 **Returns:** *void*
 
-▸ **texSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `format`: number, `type`: number, `source`: TexImageSource): *void*
+▸ **texSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `format`: *number*, `type`: *number*, `source`: TexImageSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`format` | *number* |
+`type` | *number* |
 `source` | TexImageSource |
 
 **Returns:** *void*
 
-▸ **texSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `width`: number, `height`: number, `format`: number, `type`: number, `pboOffset`: number): *void*
+▸ **texSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `pboOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
-`pboOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
+`pboOffset` | *number* |
 
 **Returns:** *void*
 
-▸ **texSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `width`: number, `height`: number, `format`: number, `type`: number, `source`: TexImageSource): *void*
+▸ **texSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `source`: TexImageSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
 `source` | TexImageSource |
 
 **Returns:** *void*
 
-▸ **texSubImage2D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `width`: number, `height`: number, `format`: number, `type`: number, `srcData`: ArrayBufferView, `srcOffset`: number): *void*
+▸ **texSubImage2D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `width`: *number*, `height`: *number*, `format`: *number*, `type`: *number*, `srcData`: ArrayBufferView, `srcOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`width` | number |
-`height` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`format` | *number* |
+`type` | *number* |
 `srcData` | ArrayBufferView |
-`srcOffset` | number |
+`srcOffset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  texSubImage3D
+### texSubImage3D
 
-▸ **texSubImage3D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `zoffset`: number, `width`: number, `height`: number, `depth`: number, `format`: number, `type`: number, `pboOffset`: number): *void*
+▸ **texSubImage3D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `zoffset`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `format`: *number*, `type`: *number*, `pboOffset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`zoffset` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`format` | number |
-`type` | number |
-`pboOffset` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`zoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`format` | *number* |
+`type` | *number* |
+`pboOffset` | *number* |
 
 **Returns:** *void*
 
-▸ **texSubImage3D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `zoffset`: number, `width`: number, `height`: number, `depth`: number, `format`: number, `type`: number, `source`: TexImageSource): *void*
+▸ **texSubImage3D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `zoffset`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `format`: *number*, `type`: *number*, `source`: TexImageSource): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`zoffset` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`format` | number |
-`type` | number |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`zoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`format` | *number* |
+`type` | *number* |
 `source` | TexImageSource |
 
 **Returns:** *void*
 
-▸ **texSubImage3D**(`target`: number, `level`: number, `xoffset`: number, `yoffset`: number, `zoffset`: number, `width`: number, `height`: number, `depth`: number, `format`: number, `type`: number, `srcData`: ArrayBufferView | null, `srcOffset?`: number | undefined): *void*
+▸ **texSubImage3D**(`target`: *number*, `level`: *number*, `xoffset`: *number*, `yoffset`: *number*, `zoffset`: *number*, `width`: *number*, `height`: *number*, `depth`: *number*, `format`: *number*, `type`: *number*, `srcData`: *null* \| ArrayBufferView, `srcOffset?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`target` | number |
-`level` | number |
-`xoffset` | number |
-`yoffset` | number |
-`zoffset` | number |
-`width` | number |
-`height` | number |
-`depth` | number |
-`format` | number |
-`type` | number |
-`srcData` | ArrayBufferView &#124; null |
-`srcOffset?` | number &#124; undefined |
+:------ | :------ |
+`target` | *number* |
+`level` | *number* |
+`xoffset` | *number* |
+`yoffset` | *number* |
+`zoffset` | *number* |
+`width` | *number* |
+`height` | *number* |
+`depth` | *number* |
+`format` | *number* |
+`type` | *number* |
+`srcData` | *null* \| ArrayBufferView |
+`srcOffset?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  transformFeedbackVaryings
+### transformFeedbackVaryings
 
-▸ **transformFeedbackVaryings**(`program`: WebGLProgram, `varyings`: string[], `bufferMode`: number): *void*
+▸ **transformFeedbackVaryings**(`program`: WebGLProgram, `varyings`: *string*[], `bufferMode`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`varyings` | string[] |
-`bufferMode` | number |
+`varyings` | *string*[] |
+`bufferMode` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform1f
+### uniform1f
 
-▸ **uniform1f**(`location`: WebGLUniformLocation | null, `x`: number): *void*
+▸ **uniform1f**(`location`: *null* \| WebGLUniformLocation, `x`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform1fv
+### uniform1fv
 
-▸ **uniform1fv**(`location`: WebGLUniformLocation | null, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform1fv**(`location`: *null* \| WebGLUniformLocation, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform1i
+### uniform1i
 
-▸ **uniform1i**(`location`: WebGLUniformLocation | null, `x`: number): *void*
+▸ **uniform1i**(`location`: *null* \| WebGLUniformLocation, `x`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform1iv
+### uniform1iv
 
-▸ **uniform1iv**(`location`: WebGLUniformLocation | null, `data`: Int32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform1iv**(`location`: *null* \| WebGLUniformLocation, `data`: Int32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Int32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform1ui
+### uniform1ui
 
-▸ **uniform1ui**(`location`: WebGLUniformLocation | null, `v0`: number): *void*
+▸ **uniform1ui**(`location`: *null* \| WebGLUniformLocation, `v0`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`v0` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`v0` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform1uiv
+### uniform1uiv
 
-▸ **uniform1uiv**(`location`: WebGLUniformLocation | null, `data`: Uint32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform1uiv**(`location`: *null* \| WebGLUniformLocation, `data`: Uint32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Uint32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform2f
+### uniform2f
 
-▸ **uniform2f**(`location`: WebGLUniformLocation | null, `x`: number, `y`: number): *void*
+▸ **uniform2f**(`location`: *null* \| WebGLUniformLocation, `x`: *number*, `y`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
-`y` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
+`y` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform2fv
+### uniform2fv
 
-▸ **uniform2fv**(`location`: WebGLUniformLocation | null, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform2fv**(`location`: *null* \| WebGLUniformLocation, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform2i
+### uniform2i
 
-▸ **uniform2i**(`location`: WebGLUniformLocation | null, `x`: number, `y`: number): *void*
+▸ **uniform2i**(`location`: *null* \| WebGLUniformLocation, `x`: *number*, `y`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
-`y` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
+`y` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform2iv
+### uniform2iv
 
-▸ **uniform2iv**(`location`: WebGLUniformLocation | null, `data`: Int32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform2iv**(`location`: *null* \| WebGLUniformLocation, `data`: Int32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Int32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform2ui
+### uniform2ui
 
-▸ **uniform2ui**(`location`: WebGLUniformLocation | null, `v0`: number, `v1`: number): *void*
+▸ **uniform2ui**(`location`: *null* \| WebGLUniformLocation, `v0`: *number*, `v1`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`v0` | number |
-`v1` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`v0` | *number* |
+`v1` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform2uiv
+### uniform2uiv
 
-▸ **uniform2uiv**(`location`: WebGLUniformLocation | null, `data`: Uint32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform2uiv**(`location`: *null* \| WebGLUniformLocation, `data`: Uint32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Uint32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform3f
+### uniform3f
 
-▸ **uniform3f**(`location`: WebGLUniformLocation | null, `x`: number, `y`: number, `z`: number): *void*
+▸ **uniform3f**(`location`: *null* \| WebGLUniformLocation, `x`: *number*, `y`: *number*, `z`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
-`y` | number |
-`z` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform3fv
+### uniform3fv
 
-▸ **uniform3fv**(`location`: WebGLUniformLocation | null, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform3fv**(`location`: *null* \| WebGLUniformLocation, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform3i
+### uniform3i
 
-▸ **uniform3i**(`location`: WebGLUniformLocation | null, `x`: number, `y`: number, `z`: number): *void*
+▸ **uniform3i**(`location`: *null* \| WebGLUniformLocation, `x`: *number*, `y`: *number*, `z`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
-`y` | number |
-`z` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform3iv
+### uniform3iv
 
-▸ **uniform3iv**(`location`: WebGLUniformLocation | null, `data`: Int32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform3iv**(`location`: *null* \| WebGLUniformLocation, `data`: Int32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Int32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform3ui
+### uniform3ui
 
-▸ **uniform3ui**(`location`: WebGLUniformLocation | null, `v0`: number, `v1`: number, `v2`: number): *void*
+▸ **uniform3ui**(`location`: *null* \| WebGLUniformLocation, `v0`: *number*, `v1`: *number*, `v2`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`v0` | number |
-`v1` | number |
-`v2` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`v0` | *number* |
+`v1` | *number* |
+`v2` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform3uiv
+### uniform3uiv
 
-▸ **uniform3uiv**(`location`: WebGLUniformLocation | null, `data`: Uint32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform3uiv**(`location`: *null* \| WebGLUniformLocation, `data`: Uint32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Uint32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform4f
+### uniform4f
 
-▸ **uniform4f**(`location`: WebGLUniformLocation | null, `x`: number, `y`: number, `z`: number, `w`: number): *void*
+▸ **uniform4f**(`location`: *null* \| WebGLUniformLocation, `x`: *number*, `y`: *number*, `z`: *number*, `w`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
-`y` | number |
-`z` | number |
-`w` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
+`w` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform4fv
+### uniform4fv
 
-▸ **uniform4fv**(`location`: WebGLUniformLocation | null, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform4fv**(`location`: *null* \| WebGLUniformLocation, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform4i
+### uniform4i
 
-▸ **uniform4i**(`location`: WebGLUniformLocation | null, `x`: number, `y`: number, `z`: number, `w`: number): *void*
+▸ **uniform4i**(`location`: *null* \| WebGLUniformLocation, `x`: *number*, `y`: *number*, `z`: *number*, `w`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`x` | number |
-`y` | number |
-`z` | number |
-`w` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
+`w` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform4iv
+### uniform4iv
 
-▸ **uniform4iv**(`location`: WebGLUniformLocation | null, `data`: Int32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform4iv**(`location`: *null* \| WebGLUniformLocation, `data`: Int32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Int32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform4ui
+### uniform4ui
 
-▸ **uniform4ui**(`location`: WebGLUniformLocation | null, `v0`: number, `v1`: number, `v2`: number, `v3`: number): *void*
+▸ **uniform4ui**(`location`: *null* \| WebGLUniformLocation, `v0`: *number*, `v1`: *number*, `v2`: *number*, `v3`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`v0` | number |
-`v1` | number |
-`v2` | number |
-`v3` | number |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`v0` | *number* |
+`v1` | *number* |
+`v2` | *number* |
+`v3` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniform4uiv
+### uniform4uiv
 
-▸ **uniform4uiv**(`location`: WebGLUniformLocation | null, `data`: Uint32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniform4uiv**(`location`: *null* \| WebGLUniformLocation, `data`: Uint32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
 `data` | Uint32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformBlockBinding
+### uniformBlockBinding
 
-▸ **uniformBlockBinding**(`program`: WebGLProgram, `uniformBlockIndex`: number, `uniformBlockBinding`: number): *void*
+▸ **uniformBlockBinding**(`program`: WebGLProgram, `uniformBlockIndex`: *number*, `uniformBlockBinding`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
-`uniformBlockIndex` | number |
-`uniformBlockBinding` | number |
+`uniformBlockIndex` | *number* |
+`uniformBlockBinding` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix2fv
+### uniformMatrix2fv
 
-▸ **uniformMatrix2fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix2fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix2x3fv
+### uniformMatrix2x3fv
 
-▸ **uniformMatrix2x3fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix2x3fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix2x4fv
+### uniformMatrix2x4fv
 
-▸ **uniformMatrix2x4fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix2x4fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix3fv
+### uniformMatrix3fv
 
-▸ **uniformMatrix3fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix3fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix3x2fv
+### uniformMatrix3x2fv
 
-▸ **uniformMatrix3x2fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix3x2fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix3x4fv
+### uniformMatrix3x4fv
 
-▸ **uniformMatrix3x4fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix3x4fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix4fv
+### uniformMatrix4fv
 
-▸ **uniformMatrix4fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix4fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix4x2fv
+### uniformMatrix4x2fv
 
-▸ **uniformMatrix4x2fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix4x2fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  uniformMatrix4x3fv
+### uniformMatrix4x3fv
 
-▸ **uniformMatrix4x3fv**(`location`: WebGLUniformLocation | null, `transpose`: boolean, `data`: Float32List, `srcOffset?`: number | undefined, `srcLength?`: number | undefined): *void*
+▸ **uniformMatrix4x3fv**(`location`: *null* \| WebGLUniformLocation, `transpose`: *boolean*, `data`: Float32List, `srcOffset?`: *number*, `srcLength?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`location` | WebGLUniformLocation &#124; null |
-`transpose` | boolean |
+:------ | :------ |
+`location` | *null* \| WebGLUniformLocation |
+`transpose` | *boolean* |
 `data` | Float32List |
-`srcOffset?` | number &#124; undefined |
-`srcLength?` | number &#124; undefined |
+`srcOffset?` | *number* |
+`srcLength?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  useProgram
+### useProgram
 
-▸ **useProgram**(`program`: WebGLProgram | null): *void*
+▸ **useProgram**(`program`: *null* \| WebGLProgram): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`program` | WebGLProgram &#124; null |
+:------ | :------ |
+`program` | *null* \| WebGLProgram |
 
 **Returns:** *void*
 
 ___
 
-###  validateProgram
+### validateProgram
 
 ▸ **validateProgram**(`program`: WebGLProgram): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `program` | WebGLProgram |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib1f
+### vertexAttrib1f
 
-▸ **vertexAttrib1f**(`index`: number, `x`: number): *void*
+▸ **vertexAttrib1f**(`index`: *number*, `x`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`x` | number |
+:------ | :------ |
+`index` | *number* |
+`x` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib1fv
+### vertexAttrib1fv
 
-▸ **vertexAttrib1fv**(`index`: number, `values`: Float32List): *void*
+▸ **vertexAttrib1fv**(`index`: *number*, `values`: Float32List): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 `values` | Float32List |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib2f
+### vertexAttrib2f
 
-▸ **vertexAttrib2f**(`index`: number, `x`: number, `y`: number): *void*
+▸ **vertexAttrib2f**(`index`: *number*, `x`: *number*, `y`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`x` | number |
-`y` | number |
+:------ | :------ |
+`index` | *number* |
+`x` | *number* |
+`y` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib2fv
+### vertexAttrib2fv
 
-▸ **vertexAttrib2fv**(`index`: number, `values`: Float32List): *void*
+▸ **vertexAttrib2fv**(`index`: *number*, `values`: Float32List): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 `values` | Float32List |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib3f
+### vertexAttrib3f
 
-▸ **vertexAttrib3f**(`index`: number, `x`: number, `y`: number, `z`: number): *void*
+▸ **vertexAttrib3f**(`index`: *number*, `x`: *number*, `y`: *number*, `z`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`x` | number |
-`y` | number |
-`z` | number |
+:------ | :------ |
+`index` | *number* |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib3fv
+### vertexAttrib3fv
 
-▸ **vertexAttrib3fv**(`index`: number, `values`: Float32List): *void*
+▸ **vertexAttrib3fv**(`index`: *number*, `values`: Float32List): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 `values` | Float32List |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib4f
+### vertexAttrib4f
 
-▸ **vertexAttrib4f**(`index`: number, `x`: number, `y`: number, `z`: number, `w`: number): *void*
+▸ **vertexAttrib4f**(`index`: *number*, `x`: *number*, `y`: *number*, `z`: *number*, `w`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`x` | number |
-`y` | number |
-`z` | number |
-`w` | number |
+:------ | :------ |
+`index` | *number* |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
+`w` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttrib4fv
+### vertexAttrib4fv
 
-▸ **vertexAttrib4fv**(`index`: number, `values`: Float32List): *void*
+▸ **vertexAttrib4fv**(`index`: *number*, `values`: Float32List): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 `values` | Float32List |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribDivisor
+### vertexAttribDivisor
 
-▸ **vertexAttribDivisor**(`index`: number, `divisor`: number): *void*
+▸ **vertexAttribDivisor**(`index`: *number*, `divisor`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`divisor` | number |
+:------ | :------ |
+`index` | *number* |
+`divisor` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribI4i
+### vertexAttribI4i
 
-▸ **vertexAttribI4i**(`index`: number, `x`: number, `y`: number, `z`: number, `w`: number): *void*
+▸ **vertexAttribI4i**(`index`: *number*, `x`: *number*, `y`: *number*, `z`: *number*, `w`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`x` | number |
-`y` | number |
-`z` | number |
-`w` | number |
+:------ | :------ |
+`index` | *number* |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
+`w` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribI4iv
+### vertexAttribI4iv
 
-▸ **vertexAttribI4iv**(`index`: number, `values`: Int32List): *void*
+▸ **vertexAttribI4iv**(`index`: *number*, `values`: Int32List): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 `values` | Int32List |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribI4ui
+### vertexAttribI4ui
 
-▸ **vertexAttribI4ui**(`index`: number, `x`: number, `y`: number, `z`: number, `w`: number): *void*
+▸ **vertexAttribI4ui**(`index`: *number*, `x`: *number*, `y`: *number*, `z`: *number*, `w`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`x` | number |
-`y` | number |
-`z` | number |
-`w` | number |
+:------ | :------ |
+`index` | *number* |
+`x` | *number* |
+`y` | *number* |
+`z` | *number* |
+`w` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribI4uiv
+### vertexAttribI4uiv
 
-▸ **vertexAttribI4uiv**(`index`: number, `values`: Uint32List): *void*
+▸ **vertexAttribI4uiv**(`index`: *number*, `values`: Uint32List): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
+:------ | :------ |
+`index` | *number* |
 `values` | Uint32List |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribIPointer
+### vertexAttribIPointer
 
-▸ **vertexAttribIPointer**(`index`: number, `size`: number, `type`: number, `stride`: number, `offset`: number): *void*
+▸ **vertexAttribIPointer**(`index`: *number*, `size`: *number*, `type`: *number*, `stride`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`size` | number |
-`type` | number |
-`stride` | number |
-`offset` | number |
+:------ | :------ |
+`index` | *number* |
+`size` | *number* |
+`type` | *number* |
+`stride` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  vertexAttribPointer
+### vertexAttribPointer
 
-▸ **vertexAttribPointer**(`index`: number, `size`: number, `type`: number, `normalized`: boolean, `stride`: number, `offset`: number): *void*
+▸ **vertexAttribPointer**(`index`: *number*, `size`: *number*, `type`: *number*, `normalized`: *boolean*, `stride`: *number*, `offset`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`index` | number |
-`size` | number |
-`type` | number |
-`normalized` | boolean |
-`stride` | number |
-`offset` | number |
+:------ | :------ |
+`index` | *number* |
+`size` | *number* |
+`type` | *number* |
+`normalized` | *boolean* |
+`stride` | *number* |
+`offset` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  viewport
+### viewport
 
-▸ **viewport**(`x`: number, `y`: number, `width`: number, `height`: number): *void*
+▸ **viewport**(`x`: *number*, `y`: *number*, `width`: *number*, `height`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`x` | number |
-`y` | number |
-`width` | number |
-`height` | number |
+:------ | :------ |
+`x` | *number* |
+`y` | *number* |
+`width` | *number* |
+`height` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  waitSync
+### waitSync
 
-▸ **waitSync**(`sync`: WebGLSync, `flags`: number, `timeout`: number): *void*
+▸ **waitSync**(`sync`: WebGLSync, `flags`: *number*, `timeout`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `sync` | WebGLSync |
-`flags` | number |
-`timeout` | number |
+`flags` | *number* |
+`timeout` | *number* |
 
 **Returns:** *void*

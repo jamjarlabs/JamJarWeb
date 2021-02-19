@@ -1,79 +1,76 @@
-
 # Class: Pointer
 
 Pointer describes a pointer event with additional information around cameras and position within
 the element the game is running in.
 
-## Hierarchy
-
-* **Pointer**
-
 ## Implements
 
-* [IFreeable](../interfaces/ifreeable.md)
+* [*IFreeable*](../interfaces/ifreeable.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](pointer.md#constructor)
+- [constructor](pointer.md#constructor)
 
 ### Properties
 
-* [cameraInfos](pointer.md#camerainfos)
-* [elementPosition](pointer.md#elementposition)
-* [event](pointer.md#event)
+- [cameraInfos](pointer.md#camerainfos)
+- [elementPosition](pointer.md#elementposition)
+- [event](pointer.md#event)
 
 ### Methods
 
-* [Free](pointer.md#free)
+- [Free](pointer.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Pointer**(`event`: PointerEvent, `elementPosition`: [Vector](vector.md), `cameraInfos`: [PointerCameraInfo](pointercamerainfo.md)[]): *[Pointer](pointer.md)*
+\+ **new Pointer**(`event`: PointerEvent, `elementPosition`: [*Vector*](vector.md), `cameraInfos`: [*PointerCameraInfo*](pointercamerainfo.md)[]): [*Pointer*](pointer.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | PointerEvent |
-`elementPosition` | [Vector](vector.md) |
-`cameraInfos` | [PointerCameraInfo](pointercamerainfo.md)[] |
+`elementPosition` | [*Vector*](vector.md) |
+`cameraInfos` | [*PointerCameraInfo*](pointercamerainfo.md)[] |
 
-**Returns:** *[Pointer](pointer.md)*
+**Returns:** [*Pointer*](pointer.md)
 
 ## Properties
 
-###  cameraInfos
+### cameraInfos
 
-• **cameraInfos**: *[PointerCameraInfo](pointercamerainfo.md)[]*
+• **cameraInfos**: [*PointerCameraInfo*](pointercamerainfo.md)[]
 
 Relevant camera information around the pointer event.
 
 ___
 
-###  elementPosition
+### elementPosition
 
-• **elementPosition**: *[Vector](vector.md)*
+• **elementPosition**: [*Vector*](vector.md)
 
 Position within the game HTML element, from bottom left (-1, -1) to top right (1, 1).
 
 ___
 
-###  event
+### event
 
-• **event**: *PointerEvent*
+• **event**: PointerEvent
 
 Standard PointerEvent dispatched from JS.
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
+
+Implementation of: [IFreeable](../interfaces/ifreeable.md)

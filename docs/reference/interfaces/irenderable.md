@@ -1,4 +1,3 @@
-
 # Interface: IRenderable
 
 Renderable represents something that can be rendered.
@@ -6,85 +5,85 @@ Contains information for rendering.
 
 ## Hierarchy
 
-  ↳ [IPoolable](ipoolable.md)
+* [*IPoolable*](ipoolable.md)
 
   ↳ **IRenderable**
 
 ## Implemented by
 
-* [Renderable](../classes/renderable.md)
+* [*Renderable*](../classes/renderable.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [camera](irenderable.md#camera)
-* [drawMode](irenderable.md#drawmode)
-* [material](irenderable.md#material)
-* [modelMatrix](irenderable.md#modelmatrix)
-* [objectInPool](irenderable.md#objectinpool)
-* [vertices](irenderable.md#vertices)
-* [zOrder](irenderable.md#zorder)
+- [camera](irenderable.md#camera)
+- [drawMode](irenderable.md#drawmode)
+- [material](irenderable.md#material)
+- [modelMatrix](irenderable.md#modelmatrix)
+- [objectInPool](irenderable.md#objectinpool)
+- [vertices](irenderable.md#vertices)
+- [zOrder](irenderable.md#zorder)
 
 ### Methods
 
-* [Free](irenderable.md#free)
-* [Recycle](irenderable.md#recycle)
+- [Free](irenderable.md#free)
+- [Recycle](irenderable.md#recycle)
 
 ## Properties
 
-###  camera
+### camera
 
-• **camera**: *[IEntity](ientity.md)*
+• **camera**: [*IEntity*](ientity.md)
 
 The camera to draw the renderable to.
 
 ___
 
-###  drawMode
+### drawMode
 
-• **drawMode**: *[DrawMode](../enums/drawmode.md)*
+• **drawMode**: [*DrawMode*](../enums/drawmode.md)
 
 The draw mode of the renderable, specifying how it will be rendered.
 
 ___
 
-###  material
+### material
 
-• **material**: *[Material](../classes/material.md)*
+• **material**: [*Material*](../classes/material.md)
 
 The material of the object to render, containing render information
 about texture and shaders.
 
 ___
 
-###  modelMatrix
+### modelMatrix
 
-• **modelMatrix**: *[Matrix4D](../classes/matrix4d.md)*
+• **modelMatrix**: [*Matrix4D*](../classes/matrix4d.md)
 
 The model matrix (position, scale, rotation) of the object to render.
 
 ___
 
-###  objectInPool
+### objectInPool
 
 • **objectInPool**: *boolean*
 
-*Inherited from [IPoolable](ipoolable.md).[objectInPool](ipoolable.md#objectinpool)*
-
 objectInPool is used to mark if the instance of the object is currently pooled.
+
+Inherited from: [IPoolable](ipoolable.md).[objectInPool](ipoolable.md#objectinpool)
 
 ___
 
-###  vertices
+### vertices
 
-• **vertices**: *[Polygon](../classes/polygon.md)*
+• **vertices**: [*Polygon*](../classes/polygon.md)
 
 The vertices of the object to render.
 
 ___
 
-###  zOrder
+### zOrder
 
 • **zOrder**: *number*
 
@@ -94,31 +93,31 @@ lower Z-Order means behind.
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
-
-*Inherited from [IFreeable](ifreeable.md).[Free](ifreeable.md#free)*
 
 Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Inherited from: [IPoolable](ipoolable.md)
+
 ___
 
-###  Recycle
+### Recycle
 
-▸ **Recycle**(...`args`: any): *[IPoolable](ipoolable.md)*
-
-*Inherited from [IPoolable](ipoolable.md).[Recycle](ipoolable.md#recycle)*
+▸ **Recycle**(...`args`: *any*): [*IPoolable*](ipoolable.md)
 
 Recycle is used to reuse an existing object instance, using the arguments provided - similar to a constructor,
 but must be repeatable.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`...args` | any | The arguments to use when recycling the object instance  |
+:------ | :------ | :------ |
+`...args` | *any* | The arguments to use when recycling the object instance    |
 
-**Returns:** *[IPoolable](ipoolable.md)*
+**Returns:** [*IPoolable*](ipoolable.md)
+
+Inherited from: [IPoolable](ipoolable.md)

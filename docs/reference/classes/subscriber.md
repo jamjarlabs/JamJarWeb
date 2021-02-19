@@ -1,4 +1,3 @@
-
 # Class: Subscriber
 
 Subscriber represents something that can subscribe to and recieve messages
@@ -8,74 +7,67 @@ from the message bus
 
 * **Subscriber**
 
-  ↳ [Scene](scene.md)
+  ↳ [*Game*](game.md)
 
-  ↳ [System](system.md)
+  ↳ [*EntityManager*](entitymanager.md)
 
-  ↳ [EntityManager](entitymanager.md)
+  ↳ [*Scene*](scene.md)
 
-  ↳ [Game](game.md)
+  ↳ [*System*](system.md)
 
 ## Implements
 
-* [ISubscriber](../interfaces/isubscriber.md)
+* [*ISubscriber*](../interfaces/isubscriber.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](subscriber.md#constructor)
+- [constructor](subscriber.md#constructor)
 
 ### Properties
 
-* [subscriberID](subscriber.md#subscriberid)
-* [SUBSCRIBER_ID](subscriber.md#static-private-subscriber_id)
+- [subscriberID](subscriber.md#subscriberid)
 
 ### Methods
 
-* [OnMessage](subscriber.md#abstract-onmessage)
+- [OnMessage](subscriber.md#onmessage)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Subscriber**(`subscriberID`: number): *[Subscriber](subscriber.md)*
+\+ **new Subscriber**(`subscriberID?`: *number*): [*Subscriber*](subscriber.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`subscriberID` | number | Subscriber.SUBSCRIBER_ID++ |
+Name | Type |
+:------ | :------ |
+`subscriberID` | *number* |
 
-**Returns:** *[Subscriber](subscriber.md)*
+**Returns:** [*Subscriber*](subscriber.md)
 
 ## Properties
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-___
-
-### `Static` `Private` SUBSCRIBER_ID
-
-▪ **SUBSCRIBER_ID**: *number* = 0
+Implementation of: [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)
 
 ## Methods
 
-### `Abstract` OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ `Abstract`**OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
 OnMessage handles a subscriber recieving a message.
 Called by the message bus for appropriate messages.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`message` | [IMessage](../interfaces/imessage.md) | The message that has been sent to the subscriber  |
+:------ | :------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) | The message that has been sent to the subscriber    |
 
 **Returns:** *void*

@@ -1,4 +1,3 @@
-
 # Class: RenderSystem
 
 RenderSystem is an abstract class representing a generic rendering system,
@@ -7,160 +6,150 @@ Contains the message constant for loading renderables.
 
 ## Hierarchy
 
-  ↳ [ArraySystem](arraysystem.md)
+* [*ArraySystem*](arraysystem.md)
 
   ↳ **RenderSystem**
 
-  ↳ [WebGLSystem](webglsystem.md)
+  ↳↳ [*WebGLSystem*](webglsystem.md)
 
-  ↳ [TestRenderSystem](testrendersystem.md)
-
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](rendersystem.md#constructor)
+- [constructor](rendersystem.md#constructor)
 
 ### Properties
 
-* [entities](rendersystem.md#protected-entities)
-* [messageBus](rendersystem.md#protected-messagebus)
-* [renderables](rendersystem.md#protected-renderables)
-* [scene](rendersystem.md#protected-optional-scene)
-* [subscriberID](rendersystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](rendersystem.md#static-message_deregister)
-* [MESSAGE_LOAD_RENDERABLES](rendersystem.md#static-message_load_renderables)
-* [MESSAGE_REGISTER](rendersystem.md#static-message_register)
-* [MESSAGE_UPDATE](rendersystem.md#static-message_update)
+- [entities](rendersystem.md#entities)
+- [messageBus](rendersystem.md#messagebus)
+- [renderables](rendersystem.md#renderables)
+- [scene](rendersystem.md#scene)
+- [subscriberID](rendersystem.md#subscriberid)
+- [MESSAGE\_DEREGISTER](rendersystem.md#message_deregister)
+- [MESSAGE\_LOAD\_RENDERABLES](rendersystem.md#message_load_renderables)
+- [MESSAGE\_REGISTER](rendersystem.md#message_register)
+- [MESSAGE\_UPDATE](rendersystem.md#message_update)
 
 ### Methods
 
-* [Destroy](rendersystem.md#destroy)
-* [OnDestroy](rendersystem.md#protected-ondestroy)
-* [OnMessage](rendersystem.md#onmessage)
-* [Update](rendersystem.md#protected-update)
-* [register](rendersystem.md#protected-register)
-* [remove](rendersystem.md#protected-remove)
+- [Destroy](rendersystem.md#destroy)
+- [OnDestroy](rendersystem.md#ondestroy)
+- [OnMessage](rendersystem.md#onmessage)
+- [Update](rendersystem.md#update)
+- [register](rendersystem.md#register)
+- [remove](rendersystem.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new RenderSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `evaluator?`: [Evaluator](../README.md#evaluator), `renderables`: [IRenderable](../interfaces/irenderable.md)[], `entities?`: [SystemEntity](systementity.md)[], `subscriberID?`: undefined | number): *[RenderSystem](rendersystem.md)*
+\+ **new RenderSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `scene?`: [*IScene*](../interfaces/iscene.md), `evaluator?`: [*Evaluator*](../README.md#evaluator), `renderables?`: [*IRenderable*](../interfaces/irenderable.md)[], `entities?`: [*SystemEntity*](systementity.md)[], `subscriberID?`: *number*): [*RenderSystem*](rendersystem.md)
 
-*Overrides [ArraySystem](arraysystem.md).[constructor](arraysystem.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
+`scene?` | [*IScene*](../interfaces/iscene.md) |
+`evaluator?` | [*Evaluator*](../README.md#evaluator) |
+`renderables` | [*IRenderable*](../interfaces/irenderable.md)[] |
+`entities?` | [*SystemEntity*](systementity.md)[] |
+`subscriberID?` | *number* |
 
-Name | Type | Default |
------- | ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`scene?` | [IScene](../interfaces/iscene.md) | - |
-`evaluator?` | [Evaluator](../README.md#evaluator) | - |
-`renderables` | [IRenderable](../interfaces/irenderable.md)[] | [] |
-`entities?` | [SystemEntity](systementity.md)[] | - |
-`subscriberID?` | undefined &#124; number | - |
+**Returns:** [*RenderSystem*](rendersystem.md)
 
-**Returns:** *[RenderSystem](rendersystem.md)*
+Inherited from: [ArraySystem](arraysystem.md)
 
 ## Properties
 
-### `Protected` entities
+### entities
 
-• **entities**: *[SystemEntity](systementity.md)[]*
-
-*Inherited from [ArraySystem](arraysystem.md).[entities](arraysystem.md#protected-entities)*
+• `Protected` **entities**: [*SystemEntity*](systementity.md)[]
 
 The list of entities the system is tracking.
 
+Inherited from: [ArraySystem](arraysystem.md).[entities](arraysystem.md#entities)
+
 ___
 
-### `Protected` messageBus
+### messageBus
 
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-*Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
+Inherited from: [ArraySystem](arraysystem.md).[messageBus](arraysystem.md#messagebus)
+
 ___
 
-### `Protected` renderables
+### renderables
 
-• **renderables**: *[IRenderable](../interfaces/irenderable.md)[]*
+• `Protected` **renderables**: [*IRenderable*](../interfaces/irenderable.md)[]
 
 A list of things to be rendered.
 
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
-
-*Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
 when the scene is destroyed.
 
+Inherited from: [ArraySystem](arraysystem.md).[scene](arraysystem.md#scene)
+
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [ArraySystem](arraysystem.md).[subscriberID](arraysystem.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_DEREGISTER
+### MESSAGE\_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+▪ `Readonly` `Static` **MESSAGE\_DEREGISTER**: *stateful_system_deregister*= "stateful\_system\_deregister"
 
 Message to deregister an entity + components with a system so it is no longer tracked.
 
+Inherited from: [ArraySystem](arraysystem.md).[MESSAGE_DEREGISTER](arraysystem.md#message_deregister)
+
 ___
 
-### `Static` MESSAGE_LOAD_RENDERABLES
+### MESSAGE\_LOAD\_RENDERABLES
 
-▪ **MESSAGE_LOAD_RENDERABLES**: *"load_renderables"* = "load_renderables"
+▪ `Readonly` `Static` **MESSAGE\_LOAD\_RENDERABLES**: *load_renderables*= "load\_renderables"
 
 Message used to add new renderables into the render system's render list.
 
 ___
 
-### `Static` MESSAGE_REGISTER
+### MESSAGE\_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+▪ `Readonly` `Static` **MESSAGE\_REGISTER**: *stateful_system_register*= "stateful\_system\_register"
 
 Message to register an entity + components with a system so it can be tracked.
 
+Inherited from: [ArraySystem](arraysystem.md).[MESSAGE_REGISTER](arraysystem.md#message_register)
+
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_UPDATE
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
 
-*Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+Inherited from: [ArraySystem](arraysystem.md).[MESSAGE_UPDATE](arraysystem.md#message_update)
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
-
-*Inherited from [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -170,86 +159,84 @@ message bus.
 
 **Returns:** *void*
 
+Inherited from: [ArraySystem](arraysystem.md)
+
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
-
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
 **Returns:** *void*
 
+Inherited from: [ArraySystem](arraysystem.md)
+
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [ArraySystem](arraysystem.md)
+
 ___
 
-### `Protected` Update
+### Update
 
-▸ **Update**(`dt`: number): *void*
-
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
+▸ `Protected`**Update**(`dt`: *number*): *void*
 
 General update method, default empty. Override with custom logic.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+:------ | :------ | :------ |
+`dt` | *number* | DeltaTime    |
 
 **Returns:** *void*
+
+Inherited from: [ArraySystem](arraysystem.md)
 
 ___
 
-### `Protected` register
+### register
 
-▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+▸ `Protected`**register**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): *void*
 
-*Inherited from [ArraySystem](arraysystem.md).[register](arraysystem.md#protected-register)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
+`components` | [*Component*](component.md)[] |
 
 **Returns:** *void*
+
+Inherited from: [ArraySystem](arraysystem.md)
 
 ___
 
-### `Protected` remove
+### remove
 
-▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+▸ `Protected`**remove**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
-*Inherited from [ArraySystem](arraysystem.md).[remove](arraysystem.md#protected-remove)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
 
 **Returns:** *void*
+
+Inherited from: [ArraySystem](arraysystem.md)

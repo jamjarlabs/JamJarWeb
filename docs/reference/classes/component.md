@@ -1,4 +1,3 @@
-
 # Class: Component
 
 Component is one of the key elements of the Entity-Component-System architecture.
@@ -11,88 +10,90 @@ Each entity can only have 1 component of each type.
 
 * **Component**
 
-  ↳ [FakeComponent](fakecomponent.md)
+  ↳ [*FakeComponent*](fakecomponent.md)
 
-  ↳ [Transform](transform.md)
+  ↳ [*AudioSource*](audiosource.md)
 
-  ↳ [AudioSource](audiosource.md)
+  ↳ [*Camera*](camera.md)
 
-  ↳ [Camera](camera.md)
+  ↳ [*Collider*](collider.md)
 
-  ↳ [Collider](collider.md)
+  ↳ [*Motion*](motion.md)
 
-  ↳ [Motion](motion.md)
+  ↳ [*Primitive*](primitive.md)
 
-  ↳ [Primitive](primitive.md)
+  ↳ [*Script*](script.md)
 
-  ↳ [UI](ui.md)
+  ↳ [*Sprite*](sprite.md)
 
-  ↳ [Script](script.md)
+  ↳ [*SpriteAnimator*](spriteanimator.md)
 
-  ↳ [Sprite](sprite.md)
+  ↳ [*Text*](text.md)
 
-  ↳ [SpriteAnimator](spriteanimator.md)
+  ↳ [*Transform*](transform.md)
 
-  ↳ [Text](text.md)
+  ↳ [*UI*](ui.md)
 
 ## Implements
 
-* [IFreeable](../interfaces/ifreeable.md)
+* [*IFreeable*](../interfaces/ifreeable.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](component.md#constructor)
+- [constructor](component.md#constructor)
 
 ### Properties
 
-* [key](component.md#key)
-* [MESSAGE_ADD](component.md#static-message_add)
-* [MESSAGE_REMOVE](component.md#static-message_remove)
+- [key](component.md#key)
+- [MESSAGE\_ADD](component.md#message_add)
+- [MESSAGE\_REMOVE](component.md#message_remove)
 
 ### Methods
 
-* [Free](component.md#free)
+- [Free](component.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Component**(`key`: string): *[Component](component.md)*
+\+ **new Component**(`key`: *string*): [*Component*](component.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`key` | string |
+:------ | :------ |
+`key` | *string* |
 
-**Returns:** *[Component](component.md)*
+**Returns:** [*Component*](component.md)
 
 ## Properties
 
-###  key
+### key
 
 • **key**: *string*
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
+
+Implementation of: [IFreeable](../interfaces/ifreeable.md)

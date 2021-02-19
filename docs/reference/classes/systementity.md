@@ -1,4 +1,3 @@
-
 # Class: SystemEntity
 
 SystemEntity is a wrapper around an entity and its components,
@@ -7,74 +6,63 @@ components.
 Includes a number of helper functions for retrieving/adding/removing components,
 and destroying the entity.
 
-## Hierarchy
-
-* **SystemEntity**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](systementity.md#constructor)
+- [constructor](systementity.md#constructor)
 
 ### Properties
 
-* [components](systementity.md#private-components)
-* [entity](systementity.md#entity)
+- [entity](systementity.md#entity)
 
 ### Methods
 
-* [Add](systementity.md#add)
-* [Destroy](systementity.md#destroy)
-* [Get](systementity.md#get)
-* [Remove](systementity.md#remove)
+- [Add](systementity.md#add)
+- [Destroy](systementity.md#destroy)
+- [Get](systementity.md#get)
+- [Remove](systementity.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new SystemEntity**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *[SystemEntity](systementity.md)*
+\+ **new SystemEntity**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): [*SystemEntity*](systementity.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
+`components` | [*Component*](component.md)[] |
 
-**Returns:** *[SystemEntity](systementity.md)*
+**Returns:** [*SystemEntity*](systementity.md)
 
 ## Properties
 
-### `Private` components
+### entity
 
-• **components**: *Record‹string, [Component](component.md)›*
-
-___
-
-###  entity
-
-• **entity**: *[IEntity](../interfaces/ientity.md)*
+• **entity**: [*IEntity*](../interfaces/ientity.md)
 
 ## Methods
 
-###  Add
+### Add
 
-▸ **Add**(`component`: [Component](component.md)): *void*
+▸ **Add**(`component`: [*Component*](component.md)): *void*
 
 Add adds a component to an entity.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`component` | [Component](component.md) | The component to add  |
+:------ | :------ | :------ |
+`component` | [*Component*](component.md) | The component to add    |
 
 **Returns:** *void*
 
 ___
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
 
@@ -84,35 +72,35 @@ Destroy destroys the entity and all of its components.
 
 ___
 
-###  Get
+### Get
 
-▸ **Get**(`key`: string): *[Component](component.md) | undefined*
+▸ **Get**(`key`: *string*): *undefined* \| [*Component*](component.md)
 
 Get returns any Component with the key provided if it exists;
 otherwise it returns undefined.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`key` | string | The key identifier of the component |
+:------ | :------ | :------ |
+`key` | *string* | The key identifier of the component   |
 
-**Returns:** *[Component](component.md) | undefined*
+**Returns:** *undefined* \| [*Component*](component.md)
 
 The component if it exists, otherwise undefined
 
 ___
 
-###  Remove
+### Remove
 
-▸ **Remove**(`key`: string): *void*
+▸ **Remove**(`key`: *string*): *void*
 
 Remove removes a component from an entity.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`key` | string | The key of the component to remove  |
+:------ | :------ | :------ |
+`key` | *string* | The key of the component to remove    |
 
 **Returns:** *void*

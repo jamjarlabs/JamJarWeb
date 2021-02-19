@@ -1,53 +1,48 @@
-
 # Interface: IFontOptions
 
 IFontOptions represents optional properties for a font being loaded, will be
 generally used with defaults that are overridden.
 
-## Hierarchy
-
-* **IFontOptions**
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [buffer](ifontoptions.md#optional-buffer)
-* [characters](ifontoptions.md#optional-characters)
-* [cutoff](ifontoptions.md#optional-cutoff)
-* [radius](ifontoptions.md#optional-radius)
+- [buffer](ifontoptions.md#buffer)
+- [characters](ifontoptions.md#characters)
+- [cutoff](ifontoptions.md#cutoff)
+- [radius](ifontoptions.md#radius)
 
 ## Properties
 
-### `Optional` buffer
+### buffer
 
-• **buffer**? : *undefined | number*
+• `Optional` **buffer**: *undefined* \| *number*
 
 Whitespace buffer around a glyph in the atlas in pixels.
 
 ___
 
-### `Optional` characters
+### characters
 
-• **characters**? : *undefined | string*
+• `Optional` **characters**: *undefined* \| *string*
 
 Characters to pre-render for the font, should be
 all characters that will be displayed with the font.
 
 ___
 
-### `Optional` cutoff
+### cutoff
 
-• **cutoff**? : *undefined | number*
+• `Optional` **cutoff**: *undefined* \| *number*
 
 How much of the radius (relative) is used for the
 inside part the glyph.
 
 ___
 
-### `Optional` radius
+### radius
 
-• **radius**? : *undefined | number*
+• `Optional` **radius**: *undefined* \| *number*
 
 How many pixels around the glyph shape in the atlas
 to use for encoding distance.

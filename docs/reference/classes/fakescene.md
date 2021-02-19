@@ -1,75 +1,74 @@
-
 # Class: FakeScene
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeScene**
 
 ## Implements
 
-* [IScene](../interfaces/iscene.md)
+* [*IScene*](../interfaces/iscene.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakescene.md#constructor)
+- [constructor](fakescene.md#constructor)
 
 ### Properties
 
-* [id](fakescene.md#id)
+- [id](fakescene.md#id)
 
 ### Methods
 
-* [AddEntity](fakescene.md#addentity)
-* [Destroy](fakescene.md#destroy)
-* [OnMessage](fakescene.md#onmessage)
-* [Start](fakescene.md#start)
+- [AddEntity](fakescene.md#addentity)
+- [Destroy](fakescene.md#destroy)
+- [OnMessage](fakescene.md#onmessage)
+- [Start](fakescene.md#start)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeScene**(`id`: number, `reactors`: [Reactor](reactor.md)[]): *[FakeScene](fakescene.md)*
+\+ **new FakeScene**(`id`: *number*, `reactors?`: [*Reactor*](reactor.md)[]): [*FakeScene*](fakescene.md)
 
-*Overrides [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`id` | *number* |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`id` | number | - |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeScene*](fakescene.md)
 
-**Returns:** *[FakeScene](fakescene.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  id
+### id
 
 • **id**: *number*
 
-*Implementation of [IScene](../interfaces/iscene.md).[id](../interfaces/iscene.md#id)*
+Implementation of: [IScene](../interfaces/iscene.md).[id](../interfaces/iscene.md#id)
 
 ## Methods
 
-###  AddEntity
+### AddEntity
 
-▸ **AddEntity**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+▸ **AddEntity**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
 
 **Returns:** *void*
 
 ___
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
 
@@ -77,21 +76,21 @@ ___
 
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
 ___
 
-###  Start
+### Start
 
 ▸ **Start**(): *void*
 

@@ -1,59 +1,54 @@
-
 # Class: ScriptAsset
 
-## Hierarchy
-
-* **ScriptAsset**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](scriptasset.md#constructor)
+- [constructor](scriptasset.md#constructor)
 
 ### Properties
 
-* [code](scriptasset.md#code)
-* [error](scriptasset.md#optional-error)
-* [name](scriptasset.md#name)
-* [MESSAGE_FINISH_LOAD](scriptasset.md#static-message_finish_load)
+- [code](scriptasset.md#code)
+- [error](scriptasset.md#error)
+- [name](scriptasset.md#name)
+- [MESSAGE\_FINISH\_LOAD](scriptasset.md#message_finish_load)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new ScriptAsset**(`name`: string, `code`: string, `error?`: Error): *[ScriptAsset](scriptasset.md)*
+\+ **new ScriptAsset**(`name`: *string*, `code`: *string*, `error?`: Error): [*ScriptAsset*](scriptasset.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`name` | string |
-`code` | string |
+:------ | :------ |
+`name` | *string* |
+`code` | *string* |
 `error?` | Error |
 
-**Returns:** *[ScriptAsset](scriptasset.md)*
+**Returns:** [*ScriptAsset*](scriptasset.md)
 
 ## Properties
 
-###  code
+### code
 
 • **code**: *string*
 
 ___
 
-### `Optional` error
+### error
 
-• **error**? : *Error*
+• `Optional` **error**: *undefined* \| Error
 
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
 ___
 
-### `Static` MESSAGE_FINISH_LOAD
+### MESSAGE\_FINISH\_LOAD
 
-▪ **MESSAGE_FINISH_LOAD**: *"finish_script_load"* = "finish_script_load"
+▪ `Readonly` `Static` **MESSAGE\_FINISH\_LOAD**: *finish_script_load*= "finish\_script\_load"

@@ -1,4 +1,3 @@
-
 # Class: AudioAsset
 
 AudioAsset represents an in-memory audio asset that has been loaded/attempted
@@ -7,59 +6,55 @@ Stores meta info around the audio, such as a name, the success
 of the audio being loaded, and any errors from loading it.
 Also stores the audio data itself.
 
-## Hierarchy
-
-* **AudioAsset**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](audioasset.md#constructor)
+- [constructor](audioasset.md#constructor)
 
 ### Properties
 
-* [buffer](audioasset.md#buffer)
-* [error](audioasset.md#optional-error)
-* [name](audioasset.md#name)
-* [MESSAGE_FINISH_LOAD](audioasset.md#static-message_finish_load)
+- [buffer](audioasset.md#buffer)
+- [error](audioasset.md#error)
+- [name](audioasset.md#name)
+- [MESSAGE\_FINISH\_LOAD](audioasset.md#message_finish_load)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new AudioAsset**(`name`: string, `buffer`: AudioBuffer, `error?`: Error): *[AudioAsset](audioasset.md)*
+\+ **new AudioAsset**(`name`: *string*, `buffer`: AudioBuffer, `error?`: Error): [*AudioAsset*](audioasset.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`name` | string |
+:------ | :------ |
+`name` | *string* |
 `buffer` | AudioBuffer |
 `error?` | Error |
 
-**Returns:** *[AudioAsset](audioasset.md)*
+**Returns:** [*AudioAsset*](audioasset.md)
 
 ## Properties
 
-###  buffer
+### buffer
 
-• **buffer**: *AudioBuffer*
+• **buffer**: AudioBuffer
 
 The data of the audio.
 
 ___
 
-### `Optional` error
+### error
 
-• **error**? : *Error*
+• `Optional` **error**: *undefined* \| Error
 
 An optional field, contains any error from loading the audio, if there is
 none it will be undefined.
 
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
@@ -68,8 +63,8 @@ should be unique.
 
 ___
 
-### `Static` MESSAGE_FINISH_LOAD
+### MESSAGE\_FINISH\_LOAD
 
-▪ **MESSAGE_FINISH_LOAD**: *"finish_audio_load"* = "finish_audio_load"
+▪ `Readonly` `Static` **MESSAGE\_FINISH\_LOAD**: *finish_audio_load*= "finish\_audio\_load"
 
 Message when an audio asset is finished loading.

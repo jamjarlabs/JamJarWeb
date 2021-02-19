@@ -1,42 +1,37 @@
-
 # Class: SpriteKeyFrame
 
 SpriteKeyFrame represents a key frame, which is a material to apply to a
 Sprite for a duration of frames.
 
-## Hierarchy
-
-* **SpriteKeyFrame**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](spritekeyframe.md#constructor)
+- [constructor](spritekeyframe.md#constructor)
 
 ### Properties
 
-* [frameCount](spritekeyframe.md#framecount)
-* [material](spritekeyframe.md#material)
+- [frameCount](spritekeyframe.md#framecount)
+- [material](spritekeyframe.md#material)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new SpriteKeyFrame**(`material`: [Material](material.md), `frameCount`: number): *[SpriteKeyFrame](spritekeyframe.md)*
+\+ **new SpriteKeyFrame**(`material`: [*Material*](material.md), `frameCount`: *number*): [*SpriteKeyFrame*](spritekeyframe.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`material` | [Material](material.md) |
-`frameCount` | number |
+:------ | :------ |
+`material` | [*Material*](material.md) |
+`frameCount` | *number* |
 
-**Returns:** *[SpriteKeyFrame](spritekeyframe.md)*
+**Returns:** [*SpriteKeyFrame*](spritekeyframe.md)
 
 ## Properties
 
-###  frameCount
+### frameCount
 
 • **frameCount**: *number*
 
@@ -44,8 +39,8 @@ Number of frames to render this Key Frame for.
 
 ___
 
-###  material
+### material
 
-• **material**: *[Material](material.md)*
+• **material**: [*Material*](material.md)
 
 Material to apply when rendering the Key Frame.

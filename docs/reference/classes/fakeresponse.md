@@ -1,164 +1,163 @@
-
 # Class: FakeResponse
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeResponse**
 
 ## Implements
 
-* Response
+* *Response*
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakeresponse.md#constructor)
+- [constructor](fakeresponse.md#constructor)
 
 ### Properties
 
-* [body](fakeresponse.md#body)
-* [bodyUsed](fakeresponse.md#bodyused)
-* [headers](fakeresponse.md#headers)
-* [ok](fakeresponse.md#ok)
-* [redirected](fakeresponse.md#redirected)
-* [status](fakeresponse.md#status)
-* [statusText](fakeresponse.md#statustext)
-* [trailer](fakeresponse.md#trailer)
-* [type](fakeresponse.md#type)
-* [url](fakeresponse.md#url)
+- [body](fakeresponse.md#body)
+- [bodyUsed](fakeresponse.md#bodyused)
+- [headers](fakeresponse.md#headers)
+- [ok](fakeresponse.md#ok)
+- [redirected](fakeresponse.md#redirected)
+- [status](fakeresponse.md#status)
+- [statusText](fakeresponse.md#statustext)
+- [trailer](fakeresponse.md#trailer)
+- [type](fakeresponse.md#type)
+- [url](fakeresponse.md#url)
 
 ### Methods
 
-* [arrayBuffer](fakeresponse.md#arraybuffer)
-* [blob](fakeresponse.md#blob)
-* [clone](fakeresponse.md#clone)
-* [formData](fakeresponse.md#formdata)
-* [json](fakeresponse.md#json)
-* [text](fakeresponse.md#text)
+- [arrayBuffer](fakeresponse.md#arraybuffer)
+- [blob](fakeresponse.md#blob)
+- [clone](fakeresponse.md#clone)
+- [formData](fakeresponse.md#formdata)
+- [json](fakeresponse.md#json)
+- [text](fakeresponse.md#text)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeResponse**(`reactors`: [Reactor](reactor.md)[]): *[FakeResponse](fakeresponse.md)*
+\+ **new FakeResponse**(`reactors?`: [*Reactor*](reactor.md)[]): [*FakeResponse*](fakeresponse.md)
 
-*Inherited from [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeResponse*](fakeresponse.md)
 
-**Returns:** *[FakeResponse](fakeresponse.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  body
+### body
 
-• **body**: *ReadableStream‹Uint8Array› | null*
+• **body**: *null* \| *ReadableStream*<Uint8Array\>
 
 ___
 
-###  bodyUsed
+### bodyUsed
 
 • **bodyUsed**: *boolean*
 
 ___
 
-###  headers
+### headers
 
-• **headers**: *Headers*
+• **headers**: Headers
 
 ___
 
-###  ok
+### ok
 
 • **ok**: *boolean*
 
 ___
 
-###  redirected
+### redirected
 
 • **redirected**: *boolean*
 
 ___
 
-###  status
+### status
 
 • **status**: *number*
 
 ___
 
-###  statusText
+### statusText
 
 • **statusText**: *string*
 
 ___
 
-###  trailer
+### trailer
 
-• **trailer**: *Promise‹Headers›*
-
-___
-
-###  type
-
-• **type**: *ResponseType*
+• **trailer**: *Promise*<Headers\>
 
 ___
 
-###  url
+### type
+
+• **type**: ResponseType
+
+___
+
+### url
 
 • **url**: *string*
 
 ## Methods
 
-###  arrayBuffer
+### arrayBuffer
 
-▸ **arrayBuffer**(): *Promise‹ArrayBuffer›*
+▸ **arrayBuffer**(): *Promise*<ArrayBuffer\>
 
-**Returns:** *Promise‹ArrayBuffer›*
-
-___
-
-###  blob
-
-▸ **blob**(): *Promise‹Blob›*
-
-**Returns:** *Promise‹Blob›*
+**Returns:** *Promise*<ArrayBuffer\>
 
 ___
 
-###  clone
+### blob
 
-▸ **clone**(): *Response*
+▸ **blob**(): *Promise*<Blob\>
 
-**Returns:** *Response*
-
-___
-
-###  formData
-
-▸ **formData**(): *Promise‹FormData›*
-
-**Returns:** *Promise‹FormData›*
+**Returns:** *Promise*<Blob\>
 
 ___
 
-###  json
+### clone
 
-▸ **json**(): *Promise‹any›*
+▸ **clone**(): Response
 
-**Returns:** *Promise‹any›*
+**Returns:** Response
 
 ___
 
-###  text
+### formData
 
-▸ **text**(): *Promise‹string›*
+▸ **formData**(): *Promise*<FormData\>
 
-**Returns:** *Promise‹string›*
+**Returns:** *Promise*<FormData\>
+
+___
+
+### json
+
+▸ **json**(): *Promise*<any\>
+
+**Returns:** *Promise*<any\>
+
+___
+
+### text
+
+▸ **text**(): *Promise*<string\>
+
+**Returns:** *Promise*<string\>

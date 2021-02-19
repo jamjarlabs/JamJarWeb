@@ -1,46 +1,43 @@
-
 # Class: Fake
 
 ## Hierarchy
 
 * **Fake**
 
-  ↳ [FakeEntity](fakeentity.md)
+  ↳ [*FakeAudioBufferSourceNode*](fakeaudiobuffersourcenode.md)
 
-  ↳ [FakeMessageBus](fakemessagebus.md)
+  ↳ [*FakeAudioContext*](fakeaudiocontext.md)
 
-  ↳ [FakeAudioBufferSourceNode](fakeaudiobuffersourcenode.md)
+  ↳ [*FakeEntity*](fakeentity.md)
 
-  ↳ [FakeAudioContext](fakeaudiocontext.md)
+  ↳ [*FakeGainNode*](fakegainnode.md)
 
-  ↳ [FakeGainNode](fakegainnode.md)
+  ↳ [*FakeMessageBus*](fakemessagebus.md)
 
-  ↳ [FakeResponse](fakeresponse.md)
+  ↳ [*FakeResponse*](fakeresponse.md)
 
-  ↳ [FakeScene](fakescene.md)
+  ↳ [*FakeScene*](fakescene.md)
 
-  ↳ [FakeSubscriber](fakesubscriber.md)
+  ↳ [*FakeSubscriber*](fakesubscriber.md)
 
-  ↳ [FakeWebGL2RenderingContext](fakewebgl2renderingcontext.md)
+  ↳ [*FakeWebGL2RenderingContext*](fakewebgl2renderingcontext.md)
 
-  ↳ [FakeSDFGenerator](fakesdfgenerator.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fake.md#constructor)
+- [constructor](fake.md#constructor)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Fake**(`reactors`: [Reactor](reactor.md)[]): *[Fake](fake.md)*
+\+ **new Fake**(`reactors?`: [*Reactor*](reactor.md)[]): [*Fake*](fake.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`reactors` | [Reactor](reactor.md)[] | [] |
+Name | Type |
+:------ | :------ |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-**Returns:** *[Fake](fake.md)*
+**Returns:** [*Fake*](fake.md)

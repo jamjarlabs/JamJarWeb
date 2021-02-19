@@ -1,4 +1,3 @@
-
 # Class: ShaderAsset
 
 ShaderAsset is used to load in new shaders, takes a generic shader
@@ -6,48 +5,44 @@ and a shader name.
 Render Systems listen out for shader loading requests and will
 load the requested shaders if valid.
 
-## Hierarchy
-
-* **ShaderAsset**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](shaderasset.md#constructor)
+- [constructor](shaderasset.md#constructor)
 
 ### Properties
 
-* [name](shaderasset.md#name)
-* [shader](shaderasset.md#shader)
-* [DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_primitive_fragment_shader_name)
-* [DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME](shaderasset.md#static-default_primitive_vertex_shader_name)
-* [DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_texture_fragment_shader_name)
-* [DEFAULT_TEXTURE_VERTEX_SHADER_NAME](shaderasset.md#static-default_texture_vertex_shader_name)
-* [DEFAULT_TEXT_FRAGMENT_SHADER_NAME](shaderasset.md#static-default_text_fragment_shader_name)
-* [FRAGMENT_TYPE](shaderasset.md#static-fragment_type)
-* [MESSAGE_FINISH_LOAD](shaderasset.md#static-message_finish_load)
-* [MESSAGE_REQUEST_LOAD](shaderasset.md#static-message_request_load)
-* [VERTEX_TYPE](shaderasset.md#static-vertex_type)
+- [name](shaderasset.md#name)
+- [shader](shaderasset.md#shader)
+- [DEFAULT\_PRIMITIVE\_FRAGMENT\_SHADER\_NAME](shaderasset.md#default_primitive_fragment_shader_name)
+- [DEFAULT\_PRIMITIVE\_VERTEX\_SHADER\_NAME](shaderasset.md#default_primitive_vertex_shader_name)
+- [DEFAULT\_TEXTURE\_FRAGMENT\_SHADER\_NAME](shaderasset.md#default_texture_fragment_shader_name)
+- [DEFAULT\_TEXTURE\_VERTEX\_SHADER\_NAME](shaderasset.md#default_texture_vertex_shader_name)
+- [DEFAULT\_TEXT\_FRAGMENT\_SHADER\_NAME](shaderasset.md#default_text_fragment_shader_name)
+- [FRAGMENT\_TYPE](shaderasset.md#fragment_type)
+- [MESSAGE\_FINISH\_LOAD](shaderasset.md#message_finish_load)
+- [MESSAGE\_REQUEST\_LOAD](shaderasset.md#message_request_load)
+- [VERTEX\_TYPE](shaderasset.md#vertex_type)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new ShaderAsset**(`name`: string, `shader`: [IShader](../interfaces/ishader.md)): *[ShaderAsset](shaderasset.md)*
+\+ **new ShaderAsset**(`name`: *string*, `shader`: [*IShader*](../interfaces/ishader.md)): [*ShaderAsset*](shaderasset.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`name` | string |
-`shader` | [IShader](../interfaces/ishader.md) |
+:------ | :------ |
+`name` | *string* |
+`shader` | [*IShader*](../interfaces/ishader.md) |
 
-**Returns:** *[ShaderAsset](shaderasset.md)*
+**Returns:** [*ShaderAsset*](shaderasset.md)
 
 ## Properties
 
-###  name
+### name
 
 • **name**: *string*
 
@@ -55,47 +50,47 @@ Name of the shader.
 
 ___
 
-###  shader
+### shader
 
-• **shader**: *[IShader](../interfaces/ishader.md)*
+• **shader**: [*IShader*](../interfaces/ishader.md)
 
 Generic shader.
 
 ___
 
-### `Static` DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME
+### DEFAULT\_PRIMITIVE\_FRAGMENT\_SHADER\_NAME
 
-▪ **DEFAULT_PRIMITIVE_FRAGMENT_SHADER_NAME**: *"default_primitive_fragment"* = "default_primitive_fragment"
-
-___
-
-### `Static` DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME
-
-▪ **DEFAULT_PRIMITIVE_VERTEX_SHADER_NAME**: *"default_primitive_vertex"* = "default_primitive_vertex"
+▪ `Readonly` `Static` **DEFAULT\_PRIMITIVE\_FRAGMENT\_SHADER\_NAME**: *default_primitive_fragment*= "default\_primitive\_fragment"
 
 ___
 
-### `Static` DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME
+### DEFAULT\_PRIMITIVE\_VERTEX\_SHADER\_NAME
 
-▪ **DEFAULT_TEXTURE_FRAGMENT_SHADER_NAME**: *"default_texture_fragment"* = "default_texture_fragment"
+▪ `Readonly` `Static` **DEFAULT\_PRIMITIVE\_VERTEX\_SHADER\_NAME**: *default_primitive_vertex*= "default\_primitive\_vertex"
+
+___
+
+### DEFAULT\_TEXTURE\_FRAGMENT\_SHADER\_NAME
+
+▪ `Readonly` `Static` **DEFAULT\_TEXTURE\_FRAGMENT\_SHADER\_NAME**: *default_texture_fragment*= "default\_texture\_fragment"
 
 Default fragment shader name, render systems will generally load this
 by default, and it will therefore be always available.
 
 ___
 
-### `Static` DEFAULT_TEXTURE_VERTEX_SHADER_NAME
+### DEFAULT\_TEXTURE\_VERTEX\_SHADER\_NAME
 
-▪ **DEFAULT_TEXTURE_VERTEX_SHADER_NAME**: *"default_texture_vertex"* = "default_texture_vertex"
+▪ `Readonly` `Static` **DEFAULT\_TEXTURE\_VERTEX\_SHADER\_NAME**: *default_texture_vertex*= "default\_texture\_vertex"
 
 Default vertex shader name, render systems will generally load this
 by default, and it will therefore be always available.
 
 ___
 
-### `Static` DEFAULT_TEXT_FRAGMENT_SHADER_NAME
+### DEFAULT\_TEXT\_FRAGMENT\_SHADER\_NAME
 
-▪ **DEFAULT_TEXT_FRAGMENT_SHADER_NAME**: *"default_text_fragment"* = "default_text_fragment"
+▪ `Readonly` `Static` **DEFAULT\_TEXT\_FRAGMENT\_SHADER\_NAME**: *default_text_fragment*= "default\_text\_fragment"
 
 Default text fragment shader name, render systems will generally load this
 by default, and it will therefore be always available. Default fragment shader
@@ -103,32 +98,32 @@ for text.
 
 ___
 
-### `Static` FRAGMENT_TYPE
+### FRAGMENT\_TYPE
 
-▪ **FRAGMENT_TYPE**: *"fragment"* = "fragment"
+▪ `Readonly` `Static` **FRAGMENT\_TYPE**: *fragment*= "fragment"
 
 Fragment shader type.
 
 ___
 
-### `Static` MESSAGE_FINISH_LOAD
+### MESSAGE\_FINISH\_LOAD
 
-▪ **MESSAGE_FINISH_LOAD**: *"finish_shader_load"* = "finish_shader_load"
+▪ `Readonly` `Static` **MESSAGE\_FINISH\_LOAD**: *finish_shader_load*= "finish\_shader\_load"
 
 Message for finishing loading a shader.
 
 ___
 
-### `Static` MESSAGE_REQUEST_LOAD
+### MESSAGE\_REQUEST\_LOAD
 
-▪ **MESSAGE_REQUEST_LOAD**: *"request_shader_load"* = "request_shader_load"
+▪ `Readonly` `Static` **MESSAGE\_REQUEST\_LOAD**: *request_shader_load*= "request\_shader\_load"
 
 Message to request loading a shader.
 
 ___
 
-### `Static` VERTEX_TYPE
+### VERTEX\_TYPE
 
-▪ **VERTEX_TYPE**: *"vertex"* = "vertex"
+▪ `Readonly` `Static` **VERTEX\_TYPE**: *vertex*= "vertex"
 
 Vertex shader type.

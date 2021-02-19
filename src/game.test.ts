@@ -90,7 +90,7 @@ describe("Game - Start", () => {
 });
 
 describe("Game - Ensure window variables set after constructor and start", () => {
-    const browserWindow = new JSDOM().window;
+    const browserWindow = (new JSDOM().window as unknown) as Window;
     expect(browserWindow.JamJarStopGames).toBe(undefined);
 
     const game = new TestGame(new FakeMessageBus(), "test", (): number => 0, undefined, browserWindow, 0);
@@ -104,7 +104,7 @@ describe("Game - Ensure window variables set after constructor and start", () =>
 });
 
 describe("Game - Ensure window variables set after constructor and start, stop games function already set and already 1 message bus", () => {
-    const browserWindow = new JSDOM().window;
+    const browserWindow = (new JSDOM().window as unknown) as Window;
     browserWindow.JamJarStopGames = () => {
         return;
     };
@@ -143,7 +143,7 @@ describe("Game - Loop 5 times before stopping", () => {
 });
 
 describe("Game - Stop all games", () => {
-    const browserWindow = new JSDOM().window;
+    const browserWindow = (new JSDOM().window as unknown) as Window;
     let game: TestGame | undefined = undefined;
     const animationLoop = (): ((callback: FrameRequestCallback) => number) => {
         let count = 0;

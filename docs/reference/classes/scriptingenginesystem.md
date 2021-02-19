@@ -1,4 +1,3 @@
-
 # Class: ScriptingEngineSystem
 
 ScriptingEngineSystem handles executing scripts, listening out for trigger
@@ -8,84 +7,63 @@ communicating between the game engine and the scripts
 
 ## Hierarchy
 
-  ↳ [MapSystem](mapsystem.md)
+* [*MapSystem*](mapsystem.md)
 
   ↳ **ScriptingEngineSystem**
 
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](scriptingenginesystem.md#constructor)
+- [constructor](scriptingenginesystem.md#constructor)
 
 ### Properties
 
-* [assets](scriptingenginesystem.md#private-assets)
-* [entities](scriptingenginesystem.md#protected-entities)
-* [messageBus](scriptingenginesystem.md#protected-messagebus)
-* [reference](scriptingenginesystem.md#private-reference)
-* [scene](scriptingenginesystem.md#protected-optional-scene)
-* [scriptEntity](scriptingenginesystem.md#private-scriptentity)
-* [subscriberID](scriptingenginesystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](scriptingenginesystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](scriptingenginesystem.md#static-message_register)
-* [MESSAGE_UPDATE](scriptingenginesystem.md#static-message_update)
+- [entities](scriptingenginesystem.md#entities)
+- [messageBus](scriptingenginesystem.md#messagebus)
+- [scene](scriptingenginesystem.md#scene)
+- [subscriberID](scriptingenginesystem.md#subscriberid)
+- [MESSAGE\_DEREGISTER](scriptingenginesystem.md#message_deregister)
+- [MESSAGE\_REGISTER](scriptingenginesystem.md#message_register)
+- [MESSAGE\_UPDATE](scriptingenginesystem.md#message_update)
 
 ### Methods
 
-* [Destroy](scriptingenginesystem.md#destroy)
-* [OnDestroy](scriptingenginesystem.md#protected-ondestroy)
-* [OnMessage](scriptingenginesystem.md#onmessage)
-* [Update](scriptingenginesystem.md#protected-update)
-* [getEntitiesByLayer](scriptingenginesystem.md#private-getentitiesbylayer)
-* [getEntitiesByTag](scriptingenginesystem.md#private-getentitiesbytag)
-* [getEntityByID](scriptingenginesystem.md#private-getentitybyid)
-* [getScriptEntity](scriptingenginesystem.md#private-getscriptentity)
-* [register](scriptingenginesystem.md#protected-register)
-* [remove](scriptingenginesystem.md#protected-remove)
-* [sendMessage](scriptingenginesystem.md#private-sendmessage)
-* [EVALUATOR](scriptingenginesystem.md#static-private-evaluator)
+- [Destroy](scriptingenginesystem.md#destroy)
+- [OnDestroy](scriptingenginesystem.md#ondestroy)
+- [OnMessage](scriptingenginesystem.md#onmessage)
+- [Update](scriptingenginesystem.md#update)
+- [register](scriptingenginesystem.md#register)
+- [remove](scriptingenginesystem.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new ScriptingEngineSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `ref`: string, `scene?`: [IScene](../interfaces/iscene.md), `scripts`: Map‹string, [ScriptAsset](scriptasset.md)›, `scriptEntity`: [SystemEntity](systementity.md) | undefined, `reference`: [ScriptingReference](scriptingreference.md) | undefined, `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[ScriptingEngineSystem](scriptingenginesystem.md)*
+\+ **new ScriptingEngineSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `ref`: *string*, `scene?`: [*IScene*](../interfaces/iscene.md), `scripts?`: *Map*<string, [*ScriptAsset*](scriptasset.md)\>, `scriptEntity?`: *undefined* \| [*SystemEntity*](systementity.md), `reference?`: *undefined* \| [*ScriptingReference*](scriptingreference.md), `entities?`: *Map*<number, [*SystemEntity*](systementity.md)\>, `subscriberID?`: *number*): [*ScriptingEngineSystem*](scriptingenginesystem.md)
 
-*Overrides [MapSystem](mapsystem.md).[constructor](mapsystem.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
+`ref` | *string* |
+`scene?` | [*IScene*](../interfaces/iscene.md) |
+`scripts` | *Map*<string, [*ScriptAsset*](scriptasset.md)\> |
+`scriptEntity` | *undefined* \| [*SystemEntity*](systementity.md) |
+`reference` | *undefined* \| [*ScriptingReference*](scriptingreference.md) |
+`entities?` | *Map*<number, [*SystemEntity*](systementity.md)\> |
+`subscriberID?` | *number* |
 
-Name | Type | Default |
------- | ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`ref` | string | - |
-`scene?` | [IScene](../interfaces/iscene.md) | - |
-`scripts` | Map‹string, [ScriptAsset](scriptasset.md)› | new Map() |
-`scriptEntity` | [SystemEntity](systementity.md) &#124; undefined | undefined |
-`reference` | [ScriptingReference](scriptingreference.md) &#124; undefined | undefined |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
-`subscriberID?` | undefined &#124; number | - |
+**Returns:** [*ScriptingEngineSystem*](scriptingenginesystem.md)
 
-**Returns:** *[ScriptingEngineSystem](scriptingenginesystem.md)*
+Inherited from: [MapSystem](mapsystem.md)
 
 ## Properties
 
-### `Private` assets
+### entities
 
-• **assets**: *Map‹string, [ScriptAsset](scriptasset.md)›*
-
-___
-
-### `Protected` entities
-
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
-
-*Inherited from [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
+• `Protected` **entities**: *Map*<number, [*SystemEntity*](systementity.md)\>
 
 A map of entities, mapped by their entity ID.
 ID: Entity
@@ -93,89 +71,72 @@ ID: Entity
 1: ObstacleEntity
 etc.
 
+Inherited from: [MapSystem](mapsystem.md).[entities](mapsystem.md#entities)
+
 ___
 
-### `Protected` messageBus
+### messageBus
 
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-*Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
-___
-
-### `Private` reference
-
-• **reference**: *[ScriptingReference](scriptingreference.md)*
-
-reference provides the functions interface for scripts to interact with
-the game engine
+Inherited from: [MapSystem](mapsystem.md).[messageBus](mapsystem.md#messagebus)
 
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
-
-*Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
 when the scene is destroyed.
 
-___
-
-### `Private` scriptEntity
-
-• **scriptEntity**: *[SystemEntity](systementity.md) | undefined*
+Inherited from: [MapSystem](mapsystem.md).[scene](mapsystem.md#scene)
 
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [MapSystem](mapsystem.md).[subscriberID](mapsystem.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_DEREGISTER
+### MESSAGE\_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+▪ `Readonly` `Static` **MESSAGE\_DEREGISTER**: *stateful_system_deregister*= "stateful\_system\_deregister"
 
 Message to deregister an entity + components with a system so it is no longer tracked.
 
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_DEREGISTER](mapsystem.md#message_deregister)
+
 ___
 
-### `Static` MESSAGE_REGISTER
+### MESSAGE\_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+▪ `Readonly` `Static` **MESSAGE\_REGISTER**: *stateful_system_register*= "stateful\_system\_register"
 
 Message to register an entity + components with a system so it can be tracked.
 
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_REGISTER](mapsystem.md#message_register)
+
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_UPDATE
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
 
-*Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_UPDATE](mapsystem.md#message_update)
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
-
-*Inherited from [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -185,167 +146,84 @@ message bus.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
-
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` Update
+### Update
 
-▸ **Update**(`dt`: number): *void*
-
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
+▸ `Protected`**Update**(`dt`: *number*): *void*
 
 General update method, default empty. Override with custom logic.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+:------ | :------ | :------ |
+`dt` | *number* | DeltaTime    |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Private` getEntitiesByLayer
+### register
 
-▸ **getEntitiesByLayer**(`layer`: string): *[SystemEntity](systementity.md)[]*
+▸ `Protected`**register**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`layer` | string |
-
-**Returns:** *[SystemEntity](systementity.md)[]*
-
-___
-
-### `Private` getEntitiesByTag
-
-▸ **getEntitiesByTag**(`tag`: string): *[SystemEntity](systementity.md)[]*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`tag` | string |
-
-**Returns:** *[SystemEntity](systementity.md)[]*
-
-___
-
-### `Private` getEntityByID
-
-▸ **getEntityByID**(`id`: number): *[SystemEntity](systementity.md) | undefined*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`id` | number |
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-___
-
-### `Private` getScriptEntity
-
-▸ **getScriptEntity**(): *[SystemEntity](systementity.md) | undefined*
-
-**Returns:** *[SystemEntity](systementity.md) | undefined*
-
-___
-
-### `Protected` register
-
-▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
-
-*Inherited from [MapSystem](mapsystem.md).[register](mapsystem.md#protected-register)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
+`components` | [*Component*](component.md)[] |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` remove
+### remove
 
-▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+▸ `Protected`**remove**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
-*Inherited from [MapSystem](mapsystem.md).[remove](mapsystem.md#protected-remove)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
 
 **Returns:** *void*
 
-___
-
-### `Private` sendMessage
-
-▸ **sendMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
-
-**Returns:** *void*
-
-___
-
-### `Static` `Private` EVALUATOR
-
-▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
-
-Track all entities
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
-
-**Returns:** *boolean*
+Inherited from: [MapSystem](mapsystem.md)

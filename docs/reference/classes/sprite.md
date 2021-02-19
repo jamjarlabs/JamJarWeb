@@ -1,4 +1,3 @@
-
 # Class: Sprite
 
 Sprite is a component for storing information around a sprite
@@ -9,76 +8,72 @@ Can contain texture information such as bounds and a texture.
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **Sprite**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](sprite.md#constructor)
+- [constructor](sprite.md#constructor)
 
 ### Properties
 
-* [key](sprite.md#key)
-* [material](sprite.md#material)
-* [transformedShape](sprite.md#transformedshape)
-* [zOrder](sprite.md#zorder)
-* [KEY](sprite.md#static-key)
-* [MESSAGE_ADD](sprite.md#static-message_add)
-* [MESSAGE_REMOVE](sprite.md#static-message_remove)
+- [key](sprite.md#key)
+- [material](sprite.md#material)
+- [transformedShape](sprite.md#transformedshape)
+- [zOrder](sprite.md#zorder)
+- [KEY](sprite.md#key)
+- [MESSAGE\_ADD](sprite.md#message_add)
+- [MESSAGE\_REMOVE](sprite.md#message_remove)
 
 ### Methods
 
-* [Free](sprite.md#free)
+- [Free](sprite.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Sprite**(`material`: [Material](material.md), `zOrder`: number): *[Sprite](sprite.md)*
+\+ **new Sprite**(`material`: [*Material*](material.md), `zOrder?`: *number*): [*Sprite*](sprite.md)
 
-*Overrides [Component](component.md).[constructor](component.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type | Default value |
+:------ | :------ | :------ |
+`material` | [*Material*](material.md) | - |
+`zOrder` | *number* | 0 |
 
-Name | Type | Default |
------- | ------ | ------ |
-`material` | [Material](material.md) | - |
-`zOrder` | number | 0 |
+**Returns:** [*Sprite*](sprite.md)
 
-**Returns:** *[Sprite](sprite.md)*
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  key
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-###  material
+### material
 
-• **material**: *[Material](material.md)*
+• **material**: [*Material*](material.md)
 
 Material to apply when rendering the Sprite.
 
 ___
 
-###  transformedShape
+### transformedShape
 
-• **transformedShape**: *[AABB](aabb.md)*
+• **transformedShape**: [*AABB*](aabb.md)
 
 ___
 
-###  zOrder
+### zOrder
 
 • **zOrder**: *number*
 
@@ -88,36 +83,34 @@ appear in front of objects with a lower value.
 
 ___
 
-### `Static` KEY
+### KEY
 
-▪ **KEY**: *"sprite"* = "sprite"
+▪ `Readonly` `Static` **KEY**: *sprite*= "sprite"
 
 Key of the sprite component.
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Overrides [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Overrides: [Component](component.md)

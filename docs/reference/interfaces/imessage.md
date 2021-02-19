@@ -1,4 +1,3 @@
-
 # Interface: IMessage
 
 IMessage is the interface for passing messages between systems/engine parts.
@@ -7,38 +6,38 @@ meaning for each message.
 
 ## Hierarchy
 
-* [IFreeable](ifreeable.md)
+* [*IFreeable*](ifreeable.md)
 
   ↳ **IMessage**
 
 ## Implemented by
 
-* [Message](../classes/message.md)
+* [*Message*](../classes/message.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [type](imessage.md#type)
+- [type](imessage.md#type)
 
 ### Methods
 
-* [Free](imessage.md#free)
+- [Free](imessage.md#free)
 
 ## Properties
 
-###  type
+### type
 
 • **type**: *string*
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
-
-*Inherited from [IFreeable](ifreeable.md).[Free](ifreeable.md#free)*
 
 Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
+
+Inherited from: [IFreeable](ifreeable.md)

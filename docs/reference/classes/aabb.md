@@ -1,4 +1,3 @@
-
 # Class: AABB
 
 AABB is an Axis-Aligned Bounding-Box, this is a rectangle that has no
@@ -7,135 +6,144 @@ The AABB is defined by a centre and width and height dimensions, it can
 be used for faster collision detection as it is a more simple shape,
 requiring less calculations than a fully defined polygon.
 
-## Hierarchy
-
-* **AABB**
-
 ## Implements
 
-* [IShape](../interfaces/ishape.md)
+* [*IShape*](../interfaces/ishape.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](aabb.md#constructor)
+- [constructor](aabb.md#constructor)
 
 ### Properties
 
-* [center](aabb.md#center)
-* [size](aabb.md#size)
+- [center](aabb.md#center)
+- [size](aabb.md#size)
 
 ### Methods
 
-* [Center](aabb.md#center)
-* [Copy](aabb.md#copy)
-* [FarthestPointInDirection](aabb.md#farthestpointindirection)
-* [Free](aabb.md#free)
-* [PointInside](aabb.md#pointinside)
-* [Transform](aabb.md#transform)
+- [Center](aabb.md#center)
+- [Copy](aabb.md#copy)
+- [FarthestPointInDirection](aabb.md#farthestpointindirection)
+- [Free](aabb.md#free)
+- [PointInside](aabb.md#pointinside)
+- [Transform](aabb.md#transform)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new AABB**(`size`: [Vector](vector.md), `center`: [Vector](vector.md)): *[AABB](aabb.md)*
+\+ **new AABB**(`size`: [*Vector*](vector.md), `center?`: [*Vector*](vector.md)): [*AABB*](aabb.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`size` | [Vector](vector.md) | - |
-`center` | [Vector](vector.md) | Vector.New(0, 0) |
+Name | Type |
+:------ | :------ |
+`size` | [*Vector*](vector.md) |
+`center` | [*Vector*](vector.md) |
 
-**Returns:** *[AABB](aabb.md)*
+**Returns:** [*AABB*](aabb.md)
 
 ## Properties
 
-###  center
+### center
 
-• **center**: *[Vector](vector.md)*
+• **center**: [*Vector*](vector.md)
 
 ___
 
-###  size
+### size
 
-• **size**: *[Vector](vector.md)*
+• **size**: [*Vector*](vector.md)
 
 ## Methods
 
-###  Center
+### Center
 
-▸ **Center**(): *[Vector](vector.md)*
+▸ **Center**(): [*Vector*](vector.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Center calculates/retrieves the center of a shape.
 
-**Returns:** *[Vector](vector.md)*
+**Returns:** [*Vector*](vector.md)
 
-___
-
-###  Copy
-
-▸ **Copy**(): *[AABB](aabb.md)*
-
-*Implementation of [IShape](../interfaces/ishape.md)*
-
-**Returns:** *[AABB](aabb.md)*
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-###  FarthestPointInDirection
+### Copy
 
-▸ **FarthestPointInDirection**(`direction`: [Vector](vector.md)): *[Vector](vector.md)*
+▸ **Copy**(): [*AABB*](aabb.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Creates a copy of the shape and its values, rather than pointing to the same Shape.
 
-**Parameters:**
+**Returns:** [*AABB*](aabb.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)
+
+___
+
+### FarthestPointInDirection
+
+▸ **FarthestPointInDirection**(`direction`: [*Vector*](vector.md)): [*Vector*](vector.md)
+
+FarthestPointInDirection returns the point that is farthest in the direction provided.
+Used in the GJK algorithm for collision detection.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`direction` | [Vector](vector.md) |
+:------ | :------ |
+`direction` | [*Vector*](vector.md) |
 
-**Returns:** *[Vector](vector.md)*
+**Returns:** [*Vector*](vector.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Implementation of: [IShape](../interfaces/ishape.md)
+
 ___
 
-###  PointInside
+### PointInside
 
-▸ **PointInside**(`point`: [Vector](vector.md)): *boolean*
+▸ **PointInside**(`point`: [*Vector*](vector.md)): *boolean*
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+PointInside determines if a point provided is within the shape or not.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`point` | [Vector](vector.md) |
+:------ | :------ |
+`point` | [*Vector*](vector.md) |
 
 **Returns:** *boolean*
 
+Implementation of: [IShape](../interfaces/ishape.md)
+
 ___
 
-###  Transform
+### Transform
 
-▸ **Transform**(`transform`: [Transform](transform.md)): *[IShape](../interfaces/ishape.md)*
+▸ **Transform**(`transform`: [*Transform*](transform.md)): [*IShape*](../interfaces/ishape.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Transform takes a transform and applies it to shape.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`transform` | [Transform](transform.md) |
+:------ | :------ |
+`transform` | [*Transform*](transform.md) |
 
-**Returns:** *[IShape](../interfaces/ishape.md)*
+**Returns:** [*IShape*](../interfaces/ishape.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)

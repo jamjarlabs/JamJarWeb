@@ -1,4 +1,3 @@
-
 # Class: UI
 
 UI is a component for marking an entity as part of the UI,
@@ -9,96 +8,90 @@ than in world space.
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **UI**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](ui.md#constructor)
+- [constructor](ui.md#constructor)
 
 ### Properties
 
-* [camera](ui.md#camera)
-* [key](ui.md#key)
-* [KEY](ui.md#static-key)
-* [MESSAGE_ADD](ui.md#static-message_add)
-* [MESSAGE_REMOVE](ui.md#static-message_remove)
+- [camera](ui.md#camera)
+- [key](ui.md#key)
+- [KEY](ui.md#key)
+- [MESSAGE\_ADD](ui.md#message_add)
+- [MESSAGE\_REMOVE](ui.md#message_remove)
 
 ### Methods
 
-* [Free](ui.md#free)
+- [Free](ui.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new UI**(`camera`: [IEntity](../interfaces/ientity.md)): *[UI](ui.md)*
+\+ **new UI**(`camera`: [*IEntity*](../interfaces/ientity.md)): [*UI*](ui.md)
 
-*Overrides [Component](component.md).[constructor](component.md#constructor)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`camera` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`camera` | [*IEntity*](../interfaces/ientity.md) |
 
-**Returns:** *[UI](ui.md)*
+**Returns:** [*UI*](ui.md)
+
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  camera
+### camera
 
-• **camera**: *[IEntity](../interfaces/ientity.md)*
+• **camera**: [*IEntity*](../interfaces/ientity.md)
 
 Entity of the camera to render this UI element on.
 
 ___
 
-###  key
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-### `Static` KEY
+### KEY
 
-▪ **KEY**: *"ui"* = "ui"
+▪ `Readonly` `Static` **KEY**: *ui*= "ui"
 
 Key of the UI component.
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Inherited from [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Inherited from: [Component](component.md)

@@ -1,4 +1,3 @@
-
 # Class: MessageBus
 
 MessageBus is the core link between each part of the Engine, it handles processing
@@ -11,131 +10,125 @@ to send all the messages and to the subscribers that have subscribed to the mess
 type.
 The dispatch should probably be left to the core game loop for triggering.
 
-## Hierarchy
-
-* **MessageBus**
-
 ## Implements
 
-* [IMessageBus](../interfaces/imessagebus.md)
+* [*IMessageBus*](../interfaces/imessagebus.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](messagebus.md#constructor)
-
-### Properties
-
-* [messageQueue](messagebus.md#private-messagequeue)
-* [subscribers](messagebus.md#private-subscribers)
+- [constructor](messagebus.md#constructor)
 
 ### Methods
 
-* [Dispatch](messagebus.md#dispatch)
-* [DispatchUntilEmpty](messagebus.md#dispatchuntilempty)
-* [Publish](messagebus.md#publish)
-* [Subscribe](messagebus.md#subscribe)
-* [Unsubscribe](messagebus.md#unsubscribe)
-* [UnsubscribeAll](messagebus.md#unsubscribeall)
+- [Dispatch](messagebus.md#dispatch)
+- [DispatchUntilEmpty](messagebus.md#dispatchuntilempty)
+- [Publish](messagebus.md#publish)
+- [Subscribe](messagebus.md#subscribe)
+- [Unsubscribe](messagebus.md#unsubscribe)
+- [UnsubscribeAll](messagebus.md#unsubscribeall)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new MessageBus**(`subscribers`: Record‹string, [ISubscriber](../interfaces/isubscriber.md)[]›, `messageQueue`: [IMessage](../interfaces/imessage.md)[]): *[MessageBus](messagebus.md)*
+\+ **new MessageBus**(`subscribers?`: *Record*<string, [*ISubscriber*](../interfaces/isubscriber.md)[]\>, `messageQueue?`: [*IMessage*](../interfaces/imessage.md)[]): [*MessageBus*](messagebus.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`subscribers` | Record‹string, [ISubscriber](../interfaces/isubscriber.md)[]› | {} |
-`messageQueue` | [IMessage](../interfaces/imessage.md)[] | [] |
+Name | Type |
+:------ | :------ |
+`subscribers` | *Record*<string, [*ISubscriber*](../interfaces/isubscriber.md)[]\> |
+`messageQueue` | [*IMessage*](../interfaces/imessage.md)[] |
 
-**Returns:** *[MessageBus](messagebus.md)*
-
-## Properties
-
-### `Private` messageQueue
-
-• **messageQueue**: *[IMessage](../interfaces/imessage.md)[]*
-
-___
-
-### `Private` subscribers
-
-• **subscribers**: *Record‹string, [ISubscriber](../interfaces/isubscriber.md)[]›*
+**Returns:** [*MessageBus*](messagebus.md)
 
 ## Methods
 
-###  Dispatch
+### Dispatch
 
 ▸ **Dispatch**(): *void*
 
+Dispatch processes the current message bus queue and forwards the messages to the subscribers who have
+subscribed to each message type.
+
 **Returns:** *void*
 
 ___
 
-###  DispatchUntilEmpty
+### DispatchUntilEmpty
 
 ▸ **DispatchUntilEmpty**(): *void*
 
-**Returns:** *void*
-
-___
-
-###  Publish
-
-▸ **Publish**(`message`: [IMessage](../interfaces/imessage.md)): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+DispatchUntilEmpty repeatedly dispatches until the message queue is empty, used to make sure everything is
+processed, e.g. if there is a message that causes a new message to be added, it will ensure that all recursive
+messages are processed.
 
 **Returns:** *void*
 
 ___
 
-###  Subscribe
+### Publish
 
-▸ **Subscribe**(`subscriber`: [ISubscriber](../interfaces/isubscriber.md), `types`: string | string[]): *void*
+▸ **Publish**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-**Parameters:**
+Publish adds a message to the message bus queue to be dispatched.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`subscriber` | [ISubscriber](../interfaces/isubscriber.md) |
-`types` | string &#124; string[] |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
 ___
 
-###  Unsubscribe
+### Subscribe
 
-▸ **Unsubscribe**(`subscriber`: [ISubscriber](../interfaces/isubscriber.md), `types`: string | string[]): *void*
+▸ **Subscribe**(`subscriber`: [*ISubscriber*](../interfaces/isubscriber.md), `types`: *string* \| *string*[]): *void*
 
-**Parameters:**
+Subscribe subscibes a subscriber to a particular message type or types.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`subscriber` | [ISubscriber](../interfaces/isubscriber.md) |
-`types` | string &#124; string[] |
+:------ | :------ |
+`subscriber` | [*ISubscriber*](../interfaces/isubscriber.md) |
+`types` | *string* \| *string*[] |
 
 **Returns:** *void*
 
 ___
 
-###  UnsubscribeAll
+### Unsubscribe
 
-▸ **UnsubscribeAll**(`subscriber`: [ISubscriber](../interfaces/isubscriber.md)): *void*
+▸ **Unsubscribe**(`subscriber`: [*ISubscriber*](../interfaces/isubscriber.md), `types`: *string* \| *string*[]): *void*
 
-**Parameters:**
+Unsubscribe unsubscribes a subscriber from a specific message type or types.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`subscriber` | [ISubscriber](../interfaces/isubscriber.md) |
+:------ | :------ |
+`subscriber` | [*ISubscriber*](../interfaces/isubscriber.md) |
+`types` | *string* \| *string*[] |
+
+**Returns:** *void*
+
+___
+
+### UnsubscribeAll
+
+▸ **UnsubscribeAll**(`subscriber`: [*ISubscriber*](../interfaces/isubscriber.md)): *void*
+
+UnsubscribeAll unsubscribes a Subscriber from all messages.
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`subscriber` | [*ISubscriber*](../interfaces/isubscriber.md) |
 
 **Returns:** *void*

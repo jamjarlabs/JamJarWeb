@@ -1,4 +1,3 @@
-
 # Interface: IFreeable
 
 IFreeable defines the contract for an object that either is poolable or contains poolable elements, allowing the
@@ -8,41 +7,29 @@ object to be freed/it's constituent parts freed back to object pools.
 
 * **IFreeable**
 
-  ↳ [IPoolable](ipoolable.md)
+  ↳ [*IMessage*](imessage.md)
 
-  ↳ [IMessage](imessage.md)
+  ↳ [*IShape*](ishape.md)
 
-  ↳ [IShape](ishape.md)
+  ↳ [*IPoolable*](ipoolable.md)
 
 ## Implemented by
 
-* [AudioSource](../classes/audiosource.md)
-* [Camera](../classes/camera.md)
-* [Collider](../classes/collider.md)
-* [Component](../classes/component.md)
-* [FakeComponent](../classes/fakecomponent.md)
-* [Material](../classes/material.md)
-* [Motion](../classes/motion.md)
-* [Pointer](../classes/pointer.md)
-* [PointerCameraInfo](../classes/pointercamerainfo.md)
-* [Primitive](../classes/primitive.md)
-* [Script](../classes/script.md)
-* [Sprite](../classes/sprite.md)
-* [SpriteAnimator](../classes/spriteanimator.md)
-* [Text](../classes/text.md)
-* [Texture](../classes/texture.md)
-* [Transform](../classes/transform.md)
-* [UI](../classes/ui.md)
+* [*Component*](../classes/component.md)
+* [*Material*](../classes/material.md)
+* [*Pointer*](../classes/pointer.md)
+* [*PointerCameraInfo*](../classes/pointercamerainfo.md)
+* [*Texture*](../classes/texture.md)
 
-## Index
+## Table of contents
 
 ### Methods
 
-* [Free](ifreeable.md#free)
+- [Free](ifreeable.md#free)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
