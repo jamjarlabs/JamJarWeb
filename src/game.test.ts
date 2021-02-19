@@ -17,6 +17,9 @@ limitations under the License.
 import Game from "./game";
 import FakeMessageBus from "./fake/message_bus";
 import Reactor from "./fake/reactor";
+import { JSDOM } from "jsdom";
+import Message from "./message/message";
+import MessageBus from "./message/message_bus";
 
 class TestGame extends Game {}
 
@@ -84,4 +87,85 @@ describe("Game - Start", () => {
         }
         jest.runAllTimers();
     });
+});
+
+describe("Game - Ensure window variables set after constructor and start", () => {
+    const browserWindow = new JSDOM().window;
+    expect(browserWindow.JamJarStopGames).toBe(undefined);
+
+    const game = new TestGame(new FakeMessageBus(), "test", (): number => 0, undefined, browserWindow, 0);
+    expect(browserWindow.JamJarStopGames).not.toBe(undefined);
+    expect(browserWindow.JamJarStopGames).not.toBe(null);
+    expect(browserWindow.__jamJarRunningGameBuses).toBe(undefined);
+
+    game.Start();
+    expect(browserWindow.__jamJarRunningGameBuses).not.toBe(undefined);
+    expect(browserWindow.__jamJarRunningGameBuses).not.toBe(null);
+});
+
+describe("Game - Ensure window variables set after constructor and start, stop games function already set and already 1 message bus", () => {
+    const browserWindow = new JSDOM().window;
+    browserWindow.JamJarStopGames = () => {
+        return;
+    };
+    browserWindow.__jamJarRunningGameBuses = [new FakeMessageBus()];
+
+    const game = new TestGame(new FakeMessageBus(), "test", (): number => 0, undefined, browserWindow, 0);
+    expect(browserWindow.JamJarStopGames).not.toBe(undefined);
+    expect(browserWindow.JamJarStopGames).not.toBe(null);
+    expect(browserWindow.__jamJarRunningGameBuses).toHaveLength(1);
+
+    game.Start();
+    expect(browserWindow.__jamJarRunningGameBuses).toHaveLength(2);
+});
+
+describe("Game - Loop 5 times before stopping", () => {
+    let game: TestGame | undefined = undefined;
+    const animationLoop = (): ((callback: FrameRequestCallback) => number) => {
+        let count = 0;
+        return (callback: FrameRequestCallback): number => {
+            count++;
+            if (count < 5) {
+                callback(new Date().getTime());
+                return 0;
+            }
+            if (count > 5) {
+                throw "Should not loop more than 5 times";
+            }
+            game?.OnMessage(new Message(Game.MESSAGE_STOP_GAME));
+            callback(new Date().getTime());
+            return 0;
+        };
+    };
+
+    game = new TestGame(new FakeMessageBus(), "test", animationLoop());
+    game.Start();
+});
+
+describe("Game - Stop all games", () => {
+    const browserWindow = new JSDOM().window;
+    let game: TestGame | undefined = undefined;
+    const animationLoop = (): ((callback: FrameRequestCallback) => number) => {
+        let count = 0;
+        return (callback: FrameRequestCallback): number => {
+            count++;
+            if (count < 5) {
+                callback(new Date().getTime());
+                return 0;
+            }
+            // This test is 6 times since it will take one more final loop to process the stop command
+            if (count > 6) {
+                throw "Should not loop more than 6 times";
+            }
+
+            if (count === 5) {
+                browserWindow.JamJarStopGames(browserWindow);
+            }
+            callback(new Date().getTime());
+            return 0;
+        };
+    };
+
+    game = new TestGame(new MessageBus(), "test", animationLoop(), undefined, browserWindow);
+    game.Start();
 });

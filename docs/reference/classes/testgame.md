@@ -3,12 +3,13 @@
 
 ## Hierarchy
 
-* [Game](game.md)
+  ↳ [Game](game.md)
 
   ↳ **TestGame**
 
 ## Implements
 
+* [ISubscriber](../interfaces/isubscriber.md)
 * [IGame](../interfaces/igame.md)
 
 ## Index
@@ -21,22 +22,28 @@
 
 * [messageBus](testgame.md#protected-messagebus)
 * [name](testgame.md#name)
+* [subscriberID](testgame.md#subscriberid)
 * [MESSAGE_POST_RENDER](testgame.md#static-message_post_render)
 * [MESSAGE_PRE_RENDER](testgame.md#static-message_pre_render)
 * [MESSAGE_RENDER](testgame.md#static-message_render)
+* [MESSAGE_STOP_GAME](testgame.md#static-message_stop_game)
 
 ### Methods
 
+* [OnMessage](testgame.md#onmessage)
 * [OnStart](testgame.md#protected-onstart)
+* [OnStop](testgame.md#protected-onstop)
 * [Start](testgame.md#start)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new TestGame**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function): *[TestGame](testgame.md)*
+\+ **new TestGame**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function, `running`: boolean, `browserWindow`: Window, `subscriberID?`: undefined | number): *[TestGame](testgame.md)*
 
 *Inherited from [Game](game.md).[constructor](game.md#constructor)*
+
+*Overrides [Subscriber](subscriber.md).[constructor](subscriber.md#constructor)*
 
 **Parameters:**
 
@@ -53,6 +60,12 @@
 Name | Type |
 ------ | ------ |
 `callback` | FrameRequestCallback |
+
+▪`Default value`  **running**: *boolean*= false
+
+▪`Default value`  **browserWindow**: *Window*= window
+
+▪`Optional`  **subscriberID**: *undefined | number*
 
 **Returns:** *[TestGame](testgame.md)*
 
@@ -71,6 +84,16 @@ ___
 • **name**: *string*
 
 *Inherited from [Game](game.md).[name](game.md#name)*
+
+___
+
+###  subscriberID
+
+• **subscriberID**: *number*
+
+*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
+
+*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
 
 ___
 
@@ -96,7 +119,33 @@ ___
 
 *Inherited from [Game](game.md).[MESSAGE_RENDER](game.md#static-message_render)*
 
+___
+
+### `Static` MESSAGE_STOP_GAME
+
+▪ **MESSAGE_STOP_GAME**: *"jamjar_stop_game"* = "jamjar_stop_game"
+
+*Inherited from [Game](game.md).[MESSAGE_STOP_GAME](game.md#static-message_stop_game)*
+
 ## Methods
+
+###  OnMessage
+
+▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+
+*Inherited from [Game](game.md).[OnMessage](game.md#onmessage)*
+
+*Overrides [Subscriber](subscriber.md).[OnMessage](subscriber.md#abstract-onmessage)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`message` | [IMessage](../interfaces/imessage.md) |
+
+**Returns:** *void*
+
+___
 
 ### `Protected` OnStart
 
@@ -105,6 +154,18 @@ ___
 *Inherited from [Game](game.md).[OnStart](game.md#protected-onstart)*
 
 OnStart is triggered when the game is started.
+
+**Returns:** *void*
+
+___
+
+### `Protected` OnStop
+
+▸ **OnStop**(): *void*
+
+*Inherited from [Game](game.md).[OnStop](game.md#protected-onstop)*
+
+OnStop is triggered when the game is stopped.
 
 **Returns:** *void*
 

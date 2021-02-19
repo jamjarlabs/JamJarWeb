@@ -14,6 +14,8 @@ from the message bus
 
   ↳ [EntityManager](entitymanager.md)
 
+  ↳ [Game](game.md)
+
 ## Implements
 
 * [ISubscriber](../interfaces/isubscriber.md)
