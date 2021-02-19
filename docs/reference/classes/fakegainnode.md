@@ -1,239 +1,238 @@
-
 # Class: FakeGainNode
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeGainNode**
 
 ## Implements
 
-* GainNode
+* *GainNode*
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakegainnode.md#constructor)
+- [constructor](fakegainnode.md#constructor)
 
 ### Properties
 
-* [channelCount](fakegainnode.md#channelcount)
-* [channelCountMode](fakegainnode.md#channelcountmode)
-* [channelInterpretation](fakegainnode.md#channelinterpretation)
-* [context](fakegainnode.md#context)
-* [gain](fakegainnode.md#gain)
-* [numberOfInputs](fakegainnode.md#numberofinputs)
-* [numberOfOutputs](fakegainnode.md#numberofoutputs)
+- [channelCount](fakegainnode.md#channelcount)
+- [channelCountMode](fakegainnode.md#channelcountmode)
+- [channelInterpretation](fakegainnode.md#channelinterpretation)
+- [context](fakegainnode.md#context)
+- [gain](fakegainnode.md#gain)
+- [numberOfInputs](fakegainnode.md#numberofinputs)
+- [numberOfOutputs](fakegainnode.md#numberofoutputs)
 
 ### Methods
 
-* [addEventListener](fakegainnode.md#addeventlistener)
-* [connect](fakegainnode.md#connect)
-* [disconnect](fakegainnode.md#disconnect)
-* [dispatchEvent](fakegainnode.md#dispatchevent)
-* [removeEventListener](fakegainnode.md#removeeventlistener)
+- [addEventListener](fakegainnode.md#addeventlistener)
+- [connect](fakegainnode.md#connect)
+- [disconnect](fakegainnode.md#disconnect)
+- [dispatchEvent](fakegainnode.md#dispatchevent)
+- [removeEventListener](fakegainnode.md#removeeventlistener)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeGainNode**(`reactors`: [Reactor](reactor.md)[]): *[FakeGainNode](fakegainnode.md)*
+\+ **new FakeGainNode**(`reactors?`: [*Reactor*](reactor.md)[]): [*FakeGainNode*](fakegainnode.md)
 
-*Inherited from [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeGainNode*](fakegainnode.md)
 
-**Returns:** *[FakeGainNode](fakegainnode.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  channelCount
+### channelCount
 
 • **channelCount**: *number*
 
 ___
 
-###  channelCountMode
+### channelCountMode
 
-• **channelCountMode**: *ChannelCountMode*
-
-___
-
-###  channelInterpretation
-
-• **channelInterpretation**: *ChannelInterpretation*
+• **channelCountMode**: ChannelCountMode
 
 ___
 
-###  context
+### channelInterpretation
 
-• **context**: *BaseAudioContext*
-
-___
-
-###  gain
-
-• **gain**: *AudioParam*
+• **channelInterpretation**: ChannelInterpretation
 
 ___
 
-###  numberOfInputs
+### context
+
+• **context**: BaseAudioContext
+
+___
+
+### gain
+
+• **gain**: AudioParam
+
+___
+
+### numberOfInputs
 
 • **numberOfInputs**: *number*
 
 ___
 
-###  numberOfOutputs
+### numberOfOutputs
 
 • **numberOfOutputs**: *number*
 
 ## Methods
 
-###  addEventListener
+### addEventListener
 
-▸ **addEventListener**(`type`: string, `listener`: EventListener | EventListenerObject | null, `options?`: boolean | AddEventListenerOptions | undefined): *void*
+▸ **addEventListener**(`type`: *string*, `listener`: *null* \| EventListener \| EventListenerObject, `options?`: *boolean* \| AddEventListenerOptions): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
-`listener` | EventListener &#124; EventListenerObject &#124; null |
-`options?` | boolean &#124; AddEventListenerOptions &#124; undefined |
+:------ | :------ |
+`type` | *string* |
+`listener` | *null* \| EventListener \| EventListenerObject |
+`options?` | *boolean* \| AddEventListenerOptions |
 
 **Returns:** *void*
 
 ___
 
-###  connect
+### connect
 
-▸ **connect**(`destinationNode`: AudioNode, `output?`: number | undefined, `input?`: number | undefined): *AudioNode*
+▸ **connect**(`destinationNode`: AudioNode, `output?`: *number*, `input?`: *number*): AudioNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
-`output?` | number &#124; undefined |
-`input?` | number &#124; undefined |
+`output?` | *number* |
+`input?` | *number* |
 
-**Returns:** *AudioNode*
+**Returns:** AudioNode
 
-▸ **connect**(`destinationParam`: AudioParam, `output?`: number | undefined): *void*
+▸ **connect**(`destinationParam`: AudioParam, `output?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationParam` | AudioParam |
-`output?` | number &#124; undefined |
+`output?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  disconnect
+### disconnect
 
 ▸ **disconnect**(): *void*
 
 **Returns:** *void*
 
-▸ **disconnect**(`output`: number): *void*
+▸ **disconnect**(`output`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`output` | number |
+:------ | :------ |
+`output` | *number* |
 
 **Returns:** *void*
 
 ▸ **disconnect**(`destinationNode`: AudioNode): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
 
 **Returns:** *void*
 
-▸ **disconnect**(`destinationNode`: AudioNode, `output`: number): *void*
+▸ **disconnect**(`destinationNode`: AudioNode, `output`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
-`output` | number |
+`output` | *number* |
 
 **Returns:** *void*
 
-▸ **disconnect**(`destinationNode`: AudioNode, `output`: number, `input`: number): *void*
+▸ **disconnect**(`destinationNode`: AudioNode, `output`: *number*, `input`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
-`output` | number |
-`input` | number |
+`output` | *number* |
+`input` | *number* |
 
 **Returns:** *void*
 
 ▸ **disconnect**(`destinationParam`: AudioParam): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationParam` | AudioParam |
 
 **Returns:** *void*
 
-▸ **disconnect**(`destinationParam`: AudioParam, `output`: number): *void*
+▸ **disconnect**(`destinationParam`: AudioParam, `output`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationParam` | AudioParam |
-`output` | number |
+`output` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  dispatchEvent
+### dispatchEvent
 
 ▸ **dispatchEvent**(`event`: Event): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | Event |
 
 **Returns:** *boolean*
 
 ___
 
-###  removeEventListener
+### removeEventListener
 
-▸ **removeEventListener**(`type`: string, `callback`: EventListener | EventListenerObject | null, `options?`: boolean | EventListenerOptions | undefined): *void*
+▸ **removeEventListener**(`type`: *string*, `callback`: *null* \| EventListener \| EventListenerObject, `options?`: *boolean* \| EventListenerOptions): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
-`callback` | EventListener &#124; EventListenerObject &#124; null |
-`options?` | boolean &#124; EventListenerOptions &#124; undefined |
+:------ | :------ |
+`type` | *string* |
+`callback` | *null* \| EventListener \| EventListenerObject |
+`options?` | *boolean* \| EventListenerOptions |
 
 **Returns:** *void*

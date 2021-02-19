@@ -1,4 +1,3 @@
-
 # Class: Entity
 
 Entity is one of the key elements of the Entity-Component-System architecture.
@@ -8,128 +7,123 @@ The entity is basically just an ID, with some meta information of tags and
 layers for grouping and filtering, alongside some helper functions for
 adding/removing components and destroying itself.
 
-## Hierarchy
-
-* **Entity**
-
 ## Implements
 
-* [IEntity](../interfaces/ientity.md)
+* [*IEntity*](../interfaces/ientity.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](entity.md#constructor)
+- [constructor](entity.md#constructor)
 
 ### Properties
 
-* [id](entity.md#id)
-* [layers](entity.md#layers)
-* [messageBus](entity.md#private-messagebus)
-* [tags](entity.md#tags)
-* [ID](entity.md#static-private-id)
-* [MESSAGE_DESTROY](entity.md#static-message_destroy)
+- [id](entity.md#id)
+- [layers](entity.md#layers)
+- [tags](entity.md#tags)
+- [MESSAGE\_DESTROY](entity.md#message_destroy)
 
 ### Methods
 
-* [Add](entity.md#add)
-* [Destroy](entity.md#destroy)
-* [Remove](entity.md#remove)
+- [Add](entity.md#add)
+- [Destroy](entity.md#destroy)
+- [Remove](entity.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Entity**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `tags`: string[], `layers`: string[], `id`: number): *[Entity](entity.md)*
+\+ **new Entity**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `tags?`: *string*[], `layers?`: *string*[], `id?`: *number*): [*Entity*](entity.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`tags` | string[] | [] |
-`layers` | string[] | [] |
-`id` | number | Entity.ID++ |
+Name | Type |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
+`tags` | *string*[] |
+`layers` | *string*[] |
+`id` | *number* |
 
-**Returns:** *[Entity](entity.md)*
+**Returns:** [*Entity*](entity.md)
 
 ## Properties
 
-###  id
+### id
 
 • **id**: *number*
 
-*Implementation of [IEntity](../interfaces/ientity.md).[id](../interfaces/ientity.md#id)*
+Unique numeric identifier of the entity.
+
+Implementation of: [IEntity](../interfaces/ientity.md).[id](../interfaces/ientity.md#id)
 
 ___
 
-###  layers
+### layers
 
-• **layers**: *string[]*
+• **layers**: *string*[]
 
-*Implementation of [IEntity](../interfaces/ientity.md).[layers](../interfaces/ientity.md#layers)*
+A list of layers the entity belongs to, used for grouping entities.
 
-___
-
-### `Private` messageBus
-
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+Implementation of: [IEntity](../interfaces/ientity.md).[layers](../interfaces/ientity.md#layers)
 
 ___
 
-###  tags
+### tags
 
-• **tags**: *string[]*
+• **tags**: *string*[]
 
-*Implementation of [IEntity](../interfaces/ientity.md).[tags](../interfaces/ientity.md#tags)*
+A list of tags the entity has, used for discriminating between entities
+without having to add custom components.
 
-___
-
-### `Static` `Private` ID
-
-▪ **ID**: *number* = 0
+Implementation of: [IEntity](../interfaces/ientity.md).[tags](../interfaces/ientity.md#tags)
 
 ___
 
-### `Static` MESSAGE_DESTROY
+### MESSAGE\_DESTROY
 
-▪ **MESSAGE_DESTROY**: *"entity_destroy"* = "entity_destroy"
+▪ `Readonly` `Static` **MESSAGE\_DESTROY**: *entity_destroy*= "entity\_destroy"
 
 Message broadcast when an entity is destroyed.
 
 ## Methods
 
-###  Add
+### Add
 
-▸ **Add**(`component`: [Component](component.md)): *void*
+▸ **Add**(`component`: [*Component*](component.md)): *void*
 
-**Parameters:**
+Add adds a component to the entity.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`component` | [Component](component.md) |
+:------ | :------ |
+`component` | [*Component*](component.md) |
 
 **Returns:** *void*
 
 ___
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
 
+Destroy deletes the entity and all associated components.
+
 **Returns:** *void*
 
 ___
 
-###  Remove
+### Remove
 
-▸ **Remove**(`key`: string): *void*
+▸ **Remove**(`key`: *string*): *void*
 
-**Parameters:**
+Remove removes a component from the entity.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`key` | string |
+:------ | :------ |
+`key` | *string* |
 
 **Returns:** *void*

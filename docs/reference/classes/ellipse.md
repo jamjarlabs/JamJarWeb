@@ -1,171 +1,172 @@
-
 # Class: Ellipse
 
 Ellipse is the representation of a 2D Ellipse shape. Can be used for collision detection.
 
-## Hierarchy
-
-* **Ellipse**
-
 ## Implements
 
-* [IShape](../interfaces/ishape.md)
+* [*IShape*](../interfaces/ishape.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](ellipse.md#constructor)
+- [constructor](ellipse.md#constructor)
 
 ### Properties
 
-* [center](ellipse.md#center)
-* [dimensions](ellipse.md#dimensions)
-* [orientation](ellipse.md#orientation)
-* [ORIGIN](ellipse.md#static-private-origin)
+- [center](ellipse.md#center)
+- [dimensions](ellipse.md#dimensions)
+- [orientation](ellipse.md#orientation)
 
 ### Methods
 
-* [Center](ellipse.md#center)
-* [Copy](ellipse.md#copy)
-* [FarthestPointInDirection](ellipse.md#farthestpointindirection)
-* [Free](ellipse.md#free)
-* [PointInside](ellipse.md#pointinside)
-* [Transform](ellipse.md#transform)
-* [Circle](ellipse.md#static-circle)
+- [Center](ellipse.md#center)
+- [Copy](ellipse.md#copy)
+- [FarthestPointInDirection](ellipse.md#farthestpointindirection)
+- [Free](ellipse.md#free)
+- [PointInside](ellipse.md#pointinside)
+- [Transform](ellipse.md#transform)
+- [Circle](ellipse.md#circle)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Ellipse**(`dimensions`: [Vector](vector.md), `orientation`: number, `center`: [Vector](vector.md)): *[Ellipse](ellipse.md)*
+\+ **new Ellipse**(`dimensions`: [*Vector*](vector.md), `orientation?`: *number*, `center?`: [*Vector*](vector.md)): [*Ellipse*](ellipse.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`dimensions` | [Vector](vector.md) | - |
-`orientation` | number | 0 |
-`center` | [Vector](vector.md) | Vector.New(0, 0) |
+Name | Type | Default value |
+:------ | :------ | :------ |
+`dimensions` | [*Vector*](vector.md) | - |
+`orientation` | *number* | 0 |
+`center` | [*Vector*](vector.md) | - |
 
-**Returns:** *[Ellipse](ellipse.md)*
+**Returns:** [*Ellipse*](ellipse.md)
 
 ## Properties
 
-###  center
+### center
 
-• **center**: *[Vector](vector.md)*
-
-___
-
-###  dimensions
-
-• **dimensions**: *[Vector](vector.md)*
+• **center**: [*Vector*](vector.md)
 
 ___
 
-###  orientation
+### dimensions
+
+• **dimensions**: [*Vector*](vector.md)
+
+___
+
+### orientation
 
 • **orientation**: *number*
 
-___
-
-### `Static` `Private` ORIGIN
-
-▪ **ORIGIN**: *[Vector](vector.md)‹›* = new Vector(0, 0)
-
 ## Methods
 
-###  Center
+### Center
 
-▸ **Center**(): *[Vector](vector.md)*
+▸ **Center**(): [*Vector*](vector.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Center calculates/retrieves the center of a shape.
 
-**Returns:** *[Vector](vector.md)*
+**Returns:** [*Vector*](vector.md)
 
-___
-
-###  Copy
-
-▸ **Copy**(): *[Ellipse](ellipse.md)*
-
-*Implementation of [IShape](../interfaces/ishape.md)*
-
-**Returns:** *[Ellipse](ellipse.md)*
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-###  FarthestPointInDirection
+### Copy
 
-▸ **FarthestPointInDirection**(`direction`: [Vector](vector.md)): *[Vector](vector.md)*
+▸ **Copy**(): [*Ellipse*](ellipse.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Creates a copy of the shape and its values, rather than pointing to the same Shape.
 
-**Parameters:**
+**Returns:** [*Ellipse*](ellipse.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)
+
+___
+
+### FarthestPointInDirection
+
+▸ **FarthestPointInDirection**(`direction`: [*Vector*](vector.md)): [*Vector*](vector.md)
+
+FarthestPointInDirection returns the point that is farthest in the direction provided.
+Used in the GJK algorithm for collision detection.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`direction` | [Vector](vector.md) |
+:------ | :------ |
+`direction` | [*Vector*](vector.md) |
 
-**Returns:** *[Vector](vector.md)*
+**Returns:** [*Vector*](vector.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Implementation of: [IShape](../interfaces/ishape.md)
+
 ___
 
-###  PointInside
+### PointInside
 
-▸ **PointInside**(`point`: [Vector](vector.md)): *boolean*
+▸ **PointInside**(`point`: [*Vector*](vector.md)): *boolean*
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+PointInside determines if a point provided is within the shape or not.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`point` | [Vector](vector.md) |
+:------ | :------ |
+`point` | [*Vector*](vector.md) |
 
 **Returns:** *boolean*
 
+Implementation of: [IShape](../interfaces/ishape.md)
+
 ___
 
-###  Transform
+### Transform
 
-▸ **Transform**(`transform`: [Transform](transform.md)): *[IShape](../interfaces/ishape.md)*
+▸ **Transform**(`transform`: [*Transform*](transform.md)): [*IShape*](../interfaces/ishape.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Transform takes a transform and applies it to shape.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`transform` | [Transform](transform.md) |
+:------ | :------ |
+`transform` | [*Transform*](transform.md) |
 
-**Returns:** *[IShape](../interfaces/ishape.md)*
+**Returns:** [*IShape*](../interfaces/ishape.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-### `Static` Circle
+### Circle
 
-▸ **Circle**(`radius`: number, `centerX`: number, `centerY`: number): *[Ellipse](ellipse.md)*
+▸ `Static`**Circle**(`radius`: *number*, `centerX?`: *number*, `centerY?`: *number*): [*Ellipse*](ellipse.md)
 
 Circle returns a new Ellipse in the shape of a circle.
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`radius` | number | - | Radius of the circle |
-`centerX` | number | 0 | - |
-`centerY` | number | 0 | - |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`radius` | *number* | - | Radius of the circle   |
+`centerX` | *number* | 0 | - |
+`centerY` | *number* | 0 | - |
 
-**Returns:** *[Ellipse](ellipse.md)*
+**Returns:** [*Ellipse*](ellipse.md)

@@ -1,37 +1,36 @@
-
 # Interface: IPoolable
 
 IPoolable defines the required properties of an object that is able to be pooled using an object pool.
 
 ## Hierarchy
 
-* [IFreeable](ifreeable.md)
+* [*IFreeable*](ifreeable.md)
 
   ↳ **IPoolable**
 
-  ↳ [IRenderable](irenderable.md)
+  ↳↳ [*IRenderable*](irenderable.md)
 
 ## Implemented by
 
-* [Matrix3D](../classes/matrix3d.md)
-* [Matrix4D](../classes/matrix4d.md)
-* [Message](../classes/message.md)
-* [Vector](../classes/vector.md)
+* [*Matrix3D*](../classes/matrix3d.md)
+* [*Matrix4D*](../classes/matrix4d.md)
+* [*Message*](../classes/message.md)
+* [*Vector*](../classes/vector.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [objectInPool](ipoolable.md#objectinpool)
+- [objectInPool](ipoolable.md#objectinpool)
 
 ### Methods
 
-* [Free](ipoolable.md#free)
-* [Recycle](ipoolable.md#recycle)
+- [Free](ipoolable.md#free)
+- [Recycle](ipoolable.md#recycle)
 
 ## Properties
 
-###  objectInPool
+### objectInPool
 
 • **objectInPool**: *boolean*
 
@@ -39,29 +38,29 @@ objectInPool is used to mark if the instance of the object is currently pooled.
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
-
-*Inherited from [IFreeable](ifreeable.md).[Free](ifreeable.md#free)*
 
 Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Inherited from: [IFreeable](ifreeable.md)
+
 ___
 
-###  Recycle
+### Recycle
 
-▸ **Recycle**(...`args`: any): *[IPoolable](ipoolable.md)*
+▸ **Recycle**(...`args`: *any*): [*IPoolable*](ipoolable.md)
 
 Recycle is used to reuse an existing object instance, using the arguments provided - similar to a constructor,
 but must be repeatable.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`...args` | any | The arguments to use when recycling the object instance  |
+:------ | :------ | :------ |
+`...args` | *any* | The arguments to use when recycling the object instance    |
 
-**Returns:** *[IPoolable](ipoolable.md)*
+**Returns:** [*IPoolable*](ipoolable.md)

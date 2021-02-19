@@ -1,4 +1,3 @@
-
 # Class: AudioSource
 
 AudioSource is a component for storing information around audio and how it
@@ -6,61 +5,57 @@ should be played.
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **AudioSource**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](audiosource.md#constructor)
+- [constructor](audiosource.md#constructor)
 
 ### Properties
 
-* [audio](audiosource.md#audio)
-* [audioProcessor](audiosource.md#optional-audioprocessor)
-* [key](audiosource.md#key)
-* [loop](audiosource.md#loop)
-* [playCount](audiosource.md#playcount)
-* [playbackRate](audiosource.md#playbackrate)
-* [playing](audiosource.md#playing)
-* [volume](audiosource.md#volume)
-* [KEY](audiosource.md#static-key)
-* [MESSAGE_ADD](audiosource.md#static-message_add)
-* [MESSAGE_REMOVE](audiosource.md#static-message_remove)
+- [audio](audiosource.md#audio)
+- [audioProcessor](audiosource.md#audioprocessor)
+- [key](audiosource.md#key)
+- [loop](audiosource.md#loop)
+- [playCount](audiosource.md#playcount)
+- [playbackRate](audiosource.md#playbackrate)
+- [playing](audiosource.md#playing)
+- [volume](audiosource.md#volume)
+- [KEY](audiosource.md#key)
+- [MESSAGE\_ADD](audiosource.md#message_add)
+- [MESSAGE\_REMOVE](audiosource.md#message_remove)
 
 ### Methods
 
-* [Free](audiosource.md#free)
-* [Play](audiosource.md#play)
-* [Stop](audiosource.md#stop)
+- [Free](audiosource.md#free)
+- [Play](audiosource.md#play)
+- [Stop](audiosource.md#stop)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new AudioSource**(`audio`: string, `options`: [IAudioOptions](../interfaces/iaudiooptions.md), `playCount`: number): *[AudioSource](audiosource.md)*
+\+ **new AudioSource**(`audio`: *string*, `options?`: [*IAudioOptions*](../interfaces/iaudiooptions.md), `playCount?`: *number*): [*AudioSource*](audiosource.md)
 
-*Overrides [Component](component.md).[constructor](component.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type | Default value |
+:------ | :------ | :------ |
+`audio` | *string* | - |
+`options` | [*IAudioOptions*](../interfaces/iaudiooptions.md) | - |
+`playCount` | *number* | 0 |
 
-Name | Type | Default |
------- | ------ | ------ |
-`audio` | string | - |
-`options` | [IAudioOptions](../interfaces/iaudiooptions.md) | {} |
-`playCount` | number | 0 |
+**Returns:** [*AudioSource*](audiosource.md)
 
-**Returns:** *[AudioSource](audiosource.md)*
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  audio
+### audio
 
 • **audio**: *string*
 
@@ -68,9 +63,9 @@ The name of the audio asset to play.
 
 ___
 
-### `Optional` audioProcessor
+### audioProcessor
 
-• **audioProcessor**? : *undefined | function*
+• `Optional` **audioProcessor**: *undefined* \| (`base`: AudioBufferSourceNode, `context`: AudioContext) => AudioNode
 
 Audio processing function, during audio playback this function will be
 called and allows injection of filters/customisation. This uses the Web
@@ -79,15 +74,15 @@ https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 
 ___
 
-###  key
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-###  loop
+### loop
 
 • **loop**: *number*
 
@@ -97,7 +92,7 @@ result in 1 initial play and 3 looped plays.
 
 ___
 
-###  playCount
+### playCount
 
 • **playCount**: *number*
 
@@ -106,7 +101,7 @@ played, used to determine if it should continue looping.
 
 ___
 
-###  playbackRate
+### playbackRate
 
 • **playbackRate**: *number*
 
@@ -116,7 +111,7 @@ speed, 2.0 is double speed.
 
 ___
 
-###  playing
+### playing
 
 • **playing**: *boolean*
 
@@ -124,7 +119,7 @@ If the audio is playing or not, true = playing, false = not playing.
 
 ___
 
-###  volume
+### volume
 
 • **volume**: *number*
 
@@ -132,43 +127,41 @@ The volume of the audio, between 0 and 1
 
 ___
 
-### `Static` KEY
+### KEY
 
-▪ **KEY**: *"audio_source"* = "audio_source"
+▪ `Readonly` `Static` **KEY**: *audio_source*= "audio\_source"
 
 Key of the audio source component.
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Inherited from [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Inherited from: [Component](component.md)
 
 ___
 
-###  Play
+### Play
 
 ▸ **Play**(): *void*
 
@@ -179,7 +172,7 @@ of times specified.
 
 ___
 
-###  Stop
+### Stop
 
 ▸ **Stop**(): *void*
 

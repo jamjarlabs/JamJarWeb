@@ -1,4 +1,3 @@
-
 # Class: DefaultTextureFragmentShader
 
 DefaultFragmentShader is the shader loaded for handling the
@@ -7,64 +6,52 @@ and expected to be loaded.
 
 ## Hierarchy
 
-* [GLSLShader](glslshader.md)
+* [*GLSLShader*](glslshader.md)
 
   ↳ **DefaultTextureFragmentShader**
 
-## Implements
-
-* [IShader](../interfaces/ishader.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](defaulttexturefragmentshader.md#constructor)
+- [constructor](defaulttexturefragmentshader.md#constructor)
 
 ### Properties
 
-* [perRenderable](defaulttexturefragmentshader.md#optional-perrenderable)
-* [perShader](defaulttexturefragmentshader.md#optional-pershader)
-* [perTexture](defaulttexturefragmentshader.md#optional-pertexture)
-* [source](defaulttexturefragmentshader.md#source)
-* [type](defaulttexturefragmentshader.md#type)
-* [SOURCE](defaulttexturefragmentshader.md#static-private-source)
-
-### Methods
-
-* [PER_RENDERABLE](defaulttexturefragmentshader.md#static-private-per_renderable)
-* [PER_TEXTURE](defaulttexturefragmentshader.md#static-private-per_texture)
+- [perRenderable](defaulttexturefragmentshader.md#perrenderable)
+- [perShader](defaulttexturefragmentshader.md#pershader)
+- [perTexture](defaulttexturefragmentshader.md#pertexture)
+- [source](defaulttexturefragmentshader.md#source)
+- [type](defaulttexturefragmentshader.md#type)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new DefaultTextureFragmentShader**(): *[DefaultTextureFragmentShader](defaulttexturefragmentshader.md)*
+\+ **new DefaultTextureFragmentShader**(): [*DefaultTextureFragmentShader*](defaulttexturefragmentshader.md)
 
-*Overrides [GLSLShader](glslshader.md).[constructor](glslshader.md#constructor)*
+**Returns:** [*DefaultTextureFragmentShader*](defaulttexturefragmentshader.md)
 
-**Returns:** *[DefaultTextureFragmentShader](defaulttexturefragmentshader.md)*
+Inherited from: [GLSLShader](glslshader.md)
 
 ## Properties
 
-### `Optional` perRenderable
+### perRenderable
 
-• **perRenderable**? : *undefined | function*
-
-*Inherited from [GLSLShader](glslshader.md).[perRenderable](glslshader.md#optional-perrenderable)*
+• `Optional` **perRenderable**: *undefined* \| (`context`: [*GLSLContext*](glslcontext.md), `renderable`: [*IRenderable*](../interfaces/irenderable.md), `texture?`: WebGLTexture) => *void*
 
 Hook for injecting variables for the GLSL shader at the
 per renderable stage of the rendering process, runs once
 per renderable used, should inject variables for renderable
 specific variables.
 
+Inherited from: [GLSLShader](glslshader.md).[perRenderable](glslshader.md#perrenderable)
+
 ___
 
-### `Optional` perShader
+### perShader
 
-• **perShader**? : *undefined | function*
-
-*Inherited from [GLSLShader](glslshader.md).[perShader](glslshader.md#optional-pershader)*
+• `Optional` **perShader**: *undefined* \| (`context`: [*GLSLContext*](glslcontext.md)) => *void*
 
 Hook for injecting variables for the GLSL shader at the
 per shader stage of the rendering process, runs once
@@ -72,104 +59,37 @@ per program (grouping of shaders) used, should inject
 variables for shader specific, but not texture or renderable
 specific variables.
 
+Inherited from: [GLSLShader](glslshader.md).[perShader](glslshader.md#pershader)
+
 ___
 
-### `Optional` perTexture
+### perTexture
 
-• **perTexture**? : *undefined | function*
-
-*Inherited from [GLSLShader](glslshader.md).[perTexture](glslshader.md#optional-pertexture)*
+• `Optional` **perTexture**: *undefined* \| (`context`: [*GLSLContext*](glslcontext.md), `texture`: WebGLTexture) => *void*
 
 Hook for injecting variables for the GLSL shader at the
 per texture stage of the rendering process, runs once
 per texture used, should inject variables for texture specific,
 but not renderable specific variables.
 
+Inherited from: [GLSLShader](glslshader.md).[perTexture](glslshader.md#pertexture)
+
 ___
 
-###  source
+### source
 
 • **source**: *string*
 
-*Implementation of [IShader](../interfaces/ishader.md).[source](../interfaces/ishader.md#source)*
-
-*Inherited from [GLSLShader](glslshader.md).[source](glslshader.md#source)*
-
 GLSL source code.
+
+Inherited from: [GLSLShader](glslshader.md).[source](glslshader.md#source)
 
 ___
 
-###  type
+### type
 
 • **type**: *string*
 
-*Implementation of [IShader](../interfaces/ishader.md).[type](../interfaces/ishader.md#type)*
-
-*Inherited from [GLSLShader](glslshader.md).[type](glslshader.md#type)*
-
 Shader type, vertex or fragment.
 
-___
-
-### `Static` `Private` SOURCE
-
-▪ **SOURCE**: *"#version 300 es
-        precision mediump float;
-
-        uniform sampler2D uTexture;
-        uniform vec4 uColor;
-
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
-
-        void main() {
-            outColor = texture(uTexture, vTextureCoordinate);
-            outColor = outColor * uColor;
-        }
-    "* = `#version 300 es
-        precision mediump float;
-
-        uniform sampler2D uTexture;
-        uniform vec4 uColor;
-
-        in vec2 vTextureCoordinate;
-
-        out vec4 outColor;
-
-        void main() {
-            outColor = texture(uTexture, vTextureCoordinate);
-            outColor = outColor * uColor;
-        }
-    `
-
-## Methods
-
-### `Static` `Private` PER_RENDERABLE
-
-▸ **PER_RENDERABLE**(`context`: [GLSLContext](glslcontext.md), `renderable`: [IRenderable](../interfaces/irenderable.md), `texture?`: WebGLTexture): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`context` | [GLSLContext](glslcontext.md) |
-`renderable` | [IRenderable](../interfaces/irenderable.md) |
-`texture?` | WebGLTexture |
-
-**Returns:** *void*
-
-___
-
-### `Static` `Private` PER_TEXTURE
-
-▸ **PER_TEXTURE**(`context`: [GLSLContext](glslcontext.md), `texture`: WebGLTexture): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`context` | [GLSLContext](glslcontext.md) |
-`texture` | WebGLTexture |
-
-**Returns:** *void*
+Inherited from: [GLSLShader](glslshader.md).[type](glslshader.md#type)

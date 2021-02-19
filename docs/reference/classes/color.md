@@ -1,144 +1,139 @@
-
 # Class: Color
 
 Color represents an RGBA color.
 Values from 0 to 1.
 
-## Hierarchy
-
-* **Color**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](color.md#constructor)
+- [constructor](color.md#constructor)
 
 ### Properties
 
-* [data](color.md#data)
+- [data](color.md#data)
 
 ### Accessors
 
-* [alpha](color.md#alpha)
-* [blue](color.md#blue)
-* [green](color.md#green)
-* [red](color.md#red)
+- [alpha](color.md#alpha)
+- [blue](color.md#blue)
+- [green](color.md#green)
+- [red](color.md#red)
 
 ### Methods
 
-* [Copy](color.md#copy)
-* [GetFloat32Array](color.md#getfloat32array)
-* [Mix](color.md#mix)
+- [Copy](color.md#copy)
+- [GetFloat32Array](color.md#getfloat32array)
+- [Mix](color.md#mix)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Color**(`red`: number, `green`: number, `blue`: number, `alpha`: number): *[Color](color.md)*
+\+ **new Color**(`red`: *number*, `green`: *number*, `blue`: *number*, `alpha?`: *number*): [*Color*](color.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`red` | number | - |
-`green` | number | - |
-`blue` | number | - |
-`alpha` | number | 1 |
+Name | Type | Default value |
+:------ | :------ | :------ |
+`red` | *number* | - |
+`green` | *number* | - |
+`blue` | *number* | - |
+`alpha` | *number* | 1 |
 
-**Returns:** *[Color](color.md)*
+**Returns:** [*Color*](color.md)
 
 ## Properties
 
-###  data
+### data
 
 • **data**: *Float32Array*
 
 ## Accessors
 
-###  alpha
+### alpha
 
-• **get alpha**(): *number*
+• get **alpha**(): *number*
 
 **Returns:** *number*
 
-• **set alpha**(`value`: number): *void*
+• set **alpha**(`value`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`value` | number |
+:------ | :------ |
+`value` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  blue
+### blue
 
-• **get blue**(): *number*
+• get **blue**(): *number*
 
 **Returns:** *number*
 
-• **set blue**(`value`: number): *void*
+• set **blue**(`value`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`value` | number |
+:------ | :------ |
+`value` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  green
+### green
 
-• **get green**(): *number*
+• get **green**(): *number*
 
 **Returns:** *number*
 
-• **set green**(`value`: number): *void*
+• set **green**(`value`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`value` | number |
+:------ | :------ |
+`value` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  red
+### red
 
-• **get red**(): *number*
+• get **red**(): *number*
 
 **Returns:** *number*
 
-• **set red**(`value`: number): *void*
+• set **red**(`value`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`value` | number |
+:------ | :------ |
+`value` | *number* |
 
 **Returns:** *void*
 
 ## Methods
 
-###  Copy
+### Copy
 
-▸ **Copy**(): *[Color](color.md)*
+▸ **Copy**(): [*Color*](color.md)
 
 Make a value copy of the color.
 
-**Returns:** *[Color](color.md)*
+**Returns:** [*Color*](color.md)
 
 ___
 
-###  GetFloat32Array
+### GetFloat32Array
 
 ▸ **GetFloat32Array**(): *Float32Array*
 
@@ -146,18 +141,18 @@ ___
 
 ___
 
-###  Mix
+### Mix
 
-▸ **Mix**(`color`: [Color](color.md)): *[Color](color.md)*
+▸ **Mix**(`color`: [*Color*](color.md)): [*Color*](color.md)
 
 Mixes two colors together.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`color` | [Color](color.md) | The color to mix with this one |
+:------ | :------ | :------ |
+`color` | [*Color*](color.md) | The color to mix with this one   |
 
-**Returns:** *[Color](color.md)*
+**Returns:** [*Color*](color.md)
 
 The mixed color

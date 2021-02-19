@@ -1,4 +1,3 @@
-
 # Class: StatefulSystem
 
 StatefulSystem defines a system that tracks the state of entities and components by listening for register and
@@ -6,126 +5,116 @@ deregister messages.
 
 ## Hierarchy
 
-  ↳ [System](system.md)
+* [*System*](system.md)
 
   ↳ **StatefulSystem**
 
-  ↳ [MapSystem](mapsystem.md)
+  ↳↳ [*MapSystem*](mapsystem.md)
 
-  ↳ [ArraySystem](arraysystem.md)
+  ↳↳ [*ArraySystem*](arraysystem.md)
 
-  ↳ [TestSystem](testsystem.md)
-
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](statefulsystem.md#constructor)
+- [constructor](statefulsystem.md#constructor)
 
 ### Properties
 
-* [messageBus](statefulsystem.md#protected-messagebus)
-* [scene](statefulsystem.md#protected-optional-scene)
-* [subscriberID](statefulsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](statefulsystem.md#static-message_register)
-* [MESSAGE_UPDATE](statefulsystem.md#static-message_update)
+- [messageBus](statefulsystem.md#messagebus)
+- [scene](statefulsystem.md#scene)
+- [subscriberID](statefulsystem.md#subscriberid)
+- [MESSAGE\_DEREGISTER](statefulsystem.md#message_deregister)
+- [MESSAGE\_REGISTER](statefulsystem.md#message_register)
+- [MESSAGE\_UPDATE](statefulsystem.md#message_update)
 
 ### Methods
 
-* [Destroy](statefulsystem.md#destroy)
-* [OnDestroy](statefulsystem.md#protected-ondestroy)
-* [OnMessage](statefulsystem.md#onmessage)
-* [Update](statefulsystem.md#protected-update)
-* [register](statefulsystem.md#protected-abstract-register)
-* [remove](statefulsystem.md#protected-abstract-remove)
+- [Destroy](statefulsystem.md#destroy)
+- [OnDestroy](statefulsystem.md#ondestroy)
+- [OnMessage](statefulsystem.md#onmessage)
+- [Update](statefulsystem.md#update)
+- [register](statefulsystem.md#register)
+- [remove](statefulsystem.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new StatefulSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `subscriberID?`: undefined | number): *[StatefulSystem](statefulsystem.md)*
+\+ **new StatefulSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `scene?`: [*IScene*](../interfaces/iscene.md), `subscriberID?`: *number*): [*StatefulSystem*](statefulsystem.md)
 
-*Overrides [System](system.md).[constructor](system.md#constructor)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`scene?` | [IScene](../interfaces/iscene.md) |
-`subscriberID?` | undefined &#124; number |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
+`scene?` | [*IScene*](../interfaces/iscene.md) |
+`subscriberID?` | *number* |
 
-**Returns:** *[StatefulSystem](statefulsystem.md)*
+**Returns:** [*StatefulSystem*](statefulsystem.md)
+
+Inherited from: [System](system.md)
 
 ## Properties
 
-### `Protected` messageBus
+### messageBus
 
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-*Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
+Inherited from: [System](system.md).[messageBus](system.md#messagebus)
+
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
-
-*Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
 when the scene is destroyed.
 
+Inherited from: [System](system.md).[scene](system.md#scene)
+
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [System](system.md).[subscriberID](system.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_DEREGISTER
+### MESSAGE\_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
+▪ `Readonly` `Static` **MESSAGE\_DEREGISTER**: *stateful_system_deregister*= "stateful\_system\_deregister"
 
 Message to deregister an entity + components with a system so it is no longer tracked.
 
 ___
 
-### `Static` MESSAGE_REGISTER
+### MESSAGE\_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
+▪ `Readonly` `Static` **MESSAGE\_REGISTER**: *stateful_system_register*= "stateful\_system\_register"
 
 Message to register an entity + components with a system so it can be tracked.
 
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_UPDATE
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
 
-*Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+Inherited from: [System](system.md).[MESSAGE_UPDATE](system.md#message_update)
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
-
-*Inherited from [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -135,85 +124,87 @@ message bus.
 
 **Returns:** *void*
 
+Inherited from: [System](system.md)
+
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
-
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
 **Returns:** *void*
 
+Inherited from: [System](system.md)
+
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [System](system.md).[OnMessage](system.md#onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [System](system.md)
+
 ___
 
-### `Protected` Update
+### Update
 
-▸ **Update**(`dt`: number): *void*
-
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
+▸ `Protected`**Update**(`dt`: *number*): *void*
 
 General update method, default empty. Override with custom logic.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+:------ | :------ | :------ |
+`dt` | *number* | DeltaTime    |
 
 **Returns:** *void*
 
+Inherited from: [System](system.md)
+
 ___
 
-### `Protected` `Abstract` register
+### register
 
-▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+▸ `Protected` `Abstract`**register**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): *void*
 
 register is used when a new entity is created with components, or an existing
 entity's components are changed; register calls the evaluator to check if the
 system should track this entity. If the evaluator returns true, the entity
 is added to the System's internal entity array.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to register |
-`components` | [Component](component.md)[] | The components of the registering entity.  |
+:------ | :------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) | The entity to register   |
+`components` | [*Component*](component.md)[] | The components of the registering entity.    |
 
 **Returns:** *void*
 
 ___
 
-### `Protected` `Abstract` remove
+### remove
 
-▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+▸ `Protected` `Abstract`**remove**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
 remove removes an entity from being tracked by the system
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) | The entity to remove  |
+:------ | :------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) | The entity to remove    |
 
 **Returns:** *void*

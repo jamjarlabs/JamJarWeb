@@ -1,34 +1,29 @@
-
 # Interface: IMessageBus
 
 IMessageBus defines the contract for a message bus, handling receiver subscription/unsubcription, message publishing,
 and message dispatching.
 
-## Hierarchy
-
-* **IMessageBus**
-
 ## Implemented by
 
-* [FakeMessageBus](../classes/fakemessagebus.md)
-* [MessageBus](../classes/messagebus.md)
+* [*FakeMessageBus*](../classes/fakemessagebus.md)
+* [*MessageBus*](../classes/messagebus.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [Dispatch](imessagebus.md#dispatch)
-* [DispatchUntilEmpty](imessagebus.md#dispatchuntilempty)
-* [Publish](imessagebus.md#publish)
-* [Subscribe](imessagebus.md#subscribe)
-* [Unsubscribe](imessagebus.md#unsubscribe)
-* [UnsubscribeAll](imessagebus.md#unsubscribeall)
+- [Dispatch](imessagebus.md#dispatch)
+- [DispatchUntilEmpty](imessagebus.md#dispatchuntilempty)
+- [Publish](imessagebus.md#publish)
+- [Subscribe](imessagebus.md#subscribe)
+- [Unsubscribe](imessagebus.md#unsubscribe)
+- [UnsubscribeAll](imessagebus.md#unsubscribeall)
 
 ## Properties
 
-###  Dispatch
+### Dispatch
 
-• **Dispatch**: *function*
+• **Dispatch**: () => *void*
 
 Dispatch processes the current message bus queue and forwards the messages to the subscribers who have
 subscribed to each message type.
@@ -37,11 +32,13 @@ subscribed to each message type.
 
 ▸ (): *void*
 
+**Returns:** *void*
+
 ___
 
-###  DispatchUntilEmpty
+### DispatchUntilEmpty
 
-• **DispatchUntilEmpty**: *function*
+• **DispatchUntilEmpty**: () => *void*
 
 DispatchUntilEmpty repeatedly dispatches until the message queue is empty, used to make sure everything is
 processed, e.g. if there is a message that causes a new message to be added, it will ensure that all recursive
@@ -51,11 +48,13 @@ messages are processed.
 
 ▸ (): *void*
 
+**Returns:** *void*
+
 ___
 
-###  Publish
+### Publish
 
-• **Publish**: *function*
+• **Publish**: (`message`: [*IMessage*](imessage.md)) => *void*
 
 Publish adds a message to the message bus queue to be dispatched.
 
@@ -63,19 +62,21 @@ Publish adds a message to the message bus queue to be dispatched.
 
 #### Type declaration:
 
-▸ (`message`: [IMessage](imessage.md)): *void*
+▸ (`message`: [*IMessage*](imessage.md)): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](imessage.md) |
+
+**Returns:** *void*
 
 ___
 
-###  Subscribe
+### Subscribe
 
-• **Subscribe**: *function*
+• **Subscribe**: (`subscriber`: [*ISubscriber*](isubscriber.md), `types`: *string* \| *string*[]) => *void*
 
 Subscribe subscibes a subscriber to a particular message type or types.
 
@@ -85,20 +86,22 @@ Subscribe subscibes a subscriber to a particular message type or types.
 
 #### Type declaration:
 
-▸ (`subscriber`: [ISubscriber](isubscriber.md), `types`: string | string[]): *void*
+▸ (`subscriber`: [*ISubscriber*](isubscriber.md), `types`: *string* \| *string*[]): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`subscriber` | [ISubscriber](isubscriber.md) |
-`types` | string &#124; string[] |
+:------ | :------ |
+`subscriber` | [*ISubscriber*](isubscriber.md) |
+`types` | *string* \| *string*[] |
+
+**Returns:** *void*
 
 ___
 
-###  Unsubscribe
+### Unsubscribe
 
-• **Unsubscribe**: *function*
+• **Unsubscribe**: (`subscriber`: [*ISubscriber*](isubscriber.md), `types`: *string* \| *string*[]) => *void*
 
 Unsubscribe unsubscribes a subscriber from a specific message type or types.
 
@@ -108,20 +111,22 @@ Unsubscribe unsubscribes a subscriber from a specific message type or types.
 
 #### Type declaration:
 
-▸ (`subscriber`: [ISubscriber](isubscriber.md), `types`: string | string[]): *void*
+▸ (`subscriber`: [*ISubscriber*](isubscriber.md), `types`: *string* \| *string*[]): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`subscriber` | [ISubscriber](isubscriber.md) |
-`types` | string &#124; string[] |
+:------ | :------ |
+`subscriber` | [*ISubscriber*](isubscriber.md) |
+`types` | *string* \| *string*[] |
+
+**Returns:** *void*
 
 ___
 
-###  UnsubscribeAll
+### UnsubscribeAll
 
-• **UnsubscribeAll**: *function*
+• **UnsubscribeAll**: (`subscriber`: [*ISubscriber*](isubscriber.md)) => *void*
 
 UnsubscribeAll unsubscribes a Subscriber from all messages.
 
@@ -129,10 +134,12 @@ UnsubscribeAll unsubscribes a Subscriber from all messages.
 
 #### Type declaration:
 
-▸ (`subscriber`: [ISubscriber](isubscriber.md)): *void*
+▸ (`subscriber`: [*ISubscriber*](isubscriber.md)): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`subscriber` | [ISubscriber](isubscriber.md) |
+:------ | :------ |
+`subscriber` | [*ISubscriber*](isubscriber.md) |
+
+**Returns:** *void*

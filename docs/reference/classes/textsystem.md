@@ -1,4 +1,3 @@
-
 # Class: TextSystem
 
 TextSystem is a pre-rendering system, taking in text components and
@@ -8,78 +7,63 @@ be loaded as textures by rendering systems.
 
 ## Hierarchy
 
-  ↳ [MapSystem](mapsystem.md)
+* [*MapSystem*](mapsystem.md)
 
   ↳ **TextSystem**
 
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](textsystem.md#constructor)
+- [constructor](textsystem.md#constructor)
 
 ### Properties
 
-* [entities](textsystem.md#protected-entities)
-* [frustumCuller](textsystem.md#private-frustumculler)
-* [mappings](textsystem.md#private-mappings)
-* [messageBus](textsystem.md#protected-messagebus)
-* [renderables](textsystem.md#private-renderables)
-* [scene](textsystem.md#protected-optional-scene)
-* [sdfGeneratorFactory](textsystem.md#private-sdfgeneratorfactory)
-* [subscriberID](textsystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](textsystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](textsystem.md#static-message_register)
-* [MESSAGE_UPDATE](textsystem.md#static-message_update)
+- [entities](textsystem.md#entities)
+- [messageBus](textsystem.md#messagebus)
+- [scene](textsystem.md#scene)
+- [subscriberID](textsystem.md#subscriberid)
+- [MESSAGE\_DEREGISTER](textsystem.md#message_deregister)
+- [MESSAGE\_REGISTER](textsystem.md#message_register)
+- [MESSAGE\_UPDATE](textsystem.md#message_update)
 
 ### Methods
 
-* [Destroy](textsystem.md#destroy)
-* [OnDestroy](textsystem.md#protected-ondestroy)
-* [OnMessage](textsystem.md#onmessage)
-* [Update](textsystem.md#protected-update)
-* [freeRenderables](textsystem.md#private-freerenderables)
-* [loadFont](textsystem.md#private-loadfont)
-* [prepareText](textsystem.md#private-preparetext)
-* [register](textsystem.md#protected-register)
-* [remove](textsystem.md#protected-remove)
-* [DEFAULT_SDF_GENERATOR_FACTORY](textsystem.md#static-private-default_sdf_generator_factory)
-* [EVALUATOR](textsystem.md#static-private-evaluator)
+- [Destroy](textsystem.md#destroy)
+- [OnDestroy](textsystem.md#ondestroy)
+- [OnMessage](textsystem.md#onmessage)
+- [Update](textsystem.md#update)
+- [register](textsystem.md#register)
+- [remove](textsystem.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new TextSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `frustumCuller`: [IFrustumCuller](../interfaces/ifrustumculler.md), `renderables`: [Renderable](renderable.md)‹[TextRender](textrender.md)›[], `mappings`: Map‹string, [FontMapping](fontmapping.md)›, `sdfGeneratorFactory`: SDFGeneratorFactory, `subscriberID?`: undefined | number): *[TextSystem](textsystem.md)*
+\+ **new TextSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `scene?`: [*IScene*](../interfaces/iscene.md), `entities?`: *Map*<number, [*SystemEntity*](systementity.md)\>, `frustumCuller?`: [*IFrustumCuller*](../interfaces/ifrustumculler.md), `renderables?`: [*Renderable*](renderable.md)<[*TextRender*](textrender.md)\>[], `mappings?`: *Map*<string, [*FontMapping*](fontmapping.md)\>, `sdfGeneratorFactory?`: SDFGeneratorFactory, `subscriberID?`: *number*): [*TextSystem*](textsystem.md)
 
-*Overrides [MapSystem](mapsystem.md).[constructor](mapsystem.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
+`scene?` | [*IScene*](../interfaces/iscene.md) |
+`entities?` | *Map*<number, [*SystemEntity*](systementity.md)\> |
+`frustumCuller` | [*IFrustumCuller*](../interfaces/ifrustumculler.md) |
+`renderables` | [*Renderable*](renderable.md)<[*TextRender*](textrender.md)\>[] |
+`mappings` | *Map*<string, [*FontMapping*](fontmapping.md)\> |
+`sdfGeneratorFactory` | SDFGeneratorFactory |
+`subscriberID?` | *number* |
 
-Name | Type | Default |
------- | ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
-`scene?` | [IScene](../interfaces/iscene.md) | - |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
-`frustumCuller` | [IFrustumCuller](../interfaces/ifrustumculler.md) | new FrustumCuller() |
-`renderables` | [Renderable](renderable.md)‹[TextRender](textrender.md)›[] | [] |
-`mappings` | Map‹string, [FontMapping](fontmapping.md)› | new Map() |
-`sdfGeneratorFactory` | SDFGeneratorFactory | TextSystem.DEFAULT_SDF_GENERATOR_FACTORY |
-`subscriberID?` | undefined &#124; number | - |
+**Returns:** [*TextSystem*](textsystem.md)
 
-**Returns:** *[TextSystem](textsystem.md)*
+Inherited from: [MapSystem](mapsystem.md)
 
 ## Properties
 
-### `Protected` entities
+### entities
 
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
-
-*Inherited from [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
+• `Protected` **entities**: *Map*<number, [*SystemEntity*](systementity.md)\>
 
 A map of entities, mapped by their entity ID.
 ID: Entity
@@ -87,98 +71,72 @@ ID: Entity
 1: ObstacleEntity
 etc.
 
-___
-
-### `Private` frustumCuller
-
-• **frustumCuller**: *[IFrustumCuller](../interfaces/ifrustumculler.md)*
+Inherited from: [MapSystem](mapsystem.md).[entities](mapsystem.md#entities)
 
 ___
 
-### `Private` mappings
+### messageBus
 
-• **mappings**: *Map‹string, [FontMapping](fontmapping.md)›*
-
-___
-
-### `Protected` messageBus
-
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-*Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
-___
-
-### `Private` renderables
-
-• **renderables**: *[Renderable](renderable.md)‹[TextRender](textrender.md)›[]*
+Inherited from: [MapSystem](mapsystem.md).[messageBus](mapsystem.md#messagebus)
 
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
-
-*Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
 when the scene is destroyed.
 
-___
-
-### `Private` sdfGeneratorFactory
-
-• **sdfGeneratorFactory**: *SDFGeneratorFactory*
+Inherited from: [MapSystem](mapsystem.md).[scene](mapsystem.md#scene)
 
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [MapSystem](mapsystem.md).[subscriberID](mapsystem.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_DEREGISTER
+### MESSAGE\_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+▪ `Readonly` `Static` **MESSAGE\_DEREGISTER**: *stateful_system_deregister*= "stateful\_system\_deregister"
 
 Message to deregister an entity + components with a system so it is no longer tracked.
 
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_DEREGISTER](mapsystem.md#message_deregister)
+
 ___
 
-### `Static` MESSAGE_REGISTER
+### MESSAGE\_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+▪ `Readonly` `Static` **MESSAGE\_REGISTER**: *stateful_system_register*= "stateful\_system\_register"
 
 Message to register an entity + components with a system so it can be tracked.
 
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_REGISTER](mapsystem.md#message_register)
+
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_UPDATE
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
 
-*Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_UPDATE](mapsystem.md#message_update)
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
-
-*Inherited from [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -188,156 +146,84 @@ message bus.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
-
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` Update
+### Update
 
-▸ **Update**(`dt`: number): *void*
-
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
+▸ `Protected`**Update**(`dt`: *number*): *void*
 
 General update method, default empty. Override with custom logic.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+:------ | :------ | :------ |
+`dt` | *number* | DeltaTime    |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Private` freeRenderables
+### register
 
-▸ **freeRenderables**(): *void*
+▸ `Protected`**register**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
+`components` | [*Component*](component.md)[] |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Private` loadFont
+### remove
 
-▸ **loadFont**(`request`: [FontRequest](fontrequest.md)): *void*
+▸ `Protected`**remove**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`request` | [FontRequest](fontrequest.md) |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
 
 **Returns:** *void*
 
-___
-
-### `Private` prepareText
-
-▸ **prepareText**(`alpha`: number): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`alpha` | number |
-
-**Returns:** *void*
-
-___
-
-### `Protected` register
-
-▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
-
-*Inherited from [MapSystem](mapsystem.md).[register](mapsystem.md#protected-register)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
-
-**Returns:** *void*
-
-___
-
-### `Protected` remove
-
-▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
-
-*Inherited from [MapSystem](mapsystem.md).[remove](mapsystem.md#protected-remove)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-
-**Returns:** *void*
-
-___
-
-### `Static` `Private` DEFAULT_SDF_GENERATOR_FACTORY
-
-▸ **DEFAULT_SDF_GENERATOR_FACTORY**(`fontSize?`: undefined | number, `buffer?`: undefined | number, `radius?`: undefined | number, `cutoff?`: undefined | number, `fontFamily?`: undefined | string, `fontWeight?`: undefined | string): *ISDFGenerator*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fontSize?` | undefined &#124; number |
-`buffer?` | undefined &#124; number |
-`radius?` | undefined &#124; number |
-`cutoff?` | undefined &#124; number |
-`fontFamily?` | undefined &#124; string |
-`fontWeight?` | undefined &#124; string |
-
-**Returns:** *ISDFGenerator*
-
-___
-
-### `Static` `Private` EVALUATOR
-
-▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
-
-**Returns:** *boolean*
+Inherited from: [MapSystem](mapsystem.md)

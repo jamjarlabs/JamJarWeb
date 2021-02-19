@@ -1,52 +1,47 @@
-
 # Class: FontMapping
 
-## Hierarchy
-
-* **FontMapping**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fontmapping.md#constructor)
+- [constructor](fontmapping.md#constructor)
 
 ### Properties
 
-* [asset](fontmapping.md#asset)
-* [characters](fontmapping.md#characters)
-* [width](fontmapping.md#width)
+- [asset](fontmapping.md#asset)
+- [characters](fontmapping.md#characters)
+- [width](fontmapping.md#width)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FontMapping**(`width`: number, `asset`: [FontAsset](fontasset.md), `characters`: Map‹string, number›): *[FontMapping](fontmapping.md)*
+\+ **new FontMapping**(`width`: *number*, `asset`: [*FontAsset*](fontasset.md), `characters`: *Map*<string, number\>): [*FontMapping*](fontmapping.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`width` | number |
-`asset` | [FontAsset](fontasset.md) |
-`characters` | Map‹string, number› |
+:------ | :------ |
+`width` | *number* |
+`asset` | [*FontAsset*](fontasset.md) |
+`characters` | *Map*<string, number\> |
 
-**Returns:** *[FontMapping](fontmapping.md)*
+**Returns:** [*FontMapping*](fontmapping.md)
 
 ## Properties
 
-###  asset
+### asset
 
-• **asset**: *[FontAsset](fontasset.md)*
-
-___
-
-###  characters
-
-• **characters**: *Map‹string, number›*
+• **asset**: [*FontAsset*](fontasset.md)
 
 ___
 
-###  width
+### characters
+
+• **characters**: *Map*<string, number\>
+
+___
+
+### width
 
 • **width**: *number*

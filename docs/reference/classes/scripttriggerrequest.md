@@ -1,5 +1,4 @@
-
-# Class: ScriptTriggerRequest <**T**>
+# Class: ScriptTriggerRequest<T\>
 
 ScriptTriggerRequest contains all information for triggering a script to
 execute. This includes the name of the script, a descriptor of how it was
@@ -8,54 +7,58 @@ expose to the script.
 
 ## Type parameters
 
-▪ **T**
+Name |
+:------ |
+`T` |
 
-## Hierarchy
-
-* **ScriptTriggerRequest**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](scripttriggerrequest.md#constructor)
+- [constructor](scripttriggerrequest.md#constructor)
 
 ### Properties
 
-* [data](scripttriggerrequest.md#optional-data)
-* [descriptor](scripttriggerrequest.md#descriptor)
-* [entity](scripttriggerrequest.md#optional-entity)
-* [name](scripttriggerrequest.md#name)
-* [MESSAGE_TRIGGER_SCRIPT](scripttriggerrequest.md#static-message_trigger_script)
+- [data](scripttriggerrequest.md#data)
+- [descriptor](scripttriggerrequest.md#descriptor)
+- [entity](scripttriggerrequest.md#entity)
+- [name](scripttriggerrequest.md#name)
+- [MESSAGE\_TRIGGER\_SCRIPT](scripttriggerrequest.md#message_trigger_script)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new ScriptTriggerRequest**(`name`: string, `descriptor`: string, `entity?`: [IEntity](../interfaces/ientity.md), `data?`: T): *[ScriptTriggerRequest](scripttriggerrequest.md)*
+\+ **new ScriptTriggerRequest**<T\>(`name`: *string*, `descriptor`: *string*, `entity?`: [*IEntity*](../interfaces/ientity.md), `data?`: T): [*ScriptTriggerRequest*](scripttriggerrequest.md)<T\>
 
-**Parameters:**
+#### Type parameters:
+
+Name |
+:------ |
+`T` |
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`name` | string |
-`descriptor` | string |
-`entity?` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`name` | *string* |
+`descriptor` | *string* |
+`entity?` | [*IEntity*](../interfaces/ientity.md) |
 `data?` | T |
 
-**Returns:** *[ScriptTriggerRequest](scripttriggerrequest.md)*
+**Returns:** [*ScriptTriggerRequest*](scripttriggerrequest.md)<T\>
 
 ## Properties
 
-### `Optional` data
+### data
 
-• **data**? : *T*
+• `Optional` **data**: *undefined* \| T
 
 Any arbitrary data to expose to the script.
 
 ___
 
-###  descriptor
+### descriptor
 
 • **descriptor**: *string*
 
@@ -64,15 +67,15 @@ Descriptor of the conditions the script was executed under, e.g.
 
 ___
 
-### `Optional` entity
+### entity
 
-• **entity**? : *[IEntity](../interfaces/ientity.md)*
+• `Optional` **entity**: *undefined* \| [*IEntity*](../interfaces/ientity.md)
 
 Any entity associated with the execution of the script.
 
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
@@ -80,6 +83,6 @@ Name of the script to execute.
 
 ___
 
-### `Static` MESSAGE_TRIGGER_SCRIPT
+### MESSAGE\_TRIGGER\_SCRIPT
 
-▪ **MESSAGE_TRIGGER_SCRIPT**: *"trigger_script"* = "trigger_script"
+▪ `Readonly` `Static` **MESSAGE\_TRIGGER\_SCRIPT**: *trigger_script*= "trigger\_script"

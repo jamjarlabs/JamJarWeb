@@ -1,282 +1,269 @@
-
-# Class: Message <**T**>
+# Class: Message<T\>
 
 Message is a message that can be sent along the event bus to subscribers.
 Message has a generic type payload for passing more data than just the message type.
 
 ## Type parameters
 
-▪ **T**
+Name |
+:------ |
+`T` |
 
 ## Hierarchy
 
-* [Pooled](pooled.md)
+* [*Pooled*](pooled.md)
 
   ↳ **Message**
 
 ## Implements
 
-* [IMessage](../interfaces/imessage.md)
-* [IPoolable](../interfaces/ipoolable.md)
+* [*IMessage*](../interfaces/imessage.md)
+* [*IPoolable*](../interfaces/ipoolable.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](message.md#constructor)
+- [constructor](message.md#constructor)
 
 ### Properties
 
-* [objectInPool](message.md#objectinpool)
-* [payload](message.md#optional-payload)
-* [type](message.md#type)
-* [POOL_KEY](message.md#static-private-pool_key)
-* [pools](message.md#static-protected-pools)
+- [objectInPool](message.md#objectinpool)
+- [payload](message.md#payload)
+- [type](message.md#type)
+- [pools](message.md#pools)
 
 ### Methods
 
-* [Free](message.md#free)
-* [Recycle](message.md#recycle)
-* [Free](message.md#static-free)
-* [INIT_MESSAGE](message.md#static-private-init_message)
-* [Init](message.md#static-init)
-* [New](message.md#static-new)
-* [free](message.md#static-protected-free)
-* [init](message.md#static-protected-init)
-* [new](message.md#static-protected-new)
+- [Free](message.md#free)
+- [Recycle](message.md#recycle)
+- [Free](message.md#free)
+- [Init](message.md#init)
+- [New](message.md#new)
+- [free](message.md#free)
+- [init](message.md#init)
+- [new](message.md#new)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Message**(`type`: string, `payload?`: T): *[Message](message.md)*
+\+ **new Message**<T\>(`type`: *string*, `payload?`: T): [*Message*](message.md)<T\>
 
-**Parameters:**
+#### Type parameters:
+
+Name |
+:------ |
+`T` |
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `payload?` | T |
 
-**Returns:** *[Message](message.md)*
+**Returns:** [*Message*](message.md)<T\>
+
+Inherited from: [Pooled](pooled.md)
 
 ## Properties
 
-###  objectInPool
+### objectInPool
 
-• **objectInPool**: *boolean* = false
-
-*Implementation of [IPoolable](../interfaces/ipoolable.md).[objectInPool](../interfaces/ipoolable.md#objectinpool)*
-
-*Inherited from [Pooled](pooled.md).[objectInPool](pooled.md#objectinpool)*
+• **objectInPool**: *boolean*= false
 
 objectInPool is true if an object is made available in the object pool. If it is false it is not
 currently available in the object pool.
 This is used to avoid adding the same object to the same object pool multiple times if there are successive
 calls to free the the same object.
 
-___
+Implementation of: [IPoolable](../interfaces/ipoolable.md).[objectInPool](../interfaces/ipoolable.md#objectinpool)
 
-### `Optional` payload
-
-• **payload**? : *T*
+Inherited from: [Pooled](pooled.md).[objectInPool](pooled.md#objectinpool)
 
 ___
 
-###  type
+### payload
+
+• `Optional` **payload**: *undefined* \| T
+
+___
+
+### type
 
 • **type**: *string*
 
-*Implementation of [IMessage](../interfaces/imessage.md).[type](../interfaces/imessage.md#type)*
+Implementation of: [IMessage](../interfaces/imessage.md).[type](../interfaces/imessage.md#type)
 
 ___
 
-### `Static` `Private` POOL_KEY
+### pools
 
-▪ **POOL_KEY**: *"jamjar_message"* = "jamjar_message"
-
-Value of the Message object pool.
-
-___
-
-### `Static` `Protected` pools
-
-▪ **pools**: *Map‹string, [number, [IPoolable](../interfaces/ipoolable.md)[]]›* = new Map()
-
-*Inherited from [Pooled](pooled.md).[pools](pooled.md#static-protected-pools)*
+▪ `Protected` `Static` **pools**: *Map*<string, [*number*, [*IPoolable*](../interfaces/ipoolable.md)[]]\>
 
 pools is the global, static mapping of string keys to object pools.
 An object pool contains two pieces of data, the maximum size of the pool (first value), and the objects that
 make up the pool as an array (second value).
 
+Inherited from: [Pooled](pooled.md).[pools](pooled.md#pools)
+
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IPoolable](../interfaces/ipoolable.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Implementation of: [IPoolable](../interfaces/ipoolable.md)
+
 ___
 
-###  Recycle
+### Recycle
 
-▸ **Recycle**(`type`: string, `payload?`: T): *[IPoolable](../interfaces/ipoolable.md)*
+▸ **Recycle**(`type`: *string*, `payload?`: T): [*IPoolable*](../interfaces/ipoolable.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `payload?` | T |
 
-**Returns:** *[IPoolable](../interfaces/ipoolable.md)*
+**Returns:** [*IPoolable*](../interfaces/ipoolable.md)
 
 ___
 
-### `Static` Free
+### Free
 
-▸ **Free**<**T**>(`obj`: [Message](message.md)‹T›): *void*
+▸ `Static`**Free**<T\>(`obj`: [*Message*](message.md)<T\>): *void*
 
 Free the provided Message.
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+:------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`obj` | [Message](message.md)‹T› |
+:------ | :------ |
+`obj` | [*Message*](message.md)<T\> |
 
 **Returns:** *void*
 
 ___
 
-### `Static` `Private` INIT_MESSAGE
+### Init
 
-▸ **INIT_MESSAGE**(): *[Message](message.md)‹unknown›*
-
-**Returns:** *[Message](message.md)‹unknown›*
-
-___
-
-### `Static` Init
-
-▸ **Init**(`size`: number): *void*
+▸ `Static`**Init**(`size`: *number*): *void*
 
 Initialize the Message pool to the size provided.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`size` | number |
+:------ | :------ |
+`size` | *number* |
 
 **Returns:** *void*
 
 ___
 
-### `Static` New
+### New
 
-▸ **New**<**T**>(`type`: string, `payload?`: T): *[Message](message.md)‹T›*
+▸ `Static`**New**<T\>(`type`: *string*, `payload?`: T): [*Message*](message.md)<T\>
 
 Create a Message.New, using pooling if available.
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+:------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `payload?` | T |
 
-**Returns:** *[Message](message.md)‹T›*
+**Returns:** [*Message*](message.md)<T\>
 
 ___
 
-### `Static` `Protected` free
+### free
 
-▸ **free**(`poolKey`: string, `obj`: [IPoolable](../interfaces/ipoolable.md)): *void*
-
-*Inherited from [Pooled](pooled.md).[free](pooled.md#static-protected-free)*
+▸ `Protected` `Static`**free**(`poolKey`: *string*, `obj`: [*IPoolable*](../interfaces/ipoolable.md)): *void*
 
 free is used to mark a provided object as free in the pool provided. This method can be called multiple times
 with the same object, it will only add one entry to the pool.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`poolKey` | string | The key of the pool to add the object to. |
-`obj` | [IPoolable](../interfaces/ipoolable.md) | The object to add to the pool.  |
+:------ | :------ | :------ |
+`poolKey` | *string* | The key of the pool to add the object to.   |
+`obj` | [*IPoolable*](../interfaces/ipoolable.md) | The object to add to the pool.    |
 
 **Returns:** *void*
 
+Inherited from: [Pooled](pooled.md)
+
 ___
 
-### `Static` `Protected` init
+### init
 
-▸ **init**(`poolKey`: string, `emptyGenerator`: function, `size`: number): *void*
-
-*Inherited from [Pooled](pooled.md).[init](pooled.md#static-protected-init)*
+▸ `Protected` `Static`**init**(`poolKey`: *string*, `emptyGenerator`: () => [*IPoolable*](../interfaces/ipoolable.md), `size`: *number*): *void*
 
 init is used to initialize an object pool to a certain size. This method takes a key of the pool to initialize,
 an 'empty generator' which is a function that should return an empty/blank instance of the object being pooled
 which can be overwritten at a later point, and the maximum size of the pool (which it will be initialized to
 at the start using the empty generator).
 
-**Parameters:**
+#### Parameters:
 
-▪ **poolKey**: *string*
-
-▪ **emptyGenerator**: *function*
-
-▸ (): *[IPoolable](../interfaces/ipoolable.md)*
-
-▪ **size**: *number*
+Name | Type |
+:------ | :------ |
+`poolKey` | *string* |
+`emptyGenerator` | () => [*IPoolable*](../interfaces/ipoolable.md) |
+`size` | *number* |
 
 **Returns:** *void*
 
+Inherited from: [Pooled](pooled.md)
+
 ___
 
-### `Static` `Protected` new
+### new
 
-▸ **new**<**T**>(`poolKey`: string, `type`: object, ...`args`: any): *T*
-
-*Inherited from [Pooled](pooled.md).[new](pooled.md#static-protected-new)*
+▸ `Protected` `Static`**new**<T\>(`poolKey`: *string*, `type`: (...`args`: *any*) => T, ...`args`: *any*): T
 
 new is used to request a new object from the pool specified, if the pool is unavailable or empty it will use
 the type to provision a new object through a constructor.
 This is a generic method, it includes a cast to the generic type provided - this cast can fail if the objects
 returned from the pool are not the type expected.
 
-**Type parameters:**
-
-▪ **T**: *[IPoolable](../interfaces/ipoolable.md)*
-
-**Parameters:**
-
-▪ **poolKey**: *string*
-
-The key of the pool to retrieve from.
-
-▪ **type**: *object*
-
-The fallback constructor to use if the pool is not initialized/empty.
+#### Type parameters:
 
 Name | Type |
------- | ------ |
-`constructor` |  |
+:------ | :------ |
+`T` | [*IPoolable*](../interfaces/ipoolable.md) |
 
-▪... **args**: *any*
+#### Parameters:
 
-The args to use when creating/recycling the object.
+Name | Type | Description |
+:------ | :------ | :------ |
+`poolKey` | *string* | The key of the pool to retrieve from.   |
+`type` | (...`args`: *any*) => T | The fallback constructor to use if the pool is not initialized/empty.   |
+`...args` | *any* | The args to use when creating/recycling the object.    |
 
-**Returns:** *T*
+**Returns:** T
+
+Inherited from: [Pooled](pooled.md)

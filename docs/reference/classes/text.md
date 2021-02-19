@@ -1,4 +1,3 @@
-
 # Class: Text
 
 Text is a component for specifying text to render, alongside options for
@@ -6,85 +5,77 @@ rendering it such as font, alignment, color and shaders.
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **Text**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](text.md#constructor)
+- [constructor](text.md#constructor)
 
 ### Properties
 
-* [align](text.md#align)
-* [color](text.md#color)
-* [font](text.md#font)
-* [key](text.md#key)
-* [offset](text.md#offset)
-* [shaders](text.md#shaders)
-* [spacing](text.md#spacing)
-* [value](text.md#value)
-* [zOrder](text.md#zorder)
-* [DEFAULT_SPACING](text.md#static-private-default_spacing)
-* [KEY](text.md#static-key)
-* [MESSAGE_ADD](text.md#static-message_add)
-* [MESSAGE_REMOVE](text.md#static-message_remove)
+- [align](text.md#align)
+- [color](text.md#color)
+- [font](text.md#font)
+- [key](text.md#key)
+- [offset](text.md#offset)
+- [shaders](text.md#shaders)
+- [spacing](text.md#spacing)
+- [value](text.md#value)
+- [zOrder](text.md#zorder)
+- [KEY](text.md#key)
+- [MESSAGE\_ADD](text.md#message_add)
+- [MESSAGE\_REMOVE](text.md#message_remove)
 
 ### Methods
 
-* [Free](text.md#free)
+- [Free](text.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Text**(`zOrder`: number, `value`: string, `font`: string, `align`: [TextAlignment](../enums/textalignment.md), `spacing`: number, `offset`: [Vector](vector.md), `color`: [Color](color.md), `shaders`: string[]): *[Text](text.md)*
+\+ **new Text**(`zOrder`: *number*, `value`: *string*, `font`: *string*, `align?`: [*TextAlignment*](../enums/textalignment.md), `spacing?`: *number*, `offset?`: [*Vector*](vector.md), `color?`: [*Color*](color.md), `shaders?`: *string*[]): [*Text*](text.md)
 
-*Overrides [Component](component.md).[constructor](component.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`zOrder` | *number* |
+`value` | *string* |
+`font` | *string* |
+`align` | [*TextAlignment*](../enums/textalignment.md) |
+`spacing` | *number* |
+`offset` | [*Vector*](vector.md) |
+`color` | [*Color*](color.md) |
+`shaders` | *string*[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`zOrder` | number | - |
-`value` | string | - |
-`font` | string | - |
-`align` | [TextAlignment](../enums/textalignment.md) | TextAlignment.Left |
-`spacing` | number | Text.DEFAULT_SPACING |
-`offset` | [Vector](vector.md) | Vector.New(0, 0) |
-`color` | [Color](color.md) | new Color(0, 0, 0, 1) |
-`shaders` | string[] | [
-            ShaderAsset.DEFAULT_TEXTURE_VERTEX_SHADER_NAME,
-            ShaderAsset.DEFAULT_TEXT_FRAGMENT_SHADER_NAME,
-        ] |
+**Returns:** [*Text*](text.md)
 
-**Returns:** *[Text](text.md)*
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  align
+### align
 
-• **align**: *[TextAlignment](../enums/textalignment.md)*
+• **align**: [*TextAlignment*](../enums/textalignment.md)
 
 Text Alignment, changes the meaning of the transform position.
 
 ___
 
-###  color
+### color
 
-• **color**: *[Color](color.md)*
+• **color**: [*Color*](color.md)
 
 Text color.
 
 ___
 
-###  font
+### font
 
 • **font**: *string*
 
@@ -92,32 +83,32 @@ Font to use when rendering, must already be loaded with a FontAsset.
 
 ___
 
-###  key
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-###  offset
+### offset
 
-• **offset**: *[Vector](vector.md)*
+• **offset**: [*Vector*](vector.md)
 
 The offset from the text origin to place the text, allows adding text
 above or below an entity.
 
 ___
 
-###  shaders
+### shaders
 
-• **shaders**: *string[]*
+• **shaders**: *string*[]
 
 List of shaders to apply.
 
 ___
 
-###  spacing
+### spacing
 
 • **spacing**: *number*
 
@@ -126,7 +117,7 @@ character's width, taken from transform.scale.x.
 
 ___
 
-###  value
+### value
 
 • **value**: *string*
 
@@ -134,7 +125,7 @@ String to render.
 
 ___
 
-###  zOrder
+### zOrder
 
 • **zOrder**: *number*
 
@@ -144,44 +135,34 @@ appear in front of objects with a lower value.
 
 ___
 
-### `Static` `Private` DEFAULT_SPACING
+### KEY
 
-▪ **DEFAULT_SPACING**: *0.3* = 0.3
-
-Default spacing between characters in text.
-
-___
-
-### `Static` KEY
-
-▪ **KEY**: *"text"* = "text"
+▪ `Readonly` `Static` **KEY**: *text*= "text"
 
 Key of the text component.
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Overrides [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Overrides: [Component](component.md)

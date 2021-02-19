@@ -1,40 +1,34 @@
-
 # Interface: ICollisionAlgorithm
 
 ICollisionAlgorithm represents a collision detection algorithm.
 
-## Hierarchy
-
-* **ICollisionAlgorithm**
-
 ## Implemented by
 
-* [AABBAlgorithm](../classes/aabbalgorithm.md)
-* [AllCollideAlgorithm](../classes/allcollidealgorithm.md)
-* [GJKAlgorithm](../classes/gjkalgorithm.md)
-* [NoneCollideAlgorithm](../classes/nonecollidealgorithm.md)
-* [TestCollisionAlgorithm](../classes/testcollisionalgorithm.md)
+* [*AABBAlgorithm*](../classes/aabbalgorithm.md)
+* [*AllCollideAlgorithm*](../classes/allcollidealgorithm.md)
+* [*GJKAlgorithm*](../classes/gjkalgorithm.md)
+* [*NoneCollideAlgorithm*](../classes/nonecollidealgorithm.md)
 
-## Index
+## Table of contents
 
 ### Methods
 
-* [CalculateCollisions](icollisionalgorithm.md#calculatecollisions)
+- [CalculateCollisions](icollisionalgorithm.md#calculatecollisions)
 
 ## Methods
 
-###  CalculateCollisions
+### CalculateCollisions
 
-▸ **CalculateCollisions**(`shapes`: [IShape](ishape.md)[]): *[CollisionInfo](../classes/collisioninfo.md)[]*
+▸ **CalculateCollisions**(`shapes`: [*IShape*](ishape.md)[]): [*CollisionInfo*](../classes/collisioninfo.md)[]
 
 CalculateCollisions calculates all collisions between the shapes
 provided, returning a list of CollisionInfos, each representing a
 Collision.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`shapes` | [IShape](ishape.md)[] | The shapes to check for collisions  |
+:------ | :------ | :------ |
+`shapes` | [*IShape*](ishape.md)[] | The shapes to check for collisions    |
 
-**Returns:** *[CollisionInfo](../classes/collisioninfo.md)[]*
+**Returns:** [*CollisionInfo*](../classes/collisioninfo.md)[]

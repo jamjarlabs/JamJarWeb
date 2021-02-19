@@ -1,98 +1,46 @@
-
 # Class: GJKAlgorithm
 
 GJKAlgorithm is the implementation of the Gilbert–Johnson–Keerthi distance
 algorithm for collision detection.
 
-## Hierarchy
-
-* **GJKAlgorithm**
-
 ## Implements
 
-* [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)
+* [*ICollisionAlgorithm*](../interfaces/icollisionalgorithm.md)
 
-## Index
+## Table of contents
+
+### Constructors
+
+- [constructor](gjkalgorithm.md#constructor)
 
 ### Methods
 
-* [CalculateCollisions](gjkalgorithm.md#calculatecollisions)
-* [calculateDirection](gjkalgorithm.md#private-calculatedirection)
-* [freeSimplex](gjkalgorithm.md#private-freesimplex)
-* [gjk](gjkalgorithm.md#private-gjk)
-* [support](gjkalgorithm.md#private-support)
+- [CalculateCollisions](gjkalgorithm.md#calculatecollisions)
+
+## Constructors
+
+### constructor
+
+\+ **new GJKAlgorithm**(): [*GJKAlgorithm*](gjkalgorithm.md)
+
+**Returns:** [*GJKAlgorithm*](gjkalgorithm.md)
 
 ## Methods
 
-###  CalculateCollisions
+### CalculateCollisions
 
-▸ **CalculateCollisions**(`shapes`: [IShape](../interfaces/ishape.md)[]): *[CollisionInfo](collisioninfo.md)[]*
+▸ **CalculateCollisions**(`shapes`: [*IShape*](../interfaces/ishape.md)[]): [*CollisionInfo*](collisioninfo.md)[]
 
-*Implementation of [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
+CalculateCollisions calculates all collisions between the shapes
+provided, returning a list of CollisionInfos, each representing a
+Collision.
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`shapes` | [IShape](../interfaces/ishape.md)[] |
-
-**Returns:** *[CollisionInfo](collisioninfo.md)[]*
-
-___
-
-### `Private` calculateDirection
-
-▸ **calculateDirection**(`points`: [Vector](vector.md)[]): *[Vector](vector.md) | undefined*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`points` | [Vector](vector.md)[] |
+:------ | :------ |
+`shapes` | [*IShape*](../interfaces/ishape.md)[] |
 
-**Returns:** *[Vector](vector.md) | undefined*
+**Returns:** [*CollisionInfo*](collisioninfo.md)[]
 
-___
-
-### `Private` freeSimplex
-
-▸ **freeSimplex**(`simplex`: [Vector](vector.md)[]): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`simplex` | [Vector](vector.md)[] |
-
-**Returns:** *void*
-
-___
-
-### `Private` gjk
-
-▸ **gjk**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md)): *[CollisionInfo](collisioninfo.md) | undefined*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`a` | [IShape](../interfaces/ishape.md) |
-`b` | [IShape](../interfaces/ishape.md) |
-
-**Returns:** *[CollisionInfo](collisioninfo.md) | undefined*
-
-___
-
-### `Private` support
-
-▸ **support**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md), `direction`: [Vector](vector.md)): *[Vector](vector.md)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`a` | [IShape](../interfaces/ishape.md) |
-`b` | [IShape](../interfaces/ishape.md) |
-`direction` | [Vector](vector.md) |
-
-**Returns:** *[Vector](vector.md)*
+Implementation of: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)
