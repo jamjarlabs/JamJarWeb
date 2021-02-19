@@ -27,6 +27,7 @@ setting up rendering.
 ### Properties
 
 * [accumulator](game.md#private-accumulator)
+* [browserWindow](game.md#private-browserwindow)
 * [currentTime](game.md#private-currenttime)
 * [frameRequestCallback](game.md#private-framerequestcallback)
 * [messageBus](game.md#protected-messagebus)
@@ -53,7 +54,7 @@ setting up rendering.
 
 ###  constructor
 
-\+ **new Game**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function, `running`: boolean, `subscriberID?`: undefined | number): *[Game](game.md)*
+\+ **new Game**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function, `running`: boolean, `browserWindow`: Window, `subscriberID?`: undefined | number): *[Game](game.md)*
 
 *Overrides [Subscriber](subscriber.md).[constructor](subscriber.md#constructor)*
 
@@ -75,6 +76,8 @@ Name | Type |
 
 ▪`Default value`  **running**: *boolean*= false
 
+▪`Default value`  **browserWindow**: *Window*= window
+
 ▪`Optional`  **subscriberID**: *undefined | number*
 
 **Returns:** *[Game](game.md)*
@@ -84,6 +87,12 @@ Name | Type |
 ### `Private` accumulator
 
 • **accumulator**: *number*
+
+___
+
+### `Private` browserWindow
+
+• **browserWindow**: *Window*
 
 ___
 
@@ -244,6 +253,12 @@ ___
 
 ### `Static` `Private` stopAllGames
 
-▸ **stopAllGames**(): *void*
+▸ **stopAllGames**(`browserWindow`: Window): *void*
+
+**Parameters:**
+
+Name | Type | Default |
+------ | ------ | ------ |
+`browserWindow` | Window | window |
 
 **Returns:** *void*

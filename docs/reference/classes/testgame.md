@@ -39,7 +39,7 @@
 
 ###  constructor
 
-\+ **new TestGame**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function, `running`: boolean, `subscriberID?`: undefined | number): *[TestGame](testgame.md)*
+\+ **new TestGame**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function, `running`: boolean, `browserWindow`: Window, `subscriberID?`: undefined | number): *[TestGame](testgame.md)*
 
 *Inherited from [Game](game.md).[constructor](game.md#constructor)*
 
@@ -62,6 +62,8 @@ Name | Type |
 `callback` | FrameRequestCallback |
 
 ▪`Default value`  **running**: *boolean*= false
+
+▪`Default value`  **browserWindow**: *Window*= window
 
 ▪`Optional`  **subscriberID**: *undefined | number*
 
