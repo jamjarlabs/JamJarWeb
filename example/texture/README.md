@@ -1,15 +1,11 @@
-# Audio
+# Texture
 
-This example showcases how audio can be loaded in over HTTP and played.
+This example shows how textures are loaded and displayed using sprites.
 
 ## Overview
 
-The example loads in an MP3 file over HTTP.
-
-This example is two buttons, one to start playing the looped audio MP3, another to stop it from playing.
-
-The game has to have a button press before starting, since Chrome and Firefox require user interaction before audio
-can be played.
+This example loads an image (`assets/example.png`) in 6 different ways, using different options for wrapping and
+filtering. Each differently loaded texture is rendered with a sprite.
 
 ## Running
 

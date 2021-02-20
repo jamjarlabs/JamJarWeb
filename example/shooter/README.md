@@ -1,15 +1,7 @@
-# Audio
+# Shooter
 
-This example showcases how audio can be loaded in over HTTP and played.
-
-## Overview
-
-The example loads in an MP3 file over HTTP.
-
-This example is two buttons, one to start playing the looped audio MP3, another to stop it from playing.
-
-The game has to have a button press before starting, since Chrome and Firefox require user interaction before audio
-can be played.
+This example showcases a more fully fledged game, it is a simple asteroid shooting game using simple shape rendering
+using primitives instead of sprites.
 
 ## Running
 

@@ -36,11 +36,10 @@ import {
     Renderable,
     Message,
     Matrix3D,
-    Matrix4D
+    Matrix4D,
 } from "jamjar";
 
 class StoppableGame extends Game {
-
     private gl: WebGL2RenderingContext;
 
     constructor(messageBus: IMessageBus, gl: WebGL2RenderingContext) {
@@ -63,23 +62,25 @@ class StoppableGame extends Game {
         const square = new Entity(this.messageBus);
         square.Add(new Transform(Vector.New(0, 0), Vector.New(10, 10)));
         square.Add(new Motion(undefined, undefined, 1));
-        square.Add(new Primitive(
-            new Material({
-                color: new Color(1, 0, 0, 1)
-            }),
-            0,
-            Polygon.RectangleByDimensions(1, 1, undefined, undefined, true),
-            DrawMode.LINE_STRIP
-        ));
+        square.Add(
+            new Primitive(
+                new Material({
+                    color: new Color(1, 0, 0, 1),
+                }),
+                0,
+                Polygon.RectangleByDimensions(1, 1, undefined, undefined, true),
+                DrawMode.LINE_STRIP
+            )
+        );
     }
 }
 
 if (window.JamJar === undefined) {
-    throw ("Missing required JamJar configuration options");
+    throw "Missing required JamJar configuration options";
 }
 
 if (window.JamJar.CanvasID === undefined) {
-    throw ("Missing required CanvasID");
+    throw "Missing required CanvasID";
 }
 
 // Get canvas
@@ -88,7 +89,7 @@ const canvas = document.getElementById(window.JamJar.CanvasID) as HTMLCanvasElem
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 // Set up vector and renderable pooling

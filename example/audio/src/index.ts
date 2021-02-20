@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46,24 +46,20 @@ import {
     Collider,
     Pointer,
     PointerSystem,
-    Renderable
+    Renderable,
 } from "jamjar";
 
 class AudioButtonSystem extends MapSystem {
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Collider.KEY].every((type) => components.some(
-            component => component.key == type
-        )) || [AudioSource.KEY].every((type) => components.some(
-            component => component.key == type
-        ));
+        return (
+            [Transform.KEY, Collider.KEY].every((type) => components.some((component) => component.key == type)) ||
+            [AudioSource.KEY].every((type) => components.some((component) => component.key == type))
+        );
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, AudioButtonSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, ["pointerdown"])
+        this.messageBus.Subscribe(this, ["pointerdown"]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -115,21 +111,24 @@ class AudioGame extends Game {
 
     OnStart(): void {
         // Load sprite sheet
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "button",
-            "assets/button.png",
-            {
-                minFilter: TextureFiltering.NEAREST,
-                magFilter: TextureFiltering.NEAREST,
-            }
-        )));
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("button", "assets/button.png", {
+                    minFilter: TextureFiltering.NEAREST,
+                    magFilter: TextureFiltering.NEAREST,
+                })
+            )
+        );
 
-        this.messageBus.Publish(Message.New<AudioRequest>(AudioRequest.MESSAGE_REQUEST_LOAD, new AudioRequest(
-            "example",
-            "assets/example.mp3"
-        )));
+        this.messageBus.Publish(
+            Message.New<AudioRequest>(
+                AudioRequest.MESSAGE_REQUEST_LOAD,
+                new AudioRequest("example", "assets/example.mp3")
+            )
+        );
 
-        const buttonSpriteSheet = Texture.GenerateSpritesheetIndex(1,2);
+        const buttonSpriteSheet = Texture.GenerateSpritesheetIndex(1, 2);
 
         // Create camera
         const cameraEntity = new Entity(this.messageBus);
@@ -137,36 +136,40 @@ class AudioGame extends Game {
         cameraEntity.Add(new Transform());
 
         const audioSource = new Entity(this.messageBus);
-        audioSource.Add(new AudioSource("example", {
-            playing: false,
-            loop: -1,
-            volume: 0.2,
-            playbackRate: 1
-        }));
+        audioSource.Add(
+            new AudioSource("example", {
+                playing: false,
+                loop: -1,
+                volume: 0.2,
+                playbackRate: 1,
+            })
+        );
 
         // Create entities
         const stopButton = new Entity(this.messageBus, ["stop"]);
-        stopButton.Add(new Transform(Vector.New(-40, 0), Vector.New(40,40)));
-        stopButton.Add(new Sprite(
-            new Material({
-                texture: new Texture("button", buttonSpriteSheet[0]),
-            }), 5
-        ));
-        stopButton.Add(new Collider(
-            Polygon.RectangleByDimensions(1,1)
-        ));
+        stopButton.Add(new Transform(Vector.New(-40, 0), Vector.New(40, 40)));
+        stopButton.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("button", buttonSpriteSheet[0]),
+                }),
+                5
+            )
+        );
+        stopButton.Add(new Collider(Polygon.RectangleByDimensions(1, 1)));
 
         // Create entities
         const playButton = new Entity(this.messageBus, ["play"]);
-        playButton.Add(new Transform(Vector.New(40, 0), Vector.New(40,40)));
-        playButton.Add(new Sprite(
-            new Material({
-                texture: new Texture("button", buttonSpriteSheet[1]),
-            }), 5
-        ));
-        playButton.Add(new Collider(
-            Polygon.RectangleByDimensions(1,1)
-        ));
+        playButton.Add(new Transform(Vector.New(40, 0), Vector.New(40, 40)));
+        playButton.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("button", buttonSpriteSheet[1]),
+                }),
+                5
+            )
+        );
+        playButton.Add(new Collider(Polygon.RectangleByDimensions(1, 1)));
     }
 }
 
@@ -176,12 +179,12 @@ const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 const startButton = document.getElementById("start-button");
 if (startButton === null) {
-    throw ("Failed to find start button");
+    throw "Failed to find start button";
 }
 
 startButton.onclick = () => {
