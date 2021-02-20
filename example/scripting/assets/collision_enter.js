@@ -1,4 +1,4 @@
-const gameRef = window.JamJarRefs.get("scripting");
+const gameRef = window.JamJar.Refs.get("scripting");
 
 const entity = gameRef.GetScriptEntity();
 

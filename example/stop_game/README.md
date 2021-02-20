@@ -7,10 +7,10 @@ The game itself is a simple red box that rotates, it will stop rotating only if 
 The game is stopped by a button:
 
 ```html
-<button onclick="window.JamJarStopGames()">Stop the game</button>
+<button onclick="window.JamJar.StopGames()">Stop the game</button>
 ```
 
-This button uses the `window.JamJarStopGames()` global function to stop the game.
+This button uses the `window.JamJar.StopGames()` global function to stop the game.
 
 ## Running this sample
 

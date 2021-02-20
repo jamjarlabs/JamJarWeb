@@ -32,7 +32,11 @@ import {
     PrimitiveSystem,
     Motion,
     MotionSystem,
-    InterpolationSystem
+    InterpolationSystem,
+    Renderable,
+    Message,
+    Matrix3D,
+    Matrix4D
 } from "jamjar";
 
 class StoppableGame extends Game {
@@ -70,14 +74,29 @@ class StoppableGame extends Game {
     }
 }
 
+if (window.JamJar === undefined) {
+    throw ("Missing required JamJar configuration options");
+}
+
+if (window.JamJar.CanvasID === undefined) {
+    throw ("Missing required CanvasID");
+}
+
 // Get canvas
-const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
+const canvas = document.getElementById(window.JamJar.CanvasID) as HTMLCanvasElement;
 
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
     throw ("WebGL2 not supported in this browser")
 }
+
+// Set up vector and renderable pooling
+Vector.Init(200);
+Renderable.Init(100);
+Message.Init(500);
+Matrix4D.Init(30);
+Matrix3D.Init(30);
 
 // Create message bus and entity manager
 const messageBus = new MessageBus();

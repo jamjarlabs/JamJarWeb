@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -62,16 +62,19 @@ abstract class Game extends Subscriber implements IGame {
         this.running = running;
         this.browserWindow = browserWindow;
         this.messageBus.Subscribe(this, Game.MESSAGE_STOP_GAME);
-        if (this.browserWindow.JamJarStopGames === undefined) {
-            this.browserWindow.JamJarStopGames = Game.stopAllGames;
+        if (this.browserWindow.JamJar === undefined) {
+            this.browserWindow.JamJar = {};
+        }
+        if (this.browserWindow.JamJar.StopGames === undefined) {
+            this.browserWindow.JamJar.StopGames = Game.stopAllGames;
         }
     }
 
     private static stopAllGames(browserWindow: Window = window): void {
-        if (browserWindow.__jamJarRunningGameBuses === undefined) {
+        if (browserWindow.JamJar.__runningGameBuses === undefined) {
             return;
         }
-        for (const runningGameBus of browserWindow.__jamJarRunningGameBuses) {
+        for (const runningGameBus of browserWindow.JamJar.__runningGameBuses) {
             runningGameBus.Publish(new Message(Game.MESSAGE_STOP_GAME));
         }
     }
@@ -100,10 +103,10 @@ abstract class Game extends Subscriber implements IGame {
         this.currentTime = 0;
         this.running = true;
         // Add message bus to the global message bus list
-        if (this.browserWindow.__jamJarRunningGameBuses === undefined) {
-            this.browserWindow.__jamJarRunningGameBuses = [];
+        if (this.browserWindow.JamJar.__runningGameBuses === undefined) {
+            this.browserWindow.JamJar.__runningGameBuses = [];
         }
-        this.browserWindow.__jamJarRunningGameBuses.push(this.messageBus);
+        this.browserWindow.JamJar.__runningGameBuses.push(this.messageBus);
         this.loop(0);
     }
 
@@ -118,10 +121,10 @@ abstract class Game extends Subscriber implements IGame {
 
     private stop(): void {
         // Remove message bus from the global message bus list
-        if (this.browserWindow.__jamJarRunningGameBuses !== undefined) {
-            for (let i = 0; i < this.browserWindow.__jamJarRunningGameBuses.length; i++) {
-                if (this.browserWindow.__jamJarRunningGameBuses[i] === this.messageBus) {
-                    this.browserWindow.__jamJarRunningGameBuses.splice(i, 1);
+        if (this.browserWindow.JamJar.__runningGameBuses !== undefined) {
+            for (let i = 0; i < this.browserWindow.JamJar.__runningGameBuses.length; i++) {
+                if (this.browserWindow.JamJar.__runningGameBuses[i] === this.messageBus) {
+                    this.browserWindow.JamJar.__runningGameBuses.splice(i, 1);
                     break;
                 }
             }

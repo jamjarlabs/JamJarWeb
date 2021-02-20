@@ -18,10 +18,35 @@ limitations under the License.
     <head>
         <title>Stoppable Game</title>
         <script>
-            window.GameCanvasID = "game-canvas";
-            window.GameRootPath = "/"
-            window.GameCanvasWrapperID = "game-canvas-wrapper"
+            window.JamJar = {}
+            window.JamJar.CanvasID = "game-canvas";
+            window.JamJar.RootPath = "/"
+            window.JamJar.CanvasWrapperID = "game-canvas-wrapper"
         </script>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            #game-canvas-wrapper {
+                display: flex;
+                margin: auto;
+                width: 100%;
+                flex-direction: column;
+                justify-content: center;
+                flex-grow: 1;
+            }
+
+            #game-canvas {
+                margin: auto;
+            }
+        </style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="HandheldFriendly" content="true" />
     </head>
@@ -29,7 +54,7 @@ limitations under the License.
         <div id="game-canvas-wrapper">
             <canvas id="game-canvas" width="889" height="500"></canvas>
         </div>
-        <button onclick="window.JamJarStopGames()">Stop the game</button>
+        <button onclick="window.JamJar.StopGames()">Stop the game</button>
         <script src="./main.js" type="module"></script>
     </body>
 </html>

@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -91,32 +91,35 @@ describe("Game - Start", () => {
 
 describe("Game - Ensure window variables set after constructor and start", () => {
     const browserWindow = (new JSDOM().window as unknown) as Window;
-    expect(browserWindow.JamJarStopGames).toBe(undefined);
+    expect(browserWindow.JamJar).toBe(undefined);
 
     const game = new TestGame(new FakeMessageBus(), "test", (): number => 0, undefined, browserWindow, 0);
-    expect(browserWindow.JamJarStopGames).not.toBe(undefined);
-    expect(browserWindow.JamJarStopGames).not.toBe(null);
-    expect(browserWindow.__jamJarRunningGameBuses).toBe(undefined);
+    expect(browserWindow.JamJar).not.toBe(undefined);
+    expect(browserWindow.JamJar.StopGames).not.toBe(undefined);
+    expect(browserWindow.JamJar.StopGames).not.toBe(null);
+    expect(browserWindow.JamJar.__runningGameBuses).toBe(undefined);
 
     game.Start();
-    expect(browserWindow.__jamJarRunningGameBuses).not.toBe(undefined);
-    expect(browserWindow.__jamJarRunningGameBuses).not.toBe(null);
+    expect(browserWindow.JamJar.__runningGameBuses).not.toBe(undefined);
+    expect(browserWindow.JamJar.__runningGameBuses).not.toBe(null);
 });
 
 describe("Game - Ensure window variables set after constructor and start, stop games function already set and already 1 message bus", () => {
     const browserWindow = (new JSDOM().window as unknown) as Window;
-    browserWindow.JamJarStopGames = () => {
+    browserWindow.JamJar = {};
+    browserWindow.JamJar.StopGames = () => {
         return;
     };
-    browserWindow.__jamJarRunningGameBuses = [new FakeMessageBus()];
+    browserWindow.JamJar.__runningGameBuses = [new FakeMessageBus()];
 
     const game = new TestGame(new FakeMessageBus(), "test", (): number => 0, undefined, browserWindow, 0);
-    expect(browserWindow.JamJarStopGames).not.toBe(undefined);
-    expect(browserWindow.JamJarStopGames).not.toBe(null);
-    expect(browserWindow.__jamJarRunningGameBuses).toHaveLength(1);
+    expect(browserWindow.JamJar).not.toBe(undefined);
+    expect(browserWindow.JamJar.StopGames).not.toBe(undefined);
+    expect(browserWindow.JamJar.StopGames).not.toBe(null);
+    expect(browserWindow.JamJar.__runningGameBuses).toHaveLength(1);
 
     game.Start();
-    expect(browserWindow.__jamJarRunningGameBuses).toHaveLength(2);
+    expect(browserWindow.JamJar.__runningGameBuses).toHaveLength(2);
 });
 
 describe("Game - Loop 5 times before stopping", () => {
@@ -159,7 +162,9 @@ describe("Game - Stop all games", () => {
             }
 
             if (count === 5) {
-                browserWindow.JamJarStopGames(browserWindow);
+                if (browserWindow.JamJar !== undefined && browserWindow.JamJar.StopGames !== undefined) {
+                    browserWindow.JamJar.StopGames(browserWindow);
+                }
             }
             callback(new Date().getTime());
             return 0;

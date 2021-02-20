@@ -33,7 +33,8 @@ import {
     Texture,
     Vector,
     ImageRequest,
-    ShaderAsset,, Renderable
+    ShaderAsset,
+    Renderable
 } from "jamjar";
 
 // Game definition

@@ -9,7 +9,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- New ability to stop games, using the `window.JamJarStopGames()` global function, allows host sites to stop a running
+- Global variables to allow flexiblity in hosting environment.
+    - `window.JamJar.CanvasID` - The ID of the canvas to render to.
+    - `window.JamJar.CanvasWrapperID` - The ID of the wrapper around the canvas, used to handle automatic resizes.
+    - `window.JamJar.RootPath` - The 'root path' that the game was loaded from to handle resolving paths to assets.
+- Ability to stop games, using the `window.JamJar.StopGames()` global function, allows host sites to stop a running
 game.
 - Object pooling, allows reusing objects in memory to avoid the garbage collection churn of create -> delete -> create.
     This can help prevent stuttering due to minor and major garbage collection occurring between frames by reducing the

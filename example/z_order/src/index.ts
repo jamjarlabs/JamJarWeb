@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31,7 +31,8 @@ import {
     Camera,
     Material,
     Texture,
-    Vector,, Renderable
+    Vector,
+    Renderable
 } from "jamjar";
 
 class ZOrderGame extends Game {
@@ -46,7 +47,7 @@ class ZOrderGame extends Game {
             "assets/example.png",
             {
                 minFilter: TextureFiltering.NEAREST,
-                magFilter: TextureFiltering.NEARESRenderableT,
+                magFilter: TextureFiltering.NEAREST,
             }
         )));
 
@@ -93,8 +94,16 @@ class ZOrderGame extends Game {
     }
 }
 
+if (window.JamJar === undefined) {
+    throw ("Missing required JamJar configuration options");
+}
+
+if (window.JamJar.CanvasID === undefined) {
+    throw ("Missing required CanvasID");
+}
+
 // Get canvas
-const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
+const canvas = document.getElementById(window.JamJar.CanvasID) as HTMLCanvasElement;
 
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });

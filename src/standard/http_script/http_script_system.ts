@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,6 +37,9 @@ class HTTPScriptSystem extends MapSystem {
      */
     public static readonly MESSAGE_REQUEST_CLEAR = "request_script_clear";
 
+    private static readonly DEFAULT_ROOT_PATH = "/";
+
+    private rootPath: string;
     private assets: ScriptAsset[];
 
     constructor(
@@ -53,6 +56,12 @@ class HTTPScriptSystem extends MapSystem {
             HTTPScriptSystem.MESSAGE_REQUEST_FLUSH,
             HTTPScriptSystem.MESSAGE_REQUEST_CLEAR,
         ]);
+
+        if (window.JamJar && window.JamJar.RootPath) {
+            this.rootPath = window.JamJar.RootPath;
+        } else {
+            this.rootPath = HTTPScriptSystem.DEFAULT_ROOT_PATH;
+        }
     }
 
     public OnMessage(message: IMessage): void {
@@ -98,8 +107,13 @@ class HTTPScriptSystem extends MapSystem {
     }
 
     private load(request: ScriptRequest): void {
+        let source = request.source;
+        if (source.indexOf("http://") !== 0 && source.indexOf("https://") !== 0) {
+            // If relative, prepend with root path
+            source = `${this.rootPath}${source}`;
+        }
         // HTTP fetch request to source
-        fetch(request.source)
+        fetch(source)
             .then(this.handleResponse)
             .then((buffer) => this.httpSuccess(buffer, request))
             .catch((error) => this.httpError(request, error));
