@@ -159,7 +159,7 @@ reference key that the [ScriptingEngineSystem] was set up with, allowing
 access to a number of useful functions.
 
 ```javascript
-const gameRef = window.JamJarRefs.get("script-test");
+const gameRef = window.JamJar.Refs.get("script-test");
 console.log(gameRef.GetScriptEntity());
 console.log(gameRef.GetEntityByID(0));
 console.log(gameRef.GetEntitiesByTag("test"));

@@ -38,7 +38,6 @@ import {
     SpriteAnimation,
     SpriteKeyFrame,
     KeyboardSystem,
-    System,
     IMessage,
     IEntity,
     Component,

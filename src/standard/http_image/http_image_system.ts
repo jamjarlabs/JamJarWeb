@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31,7 +31,10 @@ class HTTPImageSystem extends MapSystem {
     public static readonly MESSAGE_REQUEST_FLUSH = "request_image_flush";
     public static readonly MESSAGE_REQUEST_CLEAR = "request_image_clear";
 
+    private static readonly DEFAULT_ROOT_PATH = "/";
+
     private images: ImageAsset[];
+    private rootPath: string;
 
     constructor(
         messageBus: IMessageBus,
@@ -47,6 +50,12 @@ class HTTPImageSystem extends MapSystem {
             HTTPImageSystem.MESSAGE_REQUEST_FLUSH,
             HTTPImageSystem.MESSAGE_REQUEST_CLEAR,
         ]);
+
+        if (window.JamJar && window.JamJar.RootPath) {
+            this.rootPath = window.JamJar.RootPath;
+        } else {
+            this.rootPath = HTTPImageSystem.DEFAULT_ROOT_PATH;
+        }
     }
 
     public OnMessage(message: IMessage): void {
@@ -106,9 +115,16 @@ class HTTPImageSystem extends MapSystem {
 
     private load(request: ImageRequest): void {
         const img = new Image();
+        img.crossOrigin = "*";
         img.addEventListener("error", this.onError.bind(this, event, img, request));
         img.addEventListener("load", this.onLoad.bind(this, event, img, request));
-        img.src = request.source;
+        if (request.source.indexOf("http://") === 0 || request.source.indexOf("https://") === 0) {
+            // Handle absolute URLs
+            img.src = request.source;
+        } else {
+            // If relative, prepend with root path
+            img.src = `${this.rootPath}${request.source}`;
+        }
     }
 
     private flush(): void {

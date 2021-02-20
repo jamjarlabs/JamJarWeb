@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -134,6 +134,7 @@ import IPoolable from "./pooling/ipoolable";
 import IFreeable from "./pooling/ifreeable";
 import ArraySystem from "./system/array_system";
 import StatefulSystem from "./system/stateful_system";
+import IJamJarGlobals from "./jamjar_globals";
 
 export {
     // Core
@@ -284,3 +285,11 @@ export {
     DefaultTextureVertexShader,
     WebGLSystem,
 };
+
+declare global {
+    // Window is a globally defined interface, it does not conform to the I
+    // prefix naming scheme.
+    interface Window {
+        JamJar: IJamJarGlobals;
+    }
+}

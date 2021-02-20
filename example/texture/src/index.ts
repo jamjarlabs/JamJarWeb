@@ -151,8 +151,16 @@ class TextureGame extends Game {
     }
 }
 
+if (window.JamJar === undefined) {
+    throw ("Missing required JamJar configuration options");
+}
+
+if (window.JamJar.CanvasID === undefined) {
+    throw ("Missing required CanvasID");
+}
+
 // Get canvas
-const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
+const canvas = document.getElementById(window.JamJar.CanvasID) as HTMLCanvasElement;
 
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });

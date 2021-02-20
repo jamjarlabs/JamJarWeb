@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,6 +37,9 @@ class HTTPAudioSystem extends MapSystem {
      */
     public static readonly MESSAGE_REQUEST_CLEAR = "request_audio_clear";
 
+    private static readonly DEFAULT_ROOT_PATH = "/";
+
+    private rootPath: string;
     private assets: AudioAsset[];
     private context: AudioContext;
 
@@ -58,6 +61,12 @@ class HTTPAudioSystem extends MapSystem {
             HTTPAudioSystem.MESSAGE_REQUEST_FLUSH,
             HTTPAudioSystem.MESSAGE_REQUEST_CLEAR,
         ]);
+
+        if (window.JamJar && window.JamJar.RootPath) {
+            this.rootPath = window.JamJar.RootPath;
+        } else {
+            this.rootPath = HTTPAudioSystem.DEFAULT_ROOT_PATH;
+        }
     }
 
     public OnMessage(message: IMessage): void {
@@ -103,8 +112,14 @@ class HTTPAudioSystem extends MapSystem {
     }
 
     private load(request: AudioRequest): void {
+        let source = request.source;
+        if (source.indexOf("http://") !== 0 && source.indexOf("https://") !== 0) {
+            // If relative, prepend with root path
+            source = `${this.rootPath}${source}`;
+        }
+
         // HTTP fetch request to source
-        fetch(request.source)
+        fetch(source)
             .then(this.handleResponse)
             .then((buffer) => this.context.decodeAudioData(buffer))
             .then((buffer) => this.httpSuccess(buffer, request))

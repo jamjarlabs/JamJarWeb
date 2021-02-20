@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -296,7 +296,7 @@ describe("ScriptingEngineSystem - OnMessage", () => {
                         new ScriptAsset(
                             "test",
                             `
-                    const gameRef = window.JamJarRefs.get("test_calls");
+                    const gameRef = window.JamJar.Refs.get("test_calls");
                     console.log(gameRef.GetScriptEntity());
                     console.log(gameRef.GetEntityByID(0));
                     console.log(gameRef.GetEntitiesByTag("test"));
@@ -325,7 +325,7 @@ describe("ScriptingEngineSystem - OnMessage", () => {
                         new ScriptAsset(
                             "test",
                             `
-                    const gameRef = window.JamJarRefs.get("test_calls");
+                    const gameRef = window.JamJar.Refs.get("test_calls");
                     console.log(gameRef.GetScriptEntity());
                     console.log(gameRef.GetEntityByID(0));
                     console.log(gameRef.GetEntitiesByTag("test"));
