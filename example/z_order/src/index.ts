@@ -32,7 +32,7 @@ import {
     Material,
     Texture,
     Vector,
-    Renderable
+    Renderable,
 } from "jamjar";
 
 class ZOrderGame extends Game {
@@ -42,14 +42,15 @@ class ZOrderGame extends Game {
 
     OnStart(): void {
         // Load sprite sheet
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "example_sheet",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.NEAREST,
-                magFilter: TextureFiltering.NEAREST,
-            }
-        )));
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("example_sheet", "assets/example.png", {
+                    minFilter: TextureFiltering.NEAREST,
+                    magFilter: TextureFiltering.NEAREST,
+                })
+            )
+        );
 
         // Divide sprite sheet
         const exampleSpriteSheet = Texture.GenerateSpritesheetIndex(1, 4);
@@ -61,45 +62,57 @@ class ZOrderGame extends Game {
 
         // Create entities
         const near = new Entity(this.messageBus);
-        near.Add(new Transform(Vector.New(-11, 0), Vector.New(20,20)));
-        near.Add(new Sprite(
-            new Material({
-                texture: new Texture("example_sheet", exampleSpriteSheet[3]),
-            }), 5
-        ));
+        near.Add(new Transform(Vector.New(-11, 0), Vector.New(20, 20)));
+        near.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("example_sheet", exampleSpriteSheet[3]),
+                }),
+                5
+            )
+        );
 
         const medium = new Entity(this.messageBus);
-        medium.Add(new Transform(Vector.New(0, 11), Vector.New(20,20)));
-        medium.Add(new Sprite(
-            new Material({
-                texture: new Texture("example_sheet", exampleSpriteSheet[2]),
-            }), 2
-        ));
+        medium.Add(new Transform(Vector.New(0, 11), Vector.New(20, 20)));
+        medium.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("example_sheet", exampleSpriteSheet[2]),
+                }),
+                2
+            )
+        );
 
         const far = new Entity(this.messageBus);
-        far.Add(new Transform(Vector.New(11, 0), Vector.New(20,20)));
-        far.Add(new Sprite(
-            new Material({
-                texture: new Texture("example_sheet", exampleSpriteSheet[1]),
-            }), 1
-        ));
+        far.Add(new Transform(Vector.New(11, 0), Vector.New(20, 20)));
+        far.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("example_sheet", exampleSpriteSheet[1]),
+                }),
+                1
+            )
+        );
 
         const evenFurther = new Entity(this.messageBus);
-        evenFurther.Add(new Transform(Vector.New(0, -11), Vector.New(20,20)));
-        evenFurther.Add(new Sprite(
-            new Material({
-                texture: new Texture("example_sheet", exampleSpriteSheet[0]),
-            }), 0
-        ));
+        evenFurther.Add(new Transform(Vector.New(0, -11), Vector.New(20, 20)));
+        evenFurther.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("example_sheet", exampleSpriteSheet[0]),
+                }),
+                0
+            )
+        );
     }
 }
 
 if (window.JamJar === undefined) {
-    throw ("Missing required JamJar configuration options");
+    throw "Missing required JamJar configuration options";
 }
 
 if (window.JamJar.CanvasID === undefined) {
-    throw ("Missing required CanvasID");
+    throw "Missing required CanvasID";
 }
 
 // Get canvas
@@ -108,7 +121,7 @@ const canvas = document.getElementById(window.JamJar.CanvasID) as HTMLCanvasElem
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 // Set up pooling

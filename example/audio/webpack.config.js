@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@ limitations under the License.
 */
 
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: path.join(__dirname, "./src/index.ts"),
     output: {
         filename: "./[name].js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
     },
     module: {
         rules: [
@@ -30,23 +30,22 @@ module.exports = {
                 loader: "ts-loader",
                 exclude: /node_modules/,
             },
-        ]
+        ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js"],
     },
-    plugins:
-        [
-            new CopyWebpackPlugin({
-                patterns: [
-                    { from: "index.html", to: "index.html" },
-                    { from: "assets/", to: "assets/" }
-                ]
-            })
-        ],
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: "index.html", to: "index.html" },
+                { from: "assets/", to: "assets/" },
+            ],
+        }),
+    ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
-        port: 8000
-    }
+        port: 8000,
+    },
 };

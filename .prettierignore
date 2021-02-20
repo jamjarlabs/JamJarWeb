@@ -1,6 +1,5 @@
 lib
 node_modules
-example
 docs
 coverage
 *.json

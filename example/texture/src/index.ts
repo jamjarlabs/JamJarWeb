@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import {
     TextureWrapping,
     Renderable,
     Matrix4D,
-    Matrix3D
+    Matrix3D,
 } from "jamjar";
 
 class TextureGame extends Game {
@@ -46,50 +46,55 @@ class TextureGame extends Game {
     }
 
     OnStart(): void {
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "nearest",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.NEAREST,
-                magFilter: TextureFiltering.NEAREST,
-            }
-        )));
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "bilinear",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.BILINEAR,
-                magFilter: TextureFiltering.BILINEAR,
-            }
-        )));
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "trilinear",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.TRILINEAR,
-                magFilter: TextureFiltering.TRILINEAR,
-            }
-        )));
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "trilinear_repeat",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.TRILINEAR,
-                magFilter: TextureFiltering.TRILINEAR,
-                xWrap: TextureWrapping.REPEAT,
-                yWrap: TextureWrapping.REPEAT,
-            }
-        )));
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "bilinear_mirror_repeat",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.BILINEAR,
-                magFilter: TextureFiltering.BILINEAR,
-                xWrap: TextureWrapping.MIRRORED_REPEAT,
-                yWrap: TextureWrapping.MIRRORED_REPEAT,
-            }
-        )));
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("nearest", "assets/example.png", {
+                    minFilter: TextureFiltering.NEAREST,
+                    magFilter: TextureFiltering.NEAREST,
+                })
+            )
+        );
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("bilinear", "assets/example.png", {
+                    minFilter: TextureFiltering.BILINEAR,
+                    magFilter: TextureFiltering.BILINEAR,
+                })
+            )
+        );
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("trilinear", "assets/example.png", {
+                    minFilter: TextureFiltering.TRILINEAR,
+                    magFilter: TextureFiltering.TRILINEAR,
+                })
+            )
+        );
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("trilinear_repeat", "assets/example.png", {
+                    minFilter: TextureFiltering.TRILINEAR,
+                    magFilter: TextureFiltering.TRILINEAR,
+                    xWrap: TextureWrapping.REPEAT,
+                    yWrap: TextureWrapping.REPEAT,
+                })
+            )
+        );
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("bilinear_mirror_repeat", "assets/example.png", {
+                    minFilter: TextureFiltering.BILINEAR,
+                    magFilter: TextureFiltering.BILINEAR,
+                    xWrap: TextureWrapping.MIRRORED_REPEAT,
+                    yWrap: TextureWrapping.MIRRORED_REPEAT,
+                })
+            )
+        );
 
         // Create camera
         const cameraEntity = new Entity(this.messageBus);
@@ -98,65 +103,80 @@ class TextureGame extends Game {
 
         // Create entities
         const nearest = new Entity(this.messageBus);
-        nearest.Add(new Transform(Vector.New(-40, 20), Vector.New(20,20)));
-        nearest.Add(new Sprite(
-            new Material({
-                texture: new Texture("nearest"),
-            }),
-        ));
+        nearest.Add(new Transform(Vector.New(-40, 20), Vector.New(20, 20)));
+        nearest.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("nearest"),
+                })
+            )
+        );
 
         const bilinear = new Entity(this.messageBus);
-        bilinear.Add(new Transform(Vector.New(0, 20), Vector.New(20,20)));
-        bilinear.Add(new Sprite(
-            new Material({
-                texture: new Texture("bilinear"),
-            }),
-        ));
+        bilinear.Add(new Transform(Vector.New(0, 20), Vector.New(20, 20)));
+        bilinear.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("bilinear"),
+                })
+            )
+        );
 
         const trilinear = new Entity(this.messageBus);
-        trilinear.Add(new Transform(Vector.New(40, 20), Vector.New(20,20)));
-        trilinear.Add(new Sprite(
-            new Material({
-                texture: new Texture("trilinear"),
-            }),
-        ));
+        trilinear.Add(new Transform(Vector.New(40, 20), Vector.New(20, 20)));
+        trilinear.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("trilinear"),
+                })
+            )
+        );
 
         const nearestRed = new Entity(this.messageBus);
-        nearestRed.Add(new Transform(Vector.New(-40, -20), Vector.New(20,20)));
-        nearestRed.Add(new Sprite(
-            new Material({
-                texture: new Texture("nearest"),
-                color: new Color(1,0,0,1)
-            }),
-        ));
+        nearestRed.Add(new Transform(Vector.New(-40, -20), Vector.New(20, 20)));
+        nearestRed.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("nearest"),
+                    color: new Color(1, 0, 0, 1),
+                })
+            )
+        );
 
         const bilinearMirroRepeat = new Entity(this.messageBus);
-        bilinearMirroRepeat.Add(new Transform(Vector.New(0, -20), Vector.New(20,20)));
-        bilinearMirroRepeat.Add(new Sprite(
-            new Material({
-                texture: new Texture("bilinear_mirror_repeat", Polygon.QuadByPoints(Vector.New(0,0), Vector.New(5,5))),
-                color: new Color(1,1,1,0.5)
-            }),
-        ));
+        bilinearMirroRepeat.Add(new Transform(Vector.New(0, -20), Vector.New(20, 20)));
+        bilinearMirroRepeat.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture(
+                        "bilinear_mirror_repeat",
+                        Polygon.QuadByPoints(Vector.New(0, 0), Vector.New(5, 5))
+                    ),
+                    color: new Color(1, 1, 1, 0.5),
+                })
+            )
+        );
 
         const trilinearRepeat = new Entity(this.messageBus);
-        trilinearRepeat.Add(new Transform(Vector.New(40, -20), Vector.New(20,20)));
-        trilinearRepeat.Add(new Sprite(
-            new Material({
-                texture: new Texture("trilinear_repeat", Polygon.QuadByPoints(Vector.New(0,0), Vector.New(5,5))),
-                color: new Color(0,1,0,1)
-            }),
-            0,
-        ));
+        trilinearRepeat.Add(new Transform(Vector.New(40, -20), Vector.New(20, 20)));
+        trilinearRepeat.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("trilinear_repeat", Polygon.QuadByPoints(Vector.New(0, 0), Vector.New(5, 5))),
+                    color: new Color(0, 1, 0, 1),
+                }),
+                0
+            )
+        );
     }
 }
 
 if (window.JamJar === undefined) {
-    throw ("Missing required JamJar configuration options");
+    throw "Missing required JamJar configuration options";
 }
 
 if (window.JamJar.CanvasID === undefined) {
-    throw ("Missing required CanvasID");
+    throw "Missing required CanvasID";
 }
 
 // Get canvas
@@ -165,7 +185,7 @@ const canvas = document.getElementById(window.JamJar.CanvasID) as HTMLCanvasElem
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 // Set up vector and renderable pooling

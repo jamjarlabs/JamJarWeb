@@ -1,15 +1,11 @@
-# Audio
+# Ellipse Approximation
 
-This example showcases how audio can be loaded in over HTTP and played.
+This example showcases how primitives can be used to approximate ellipses using the `Polygon.EllipseEstimation` helper
+function.
 
 ## Overview
 
-The example loads in an MP3 file over HTTP.
-
-This example is two buttons, one to start playing the looped audio MP3, another to stop it from playing.
-
-The game has to have a button press before starting, since Chrome and Firefox require user interaction before audio
-can be played.
+This example creates a number of random ellipses, given random sizes and colors.
 
 ## Running
 

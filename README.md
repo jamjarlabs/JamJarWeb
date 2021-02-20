@@ -10,10 +10,8 @@ Status](https://readthedocs.org/projects/jamjar/badge/?version=latest)](https://
 
 # JamJar 2D Typescript Game Engine
 
-JamJar is a 2D typescript game engine, designed to simplify building browser
-WebGL based games.
-The engine is built for the source to be looked at and understood, to help in
-understanding game dev concepts.
+JamJar is a 2D typescript game engine, designed to simplify building browser WebGL based games.
+The engine is built for the source to be looked at and understood, to help in understanding game dev concepts.
 
 JamJar provides the following:
 
@@ -42,6 +40,10 @@ JamJar provides the following:
 ## More information
 
 Check [out the Wiki for more information](https://jamjar.readthedocs.io/en/latest).
+
+## Examples
+
+Check out the [examples directory](./examples) to see different features showcased.
 
 ## Dependencies
 

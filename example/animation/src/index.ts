@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ import {
     MotionSystem,
     InterpolationSystem,
     Renderable,
-    MapSystem
+    MapSystem,
 } from "jamjar";
 
 class TextureGame extends Game {
@@ -56,161 +56,178 @@ class TextureGame extends Game {
     }
 
     OnStart(): void {
-        this.messageBus.Publish(Message.New<ImageRequest>(ImageRequest.MESSAGE_REQUEST_LOAD, new ImageRequest(
-            "animation_sheet",
-            "assets/example.png",
-            {
-                minFilter: TextureFiltering.NEAREST,
-                magFilter: TextureFiltering.NEAREST,
-            }
-        )));
+        this.messageBus.Publish(
+            Message.New<ImageRequest>(
+                ImageRequest.MESSAGE_REQUEST_LOAD,
+                new ImageRequest("animation_sheet", "assets/example.png", {
+                    minFilter: TextureFiltering.NEAREST,
+                    magFilter: TextureFiltering.NEAREST,
+                })
+            )
+        );
 
         const spriteSheetIndices = Texture.GenerateSpritesheetIndex(1, 13);
 
         // Create camera
         const cameraEntity = new Entity(this.messageBus);
-        cameraEntity.Add(new Camera(new Color(1,1,1,1)));
+        cameraEntity.Add(new Camera(new Color(1, 1, 1, 1)));
         cameraEntity.Add(new Transform());
 
         // Create player
         const player = new Entity(this.messageBus, ["player"]);
-        player.Add(new Transform(Vector.New(0, 0), Vector.New(20,20)));
-        player.Add(new Sprite(
-            new Material({
-                texture: new Texture("animation_sheet", spriteSheetIndices[0]),
-            }),
-        ));
+        player.Add(new Transform(Vector.New(0, 0), Vector.New(20, 20)));
+        player.Add(
+            new Sprite(
+                new Material({
+                    texture: new Texture("animation_sheet", spriteSheetIndices[0]),
+                })
+            )
+        );
         player.Add(new Motion());
         player.Add(new Player(40));
-        player.Add(new SpriteAnimator(
-            new Map<string, SpriteAnimation>([
-                ["idle", new SpriteAnimation(
+        player.Add(
+            new SpriteAnimator(
+                new Map<string, SpriteAnimation>([
                     [
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[0]),
-                            }),
-                            10
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[1]),
-                            }),
-                            10
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[2]),
-                            }),
-                            10
+                        "idle",
+                        new SpriteAnimation(
+                            [
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[0]),
+                                    }),
+                                    10
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[1]),
+                                    }),
+                                    10
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[2]),
+                                    }),
+                                    10
+                                ),
+                            ],
+                            10,
+                            -1
                         ),
                     ],
-                    10,
-                    -1
-                )],
-                ["right", new SpriteAnimation(
                     [
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[3]),
-                            }),
-                            2
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[4]),
-                            }),
-                            2
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[5]),
-                            }),
-                            2
+                        "right",
+                        new SpriteAnimation(
+                            [
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[3]),
+                                    }),
+                                    2
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[4]),
+                                    }),
+                                    2
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[5]),
+                                    }),
+                                    2
+                                ),
+                            ],
+                            10,
+                            -1
                         ),
                     ],
-                    10,
-                    -1
-                )],
-                ["left", new SpriteAnimation(
                     [
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[6]),
-                            }),
-                            2
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[7]),
-                            }),
-                            2
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[8]),
-                            }),
-                            2
+                        "left",
+                        new SpriteAnimation(
+                            [
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[6]),
+                                    }),
+                                    2
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[7]),
+                                    }),
+                                    2
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[8]),
+                                    }),
+                                    2
+                                ),
+                            ],
+                            10,
+                            -1
                         ),
                     ],
-                    10,
-                    -1
-                )],
-                ["up", new SpriteAnimation(
                     [
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[9]),
-                            }),
-                            3
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[10]),
-                            }),
-                            3
+                        "up",
+                        new SpriteAnimation(
+                            [
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[9]),
+                                    }),
+                                    3
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[10]),
+                                    }),
+                                    3
+                                ),
+                            ],
+                            10,
+                            -1
                         ),
                     ],
-                    10,
-                    -1
-                )],
-                ["down", new SpriteAnimation(
                     [
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[11]),
-                            }),
-                            3
-                        ),
-                        new SpriteKeyFrame(
-                            new Material({
-                                texture: new Texture("animation_sheet", spriteSheetIndices[12]),
-                            }),
-                            3
+                        "down",
+                        new SpriteAnimation(
+                            [
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[11]),
+                                    }),
+                                    3
+                                ),
+                                new SpriteKeyFrame(
+                                    new Material({
+                                        texture: new Texture("animation_sheet", spriteSheetIndices[12]),
+                                    }),
+                                    3
+                                ),
+                            ],
+                            10,
+                            -1
                         ),
                     ],
-                    10,
-                    -1
-                )]
-            ]),
-            "idle"
-        ));
+                ]),
+                "idle"
+            )
+        );
     }
 }
 
 class PlayerSystem extends MapSystem {
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, Motion.KEY, SpriteAnimator.KEY, Player.KEY].every((type) => components.some(
-            component => component.key == type
-        ));
+        return [Transform.KEY, Motion.KEY, SpriteAnimator.KEY, Player.KEY].every((type) =>
+            components.some((component) => component.key == type)
+        );
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, ["keydown", "keyup"])
+        this.messageBus.Subscribe(this, ["keydown", "keyup"]);
     }
 
     public OnMessage(message: IMessage): void {
@@ -305,7 +322,7 @@ class Player extends Component {
     public speed: number;
     public direction: Vector;
 
-    constructor(speed: number, direction: Vector = Vector.New(0,0)) {
+    constructor(speed: number, direction: Vector = Vector.New(0, 0)) {
         super(Player.KEY);
         this.speed = speed;
         this.direction = direction;
@@ -318,7 +335,7 @@ const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
 // Get WebGL2 context
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 // Set up object pools

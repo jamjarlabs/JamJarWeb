@@ -1,15 +1,11 @@
-# Audio
+# Animation
 
-This example showcases how audio can be loaded in over HTTP and played.
+This example shows how a JamJar game can use the sprite animation systems to loop through sprite keyframes.
 
 ## Overview
 
-The example loads in an MP3 file over HTTP.
-
-This example is two buttons, one to start playing the looped audio MP3, another to stop it from playing.
-
-The game has to have a button press before starting, since Chrome and Firefox require user interaction before audio
-can be played.
+The example loads in a sprite sheet from `assets/example.png` and sets up keyframes using the sprite sheet. The
+animation changes between animation modes, with different play rates.
 
 ## Running
 
