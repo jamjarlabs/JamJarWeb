@@ -1,31 +1,27 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "outDir": "lib",
-    "rootDir": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "downlevelIteration": true,
-    "target": "ES5",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true
-  },
-  "exclude": [
-    "node_modules",
-    "example",
-    "lib"
-  ],
-  "typedocOptions": {
-    "out": "docs/reference",
-    "readme": "none",
-    "excludeExternals": true,
-    "excludePrivate": true,
-    "hideBreadcrumbs": true,
-    "plugin": "typedoc-plugin-markdown",
-    "name": "JamJar",
-    "hideGenerator": true,
-    "disableSources": true
-  }
+    "compilerOptions": {
+        "declaration": true,
+        "outDir": "lib",
+        "rootDir": "src",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "downlevelIteration": true,
+        "target": "ES5",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true
+    },
+    "exclude": ["node_modules", "example", "lib"],
+    "typedocOptions": {
+        "out": "docs/reference",
+        "readme": "none",
+        "excludeExternals": true,
+        "excludePrivate": true,
+        "hideBreadcrumbs": true,
+        "plugin": "typedoc-plugin-markdown",
+        "name": "JamJar",
+        "hideGenerator": true,
+        "disableSources": true
+    }
 }

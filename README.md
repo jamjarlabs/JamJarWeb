@@ -49,12 +49,13 @@ Check out the [examples directory](./examples) to see different features showcas
 
 Dependencies for developing this project:
 
-- [`node`](https://nodejs.org/en/) >= `v12.14.x`
-- [`yarn`](https://legacy.yarnpkg.com/en/) >= `1.19.x`
+- [`node`](https://nodejs.org/en/) == `12.18.3`
+- [`yarn`](https://legacy.yarnpkg.com/en/) == `1.22.10`
 
-Dependencies to view docs locally:
+The docs are generated using a Python tool, requiring Python and pip:
 
-- [`mkdocs`](https://www.mkdocs.org/)
+- [`python`](https://www.python.org/downloads/) == `3.7.2`
+- [`pip`](https://pypi.org/project/pip/) == `18.1`
 
 Docs also require some plugins, use `pip install -r docs/requirements.txt` to get the required plugins.
 
