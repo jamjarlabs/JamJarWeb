@@ -54,8 +54,8 @@ Dependencies for developing this project:
 
 The docs are generated using a Python tool, requiring Python and pip:
 
-- [`python`](https://www.python.org/downloads/) == `3.7.2`
-- [`pip`](https://pypi.org/project/pip/) == `18.1`
+- [`python`](https://www.python.org/downloads/) == `3.7.10`
+- [`pip`](https://pypi.org/project/pip/) == `20.1.1`
 
 Docs also require some plugins, use `pip install -r docs/requirements.txt` to get the required plugins.
 

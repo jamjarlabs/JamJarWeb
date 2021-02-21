@@ -14,9 +14,6 @@ jobs:
             - uses: actions/setup-node@v1
               with:
                   node-version: 12.18.3
-            - uses: actions/setup-python@v2
-              with:
-                  python-version: 3.7.2
             - name: Install, lint, test and build
               run: |
                   yarn install
