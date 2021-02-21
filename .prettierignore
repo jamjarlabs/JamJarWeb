@@ -2,7 +2,4 @@ lib
 node_modules
 docs
 coverage
-*.json
-*.yaml
-*.yml
 *.md
