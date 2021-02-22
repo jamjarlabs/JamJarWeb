@@ -135,6 +135,7 @@ import IFreeable from "./pooling/ifreeable";
 import ArraySystem from "./system/array_system";
 import StatefulSystem from "./system/stateful_system";
 import IJamJarGlobals from "./jamjar_globals";
+import CanvasResizeSystem from "./standard/canvas_resize/canvas_resize_system";
 
 export {
     // Core
@@ -284,6 +285,8 @@ export {
     DefaultTextureFragmentShader,
     DefaultTextureVertexShader,
     WebGLSystem,
+    // Canvas resizing
+    CanvasResizeSystem,
 };
 
 declare global {
