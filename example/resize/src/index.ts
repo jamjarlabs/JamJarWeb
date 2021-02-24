@@ -47,6 +47,8 @@ import {
     Text,
     TextAlignment,
     Color,
+    FullscreenSystem,
+    CanvasResize,
 } from "jamjar";
 
 class AspectControlSystem extends ArraySystem {
@@ -54,6 +56,14 @@ class AspectControlSystem extends ArraySystem {
         [
             [1, 1],
             [1000, 1000],
+        ],
+        [
+            [4, 3],
+            [640, 480],
+        ],
+        [
+            [4, 3],
+            [800, 600],
         ],
         [
             [16, 10],
@@ -96,7 +106,7 @@ class AspectControlSystem extends ArraySystem {
             [768, 1366],
         ],
     ];
-    public static readonly VIRTUAL_WITDH = 100;
+    public static readonly VIRTUAL_HEIGHT = 100;
 
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         return (
@@ -106,12 +116,14 @@ class AspectControlSystem extends ArraySystem {
     };
 
     private index: number;
+    private maxResSet: boolean;
 
     constructor(messageBus: IMessageBus, index = 0) {
         super(messageBus, undefined, AspectControlSystem.EVALUATOR);
         this.index = index;
+        this.maxResSet = true;
         this.messageBus.Subscribe(this, ["keydown"]);
-        this.resolutionChange();
+        this.initialiseAspectRatio();
     }
 
     public OnMessage(message: IMessage): void {
@@ -122,7 +134,6 @@ class AspectControlSystem extends ArraySystem {
                 if (keyMessage.payload === undefined) {
                     return;
                 }
-                console.log(keyMessage.payload);
                 switch (keyMessage.payload) {
                     case "ArrowUp": {
                         this.index++;
@@ -140,19 +151,48 @@ class AspectControlSystem extends ArraySystem {
                         this.changeAspectRatio();
                         break;
                     }
+                    case "KeyF": {
+                        this.messageBus.Publish(new Message(FullscreenSystem.MESSAGE_REQUEST_ENTER_FULLSCREEN));
+                        break;
+                    }
+                    case "KeyX": {
+                        this.maxResSet = !this.maxResSet;
+                        this.changeAspectRatio();
+                        break;
+                    }
                 }
                 break;
             }
         }
     }
 
+    private initialiseAspectRatio() {
+        const ratios: [number, number][] = [];
+        for (const resolutionAndAspect of AspectControlSystem.RESOLUTION_AND_ASPECT) {
+            ratios.push(resolutionAndAspect[0]);
+        }
+
+        const initialAspect = CanvasResize.GetClosestAspectRatioToResolution(screen.width, screen.height, ratios);
+
+        for (let i = 0; i < AspectControlSystem.RESOLUTION_AND_ASPECT.length; i++) {
+            if (AspectControlSystem.RESOLUTION_AND_ASPECT[i][0] === initialAspect) {
+                this.index = i;
+            }
+        }
+        this.changeAspectRatio();
+    }
+
     private changeAspectRatio() {
         const aspect = AspectControlSystem.RESOLUTION_AND_ASPECT[this.index][0];
         const resolution = AspectControlSystem.RESOLUTION_AND_ASPECT[this.index][1];
         this.messageBus.Publish(new Message(CanvasResizeSystem.MESSAGE_SET_ASPECT_RATIO, aspect[0] / aspect[1]));
-        this.messageBus.Publish(
-            new Message<[number, number]>(CanvasResizeSystem.MESSAGE_SET_MAX_RESOLUTION, resolution)
-        );
+        if (this.maxResSet) {
+            this.messageBus.Publish(
+                new Message<[number, number]>(CanvasResizeSystem.MESSAGE_SET_MAX_RESOLUTION, resolution)
+            );
+        } else {
+            this.messageBus.Publish(new Message(CanvasResizeSystem.MESSAGE_SET_MAX_RESOLUTION, null));
+        }
         // Delete any existing cameras
         for (const entity of this.entities) {
             if (entity.Get(Camera.KEY) === undefined) {
@@ -173,12 +213,12 @@ class AspectControlSystem extends ArraySystem {
         const cameraEntity = new Entity(this.messageBus);
         cameraEntity.Add(
             new Camera(
-                undefined,
+                new Color(0.23921568627, 0.23921568627, 0.23921568627),
                 undefined,
                 undefined,
                 new Vector(
-                    AspectControlSystem.VIRTUAL_WITDH,
-                    AspectControlSystem.VIRTUAL_WITDH * (1 / (aspect[0] / aspect[1]))
+                    AspectControlSystem.VIRTUAL_HEIGHT * (aspect[0] / aspect[1]),
+                    AspectControlSystem.VIRTUAL_HEIGHT
                 )
             )
         );
@@ -188,17 +228,55 @@ class AspectControlSystem extends ArraySystem {
     private updateText(): void {
         const aspect = AspectControlSystem.RESOLUTION_AND_ASPECT[this.index][0];
         const resolution = AspectControlSystem.RESOLUTION_AND_ASPECT[this.index][1];
+        let numOfText = 0;
         for (const entity of this.entities) {
             const text = entity.Get(Text.KEY) as Text | undefined;
             if (text === undefined) {
                 continue;
             }
+            numOfText++;
             if (entity.entity.tags.includes("aspect_ratio")) {
                 text.value = `aspect ratio: ${aspect[0]}:${aspect[1]}`;
             }
             if (entity.entity.tags.includes("resolution")) {
-                text.value = `resolution: ${resolution[0]}x${resolution[1]}`;
+                if (this.maxResSet) {
+                    text.value = `max resolution: ${resolution[0]}x${resolution[1]}`;
+                } else {
+                    text.value = `max resolution: not set`;
+                }
             }
+        }
+
+        if (numOfText <= 0) {
+            const aspectRatioText = new Entity(this.messageBus, ["aspect_ratio"]);
+            aspectRatioText.Add(new Transform(Vector.New(0, 22), Vector.New(3, 3)));
+            aspectRatioText.Add(new Motion(undefined, undefined, 1));
+            aspectRatioText.Add(
+                new Text(
+                    0,
+                    `aspect ratio: ${aspect[0]}:${aspect[1]}`,
+                    "arial",
+                    TextAlignment.Center,
+                    undefined,
+                    undefined,
+                    new Color(1, 0, 0)
+                )
+            );
+
+            const resolutionText = new Entity(this.messageBus, ["resolution"]);
+            resolutionText.Add(new Transform(Vector.New(0, 18), Vector.New(3, 3)));
+            resolutionText.Add(new Motion(undefined, undefined, 1));
+            resolutionText.Add(
+                new Text(
+                    0,
+                    `max resolution: ${resolution[0]}x${resolution[1]}`,
+                    "arial",
+                    TextAlignment.Center,
+                    undefined,
+                    undefined,
+                    new Color(1, 0, 0)
+                )
+            );
         }
     }
 }
@@ -224,15 +302,18 @@ class ResizableGame extends Game {
     }
 
     OnStart(): void {
-        const initialAspect = AspectControlSystem.RESOLUTION_AND_ASPECT[0][0];
-        const initialAspectRatio = initialAspect[0] / initialAspect[1];
         new WebGLSystem(messageBus, this.gl);
         new SpriteSystem(messageBus);
         new HTTPImageSystem(messageBus);
         new KeyboardSystem(messageBus, this.document);
         new TextSystem(messageBus);
-        new CanvasResizeSystem(messageBus, this.canvas, this.wrapper, initialAspectRatio);
+        new CanvasResizeSystem(messageBus, this.canvas, this.wrapper);
+        new FullscreenSystem(messageBus, this.canvas, this.document);
         new AspectControlSystem(messageBus);
+
+        this.messageBus.Publish(
+            Message.New<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, new FontRequest("arial", "arial", "normal", 100))
+        );
 
         this.messageBus.Publish(
             Message.New<ImageRequest>(
@@ -244,10 +325,6 @@ class ResizableGame extends Game {
             )
         );
 
-        this.messageBus.Publish(
-            Message.New<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, new FontRequest("arial", "arial", "normal", 100))
-        );
-
         const picture = new Entity(this.messageBus);
         picture.Add(new Transform(Vector.New(0, 0), Vector.New(100, 56.25)));
         picture.Add(new Motion(undefined, undefined, 1));
@@ -257,20 +334,6 @@ class ResizableGame extends Game {
                     texture: new Texture("example"),
                 })
             )
-        );
-
-        const aspectRatioText = new Entity(this.messageBus, ["aspect_ratio"]);
-        aspectRatioText.Add(new Transform(Vector.New(0, 22), Vector.New(3, 3)));
-        aspectRatioText.Add(new Motion(undefined, undefined, 1));
-        aspectRatioText.Add(
-            new Text(0, "aspect ratio: 16:9", "arial", TextAlignment.Center, undefined, undefined, new Color(1, 0, 0))
-        );
-
-        const resolutionText = new Entity(this.messageBus, ["resolution"]);
-        resolutionText.Add(new Transform(Vector.New(0, 18), Vector.New(3, 3)));
-        resolutionText.Add(new Motion(undefined, undefined, 1));
-        resolutionText.Add(
-            new Text(0, "resolution: 1600x900", "arial", TextAlignment.Center, undefined, undefined, new Color(1, 0, 0))
         );
     }
 }

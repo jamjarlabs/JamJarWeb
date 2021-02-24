@@ -43,7 +43,7 @@ Check [out the Wiki for more information](https://jamjar.readthedocs.io/en/lates
 
 ## Examples
 
-Check out the [examples directory](./examples) to see different features showcased.
+Check out the [examples directory](./example) to see different features showcased.
 
 ## Dependencies
 

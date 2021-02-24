@@ -17,7 +17,7 @@ limitations under the License.
 /**
  * CanvasResize provides utility functions for calculating resolutions and aspect ratios.
  */
-module CanvasResize {
+export module CanvasResize {
     /**
      * GetLargestResolutionForAspect calculates the largest resolution for an aspect ratio that will fit inside the
      * minimum and maximum resolutions.
@@ -40,10 +40,7 @@ module CanvasResize {
             if (xHeight < maxHeight) {
                 return [xWidth, Math.floor(xHeight)];
             }
-
-            if (yWidth < maxWidth) {
-                return [Math.floor(yWidth), yHeight];
-            }
+            return [Math.floor(yWidth), yHeight];
         }
         return [xWidth, Math.floor(xHeight)];
     }
@@ -67,7 +64,17 @@ module CanvasResize {
             [9, 16],
         ]
     ): [number, number] {
-        return ratios[0];
+        const actualRatio = screenWidth / screenHeight;
+        let closest: [number, number] = ratios[0];
+        let smallestDifference = Math.abs(actualRatio - (closest[0]/closest[1]));
+        for (let i = 1; i < ratios.length; i++) {
+            let difference = Math.abs(actualRatio - (ratios[i][0] / ratios[i][1]));
+            if (difference < smallestDifference) {
+                closest = ratios[i];
+                smallestDifference = difference;
+            }
+        }
+        return closest;
     }
 }
 
