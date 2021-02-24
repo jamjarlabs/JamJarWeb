@@ -52,7 +52,7 @@ class CanvasResizeSystem extends System {
         wrapper: HTMLElement,
         aspectRatio: number = CanvasResizeSystem.DEFAULT_ASPECT_RATIO,
         scene?: IScene,
-        isFullscreen: boolean = false,
+        isFullscreen = false,
         maxResolution: [number, number] | null = null,
         browserScreen: Screen = screen,
         subscriberID?: number

@@ -288,7 +288,7 @@ export {
     WebGLSystem,
     // Canvas resizing
     CanvasResizeSystem,
-    CanvasResize
+    CanvasResize,
 };
 
 declare global {

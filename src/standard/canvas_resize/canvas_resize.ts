@@ -66,9 +66,9 @@ export module CanvasResize {
     ): [number, number] {
         const actualRatio = screenWidth / screenHeight;
         let closest: [number, number] = ratios[0];
-        let smallestDifference = Math.abs(actualRatio - (closest[0]/closest[1]));
+        let smallestDifference = Math.abs(actualRatio - closest[0] / closest[1]);
         for (let i = 1; i < ratios.length; i++) {
-            let difference = Math.abs(actualRatio - (ratios[i][0] / ratios[i][1]));
+            const difference = Math.abs(actualRatio - ratios[i][0] / ratios[i][1]);
             if (difference < smallestDifference) {
                 closest = ratios[i];
                 smallestDifference = difference;

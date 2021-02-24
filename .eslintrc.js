@@ -14,8 +14,10 @@ module.exports = {
     rules: {
         "no-undef": "off",
         semi: 2,
-        "@typescript-eslint/no-unused-vars": "off",
         eqeqeq: 2,
         "no-tabs": 2,
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/prefer-namespace-keyword": "off",
+        "@typescript-eslint/no-namespace": "off",
     },
 };
