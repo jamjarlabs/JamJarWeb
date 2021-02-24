@@ -33,7 +33,13 @@ import FullscreenSystem from "../fullscreen/fullscreen_system";
  * 5. The largest possible resolution within these criteria.
  */
 class CanvasResizeSystem extends System {
+    /**
+     * Message to set the aspect ratio.
+     */
     public static readonly MESSAGE_SET_ASPECT_RATIO = "jamjar_set_aspect_ratio";
+    /**
+     * Message to set the maximum resolution.
+     */
     public static readonly MESSAGE_SET_MAX_RESOLUTION = "jamjar_set_max_resolution";
 
     private static readonly DEFAULT_ASPECT_RATIO = 16 / 9;
@@ -51,9 +57,9 @@ class CanvasResizeSystem extends System {
         canvas: HTMLCanvasElement,
         wrapper: HTMLElement,
         aspectRatio: number = CanvasResizeSystem.DEFAULT_ASPECT_RATIO,
+        maxResolution: [number, number] | null = null,
         scene?: IScene,
         isFullscreen = false,
-        maxResolution: [number, number] | null = null,
         browserScreen: Screen = screen,
         subscriberID?: number
     ) {

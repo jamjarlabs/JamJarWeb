@@ -11,6 +11,8 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳↳ [*StatefulSystem*](statefulsystem.md)
 
+  ↳↳ [*CanvasResizeSystem*](canvasresizesystem.md)
+
 ## Table of contents
 
 ### Constructors

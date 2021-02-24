@@ -73,6 +73,10 @@ export module CanvasResize {
                 closest = ratios[i];
                 smallestDifference = difference;
             }
+            if (difference === 0) {
+                // Can't be closer than zero, exact match so exit
+                break;
+            }
         }
         return closest;
     }

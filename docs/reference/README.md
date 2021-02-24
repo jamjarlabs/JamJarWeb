@@ -2,6 +2,10 @@
 
 ## Table of contents
 
+### Namespaces
+
+- [CanvasResize](modules/canvasresize.md)
+
 ### Enumerations
 
 - [DrawMode](enums/drawmode.md)
@@ -21,6 +25,7 @@
 - [AudioSource](classes/audiosource.md)
 - [AudioSourceSystem](classes/audiosourcesystem.md)
 - [Camera](classes/camera.md)
+- [CanvasResizeSystem](classes/canvasresizesystem.md)
 - [Collider](classes/collider.md)
 - [Collision](classes/collision.md)
 - [CollisionInfo](classes/collisioninfo.md)
