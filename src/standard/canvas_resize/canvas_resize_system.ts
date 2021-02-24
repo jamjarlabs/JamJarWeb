@@ -103,10 +103,7 @@ class CanvasResizeSystem extends System {
             }
             case FullscreenSystem.MESSAGE_EXIT_FULLSCREEN: {
                 this.isFullscreen = false;
-                // This is a little bit of a hack, when exiting full screen to make sure the wrapper isn't being
-                // affected by the size of the canvas set the canvas (temporarily) to size 0x0, the wrapper will
-                // be resized which will trigger the canvas to resize appropriately immediately.
-                this.canvasToZero();
+                this.resizeCanvas();
                 break;
             }
         }
@@ -118,11 +115,6 @@ class CanvasResizeSystem extends System {
 
     protected OnDestroy(): void {
         this.observer.disconnect();
-    }
-
-    private canvasToZero(): void {
-        this.canvas.width = 0;
-        this.canvas.height = 0;
     }
 
     private resizeCanvas(): void {
