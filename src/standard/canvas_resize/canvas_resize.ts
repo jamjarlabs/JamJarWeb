@@ -31,18 +31,12 @@ export module CanvasResize {
         maxHeight: number
     ): [number, number] {
         const xWidth = maxWidth;
-        const xHeight = maxWidth * (1 / ratio);
-
         const yWidth = maxHeight * ratio;
-        const yHeight = maxHeight;
 
         if (xWidth > yWidth) {
-            if (xHeight < maxHeight) {
-                return [xWidth, Math.floor(xHeight)];
-            }
-            return [Math.floor(yWidth), yHeight];
+            return [Math.floor(yWidth), maxHeight];
         }
-        return [xWidth, Math.floor(xHeight)];
+        return [xWidth, Math.floor(maxWidth * (1 / ratio))];
     }
 
     /**

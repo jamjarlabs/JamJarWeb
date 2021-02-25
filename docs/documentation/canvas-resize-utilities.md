@@ -56,6 +56,15 @@ three provided aspect ratios based on the user's screen size. The closest aspect
 [CanvasResizeSystem] (see the [automatic canvas resizing system documentation](./automatic-canvas-resizing.md) for
 more details) to handle automatic resizing of the canvas.
 
+If a list of ratios to choose from is not provided, by default the function will use this list:
+
+- 21/9
+- 16/10
+- 16/9
+- 4/3
+- 1/1
+- 9/16
+
 [CanvasResize]:../reference/modules/canvasresize.md
 [GetLargestResolutionForAspect]:../reference/modules/canvasresize.md#getlargestresolutionforaspect
 [GetClosestAspectRatioToResolution]:../reference/modules/canvasresize.md#getclosestaspectratiotoresolution

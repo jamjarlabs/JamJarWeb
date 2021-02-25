@@ -137,6 +137,8 @@ import StatefulSystem from "./system/stateful_system";
 import IJamJarGlobals from "./jamjar_globals";
 import CanvasResizeSystem from "./standard/canvas_resize/canvas_resize_system";
 import CanvasResize from "./standard/canvas_resize/canvas_resize";
+import FakeResizeObserver from "./fake/fake_resize_observer";
+import FakeScreen from "./fake/fake_screen";
 
 export {
     // Core
@@ -207,6 +209,8 @@ export {
     FakeScene,
     FakeSubscriber,
     FakeWebGL2RenderingContext,
+    FakeResizeObserver,
+    FakeScreen,
     // Standard Lib
     // Audio Source
     AudioSource,

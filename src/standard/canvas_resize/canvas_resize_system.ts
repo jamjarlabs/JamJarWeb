@@ -61,6 +61,7 @@ class CanvasResizeSystem extends System {
         scene?: IScene,
         isFullscreen = false,
         browserScreen: Screen = screen,
+        resizeObserver?: ResizeObserver,
         subscriberID?: number
     ) {
         super(messageBus, scene, subscriberID);
@@ -70,7 +71,11 @@ class CanvasResizeSystem extends System {
         this.isFullscreen = isFullscreen;
         this.maxResolution = maxResolution;
         this.browserScreen = browserScreen;
-        this.observer = new ResizeObserver(this.onResize.bind(this));
+        if (!resizeObserver) {
+            this.observer = new ResizeObserver(this.onResize.bind(this));
+        } else {
+            this.observer = resizeObserver;
+        }
         this.observer.observe(wrapper);
         this.resizeCanvas();
         this.messageBus.Subscribe(this, [

@@ -42,7 +42,7 @@ criteria:
 
 ### constructor
 
-\+ **new CanvasResizeSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `wrapper`: HTMLElement, `aspectRatio?`: *number*, `maxResolution?`: *null* \| [*number*, *number*], `scene?`: [*IScene*](../interfaces/iscene.md), `isFullscreen?`: *boolean*, `browserScreen?`: Screen, `subscriberID?`: *number*): [*CanvasResizeSystem*](canvasresizesystem.md)
+\+ **new CanvasResizeSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `wrapper`: HTMLElement, `aspectRatio?`: *number*, `maxResolution?`: *null* \| [*number*, *number*], `scene?`: [*IScene*](../interfaces/iscene.md), `isFullscreen?`: *boolean*, `browserScreen?`: Screen, `resizeObserver?`: ResizeObserver, `subscriberID?`: *number*): [*CanvasResizeSystem*](canvasresizesystem.md)
 
 #### Parameters:
 
@@ -56,6 +56,7 @@ Name | Type | Default value |
 `scene?` | [*IScene*](../interfaces/iscene.md) | - |
 `isFullscreen` | *boolean* | false |
 `browserScreen` | Screen | - |
+`resizeObserver?` | ResizeObserver | - |
 `subscriberID?` | *number* | - |
 
 **Returns:** [*CanvasResizeSystem*](canvasresizesystem.md)
