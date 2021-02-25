@@ -9,6 +9,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- `CanvasResizeSystem` to handle automatic resizing of the canvas to fit a wrapper/the screen while maintaining the
+requested aspect ratio and within maximum resolution constraints.
+- `CanvasResize` utility functions to allow manual canvas resizing and providing best estimate aspect ratios.
 - Global variables to allow flexiblity in hosting environment.
     - `window.JamJar.CanvasID` - The ID of the canvas to render to.
     - `window.JamJar.CanvasWrapperID` - The ID of the wrapper around the canvas, used to handle automatic resizes.

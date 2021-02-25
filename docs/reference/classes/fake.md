@@ -22,6 +22,10 @@
 
   ↳ [*FakeWebGL2RenderingContext*](fakewebgl2renderingcontext.md)
 
+  ↳ [*FakeResizeObserver*](fakeresizeobserver.md)
+
+  ↳ [*FakeScreen*](fakescreen.md)
+
 ## Table of contents
 
 ### Constructors
