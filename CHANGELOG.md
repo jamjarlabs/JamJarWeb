@@ -7,6 +7,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [v0.10.0] - 2021-02-25
+
 ### Added
 
 - `CanvasResizeSystem` to handle automatic resizing of the canvas to fit a wrapper/the screen while maintaining the
@@ -337,7 +339,8 @@ deregistration.
 - Camera systems.
 - Basic physics for velocities/acceleration/rotation.
 
-[unreleased]: https://github.com/jamjarlabs/jamjar/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/jamjarlabs/jamjar/compare/v0.10.0...HEAD
+[v0.10.0]: https://github.com/jamjarlabs/jamjar/compare/v0.9.0...v0.10.0
 [v0.9.0]: https://github.com/jamjarlabs/jamjar/compare/v0.8.0...v0.9.0
 [v0.8.0]: https://github.com/jamjarlabs/jamjar/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/jamjarlabs/jamjar/compare/v0.6.1...v0.7.0
