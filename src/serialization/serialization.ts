@@ -17,9 +17,11 @@ limitations under the License.
 import ISerializable from "./iserializable";
 
 abstract class Serialization {
+    private static enc = new TextEncoder();
+    private static dec = new TextDecoder();
     public static types: Map<string, { (json: any): ISerializable }> = new Map();
 
-    public static Serialize(input: ISerializable | ISerializable[]): string {
+    public static Serialize(input: ISerializable | ISerializable[]): Uint8Array {
         let serializedString = "";
         if (Array.isArray(input)) {
             // Handle arrays
@@ -35,21 +37,23 @@ abstract class Serialization {
             // Handle serializable objects
             serializedString = input.Serialize();
         }
-        return serializedString;
+        return this.enc.encode(serializedString);
     }
 
-    public static Deserialize(input: any): any {
-        if (Array.isArray(input)) {
+    public static Deserialize(input: Uint8Array): any {
+        const inputStr = this.dec.decode(input);
+        const inputJSON = JSON.parse(inputStr);
+        if (Array.isArray(inputJSON)) {
             const deserializedArray: any = [];
-            if (input.length === 0) {
+            if (inputJSON.length === 0) {
                 return deserializedArray;
             }
             for (let i = 0; i < input.length; i++) {
-                deserializedArray.push(Serialization.deserializeObject(input[i]));
+                deserializedArray.push(Serialization.deserializeObject(inputJSON[i]));
             }
             return deserializedArray;
         }
-        return Serialization.deserializeObject(input);
+        return Serialization.deserializeObject(inputJSON);
     }
 
     private static deserializeObject(input: any): any {

@@ -20,7 +20,7 @@ import Serialization from "./serialization";
 function Serialize(className: string, serialize: { (json: any): ISerializable }) {
     return (constructor: Function) => {
         Serialization.types.set(className, serialize);
-    }
+    };
 }
 
 export default Serialize;

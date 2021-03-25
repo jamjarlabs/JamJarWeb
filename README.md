@@ -49,6 +49,7 @@ Dependencies for developing this project:
 
 - [`node`](https://nodejs.org/en/) >= `v12.14.x`
 - [`yarn`](https://legacy.yarnpkg.com/en/) >= `1.19.x`
+- [`protoc`](http://google.github.io/proto-lens/installing-protoc.html) == `3.15.6`
 
 Dependencies to view docs locally:
 

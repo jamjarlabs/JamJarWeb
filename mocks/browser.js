@@ -153,6 +153,12 @@ global.window.ImageData = function (width, height) {
     data.fill(0);
     return { width, height, data };
 };
+global.window.TextEncoder = function () {
+    return {};
+};
+global.window.TextDecoder = function () {
+    return {};
+};
 // Workaround for JSON marshalling maps, used in testing
 // From https://stackoverflow.com/a/43705077/6052295
 Map.prototype.toJSON = function () {

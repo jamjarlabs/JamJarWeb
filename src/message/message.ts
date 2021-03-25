@@ -28,12 +28,11 @@ import IMessage from "./imessage";
  */
 @Serialize(Message.CLASS_SERIALIZATION_KEY, Message.Deserialize)
 class Message<T> extends Pooled implements IMessage, IPoolable, ISerializable {
-
     public static readonly CLASS_SERIALIZATION_KEY = "com.jamjarlabs.Message";
 
     public static Deserialize(json: any): Message<unknown> {
         if (json.payload !== undefined) {
-            return Message.New(json.type, Serializeable.Deserialize(json.payload))
+            return Message.New(json.type, Serializeable.Deserialize(json.payload));
         }
         return Message.New(json.type);
     }
@@ -82,13 +81,13 @@ class Message<T> extends Pooled implements IMessage, IPoolable, ISerializable {
             return `{
                 "className": "${Message.CLASS_SERIALIZATION_KEY}",
                 "type": "${this.type}",
-                "payload": ${Serialization.Serialize(this.payload as unknown as ISerializable | ISerializable[])}
+                "payload": ${Serialization.Serialize((this.payload as unknown) as ISerializable | ISerializable[])}
             }`;
         }
         return `{
             "className": "${Message.CLASS_SERIALIZATION_KEY}",
             "type": "${this.type}"
-        }`
+        }`;
     }
 
     public Recycle(type: string, payload?: T): IPoolable {

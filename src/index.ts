@@ -138,7 +138,10 @@ import WebSocketNetworkSystem from "./standard/web_socket_network/v1/web_socket_
 import Serialization from "./serialization/serialization";
 import Serialize from "./serialization/serialize";
 import ISerializable from "./serialization/iserializable";
-import NetworkMessage from "./network/v1/network_message";
+import * as ClientV1 from "./network/v1/client";
+import * as RelayV1 from "./network/v1/relay";
+import * as RoomV1 from "./network/v1/room";
+import * as TransportV1 from "./network/v1/transport";
 
 export {
     // Core
@@ -290,9 +293,12 @@ export {
     WebGLSystem,
     // Networking
     WebSocketNetworkSystem,
-    NetworkMessage,
+    ClientV1,
+    RelayV1,
+    RoomV1,
+    TransportV1,
     // Serialization
     Serialization,
     Serialize,
-    ISerializable
+    ISerializable,
 };

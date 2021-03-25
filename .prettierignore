@@ -7,3 +7,4 @@ coverage
 *.yaml
 *.yml
 *.md
+src/network

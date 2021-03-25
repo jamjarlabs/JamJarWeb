@@ -28,7 +28,6 @@ import Matrix4D from "./matrix_4d";
  */
 @Serialize(Vector.CLASS_SERIALIZATION_KEY, Vector.Deserialize)
 class Vector extends Pooled implements IPoolable, ISerializable {
-
     public static readonly CLASS_SERIALIZATION_KEY = "com.jamjarlabs.Vector";
 
     public static Deserialize(json: any): Vector {
