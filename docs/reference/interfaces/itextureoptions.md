@@ -1,69 +1,64 @@
-
 # Interface: ITextureOptions
 
 ITextureOptions represents optional properties for a texture being rendered,
 will generally be used with defaults that are overridden.
 
-## Hierarchy
-
-* **ITextureOptions**
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [generateMipmaps](itextureoptions.md#optional-generatemipmaps)
-* [magFilter](itextureoptions.md#optional-magfilter)
-* [minFilter](itextureoptions.md#optional-minfilter)
-* [mirror](itextureoptions.md#optional-mirror)
-* [xWrap](itextureoptions.md#optional-xwrap)
-* [yWrap](itextureoptions.md#optional-ywrap)
+- [generateMipmaps](itextureoptions.md#generatemipmaps)
+- [magFilter](itextureoptions.md#magfilter)
+- [minFilter](itextureoptions.md#minfilter)
+- [mirror](itextureoptions.md#mirror)
+- [xWrap](itextureoptions.md#xwrap)
+- [yWrap](itextureoptions.md#ywrap)
 
 ## Properties
 
-### `Optional` generateMipmaps
+### generateMipmaps
 
-• **generateMipmaps**? : *undefined | false | true*
+• `Optional` **generateMipmaps**: *undefined* \| *boolean*
 
 Flag for generating mipmaps or not, true = generate, false = don't generate
 
 ___
 
-### `Optional` magFilter
+### magFilter
 
-• **magFilter**? : *[TextureFiltering](../enums/texturefiltering.md)*
+• `Optional` **magFilter**: *undefined* \| [*NEAREST*](../enums/texturefiltering.md#nearest) \| [*BILINEAR*](../enums/texturefiltering.md#bilinear) \| [*TRILINEAR*](../enums/texturefiltering.md#trilinear)
 
 Magnification filter.
 
 ___
 
-### `Optional` minFilter
+### minFilter
 
-• **minFilter**? : *[TextureFiltering](../enums/texturefiltering.md)*
+• `Optional` **minFilter**: *undefined* \| [*NEAREST*](../enums/texturefiltering.md#nearest) \| [*BILINEAR*](../enums/texturefiltering.md#bilinear) \| [*TRILINEAR*](../enums/texturefiltering.md#trilinear)
 
 Minification filter.
 
 ___
 
-### `Optional` mirror
+### mirror
 
-• **mirror**? : *undefined | false | true*
+• `Optional` **mirror**: *undefined* \| *boolean*
 
 Flag for determining if the texture should be mirrored or not (flip
 horizontal and vertical), true = mirror, false = don't mirror.
 
 ___
 
-### `Optional` xWrap
+### xWrap
 
-• **xWrap**? : *[TextureWrapping](../enums/texturewrapping.md)*
+• `Optional` **xWrap**: *undefined* \| [*REPEAT*](../enums/texturewrapping.md#repeat) \| [*MIRRORED\_REPEAT*](../enums/texturewrapping.md#mirrored_repeat) \| [*CLAMP\_TO\_EDGE*](../enums/texturewrapping.md#clamp_to_edge)
 
 Wrapping along the x-axis
 
 ___
 
-### `Optional` yWrap
+### yWrap
 
-• **yWrap**? : *[TextureWrapping](../enums/texturewrapping.md)*
+• `Optional` **yWrap**: *undefined* \| [*REPEAT*](../enums/texturewrapping.md#repeat) \| [*MIRRORED\_REPEAT*](../enums/texturewrapping.md#mirrored_repeat) \| [*CLAMP\_TO\_EDGE*](../enums/texturewrapping.md#clamp_to_edge)
 
 Wrapping along the y-axis

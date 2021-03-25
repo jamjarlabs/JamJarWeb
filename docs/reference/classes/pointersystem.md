@@ -1,90 +1,72 @@
-
 # Class: PointerSystem
 
 PointerSystem handles Pointer (mouse, touch etc.) input events, converting them into JamJar ECS messages.
 
 ## Hierarchy
 
-  ↳ [MapSystem](mapsystem.md)
+* [*MapSystem*](mapsystem.md)
 
   ↳ **PointerSystem**
 
-  ↳ [TestPointerSystem](testpointersystem.md)
-
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](pointersystem.md#constructor)
+- [constructor](pointersystem.md#constructor)
 
 ### Properties
 
-* [entities](pointersystem.md#protected-entities)
-* [inputElement](pointersystem.md#private-inputelement)
-* [isFullscreen](pointersystem.md#private-isfullscreen)
-* [lastMoveEvent](pointersystem.md#private-lastmoveevent)
-* [lastPublishedPointers](pointersystem.md#private-lastpublishedpointers)
-* [lastWheelEvent](pointersystem.md#private-lastwheelevent)
-* [lockedPointerPosition](pointersystem.md#private-lockedpointerposition)
-* [messageBus](pointersystem.md#protected-messagebus)
-* [pointerEventsToPublish](pointersystem.md#private-pointereventstopublish)
-* [scene](pointersystem.md#protected-optional-scene)
-* [subscriberID](pointersystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](pointersystem.md#static-message_deregister)
-* [MESSAGE_REGISTER](pointersystem.md#static-message_register)
-* [MESSAGE_UPDATE](pointersystem.md#static-message_update)
+- [entities](pointersystem.md#entities)
+- [messageBus](pointersystem.md#messagebus)
+- [scene](pointersystem.md#scene)
+- [subscriberID](pointersystem.md#subscriberid)
+- [MESSAGE\_DEREGISTER](pointersystem.md#message_deregister)
+- [MESSAGE\_REGISTER](pointersystem.md#message_register)
+- [MESSAGE\_UPDATE](pointersystem.md#message_update)
 
 ### Methods
 
-* [Destroy](pointersystem.md#destroy)
-* [OnDestroy](pointersystem.md#protected-ondestroy)
-* [OnMessage](pointersystem.md#onmessage)
-* [Update](pointersystem.md#update)
-* [moveEvent](pointersystem.md#protected-moveevent)
-* [pointerEvent](pointersystem.md#protected-pointerevent)
-* [processPointerEvent](pointersystem.md#private-processpointerevent)
-* [register](pointersystem.md#protected-register)
-* [remove](pointersystem.md#protected-remove)
-* [wheelEvent](pointersystem.md#protected-wheelevent)
-* [EVALUATOR](pointersystem.md#static-private-evaluator)
+- [Destroy](pointersystem.md#destroy)
+- [OnDestroy](pointersystem.md#ondestroy)
+- [OnMessage](pointersystem.md#onmessage)
+- [Update](pointersystem.md#update)
+- [moveEvent](pointersystem.md#moveevent)
+- [pointerEvent](pointersystem.md#pointerevent)
+- [register](pointersystem.md#register)
+- [remove](pointersystem.md#remove)
+- [wheelEvent](pointersystem.md#wheelevent)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new PointerSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number, `isFullscreen`: boolean, `lockedPointerPosition?`: [Vector](vector.md), `lastWheelEvent?`: WheelEvent, `lastMoveEvent?`: PointerEvent, `pointersToPublish`: PointerEvent[], `lastPublishedPointers`: [Pointer](pointer.md)[]): *[PointerSystem](pointersystem.md)*
+\+ **new PointerSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `inputElement`: HTMLElement, `scene?`: [*IScene*](../interfaces/iscene.md), `entities?`: *Map*<number, [*SystemEntity*](systementity.md)\>, `subscriberID?`: *number*, `isFullscreen?`: *boolean*, `lockedPointerPosition?`: [*Vector*](vector.md), `lastWheelEvent?`: WheelEvent, `lastMoveEvent?`: PointerEvent, `pointersToPublish?`: PointerEvent[], `lastPublishedPointers?`: [*Pointer*](pointer.md)[]): [*PointerSystem*](pointersystem.md)
 
-*Overrides [MapSystem](mapsystem.md).[constructor](mapsystem.md#constructor)*
+#### Parameters:
 
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) | - |
+Name | Type | Default value |
+:------ | :------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) | - |
 `inputElement` | HTMLElement | - |
-`scene?` | [IScene](../interfaces/iscene.md) | - |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› | - |
-`subscriberID?` | undefined &#124; number | - |
-`isFullscreen` | boolean | false |
-`lockedPointerPosition?` | [Vector](vector.md) | - |
+`scene?` | [*IScene*](../interfaces/iscene.md) | - |
+`entities?` | *Map*<number, [*SystemEntity*](systementity.md)\> | - |
+`subscriberID?` | *number* | - |
+`isFullscreen` | *boolean* | false |
+`lockedPointerPosition?` | [*Vector*](vector.md) | - |
 `lastWheelEvent?` | WheelEvent | - |
 `lastMoveEvent?` | PointerEvent | - |
-`pointersToPublish` | PointerEvent[] | [] |
-`lastPublishedPointers` | [Pointer](pointer.md)[] | [] |
+`pointersToPublish` | PointerEvent[] | - |
+`lastPublishedPointers` | [*Pointer*](pointer.md)[] | - |
 
-**Returns:** *[PointerSystem](pointersystem.md)*
+**Returns:** [*PointerSystem*](pointersystem.md)
+
+Inherited from: [MapSystem](mapsystem.md)
 
 ## Properties
 
-### `Protected` entities
+### entities
 
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
-
-*Inherited from [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
+• `Protected` **entities**: *Map*<number, [*SystemEntity*](systementity.md)\>
 
 A map of entities, mapped by their entity ID.
 ID: Entity
@@ -92,134 +74,72 @@ ID: Entity
 1: ObstacleEntity
 etc.
 
-___
-
-### `Private` inputElement
-
-• **inputElement**: *HTMLElement*
-
-The HTML element to get pointer events on.
+Inherited from: [MapSystem](mapsystem.md).[entities](mapsystem.md#entities)
 
 ___
 
-### `Private` isFullscreen
+### messageBus
 
-• **isFullscreen**: *boolean*
-
-If the game is in fullscreen mode or not.
-true = in fullscreen, false = not in fullscreen
-
-___
-
-### `Private` lastMoveEvent
-
-• **lastMoveEvent**: *PointerEvent | undefined*
-
-Last pointer move event captured, stored here to throttle a potentially frequently firing event.
-
-___
-
-### `Private` lastPublishedPointers
-
-• **lastPublishedPointers**: *[Pointer](pointer.md)[]*
-
-The pointers published in the last update.
-Used to free up objects back into pools.
-
-___
-
-### `Private` lastWheelEvent
-
-• **lastWheelEvent**: *WheelEvent | undefined*
-
-Last wheel event captured, stored here to throttle a potentially frequently firing event.
-
-___
-
-### `Private` lockedPointerPosition
-
-• **lockedPointerPosition**: *[Vector](vector.md) | undefined*
-
-Position of the pointer if it is locked, used with the PointerAPI to keep track of pointer position using
-movementX and movementY.
-If it is undefined there is no pointer lock.
-
-___
-
-### `Protected` messageBus
-
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-*Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
-___
-
-### `Private` pointerEventsToPublish
-
-• **pointerEventsToPublish**: *PointerEvent[]*
-
-The pointer events recieved since the last update that should be published.
+Inherited from: [MapSystem](mapsystem.md).[messageBus](mapsystem.md#messagebus)
 
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
-
-*Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
 when the scene is destroyed.
 
+Inherited from: [MapSystem](mapsystem.md).[scene](mapsystem.md#scene)
+
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [MapSystem](mapsystem.md).[subscriberID](mapsystem.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_DEREGISTER
+### MESSAGE\_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+▪ `Readonly` `Static` **MESSAGE\_DEREGISTER**: *stateful_system_deregister*= "stateful\_system\_deregister"
 
 Message to deregister an entity + components with a system so it is no longer tracked.
 
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_DEREGISTER](mapsystem.md#message_deregister)
+
 ___
 
-### `Static` MESSAGE_REGISTER
+### MESSAGE\_REGISTER
 
-▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+▪ `Readonly` `Static` **MESSAGE\_REGISTER**: *stateful_system_register*= "stateful\_system\_register"
 
 Message to register an entity + components with a system so it can be tracked.
 
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_REGISTER](mapsystem.md#message_register)
+
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_UPDATE
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
 
-*Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_UPDATE](mapsystem.md#message_update)
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
-
-*Inherited from [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -229,161 +149,122 @@ message bus.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
-
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [MapSystem](mapsystem.md)
+
 ___
 
-###  Update
+### Update
 
 ▸ **Update**(): *void*
 
-*Overrides [System](system.md).[Update](system.md#protected-update)*
-
 **Returns:** *void*
+
+Overrides: [MapSystem](mapsystem.md)
 
 ___
 
-### `Protected` moveEvent
+### moveEvent
 
-▸ **moveEvent**(`event`: PointerEvent): *void*
+▸ `Protected`**moveEvent**(`event`: PointerEvent): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | PointerEvent |
 
 **Returns:** *void*
 
 ___
 
-### `Protected` pointerEvent
+### pointerEvent
 
-▸ **pointerEvent**(`event`: PointerEvent): *void*
+▸ `Protected`**pointerEvent**(`event`: PointerEvent): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | PointerEvent |
 
 **Returns:** *void*
 
 ___
 
-### `Private` processPointerEvent
+### register
 
-▸ **processPointerEvent**(`event`: PointerEvent): *[Pointer](pointer.md)*
+▸ `Protected`**register**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): *void*
 
-When a Pointer Event occurs; dispatches the pointer event with extra info
-through the JamJar messaging system as a Pointer.
-Adds in useful information, such as pointer position within camera
-bounds, pointer world position for each camera and if the pointer is
-within a camera's bounds.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`event` | PointerEvent | Pointer Event  |
-
-**Returns:** *[Pointer](pointer.md)*
-
-___
-
-### `Protected` register
-
-▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
-
-*Inherited from [MapSystem](mapsystem.md).[register](mapsystem.md#protected-register)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
+`components` | [*Component*](component.md)[] |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` remove
+### remove
 
-▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+▸ `Protected`**remove**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
-*Inherited from [MapSystem](mapsystem.md).[remove](mapsystem.md#protected-remove)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` wheelEvent
+### wheelEvent
 
-▸ **wheelEvent**(`event`: WheelEvent): *void*
+▸ `Protected`**wheelEvent**(`event`: WheelEvent): *void*
 
 When a Wheel Event occurs; used to store the last wheel event to be
 dispatched at the next update. This is to throttle this event which can
 be fired many times.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`event` | WheelEvent | Fired wheel event  |
+:------ | :------ | :------ |
+`event` | WheelEvent | Fired wheel event    |
 
 **Returns:** *void*
-
-___
-
-### `Static` `Private` EVALUATOR
-
-▸ **EVALUATOR**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *boolean*
-
-Ensure has Camera and Transform
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
-
-**Returns:** *boolean*

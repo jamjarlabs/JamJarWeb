@@ -1,27 +1,23 @@
-
 # Interface: IGame
-
-## Hierarchy
-
-* **IGame**
 
 ## Implemented by
 
-* [Game](../classes/game.md)
-* [TestGame](../classes/testgame.md)
+* [*Game*](../classes/game.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [Start](igame.md#start)
+- [Start](igame.md#start)
 
 ## Properties
 
-###  Start
+### Start
 
-• **Start**: *function*
+• **Start**: () => *void*
 
 #### Type declaration:
 
 ▸ (): *void*
+
+**Returns:** *void*

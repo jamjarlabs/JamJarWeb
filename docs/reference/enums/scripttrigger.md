@@ -1,17 +1,16 @@
-
 # Enumeration: ScriptTrigger
 
 ScriptTrigger defines the possible triggers to cause a script to execute.
 
-## Index
+## Table of contents
 
 ### Enumeration members
 
-* [UPDATE](scripttrigger.md#update)
+- [UPDATE](scripttrigger.md#update)
 
 ## Enumeration members
 
-###  UPDATE
+### UPDATE
 
 • **UPDATE**: = 0
 

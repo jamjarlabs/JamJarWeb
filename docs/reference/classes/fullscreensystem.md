@@ -1,4 +1,3 @@
-
 # Class: FullscreenSystem
 
 FullscreenSystem handles JS fullscreen change events, and provides a method for requesting
@@ -6,88 +5,66 @@ entering/existing fullscreen/pointer lock.
 
 ## Hierarchy
 
-  ↳ [MapSystem](mapsystem.md)
+* [*MapSystem*](mapsystem.md)
 
   ↳ **FullscreenSystem**
 
-  ↳ [TestFullscreenSystem](testfullscreensystem.md)
-
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fullscreensystem.md#constructor)
+- [constructor](fullscreensystem.md#constructor)
 
 ### Properties
 
-* [canvas](fullscreensystem.md#private-canvas)
-* [document](fullscreensystem.md#private-document)
-* [entities](fullscreensystem.md#protected-entities)
-* [messageBus](fullscreensystem.md#protected-messagebus)
-* [scene](fullscreensystem.md#protected-optional-scene)
-* [subscriberID](fullscreensystem.md#subscriberid)
-* [MESSAGE_DEREGISTER](fullscreensystem.md#static-message_deregister)
-* [MESSAGE_ENTER_FULLSCREEN](fullscreensystem.md#static-message_enter_fullscreen)
-* [MESSAGE_EXIT_FULLSCREEN](fullscreensystem.md#static-message_exit_fullscreen)
-* [MESSAGE_REGISTER](fullscreensystem.md#static-message_register)
-* [MESSAGE_REQUEST_ENTER_FULLSCREEN](fullscreensystem.md#static-message_request_enter_fullscreen)
-* [MESSAGE_REQUEST_EXIT_FULLSCREEN](fullscreensystem.md#static-message_request_exit_fullscreen)
-* [MESSAGE_UPDATE](fullscreensystem.md#static-message_update)
+- [entities](fullscreensystem.md#entities)
+- [messageBus](fullscreensystem.md#messagebus)
+- [scene](fullscreensystem.md#scene)
+- [subscriberID](fullscreensystem.md#subscriberid)
+- [MESSAGE\_DEREGISTER](fullscreensystem.md#message_deregister)
+- [MESSAGE\_ENTER\_FULLSCREEN](fullscreensystem.md#message_enter_fullscreen)
+- [MESSAGE\_EXIT\_FULLSCREEN](fullscreensystem.md#message_exit_fullscreen)
+- [MESSAGE\_REGISTER](fullscreensystem.md#message_register)
+- [MESSAGE\_REQUEST\_ENTER\_FULLSCREEN](fullscreensystem.md#message_request_enter_fullscreen)
+- [MESSAGE\_REQUEST\_EXIT\_FULLSCREEN](fullscreensystem.md#message_request_exit_fullscreen)
+- [MESSAGE\_UPDATE](fullscreensystem.md#message_update)
 
 ### Methods
 
-* [Destroy](fullscreensystem.md#destroy)
-* [OnDestroy](fullscreensystem.md#protected-ondestroy)
-* [OnMessage](fullscreensystem.md#onmessage)
-* [Update](fullscreensystem.md#protected-update)
-* [onFullscreenChange](fullscreensystem.md#protected-onfullscreenchange)
-* [register](fullscreensystem.md#protected-register)
-* [remove](fullscreensystem.md#protected-remove)
+- [Destroy](fullscreensystem.md#destroy)
+- [OnDestroy](fullscreensystem.md#ondestroy)
+- [OnMessage](fullscreensystem.md#onmessage)
+- [Update](fullscreensystem.md#update)
+- [onFullscreenChange](fullscreensystem.md#onfullscreenchange)
+- [register](fullscreensystem.md#register)
+- [remove](fullscreensystem.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FullscreenSystem**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `document`: HTMLDocument, `scene?`: [IScene](../interfaces/iscene.md), `entities?`: Map‹number, [SystemEntity](systementity.md)›, `subscriberID?`: undefined | number): *[FullscreenSystem](fullscreensystem.md)*
+\+ **new FullscreenSystem**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `canvas`: HTMLCanvasElement, `document`: HTMLDocument, `scene?`: [*IScene*](../interfaces/iscene.md), `entities?`: *Map*<number, [*SystemEntity*](systementity.md)\>, `subscriberID?`: *number*): [*FullscreenSystem*](fullscreensystem.md)
 
-*Overrides [MapSystem](mapsystem.md).[constructor](mapsystem.md#constructor)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
 `canvas` | HTMLCanvasElement |
 `document` | HTMLDocument |
-`scene?` | [IScene](../interfaces/iscene.md) |
-`entities?` | Map‹number, [SystemEntity](systementity.md)› |
-`subscriberID?` | undefined &#124; number |
+`scene?` | [*IScene*](../interfaces/iscene.md) |
+`entities?` | *Map*<number, [*SystemEntity*](systementity.md)\> |
+`subscriberID?` | *number* |
 
-**Returns:** *[FullscreenSystem](fullscreensystem.md)*
+**Returns:** [*FullscreenSystem*](fullscreensystem.md)
+
+Inherited from: [MapSystem](mapsystem.md)
 
 ## Properties
 
-### `Private` canvas
+### entities
 
-• **canvas**: *HTMLCanvasElement*
-
-___
-
-### `Private` document
-
-• **document**: *HTMLDocument*
-
-___
-
-### `Protected` entities
-
-• **entities**: *Map‹number, [SystemEntity](systementity.md)›*
-
-*Inherited from [MapSystem](mapsystem.md).[entities](mapsystem.md#protected-entities)*
+• `Protected` **entities**: *Map*<number, [*SystemEntity*](systementity.md)\>
 
 A map of entities, mapped by their entity ID.
 ID: Entity
@@ -95,98 +72,96 @@ ID: Entity
 1: ObstacleEntity
 etc.
 
+Inherited from: [MapSystem](mapsystem.md).[entities](mapsystem.md#entities)
+
 ___
 
-### `Protected` messageBus
+### messageBus
 
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
-
-*Inherited from [System](system.md).[messageBus](system.md#protected-messagebus)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
+Inherited from: [MapSystem](mapsystem.md).[messageBus](mapsystem.md#messagebus)
+
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
-
-*Inherited from [System](system.md).[scene](system.md#protected-optional-scene)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
 when the scene is destroyed.
 
+Inherited from: [MapSystem](mapsystem.md).[scene](mapsystem.md#scene)
+
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [MapSystem](mapsystem.md).[subscriberID](mapsystem.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_DEREGISTER
+### MESSAGE\_DEREGISTER
 
-▪ **MESSAGE_DEREGISTER**: *"stateful_system_deregister"* = "stateful_system_deregister"
-
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_DEREGISTER](statefulsystem.md#static-message_deregister)*
+▪ `Readonly` `Static` **MESSAGE\_DEREGISTER**: *stateful_system_deregister*= "stateful\_system\_deregister"
 
 Message to deregister an entity + components with a system so it is no longer tracked.
 
-___
-
-### `Static` MESSAGE_ENTER_FULLSCREEN
-
-▪ **MESSAGE_ENTER_FULLSCREEN**: *"message_enter_fullscreen"* = "message_enter_fullscreen"
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_DEREGISTER](mapsystem.md#message_deregister)
 
 ___
 
-### `Static` MESSAGE_EXIT_FULLSCREEN
+### MESSAGE\_ENTER\_FULLSCREEN
 
-▪ **MESSAGE_EXIT_FULLSCREEN**: *"message_exit_fullscreen"* = "message_exit_fullscreen"
+▪ `Readonly` `Static` **MESSAGE\_ENTER\_FULLSCREEN**: *message_enter_fullscreen*= "message\_enter\_fullscreen"
 
 ___
 
-### `Static` MESSAGE_REGISTER
+### MESSAGE\_EXIT\_FULLSCREEN
 
-▪ **MESSAGE_REGISTER**: *"stateful_system_register"* = "stateful_system_register"
+▪ `Readonly` `Static` **MESSAGE\_EXIT\_FULLSCREEN**: *message_exit_fullscreen*= "message\_exit\_fullscreen"
 
-*Inherited from [StatefulSystem](statefulsystem.md).[MESSAGE_REGISTER](statefulsystem.md#static-message_register)*
+___
+
+### MESSAGE\_REGISTER
+
+▪ `Readonly` `Static` **MESSAGE\_REGISTER**: *stateful_system_register*= "stateful\_system\_register"
 
 Message to register an entity + components with a system so it can be tracked.
 
-___
-
-### `Static` MESSAGE_REQUEST_ENTER_FULLSCREEN
-
-▪ **MESSAGE_REQUEST_ENTER_FULLSCREEN**: *"message_request_enter_fullscreen"* = "message_request_enter_fullscreen"
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_REGISTER](mapsystem.md#message_register)
 
 ___
 
-### `Static` MESSAGE_REQUEST_EXIT_FULLSCREEN
+### MESSAGE\_REQUEST\_ENTER\_FULLSCREEN
 
-▪ **MESSAGE_REQUEST_EXIT_FULLSCREEN**: *"message_request_exit_fullscreen"* = "message_request_exit_fullscreen"
+▪ `Readonly` `Static` **MESSAGE\_REQUEST\_ENTER\_FULLSCREEN**: *message_request_enter_fullscreen*= "message\_request\_enter\_fullscreen"
 
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_REQUEST\_EXIT\_FULLSCREEN
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_REQUEST\_EXIT\_FULLSCREEN**: *message_request_exit_fullscreen*= "message\_request\_exit\_fullscreen"
 
-*Inherited from [System](system.md).[MESSAGE_UPDATE](system.md#static-message_update)*
+___
+
+### MESSAGE\_UPDATE
+
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
+
+Inherited from: [MapSystem](mapsystem.md).[MESSAGE_UPDATE](mapsystem.md#message_update)
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
-
-*Inherited from [System](system.md).[Destroy](system.md#destroy)*
 
 Destroy destroys the System and unsubscribes it from all messages.
 The System should be garbage collected after this, unless a direct
@@ -196,103 +171,101 @@ message bus.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
-
-*Inherited from [System](system.md).[OnDestroy](system.md#protected-ondestroy)*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [StatefulSystem](statefulsystem.md).[OnMessage](statefulsystem.md#onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` Update
+### Update
 
-▸ **Update**(`dt`: number): *void*
-
-*Inherited from [System](system.md).[Update](system.md#protected-update)*
+▸ `Protected`**Update**(`dt`: *number*): *void*
 
 General update method, default empty. Override with custom logic.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+:------ | :------ | :------ |
+`dt` | *number* | DeltaTime    |
 
 **Returns:** *void*
 
+Inherited from: [MapSystem](mapsystem.md)
+
 ___
 
-### `Protected` onFullscreenChange
+### onFullscreenChange
 
-▸ **onFullscreenChange**(`event`: Event): *void*
+▸ `Protected`**onFullscreenChange**(`event`: Event): *void*
 
 When a fullsceenchange event occurs this method is called, handles forwarding the fullscreen events
 into the JamJar ECS messaging system.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`event` | Event | The fullscreenchange event  |
+:------ | :------ | :------ |
+`event` | Event | The fullscreenchange event    |
 
 **Returns:** *void*
 
 ___
 
-### `Protected` register
+### register
 
-▸ **register**(`entity`: [IEntity](../interfaces/ientity.md), `components`: [Component](component.md)[]): *void*
+▸ `Protected`**register**(`entity`: [*IEntity*](../interfaces/ientity.md), `components`: [*Component*](component.md)[]): *void*
 
-*Inherited from [MapSystem](mapsystem.md).[register](mapsystem.md#protected-register)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[register](statefulsystem.md#protected-abstract-register)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
-`components` | [Component](component.md)[] |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
+`components` | [*Component*](component.md)[] |
 
 **Returns:** *void*
+
+Inherited from: [MapSystem](mapsystem.md)
 
 ___
 
-### `Protected` remove
+### remove
 
-▸ **remove**(`entity`: [IEntity](../interfaces/ientity.md)): *void*
+▸ `Protected`**remove**(`entity`: [*IEntity*](../interfaces/ientity.md)): *void*
 
-*Inherited from [MapSystem](mapsystem.md).[remove](mapsystem.md#protected-remove)*
-
-*Overrides [StatefulSystem](statefulsystem.md).[remove](statefulsystem.md#protected-abstract-remove)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`entity` | [IEntity](../interfaces/ientity.md) |
+:------ | :------ |
+`entity` | [*IEntity*](../interfaces/ientity.md) |
 
 **Returns:** *void*
+
+Inherited from: [MapSystem](mapsystem.md)

@@ -1,76 +1,54 @@
-
 # Class: FrustumCuller
 
 FrustumCuller is used to cull shapes that are outside of another shape (not
 colliding) - used in rendering to avoid unneccesary rendering.
 
-## Hierarchy
-
-* **FrustumCuller**
-
 ## Implements
 
-* [IFrustumCuller](../interfaces/ifrustumculler.md)
+* [*IFrustumCuller*](../interfaces/ifrustumculler.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](frustumculler.md#constructor)
-
-### Properties
-
-* [collisionAlgorithm](frustumculler.md#private-collisionalgorithm)
-* [collisionArray](frustumculler.md#private-collisionarray)
+- [constructor](frustumculler.md#constructor)
 
 ### Methods
 
-* [Cull](frustumculler.md#cull)
+- [Cull](frustumculler.md#cull)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FrustumCuller**(`collisionAlgorithm`: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)): *[FrustumCuller](frustumculler.md)*
+\+ **new FrustumCuller**(`collisionAlgorithm?`: [*ICollisionAlgorithm*](../interfaces/icollisionalgorithm.md)): [*FrustumCuller*](frustumculler.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`collisionAlgorithm` | [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md) | new AABBAlgorithm() |
+Name | Type |
+:------ | :------ |
+`collisionAlgorithm` | [*ICollisionAlgorithm*](../interfaces/icollisionalgorithm.md) |
 
-**Returns:** *[FrustumCuller](frustumculler.md)*
-
-## Properties
-
-### `Private` collisionAlgorithm
-
-• **collisionAlgorithm**: *[ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
-
-___
-
-### `Private` collisionArray
-
-• **collisionArray**: *[IShape](../interfaces/ishape.md)[]*
+**Returns:** [*FrustumCuller*](frustumculler.md)
 
 ## Methods
 
-###  Cull
+### Cull
 
-▸ **Cull**(`frustumPlaneShape`: [IShape](../interfaces/ishape.md), `shape`: [IShape](../interfaces/ishape.md)): *boolean*
-
-*Implementation of [IFrustumCuller](../interfaces/ifrustumculler.md)*
+▸ **Cull**(`frustumPlaneShape`: [*IShape*](../interfaces/ishape.md), `shape`: [*IShape*](../interfaces/ishape.md)): *boolean*
 
 Cull determines if a shape is within a frustum (defined by another
 shape). Returns false if the shape is within the frustum and it should
 not be culled, returns true if the shape is outside of the frustum and
 should be culled.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`frustumPlaneShape` | [IShape](../interfaces/ishape.md) | Shape of the frustum (view/camera) |
-`shape` | [IShape](../interfaces/ishape.md) | Shape to check if it is within the frustum  |
+:------ | :------ | :------ |
+`frustumPlaneShape` | [*IShape*](../interfaces/ishape.md) | Shape of the frustum (view/camera)   |
+`shape` | [*IShape*](../interfaces/ishape.md) | Shape to check if it is within the frustum    |
 
 **Returns:** *boolean*
+
+Implementation of: [IFrustumCuller](../interfaces/ifrustumculler.md)

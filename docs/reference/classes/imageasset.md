@@ -1,4 +1,3 @@
-
 # Class: ImageAsset
 
 ImageAsset represents a graphical image asset that has been loaded/
@@ -7,65 +6,61 @@ Stores meta info around the image, such as a name, the success
 of the image being loaded, and any errors from loading it.
 Also stores the image itself.
 
-## Hierarchy
-
-* **ImageAsset**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](imageasset.md#constructor)
+- [constructor](imageasset.md#constructor)
 
 ### Properties
 
-* [error](imageasset.md#optional-error)
-* [generateMipmaps](imageasset.md#generatemipmaps)
-* [image](imageasset.md#image)
-* [magFilter](imageasset.md#magfilter)
-* [minFilter](imageasset.md#minfilter)
-* [mirror](imageasset.md#mirror)
-* [name](imageasset.md#name)
-* [success](imageasset.md#success)
-* [xWrap](imageasset.md#xwrap)
-* [yWrap](imageasset.md#ywrap)
-* [MESSAGE_FINISH_LOAD](imageasset.md#static-message_finish_load)
+- [error](imageasset.md#error)
+- [generateMipmaps](imageasset.md#generatemipmaps)
+- [image](imageasset.md#image)
+- [magFilter](imageasset.md#magfilter)
+- [minFilter](imageasset.md#minfilter)
+- [mirror](imageasset.md#mirror)
+- [name](imageasset.md#name)
+- [success](imageasset.md#success)
+- [xWrap](imageasset.md#xwrap)
+- [yWrap](imageasset.md#ywrap)
+- [MESSAGE\_FINISH\_LOAD](imageasset.md#message_finish_load)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new ImageAsset**(`name`: string, `image`: HTMLImageElement | ImageData, `success`: boolean, `xWrap`: [TextureWrapping](../enums/texturewrapping.md), `yWrap`: [TextureWrapping](../enums/texturewrapping.md), `magFilter`: [TextureFiltering](../enums/texturefiltering.md), `minFilter`: [TextureFiltering](../enums/texturefiltering.md), `generateMipmaps`: boolean, `mirror`: boolean, `error?`: Error): *[ImageAsset](imageasset.md)*
+\+ **new ImageAsset**(`name`: *string*, `image`: HTMLImageElement \| ImageData, `success`: *boolean*, `xWrap`: [*TextureWrapping*](../enums/texturewrapping.md), `yWrap`: [*TextureWrapping*](../enums/texturewrapping.md), `magFilter`: [*TextureFiltering*](../enums/texturefiltering.md), `minFilter`: [*TextureFiltering*](../enums/texturefiltering.md), `generateMipmaps`: *boolean*, `mirror`: *boolean*, `error?`: Error): [*ImageAsset*](imageasset.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`name` | string |
-`image` | HTMLImageElement &#124; ImageData |
-`success` | boolean |
-`xWrap` | [TextureWrapping](../enums/texturewrapping.md) |
-`yWrap` | [TextureWrapping](../enums/texturewrapping.md) |
-`magFilter` | [TextureFiltering](../enums/texturefiltering.md) |
-`minFilter` | [TextureFiltering](../enums/texturefiltering.md) |
-`generateMipmaps` | boolean |
-`mirror` | boolean |
+:------ | :------ |
+`name` | *string* |
+`image` | HTMLImageElement \| ImageData |
+`success` | *boolean* |
+`xWrap` | [*TextureWrapping*](../enums/texturewrapping.md) |
+`yWrap` | [*TextureWrapping*](../enums/texturewrapping.md) |
+`magFilter` | [*TextureFiltering*](../enums/texturefiltering.md) |
+`minFilter` | [*TextureFiltering*](../enums/texturefiltering.md) |
+`generateMipmaps` | *boolean* |
+`mirror` | *boolean* |
 `error?` | Error |
 
-**Returns:** *[ImageAsset](imageasset.md)*
+**Returns:** [*ImageAsset*](imageasset.md)
 
 ## Properties
 
-### `Optional` error
+### error
 
-• **error**? : *Error*
+• `Optional` **error**: *undefined* \| Error
 
 An optional field, contains any error from loading the image, if there is
 none it will be undefined.
 
 ___
 
-###  generateMipmaps
+### generateMipmaps
 
 • **generateMipmaps**: *boolean*
 
@@ -74,31 +69,31 @@ True = generate mipmaps, false = don't generate mipmaps.
 
 ___
 
-###  image
+### image
 
-• **image**: *HTMLImageElement | ImageData*
+• **image**: HTMLImageElement \| ImageData
 
 The actual image.
 
 ___
 
-###  magFilter
+### magFilter
 
-• **magFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
+• **magFilter**: [*TextureFiltering*](../enums/texturefiltering.md)
 
 Texture magnification filter.
 
 ___
 
-###  minFilter
+### minFilter
 
-• **minFilter**: *[TextureFiltering](../enums/texturefiltering.md)*
+• **minFilter**: [*TextureFiltering*](../enums/texturefiltering.md)
 
 Texture minification filter.
 
 ___
 
-###  mirror
+### mirror
 
 • **mirror**: *boolean*
 
@@ -107,7 +102,7 @@ flip). True = mirror, false = don't mirror.
 
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
@@ -116,7 +111,7 @@ should be unique.
 
 ___
 
-###  success
+### success
 
 • **success**: *boolean*
 
@@ -125,24 +120,24 @@ load, false = failed loading.
 
 ___
 
-###  xWrap
+### xWrap
 
-• **xWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
+• **xWrap**: [*TextureWrapping*](../enums/texturewrapping.md)
 
 Texture wrapping along x axis.
 
 ___
 
-###  yWrap
+### yWrap
 
-• **yWrap**: *[TextureWrapping](../enums/texturewrapping.md)*
+• **yWrap**: [*TextureWrapping*](../enums/texturewrapping.md)
 
 Texture wrapping along y axis.
 
 ___
 
-### `Static` MESSAGE_FINISH_LOAD
+### MESSAGE\_FINISH\_LOAD
 
-▪ **MESSAGE_FINISH_LOAD**: *"finish_image_load"* = "finish_image_load"
+▪ `Readonly` `Static` **MESSAGE\_FINISH\_LOAD**: *finish_image_load*= "finish\_image\_load"
 
 Message when an image asset is finished loading.

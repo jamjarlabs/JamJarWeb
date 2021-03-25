@@ -1,129 +1,135 @@
-
 # Class: Polygon
 
 Polygon is the representation of a 2D Polygon shape.
 Can be used in collision detection and rendering.
 
-## Hierarchy
-
-* **Polygon**
-
 ## Implements
 
-* [IShape](../interfaces/ishape.md)
+* [*IShape*](../interfaces/ishape.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](polygon.md#constructor)
+- [constructor](polygon.md#constructor)
 
 ### Properties
 
-* [points](polygon.md#points)
+- [points](polygon.md#points)
 
 ### Methods
 
-* [Apply4D](polygon.md#apply4d)
-* [Center](polygon.md#center)
-* [Copy](polygon.md#copy)
-* [FarthestPointInDirection](polygon.md#farthestpointindirection)
-* [Free](polygon.md#free)
-* [GetFloat32Array](polygon.md#getfloat32array)
-* [PointInside](polygon.md#pointinside)
-* [Transform](polygon.md#transform)
-* [EllipseEstimation](polygon.md#static-ellipseestimation)
-* [QuadByDimensions](polygon.md#static-quadbydimensions)
-* [QuadByPoints](polygon.md#static-quadbypoints)
-* [RectangleByDimensions](polygon.md#static-rectanglebydimensions)
-* [RectangleByPoints](polygon.md#static-rectanglebypoints)
+- [Apply4D](polygon.md#apply4d)
+- [Center](polygon.md#center)
+- [Copy](polygon.md#copy)
+- [FarthestPointInDirection](polygon.md#farthestpointindirection)
+- [Free](polygon.md#free)
+- [GetFloat32Array](polygon.md#getfloat32array)
+- [PointInside](polygon.md#pointinside)
+- [Transform](polygon.md#transform)
+- [EllipseEstimation](polygon.md#ellipseestimation)
+- [QuadByDimensions](polygon.md#quadbydimensions)
+- [QuadByPoints](polygon.md#quadbypoints)
+- [RectangleByDimensions](polygon.md#rectanglebydimensions)
+- [RectangleByPoints](polygon.md#rectanglebypoints)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Polygon**(`points`: [Vector](vector.md)[] | Float32Array, `wrap`: boolean): *[Polygon](polygon.md)*
+\+ **new Polygon**(`points`: *Float32Array* \| [*Vector*](vector.md)[], `wrap?`: *boolean*): [*Polygon*](polygon.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`points` | [Vector](vector.md)[] &#124; Float32Array | - |
-`wrap` | boolean | false |
+Name | Type | Default value |
+:------ | :------ | :------ |
+`points` | *Float32Array* \| [*Vector*](vector.md)[] | - |
+`wrap` | *boolean* | false |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
 
 ## Properties
 
-###  points
+### points
 
 • **points**: *Float32Array*
 
 ## Methods
 
-###  Apply4D
+### Apply4D
 
-▸ **Apply4D**(`matrix`: [Matrix4D](matrix4d.md)): *[Polygon](polygon.md)*
+▸ **Apply4D**(`matrix`: [*Matrix4D*](matrix4d.md)): [*Polygon*](polygon.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`matrix` | [Matrix4D](matrix4d.md) |
+:------ | :------ |
+`matrix` | [*Matrix4D*](matrix4d.md) |
 
-**Returns:** *[Polygon](polygon.md)*
-
-___
-
-###  Center
-
-▸ **Center**(): *[Vector](vector.md)*
-
-*Implementation of [IShape](../interfaces/ishape.md)*
-
-**Returns:** *[Vector](vector.md)*
+**Returns:** [*Polygon*](polygon.md)
 
 ___
 
-###  Copy
+### Center
 
-▸ **Copy**(): *[Polygon](polygon.md)*
+▸ **Center**(): [*Vector*](vector.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Center calculates/retrieves the center of a shape.
+
+**Returns:** [*Vector*](vector.md)
+
+The center point of the shape
+
+Implementation of: [IShape](../interfaces/ishape.md)
+
+___
+
+### Copy
+
+▸ **Copy**(): [*Polygon*](polygon.md)
 
 Make a value copy of the Polygon.
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
+
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-###  FarthestPointInDirection
+### FarthestPointInDirection
 
-▸ **FarthestPointInDirection**(`direction`: [Vector](vector.md)): *[Vector](vector.md)*
+▸ **FarthestPointInDirection**(`direction`: [*Vector*](vector.md)): [*Vector*](vector.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+FarthestPointInDirection returns the point that is farthest in the direction provided.
+Used in the GJK algorithm for collision detection.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`direction` | [Vector](vector.md) |
+:------ | :------ |
+`direction` | [*Vector*](vector.md) |
 
-**Returns:** *[Vector](vector.md)*
+**Returns:** [*Vector*](vector.md)
+
+The farthest point in the direction provided
+
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Implementation of: [IShape](../interfaces/ishape.md)
+
 ___
 
-###  GetFloat32Array
+### GetFloat32Array
 
 ▸ **GetFloat32Array**(): *Float32Array*
 
@@ -135,130 +141,138 @@ The array representation of the polygon
 
 ___
 
-###  PointInside
+### PointInside
 
-▸ **PointInside**(`point`: [Vector](vector.md)): *boolean*
+▸ **PointInside**(`point`: [*Vector*](vector.md)): *boolean*
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+PointInside determines if a point provided is within the shape or not.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`point` | [Vector](vector.md) |
+:------ | :------ |
+`point` | [*Vector*](vector.md) |
 
 **Returns:** *boolean*
 
+If the point is inside the shape, true = inside, false = outside
+
+Implementation of: [IShape](../interfaces/ishape.md)
+
 ___
 
-###  Transform
+### Transform
 
-▸ **Transform**(`transform`: [Transform](transform.md)): *[Polygon](polygon.md)*
+▸ **Transform**(`transform`: [*Transform*](transform.md)): [*Polygon*](polygon.md)
 
-*Implementation of [IShape](../interfaces/ishape.md)*
+Transform takes a transform and applies it to shape.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`transform` | [Transform](transform.md) |
+:------ | :------ |
+`transform` | [*Transform*](transform.md) |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
+
+The transformed shape
+
+Implementation of: [IShape](../interfaces/ishape.md)
 
 ___
 
-### `Static` EllipseEstimation
+### EllipseEstimation
 
-▸ **EllipseEstimation**(`numOfPoints`: number, `dimensions`: [Vector](vector.md), `centerX`: number, `centerY`: number, `wrap`: boolean): *[Polygon](polygon.md)*
+▸ `Static`**EllipseEstimation**(`numOfPoints`: *number*, `dimensions`: [*Vector*](vector.md), `centerX?`: *number*, `centerY?`: *number*, `wrap?`: *boolean*): [*Polygon*](polygon.md)
 
 EllipseEstimation provides a new polygon that estimates the shape of an ellipse.
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`numOfPoints` | number | - | Number of points the estimation should have |
-`dimensions` | [Vector](vector.md) | - | Ellipse dimensions |
-`centerX` | number | 0 | - |
-`centerY` | number | 0 | - |
-`wrap` | boolean | false | If the polygon should wrap on itself (first point == last point)  |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`numOfPoints` | *number* | - | Number of points the estimation should have   |
+`dimensions` | [*Vector*](vector.md) | - | Ellipse dimensions   |
+`centerX` | *number* | 0 | - |
+`centerY` | *number* | 0 | - |
+`wrap` | *boolean* | false | If the polygon should wrap on itself (first point == last point)    |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
 
 ___
 
-### `Static` QuadByDimensions
+### QuadByDimensions
 
-▸ **QuadByDimensions**(`width`: number, `height`: number, `originX`: number, `originY`: number): *[Polygon](polygon.md)*
+▸ `Static`**QuadByDimensions**(`width`: *number*, `height`: *number*, `originX?`: *number*, `originY?`: *number*): [*Polygon*](polygon.md)
 
 QuadByDimensions returns a new polygon in a quad shape with the width and
 height provided, optionally around an origin point
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`width` | number | - | Width of the quad |
-`height` | number | - | Height of the quad |
-`originX` | number | 0 | - |
-`originY` | number | 0 | - |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`width` | *number* | - | Width of the quad   |
+`height` | *number* | - | Height of the quad   |
+`originX` | *number* | 0 | - |
+`originY` | *number* | 0 | - |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
 
 ___
 
-### `Static` QuadByPoints
+### QuadByPoints
 
-▸ **QuadByPoints**(`bottomLeft`: [Vector](vector.md), `topRight`: [Vector](vector.md)): *[Polygon](polygon.md)*
+▸ `Static`**QuadByPoints**(`bottomLeft`: [*Vector*](vector.md), `topRight`: [*Vector*](vector.md)): [*Polygon*](polygon.md)
 
 QuadByPoints returns a new polygon in a quad shape between the two
 provided points.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`bottomLeft` | [Vector](vector.md) | Bottom left of the quad |
-`topRight` | [Vector](vector.md) | Top right of the quad  |
+:------ | :------ | :------ |
+`bottomLeft` | [*Vector*](vector.md) | Bottom left of the quad   |
+`topRight` | [*Vector*](vector.md) | Top right of the quad    |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
 
 ___
 
-### `Static` RectangleByDimensions
+### RectangleByDimensions
 
-▸ **RectangleByDimensions**(`width`: number, `height`: number, `originX`: number, `originY`: number, `wrap`: boolean): *[Polygon](polygon.md)*
+▸ `Static`**RectangleByDimensions**(`width`: *number*, `height`: *number*, `originX?`: *number*, `originY?`: *number*, `wrap?`: *boolean*): [*Polygon*](polygon.md)
 
 RectangleByDimensions returns a new polygon in a rectangle shape with the
 width and height provided, optionally around an origin point.
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`width` | number | - | Width of the rectangle |
-`height` | number | - | Height of the rectangle |
-`originX` | number | 0 | - |
-`originY` | number | 0 | - |
-`wrap` | boolean | false | - |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`width` | *number* | - | Width of the rectangle   |
+`height` | *number* | - | Height of the rectangle   |
+`originX` | *number* | 0 | - |
+`originY` | *number* | 0 | - |
+`wrap` | *boolean* | false | - |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)
 
 ___
 
-### `Static` RectangleByPoints
+### RectangleByPoints
 
-▸ **RectangleByPoints**(`bottomLeft`: [Vector](vector.md), `topRight`: [Vector](vector.md), `wrap`: boolean): *[Polygon](polygon.md)*
+▸ `Static`**RectangleByPoints**(`bottomLeft`: [*Vector*](vector.md), `topRight`: [*Vector*](vector.md), `wrap?`: *boolean*): [*Polygon*](polygon.md)
 
 RectangleByPoints returns a new polygon in a rectangle shape between the
 two provided points.
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`bottomLeft` | [Vector](vector.md) | - | Bottom left of the rectangle |
-`topRight` | [Vector](vector.md) | - | Top right of the rectangle  |
-`wrap` | boolean | false | - |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`bottomLeft` | [*Vector*](vector.md) | - | Bottom left of the rectangle   |
+`topRight` | [*Vector*](vector.md) | - | Top right of the rectangle    |
+`wrap` | *boolean* | false | - |
 
-**Returns:** *[Polygon](polygon.md)*
+**Returns:** [*Polygon*](polygon.md)

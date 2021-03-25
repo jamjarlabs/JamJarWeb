@@ -1,3 +1,19 @@
+/*
+Copyright 2021 JamJar Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import {
     MessageBus,
     EntityManager,
@@ -15,7 +31,8 @@ import {
     MotionSystem,
     Material,
     Polygon,
-    Color, Renderable
+    Color,
+    Renderable,
 } from "jamjar";
 
 const OBJ_COUNT = 40;
@@ -46,23 +63,27 @@ class EllipseApproximation extends Game {
             const yDimension = randomBetweenInts(MIN_DIMENSIONS, MAX_DIMENSIONS);
             // Create entities
             const nearest = new Entity(this.messageBus);
-            nearest.Add(new Transform(
-                Vector.New(randomBetweenInts(MIN_X, MAX_X), randomBetweenInts(MIN_Y, MAX_Y)),
-                Vector.New(randomBetweenInts(MIN_SCALE, MAX_SCALE), randomBetweenInts(MIN_SCALE, MAX_SCALE))
-            ));
-            nearest.Add(new Primitive(
-                new Material({
-                    color: new Color(Math.random(), Math.random(), Math.random())
-                }),
-                1,
-                Polygon.EllipseEstimation(
-                    randomBetweenInts(MIN_POINTS, MAX_POINTS),
-                    Vector.New(xDimension, yDimension),
-                    undefined,
-                    undefined,
-                    true
+            nearest.Add(
+                new Transform(
+                    Vector.New(randomBetweenInts(MIN_X, MAX_X), randomBetweenInts(MIN_Y, MAX_Y)),
+                    Vector.New(randomBetweenInts(MIN_SCALE, MAX_SCALE), randomBetweenInts(MIN_SCALE, MAX_SCALE))
                 )
-            ));
+            );
+            nearest.Add(
+                new Primitive(
+                    new Material({
+                        color: new Color(Math.random(), Math.random(), Math.random()),
+                    }),
+                    1,
+                    Polygon.EllipseEstimation(
+                        randomBetweenInts(MIN_POINTS, MAX_POINTS),
+                        Vector.New(xDimension, yDimension),
+                        undefined,
+                        undefined,
+                        true
+                    )
+                )
+            );
         }
     }
 }
@@ -74,7 +95,7 @@ function randomBetweenInts(min: number, max: number): number {
 const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 // Set up pooling

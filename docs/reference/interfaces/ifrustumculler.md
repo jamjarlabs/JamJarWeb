@@ -1,34 +1,29 @@
-
 # Interface: IFrustumCuller
 
 IFrustumCuller represents a structure that can determine if shapes are
 outside of a frustum and if they should be culled.
 
-## Hierarchy
-
-* **IFrustumCuller**
-
 ## Implemented by
 
-* [FrustumCuller](../classes/frustumculler.md)
+* [*FrustumCuller*](../classes/frustumculler.md)
 
-## Index
+## Table of contents
 
 ### Methods
 
-* [Cull](ifrustumculler.md#cull)
+- [Cull](ifrustumculler.md#cull)
 
 ## Methods
 
-###  Cull
+### Cull
 
-▸ **Cull**(`frustumPlaneShape`: [IShape](ishape.md), `shape`: [IShape](ishape.md)): *boolean*
+▸ **Cull**(`frustumPlaneShape`: [*IShape*](ishape.md), `shape`: [*IShape*](ishape.md)): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`frustumPlaneShape` | [IShape](ishape.md) |
-`shape` | [IShape](ishape.md) |
+:------ | :------ |
+`frustumPlaneShape` | [*IShape*](ishape.md) |
+`shape` | [*IShape*](ishape.md) |
 
 **Returns:** *boolean*

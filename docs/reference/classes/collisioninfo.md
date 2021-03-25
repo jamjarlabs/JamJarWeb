@@ -1,47 +1,42 @@
-
 # Class: CollisionInfo
 
 CollisionInfo contains specific collision information, calculated by a
 CollisionAlgorithm.
 
-## Hierarchy
-
-* **CollisionInfo**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](collisioninfo.md#constructor)
+- [constructor](collisioninfo.md#constructor)
 
 ### Properties
 
-* [a](collisioninfo.md#a)
-* [b](collisioninfo.md#b)
+- [a](collisioninfo.md#a)
+- [b](collisioninfo.md#b)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new CollisionInfo**(`a`: [IShape](../interfaces/ishape.md), `b`: [IShape](../interfaces/ishape.md)): *[CollisionInfo](collisioninfo.md)*
+\+ **new CollisionInfo**(`a`: [*IShape*](../interfaces/ishape.md), `b`: [*IShape*](../interfaces/ishape.md)): [*CollisionInfo*](collisioninfo.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`a` | [IShape](../interfaces/ishape.md) |
-`b` | [IShape](../interfaces/ishape.md) |
+:------ | :------ |
+`a` | [*IShape*](../interfaces/ishape.md) |
+`b` | [*IShape*](../interfaces/ishape.md) |
 
-**Returns:** *[CollisionInfo](collisioninfo.md)*
+**Returns:** [*CollisionInfo*](collisioninfo.md)
 
 ## Properties
 
-###  a
+### a
 
-• **a**: *[IShape](../interfaces/ishape.md)*
+• **a**: [*IShape*](../interfaces/ishape.md)
 
 ___
 
-###  b
+### b
 
-• **b**: *[IShape](../interfaces/ishape.md)*
+• **b**: [*IShape*](../interfaces/ishape.md)

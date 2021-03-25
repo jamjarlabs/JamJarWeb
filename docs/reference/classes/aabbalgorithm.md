@@ -1,36 +1,47 @@
-
 # Class: AABBAlgorithm
 
 AABBAlgorithm is used to provide collision detection using Axis-Aligned
 Bounding-Boxes (AABB), it provides a simplified collision detection method.
 This algorithm sacrifices some collision accuracy for performance.
 
-## Hierarchy
-
-* **AABBAlgorithm**
-
 ## Implements
 
-* [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)
+* [*ICollisionAlgorithm*](../interfaces/icollisionalgorithm.md)
 
-## Index
+## Table of contents
+
+### Constructors
+
+- [constructor](aabbalgorithm.md#constructor)
 
 ### Methods
 
-* [CalculateCollisions](aabbalgorithm.md#calculatecollisions)
+- [CalculateCollisions](aabbalgorithm.md#calculatecollisions)
+
+## Constructors
+
+### constructor
+
+\+ **new AABBAlgorithm**(): [*AABBAlgorithm*](aabbalgorithm.md)
+
+**Returns:** [*AABBAlgorithm*](aabbalgorithm.md)
 
 ## Methods
 
-###  CalculateCollisions
+### CalculateCollisions
 
-▸ **CalculateCollisions**(`shapes`: [IShape](../interfaces/ishape.md)[]): *[CollisionInfo](collisioninfo.md)[]*
+▸ **CalculateCollisions**(`shapes`: [*IShape*](../interfaces/ishape.md)[]): [*CollisionInfo*](collisioninfo.md)[]
 
-*Implementation of [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)*
+CalculateCollisions calculates all collisions between the shapes
+provided, returning a list of CollisionInfos, each representing a
+Collision.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`shapes` | [IShape](../interfaces/ishape.md)[] |
+:------ | :------ |
+`shapes` | [*IShape*](../interfaces/ishape.md)[] |
 
-**Returns:** *[CollisionInfo](collisioninfo.md)[]*
+**Returns:** [*CollisionInfo*](collisioninfo.md)[]
+
+Implementation of: [ICollisionAlgorithm](../interfaces/icollisionalgorithm.md)

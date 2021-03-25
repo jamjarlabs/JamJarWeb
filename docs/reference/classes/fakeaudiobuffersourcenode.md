@@ -1,363 +1,348 @@
-
 # Class: FakeAudioBufferSourceNode
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeAudioBufferSourceNode**
 
 ## Implements
 
-* AudioBufferSourceNode
+* *AudioBufferSourceNode*
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakeaudiobuffersourcenode.md#constructor)
+- [constructor](fakeaudiobuffersourcenode.md#constructor)
 
 ### Properties
 
-* [buffer](fakeaudiobuffersourcenode.md#buffer)
-* [channelCount](fakeaudiobuffersourcenode.md#channelcount)
-* [channelCountMode](fakeaudiobuffersourcenode.md#channelcountmode)
-* [channelInterpretation](fakeaudiobuffersourcenode.md#channelinterpretation)
-* [context](fakeaudiobuffersourcenode.md#context)
-* [detune](fakeaudiobuffersourcenode.md#detune)
-* [loop](fakeaudiobuffersourcenode.md#loop)
-* [loopEnd](fakeaudiobuffersourcenode.md#loopend)
-* [loopStart](fakeaudiobuffersourcenode.md#loopstart)
-* [numberOfInputs](fakeaudiobuffersourcenode.md#numberofinputs)
-* [numberOfOutputs](fakeaudiobuffersourcenode.md#numberofoutputs)
-* [onended](fakeaudiobuffersourcenode.md#onended)
-* [playbackRate](fakeaudiobuffersourcenode.md#playbackrate)
+- [buffer](fakeaudiobuffersourcenode.md#buffer)
+- [channelCount](fakeaudiobuffersourcenode.md#channelcount)
+- [channelCountMode](fakeaudiobuffersourcenode.md#channelcountmode)
+- [channelInterpretation](fakeaudiobuffersourcenode.md#channelinterpretation)
+- [context](fakeaudiobuffersourcenode.md#context)
+- [detune](fakeaudiobuffersourcenode.md#detune)
+- [loop](fakeaudiobuffersourcenode.md#loop)
+- [loopEnd](fakeaudiobuffersourcenode.md#loopend)
+- [loopStart](fakeaudiobuffersourcenode.md#loopstart)
+- [numberOfInputs](fakeaudiobuffersourcenode.md#numberofinputs)
+- [numberOfOutputs](fakeaudiobuffersourcenode.md#numberofoutputs)
+- [onended](fakeaudiobuffersourcenode.md#onended)
+- [playbackRate](fakeaudiobuffersourcenode.md#playbackrate)
 
 ### Methods
 
-* [addEventListener](fakeaudiobuffersourcenode.md#addeventlistener)
-* [connect](fakeaudiobuffersourcenode.md#connect)
-* [disconnect](fakeaudiobuffersourcenode.md#disconnect)
-* [dispatchEvent](fakeaudiobuffersourcenode.md#dispatchevent)
-* [removeEventListener](fakeaudiobuffersourcenode.md#removeeventlistener)
-* [start](fakeaudiobuffersourcenode.md#start)
-* [stop](fakeaudiobuffersourcenode.md#stop)
+- [addEventListener](fakeaudiobuffersourcenode.md#addeventlistener)
+- [connect](fakeaudiobuffersourcenode.md#connect)
+- [disconnect](fakeaudiobuffersourcenode.md#disconnect)
+- [dispatchEvent](fakeaudiobuffersourcenode.md#dispatchevent)
+- [removeEventListener](fakeaudiobuffersourcenode.md#removeeventlistener)
+- [start](fakeaudiobuffersourcenode.md#start)
+- [stop](fakeaudiobuffersourcenode.md#stop)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeAudioBufferSourceNode**(`reactors`: [Reactor](reactor.md)[]): *[FakeAudioBufferSourceNode](fakeaudiobuffersourcenode.md)*
+\+ **new FakeAudioBufferSourceNode**(`reactors?`: [*Reactor*](reactor.md)[]): [*FakeAudioBufferSourceNode*](fakeaudiobuffersourcenode.md)
 
-*Inherited from [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeAudioBufferSourceNode*](fakeaudiobuffersourcenode.md)
 
-**Returns:** *[FakeAudioBufferSourceNode](fakeaudiobuffersourcenode.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  buffer
+### buffer
 
-• **buffer**: *AudioBuffer | null*
+• **buffer**: *null* \| AudioBuffer
 
 ___
 
-###  channelCount
+### channelCount
 
 • **channelCount**: *number*
 
 ___
 
-###  channelCountMode
+### channelCountMode
 
-• **channelCountMode**: *ChannelCountMode*
-
-___
-
-###  channelInterpretation
-
-• **channelInterpretation**: *ChannelInterpretation*
+• **channelCountMode**: ChannelCountMode
 
 ___
 
-###  context
+### channelInterpretation
 
-• **context**: *BaseAudioContext*
-
-___
-
-###  detune
-
-• **detune**: *AudioParam*
+• **channelInterpretation**: ChannelInterpretation
 
 ___
 
-###  loop
+### context
+
+• **context**: BaseAudioContext
+
+___
+
+### detune
+
+• **detune**: AudioParam
+
+___
+
+### loop
 
 • **loop**: *boolean*
 
 ___
 
-###  loopEnd
+### loopEnd
 
 • **loopEnd**: *number*
 
 ___
 
-###  loopStart
+### loopStart
 
 • **loopStart**: *number*
 
 ___
 
-###  numberOfInputs
+### numberOfInputs
 
 • **numberOfInputs**: *number*
 
 ___
 
-###  numberOfOutputs
+### numberOfOutputs
 
 • **numberOfOutputs**: *number*
 
 ___
 
-###  onended
+### onended
 
-• **onended**: *function | null*
+• **onended**: *null* \| (`ev`: Event) => *any*
 
 ___
 
-###  playbackRate
+### playbackRate
 
-• **playbackRate**: *AudioParam*
+• **playbackRate**: AudioParam
 
 ## Methods
 
-###  addEventListener
+### addEventListener
 
-▸ **addEventListener**<**K**>(`type`: K, `listener`: function, `options?`: boolean | AddEventListenerOptions | undefined): *void*
+▸ **addEventListener**<K\>(`type`: K, `listener`: (`ev`: AudioScheduledSourceNodeEventMap[K]) => *any*, `options?`: *boolean* \| AddEventListenerOptions): *void*
 
-**Type parameters:**
-
-▪ **K**: *"ended"*
-
-**Parameters:**
-
-▪ **type**: *K*
-
-▪ **listener**: *function*
-
-▸ (`this`: AudioBufferSourceNode, `ev`: AudioScheduledSourceNodeEventMap[K]): *any*
-
-**Parameters:**
+#### Type parameters:
 
 Name | Type |
------- | ------ |
-`this` | AudioBufferSourceNode |
-`ev` | AudioScheduledSourceNodeEventMap[K] |
+:------ | :------ |
+`K` | *ended* |
 
-▪`Optional`  **options**: *boolean | AddEventListenerOptions | undefined*
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`type` | K |
+`listener` | (`ev`: AudioScheduledSourceNodeEventMap[K]) => *any* |
+`options?` | *boolean* \| AddEventListenerOptions |
 
 **Returns:** *void*
 
-▸ **addEventListener**(`type`: string, `listener`: EventListenerOrEventListenerObject, `options?`: boolean | AddEventListenerOptions | undefined): *void*
+▸ **addEventListener**(`type`: *string*, `listener`: EventListenerOrEventListenerObject, `options?`: *boolean* \| AddEventListenerOptions): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `listener` | EventListenerOrEventListenerObject |
-`options?` | boolean &#124; AddEventListenerOptions &#124; undefined |
+`options?` | *boolean* \| AddEventListenerOptions |
 
 **Returns:** *void*
 
 ___
 
-###  connect
+### connect
 
-▸ **connect**(`destinationNode`: AudioNode, `output?`: number | undefined, `input?`: number | undefined): *AudioNode*
+▸ **connect**(`destinationNode`: AudioNode, `output?`: *number*, `input?`: *number*): AudioNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
-`output?` | number &#124; undefined |
-`input?` | number &#124; undefined |
+`output?` | *number* |
+`input?` | *number* |
 
-**Returns:** *AudioNode*
+**Returns:** AudioNode
 
-▸ **connect**(`destinationParam`: AudioParam, `output?`: number | undefined): *void*
+▸ **connect**(`destinationParam`: AudioParam, `output?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationParam` | AudioParam |
-`output?` | number &#124; undefined |
+`output?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  disconnect
+### disconnect
 
 ▸ **disconnect**(): *void*
 
 **Returns:** *void*
 
-▸ **disconnect**(`output`: number): *void*
+▸ **disconnect**(`output`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`output` | number |
+:------ | :------ |
+`output` | *number* |
 
 **Returns:** *void*
 
 ▸ **disconnect**(`destinationNode`: AudioNode): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
 
 **Returns:** *void*
 
-▸ **disconnect**(`destinationNode`: AudioNode, `output`: number): *void*
+▸ **disconnect**(`destinationNode`: AudioNode, `output`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
-`output` | number |
+`output` | *number* |
 
 **Returns:** *void*
 
-▸ **disconnect**(`destinationNode`: AudioNode, `output`: number, `input`: number): *void*
+▸ **disconnect**(`destinationNode`: AudioNode, `output`: *number*, `input`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationNode` | AudioNode |
-`output` | number |
-`input` | number |
+`output` | *number* |
+`input` | *number* |
 
 **Returns:** *void*
 
 ▸ **disconnect**(`destinationParam`: AudioParam): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationParam` | AudioParam |
 
 **Returns:** *void*
 
-▸ **disconnect**(`destinationParam`: AudioParam, `output`: number): *void*
+▸ **disconnect**(`destinationParam`: AudioParam, `output`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `destinationParam` | AudioParam |
-`output` | number |
+`output` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  dispatchEvent
+### dispatchEvent
 
 ▸ **dispatchEvent**(`event`: Event): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | Event |
 
 **Returns:** *boolean*
 
 ___
 
-###  removeEventListener
+### removeEventListener
 
-▸ **removeEventListener**<**K**>(`type`: K, `listener`: function, `options?`: boolean | EventListenerOptions | undefined): *void*
+▸ **removeEventListener**<K\>(`type`: K, `listener`: (`ev`: AudioScheduledSourceNodeEventMap[K]) => *any*, `options?`: *boolean* \| EventListenerOptions): *void*
 
-**Type parameters:**
-
-▪ **K**: *"ended"*
-
-**Parameters:**
-
-▪ **type**: *K*
-
-▪ **listener**: *function*
-
-▸ (`this`: AudioBufferSourceNode, `ev`: AudioScheduledSourceNodeEventMap[K]): *any*
-
-**Parameters:**
+#### Type parameters:
 
 Name | Type |
------- | ------ |
-`this` | AudioBufferSourceNode |
-`ev` | AudioScheduledSourceNodeEventMap[K] |
+:------ | :------ |
+`K` | *ended* |
 
-▪`Optional`  **options**: *boolean | EventListenerOptions | undefined*
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`type` | K |
+`listener` | (`ev`: AudioScheduledSourceNodeEventMap[K]) => *any* |
+`options?` | *boolean* \| EventListenerOptions |
 
 **Returns:** *void*
 
-▸ **removeEventListener**(`type`: string, `listener`: EventListenerOrEventListenerObject, `options?`: boolean | EventListenerOptions | undefined): *void*
+▸ **removeEventListener**(`type`: *string*, `listener`: EventListenerOrEventListenerObject, `options?`: *boolean* \| EventListenerOptions): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `listener` | EventListenerOrEventListenerObject |
-`options?` | boolean &#124; EventListenerOptions &#124; undefined |
+`options?` | *boolean* \| EventListenerOptions |
 
 **Returns:** *void*
 
 ___
 
-###  start
+### start
 
-▸ **start**(`when?`: number | undefined, `offset?`: number | undefined, `duration?`: number | undefined): *void*
+▸ **start**(`when?`: *number*, `offset?`: *number*, `duration?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`when?` | number &#124; undefined |
-`offset?` | number &#124; undefined |
-`duration?` | number &#124; undefined |
+:------ | :------ |
+`when?` | *number* |
+`offset?` | *number* |
+`duration?` | *number* |
 
 **Returns:** *void*
 
 ___
 
-###  stop
+### stop
 
-▸ **stop**(`when?`: number | undefined): *void*
+▸ **stop**(`when?`: *number*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`when?` | number &#124; undefined |
+:------ | :------ |
+`when?` | *number* |
 
 **Returns:** *void*

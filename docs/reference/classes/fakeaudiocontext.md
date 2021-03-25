@@ -1,520 +1,505 @@
-
 # Class: FakeAudioContext
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeAudioContext**
 
 ## Implements
 
-* AudioContext
+* *AudioContext*
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakeaudiocontext.md#constructor)
+- [constructor](fakeaudiocontext.md#constructor)
 
 ### Properties
 
-* [audioWorklet](fakeaudiocontext.md#audioworklet)
-* [baseLatency](fakeaudiocontext.md#baselatency)
-* [currentTime](fakeaudiocontext.md#currenttime)
-* [destination](fakeaudiocontext.md#destination)
-* [listener](fakeaudiocontext.md#listener)
-* [onstatechange](fakeaudiocontext.md#onstatechange)
-* [outputLatency](fakeaudiocontext.md#outputlatency)
-* [sampleRate](fakeaudiocontext.md#samplerate)
-* [state](fakeaudiocontext.md#state)
+- [audioWorklet](fakeaudiocontext.md#audioworklet)
+- [baseLatency](fakeaudiocontext.md#baselatency)
+- [currentTime](fakeaudiocontext.md#currenttime)
+- [destination](fakeaudiocontext.md#destination)
+- [listener](fakeaudiocontext.md#listener)
+- [onstatechange](fakeaudiocontext.md#onstatechange)
+- [outputLatency](fakeaudiocontext.md#outputlatency)
+- [sampleRate](fakeaudiocontext.md#samplerate)
+- [state](fakeaudiocontext.md#state)
 
 ### Methods
 
-* [addEventListener](fakeaudiocontext.md#addeventlistener)
-* [close](fakeaudiocontext.md#close)
-* [createAnalyser](fakeaudiocontext.md#createanalyser)
-* [createBiquadFilter](fakeaudiocontext.md#createbiquadfilter)
-* [createBuffer](fakeaudiocontext.md#createbuffer)
-* [createBufferSource](fakeaudiocontext.md#createbuffersource)
-* [createChannelMerger](fakeaudiocontext.md#createchannelmerger)
-* [createChannelSplitter](fakeaudiocontext.md#createchannelsplitter)
-* [createConstantSource](fakeaudiocontext.md#createconstantsource)
-* [createConvolver](fakeaudiocontext.md#createconvolver)
-* [createDelay](fakeaudiocontext.md#createdelay)
-* [createDynamicsCompressor](fakeaudiocontext.md#createdynamicscompressor)
-* [createGain](fakeaudiocontext.md#creategain)
-* [createIIRFilter](fakeaudiocontext.md#createiirfilter)
-* [createMediaElementSource](fakeaudiocontext.md#createmediaelementsource)
-* [createMediaStreamDestination](fakeaudiocontext.md#createmediastreamdestination)
-* [createMediaStreamSource](fakeaudiocontext.md#createmediastreamsource)
-* [createMediaStreamTrackSource](fakeaudiocontext.md#createmediastreamtracksource)
-* [createOscillator](fakeaudiocontext.md#createoscillator)
-* [createPanner](fakeaudiocontext.md#createpanner)
-* [createPeriodicWave](fakeaudiocontext.md#createperiodicwave)
-* [createScriptProcessor](fakeaudiocontext.md#createscriptprocessor)
-* [createStereoPanner](fakeaudiocontext.md#createstereopanner)
-* [createWaveShaper](fakeaudiocontext.md#createwaveshaper)
-* [decodeAudioData](fakeaudiocontext.md#decodeaudiodata)
-* [dispatchEvent](fakeaudiocontext.md#dispatchevent)
-* [getOutputTimestamp](fakeaudiocontext.md#getoutputtimestamp)
-* [removeEventListener](fakeaudiocontext.md#removeeventlistener)
-* [resume](fakeaudiocontext.md#resume)
-* [suspend](fakeaudiocontext.md#suspend)
+- [addEventListener](fakeaudiocontext.md#addeventlistener)
+- [close](fakeaudiocontext.md#close)
+- [createAnalyser](fakeaudiocontext.md#createanalyser)
+- [createBiquadFilter](fakeaudiocontext.md#createbiquadfilter)
+- [createBuffer](fakeaudiocontext.md#createbuffer)
+- [createBufferSource](fakeaudiocontext.md#createbuffersource)
+- [createChannelMerger](fakeaudiocontext.md#createchannelmerger)
+- [createChannelSplitter](fakeaudiocontext.md#createchannelsplitter)
+- [createConstantSource](fakeaudiocontext.md#createconstantsource)
+- [createConvolver](fakeaudiocontext.md#createconvolver)
+- [createDelay](fakeaudiocontext.md#createdelay)
+- [createDynamicsCompressor](fakeaudiocontext.md#createdynamicscompressor)
+- [createGain](fakeaudiocontext.md#creategain)
+- [createIIRFilter](fakeaudiocontext.md#createiirfilter)
+- [createMediaElementSource](fakeaudiocontext.md#createmediaelementsource)
+- [createMediaStreamDestination](fakeaudiocontext.md#createmediastreamdestination)
+- [createMediaStreamSource](fakeaudiocontext.md#createmediastreamsource)
+- [createMediaStreamTrackSource](fakeaudiocontext.md#createmediastreamtracksource)
+- [createOscillator](fakeaudiocontext.md#createoscillator)
+- [createPanner](fakeaudiocontext.md#createpanner)
+- [createPeriodicWave](fakeaudiocontext.md#createperiodicwave)
+- [createScriptProcessor](fakeaudiocontext.md#createscriptprocessor)
+- [createStereoPanner](fakeaudiocontext.md#createstereopanner)
+- [createWaveShaper](fakeaudiocontext.md#createwaveshaper)
+- [decodeAudioData](fakeaudiocontext.md#decodeaudiodata)
+- [dispatchEvent](fakeaudiocontext.md#dispatchevent)
+- [getOutputTimestamp](fakeaudiocontext.md#getoutputtimestamp)
+- [removeEventListener](fakeaudiocontext.md#removeeventlistener)
+- [resume](fakeaudiocontext.md#resume)
+- [suspend](fakeaudiocontext.md#suspend)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeAudioContext**(`reactors`: [Reactor](reactor.md)[]): *[FakeAudioContext](fakeaudiocontext.md)*
+\+ **new FakeAudioContext**(`reactors?`: [*Reactor*](reactor.md)[]): [*FakeAudioContext*](fakeaudiocontext.md)
 
-*Inherited from [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeAudioContext*](fakeaudiocontext.md)
 
-**Returns:** *[FakeAudioContext](fakeaudiocontext.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  audioWorklet
+### audioWorklet
 
-• **audioWorklet**: *AudioWorklet*
+• **audioWorklet**: AudioWorklet
 
 ___
 
-###  baseLatency
+### baseLatency
 
 • **baseLatency**: *number*
 
 ___
 
-###  currentTime
+### currentTime
 
 • **currentTime**: *number*
 
 ___
 
-###  destination
+### destination
 
-• **destination**: *AudioDestinationNode*
-
-___
-
-###  listener
-
-• **listener**: *AudioListener*
+• **destination**: AudioDestinationNode
 
 ___
 
-###  onstatechange
+### listener
 
-• **onstatechange**: *function | null*
+• **listener**: AudioListener
 
 ___
 
-###  outputLatency
+### onstatechange
+
+• **onstatechange**: *null* \| (`ev`: Event) => *any*
+
+___
+
+### outputLatency
 
 • **outputLatency**: *number*
 
 ___
 
-###  sampleRate
+### sampleRate
 
 • **sampleRate**: *number*
 
 ___
 
-###  state
+### state
 
-• **state**: *AudioContextState*
+• **state**: AudioContextState
 
 ## Methods
 
-###  addEventListener
+### addEventListener
 
-▸ **addEventListener**<**K**>(`type`: K, `listener`: function, `options?`: boolean | AddEventListenerOptions | undefined): *void*
+▸ **addEventListener**<K\>(`type`: K, `listener`: (`ev`: BaseAudioContextEventMap[K]) => *any*, `options?`: *boolean* \| AddEventListenerOptions): *void*
 
-**Type parameters:**
-
-▪ **K**: *"statechange"*
-
-**Parameters:**
-
-▪ **type**: *K*
-
-▪ **listener**: *function*
-
-▸ (`this`: AudioContext, `ev`: BaseAudioContextEventMap[K]): *any*
-
-**Parameters:**
+#### Type parameters:
 
 Name | Type |
------- | ------ |
-`this` | AudioContext |
-`ev` | BaseAudioContextEventMap[K] |
+:------ | :------ |
+`K` | *statechange* |
 
-▪`Optional`  **options**: *boolean | AddEventListenerOptions | undefined*
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`type` | K |
+`listener` | (`ev`: BaseAudioContextEventMap[K]) => *any* |
+`options?` | *boolean* \| AddEventListenerOptions |
 
 **Returns:** *void*
 
-▸ **addEventListener**(`type`: string, `listener`: EventListenerOrEventListenerObject, `options?`: boolean | AddEventListenerOptions | undefined): *void*
+▸ **addEventListener**(`type`: *string*, `listener`: EventListenerOrEventListenerObject, `options?`: *boolean* \| AddEventListenerOptions): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `listener` | EventListenerOrEventListenerObject |
-`options?` | boolean &#124; AddEventListenerOptions &#124; undefined |
+`options?` | *boolean* \| AddEventListenerOptions |
 
 **Returns:** *void*
 
 ___
 
-###  close
+### close
 
-▸ **close**(): *Promise‹void›*
+▸ **close**(): *Promise*<void\>
 
-**Returns:** *Promise‹void›*
-
-___
-
-###  createAnalyser
-
-▸ **createAnalyser**(): *AnalyserNode*
-
-**Returns:** *AnalyserNode*
+**Returns:** *Promise*<void\>
 
 ___
 
-###  createBiquadFilter
+### createAnalyser
 
-▸ **createBiquadFilter**(): *BiquadFilterNode*
+▸ **createAnalyser**(): AnalyserNode
 
-**Returns:** *BiquadFilterNode*
+**Returns:** AnalyserNode
 
 ___
 
-###  createBuffer
+### createBiquadFilter
 
-▸ **createBuffer**(`numberOfChannels`: number, `length`: number, `sampleRate`: number): *AudioBuffer*
+▸ **createBiquadFilter**(): BiquadFilterNode
 
-**Parameters:**
+**Returns:** BiquadFilterNode
+
+___
+
+### createBuffer
+
+▸ **createBuffer**(`numberOfChannels`: *number*, `length`: *number*, `sampleRate`: *number*): AudioBuffer
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`numberOfChannels` | number |
-`length` | number |
-`sampleRate` | number |
+:------ | :------ |
+`numberOfChannels` | *number* |
+`length` | *number* |
+`sampleRate` | *number* |
 
-**Returns:** *AudioBuffer*
-
-___
-
-###  createBufferSource
-
-▸ **createBufferSource**(): *AudioBufferSourceNode*
-
-**Returns:** *AudioBufferSourceNode*
+**Returns:** AudioBuffer
 
 ___
 
-###  createChannelMerger
+### createBufferSource
 
-▸ **createChannelMerger**(`numberOfInputs?`: number | undefined): *ChannelMergerNode*
+▸ **createBufferSource**(): AudioBufferSourceNode
 
-**Parameters:**
+**Returns:** AudioBufferSourceNode
+
+___
+
+### createChannelMerger
+
+▸ **createChannelMerger**(`numberOfInputs?`: *number*): ChannelMergerNode
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`numberOfInputs?` | number &#124; undefined |
+:------ | :------ |
+`numberOfInputs?` | *number* |
 
-**Returns:** *ChannelMergerNode*
+**Returns:** ChannelMergerNode
 
 ___
 
-###  createChannelSplitter
+### createChannelSplitter
 
-▸ **createChannelSplitter**(`numberOfOutputs?`: number | undefined): *ChannelSplitterNode*
+▸ **createChannelSplitter**(`numberOfOutputs?`: *number*): ChannelSplitterNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`numberOfOutputs?` | number &#124; undefined |
+:------ | :------ |
+`numberOfOutputs?` | *number* |
 
-**Returns:** *ChannelSplitterNode*
-
-___
-
-###  createConstantSource
-
-▸ **createConstantSource**(): *ConstantSourceNode*
-
-**Returns:** *ConstantSourceNode*
+**Returns:** ChannelSplitterNode
 
 ___
 
-###  createConvolver
+### createConstantSource
 
-▸ **createConvolver**(): *ConvolverNode*
+▸ **createConstantSource**(): ConstantSourceNode
 
-**Returns:** *ConvolverNode*
+**Returns:** ConstantSourceNode
 
 ___
 
-###  createDelay
+### createConvolver
 
-▸ **createDelay**(`maxDelayTime?`: number | undefined): *DelayNode*
+▸ **createConvolver**(): ConvolverNode
 
-**Parameters:**
+**Returns:** ConvolverNode
+
+___
+
+### createDelay
+
+▸ **createDelay**(`maxDelayTime?`: *number*): DelayNode
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`maxDelayTime?` | number &#124; undefined |
+:------ | :------ |
+`maxDelayTime?` | *number* |
 
-**Returns:** *DelayNode*
-
-___
-
-###  createDynamicsCompressor
-
-▸ **createDynamicsCompressor**(): *DynamicsCompressorNode*
-
-**Returns:** *DynamicsCompressorNode*
+**Returns:** DelayNode
 
 ___
 
-###  createGain
+### createDynamicsCompressor
 
-▸ **createGain**(): *GainNode*
+▸ **createDynamicsCompressor**(): DynamicsCompressorNode
 
-**Returns:** *GainNode*
+**Returns:** DynamicsCompressorNode
 
 ___
 
-###  createIIRFilter
+### createGain
 
-▸ **createIIRFilter**(`feedforward`: number[], `feedback`: number[]): *IIRFilterNode*
+▸ **createGain**(): GainNode
 
-**Parameters:**
+**Returns:** GainNode
+
+___
+
+### createIIRFilter
+
+▸ **createIIRFilter**(`feedforward`: *number*[], `feedback`: *number*[]): IIRFilterNode
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`feedforward` | number[] |
-`feedback` | number[] |
+:------ | :------ |
+`feedforward` | *number*[] |
+`feedback` | *number*[] |
 
-**Returns:** *IIRFilterNode*
+**Returns:** IIRFilterNode
 
 ___
 
-###  createMediaElementSource
+### createMediaElementSource
 
-▸ **createMediaElementSource**(`mediaElement`: HTMLMediaElement): *MediaElementAudioSourceNode*
+▸ **createMediaElementSource**(`mediaElement`: HTMLMediaElement): MediaElementAudioSourceNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `mediaElement` | HTMLMediaElement |
 
-**Returns:** *MediaElementAudioSourceNode*
+**Returns:** MediaElementAudioSourceNode
 
 ___
 
-###  createMediaStreamDestination
+### createMediaStreamDestination
 
-▸ **createMediaStreamDestination**(): *MediaStreamAudioDestinationNode*
+▸ **createMediaStreamDestination**(): MediaStreamAudioDestinationNode
 
-**Returns:** *MediaStreamAudioDestinationNode*
+**Returns:** MediaStreamAudioDestinationNode
 
 ___
 
-###  createMediaStreamSource
+### createMediaStreamSource
 
-▸ **createMediaStreamSource**(`mediaStream`: MediaStream): *MediaStreamAudioSourceNode*
+▸ **createMediaStreamSource**(`mediaStream`: MediaStream): MediaStreamAudioSourceNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `mediaStream` | MediaStream |
 
-**Returns:** *MediaStreamAudioSourceNode*
+**Returns:** MediaStreamAudioSourceNode
 
 ___
 
-###  createMediaStreamTrackSource
+### createMediaStreamTrackSource
 
-▸ **createMediaStreamTrackSource**(`mediaStreamTrack`: MediaStreamTrack): *MediaStreamTrackAudioSourceNode*
+▸ **createMediaStreamTrackSource**(`mediaStreamTrack`: MediaStreamTrack): MediaStreamTrackAudioSourceNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `mediaStreamTrack` | MediaStreamTrack |
 
-**Returns:** *MediaStreamTrackAudioSourceNode*
+**Returns:** MediaStreamTrackAudioSourceNode
 
 ___
 
-###  createOscillator
+### createOscillator
 
-▸ **createOscillator**(): *OscillatorNode*
+▸ **createOscillator**(): OscillatorNode
 
-**Returns:** *OscillatorNode*
-
-___
-
-###  createPanner
-
-▸ **createPanner**(): *PannerNode*
-
-**Returns:** *PannerNode*
+**Returns:** OscillatorNode
 
 ___
 
-###  createPeriodicWave
+### createPanner
 
-▸ **createPeriodicWave**(`real`: number[] | Float32Array, `imag`: number[] | Float32Array, `constraints?`: PeriodicWaveConstraints | undefined): *PeriodicWave*
+▸ **createPanner**(): PannerNode
 
-**Parameters:**
+**Returns:** PannerNode
+
+___
+
+### createPeriodicWave
+
+▸ **createPeriodicWave**(`real`: *Float32Array* \| *number*[], `imag`: *Float32Array* \| *number*[], `constraints?`: PeriodicWaveConstraints): PeriodicWave
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`real` | number[] &#124; Float32Array |
-`imag` | number[] &#124; Float32Array |
-`constraints?` | PeriodicWaveConstraints &#124; undefined |
+:------ | :------ |
+`real` | *Float32Array* \| *number*[] |
+`imag` | *Float32Array* \| *number*[] |
+`constraints?` | PeriodicWaveConstraints |
 
-**Returns:** *PeriodicWave*
+**Returns:** PeriodicWave
 
 ___
 
-###  createScriptProcessor
+### createScriptProcessor
 
-▸ **createScriptProcessor**(`bufferSize?`: number | undefined, `numberOfInputChannels?`: number | undefined, `numberOfOutputChannels?`: number | undefined): *ScriptProcessorNode*
+▸ **createScriptProcessor**(`bufferSize?`: *number*, `numberOfInputChannels?`: *number*, `numberOfOutputChannels?`: *number*): ScriptProcessorNode
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`bufferSize?` | number &#124; undefined |
-`numberOfInputChannels?` | number &#124; undefined |
-`numberOfOutputChannels?` | number &#124; undefined |
+:------ | :------ |
+`bufferSize?` | *number* |
+`numberOfInputChannels?` | *number* |
+`numberOfOutputChannels?` | *number* |
 
-**Returns:** *ScriptProcessorNode*
-
-___
-
-###  createStereoPanner
-
-▸ **createStereoPanner**(): *StereoPannerNode*
-
-**Returns:** *StereoPannerNode*
+**Returns:** ScriptProcessorNode
 
 ___
 
-###  createWaveShaper
+### createStereoPanner
 
-▸ **createWaveShaper**(): *WaveShaperNode*
+▸ **createStereoPanner**(): StereoPannerNode
 
-**Returns:** *WaveShaperNode*
+**Returns:** StereoPannerNode
 
 ___
 
-###  decodeAudioData
+### createWaveShaper
 
-▸ **decodeAudioData**(`audioData`: ArrayBuffer, `successCallback?`: DecodeSuccessCallback | null | undefined, `errorCallback?`: DecodeErrorCallback | null | undefined): *Promise‹AudioBuffer›*
+▸ **createWaveShaper**(): WaveShaperNode
 
-**Parameters:**
+**Returns:** WaveShaperNode
+
+___
+
+### decodeAudioData
+
+▸ **decodeAudioData**(`audioData`: ArrayBuffer, `successCallback?`: *null* \| DecodeSuccessCallback, `errorCallback?`: *null* \| DecodeErrorCallback): *Promise*<AudioBuffer\>
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `audioData` | ArrayBuffer |
-`successCallback?` | DecodeSuccessCallback &#124; null &#124; undefined |
-`errorCallback?` | DecodeErrorCallback &#124; null &#124; undefined |
+`successCallback?` | *null* \| DecodeSuccessCallback |
+`errorCallback?` | *null* \| DecodeErrorCallback |
 
-**Returns:** *Promise‹AudioBuffer›*
+**Returns:** *Promise*<AudioBuffer\>
 
 ___
 
-###  dispatchEvent
+### dispatchEvent
 
 ▸ **dispatchEvent**(`event`: Event): *boolean*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | Event |
 
 **Returns:** *boolean*
 
 ___
 
-###  getOutputTimestamp
+### getOutputTimestamp
 
-▸ **getOutputTimestamp**(): *AudioTimestamp*
+▸ **getOutputTimestamp**(): AudioTimestamp
 
-**Returns:** *AudioTimestamp*
+**Returns:** AudioTimestamp
 
 ___
 
-###  removeEventListener
+### removeEventListener
 
-▸ **removeEventListener**<**K**>(`type`: K, `listener`: function, `options?`: boolean | EventListenerOptions | undefined): *void*
+▸ **removeEventListener**<K\>(`type`: K, `listener`: (`ev`: BaseAudioContextEventMap[K]) => *any*, `options?`: *boolean* \| EventListenerOptions): *void*
 
-**Type parameters:**
-
-▪ **K**: *"statechange"*
-
-**Parameters:**
-
-▪ **type**: *K*
-
-▪ **listener**: *function*
-
-▸ (`this`: AudioContext, `ev`: BaseAudioContextEventMap[K]): *any*
-
-**Parameters:**
+#### Type parameters:
 
 Name | Type |
------- | ------ |
-`this` | AudioContext |
-`ev` | BaseAudioContextEventMap[K] |
+:------ | :------ |
+`K` | *statechange* |
 
-▪`Optional`  **options**: *boolean | EventListenerOptions | undefined*
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`type` | K |
+`listener` | (`ev`: BaseAudioContextEventMap[K]) => *any* |
+`options?` | *boolean* \| EventListenerOptions |
 
 **Returns:** *void*
 
-▸ **removeEventListener**(`type`: string, `listener`: EventListenerOrEventListenerObject, `options?`: boolean | EventListenerOptions | undefined): *void*
+▸ **removeEventListener**(`type`: *string*, `listener`: EventListenerOrEventListenerObject, `options?`: *boolean* \| EventListenerOptions): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`type` | string |
+:------ | :------ |
+`type` | *string* |
 `listener` | EventListenerOrEventListenerObject |
-`options?` | boolean &#124; EventListenerOptions &#124; undefined |
+`options?` | *boolean* \| EventListenerOptions |
 
 **Returns:** *void*
 
 ___
 
-###  resume
+### resume
 
-▸ **resume**(): *Promise‹void›*
+▸ **resume**(): *Promise*<void\>
 
-**Returns:** *Promise‹void›*
+**Returns:** *Promise*<void\>
 
 ___
 
-###  suspend
+### suspend
 
-▸ **suspend**(): *Promise‹void›*
+▸ **suspend**(): *Promise*<void\>
 
-**Returns:** *Promise‹void›*
+**Returns:** *Promise*<void\>

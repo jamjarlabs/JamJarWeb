@@ -1,4 +1,3 @@
-
 # Class: Primitive
 
 Primitive allows for a more direct level of control over how an object is
@@ -8,91 +7,87 @@ modification.
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **Primitive**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](primitive.md#constructor)
+- [constructor](primitive.md#constructor)
 
 ### Properties
 
-* [drawMode](primitive.md#drawmode)
-* [key](primitive.md#key)
-* [material](primitive.md#material)
-* [points](primitive.md#points)
-* [zOrder](primitive.md#zorder)
-* [KEY](primitive.md#static-key)
-* [MESSAGE_ADD](primitive.md#static-message_add)
-* [MESSAGE_REMOVE](primitive.md#static-message_remove)
+- [drawMode](primitive.md#drawmode)
+- [key](primitive.md#key)
+- [material](primitive.md#material)
+- [points](primitive.md#points)
+- [zOrder](primitive.md#zorder)
+- [KEY](primitive.md#key)
+- [MESSAGE\_ADD](primitive.md#message_add)
+- [MESSAGE\_REMOVE](primitive.md#message_remove)
 
 ### Methods
 
-* [Free](primitive.md#free)
+- [Free](primitive.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Primitive**(`material`: [Material](material.md), `zOrder`: number, `points`: [Polygon](polygon.md), `drawMode`: [DrawMode](../enums/drawmode.md)): *[Primitive](primitive.md)*
+\+ **new Primitive**(`material`: [*Material*](material.md), `zOrder`: *number*, `points?`: [*Polygon*](polygon.md), `drawMode?`: [*DrawMode*](../enums/drawmode.md)): [*Primitive*](primitive.md)
 
-*Overrides [Component](component.md).[constructor](component.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`material` | [*Material*](material.md) |
+`zOrder` | *number* |
+`points` | [*Polygon*](polygon.md) |
+`drawMode` | [*DrawMode*](../enums/drawmode.md) |
 
-Name | Type | Default |
------- | ------ | ------ |
-`material` | [Material](material.md) | - |
-`zOrder` | number | - |
-`points` | [Polygon](polygon.md) | Polygon.RectangleByDimensions(1, 1) |
-`drawMode` | [DrawMode](../enums/drawmode.md) | DrawMode.LINE_STRIP |
+**Returns:** [*Primitive*](primitive.md)
 
-**Returns:** *[Primitive](primitive.md)*
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  drawMode
+### drawMode
 
-• **drawMode**: *[DrawMode](../enums/drawmode.md)*
+• **drawMode**: [*DrawMode*](../enums/drawmode.md)
 
 Draw mode of the primitive, allows direct control over how the primitive
 is rendered.
 
 ___
 
-###  key
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-###  material
+### material
 
-• **material**: *[Material](material.md)*
+• **material**: [*Material*](material.md)
 
 Material to apply when rendering the primitive.
 
 ___
 
-###  points
+### points
 
-• **points**: *[Polygon](polygon.md)*
+• **points**: [*Polygon*](polygon.md)
 
 List of points to pass to the render system, the shape that will be
 rendered.
 
 ___
 
-###  zOrder
+### zOrder
 
 • **zOrder**: *number*
 
@@ -102,36 +97,34 @@ is given and will appear in front of objects with a lower value.
 
 ___
 
-### `Static` KEY
+### KEY
 
-▪ **KEY**: *"primitive"* = "primitive"
+▪ `Readonly` `Static` **KEY**: *primitive*= "primitive"
 
 Key of the primitive component.
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Overrides [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Overrides: [Component](component.md)

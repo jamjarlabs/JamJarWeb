@@ -1,109 +1,121 @@
-
 # Class: FakeEntity
 
 ## Hierarchy
 
-* [Fake](fake.md)
+* [*Fake*](fake.md)
 
   ↳ **FakeEntity**
 
 ## Implements
 
-* [IEntity](../interfaces/ientity.md)
+* [*IEntity*](../interfaces/ientity.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakeentity.md#constructor)
+- [constructor](fakeentity.md#constructor)
 
 ### Properties
 
-* [id](fakeentity.md#id)
-* [layers](fakeentity.md#layers)
-* [tags](fakeentity.md#tags)
+- [id](fakeentity.md#id)
+- [layers](fakeentity.md#layers)
+- [tags](fakeentity.md#tags)
 
 ### Methods
 
-* [Add](fakeentity.md#add)
-* [Destroy](fakeentity.md#destroy)
-* [Remove](fakeentity.md#remove)
+- [Add](fakeentity.md#add)
+- [Destroy](fakeentity.md#destroy)
+- [Remove](fakeentity.md#remove)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeEntity**(`id`: number, `tags`: string[], `layers`: string[], `reactors`: [Reactor](reactor.md)[]): *[FakeEntity](fakeentity.md)*
+\+ **new FakeEntity**(`id`: *number*, `tags?`: *string*[], `layers?`: *string*[], `reactors?`: [*Reactor*](reactor.md)[]): [*FakeEntity*](fakeentity.md)
 
-*Overrides [Fake](fake.md).[constructor](fake.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`id` | *number* |
+`tags` | *string*[] |
+`layers` | *string*[] |
+`reactors` | [*Reactor*](reactor.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`id` | number | - |
-`tags` | string[] | [] |
-`layers` | string[] | [] |
-`reactors` | [Reactor](reactor.md)[] | [] |
+**Returns:** [*FakeEntity*](fakeentity.md)
 
-**Returns:** *[FakeEntity](fakeentity.md)*
+Inherited from: [Fake](fake.md)
 
 ## Properties
 
-###  id
+### id
 
 • **id**: *number*
 
-*Implementation of [IEntity](../interfaces/ientity.md).[id](../interfaces/ientity.md#id)*
+Unique numeric identifier of the entity.
+
+Implementation of: [IEntity](../interfaces/ientity.md).[id](../interfaces/ientity.md#id)
 
 ___
 
-###  layers
+### layers
 
-• **layers**: *string[]*
+• **layers**: *string*[]
 
-*Implementation of [IEntity](../interfaces/ientity.md).[layers](../interfaces/ientity.md#layers)*
+A list of layers the entity belongs to, used for grouping entities.
+
+Implementation of: [IEntity](../interfaces/ientity.md).[layers](../interfaces/ientity.md#layers)
 
 ___
 
-###  tags
+### tags
 
-• **tags**: *string[]*
+• **tags**: *string*[]
 
-*Implementation of [IEntity](../interfaces/ientity.md).[tags](../interfaces/ientity.md#tags)*
+A list of tags the entity has, used for discriminating between entities
+without having to add custom components.
+
+Implementation of: [IEntity](../interfaces/ientity.md).[tags](../interfaces/ientity.md#tags)
 
 ## Methods
 
-###  Add
+### Add
 
-▸ **Add**(`component`: [Component](component.md)): *void*
+▸ **Add**(`component`: [*Component*](component.md)): *void*
 
-**Parameters:**
+Add adds a component to the entity.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`component` | [Component](component.md) |
+:------ | :------ |
+`component` | [*Component*](component.md) |
 
 **Returns:** *void*
 
 ___
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
 
+Destroy deletes the entity and all associated components.
+
 **Returns:** *void*
 
 ___
 
-###  Remove
+### Remove
 
-▸ **Remove**(`key`: string): *void*
+▸ **Remove**(`key`: *string*): *void*
 
-**Parameters:**
+Remove removes a component from the entity.
+
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`key` | string |
+:------ | :------ |
+`key` | *string* |
 
 **Returns:** *void*

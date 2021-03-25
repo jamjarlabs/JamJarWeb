@@ -1,22 +1,21 @@
-
 # Enumeration: DrawMode
 
 DrawMode represents available draw modes for rendering, changes how render
 systems interpret how to render renderables.
 
-## Index
+## Table of contents
 
 ### Enumeration members
 
-* [LINES](drawmode.md#lines)
-* [LINE_STRIP](drawmode.md#line_strip)
-* [POINTS](drawmode.md#points)
-* [TRIANGLES](drawmode.md#triangles)
-* [TRIANGLE_STRIP](drawmode.md#triangle_strip)
+- [LINES](drawmode.md#lines)
+- [LINE\_STRIP](drawmode.md#line_strip)
+- [POINTS](drawmode.md#points)
+- [TRIANGLES](drawmode.md#triangles)
+- [TRIANGLE\_STRIP](drawmode.md#triangle_strip)
 
 ## Enumeration members
 
-###  LINES
+### LINES
 
 • **LINES**: = 1
 
@@ -26,9 +25,9 @@ B C are NOT a pair and connected.
 
 ___
 
-###  LINE_STRIP
+### LINE\_STRIP
 
-• **LINE_STRIP**: = 2
+• **LINE\_STRIP**: = 2
 
 The vertices make up a singular line that moves from point to point
 continously, e.g. in ABCD A-B are connected, B-C are connected, C-D are
@@ -36,7 +35,7 @@ connected.
 
 ___
 
-###  POINTS
+### POINTS
 
 • **POINTS**: = 0
 
@@ -44,7 +43,7 @@ Each vertex is interpreted as a point.
 
 ___
 
-###  TRIANGLES
+### TRIANGLES
 
 • **TRIANGLES**: = 3
 
@@ -54,9 +53,9 @@ D-E-F are not connected.
 
 ___
 
-###  TRIANGLE_STRIP
+### TRIANGLE\_STRIP
 
-• **TRIANGLE_STRIP**: = 4
+• **TRIANGLE\_STRIP**: = 4
 
 Every group of 3 adjacent vertices forms a triangle, with the face
 direction of the strip determined by the winding of the first triangle.

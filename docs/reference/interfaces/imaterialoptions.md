@@ -1,42 +1,37 @@
-
 # Interface: IMaterialOptions
 
 IMaterialOptions represents optional properties for a material, will
 generally be used with defaults that are overridden.
 
-## Hierarchy
-
-* **IMaterialOptions**
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [color](imaterialoptions.md#optional-color)
-* [shaders](imaterialoptions.md#optional-shaders)
-* [texture](imaterialoptions.md#optional-texture)
+- [color](imaterialoptions.md#color)
+- [shaders](imaterialoptions.md#shaders)
+- [texture](imaterialoptions.md#texture)
 
 ## Properties
 
-### `Optional` color
+### color
 
-• **color**? : *[Color](../classes/color.md)*
+• `Optional` **color**: *undefined* \| [*Color*](../classes/color.md)
 
 The color to apply, either to a texture if there is one, or just the
 direct color if there is no texture.
 
 ___
 
-### `Optional` shaders
+### shaders
 
-• **shaders**? : *string[]*
+• `Optional` **shaders**: *undefined* \| *string*[]
 
 List of shaders to apply.
 
 ___
 
-### `Optional` texture
+### texture
 
-• **texture**? : *[Texture](../classes/texture.md)*
+• `Optional` **texture**: *undefined* \| [*Texture*](../classes/texture.md)
 
 The texture to apply.

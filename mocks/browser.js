@@ -48,6 +48,12 @@ global.window.WebGL2RenderingContext.TRIANGLES = 0;
 global.window.WebGL2RenderingContext.TRIANGLE_STRIP = 0;
 global.window.WebGL2RenderingContext.TRIANGLE_FAN = 0;
 
+global.window.ScreenOrientation = function () {
+    return {};
+};
+global.window.ResizeObserver = function () {
+    return {};
+};
 global.window.AudioContext = function () {
     return {};
 };

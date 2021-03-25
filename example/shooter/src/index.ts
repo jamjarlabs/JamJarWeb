@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -53,8 +53,8 @@ import {
     FontRequest,
     DrawMode,
     Renderable,
-    MapSystem
-} from "jamjar"
+    MapSystem,
+} from "jamjar";
 
 class ScoreCounter extends Component {
     public static readonly KEY = "score_counter";
@@ -71,17 +71,12 @@ class ScoreSystem extends MapSystem {
     public static readonly MESSAGE_SCORE_INCREMENT = "message_score_increment";
     // Only entities with transform and bullet components.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [ScoreCounter.KEY, Text.KEY].every((type) => components.some(
-            component => component.key == type
-        ));
+        return [ScoreCounter.KEY, Text.KEY].every((type) => components.some((component) => component.key == type));
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, ScoreSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, ScoreSystem.MESSAGE_SCORE_INCREMENT)
+        this.messageBus.Subscribe(this, ScoreSystem.MESSAGE_SCORE_INCREMENT);
     }
 
     public OnMessage(message: IMessage): void {
@@ -98,7 +93,6 @@ class ScoreSystem extends MapSystem {
             }
         }
     }
-
 }
 
 class AsteroidSystem extends MapSystem {
@@ -112,15 +106,17 @@ class AsteroidSystem extends MapSystem {
     private static readonly SPAWN_MULTIPLIER: number = 0.95;
     private static readonly SPAWN_DISTANCE: number = 90;
 
-    private static readonly ORIGIN: Vector = Vector.New(0,0);
+    private static readonly ORIGIN: Vector = Vector.New(0, 0);
 
     // Entities with transform and tagged as either asteroid, bullet, or player.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
         // Has transform
-        if (components.some(component => component.key === Transform.KEY)) {
-            return entity.tags.includes(AsteroidSystem.ASTEROID_TAG) ||
+        if (components.some((component) => component.key === Transform.KEY)) {
+            return (
+                entity.tags.includes(AsteroidSystem.ASTEROID_TAG) ||
                 entity.tags.includes(BulletSystem.BULLET_TAG) ||
-                entity.tags.includes(PlayerSystem.PLAYER_TAG);
+                entity.tags.includes(PlayerSystem.PLAYER_TAG)
+            );
         }
         return false;
     };
@@ -128,12 +124,13 @@ class AsteroidSystem extends MapSystem {
     private lastSpawnTime: number;
     private spawnInterval: number;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         lastSpawnTime: number = 0,
         spawnInterval: number = AsteroidSystem.BASE_SPAWN_INTERVAL,
         entities?: Map<number, SystemEntity>,
-        subscriberID?: number,
+        subscriberID?: number
     ) {
         super(messageBus, scene, AsteroidSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, CollisionSystem.MESSAGE_COLLISION_ENTER);
@@ -168,8 +165,12 @@ class AsteroidSystem extends MapSystem {
             const entity = asteroids[i];
             const transform = entity.Get(Transform.KEY) as Transform;
 
-            if (transform.position.x > 150 || transform.position.x < -150 ||
-                transform.position.y > 150 || transform.position.y < -150) {
+            if (
+                transform.position.x > 150 ||
+                transform.position.x < -150 ||
+                transform.position.y > 150 ||
+                transform.position.y < -150
+            ) {
                 entity.Destroy();
             }
         }
@@ -249,25 +250,31 @@ class AsteroidSystem extends MapSystem {
 
         let points: Vector[] = [];
         for (let i = 0; i < numberOfSides; i++) {
-            points.push(Vector.New(Math.cos(2 * Math.PI * i / numberOfSides), Math.sin(2 * Math.PI * i / numberOfSides)).Scale(Math.random() * (0.5 - 1.5) + 1.5));
+            points.push(
+                Vector.New(
+                    Math.cos((2 * Math.PI * i) / numberOfSides),
+                    Math.sin((2 * Math.PI * i) / numberOfSides)
+                ).Scale(Math.random() * (0.5 - 1.5) + 1.5)
+            );
         }
         points.push(points[0]);
         const shape = new Polygon(points);
 
-        asteroid.Add(new Transform(
-            position,
-            scale,
-            Math.random() * (0 - Math.PI * 2) + Math.PI * 2));
-        asteroid.Add(new Primitive(
-            new Material({
-                color: new Color(1, 1, 1, 1)
-            }),
-            0,
-            shape,
-            DrawMode.LINE_STRIP
-        ));
+        asteroid.Add(new Transform(position, scale, Math.random() * (0 - Math.PI * 2) + Math.PI * 2));
+        asteroid.Add(
+            new Primitive(
+                new Material({
+                    color: new Color(1, 1, 1, 1),
+                }),
+                0,
+                shape,
+                DrawMode.LINE_STRIP
+            )
+        );
         asteroid.Add(new Collider(shape));
-        asteroid.Add(new Motion(towardsVector.Scale(Math.random() * randomBetweenInts(AsteroidSystem.MIN_SPEED, maxSpeed))));
+        asteroid.Add(
+            new Motion(towardsVector.Scale(Math.random() * randomBetweenInts(AsteroidSystem.MIN_SPEED, maxSpeed)))
+        );
         if (this.scene !== undefined) {
             this.scene.AddEntity(asteroid);
         }
@@ -279,17 +286,15 @@ class BulletSystem extends MapSystem {
     public static readonly BULLET_LAYER = "bullet";
     public static readonly SPEED = 40;
 
-
     // Only entities with transform component and bullet tag.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return components.some(component => component.key === Transform.KEY) &&
-            entity.tags.includes(BulletSystem.BULLET_TAG);
+        return (
+            components.some((component) => component.key === Transform.KEY) &&
+            entity.tags.includes(BulletSystem.BULLET_TAG)
+        );
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, BulletSystem.EVALUATOR, entities, subscriberID);
     }
 
@@ -297,30 +302,31 @@ class BulletSystem extends MapSystem {
         for (const bullet of this.entities.values()) {
             const transform = bullet.Get(Transform.KEY) as Transform;
             // Delete bullets beyond the game screen
-            if (transform.position.x > 85 || transform.position.x < -85 ||
-                transform.position.y > 50 || transform.position.y < -50) {
+            if (
+                transform.position.x > 85 ||
+                transform.position.x < -85 ||
+                transform.position.y > 50 ||
+                transform.position.y < -50
+            ) {
                 bullet.Destroy();
             }
         }
     }
-
 }
 
 class CrosshairSystem extends MapSystem {
     public static readonly CROSSHAIR_TAG = "crosshair";
     // Only entities with transform, UI component and crosshair tag
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return [Transform.KEY, UI.KEY].every((type) => components.some(
-            component => component.key == type
-        )) && entity.tags.includes(CrosshairSystem.CROSSHAIR_TAG);
+        return (
+            [Transform.KEY, UI.KEY].every((type) => components.some((component) => component.key == type)) &&
+            entity.tags.includes(CrosshairSystem.CROSSHAIR_TAG)
+        );
     };
 
-    constructor(messageBus: IMessageBus,
-        scene?: IScene,
-        entities?: Map<number, SystemEntity>,
-        subscriberID?: number) {
+    constructor(messageBus: IMessageBus, scene?: IScene, entities?: Map<number, SystemEntity>, subscriberID?: number) {
         super(messageBus, scene, CrosshairSystem.EVALUATOR, entities, subscriberID);
-        this.messageBus.Subscribe(this, ["pointermove", "pointerdown", "keydown"])
+        this.messageBus.Subscribe(this, ["pointermove", "pointerdown", "keydown"]);
     }
     public OnMessage(message: IMessage): void {
         super.OnMessage(message);
@@ -356,7 +362,6 @@ class CrosshairSystem extends MapSystem {
             }
         }
     }
-
 }
 
 class PlayerSystem extends MapSystem {
@@ -365,17 +370,21 @@ class PlayerSystem extends MapSystem {
 
     // Only entities with transform component and player tag.
     private static readonly EVALUATOR = (entity: IEntity, components: Component[]): boolean => {
-        return components.some(component => component.key === Transform.KEY) &&
-            entity.tags.includes(PlayerSystem.PLAYER_TAG);
+        return (
+            components.some((component) => component.key === Transform.KEY) &&
+            entity.tags.includes(PlayerSystem.PLAYER_TAG)
+        );
     };
 
     private targetedPosition: Vector;
 
-    constructor(messageBus: IMessageBus,
+    constructor(
+        messageBus: IMessageBus,
         scene?: IScene,
         entities?: Map<number, SystemEntity>,
         subscriberID?: number,
-        targetedPosition: Vector = Vector.New(0, 0)) {
+        targetedPosition: Vector = Vector.New(0, 0)
+    ) {
         super(messageBus, scene, PlayerSystem.EVALUATOR, entities, subscriberID);
         this.messageBus.Subscribe(this, ["pointermove", "pointerdown"]);
         this.targetedPosition = targetedPosition;
@@ -418,18 +427,17 @@ class PlayerSystem extends MapSystem {
                     const towardsVector = this.targetedPosition.Copy().Sub(transform.position).Normalize();
 
                     bullet.Add(new Transform(towardsVector.Copy().Scale(6), Vector.New(0.4, 3), orientation));
-                    bullet.Add(new Primitive(
-                        new Material({
-                            color: new Color(0.54, 1, 0.54, 1)
-                        }),
-                        1,
-                        new Polygon([
-                            Vector.New(0, -0.5),
-                            Vector.New(0, 0.5),
-                        ]),
-                        DrawMode.LINES
-                    ))
-                    bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)))
+                    bullet.Add(
+                        new Primitive(
+                            new Material({
+                                color: new Color(0.54, 1, 0.54, 1),
+                            }),
+                            1,
+                            new Polygon([Vector.New(0, -0.5), Vector.New(0, 0.5)]),
+                            DrawMode.LINES
+                        )
+                    );
+                    bullet.Add(new Collider(Polygon.RectangleByDimensions(1, 1)));
                     bullet.Add(new Motion(towardsVector.Copy().Scale(BulletSystem.SPEED)));
 
                     towardsVector.Free();
@@ -484,34 +492,36 @@ class GameOverScene extends Scene {
         gameOver.Add(new UI(camera));
         this.AddEntity(gameOver);
 
-
         const playAgainHeight = 0.05;
         const playAgainWidth = playAgainHeight * (virtualSize.y / virtualSize.x);
         const playAgain = new Entity(this.messageBus);
         playAgain.Add(new Transform(Vector.New(0, -0.2), Vector.New(playAgainWidth, playAgainHeight)));
-        playAgain.Add(new Text(2, "REFRESH TO REPLAY", "test", TextAlignment.Center, 0.3, undefined, new Color(1, 1, 1, 1)));
+        playAgain.Add(
+            new Text(2, "REFRESH TO REPLAY", "test", TextAlignment.Center, 0.3, undefined, new Color(1, 1, 1, 1))
+        );
         playAgain.Add(new UI(camera));
         this.AddEntity(playAgain);
 
         const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
         crosshair.Add(new Transform(Vector.New(0, 0), Vector.New(0.03, 0.053)));
-        crosshair.Add(new Primitive(
-            new Material({
-                color: new Color(1, 1, 1, 1)
-            }),
-            1,
-            new Polygon([
-                Vector.New(-0.25, -0.25),
-                Vector.New(0.25, 0.25),
-                Vector.New(0, 0),
-                Vector.New(-0.25, 0.25),
-                Vector.New(0.25, -0.25),
-            ]),
-            DrawMode.LINE_STRIP
-        ))
+        crosshair.Add(
+            new Primitive(
+                new Material({
+                    color: new Color(1, 1, 1, 1),
+                }),
+                1,
+                new Polygon([
+                    Vector.New(-0.25, -0.25),
+                    Vector.New(0.25, 0.25),
+                    Vector.New(0, 0),
+                    Vector.New(-0.25, 0.25),
+                    Vector.New(0.25, -0.25),
+                ]),
+                DrawMode.LINE_STRIP
+            )
+        );
         crosshair.Add(new UI(camera));
         this.AddEntity(crosshair);
-
     }
 }
 
@@ -542,30 +552,39 @@ class MainScene extends Scene {
         new PrimitiveSystem(this.messageBus, this);
         new MotionSystem(this.messageBus, this);
         new InterpolationSystem(this.messageBus, this);
-        new CollisionSystem(this.messageBus, [
-            [BulletSystem.BULLET_LAYER, AsteroidSystem.ASTEROID_LAYER],
-            [AsteroidSystem.ASTEROID_LAYER, PlayerSystem.PLAYER_LAYER]
-        ], this);
+        new CollisionSystem(
+            this.messageBus,
+            [
+                [BulletSystem.BULLET_LAYER, AsteroidSystem.ASTEROID_LAYER],
+                [AsteroidSystem.ASTEROID_LAYER, PlayerSystem.PLAYER_LAYER],
+            ],
+            this
+        );
         new PlayerSystem(this.messageBus, this);
         new BulletSystem(this.messageBus, this);
         new ScoreSystem(this.messageBus, this);
         new AsteroidSystem(this.messageBus, this);
 
-        this.messageBus.Publish(Message.New<FontRequest>(FontRequest.MESSAGE_REQUEST_LOAD, new FontRequest(
-            "test",
-            "VT323",
-            "normal",
-            100,
-            {
-                buffer: 0,
-                cutoff: 1,
-                radius: 1
-            },
-            {
-                magFilter: TextureFiltering.NEAREST,
-                minFilter: TextureFiltering.NEAREST,
-            }
-        )));
+        this.messageBus.Publish(
+            Message.New<FontRequest>(
+                FontRequest.MESSAGE_REQUEST_LOAD,
+                new FontRequest(
+                    "test",
+                    "VT323",
+                    "normal",
+                    100,
+                    {
+                        buffer: 0,
+                        cutoff: 1,
+                        radius: 1,
+                    },
+                    {
+                        magFilter: TextureFiltering.NEAREST,
+                        minFilter: TextureFiltering.NEAREST,
+                    }
+                )
+            )
+        );
 
         const virtualSize = Vector.New(160, 90);
         const viewportPosition = Vector.New(0, 0);
@@ -579,42 +598,37 @@ class MainScene extends Scene {
 
         const player = new Entity(this.messageBus, [PlayerSystem.PLAYER_TAG], [PlayerSystem.PLAYER_LAYER]);
         player.Add(new Transform(Vector.New(0, 0), Vector.New(2, 2)));
-        player.Add(new Primitive(
-            new Material({
-                color: new Color(1, 1, 1, 1)
-            }),
-            0,
-            new Polygon([
-                Vector.New(0, 0.5),
-                Vector.New(0.5, -0.5),
-                Vector.New(-0.5, -0.5),
-                Vector.New(0, 0.5)
-            ]),
-            DrawMode.LINE_STRIP
-        ));
-        player.Add(new Collider(new Polygon([
-            Vector.New(0, 0.5),
-            Vector.New(0.5, -0.5),
-            Vector.New(-0.5, -0.5),
-        ])));
+        player.Add(
+            new Primitive(
+                new Material({
+                    color: new Color(1, 1, 1, 1),
+                }),
+                0,
+                new Polygon([Vector.New(0, 0.5), Vector.New(0.5, -0.5), Vector.New(-0.5, -0.5), Vector.New(0, 0.5)]),
+                DrawMode.LINE_STRIP
+            )
+        );
+        player.Add(new Collider(new Polygon([Vector.New(0, 0.5), Vector.New(0.5, -0.5), Vector.New(-0.5, -0.5)])));
         this.AddEntity(player);
 
         const crosshair = new Entity(this.messageBus, [CrosshairSystem.CROSSHAIR_TAG]);
         crosshair.Add(new Transform(Vector.New(0, 0), Vector.New(0.03, 0.053)));
-        crosshair.Add(new Primitive(
-            new Material({
-                color: new Color(1, 1, 1, 1)
-            }),
-            1,
-            new Polygon([
-                Vector.New(-0.25, -0.25),
-                Vector.New(0.25, 0.25),
-                Vector.New(0, 0),
-                Vector.New(-0.25, 0.25),
-                Vector.New(0.25, -0.25),
-            ]),
-            DrawMode.LINE_STRIP
-        ))
+        crosshair.Add(
+            new Primitive(
+                new Material({
+                    color: new Color(1, 1, 1, 1),
+                }),
+                1,
+                new Polygon([
+                    Vector.New(-0.25, -0.25),
+                    Vector.New(0.25, 0.25),
+                    Vector.New(0, 0),
+                    Vector.New(-0.25, 0.25),
+                    Vector.New(0.25, -0.25),
+                ]),
+                DrawMode.LINE_STRIP
+            )
+        );
         crosshair.Add(new UI(camera));
         this.AddEntity(crosshair);
 
@@ -646,7 +660,7 @@ function randomBetweenInts(min: number, max: number): number {
 const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
 const gl = canvas.getContext("webgl2", { alpha: false });
 if (!gl) {
-    throw ("WebGL2 not supported in this browser")
+    throw "WebGL2 not supported in this browser";
 }
 
 Vector.Init(5000);

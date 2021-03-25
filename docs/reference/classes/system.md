@@ -1,4 +1,3 @@
-
 # Class: System
 
 System is one of the key elements of the Entity-Component-System architecture.
@@ -6,70 +5,66 @@ A system is for implementing logic, manipulating entities and their components.
 
 ## Hierarchy
 
-* [Subscriber](subscriber.md)
+* [*Subscriber*](subscriber.md)
 
   ↳ **System**
 
-  ↳ [StatefulSystem](statefulsystem.md)
+  ↳↳ [*StatefulSystem*](statefulsystem.md)
 
-  ↳ [TestSystem](testsystem.md)
+  ↳↳ [*CanvasResizeSystem*](canvasresizesystem.md)
 
-## Implements
-
-* [ISubscriber](../interfaces/isubscriber.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](system.md#constructor)
+- [constructor](system.md#constructor)
 
 ### Properties
 
-* [messageBus](system.md#protected-messagebus)
-* [scene](system.md#protected-optional-scene)
-* [subscriberID](system.md#subscriberid)
-* [MESSAGE_UPDATE](system.md#static-message_update)
+- [messageBus](system.md#messagebus)
+- [scene](system.md#scene)
+- [subscriberID](system.md#subscriberid)
+- [MESSAGE\_UPDATE](system.md#message_update)
 
 ### Methods
 
-* [Destroy](system.md#destroy)
-* [OnDestroy](system.md#protected-ondestroy)
-* [OnMessage](system.md#onmessage)
-* [Update](system.md#protected-update)
+- [Destroy](system.md#destroy)
+- [OnDestroy](system.md#ondestroy)
+- [OnMessage](system.md#onmessage)
+- [Update](system.md#update)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new System**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `scene?`: [IScene](../interfaces/iscene.md), `subscriberID?`: undefined | number): *[System](system.md)*
+\+ **new System**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `scene?`: [*IScene*](../interfaces/iscene.md), `subscriberID?`: *number*): [*System*](system.md)
 
-*Overrides [Subscriber](subscriber.md).[constructor](subscriber.md#constructor)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`messageBus` | [IMessageBus](../interfaces/imessagebus.md) |
-`scene?` | [IScene](../interfaces/iscene.md) |
-`subscriberID?` | undefined &#124; number |
+:------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) |
+`scene?` | [*IScene*](../interfaces/iscene.md) |
+`subscriberID?` | *number* |
 
-**Returns:** *[System](system.md)*
+**Returns:** [*System*](system.md)
+
+Inherited from: [Subscriber](subscriber.md)
 
 ## Properties
 
-### `Protected` messageBus
+### messageBus
 
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 Reference to the message bus, the fundamental piece of JamJar
 for communicating with other parts of the engine.
 
 ___
 
-### `Protected` `Optional` scene
+### scene
 
-• **scene**? : *[IScene](../interfaces/iscene.md)*
+• `Protected` `Optional` **scene**: *undefined* \| [*IScene*](../interfaces/iscene.md)
 
 Any scene this system is part of, will change the lifecycle of the
 system to be part of the scene's lifecycle - it will be destroyed
@@ -77,23 +72,21 @@ when the scene is destroyed.
 
 ___
 
-###  subscriberID
+### subscriberID
 
 • **subscriberID**: *number*
 
-*Implementation of [ISubscriber](../interfaces/isubscriber.md).[subscriberID](../interfaces/isubscriber.md#subscriberid)*
-
-*Inherited from [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)*
+Inherited from: [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_UPDATE
+### MESSAGE\_UPDATE
 
-▪ **MESSAGE_UPDATE**: *"system_update"* = "system_update"
+▪ `Readonly` `Static` **MESSAGE\_UPDATE**: *system_update*= "system\_update"
 
 ## Methods
 
-###  Destroy
+### Destroy
 
 ▸ **Destroy**(): *void*
 
@@ -107,9 +100,9 @@ message bus.
 
 ___
 
-### `Protected` OnDestroy
+### OnDestroy
 
-▸ **OnDestroy**(): *void*
+▸ `Protected`**OnDestroy**(): *void*
 
 Custom Destroy logic should go here to facilitate garbage collection, for example
 removing listeners.
@@ -118,32 +111,32 @@ removing listeners.
 
 ___
 
-###  OnMessage
+### OnMessage
 
-▸ **OnMessage**(`message`: [IMessage](../interfaces/imessage.md)): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
 
-*Overrides [Subscriber](subscriber.md).[OnMessage](subscriber.md#abstract-onmessage)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`message` | [IMessage](../interfaces/imessage.md) |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
 
 **Returns:** *void*
 
+Overrides: [Subscriber](subscriber.md)
+
 ___
 
-### `Protected` Update
+### Update
 
-▸ **Update**(`dt`: number): *void*
+▸ `Protected`**Update**(`dt`: *number*): *void*
 
 General update method, default empty. Override with custom logic.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`dt` | number | DeltaTime  |
+:------ | :------ | :------ |
+`dt` | *number* | DeltaTime    |
 
 **Returns:** *void*

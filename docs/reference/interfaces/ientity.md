@@ -1,34 +1,29 @@
-
 # Interface: IEntity
 
 IEntity defines how an entity should behave, and it's underlying core
 requirements - an ID, tags, and layers.
 
-## Hierarchy
-
-* **IEntity**
-
 ## Implemented by
 
-* [Entity](../classes/entity.md)
-* [FakeEntity](../classes/fakeentity.md)
+* [*Entity*](../classes/entity.md)
+* [*FakeEntity*](../classes/fakeentity.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [Add](ientity.md#add)
-* [Destroy](ientity.md#destroy)
-* [Remove](ientity.md#remove)
-* [id](ientity.md#id)
-* [layers](ientity.md#layers)
-* [tags](ientity.md#tags)
+- [Add](ientity.md#add)
+- [Destroy](ientity.md#destroy)
+- [Remove](ientity.md#remove)
+- [id](ientity.md#id)
+- [layers](ientity.md#layers)
+- [tags](ientity.md#tags)
 
 ## Properties
 
-###  Add
+### Add
 
-• **Add**: *function*
+• **Add**: (`component`: [*Component*](../classes/component.md)) => *void*
 
 Add adds a component to the entity.
 
@@ -36,19 +31,21 @@ Add adds a component to the entity.
 
 #### Type declaration:
 
-▸ (`component`: [Component](../classes/component.md)): *void*
+▸ (`component`: [*Component*](../classes/component.md)): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`component` | [Component](../classes/component.md) |
+:------ | :------ |
+`component` | [*Component*](../classes/component.md) |
+
+**Returns:** *void*
 
 ___
 
-###  Destroy
+### Destroy
 
-• **Destroy**: *function*
+• **Destroy**: () => *void*
 
 Destroy deletes the entity and all associated components.
 
@@ -56,11 +53,13 @@ Destroy deletes the entity and all associated components.
 
 ▸ (): *void*
 
+**Returns:** *void*
+
 ___
 
-###  Remove
+### Remove
 
-• **Remove**: *function*
+• **Remove**: (`key`: *string*) => *void*
 
 Remove removes a component from the entity.
 
@@ -68,17 +67,19 @@ Remove removes a component from the entity.
 
 #### Type declaration:
 
-▸ (`key`: string): *void*
+▸ (`key`: *string*): *void*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`key` | string |
+:------ | :------ |
+`key` | *string* |
+
+**Returns:** *void*
 
 ___
 
-###  id
+### id
 
 • **id**: *number*
 
@@ -86,17 +87,17 @@ Unique numeric identifier of the entity.
 
 ___
 
-###  layers
+### layers
 
-• **layers**: *string[]*
+• **layers**: *string*[]
 
 A list of layers the entity belongs to, used for grouping entities.
 
 ___
 
-###  tags
+### tags
 
-• **tags**: *string[]*
+• **tags**: *string*[]
 
 A list of tags the entity has, used for discriminating between entities
 without having to add custom components.

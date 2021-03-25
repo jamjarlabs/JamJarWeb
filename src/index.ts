@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -142,6 +142,11 @@ import * as ClientV1 from "./network/v1/client";
 import * as RelayV1 from "./network/v1/relay";
 import * as RoomV1 from "./network/v1/room";
 import * as TransportV1 from "./network/v1/transport";
+import IJamJarGlobals from "./jamjar_globals";
+import CanvasResizeSystem from "./standard/canvas_resize/canvas_resize_system";
+import CanvasResize from "./standard/canvas_resize/canvas_resize";
+import FakeResizeObserver from "./fake/fake_resize_observer";
+import FakeScreen from "./fake/fake_screen";
 
 export {
     // Core
@@ -212,6 +217,8 @@ export {
     FakeScene,
     FakeSubscriber,
     FakeWebGL2RenderingContext,
+    FakeResizeObserver,
+    FakeScreen,
     // Standard Lib
     // Audio Source
     AudioSource,
@@ -301,4 +308,15 @@ export {
     Serialization,
     Serialize,
     ISerializable,
+    // Canvas resizing
+    CanvasResizeSystem,
+    CanvasResize,
 };
+
+declare global {
+    // Window is a globally defined interface, it does not conform to the I
+    // prefix naming scheme.
+    interface Window {
+        JamJar: IJamJarGlobals;
+    }
+}

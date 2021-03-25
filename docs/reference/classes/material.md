@@ -1,96 +1,86 @@
-
 # Class: Material
 
 Material represents how something is displayed and rendered, specifying
 shaders, textures and colors.
 
-## Hierarchy
-
-* **Material**
-
 ## Implements
 
-* [IFreeable](../interfaces/ifreeable.md)
+* [*IFreeable*](../interfaces/ifreeable.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](material.md#constructor)
+- [constructor](material.md#constructor)
 
 ### Properties
 
-* [color](material.md#color)
-* [shaders](material.md#shaders)
-* [texture](material.md#optional-texture)
-* [NO_TEXTURE_COLOR](material.md#static-private-no_texture_color)
+- [color](material.md#color)
+- [shaders](material.md#shaders)
+- [texture](material.md#texture)
 
 ### Methods
 
-* [Copy](material.md#copy)
-* [Free](material.md#free)
+- [Copy](material.md#copy)
+- [Free](material.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Material**(`options`: [IMaterialOptions](../interfaces/imaterialoptions.md)): *[Material](material.md)*
+\+ **new Material**(`options?`: [*IMaterialOptions*](../interfaces/imaterialoptions.md)): [*Material*](material.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`options` | [IMaterialOptions](../interfaces/imaterialoptions.md) | {} |
+Name | Type |
+:------ | :------ |
+`options` | [*IMaterialOptions*](../interfaces/imaterialoptions.md) |
 
-**Returns:** *[Material](material.md)*
+**Returns:** [*Material*](material.md)
 
 ## Properties
 
-###  color
+### color
 
-• **color**: *[Color](color.md)*
+• **color**: [*Color*](color.md)
 
 The color to apply, if there is a texture the texture output is mixed
 this color, if there is no texture the color is used directly.
 
 ___
 
-###  shaders
+### shaders
 
-• **shaders**: *string[]*
+• **shaders**: *string*[]
 
 List of shaders to apply.
 
 ___
 
-### `Optional` texture
+### texture
 
-• **texture**? : *[Texture](texture.md)*
+• `Optional` **texture**: *undefined* \| [*Texture*](texture.md)
 
 The texture to apply.
 
-___
-
-### `Static` `Private` NO_TEXTURE_COLOR
-
-▪ **NO_TEXTURE_COLOR**: *[Color](color.md)‹›* = new Color(0.54, 0, 0.54, 1)
-
 ## Methods
 
-###  Copy
+### Copy
 
-▸ **Copy**(): *[Material](material.md)*
+▸ **Copy**(): [*Material*](material.md)
 
 Makes a value copy of the material.
 
-**Returns:** *[Material](material.md)*
+**Returns:** [*Material*](material.md)
 
 ___
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
+
+Implementation of: [IFreeable](../interfaces/ifreeable.md)

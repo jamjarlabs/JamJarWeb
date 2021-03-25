@@ -1,52 +1,47 @@
-
 # Class: Texture
 
 Texture is the mapping from an image that has been loaded, deciding
 how the texture should be drawn and represented.
 
-## Hierarchy
-
-* **Texture**
-
 ## Implements
 
-* [IFreeable](../interfaces/ifreeable.md)
+* [*IFreeable*](../interfaces/ifreeable.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](texture.md#constructor)
+- [constructor](texture.md#constructor)
 
 ### Properties
 
-* [image](texture.md#image)
-* [points](texture.md#points)
+- [image](texture.md#image)
+- [points](texture.md#points)
 
 ### Methods
 
-* [Copy](texture.md#copy)
-* [Free](texture.md#free)
-* [GenerateSpritesheetIndex](texture.md#static-generatespritesheetindex)
+- [Copy](texture.md#copy)
+- [Free](texture.md#free)
+- [GenerateSpritesheetIndex](texture.md#generatespritesheetindex)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Texture**(`image`: string, `points`: [Polygon](polygon.md)): *[Texture](texture.md)*
+\+ **new Texture**(`image`: *string*, `points?`: [*Polygon*](polygon.md)): [*Texture*](texture.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
------- | ------ | ------ |
-`image` | string | - |
-`points` | [Polygon](polygon.md) | Polygon.QuadByPoints(Vector.New(0, 0), Vector.New(1, 1)) |
+Name | Type |
+:------ | :------ |
+`image` | *string* |
+`points` | [*Polygon*](polygon.md) |
 
-**Returns:** *[Texture](texture.md)*
+**Returns:** [*Texture*](texture.md)
 
 ## Properties
 
-###  image
+### image
 
 • **image**: *string*
 
@@ -54,37 +49,39 @@ Name of the image the texture refers to.
 
 ___
 
-###  points
+### points
 
-• **points**: *[Polygon](polygon.md)*
+• **points**: [*Polygon*](polygon.md)
 
 Mapping in points on the image.
 
 ## Methods
 
-###  Copy
+### Copy
 
-▸ **Copy**(): *[Texture](texture.md)*
+▸ **Copy**(): [*Texture*](texture.md)
 
 Make a value copy of the texture.
 
-**Returns:** *[Texture](texture.md)*
+**Returns:** [*Texture*](texture.md)
 
 ___
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
+Free releases an object or it's constituent parts back into any available object pools.
 
 **Returns:** *void*
 
+Implementation of: [IFreeable](../interfaces/ifreeable.md)
+
 ___
 
-### `Static` GenerateSpritesheetIndex
+### GenerateSpritesheetIndex
 
-▸ **GenerateSpritesheetIndex**(`rowCount`: number, `columnCount`: number): *[Polygon](polygon.md)[]*
+▸ `Static`**GenerateSpritesheetIndex**(`rowCount`: *number*, `columnCount`: *number*): [*Polygon*](polygon.md)[]
 
 GenerateSpritesheetIndex generates an indexed array of shapes to access
 each sprite in a sprite sheet. The sprite sheet must have all sprites the
@@ -99,13 +96,13 @@ sprite sheet:
 | 6  7  8 |
 |---------|
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
-`rowCount` | number | number of rows in the sprite sheet (vertically). |
-`columnCount` | number | number of columns in the sprite sheet (horizontally). |
+:------ | :------ | :------ |
+`rowCount` | *number* | number of rows in the sprite sheet (vertically).   |
+`columnCount` | *number* | number of columns in the sprite sheet (horizontally).   |
 
-**Returns:** *[Polygon](polygon.md)[]*
+**Returns:** [*Polygon*](polygon.md)[]
 
 - An indexed array of shapes to access each sprite.

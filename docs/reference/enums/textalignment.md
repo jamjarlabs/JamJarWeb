@@ -1,19 +1,18 @@
-
 # Enumeration: TextAlignment
 
 TextAlignment is the alignment options for text.
 
-## Index
+## Table of contents
 
 ### Enumeration members
 
-* [Center](textalignment.md#center)
-* [Left](textalignment.md#left)
-* [Right](textalignment.md#right)
+- [Center](textalignment.md#center)
+- [Left](textalignment.md#left)
+- [Right](textalignment.md#right)
 
 ## Enumeration members
 
-###  Center
+### Center
 
 • **Center**: = 1
 
@@ -22,7 +21,7 @@ position.
 
 ___
 
-###  Left
+### Left
 
 • **Left**: = 0
 
@@ -31,7 +30,7 @@ transform position.
 
 ___
 
-###  Right
+### Right
 
 • **Right**: = 2
 

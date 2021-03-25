@@ -1,53 +1,48 @@
-
 # Class: ScriptRequest
 
-## Hierarchy
-
-* **ScriptRequest**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](scriptrequest.md#constructor)
+- [constructor](scriptrequest.md#constructor)
 
 ### Properties
 
-* [name](scriptrequest.md#name)
-* [source](scriptrequest.md#source)
-* [MESSAGE_REQUEST_LOAD](scriptrequest.md#static-message_request_load)
+- [name](scriptrequest.md#name)
+- [source](scriptrequest.md#source)
+- [MESSAGE\_REQUEST\_LOAD](scriptrequest.md#message_request_load)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new ScriptRequest**(`name`: string, `source`: string): *[ScriptRequest](scriptrequest.md)*
+\+ **new ScriptRequest**(`name`: *string*, `source`: *string*): [*ScriptRequest*](scriptrequest.md)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`name` | string |
-`source` | string |
+:------ | :------ |
+`name` | *string* |
+`source` | *string* |
 
-**Returns:** *[ScriptRequest](scriptrequest.md)*
+**Returns:** [*ScriptRequest*](scriptrequest.md)
 
 ## Properties
 
-###  name
+### name
 
 • **name**: *string*
 
 ___
 
-###  source
+### source
 
 • **source**: *string*
 
 ___
 
-### `Static` MESSAGE_REQUEST_LOAD
+### MESSAGE\_REQUEST\_LOAD
 
-▪ **MESSAGE_REQUEST_LOAD**: *"request_script_load"* = "request_script_load"
+▪ `Readonly` `Static` **MESSAGE\_REQUEST\_LOAD**: *request_script_load*= "request\_script\_load"
 
 Message to request an image asset to be loaded.

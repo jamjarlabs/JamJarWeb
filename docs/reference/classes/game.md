@@ -1,4 +1,3 @@
-
 # Class: Game
 
 Game is the core engine class.
@@ -7,131 +6,123 @@ setting up rendering.
 
 ## Hierarchy
 
-* **Game**
+* [*Subscriber*](subscriber.md)
 
-  ↳ [TestGame](testgame.md)
+  ↳ **Game**
 
 ## Implements
 
-* [IGame](../interfaces/igame.md)
+* [*IGame*](../interfaces/igame.md)
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](game.md#constructor)
+- [constructor](game.md#constructor)
 
 ### Properties
 
-* [accumulator](game.md#private-accumulator)
-* [currentTime](game.md#private-currenttime)
-* [frameRequestCallback](game.md#private-framerequestcallback)
-* [messageBus](game.md#protected-messagebus)
-* [name](game.md#name)
-* [MESSAGE_POST_RENDER](game.md#static-message_post_render)
-* [MESSAGE_PRE_RENDER](game.md#static-message_pre_render)
-* [MESSAGE_RENDER](game.md#static-message_render)
-* [TIME_STEP](game.md#static-private-time_step)
+- [messageBus](game.md#messagebus)
+- [name](game.md#name)
+- [subscriberID](game.md#subscriberid)
+- [MESSAGE\_POST\_RENDER](game.md#message_post_render)
+- [MESSAGE\_PRE\_RENDER](game.md#message_pre_render)
+- [MESSAGE\_RENDER](game.md#message_render)
+- [MESSAGE\_STOP\_GAME](game.md#message_stop_game)
 
 ### Methods
 
-* [OnStart](game.md#protected-onstart)
-* [Start](game.md#start)
-* [loop](game.md#private-loop)
+- [OnMessage](game.md#onmessage)
+- [OnStart](game.md#onstart)
+- [OnStop](game.md#onstop)
+- [Start](game.md#start)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Game**(`messageBus`: [IMessageBus](../interfaces/imessagebus.md), `name`: string, `frameRequestCallback`: function): *[Game](game.md)*
+\+ **new Game**(`messageBus`: [*IMessageBus*](../interfaces/imessagebus.md), `name?`: *string*, `frameRequestCallback?`: (`callback`: FrameRequestCallback) => *number*, `running?`: *boolean*, `browserWindow?`: Window, `subscriberID?`: *number*): [*Game*](game.md)
 
-**Parameters:**
+#### Parameters:
 
-▪ **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+Name | Type | Default value |
+:------ | :------ | :------ |
+`messageBus` | [*IMessageBus*](../interfaces/imessagebus.md) | - |
+`name` | *string* | "game" |
+`frameRequestCallback` | (`callback`: FrameRequestCallback) => *number* | - |
+`running` | *boolean* | false |
+`browserWindow` | Window | - |
+`subscriberID?` | *number* | - |
 
-▪`Default value`  **name**: *string*= "game"
+**Returns:** [*Game*](game.md)
 
-▪`Default value`  **frameRequestCallback**: *function*= window.requestAnimationFrame.bind(window)
-
-▸ (`callback`: FrameRequestCallback): *number*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`callback` | FrameRequestCallback |
-
-**Returns:** *[Game](game.md)*
+Inherited from: [Subscriber](subscriber.md)
 
 ## Properties
 
-### `Private` accumulator
+### messageBus
 
-• **accumulator**: *number*
-
-___
-
-### `Private` currentTime
-
-• **currentTime**: *number*
+• `Protected` **messageBus**: [*IMessageBus*](../interfaces/imessagebus.md)
 
 ___
 
-### `Private` frameRequestCallback
+### name
 
-• **frameRequestCallback**: *function*
-
-#### Type declaration:
-
-▸ (`callback`: FrameRequestCallback): *number*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`callback` | FrameRequestCallback |
+• `Readonly` **name**: *string*
 
 ___
 
-### `Protected` messageBus
+### subscriberID
 
-• **messageBus**: *[IMessageBus](../interfaces/imessagebus.md)*
+• **subscriberID**: *number*
 
-___
-
-###  name
-
-• **name**: *string*
+Inherited from: [Subscriber](subscriber.md).[subscriberID](subscriber.md#subscriberid)
 
 ___
 
-### `Static` MESSAGE_POST_RENDER
+### MESSAGE\_POST\_RENDER
 
-▪ **MESSAGE_POST_RENDER**: *"post_render"* = "post_render"
-
-___
-
-### `Static` MESSAGE_PRE_RENDER
-
-▪ **MESSAGE_PRE_RENDER**: *"pre_render"* = "pre_render"
+▪ `Readonly` `Static` **MESSAGE\_POST\_RENDER**: *post_render*= "post\_render"
 
 ___
 
-### `Static` MESSAGE_RENDER
+### MESSAGE\_PRE\_RENDER
 
-▪ **MESSAGE_RENDER**: *"render"* = "render"
+▪ `Readonly` `Static` **MESSAGE\_PRE\_RENDER**: *pre_render*= "pre\_render"
 
 ___
 
-### `Static` `Private` TIME_STEP
+### MESSAGE\_RENDER
 
-▪ **TIME_STEP**: *0.01* = 0.01
+▪ `Readonly` `Static` **MESSAGE\_RENDER**: *render*= "render"
+
+___
+
+### MESSAGE\_STOP\_GAME
+
+▪ `Readonly` `Static` **MESSAGE\_STOP\_GAME**: *jamjar_stop_game*= "jamjar\_stop\_game"
 
 ## Methods
 
-### `Protected` OnStart
+### OnMessage
 
-▸ **OnStart**(): *void*
+▸ **OnMessage**(`message`: [*IMessage*](../interfaces/imessage.md)): *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`message` | [*IMessage*](../interfaces/imessage.md) |
+
+**Returns:** *void*
+
+Overrides: [Subscriber](subscriber.md)
+
+___
+
+### OnStart
+
+▸ `Protected`**OnStart**(): *void*
 
 OnStart is triggered when the game is started.
 
@@ -139,31 +130,20 @@ OnStart is triggered when the game is started.
 
 ___
 
-###  Start
+### OnStop
 
-▸ **Start**(): *void*
+▸ `Protected`**OnStop**(): *void*
 
-Start kicks off the game, setting up systems and starting the game loop.
+OnStop is triggered when the game is stopped.
 
 **Returns:** *void*
 
 ___
 
-### `Private` loop
+### Start
 
-▸ **loop**(`timestamp`: number): *void*
+▸ **Start**(): *void*
 
-loop is the core game loop, it handles repeatedly calling itself to manage updates and rendering.
-Updates should be fixed and occur consistently, therefore there is an accumulator to make sure
-that enough updates happen to keep up with the time step.
-Rendering can occur as fast as possible, rendering systems will have to account for interpolation,
-which uses the alpha value that is calculated.
-See: https://gameprogrammingpatterns.com/game-loop.html
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`timestamp` | number |
+Start kicks off the game, setting up systems and starting the game loop.
 
 **Returns:** *void*

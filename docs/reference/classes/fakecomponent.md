@@ -1,80 +1,73 @@
-
 # Class: FakeComponent
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **FakeComponent**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](fakecomponent.md#constructor)
+- [constructor](fakecomponent.md#constructor)
 
 ### Properties
 
-* [key](fakecomponent.md#key)
-* [MESSAGE_ADD](fakecomponent.md#static-message_add)
-* [MESSAGE_REMOVE](fakecomponent.md#static-message_remove)
+- [key](fakecomponent.md#key)
+- [MESSAGE\_ADD](fakecomponent.md#message_add)
+- [MESSAGE\_REMOVE](fakecomponent.md#message_remove)
 
 ### Methods
 
-* [Free](fakecomponent.md#free)
+- [Free](fakecomponent.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new FakeComponent**(`key`: string): *[FakeComponent](fakecomponent.md)*
+\+ **new FakeComponent**(`key`: *string*): [*FakeComponent*](fakecomponent.md)
 
-*Inherited from [Component](component.md).[constructor](component.md#constructor)*
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
------- | ------ |
-`key` | string |
+:------ | :------ |
+`key` | *string* |
 
-**Returns:** *[FakeComponent](fakecomponent.md)*
+**Returns:** [*FakeComponent*](fakecomponent.md)
+
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  key
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-### `Static` MESSAGE_ADD
+### MESSAGE\_ADD
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_REMOVE
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Inherited from [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Inherited from: [Component](component.md)

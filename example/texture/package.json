@@ -1,19 +1,23 @@
 {
-  "name": "texture",
-  "version": "0.0.0",
-  "description": "Example of applying textures in JamJar",
-  "main": "index.js",
-  "author": "jthomperoo",
-  "license": "Apache-2.0",
-  "scripts": {
-    "start": "webpack-dev-server --mode=development --host=0.0.0.0",
-    "build": "webpack --mode=development"
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^5.1.1",
-    "typescript": "^3.9.2",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "name": "texture",
+    "version": "0.0.0",
+    "description": "Example of applying textures in JamJar",
+    "main": "index.js",
+    "author": "jthomperoo",
+    "license": "Apache-2.0",
+    "scripts": {
+        "start": "webpack serve --mode=development --host=0.0.0.0",
+        "build": "webpack --mode=development"
+    },
+    "devDependencies": {
+        "copy-webpack-plugin": "^7.0.0",
+        "ts-loader": "^8.0.17",
+        "typescript": "^4.1.5",
+        "webpack": "^5.23.0",
+        "webpack-cli": "^4.5.0",
+        "webpack-dev-server": "^3.11.2"
+    },
+    "dependencies": {
+        "jamjar": "../../"
+    }
 }

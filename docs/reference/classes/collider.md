@@ -1,4 +1,3 @@
-
 # Class: Collider
 
 Collider is a component that defines a shape for detecting collisions
@@ -6,116 +5,110 @@ with other Colliders.
 
 ## Hierarchy
 
-* [Component](component.md)
+* [*Component*](component.md)
 
   ↳ **Collider**
 
-## Implements
-
-* [IFreeable](../interfaces/ifreeable.md)
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](collider.md#constructor)
+- [constructor](collider.md#constructor)
 
 ### Properties
 
-* [currentlyCollidingWith](collider.md#currentlycollidingwith)
-* [enterScript](collider.md#optional-enterscript)
-* [exitScript](collider.md#optional-exitscript)
-* [key](collider.md#key)
-* [shape](collider.md#shape)
-* [KEY](collider.md#static-key)
-* [MESSAGE_ADD](collider.md#static-message_add)
-* [MESSAGE_REMOVE](collider.md#static-message_remove)
+- [currentlyCollidingWith](collider.md#currentlycollidingwith)
+- [enterScript](collider.md#enterscript)
+- [exitScript](collider.md#exitscript)
+- [key](collider.md#key)
+- [shape](collider.md#shape)
+- [KEY](collider.md#key)
+- [MESSAGE\_ADD](collider.md#message_add)
+- [MESSAGE\_REMOVE](collider.md#message_remove)
 
 ### Methods
 
-* [Free](collider.md#free)
+- [Free](collider.md#free)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Collider**(`shape`: [IShape](../interfaces/ishape.md), `enterScript?`: undefined | string, `exitScript?`: undefined | string, `currentlyCollidingWith`: [IEntity](../interfaces/ientity.md)[]): *[Collider](collider.md)*
+\+ **new Collider**(`shape`: [*IShape*](../interfaces/ishape.md), `enterScript?`: *string*, `exitScript?`: *string*, `currentlyCollidingWith?`: [*IEntity*](../interfaces/ientity.md)[]): [*Collider*](collider.md)
 
-*Overrides [Component](component.md).[constructor](component.md#constructor)*
+#### Parameters:
 
-**Parameters:**
+Name | Type |
+:------ | :------ |
+`shape` | [*IShape*](../interfaces/ishape.md) |
+`enterScript?` | *string* |
+`exitScript?` | *string* |
+`currentlyCollidingWith` | [*IEntity*](../interfaces/ientity.md)[] |
 
-Name | Type | Default |
------- | ------ | ------ |
-`shape` | [IShape](../interfaces/ishape.md) | - |
-`enterScript?` | undefined &#124; string | - |
-`exitScript?` | undefined &#124; string | - |
-`currentlyCollidingWith` | [IEntity](../interfaces/ientity.md)[] | [] |
+**Returns:** [*Collider*](collider.md)
 
-**Returns:** *[Collider](collider.md)*
+Inherited from: [Component](component.md)
 
 ## Properties
 
-###  currentlyCollidingWith
+### currentlyCollidingWith
 
-• **currentlyCollidingWith**: *[IEntity](../interfaces/ientity.md)[]*
-
-___
-
-### `Optional` enterScript
-
-• **enterScript**? : *undefined | string*
+• **currentlyCollidingWith**: [*IEntity*](../interfaces/ientity.md)[]
 
 ___
 
-### `Optional` exitScript
+### enterScript
 
-• **exitScript**? : *undefined | string*
+• `Optional` **enterScript**: *undefined* \| *string*
 
 ___
 
-###  key
+### exitScript
+
+• `Optional` **exitScript**: *undefined* \| *string*
+
+___
+
+### key
 
 • **key**: *string*
 
-*Inherited from [Component](component.md).[key](component.md#key)*
+Inherited from: [Component](component.md).[key](component.md#key)
 
 ___
 
-###  shape
+### shape
 
-• **shape**: *[IShape](../interfaces/ishape.md)*
-
-___
-
-### `Static` KEY
-
-▪ **KEY**: *"collider"* = "collider"
+• **shape**: [*IShape*](../interfaces/ishape.md)
 
 ___
 
-### `Static` MESSAGE_ADD
+### KEY
 
-▪ **MESSAGE_ADD**: *"component_add"* = "component_add"
-
-*Inherited from [Component](component.md).[MESSAGE_ADD](component.md#static-message_add)*
+▪ `Readonly` `Static` **KEY**: *collider*= "collider"
 
 ___
 
-### `Static` MESSAGE_REMOVE
+### MESSAGE\_ADD
 
-▪ **MESSAGE_REMOVE**: *"component_remove"* = "component_remove"
+▪ `Readonly` `Static` **MESSAGE\_ADD**: *component_add*= "component\_add"
 
-*Inherited from [Component](component.md).[MESSAGE_REMOVE](component.md#static-message_remove)*
+Inherited from: [Component](component.md).[MESSAGE_ADD](component.md#message_add)
+
+___
+
+### MESSAGE\_REMOVE
+
+▪ `Readonly` `Static` **MESSAGE\_REMOVE**: *component_remove*= "component\_remove"
+
+Inherited from: [Component](component.md).[MESSAGE_REMOVE](component.md#message_remove)
 
 ## Methods
 
-###  Free
+### Free
 
 ▸ **Free**(): *void*
 
-*Implementation of [IFreeable](../interfaces/ifreeable.md)*
-
-*Overrides [Component](component.md).[Free](component.md#free)*
-
 **Returns:** *void*
+
+Overrides: [Component](component.md)

@@ -1,10 +1,6 @@
 lib
 node_modules
-example
 docs
 coverage
-*.json
-*.yaml
-*.yml
 *.md
 src/network

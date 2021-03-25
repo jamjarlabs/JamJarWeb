@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -72,11 +72,15 @@ class ScriptingEngineSystem extends MapSystem {
                 this.sendMessage.bind(this)
             );
 
+            if (window.JamJar === undefined) {
+                window.JamJar = {};
+            }
+
             // Add a global window reference to reference
-            if (window.JamJarRefs === undefined) {
-                window.JamJarRefs = new Map<string, ScriptingReference>([[ref, this.reference]]);
+            if (window.JamJar.Refs === undefined) {
+                window.JamJar.Refs = new Map<string, ScriptingReference>([[ref, this.reference]]);
             } else {
-                window.JamJarRefs.set(ref, this.reference);
+                window.JamJar.Refs.set(ref, this.reference);
             }
         } else {
             this.reference = reference;

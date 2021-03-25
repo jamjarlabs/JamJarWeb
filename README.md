@@ -10,10 +10,8 @@ Status](https://readthedocs.org/projects/jamjar/badge/?version=latest)](https://
 
 # JamJar 2D Typescript Game Engine
 
-JamJar is a 2D typescript game engine, designed to simplify building browser
-WebGL based games.
-The engine is built for the source to be looked at and understood, to help in
-understanding game dev concepts.
+JamJar is a 2D typescript game engine, designed to simplify building browser WebGL based games.
+The engine is built for the source to be looked at and understood, to help in understanding game dev concepts.
 
 JamJar provides the following:
 
@@ -43,17 +41,22 @@ JamJar provides the following:
 
 Check [out the Wiki for more information](https://jamjar.readthedocs.io/en/latest).
 
+## Examples
+
+Check out the [examples directory](./example) to see different features showcased.
+
 ## Dependencies
 
 Dependencies for developing this project:
 
-- [`node`](https://nodejs.org/en/) >= `v12.14.x`
-- [`yarn`](https://legacy.yarnpkg.com/en/) >= `1.19.x`
+- [`node`](https://nodejs.org/en/) == `12.18.3`
+- [`yarn`](https://legacy.yarnpkg.com/en/) == `1.22.10`
 - [`protoc`](http://google.github.io/proto-lens/installing-protoc.html) == `3.15.6`
 
-Dependencies to view docs locally:
+The docs are generated using a Python tool, requiring Python and pip:
 
-- [`mkdocs`](https://www.mkdocs.org/)
+- [`python`](https://www.python.org/downloads/) == `3.7.10`
+- [`pip`](https://pypi.org/project/pip/) == `20.1.1`
 
 Docs also require some plugins, use `pip install -r docs/requirements.txt` to get the required plugins.
 
