@@ -134,11 +134,29 @@ import IPoolable from "./pooling/ipoolable";
 import IFreeable from "./pooling/ifreeable";
 import ArraySystem from "./system/array_system";
 import StatefulSystem from "./system/stateful_system";
+import Serialization from "./serialization/serialization";
+import Deserialize from "./serialization/serialize";
+import ISerializable from "./serialization/iserializable";
+import SerializationPrimitive from "./serialization/serialization_primitive";
 import IJamJarGlobals from "./jamjar_globals";
 import CanvasResizeSystem from "./standard/canvas_resize/canvas_resize_system";
 import CanvasResize from "./standard/canvas_resize/canvas_resize";
 import FakeResizeObserver from "./fake/fake_resize_observer";
 import FakeScreen from "./fake/fake_screen";
+
+// V1 of network relay
+import WebSocketNetworkSystemV1 from "./standard/web_socket_network/v1/web_socket_network_system";
+import InboundMessageV1 from "./standard/web_socket_network/v1/inbound_message";
+import OutboundMessageV1 from "./standard/web_socket_network/v1/outbound_message";
+import * as ClientV1 from "./network/v1/client";
+import * as RelayV1 from "./network/v1/relay";
+import * as RoomV1 from "./network/v1/room";
+import * as TransportV1 from "./network/v1/transport";
+
+// V1 of relay server API
+import RelayServerV1 from "./standard/relay_server/v1/relay_server_system";
+import RelayServerRoomRequestV1 from "./standard/relay_server/v1/relay_server_room_request";
+import RelayServerRoomResponseV1 from "./standard/relay_server/v1/relay_server_room_response";
 
 export {
     // Core
@@ -290,6 +308,22 @@ export {
     DefaultTextureFragmentShader,
     DefaultTextureVertexShader,
     WebGLSystem,
+    // Networking
+    WebSocketNetworkSystemV1,
+    InboundMessageV1,
+    OutboundMessageV1,
+    ClientV1,
+    RelayV1,
+    RoomV1,
+    TransportV1,
+    RelayServerV1,
+    RelayServerRoomRequestV1,
+    RelayServerRoomResponseV1,
+    // Serialization
+    Serialization,
+    Deserialize as Serialize,
+    ISerializable,
+    SerializationPrimitive,
     // Canvas resizing
     CanvasResizeSystem,
     CanvasResize,

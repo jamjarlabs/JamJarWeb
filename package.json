@@ -10,7 +10,9 @@
         "beautify": "prettier --write .",
         "test": "jest --coverage --silent",
         "generate-reference": "typedoc --entryPoints src/index.ts",
-        "docs": "mkdocs serve"
+        "docs": "mkdocs serve",
+        "download-specs": "scripts/download_proto_specs.sh",
+        "generate-specs": "scripts/generate_proto_specs.sh"
     },
     "author": "jthomperoo",
     "license": "Apache-2.0",
@@ -33,7 +35,8 @@
     "dependencies": {
         "@types/resize-observer-browser": "^0.1.5",
         "gl-matrix": "^3.3.0",
-        "tiny-sdf": "^1.0.2"
+        "tiny-sdf": "^1.0.2",
+        "ts-proto": "^1.74.0"
     },
     "files": [
         "LICENSE",

@@ -11,6 +11,10 @@ A system is for implementing logic, manipulating entities and their components.
 
   ↳↳ [*StatefulSystem*](statefulsystem.md)
 
+  ↳↳ [*WebSocketNetworkSystemV1*](websocketnetworksystemv1.md)
+
+  ↳↳ [*RelayServerV1*](relayserverv1.md)
+
   ↳↳ [*CanvasResizeSystem*](canvasresizesystem.md)
 
 ## Table of contents

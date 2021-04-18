@@ -7,6 +7,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Serialization to and from JSON.
+- Networking using JamJar relay protocol.
+
 ## [v0.10.0] - 2021-02-25
 
 ### Added

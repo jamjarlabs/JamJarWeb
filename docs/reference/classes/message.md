@@ -19,6 +19,7 @@ Name |
 
 * [*IMessage*](../interfaces/imessage.md)
 * [*IPoolable*](../interfaces/ipoolable.md)
+* [*ISerializable*](../interfaces/iserializable.md)
 
 ## Table of contents
 
@@ -31,12 +32,15 @@ Name |
 - [objectInPool](message.md#objectinpool)
 - [payload](message.md#payload)
 - [type](message.md#type)
+- [CLASS\_SERIALIZATION\_KEY](message.md#class_serialization_key)
 - [pools](message.md#pools)
 
 ### Methods
 
 - [Free](message.md#free)
 - [Recycle](message.md#recycle)
+- [Serialize](message.md#serialize)
+- [Deserialize](message.md#deserialize)
 - [Free](message.md#free)
 - [Init](message.md#init)
 - [New](message.md#new)
@@ -98,6 +102,12 @@ Implementation of: [IMessage](../interfaces/imessage.md).[type](../interfaces/im
 
 ___
 
+### CLASS\_SERIALIZATION\_KEY
+
+▪ `Readonly` `Static` **CLASS\_SERIALIZATION\_KEY**: *jamjar.Message*= "jamjar.Message"
+
+___
+
 ### pools
 
 ▪ `Protected` `Static` **pools**: *Map*<string, [*number*, [*IPoolable*](../interfaces/ipoolable.md)[]]\>
@@ -134,6 +144,30 @@ Name | Type |
 `payload?` | T |
 
 **Returns:** [*IPoolable*](../interfaces/ipoolable.md)
+
+___
+
+### Serialize
+
+▸ **Serialize**(): *string*
+
+**Returns:** *string*
+
+Implementation of: [ISerializable](../interfaces/iserializable.md)
+
+___
+
+### Deserialize
+
+▸ `Static`**Deserialize**(`json`: *any*): [*Message*](message.md)<unknown\>
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`json` | *any* |
+
+**Returns:** [*Message*](message.md)<unknown\>
 
 ___
 
