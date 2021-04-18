@@ -104,7 +104,7 @@ ___
 
 ### CLASS\_SERIALIZATION\_KEY
 
-▪ `Readonly` `Static` **CLASS\_SERIALIZATION\_KEY**: *com.jamjarlabs.Message*= "com.jamjarlabs.Message"
+▪ `Readonly` `Static` **CLASS\_SERIALIZATION\_KEY**: *jamjar.Message*= "jamjar.Message"
 
 ___
 

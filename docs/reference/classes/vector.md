@@ -101,7 +101,7 @@ ___
 
 ### CLASS\_SERIALIZATION\_KEY
 
-▪ `Readonly` `Static` **CLASS\_SERIALIZATION\_KEY**: *com.jamjarlabs.Vector*= "com.jamjarlabs.Vector"
+▪ `Readonly` `Static` **CLASS\_SERIALIZATION\_KEY**: *jamjar.Vector*= "jamjar.Vector"
 
 ___
 

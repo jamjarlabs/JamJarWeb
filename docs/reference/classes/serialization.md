@@ -33,13 +33,13 @@
 
 ### Deserialize
 
-▸ `Static`**Deserialize**(`input`: *any*): *any*
+▸ `Static`**Deserialize**(`input`: SerializationJSON): *any*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`input` | *any* |
+`input` | SerializationJSON |
 
 **Returns:** *any*
 
