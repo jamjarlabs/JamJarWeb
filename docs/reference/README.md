@@ -5,6 +5,10 @@
 ### Namespaces
 
 - [CanvasResize](modules/canvasresize.md)
+- [ClientV1](modules/clientv1.md)
+- [RelayV1](modules/relayv1.md)
+- [RoomV1](modules/roomv1.md)
+- [TransportV1](modules/transportv1.md)
 
 ### Enumerations
 
@@ -87,6 +91,7 @@
 - [Primitive](classes/primitive.md)
 - [PrimitiveSystem](classes/primitivesystem.md)
 - [Reactor](classes/reactor.md)
+- [RelayServerV1](classes/relayserverv1.md)
 - [RenderSystem](classes/rendersystem.md)
 - [Renderable](classes/renderable.md)
 - [Scene](classes/scene.md)
@@ -97,6 +102,7 @@
 - [ScriptTriggerSystem](classes/scripttriggersystem.md)
 - [ScriptingEngineSystem](classes/scriptingenginesystem.md)
 - [ScriptingReference](classes/scriptingreference.md)
+- [Serialization](classes/serialization.md)
 - [ShaderAsset](classes/shaderasset.md)
 - [Sprite](classes/sprite.md)
 - [SpriteAnimation](classes/spriteanimation.md)
@@ -116,6 +122,7 @@
 - [UI](classes/ui.md)
 - [Vector](classes/vector.md)
 - [WebGLSystem](classes/webglsystem.md)
+- [WebSocketNetworkSystemV1](classes/websocketnetworksystemv1.md)
 
 ### Interfaces
 
@@ -132,14 +139,24 @@
 - [IPoolable](interfaces/ipoolable.md)
 - [IRenderable](interfaces/irenderable.md)
 - [IScene](interfaces/iscene.md)
+- [ISerializable](interfaces/iserializable.md)
 - [IShader](interfaces/ishader.md)
 - [IShape](interfaces/ishape.md)
 - [ISubscriber](interfaces/isubscriber.md)
 - [ITextureOptions](interfaces/itextureoptions.md)
+- [InboundMessageV1](interfaces/inboundmessagev1.md)
+- [OutboundMessageV1](interfaces/outboundmessagev1.md)
+- [RelayServerRoomRequestV1](interfaces/relayserverroomrequestv1.md)
+- [RelayServerRoomResponseV1](interfaces/relayserverroomresponsev1.md)
 
 ### Type aliases
 
 - [Evaluator](README.md#evaluator)
+- [SerializationPrimitive](README.md#serializationprimitive)
+
+### Functions
+
+- [Serialize](README.md#serialize)
 
 ## Type aliases
 
@@ -159,3 +176,24 @@ Name | Type |
 `components` | [*Component*](classes/component.md)[] |
 
 **Returns:** *boolean*
+
+___
+
+### SerializationPrimitive
+
+Ƭ **SerializationPrimitive**: *string* \| *boolean* \| *number* \| *bigint*
+
+## Functions
+
+### Serialize
+
+▸ **Serialize**(`className`: *string*, `serialize`: (`json`: *any*) => [*ISerializable*](interfaces/iserializable.md)): (`constructor`: Function) => *void*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`className` | *string* |
+`serialize` | (`json`: *any*) => [*ISerializable*](interfaces/iserializable.md) |
+
+**Returns:** *function*

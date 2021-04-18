@@ -14,8 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface ISerializable {
-    Serialize(): string;
+import * as relayv1 from "../../../network/v1/relay";
+import Message from "../../../message/message";
+import ISerializable from "../../../serialization/iserializable";
+import SerializationPrimitive from "../../../serialization/serialization_primitive";
+
+interface OutboundMessage {
+    Message: Message<ISerializable | ISerializable[] | SerializationPrimitive>;
+    RelayType: relayv1.Relay_RelayType;
+    TargetID?: number;
 }
 
-export default ISerializable;
+export default OutboundMessage;

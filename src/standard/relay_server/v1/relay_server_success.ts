@@ -14,8 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface ISerializable {
-    Serialize(): string;
+import RelayServerRoomResponse from "./relay_server_room_response";
+
+interface RelayServerSuccess {
+    code: number;
+    data: RelayServerRoomResponse;
 }
 
-export default ISerializable;
+export default RelayServerSuccess;

@@ -23,6 +23,8 @@ export enum Payload_FlagType {
     RESPONSE_LIST = 11,
     RESPONSE_KICK = 12,
     RESPONSE_ERROR = 13,
+    RESPONSE_CLIENT_CONNECT = 14,
+    RESPONSE_CLIENT_DISCONNECT = 15,
     UNRECOGNIZED = -1,
 }
 
@@ -70,6 +72,12 @@ export function payload_FlagTypeFromJSON(object: any): Payload_FlagType {
         case 13:
         case "RESPONSE_ERROR":
             return Payload_FlagType.RESPONSE_ERROR;
+        case 14:
+        case "RESPONSE_CLIENT_CONNECT":
+            return Payload_FlagType.RESPONSE_CLIENT_CONNECT;
+        case 15:
+        case "RESPONSE_CLIENT_DISCONNECT":
+            return Payload_FlagType.RESPONSE_CLIENT_DISCONNECT;
         case -1:
         case "UNRECOGNIZED":
         default:
@@ -107,6 +115,10 @@ export function payload_FlagTypeToJSON(object: Payload_FlagType): string {
             return "RESPONSE_KICK";
         case Payload_FlagType.RESPONSE_ERROR:
             return "RESPONSE_ERROR";
+        case Payload_FlagType.RESPONSE_CLIENT_CONNECT:
+            return "RESPONSE_CLIENT_CONNECT";
+        case Payload_FlagType.RESPONSE_CLIENT_DISCONNECT:
+            return "RESPONSE_CLIENT_DISCONNECT";
         default:
             return "UNKNOWN";
     }

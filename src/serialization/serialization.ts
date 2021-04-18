@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,54 +14,114 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types  */
+
 import ISerializable from "./iserializable";
+import SerializationJSON from "./serialization_json";
+import SerializationPimitive from "./serialization_primitive";
+
+function primitiveStringWrapper(type: string, value: string) {
+    return `{
+        "primitive": true,
+        "type": "${type}",
+        "value": "${value}"
+    }`;
+}
+
+function arrayWrapper(value: string) {
+    return `{
+        "type": "js.array",
+        "value": ${value}
+    }`;
+}
 
 abstract class Serialization {
-    private static enc = new TextEncoder();
-    private static dec = new TextDecoder();
     public static types: Map<string, { (json: any): ISerializable }> = new Map();
 
-    public static Serialize(input: ISerializable | ISerializable[]): Uint8Array {
+    public static Serialize(input: ISerializable | ISerializable[] | SerializationPimitive): string {
         let serializedString = "";
-        if (Array.isArray(input)) {
-            // Handle arrays
-            serializedString = "[";
-            for (let i = 0; i < input.length; i++) {
-                serializedString += input[i].Serialize();
-                if (i !== input.length - 1) {
-                    serializedString += ",";
-                }
+        switch (typeof input) {
+            case "string": {
+                serializedString = primitiveStringWrapper("js.string", input);
+                break;
             }
-            serializedString += "]";
-        } else {
-            // Handle serializable objects
-            serializedString = input.Serialize();
+            case "boolean": {
+                serializedString = primitiveStringWrapper("js.boolean", input ? "true" : "false");
+                break;
+            }
+            case "number": {
+                serializedString = primitiveStringWrapper("js.number", input.toString());
+                break;
+            }
+            case "bigint": {
+                serializedString = primitiveStringWrapper("js.bigint", input.toString());
+                break;
+            }
+            default: {
+                if (Array.isArray(input)) {
+                    let arrayString = "";
+                    // Handle arrays
+                    arrayString = "[";
+                    for (let i = 0; i < input.length; i++) {
+                        arrayString += input[i].Serialize();
+                        if (i !== input.length - 1) {
+                            arrayString += ",";
+                        }
+                    }
+                    arrayString += "]";
+                    serializedString = arrayWrapper(arrayString);
+                } else {
+                    // Handle serializable objects
+                    serializedString = input.Serialize();
+                }
+                break;
+            }
         }
-        return this.enc.encode(serializedString);
+        return serializedString;
     }
 
-    public static Deserialize(input: Uint8Array): any {
-        const inputStr = this.dec.decode(input);
-        const inputJSON = JSON.parse(inputStr);
-        if (Array.isArray(inputJSON)) {
+    public static Deserialize(input: SerializationJSON): any {
+        if (input.primitive === true) {
+            switch (input.type) {
+                case "js.string": {
+                    return input.value;
+                }
+                case "js.boolean": {
+                    return input.value === "true";
+                }
+                case "js.number": {
+                    return Number(input.value);
+                }
+                case "js.bigint": {
+                    return BigInt(input.value);
+                }
+                default: {
+                    console.error(`Unknown primitive type provided: ${input.type}`);
+                    return null;
+                }
+            }
+        }
+        if (input.type === "js.array") {
+            const arr = input.value as any[];
             const deserializedArray: any = [];
-            if (inputJSON.length === 0) {
+            if (arr.length === 0) {
                 return deserializedArray;
             }
-            for (let i = 0; i < input.length; i++) {
-                deserializedArray.push(Serialization.deserializeObject(inputJSON[i]));
+            for (let i = 0; i < arr.length; i++) {
+                deserializedArray.push(Serialization.Deserialize(arr[i]));
             }
             return deserializedArray;
         }
-        return Serialization.deserializeObject(inputJSON);
+        return Serialization.deserializeObject(input);
     }
 
-    private static deserializeObject(input: any): any {
-        const type = Serialization.types.get(input.className);
+    private static deserializeObject(input: SerializationJSON): any {
+        const type = Serialization.types.get(input.type);
         if (type === undefined) {
-            throw new Error(`Unknown deserializable: ${input.className}`);
+            console.log(input);
+            throw new Error(`Unknown deserializable: ${input.type}`);
         }
-        return type(input);
+        return type(input.value);
     }
 }
 

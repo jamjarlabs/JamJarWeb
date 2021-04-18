@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,13 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/ban-types */
+
 import ISerializable from "./iserializable";
 import Serialization from "./serialization";
 
-function Serialize(className: string, serialize: { (json: any): ISerializable }) {
+function Deserialize(className: string, serialize: { (json: any): ISerializable }): (constructor: Function) => void {
     return (constructor: Function) => {
         Serialization.types.set(className, serialize);
     };
 }
 
-export default Serialize;
+export default Deserialize;

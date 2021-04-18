@@ -14,8 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface ISerializable {
-    Serialize(): string;
+import Message from "../../../message/message";
+import ISerializable from "../../../serialization/iserializable";
+import SerializationPrimitive from "../../../serialization/serialization_primitive";
+
+interface InboundMessage {
+    SourceClientID: number;
+    Message: Message<ISerializable | ISerializable[] | SerializationPrimitive>;
 }
 
-export default ISerializable;
+export default InboundMessage;

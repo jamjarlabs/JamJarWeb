@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface ISerializable {
-    Serialize(): string;
+interface RelayServerRoomRequest {
+    max_clients: number;
 }
 
-export default ISerializable;
+export default RelayServerRoomRequest;

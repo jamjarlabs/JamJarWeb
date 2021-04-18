@@ -12,6 +12,7 @@ This is a mutable data structure, operations on Vector objects will affect the o
 ## Implements
 
 * [*IPoolable*](../interfaces/ipoolable.md)
+* [*ISerializable*](../interfaces/iserializable.md)
 
 ## Table of contents
 
@@ -22,8 +23,8 @@ This is a mutable data structure, operations on Vector objects will affect the o
 ### Properties
 
 - [data](vector.md#data)
-- [debug](vector.md#debug)
 - [objectInPool](vector.md#objectinpool)
+- [CLASS\_SERIALIZATION\_KEY](vector.md#class_serialization_key)
 - [pools](vector.md#pools)
 
 ### Accessors
@@ -48,7 +49,9 @@ This is a mutable data structure, operations on Vector objects will affect the o
 - [Rotate](vector.md#rotate)
 - [RotateDeg](vector.md#rotatedeg)
 - [Scale](vector.md#scale)
+- [Serialize](vector.md#serialize)
 - [Sub](vector.md#sub)
+- [Deserialize](vector.md#deserialize)
 - [Free](vector.md#free)
 - [Init](vector.md#init)
 - [New](vector.md#new)
@@ -81,12 +84,6 @@ Inherited from: [Pooled](pooled.md)
 
 ___
 
-### debug
-
-• **debug**: *string*= ""
-
-___
-
 ### objectInPool
 
 • **objectInPool**: *boolean*= false
@@ -99,6 +96,12 @@ calls to free the the same object.
 Implementation of: [IPoolable](../interfaces/ipoolable.md).[objectInPool](../interfaces/ipoolable.md#objectinpool)
 
 Inherited from: [Pooled](pooled.md).[objectInPool](pooled.md#objectinpool)
+
+___
+
+### CLASS\_SERIALIZATION\_KEY
+
+▪ `Readonly` `Static` **CLASS\_SERIALIZATION\_KEY**: *com.jamjarlabs.Vector*= "com.jamjarlabs.Vector"
 
 ___
 
@@ -390,6 +393,16 @@ This vector to allow chaining, the result of the scaling
 
 ___
 
+### Serialize
+
+▸ **Serialize**(): *string*
+
+**Returns:** *string*
+
+Implementation of: [ISerializable](../interfaces/iserializable.md)
+
+___
+
 ### Sub
 
 ▸ **Sub**(`vector`: [*Vector*](vector.md)): [*Vector*](vector.md)
@@ -405,6 +418,20 @@ Name | Type | Description |
 **Returns:** [*Vector*](vector.md)
 
 This vector to allow chaining, the result result of the subtraction
+
+___
+
+### Deserialize
+
+▸ `Static`**Deserialize**(`json`: *any*): [*Vector*](vector.md)
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`json` | *any* |
+
+**Returns:** [*Vector*](vector.md)
 
 ___
 

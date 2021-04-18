@@ -14,8 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface ISerializable {
-    Serialize(): string;
-}
+type SerializationPrimitive = string | boolean | number | bigint;
 
-export default ISerializable;
+export default SerializationPrimitive;

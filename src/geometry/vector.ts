@@ -1,5 +1,5 @@
 /*
-Copyright 2020 JamJar Authors
+Copyright 2021 JamJar Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import { vec2 } from "gl-matrix";
 import IPoolable from "../pooling/ipoolable";
 import Pooled from "../pooling/pooled";
 import ISerializable from "../serialization/iserializable";
-import Serialize from "../serialization/serialize";
+import Deserialize from "../serialization/serialize";
 import Matrix3D from "./matrix_3d";
 import Matrix4D from "./matrix_4d";
 
@@ -26,10 +26,11 @@ import Matrix4D from "./matrix_4d";
  * Vector is the 2 dimensional representation of a vector, with two values (x,y).
  * This is a mutable data structure, operations on Vector objects will affect the original object.
  */
-@Serialize(Vector.CLASS_SERIALIZATION_KEY, Vector.Deserialize)
+@Deserialize(Vector.CLASS_SERIALIZATION_KEY, Vector.Deserialize)
 class Vector extends Pooled implements IPoolable, ISerializable {
-    public static readonly CLASS_SERIALIZATION_KEY = "com.jamjarlabs.Vector";
+    public static readonly CLASS_SERIALIZATION_KEY = "jamjar.Vector";
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types  */
     public static Deserialize(json: any): Vector {
         return Vector.New(json.x, json.y);
     }
@@ -236,9 +237,11 @@ class Vector extends Pooled implements IPoolable, ISerializable {
 
     public Serialize(): string {
         return `{
-            "className": "${Vector.CLASS_SERIALIZATION_KEY}",
-            "x": ${this.x},
-            "y": ${this.y}
+            "type": "${Vector.CLASS_SERIALIZATION_KEY}",
+            "value": {
+                "x": ${this.x},
+                "y": ${this.y}
+            }
         }`;
     }
 }

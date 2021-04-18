@@ -14,8 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-interface ISerializable {
-    Serialize(): string;
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types  */
+
+interface SerializationJSON {
+    type: string;
+    primitive: boolean;
+    value: any;
 }
 
-export default ISerializable;
+export default SerializationJSON;
