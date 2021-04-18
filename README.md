@@ -1,7 +1,5 @@
 [![Build
 Status](https://github.com/jamjarlabs/jamjar/workflows/JamJar/badge.svg)](https://github.com/jamjarlabs/JamJar/actions)
-[![CodeCov
-Report](https://codecov.io/gh/jamjarlabs/jamjar/branch/master/graph/badge.svg)](https://codecov.io/gh/jamjarlabs/jamjar)
 [![License - Apache
 2.0](https://img.shields.io/:license-apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation
@@ -34,8 +32,9 @@ JamJar provides the following:
     - Text - processing text before rendering, handling fonts.
     - Sprite Animation - animation through sprites.
     - Audio - audio playback.
-    - Scripting - runtime execution of scripts, interface for interacting with
-        core the game logic
+    - Scripting - runtime execution of scripts, interface for interacting with core the game logic
+    - Networking - networking through a standardised relay server protocol.
+    - Serialization - serialization to and from JSON.
 
 ## More information
 
